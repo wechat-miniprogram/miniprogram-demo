@@ -1,0 +1,34 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'checkbox'}}"/>
+
+  <view class="page-body">
+    <view class="page-section page-section-gap">
+      <view class="page-section-title">默认样式</view>
+      <label class="checkbox">
+        <checkbox value="cb" checked="true"/>选中
+      </label>
+      <label class="checkbox">
+        <checkbox value="cb" />未选中
+      </label>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title">推荐展示样式</view>
+      <view class="weui-cells weui-cells_after-title">
+        <checkbox-group bindchange="checkboxChange">
+          <label class="weui-cell weui-check__label" wx:for="{{items}}" wx:key="{{item.value}}">
+            <view class="weui-cell__hd">
+              <checkbox value="{{item.value}}" checked="{{item.checked}}"/>
+            </view>
+            <view class="weui-cell__bd">{{item.name}}</view>
+          </label>
+        </checkbox-group>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

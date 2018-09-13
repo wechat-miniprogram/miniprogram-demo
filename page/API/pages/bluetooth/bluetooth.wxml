@@ -1,0 +1,56 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<wxs module="utils">
+module.exports.max = function(n1, n2) {
+  return Math.max(n1, n2)
+}
+module.exports.len = function(arr) {
+  arr = arr || []
+  return arr.length
+}
+</wxs>
+<view class="container">
+  <template is="head" data="{{title: 'bluetooth'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-body-info">
+        <view class="devices_summary">已发现 {{devices.length}} 个外围设备：</view>
+        <scroll-view class="device_list" scroll-y scroll-with-animation>
+          <view wx:for="{{devices}}" wx:key="index"
+           data-device-id="{{item.deviceId}}"
+           data-name="{{item.name || item.localName}}"
+           bindtap="createBLEConnection" 
+           class="device_item"
+           hover-class="device_item_hover">
+            <view style="font-size: 16px; color: #333;">{{item.name}}</view>
+            <view style="font-size: 10px">信号强度: {{item.RSSI}}dBm ({{utils.max(0, item.RSSI + 100)}}%)</view>
+            <view style="font-size: 10px">UUID: {{item.deviceId}}</view>
+            <view style="font-size: 10px">Service数量: {{utils.len(item.advertisServiceUUIDs)}}</view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <view class="btn-area">
+        <button type="primary" bindtap="openBluetoothAdapter">开始扫描</button>
+        <button bindtap="stopBluetoothDevicesDiscovery">停止扫描</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="connected_info" wx:if="{{connected}}">
+    <view>
+      <text>已连接到 {{name}}</text>
+      <view class="operation">
+      <button wx:if="{{canWrite}}" size="mini" bindtap="writeBLECharacteristicValue">写数据</button>
+      <button size="mini" bindtap="closeBLEConnection">断开连接</button>
+      </view>
+    </view>
+    <view wx:for="{{chs}}" wx:key="index" style="font-size: 12px; margin-top: 10px;">
+      <view>特性UUID: {{item.uuid}}</view>
+      <view>特性值: {{item.value}}</view>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

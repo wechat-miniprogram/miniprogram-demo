@@ -1,0 +1,36 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'radio'}}"/>
+
+  <view class="page-body">
+    <view class="page-section page-section-gap">
+      <view class="page-section-title">默认样式</view>
+      <label class="radio">
+        <radio value="r1" checked="true"/>选中
+      </label>
+      <label class="radio">
+        <radio value="r2" />未选中
+      </label>
+    </view>
+
+
+    <view class="page-section">
+      <view class="page-section-title">推荐展示样式</view>
+      <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+          <label class="weui-cell weui-check__label" wx:for="{{items}}" wx:key="{{item.value}}">
+
+            <view class="weui-cell__hd">
+              <radio value="{{item.value}}" checked="true"/>
+            </view>
+            <view class="weui-cell__bd">{{item.name}}</view>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

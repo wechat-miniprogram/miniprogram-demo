@@ -1,0 +1,34 @@
+.page-content {
+  width: auto;
+  margin: 30rpx 0;
+  padding: 0 50rpx;
+}
+
+.code-fragment {
+  height: 350rpx;
+}
+
+.code-textarea {
+  width: auto;
+  height: 350rpx;
+  border: 1rpx solid #1AAD19;
+}
+
+.p {
+  color: #1AAD19;
+  margin-top: 30rpx;
+}
+
+.space {
+  display: inline-block;
+  background: red;
+  width: 10rpx;
+}
+
+scroll-view {
+  height: 350rpx;
+  border: 1rpx solid #1AAD19;
+  white-space: pre;
+  padding: 10rpx;
+  box-sizing: border-box;
+}

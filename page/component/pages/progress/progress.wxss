@@ -1,0 +1,11 @@
+progress{
+  width: 100%;
+}
+.progress-box{
+  display: flex;
+  height: 50rpx;
+  margin-bottom: 60rpx;
+}
+.progress-cancel{
+  margin-left: 40rpx;
+}

@@ -1,0 +1,28 @@
+.cover-view {
+  position: absolute;
+  top: calc(50% - 150rpx);
+  left: calc(50% - 300rpx);
+  /* opacity: .7; */
+}
+
+.flex-wrp{
+  display:flex;
+}
+
+.flex-item{
+  width: 200rpx;
+  height: 300rpx;
+  font-size: 26rpx;
+}
+
+.demo-text-1 {
+  background: rgba(26, 173, 25, 0.7);
+}
+
+.demo-text-2 {
+  background: rgba(39, 130, 215, 0.7);
+}
+
+.demo-text-3 {
+  background: rgba(255, 255, 255, 0.7);
+}

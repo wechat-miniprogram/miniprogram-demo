@@ -1,0 +1,19 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'on/stopPullDownRefresh'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-body-info">
+        <text class="page-body-text">下滑页面即可刷新</text>
+      </view>
+      <view class="btn-area">
+        <button bindtap="stopPullDownRefresh">停止刷新</button>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

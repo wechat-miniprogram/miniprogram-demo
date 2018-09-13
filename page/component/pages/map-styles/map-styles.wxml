@@ -1,0 +1,36 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'map'}}"/>
+
+  <view class="page-body">
+    <view class="page-section page-section-gap">
+      <view class="page-section-title">经典</view>
+      <view class="page-section-ctn">
+        <image class="image" src="../../resources/pic/custom_map_template_1.png"/>
+      </view>
+    </view>
+    <view class="page-section page-section-gap">
+      <view class="page-section-title">墨渊</view>
+      <view class="page-section-ctn">
+        <image class="image" src="../../resources/pic/custom_map_template_2.png"/>
+      </view>
+    </view>
+    <view class="page-section page-section-gap">
+      <view class="page-section-title">白浅</view>
+      <view class="page-section-ctn">
+        <image class="image" src="../../resources/pic/custom_map_template_3.png"/>
+      </view>
+    </view>
+    <view class="page-section page-section-gap">
+      <view class="page-section-title">玉露</view>
+      <view class="page-section-ctn">
+        <image class="image" src="../../resources/pic/custom_map_template_4.png"/>
+      </view>
+    </view>
+    
+  </view>
+
+  <template is="foot" />
+</view>

@@ -1,0 +1,15 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'onUserCaptureScreen'}}"/>
+
+  <view class="page-body">
+    <view class="page-body-info">
+      <view class="page-body-title">请进行屏幕截屏</view>
+      <text class="page-body-text">截屏事件{{ captured ? "已" : "未" }}触发</text>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

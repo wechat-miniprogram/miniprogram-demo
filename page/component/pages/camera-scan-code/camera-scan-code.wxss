@@ -1,0 +1,21 @@
+@import "../../../common/lib/weui.wxss";
+
+camera {
+  height: 500rpx;
+}
+
+.btn-area {
+  margin-top: 0;
+}
+
+form {
+  margin-top: 30rpx;
+}
+
+.weui-cell__bd {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20rpx 0;
+  min-height: 60rpx;
+}

@@ -1,0 +1,34 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'Worker'}}"/>
+  
+  <view class="page-body">
+    <view class="page-body-wrapper">
+      <canvas canvas-id="canvas" class="canvas"></canvas>
+    </view>
+  </view>
+
+  <view class="page-section">
+    <view class="weui-cells__title">计算斐波那契数</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input class="weui-input" type="number" value="{{input}}" bindinput="bindInput" />
+      </view>
+    </view>
+    <view class="weui-cells__title">结果</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-input">{{res}}</view>
+      </view>
+    </view>
+     <view class="page-section-title">提示：使用单线程进行计算时，动画会出现明显的卡顿现象。使用 Worker 线程进行计算，则可以保证动画的流畅。</view>
+    <view class="btn-area">
+      <button bindtap="compute">单线程计算</button>
+      <button type="primary" bindtap="multiThreadCompute">利用 Worker 线程计算</button>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

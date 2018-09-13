@@ -1,0 +1,10 @@
+@import "../../../common/lib/weui.wxss";
+
+.page-body-wording {
+  padding: 130rpx 100rpx;
+}
+
+.page-body-title {
+  font-size: 40rpx;
+  line-height: 1;
+}

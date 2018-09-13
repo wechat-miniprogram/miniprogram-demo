@@ -1,0 +1,11 @@
+.label-1, .label-2{
+  margin: 30rpx 0;
+}
+.label-3-text{
+  color: #576B95;
+  font-size: 28rpx;
+}
+.checkbox-3{
+  display: block;
+  margin: 30rpx 0;
+}

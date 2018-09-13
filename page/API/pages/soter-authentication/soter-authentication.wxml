@@ -1,0 +1,14 @@
+<import src="../../../common/head.wxml"/>
+<import src="../../../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title: 'startSoterAuthentication'}}"/>
+
+  <view class="page-body">
+    <view class="btn-area">
+      <button type="primary" bindtap="startAuth">开始认证</button>
+    </view>
+  </view>
+
+  <template is="foot"/>
+</view>

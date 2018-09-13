@@ -1,0 +1,41 @@
+page {
+  color: #333;
+}
+.devices_summary {
+  padding: 10rpx;
+  font-size: 30rpx;
+}
+.device_list {
+  height: 300rpx;
+  border-radius: 5rpx;
+  flex: 1;
+}
+.device_item {
+  border-bottom: 1rpx solid #EEE;
+  padding: 10rpx;
+  color: #666;
+}
+.device_item_hover {
+  background-color: rgba(0, 0, 0, .1);
+}
+.connected_info {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #F0F0F0;
+  padding: 10rpx;
+  padding-bottom: 20rpx;
+  margin-bottom: env(safe-area-inset-bottom);
+  font-size: 28rpx;
+  min-height: 100rpx;
+  box-shadow: 0rpx 0rpx 3rpx 0rpx;
+}
+.connected_info .operation {
+  position: absolute;
+  display: inline-block;
+  right: 30rpx;
+}
+.page-body-info {
+  padding: 30rpx;
+  box-sizing: border-box;
+}

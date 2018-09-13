@@ -1,0 +1,21 @@
+<import src="../../../common/head.wxml"/>
+<import src="../../../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title: 'share-button'}}"/>
+
+  <view class="page-body">
+    <view class="page-body-wrapper">
+      <text class="page-body-title">
+        轻触下方图标即可转发
+      </text>
+      <view class="page-body-line">
+        <button bindtap="handleTapShareButton" open-type="share" class="button-share" id="share-button">
+        </button>
+        <label for="share-button"><image style="width: 27px; height: 27px" src="/image/share.png" /></label>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot"/>
+</view>

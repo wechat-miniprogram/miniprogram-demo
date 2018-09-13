@@ -1,0 +1,13 @@
+@import "../../../common/lib/weui.wxss";
+
+form {
+  margin-top: 30rpx;
+}
+
+.weui-cell__bd {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20rpx 0;
+  min-height: 60rpx;
+}

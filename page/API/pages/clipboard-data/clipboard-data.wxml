@@ -1,0 +1,34 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'get/set/ClipboardData'}}"/>
+
+  <view class="page-body">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">Copy</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" name="key" value="{{value}}" bindinput="valueChanged"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">Paste</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" value="{{pasted}}"></input>
+        </view>
+      </view>
+    </view>
+
+    <view class="btn-area">
+      <button type="primary" bindtap="copy">复制</button>
+      <button bindtap="paste">粘贴</button>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

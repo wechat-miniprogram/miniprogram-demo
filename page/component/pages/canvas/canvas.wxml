@@ -1,0 +1,16 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'canvas'}}"/>
+
+  <view class="page-body">
+    <view class="page-body-wrapper">
+      <canvas canvas-id="canvas" class="canvas"></canvas>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>
+
+

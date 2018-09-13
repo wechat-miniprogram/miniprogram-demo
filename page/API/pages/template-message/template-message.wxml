@@ -1,0 +1,48 @@
+<import src="../../../common/head.wxml"/>
+<import src="../../../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title: 'templateMessage'}}"/>
+  <form class="page-body" bindsubmit="submitForm" report-submit="true">
+    <view class="weui-cells__title">点击提交，发送示例模板消息</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">示例地点</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{formData.address}}" name="address"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">示例时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{formData.time}}" name="time"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">示例物品</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{formData.name}}" name="name"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">示例单号</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{formData.serial}}" name="serial"></input>
+        </view>
+      </view>
+    </view>
+    <view class="btn-area">
+      <button type="primary" size="40" formType="submit" loading="{{loading}}">点我提交</button>
+    </view>
+  </form>
+
+  <template is="foot" />
+</view>

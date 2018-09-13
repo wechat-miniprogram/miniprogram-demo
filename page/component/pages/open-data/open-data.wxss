@@ -1,0 +1,17 @@
+@import "../../../common/lib/weui.wxss";
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50rpx;
+}
+
+.avatar-img {
+  width: 50%;
+  border-radius: 50%;
+}
+
+.country, .province, .city {
+  padding-right: 10rpx;
+}
+

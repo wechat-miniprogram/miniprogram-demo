@@ -1,0 +1,47 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'camera'}}"/>
+
+  <view class="page-body">
+    <view class="page-body-wrapper">
+      <camera
+        mode="scanCode"
+        flash="off"
+        bindscancode="scanCode"
+        binderror="error"
+      >
+      </camera>
+      <view class="btn-area">
+        <button type="primary" bindtap="navigateBack">
+          返回正常模式
+        </button>
+      </view>
+      <form>
+        <view class="page-section">
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">类型</view>
+              </view>
+              <view class="weui-cell__bd">
+                {{ result.type }}
+              </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">结果</view>
+              </view>
+              <view class="weui-cell__bd">
+                {{ result.result }}
+              </view>
+            </view>
+          </view>
+        </view>
+      </form>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

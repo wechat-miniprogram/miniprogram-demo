@@ -1,0 +1,31 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'Wi-Fi'}}"/>
+
+  <view class="page-body">
+    <view class="page-body-info">
+      <scroll-view class="device-list" scroll-y>
+        <view class="item" wx:for="{{wifiList}}" wx:key="{{index}}">
+          <view class="list">
+            <text>{{ item.SSID }}</text>
+            <span class="wifi-icon">
+              <span class="wifi-1"></span>
+              <span class="wifi-2 {{item.strength < 2 ? 'off' : ''}}"></span>
+              <span class="wifi-3 {{item.strength < 3 ? 'off' : ''}}"></span>
+              <span class="wifi-4 {{item.strength < 4 ? 'off' : ''}}"></span>
+              <span class="lock" wx:if="{{item.secure}}"></span>
+            </span>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="btn-area">
+      <button type="primary" bindtap="startSearch">搜索Wi-Fi</button>
+      <button bindtap="stopSearch">停止搜索</button>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

@@ -1,0 +1,46 @@
+movable-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  width: 100rpx;
+  background: #1AAD19;
+  color: #fff;  
+}
+
+movable-area {
+  height: 400rpx;
+  width: 400rpx;
+  background-color: #ccc;
+  overflow: hidden;
+}
+
+.page-section {
+  display: flex;
+  justify-content: center;
+}
+
+.page-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.metric {
+  width: 400rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction:column;
+  align-items:center;
+}
+
+.b {
+  display: inline-block;
+  width: 150rpx;
+  font-weight: bold;
+}
+
+.span {
+  display: inline-block;
+  width: 100rpx;
+}

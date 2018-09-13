@@ -1,0 +1,66 @@
+<import src="../../../common/head.wxml"/>
+<import src="../../../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title: 'movable-view'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-section-title first">movable-view区域小于movable-area</view>
+      <movable-area>
+        <movable-view x="{{x}}" y="{{y}}" direction="all">text</movable-view>
+      </movable-area>
+    </view>
+    <view class="btn-area">
+      <button bindtap="tap" class="page-body-button" type="primary">点击移动到 (30px, 30px)</button>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title">movable-view区域大于movable-area</view>
+      <movable-area>
+        <movable-view class="max" direction="all">text</movable-view>
+      </movable-area>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title">只可以横向移动</view>
+      <movable-area>
+        <movable-view direction="horizontal">text</movable-view>
+      </movable-area>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title">只可以纵向移动</view>
+      <movable-area>
+        <movable-view direction="vertical">text</movable-view>
+      </movable-area>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title">可超出边界</view>
+      <movable-area>
+        <movable-view direction="all" out-of-bounds>text</movable-view>
+      </movable-area>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title">带有惯性</view>
+      <movable-area>
+        <movable-view direction="all" inertia>text</movable-view>
+      </movable-area>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title">可放缩</view>
+      <movable-area scale-area>
+        <movable-view direction="all" bindchange="onChange" bindscale="onScale" scale scale-min="0.5" scale-max="4" scale-value="{{scale}}">text</movable-view>
+      </movable-area>
+    </view>
+
+    <view class="btn-area">
+      <button bindtap="tap2" class="page-body-button" type="primary">点击放大3倍</button>
+    </view>
+  </view>
+
+  <template is="foot"/>
+</view>

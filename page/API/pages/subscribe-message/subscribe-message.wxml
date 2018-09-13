@@ -1,0 +1,24 @@
+<import src="../../../common/head.wxml"/>
+<import src="../../../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title: 'subscribeMessage'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-body-wording">
+        <text class="page-body-title" wx:if="{{hasAuth}}">已{{authType === 0 ? '' : '拒绝'}}授权</text>
+        <text class="page-body-title" wx:else>未授权</text>
+      </view>
+      <view class="btn-area">
+        <button type="primary" open-type='subscribe' bindsubscribe="onsubscribe">授权接收订阅消息</button>
+        <button type="default" bindtap="openSetting">查看授权情况</button>
+      </view>
+      <view class="btn-area">
+        <button type="primary" bindtap="dosendmsg" loading="{{loading}}">发送订阅消息</button>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

@@ -1,0 +1,84 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'chooseInvoiceTitle'}}"/>
+
+  <view class="page-body">
+    <form>
+      <view class="page-section">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">抬头类型</view>
+            </view>
+            <view class="weui-cell__bd">
+              {{ type !== '' ? (type === '0' ? '单位' : '个人') : '' }}
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">抬头名称</view>
+            </view>
+            <view class="weui-cell__bd">
+              {{ title }}
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">抬头税号</view>
+            </view>
+            <view class="weui-cell__bd">
+              {{taxNumber}}
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">单位地址</view>
+            </view>
+            <view class="weui-cell__bd">
+              {{companyAddress}}
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">手机号码</view>
+            </view>
+            <view class="weui-cell__bd">
+              {{telephone}}
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">银行名称</view>
+            </view>
+            <view class="weui-cell__bd">
+              {{bankName}}
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">银行账号</view>
+            </view>
+            <view class="weui-cell__bd">
+              {{bankAccount}}
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </form>
+
+    <view class="btn-area">
+      <button type="primary" bindtap="chooseInvoiceTitle">获取发票抬头</button>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

@@ -1,0 +1,16 @@
+.selected-date {
+  text-align: center;
+  margin: 30rpx;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.picker-icon {
+  width: 50rpx;
+  height: 50rpx;
+}

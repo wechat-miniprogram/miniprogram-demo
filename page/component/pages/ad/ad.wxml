@@ -1,0 +1,43 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'ad'}}"/>
+
+  <view class="page-body">
+    <view class="page-section page-section-gap">
+      <view class="page-section-title">关注卡片</view>
+      <ad unit-id="adunit-demo4"></ad>
+    </view>
+    <view wx:if="{{platform === 'ios'}}" class="page-section page-section-gap">
+      <view class="page-section-title">下载卡片</view>
+      <ad unit-id="adunit-demo8"></ad>
+    </view>
+    <view wx:else class="page-section page-section-gap">
+      <view class="page-section-title">下载卡片</view>
+      <ad unit-id="adunit-demo9"></ad>
+    </view>
+    <view wx:if="{{platform === 'ios'}}" class="page-section page-section-gap">
+      <view class="page-section-title">应用推广</view>
+      <ad unit-id="adunit-demo2"></ad>
+    </view>
+    <view wx:else class="page-section page-section-gap">
+      <view class="page-section-title">应用推广</view>
+      <ad unit-id="adunit-demo7"></ad>
+    </view>
+    <view class="page-section page-section-gap">
+      <view class="page-section-title">公众号推广</view>
+      <ad unit-id="adunit-demo3"></ad>
+    </view>
+    <view class="page-section page-section-gap">
+      <view class="page-section-title">活动推广</view>
+      <ad unit-id="adunit-demo5"></ad>
+    </view>
+    <view class="page-section page-section-gap">
+      <view class="page-section-title">商品推广</view>
+      <ad unit-id="adunit-demo6"></ad>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

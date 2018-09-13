@@ -1,0 +1,38 @@
+.scroll-view {
+  height: 400rpx;
+  background: #fff;
+}
+
+.scroll-area {
+  height: 1300rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: .5s;
+}
+
+.notice {
+  margin-top: 150rpx;
+}
+
+.ball {
+  width: 200rpx;
+  height: 200rpx;
+  background: #1AAD19;
+  border-radius: 50%;
+}
+
+.filling {
+  height: 400rpx;
+}
+
+.message {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.message text {
+  font-size: 40rpx;
+  font-family: -apple-system-font, Helvetica Neue,Helvetica,sans-serif;
+}

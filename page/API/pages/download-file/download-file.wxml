@@ -1,0 +1,22 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'downloadFile'}}"/>
+
+  <view class="page-body">
+    <image wx:if="{{imageSrc}}" src="{{imageSrc}}" mode="center" />
+    <block wx:else>
+      <view class="page-body-wording">
+        <text class="page-body-text">
+          点击按钮下载服务端示例图片
+        </text>
+      </view>
+      <view class="btn-area">
+        <button bindtap="downloadImage" type="primary">下载</button>
+      </view>
+    </block>
+  </view>
+
+  <template is="foot" />
+</view>

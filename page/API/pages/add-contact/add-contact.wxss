@@ -1,0 +1,5 @@
+@import "../../../common/lib/weui.wxss";
+
+input {
+  width: 100%;
+}

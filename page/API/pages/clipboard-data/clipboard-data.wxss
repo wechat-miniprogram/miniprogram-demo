@@ -1,0 +1,8 @@
+@import "../../../common/lib/weui.wxss";
+
+.page-body-info {
+  padding: 10rpx;
+  height: 200rpx;
+  overflow: scroll-y;
+  text-align: left;
+}

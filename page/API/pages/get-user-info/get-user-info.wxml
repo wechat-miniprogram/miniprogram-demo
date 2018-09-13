@@ -1,0 +1,28 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'getUserInfo'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-body-info">
+        <view class="page-body-title">用户信息</view>
+        <block wx:if="{{hasUserInfo === false}}">
+          <text class="page-body-text">未获取</text>
+          <text class="page-body-text">点击绿色按钮可获取用户头像及昵称</text>
+        </block>
+        <block wx:if="{{hasUserInfo === true}}">
+          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
+          <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </block>
+      </view>
+      <view class="btn-area">
+        <button type="primary" bindtap="getUserInfo">获取用户信息</button>
+        <button bindtap="clear">清空</button>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

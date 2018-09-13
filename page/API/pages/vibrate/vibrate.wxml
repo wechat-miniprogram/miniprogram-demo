@@ -1,0 +1,17 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'vibrate/Long/Short'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="btn-area">
+        <button type="primary" bindtap="vibrateLong">长振动</button>
+        <button type="default" bindtap="vibrateShort">短振动</button>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

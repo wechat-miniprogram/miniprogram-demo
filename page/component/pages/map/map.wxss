@@ -1,0 +1,8 @@
+.page-section-title {
+  margin-bottom: 30rpx;
+}
+
+.navigator {
+  color: #1AAD19;
+  display: inline-block;
+}
