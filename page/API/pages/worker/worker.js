@@ -21,7 +21,7 @@ Page({
     clearInterval(this.interval)
     if (this._worker) this._worker.terminate()
   },
- 
+
   bindInput(e) {
     const val = Number(e.detail.value)
     if (val > 40) return {value: 40}
