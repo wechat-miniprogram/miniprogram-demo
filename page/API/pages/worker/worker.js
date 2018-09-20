@@ -10,14 +10,18 @@ Page({
 
   data: {
     res: '',
-    input: 33,
+    input: 35,
+  },
+
+  onLoad() {
+    this._worker = wx.createWorker('workers/fib/index.js')
   },
 
   onUnload() {
     clearInterval(this.interval)
     if (this._worker) this._worker.terminate()
   },
-
+ 
   bindInput(e) {
     const val = Number(e.detail.value)
     if (val > 40) return {value: 40}
@@ -34,7 +38,9 @@ Page({
 
   compute() {
     this.reset()
-    wx.showLoading()
+    wx.showLoading({
+      title: '计算中...'
+    })
     const t0 = +Date.now()
     const res = fib(this.data.input)
     const t1 = +Date.now()
@@ -47,8 +53,9 @@ Page({
 
   multiThreadCompute() {
     this.reset()
-    wx.showLoading()
-    this._worker = wx.createWorker('workers/fib/index.js')
+    wx.showLoading({
+      title: '计算中...'
+    })
 
     const t0 = +Date.now()
     this._worker.postMessage({
@@ -59,7 +66,6 @@ Page({
       if (res.type === 'execFunc_fib') {
         wx.hideLoading()
         const t1 = +Date.now()
-        this._worker.terminate()
         this.setData({
           res: res.result,
           time: t1 - t0

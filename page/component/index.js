@@ -42,7 +42,7 @@ Page({
         name: '画布',
         pages: ['canvas']
       }, {
-        id: 'ad',
+        id: 'open',
         name: '开放能力',
         pages: ['ad', 'open-data', 'web-view']
       }
