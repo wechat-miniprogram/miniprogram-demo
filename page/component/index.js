@@ -36,14 +36,17 @@ Page({
       }, {
         id: 'map',
         name: '地图',
+        open: false,
         pages: ['map']
       }, {
         id: 'canvas',
         name: '画布',
+        open: false,
         pages: ['canvas']
       }, {
         id: 'open',
         name: '开放能力',
+        open: false,
         pages: ['ad', 'open-data', 'web-view']
       }
     ]
