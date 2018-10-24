@@ -35,7 +35,7 @@ Page({
       p.vy = 2
     }
 
-    const context = wx.createContext()
+    const context = wx.createCanvasContext('canvas')
 
     function ball(x, y) {
       context.beginPath(0)
@@ -55,10 +55,7 @@ Page({
     ball(p.x, 300 - p.y)
     ball(300 - p.x, p.y)
 
-    wx.drawCanvas({
-      canvasId: 'canvas',
-      actions: context.getActions()
-    })
+    context.draw()
   },
 
   onUnload() {
