@@ -1,4 +1,7 @@
 Page({
+  onShow() {
+    wx.reportAnalytics('enter_home_programmatically', {})
+  },
   onShareAppMessage() {
     return {
       title: '小程序官方组件展示',
@@ -65,5 +68,6 @@ Page({
     this.setData({
       list
     })
+    wx.reportAnalytics('click_view_programmatically', {})
   }
 })
