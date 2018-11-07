@@ -123,6 +123,9 @@
     "uploadFile": 10000,
     "downloadFile": 10000
   },
+  "navigateToMiniProgramAppIdList": [
+    "wx4f1b24bdc99fa23b"
+  ],
   "workers": "workers",
   "debug": false
 }
