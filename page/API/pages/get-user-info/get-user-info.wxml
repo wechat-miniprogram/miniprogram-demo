@@ -18,7 +18,7 @@
         </block>
       </view>
       <view class="btn-area">
-        <button type="primary" bindtap="getUserInfo">获取用户信息</button>
+        <button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取用户信息</button>
         <button bindtap="clear">清空</button>
       </view>
     </view>

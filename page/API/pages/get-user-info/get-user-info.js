@@ -10,27 +10,12 @@ Page({
   data: {
     hasUserInfo: false
   },
-  getUserInfo() {
-    const that = this
-
-    function _getUserInfo() {
-      wx.getUserInfo({
-        success(res) {
-          that.setData({
-            hasUserInfo: true,
-            userInfo: res.userInfo
-          })
-        }
-      })
-    }
-
-    if (app.globalData.hasLogin === false) {
-      wx.login({
-        success: _getUserInfo
-      })
-    } else {
-      _getUserInfo()
-    }
+  getUserInfo(info) {
+    const userInfo = info.detail.userInfo
+    this.setData({
+      userInfo: userInfo,
+      hasUserInfo: true
+    })
   },
   clear() {
     this.setData({
