@@ -1,4 +1,3 @@
-const app = getApp()
 Page({
   onShareAppMessage() {
     return {
@@ -13,7 +12,7 @@ Page({
   getUserInfo(info) {
     const userInfo = info.detail.userInfo
     this.setData({
-      userInfo: userInfo,
+      userInfo,
       hasUserInfo: true
     })
   },

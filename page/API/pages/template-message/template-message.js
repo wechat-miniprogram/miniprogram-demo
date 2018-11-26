@@ -40,7 +40,7 @@ Page({
           url: templateMessageUrl,
           method: 'POST',
           data: {
-            formId,
+            form_id: formId,
             openid,
             formData
           },
