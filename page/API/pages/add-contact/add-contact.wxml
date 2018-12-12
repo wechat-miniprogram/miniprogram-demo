@@ -32,7 +32,7 @@
       </view>
       <view class="btn-area">
         <button type="primary" formType="submit">创建联系人</button>
-        <button type="defualt" formType="reset">重置</button>
+        <button type="default" formType="reset">重置</button>
       </view>
     </form>
   </view>
