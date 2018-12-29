@@ -51,18 +51,30 @@ Page({
       })
     }
 
+    const notSupported = () => {
+      wx.showModal({
+        title: '错误',
+        content: '您的设备不支持指纹识别',
+        showCancel: false
+      })
+    }
+
     wx.checkIsSupportSoterAuthentication({
       success: (res) => {
         console.log(res)
+        if (
+          !res ||
+          res.supportMode.length === 0 ||
+          res.supportMode.indexOf('fingerPrint') < 0
+        ) {
+          notSupported()
+          return
+        }
         checkIsEnrolled()
       },
       fail: (err) => {
         console.error(err)
-        wx.showModal({
-          title: '错误',
-          content: '您的设备不支持指纹识别',
-          showCancel: false
-        })
+        notSupported()
       }
     })
   }
