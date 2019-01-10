@@ -1,0 +1,69 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'Database'}}" />
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="weui-cells__title">
+        <view>云函数为管理端，通过调用云函数可操作原先在小程序端无法操作的数据。</view>
+        <view>后台流水数据：权限为仅管理端可写</view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="page-body-info">
+          <view class="progress-figure">
+            <image src="/page/API/resources/kind/device.png" class="progress-icon"></image>
+            <text class="progress-line lg {{clientLoading && 'pending'}} {{serverDataClient && 'success'}} {{serverDataClientError && 'fail'}}"></text>
+            <image src="/page/cloud/resources/kind/database.png" class="progress-icon"></image>
+          </view>
+
+          <view class="data-area">
+            <view class="data-text" wx:if="{{serverDataClient}}">
+              <icon type="success"></icon>
+              <text>获取成功</text>
+            </view>
+            <view class="data-text" wx:elif="{{serverDataClientError}}">
+              <icon type="warn" color="#F43530"></icon>
+              <text>获取失败</text>
+            </view>
+          </view>
+
+          <view class="btn-area">
+            <button bindtap="queryServerDataViaClient" loading="{{clientLoading}}">小程序端获取后台流水数据</button>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells__title"></view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="page-body-info">
+          <view class="progress-figure">
+            <image src="/page/API/resources/kind/device.png" class="progress-icon"></image>
+            <text class="progress-line {{cloudLoading && 'pending'}} {{serverDataCloud && 'success'}} {{serverDataCloudError && 'fail'}}"></text>
+            <image src="/page/cloud/resources/kind/scf.png" class="progress-icon"></image>
+            <text class="progress-line {{cloudLoading && 'pending'}} {{serverDataCloud && 'success'}} {{serverDataCloudError && 'fail'}}"></text>
+            <image src="/page/cloud/resources/kind/database.png" class="progress-icon"></image>
+          </view>
+
+          <view class="data-area">
+            <view class="data-text" wx:if="{{serverDataCloud}}">
+              <icon type="success"></icon>
+              <text>获取成功</text>
+            </view>
+            <view class="data-text" wx:elif="{{serverDataCloudError}}">
+              <icon type="warn" color="#F43530"></icon>
+              <text>获取失败</text>
+            </view>
+          </view>
+
+          <view class="btn-area">
+            <button bindtap="queryServerDataViaCloudFunction" loading="{{cloudLoading}}">调用云函数获取后台流水数据</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

@@ -1,0 +1,42 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'deleteFile'}}" />
+
+  <view class="page-body">
+    <view class="page-section">
+      <block wx:if="{{!fileId}}">
+        <view class="page-section-ctn">
+          <text class="page-body-text">还未上传过文件，请先点击按钮上传</text>
+        </view>
+        
+        <view class="btn-area">
+          <navigator url="/page/cloud/pages/upload-file/upload-file?from=delete-file">
+            <button type="primary" size="40">上传文件</button>
+          </navigator>
+        </view>
+      </block>
+
+      <block wx:else>
+        <view class="weui-cells__title">点击按钮即可删除指定文件</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">文件 ID</view>
+            </view>
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value="{{fileId}}" style="height: 3.3em" disabled />
+            </view>
+          </view>
+        </view>
+
+        <view class="btn-area">
+          <button type="primary" size="40" bindtap="deleteFile" loading="{{loading}}">删除文件</button>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

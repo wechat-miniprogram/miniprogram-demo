@@ -1,0 +1,46 @@
+@import "../../../common/lib/weui.wxss";
+
+.page-body-info {
+  padding-bottom: 30rpx;
+}
+.progress-figure {
+  font-size: 32rpx;
+}
+.progress-icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+.progress-line {
+  border-top: 2px solid #2F2F2F;
+  padding: 0 60rpx;
+  margin: 0 20rpx;
+}
+.progress-line.pending {
+  border-top-style: dashed;
+}
+.progress-line.success {
+  border-top-color: #0bb20c;
+}
+.progress-line.fail {
+  border-top-color: #e64340;
+}
+.progress-line.lg {
+  padding: 0 100rpx;
+}
+.data-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30rpx;
+  height: 30rpx;
+}
+.data-area .data-text {
+  display: flex;
+  align-items: center;
+}
+.data-area .data-text icon {
+  margin-right: 10rpx;
+}
+.btn-area {
+  margin-top: 30rpx;
+}

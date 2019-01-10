@@ -1,0 +1,28 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'uploadFile'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-body-info">
+
+        <block wx:if="{{imageSrc}}">
+          <image src="{{imageSrc}}" class="image" mode="aspectFit"></image>
+        </block>
+
+        <block wx:else>
+          <view class="image-plus image-plus-nb" bindtap="chooseImage">
+            <view class="image-plus-horizontal"></view>
+            <view class="image-plus-vertical"></view>
+          </view>
+          <view class="image-plus-text">选择图片</view>
+        </block>
+
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

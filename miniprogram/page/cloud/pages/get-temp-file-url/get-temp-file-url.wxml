@@ -1,0 +1,59 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'getTempFileURL'}}" />
+
+  <view class="page-body">
+    <view class="page-section">
+      <block wx:if="{{fileTempURLDone}}">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">文件 ID</view>
+            </view>
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value="{{fileId}}" style="height: 3.3em" disabled />
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">临时链接</view>
+            </view>
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value="{{tempFileURL}}" style="height: 3.3em" disabled />
+            </view>
+          </view>
+
+          <view class="weui-cell">
+            <view class="page-section-ctn">
+              <image src="{{tempFileURL}}" class="image" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+        
+      </block>
+
+      <block wx:else>
+        <view class="weui-cells__title">点击按钮即可根据文件 ID 换取临时网络链接</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">文件 ID</view>
+            </view>
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value="{{fileId}}" style="height: 3.3em" disabled />
+            </view>
+          </view>
+        </view>
+
+        <view class="btn-area">
+          <button type="primary" size="40" bindtap="getTempFileURL" loading="{{loading}}">换取临时链接</button>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

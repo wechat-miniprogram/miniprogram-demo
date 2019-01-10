@@ -1,0 +1,26 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'CRUD'}}" />
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="weui-cells__title">内容</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入内容" value="{{description}}" bindinput="onInputContent" />
+          </view>
+        </view>
+      </view>
+
+      <view class="btn-area">
+        <button type="primary" size="40" bindtap="updateTodo" loading="{{updating}}">更新 Todo</button>
+        <button type="warn" size="40" bindtap="removeTodo" loading="{{deleting}}">删除 Todo</button>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

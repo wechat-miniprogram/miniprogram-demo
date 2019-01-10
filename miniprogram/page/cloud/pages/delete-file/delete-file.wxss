@@ -1,0 +1,14 @@
+@import "../../../common/lib/weui.wxss";
+
+.page-section-ctn {
+  text-align: center;
+  margin: 200rpx auto 0;
+  width: 100%;
+}
+
+.page-body-text {
+  color: #bbb;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  text-align: center;
+}

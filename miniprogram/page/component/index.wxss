@@ -1,0 +1,6 @@
+@import "../common/index.wxss";
+
+.weui-agree__link {
+  display: inline;
+  color: #586c94;
+}

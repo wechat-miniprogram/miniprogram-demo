@@ -1,0 +1,44 @@
+<import src="../../../common/head.wxml"/>
+<import src="../../../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title: 'sendMessage'}}"/>
+
+  <view class="page-body">
+    <view class="weui-cells__title">发送内容（以下字段可自由适配）</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">实例字段</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" placeholder="请输入"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">实例字段</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" placeholder="请输入"></input>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">跳转链接</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" placeholder="请输入" value="{{shareData.path}}"></input>
+        </view>
+      </view>
+    </view>
+    <view class="btn-area">
+      <button type="primary">发送模板消息</button>
+    </view>
+  </view>
+
+  <template is="foot"/>
+</view>

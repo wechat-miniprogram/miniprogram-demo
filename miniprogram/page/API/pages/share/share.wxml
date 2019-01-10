@@ -1,0 +1,39 @@
+<import src="../../../common/head.wxml"/>
+<import src="../../../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title: 'onShareAppMessage'}}"/>
+
+  <view class="page-body">
+    <view class="weui-cells__title">发送内容（以下字段可自由适配）</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">标题</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{shareData.title}}"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">描述</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{shareData.desc}}"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">跳转页面</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{shareData.path}}"></input>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__tips">点击右上角菜单转发给好友</view>
+  </view>
+
+  <template is="foot"/>
+</view>

@@ -1,0 +1,12 @@
+.page-body-info {
+  padding-bottom: 0;
+  height: 230px;
+}
+.page-body-text {
+  padding: 0 30rpx;
+  text-align: center;
+}
+.openid {
+  margin-top: 20rpx;
+  font-size: 38rpx;
+}
