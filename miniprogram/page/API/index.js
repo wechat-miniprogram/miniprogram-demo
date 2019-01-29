@@ -35,9 +35,6 @@ Page({
             zh: '模板消息',
             url: 'template-message/template-message'
           }, {
-            zh: '订阅消息',
-            url: 'subscribe-message/subscribe-message'
-          }, {
             zh: '收货地址',
             url: 'choose-address/choose-address'
           }, {

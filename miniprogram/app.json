@@ -37,7 +37,6 @@
     "page/API/pages/share-button/share-button",
     "page/API/pages/custom-message/custom-message",
     "page/API/pages/template-message/template-message",
-    "page/API/pages/subscribe-message/subscribe-message",
     "page/API/pages/set-navigation-bar-title/set-navigation-bar-title",
     "page/API/pages/navigation-bar-loading/navigation-bar-loading",
     "page/API/pages/navigator/navigator",
