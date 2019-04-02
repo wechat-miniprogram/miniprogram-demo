@@ -70,6 +70,9 @@ Page({
           }, {
             zh: '存储',
             url: 'scf-storage/scf-storage'
+          }, {
+            zh: '云调用',
+            url: 'scf-openapi/scf-openapi'
           }
         ]
       }

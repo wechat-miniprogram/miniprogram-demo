@@ -17,6 +17,8 @@
 	"appid": "wxe5f52902cf4de896",
 	"projectname": "%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B",
 	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -35,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -60,6 +62,12 @@
 					"name": "cloud-page",
 					"pathName": "page/cloud/pages/scf-storage/scf-storage",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "cloud-openapi",
+					"pathName": "page/cloud/pages/scf-openapi/scf-openapi",
+					"scene": null
 				}
 			]
 		}

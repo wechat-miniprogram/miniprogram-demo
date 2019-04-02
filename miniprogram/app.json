@@ -103,6 +103,7 @@
     "page/cloud/pages/server-date/server-date",
     "page/cloud/pages/scf-database/scf-database",
     "page/cloud/pages/scf-storage/scf-storage",
+    "page/cloud/pages/scf-openapi/scf-openapi",
     "page/component/pages/doc-web-view/doc-web-view",
     "page/API/pages/doc-web-view/doc-web-view",
     "page/cloud/pages/doc-web-view/doc-web-view"
@@ -155,5 +156,6 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "cloud": true
+  "cloud": true,
+  "sitemapLocation": "sitemap.json"
 }
