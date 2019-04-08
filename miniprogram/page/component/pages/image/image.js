@@ -1,3 +1,5 @@
+const config = require('../../../../config')
+
 Page({
   onShareAppMessage() {
     return {
@@ -5,5 +7,7 @@ Page({
       path: 'page/component/pages/image/image'
     }
   },
-
+  data: {
+    imageUrl: config.downloadExampleUrl
+  }
 })
