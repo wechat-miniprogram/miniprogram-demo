@@ -106,7 +106,8 @@
     "page/cloud/pages/scf-openapi/scf-openapi",
     "page/component/pages/doc-web-view/doc-web-view",
     "page/API/pages/doc-web-view/doc-web-view",
-    "page/cloud/pages/doc-web-view/doc-web-view"
+    "page/cloud/pages/doc-web-view/doc-web-view",
+    "page/component/pages/editor/editor"
   ],
   "window": {
     "navigationBarTextStyle": "black",

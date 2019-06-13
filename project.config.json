@@ -13,9 +13,9 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.2",
+	"libVersion": "2.7.0",
 	"appid": "wxe5f52902cf4de896",
-	"projectname": "%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B",
+	"projectname": "demo",
 	"isGameTourist": false,
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -67,6 +67,13 @@
 					"id": -1,
 					"name": "cloud-openapi",
 					"pathName": "page/cloud/pages/scf-openapi/scf-openapi",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "editor",
+					"pathName": "page/component/pages/editor/editor",
 					"scene": null
 				}
 			]

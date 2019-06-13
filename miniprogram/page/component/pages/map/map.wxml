@@ -19,6 +19,8 @@
         show-compass="{{showCompass}}"
         enable-zoom="{{enableZoom}}"
         enable-rotate="{{enableRotate}}"
+        enable-satellite="{{enableSatellite}}"
+        enable-traffic="{{enableTraffic}}"
         enable-overlooking="{{enableOverlooking}}"
         enable-scroll="{{enableScroll}}"
         polygons="{{drawPolygon ? polygons : []}}"
@@ -49,6 +51,12 @@
       </button>
       <button bindtap="toggleScroll">
         {{ !enableScroll ? '开启' : '关闭' }}拖动支持
+      </button>
+       <button bindtap="toggleSatellite">
+        {{ !enableSatellite ? '开启' : '关闭' }}卫星图
+      </button>
+       <button bindtap="toggleTraffic">
+        {{ !enableTraffic ? '开启' : '关闭' }}实时路况
       </button>
     </view>
   </view>

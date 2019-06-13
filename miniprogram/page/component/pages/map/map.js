@@ -49,6 +49,8 @@ Page({
     enableScroll: true,
     enableRotate: false,
     drawPolygon: false,
+    enableSatellite: false,
+    enableTraffic: false
   },
   toggle3d() {
     this.setData({
@@ -83,6 +85,16 @@ Page({
   togglePolygon() {
     this.setData({
       drawPolygon: !this.data.drawPolygon
+    })
+  },
+  toggleSatellite() {
+    this.setData({
+      enableSatellite: !this.data.enableSatellite
+    })
+  },
+  toggleTraffic() {
+    this.setData({
+      enableTraffic: !this.data.enableTraffic
     })
   }
 })
