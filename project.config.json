@@ -35,48 +35,6 @@
 		"game": {
 			"currentL": -1,
 			"list": []
-		},
-		"miniprogram": {
-			"current": 5,
-			"list": [
-				{
-					"id": -1,
-					"name": "map",
-					"pathName": "page/component/pages/map/map",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "font",
-					"pathName": "page/API/pages/load-font-face/load-font-face",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "cloud",
-					"pathName": "page/cloud/index",
-					"query": ""
-				},
-				{
-					"id": 3,
-					"name": "cloud-page",
-					"pathName": "page/cloud/pages/scf-storage/scf-storage",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "cloud-openapi",
-					"pathName": "page/cloud/pages/scf-openapi/scf-openapi",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "editor",
-					"pathName": "page/component/pages/editor/editor",
-					"scene": null
-				}
-			]
 		}
 	}
 }
