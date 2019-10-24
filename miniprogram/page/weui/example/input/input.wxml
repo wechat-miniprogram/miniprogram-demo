@@ -1,0 +1,126 @@
+
+<mp-toptips msg="{{error}}" show="{{error}}"></mp-toptips>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__hd">
+        <view class="page__title">Input（组件）</view>
+        <view class="page__desc">表单输入</view>
+    </view>
+    <view class="page__bd">
+        <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+            <mp-cells title="单选列表项">
+                <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="radioChange">
+                    <mp-checkbox wx:for="{{radioItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></mp-checkbox>
+                </mp-checkbox-group>
+            </mp-cells>
+            <mp-cells title="复选列表项">
+                <mp-checkbox-group prop="checkbox" multi="{{true}}" bindchange="checkboxChange">
+                    <mp-checkbox wx:for="{{checkboxItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></mp-checkbox>
+                </mp-checkbox-group>
+            </mp-cells>
+
+            <mp-cells title="表单" foot="底部说明文字底部说明文字">
+                <mp-cell prop="qq" title="qq" ext-class="">
+                    <input bindinput="formInputChange" data-field="qq" class="weui-input" placeholder="请输入qq"/>
+                </mp-cell>
+                <mp-cell prop="mobile" title="手机号" ext-class=" weui-cell_vcode">
+                    <input bindinput="formInputChange" data-field="mobile" class="weui-input" placeholder="请输入手机号"/>
+                    <view slot="foot" class="weui-vcode-btn">获取验证码</view>
+                </mp-cell>
+                <mp-cell prop="date" title="日期" ext-class="">
+                    <picker data-field="date" mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+                        <view class="weui-input">{{date}}</view>
+                    </picker>
+                </mp-cell>
+                <mp-cell prop="vcode" title="验证码" ext-class=" weui-cell_vcode">
+                    <input bindinput="formInputChange" data-field="vcode" class="weui-input" placeholder="请输入验证码"/>
+                    <image slot="foot" class="weui-vcode-img" src="../images/vcode.jpg" style="width: 108px"></image>
+                </mp-cell>
+            </mp-cells>
+            <mp-cells title="提交后表单项报错">
+                <mp-cell show-error prop="idcard" title="卡号" ext-class="">
+                    <input bindinput="formInputChange" data-field="idcard" class="weui-input" placeholder="请输入卡号"/>
+                </mp-cell>
+            </mp-cells>
+        </mp-form>
+
+        <view class="weui-cells__title">开关</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">标题文字</view>
+                <view class="weui-cell__ft">
+                    <switch checked />
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">文本框</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入文本" />
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">文本域</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
+                    <view class="weui-textarea-counter">0/200</view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">选择</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd" style="width: 105px">
+                    <picker bindchange="bindCountryCodeChange" value="{{countryCodeIndex}}" range="{{countryCodes}}">
+                        <view class="weui-select">{{countryCodes[countryCodeIndex]}}</view>
+                    </picker>
+                </view>
+                <view class="weui-cell__bd weui-cell__bd_in-select-before">
+                    <input class="weui-input" placeholder="请输入号码" />
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">选择</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__bd">
+                    <picker bindchange="bindAccountChange" value="{{accountIndex}}" range="{{accounts}}">
+                        <view class="weui-select">{{accounts[accountIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">国家/地区</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
+                        <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+        </view>
+
+        <checkbox-group bindchange="bindAgreeChange">
+            <label class="weui-agree" for="weuiAgree">
+                <view class="weui-agree__text">
+                    <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+                    <view class="weui-agree__checkbox-icon">
+                        <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+                    </view>
+                    阅读并同意<navigator url="" class="weui-agree__link">《相关条款》</navigator>
+                </view>
+            </label>
+        </checkbox-group>
+
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap="submitForm">确定</button>
+        </view>
+    </view>
+</view>

@@ -1,5 +1,6 @@
 const config = require('./config')
 
+global.isDemo = true
 App({
   onLaunch(opts) {
     console.log('App Launch', opts)

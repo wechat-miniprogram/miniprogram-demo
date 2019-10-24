@@ -1,0 +1,18 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">Dialog</view>
+        <view class="page__desc">对话框</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="default" bindtap="openConfirm">确认取消按钮</button>
+            <button class="weui-btn" type="default" bindtap="tapOneDialogButton">只有确认按钮</button>
+        </view>
+    </view>
+    <mp-dialog title="test" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+        <view>test content</view>
+    </mp-dialog>
+    <mp-dialog title="test1" show="{{showOneButtonDialog}}" bindbuttontap="tapDialogButton" buttons="{{oneButton}}">
+        <view>test content1</view>
+    </mp-dialog>
+</view>

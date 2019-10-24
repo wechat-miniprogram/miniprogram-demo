@@ -1,0 +1,7 @@
+<view>
+    <draggable class="drag-item" wx:for="{{list}}" id="{{'draggable' + index}}">
+        <drag-handler drag-id="{{'draggable' + index}}">
+            <view>hello test {{index}}</view>
+        </drag-handler>
+    </draggable>
+</view>

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "mp-form-page": "../../components/form-page/form-page"
+  }
+}

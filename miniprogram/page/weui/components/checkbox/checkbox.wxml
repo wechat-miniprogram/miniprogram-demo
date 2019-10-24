@@ -1,0 +1,15 @@
+<mp-cell has-footer="{{!multi}}" has-header="{{multi}}" bindtap="checkedChange" footer-class="{{!multi ? 'weui-check__ft_in-radio' : ''}}" icon-class="{{multi ? 'weui-check__hd_in-checkbox' : ''}}" ext-class="weui-check__label {{outerClass}} {{extClass}} {{!multi ? 'weui-cell_radio' : 'weui-cell_checkbox'}}">
+
+  <view slot="icon" wx:if="{{multi}}">
+    <checkbox value="{{value}}" checked="{{checked}}" disabled="{{disabled}}" color="{{color}}" class="weui-check"></checkbox>
+    <!-- 未勾选 -->
+    <icon wx:if="{{!checked}}" size="23" class="weui-icon-checkbox_circle" type="circle"></icon>
+    <icon wx:else size="23" class="weui-icon-checkbox_success" type="success"></icon>
+  </view>
+  <view>{{label}}</view>
+  <view slot="footer" wx:if="{{!multi}}">
+    <radio value="{{value}}" checked="{{checked}}" disabled="{{disabled}}" color="{{color}}" class="weui-check"></radio>
+    <!-- 已勾选 -->
+    <icon size="16" wx:if="{{checked}}" class="weui-icon-radio" type="success_no_circle"></icon>
+  </view>
+</mp-cell>

@@ -1,0 +1,39 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">Half Screen Dialog</view>
+        <view class="page__desc">半屏弹窗，辅助完成当前页面任务时；提醒用户并引导用户的下一步操作；用户主动发起的任务时。</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap="openTypeF">样式一</button>
+            <button class="weui-btn" type="primary" bindtap="openTypeS">样式二</button>
+            <button class="weui-btn" type="primary" bindtap="openTypeT">样式三</button>
+        </view>
+        <mp-halfScreenDialog show="{{typeF}}">
+          <view slot="title">测试标题A</view>
+          <view slot="desc">这是自定义描述区</view>
+          <view slot="footer">
+            <button type="default" class="weui-btn">按钮A</button>
+            <button type="primary" class="weui-btn">按钮B</button>
+          </view>
+        </mp-halfScreenDialog>
+        <mp-halfScreenDialog show="{{typeT}}" closabled="{{false}}">
+          <view slot="title">测试标题A</view>
+          <view slot="desc">这是自定义描述区</view>
+          <view slot="footer">
+            <button type="default" class="weui-btn">按钮A</button>
+            <button type="primary" class="weui-btn">按钮B</button>
+          </view>
+        </mp-halfScreenDialog>
+        <mp-halfScreenDialog 
+          bindbuttontap="buttontap"
+          show="{{typeS}}"
+          maskClosable="{{false}}" 
+          title="测试标题B" 
+          subTitle="测试标题B的副标题"
+          desc="辅助描述内容，可根据实际需要安排"
+          tips="辅助提示内容，可根据实际需要安排"
+          buttons="{{buttons}}"
+        ></mp-halfScreenDialog>
+    </view>
+</view>

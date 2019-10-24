@@ -107,7 +107,35 @@
     "page/component/pages/doc-web-view/doc-web-view",
     "page/API/pages/doc-web-view/doc-web-view",
     "page/cloud/pages/doc-web-view/doc-web-view",
-    "page/component/pages/editor/editor"
+    "page/component/pages/editor/editor",
+    "page/weui/example/index",
+    "page/weui/example/cell/cell",
+    "page/weui/example/slideview/slideview",
+    "page/weui/example/form/form",
+    "page/weui/example/uploader/uploader",
+    "page/weui/example/article/article",
+    "page/weui/example/badge/badge",
+    "page/weui/example/flex/flex",
+    "page/weui/example/footer/footer",
+    "page/weui/example/gallery/gallery",
+    "page/weui/example/grid/grid",
+    "page/weui/example/loadmore/loadmore",
+    "page/weui/example/loading/loading",
+    "page/weui/example/panel/panel",
+    "page/weui/example/preview/preview",
+    "page/weui/example/dialog/dialog",
+    "page/weui/example/msg/msg",
+    "page/weui/example/msg/msg_text",
+    "page/weui/example/msg/msg_text_primary",
+    "page/weui/example/msg/msg_success",
+    "page/weui/example/msg/msg_fail",
+    "page/weui/example/navbar/navbar",
+    "page/weui/example/navigation/navigation",
+    "page/weui/example/tabbar/tabbar",
+    "page/weui/example/icons/icons",
+    "page/weui/example/form-page/form-page",
+    "page/weui/example/half-screen-dialog/half-screen-dialog",
+    "page/weui/example/actionsheet/actionsheet"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -126,6 +154,12 @@
         "iconPath": "image/icon_component.png",
         "selectedIconPath": "image/icon_component_HL.png",
         "text": "组件"
+      },
+      {
+        "pagePath": "page/weui/example/index",
+        "iconPath": "image/icon_component.png",
+        "selectedIconPath": "image/icon_component_HL.png",
+        "text": "扩展组件"
       },
       {
         "pagePath": "page/API/index",
@@ -152,6 +186,7 @@
   ],
   "workers": "workers",
   "debug": false,
+  "style": "v2",
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"

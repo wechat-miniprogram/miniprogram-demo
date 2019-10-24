@@ -1,0 +1,9 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">SearchBar</view>
+        <view class="page__desc">搜索栏</view>
+    </view>
+    <view class="page__bd">
+        <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
+    </view>
+</view>

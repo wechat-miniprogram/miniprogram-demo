@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mp-actionSheet": "../../components/actionsheet/actionsheet",
+    "mp-icon": "../../components/icon/icon"
+  }
+}

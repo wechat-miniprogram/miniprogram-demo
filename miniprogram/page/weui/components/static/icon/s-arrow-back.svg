@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="24px" viewBox="0 0 12 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/Filled/arrow Copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="05成员管理" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="单个成员编辑" transform="translate(-25.000000, -54.000000)">
+            <rect id="bg" x="0" y="0" width="375" height="236"></rect>
+            <g id="Navbar">
+                <g id="Group-4" transform="translate(8.000000, 50.000000)">
+                    <g id="Icons/Filled/arrow" transform="translate(23.000000, 16.000000) rotate(-180.000000) translate(-23.000000, -16.000000) translate(17.000000, 4.000000)" fill="#000000" fill-opacity="0.9">
+                        <g id="Group" transform="translate(-2.000000, 5.000000)">
+                            <path d="M3,2.5039609 L11,2.5039609 L11,4.5039609 L4,4.5039609 L4,11.5039609 L2,11.5039609 L2,3.5039609 C2,2.95167615 2.44771525,2.5039609 3,2.5039609 Z" id="图标颜色" transform="translate(6.500000, 7.003961) rotate(135.000000) translate(-6.500000, -7.003961) "></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

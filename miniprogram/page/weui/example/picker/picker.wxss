@@ -1,0 +1,6 @@
+@import '../common.wxss';
+
+page{
+    background-color: #FFFFFF;
+}
+picker{margin-bottom:16px;}

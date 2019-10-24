@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "mp-cells": "../cells/cells"
+    }
+}

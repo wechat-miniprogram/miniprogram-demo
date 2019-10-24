@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "draggable": "../../components/draggable/draggable",
+        "drag-handler": "../../components/draggable/handler"
+    }
+}

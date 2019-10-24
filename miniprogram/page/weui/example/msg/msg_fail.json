@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "mp-msg": "../../components/msg/msg"
+  }
+}
