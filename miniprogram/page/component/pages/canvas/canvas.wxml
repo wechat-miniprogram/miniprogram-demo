@@ -5,8 +5,34 @@
   <template is="head" data="{{title: 'canvas'}}"/>
 
   <view class="page-body">
-    <view class="page-body-wrapper">
-      <canvas canvas-id="canvas" class="canvas"></canvas>
+    <view class="page-section">
+      <view class="page-section-title">
+      Canvas
+      </view>
+      <view class="page-section-spacing">
+        <view class="page-body-wrapper">
+          <canvas canvas-id="canvas" class="canvas"></canvas>
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title">
+        Canvas 2D
+      </view>
+      <view class="page-section-spacing">
+        <view class="page-body-wrapper">
+          <canvas type="2d" id="canvas2D" class="canvas"></canvas>    
+        </view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="page-section-title">
+        WebGL
+      </view>
+      <view class="page-body-wrapper">
+        <canvas class="canvas" type="webgl" id="canvasWebGL"></canvas>
+      </view>
     </view>
   </view>
 
