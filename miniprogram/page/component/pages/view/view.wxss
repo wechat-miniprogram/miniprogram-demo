@@ -2,23 +2,13 @@
   margin-top: 60rpx;
   display:flex;
 }
-
 .flex-item{
   width: 200rpx;
   height: 300rpx;
   font-size: 26rpx;
 }
-
 .flex-item-V{
   margin: 0 auto;
   width: 300rpx;
   height: 200rpx;
-}
-
-.flex-item-hover {
-  background: pink;
-}
-
-.flex-item-hover-parent {
-  background: yellow;
 }

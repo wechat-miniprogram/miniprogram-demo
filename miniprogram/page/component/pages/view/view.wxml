@@ -11,7 +11,7 @@
       </view>
       <view class="page-section-spacing">
         <view class="flex-wrp" style="flex-direction:row;">
-          <view  class="flex-item demo-text-1"></view>
+          <view class="flex-item demo-text-1"></view>
           <view class="flex-item demo-text-2"></view>
           <view class="flex-item demo-text-3"></view>
         </view>
@@ -27,53 +27,5 @@
         <view class="flex-item flex-item-V demo-text-3"></view>
       </view>
     </view>
-    <!-- hover-class -->
-    <view class="page-section">
-      <view class="page-section-title">
-        <text>
-          hover-class
-          指定按下时的样式
-          当 hover-class="none"时，没有点击态效果
-        </text>
-      </view>
-      <view class="page-section-spacing">
-        <view class="flex-wrp" style="flex-direction:column;">
-          <view hover-class="flex-item-hover" class="flex-item-V demo-text-1"></view>
-        </view>
-      </view>
-    </view>
-    <!-- hover-stop-propagation -->
-    <view class="page-section">
-      <view class="page-section-title">
-        <text>
-          hover-stop-propagation
-          指定是否阻止本节点的祖先节点出现点击态
-        </text>
-      </view>
-      <view class="page-section-spacing">
-        <view class="flex-wrp" style="flex-direction:column;"  hover-class="flex-item-hover-parent" >
-          <view hover-stop-propagation="true" hover-class="flex-item-hover" class="flex-item-V demo-text-1"></view>
-        </view>
-        <view class="flex-wrp" style="flex-direction:column;"  hover-class="flex-item-hover-parent" >
-          <view hover-class="flex-item-hover" class="flex-item-V demo-text-1"></view>
-        </view>
-      </view>
-    </view>
-    <!-- hover-start-time -->
-    <view class="page-section">
-      <view class="page-section-title">
-        <text>
-          hover-start-time
-          按住后多久出现点击态，单位毫秒        
-        </text>
-      </view>
-      <view class="page-section-spacing">
-        <view class="flex-wrp" style="flex-direction:column;" >
-          <view hover-start-time="2000" hover-class="flex-item-hover" class="flex-item-V demo-text-1"></view>
-        </view>
-      
-      </view>
-    </view>
-  </view>
   <template is="foot" />
 </view>
