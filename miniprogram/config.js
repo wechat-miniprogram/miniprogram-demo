@@ -40,10 +40,10 @@ const config = {
   downloadExampleUrl: `https://${host}/static/weapp.jpg`,
 
   // 云开发环境 ID
-  envId: 'release-b86096',
+  envId: 'mac-c0dgh',
 
   // 云开发-存储 示例文件的文件 ID
-  demoImageFileId: 'cloud://release-b86096.7265-release-b86096/demo.jpg',
+  demoImageFileId: 'cloud://mac-c0dgh.6d61-mac-c0dgh-1301916662/upload/5.png',
   demoVideoFileId: 'cloud://release-b86096.7265-release-b86096/demo.mp4',
 }
 
