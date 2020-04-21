@@ -23,6 +23,7 @@
     "page/component/pages/image/image",
     "page/component/pages/audio/audio",
     "page/component/pages/video/video",
+    "page/component/pages/video/picture-in-picture",
     "page/component/pages/map/map",
     "page/component/pages/canvas/canvas",
     "page/component/pages/ad/ad",
@@ -135,8 +136,7 @@
     "page/weui/example/icons/icons",
     "page/weui/example/form-page/form-page",
     "page/weui/example/half-screen-dialog/half-screen-dialog",
-    "page/weui/example/actionsheet/actionsheet",
-    "page/component/pages/video/picture-in-picture"
+    "page/weui/example/actionsheet/actionsheet"
   ],
   "window": {
     "navigationBarTextStyle": "black",
