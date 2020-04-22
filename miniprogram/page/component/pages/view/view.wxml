@@ -3,7 +3,6 @@
 
 <view class="container">
   <template is="head" data="{{title: 'view'}}"/>
-
   <view class="page-body">
     <view class="page-section">
       <view class="page-section-title">
@@ -27,5 +26,6 @@
         <view class="flex-item flex-item-V demo-text-3"></view>
       </view>
     </view>
+  </view>
   <template is="foot" />
 </view>
