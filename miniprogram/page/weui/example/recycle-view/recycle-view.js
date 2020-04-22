@@ -1,9 +1,8 @@
-const createRecycleContext = require
-('miniprogram-recycle-view')
+const createRecycleContext = require('miniprogram-recycle-view')
 
 // fakeList
-const newList = new Array(300).fill(0);
-for(let i = 0; i < newList.length; i++) {
+const newList = new Array(300).fill(0)
+for (let i = 0; i < newList.length; i++) {
   newList[i] = {
     idx: i,
     title: '列表标题',
@@ -11,9 +10,7 @@ for(let i = 0; i < newList.length; i++) {
   }
 }
 
-const rpx2px = (rpx) => {
-  return (rpx / 750) * wx.getSystemInfoSync().windowWidth
-}
+const rpx2px = (rpx) => (rpx / 750) * wx.getSystemInfoSync().windowWidth
 Page({
   data: {
 
@@ -33,5 +30,5 @@ Page({
     })
     ctx.append(newList)
   },
-  
+
 })

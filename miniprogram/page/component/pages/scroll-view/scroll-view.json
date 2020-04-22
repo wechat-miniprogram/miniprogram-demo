@@ -1,3 +1,5 @@
 {
-    "navigationBarTitleText": "scroll-view"
+    "navigationBarTitleText": "scroll-view",
+    "pageOrientation": "auto"
+
 }

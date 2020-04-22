@@ -60,7 +60,7 @@ Page({
   },
   insertEmoji(evt) {
     const emotionName = evt.detail.emotionName
-    const { cursor, comment } = this.data
+    const {cursor, comment} = this.data
     const newComment =
       comment.slice(0, cursor) + emotionName + comment.slice(cursor)
     this.setData({
@@ -76,11 +76,11 @@ Page({
       comment: ''
     })
   },
-  deleteEmoji: function() {
+  deleteEmoji() {
     const pos = this.data.cursor
     const comment = this.data.comment
-    let result = '',
-      cursor = 0
+    let result = ''
+    let cursor = 0
 
     let emojiLen = 6
     let startPos = pos - emojiLen
@@ -110,7 +110,7 @@ Page({
     }
     this.setData({
       comment: result,
-      cursor: cursor
+      cursor
     })
   }
 })

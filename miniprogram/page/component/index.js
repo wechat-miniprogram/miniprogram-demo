@@ -51,6 +51,11 @@ Page({
         name: '开放能力',
         open: false,
         pages: ['ad', 'open-data', 'web-view']
+      }, {
+        id: 'obstacle-free',
+        name: '无障碍访问',
+        open: false,
+        pages: ['aria-component']
       }
     ]
   },

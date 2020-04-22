@@ -145,7 +145,8 @@
     "page/weui/example/tabs/tabs",
     "page/weui/example/barrage/barrage",
     "page/weui/example/wxml-to-canvas/wxml-to-canvas",
-    "page/weui/example/toptips/toptips"
+    "page/weui/example/toptips/toptips",
+    "page/component/pages/aria-component/aria-component"
   ],
   "window": {
     "navigationBarTextStyle": "black",

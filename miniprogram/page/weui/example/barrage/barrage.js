@@ -16,15 +16,15 @@ Page({
       lineHeight: 2, // 弹幕行高
       mode: 'overlap', // 弹幕重叠 overlap 不重叠 separate
       padding: [10, 10, 10, 10], // 弹幕区四周
-      tunnelShow: false, // 显示轨道线
-      range: [0, 1] // 弹幕显示的垂直范围，支持两个值，[0, 1] 表示随机
+      tunnelShow: false,
+      range: [0, 1]
     })
     this.barrage.open()
     const data = mockData(100)
     this.barrage.addData(data)
     this.timer = setInterval(() => {
       const data = mockData(100);
-      this.barrage.addData(data)
+      this.barrage.addData(data);
     }, 2000)
   },
   fullscreenchange() {
