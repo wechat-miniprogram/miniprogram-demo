@@ -24,6 +24,8 @@
     "eslint-plugin-promise": "^4.0.0"
   },
   "dependencies": {
-    "miniprogram-recycle-view": "^0.1.5"
+    "miniprogram-barrage": "^1.1.0",
+    "miniprogram-recycle-view": "^0.1.5",
+    "wxml-to-canvas": "^1.1.1"
   }
 }

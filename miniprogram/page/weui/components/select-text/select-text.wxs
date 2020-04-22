@@ -1,0 +1,10 @@
+function containerStyle(data) {
+  if (data.showToolTip && data.showCopyBtn) {
+    return 'background-color: ' + data.activeBgColor
+  }
+  return ''
+}
+
+module.exports = {
+  containerStyle: containerStyle,
+}

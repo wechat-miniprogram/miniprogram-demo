@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mp-toptips": "../../components/toptips/toptips"
+  }
+
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "barrage",
+  "usingComponents": {
+    "barrage": "miniprogram-barrage"
+  }
+}

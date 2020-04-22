@@ -142,7 +142,10 @@
     "page/weui/example/emoji/emoji",
     "page/weui/example/recycle-view/recycle-view",
     "page/weui/example/sticky/sticky",
-    "page/weui/example/tabs/tabs"
+    "page/weui/example/tabs/tabs",
+    "page/weui/example/barrage/barrage",
+    "page/weui/example/wxml-to-canvas/wxml-to-canvas",
+    "page/weui/example/toptips/toptips"
   ],
   "window": {
     "navigationBarTextStyle": "black",

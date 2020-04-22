@@ -82,90 +82,80 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 13:
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-
 Component({
-    options: {
-        addGlobalClass: true
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+    space: {
+      type: String,
+      value: ''
     },
-    properties: {
-        type: {
-            type: String,
-            value: 'error',
-            observer: '_typeChange'
-        },
-        show: {
-            type: Boolean,
-            value: false,
-            observer: '_showChange'
-        },
-        msg: {
-            type: String,
-            value: ''
-        },
-        delay: {
-            type: Number,
-            value: 2000
-        },
-        extClass: {
-            type: String,
-            value: ''
-        }
+    decode: {
+      type: Boolean,
+      value: false
     },
-    data: {
-        typeClassMap: {
-            'warn': 'weui-toptips_warn',
-            'info': 'weui-toptips_info',
-            'success': 'weui-toptips_success',
-            'error': 'weui-toptips_error'
-        }
+    placement: {
+      type: String,
+      value: 'top'
     },
-    lifetimes: {
-        attached: function attached() {
-            var data = this.data;
-            this.setData({
-                className: data.typeClassMap[data.type] || ''
-            });
-        },
+    showCopyBtn: {
+      type: Boolean,
+      value: false
     },
-
-    methods: {
-        _typeChange: function _typeChange(newVal) {
-            this.setData({
-                className: this.data.typeClassMap[newVal] || ''
-            });
-            return newVal;
-        },
-        _showChange: function _showChange(newVal) {
-            this._showToptips(newVal);
-        },
-        _showToptips: function _showToptips(newVal) {
-            var _this = this;
-
-            if (newVal && this.data.delay) {
-                setTimeout(function () {
-                    _this.setData({
-                        show: false
-                    }, function () {
-                        _this.triggerEvent('hide', {}, {});
-                    });
-                }, this.data.delay);
-            }
-            this.setData({
-                show: newVal
-            });
-        }
+    value: {
+      type: String,
+      value: ''
     }
-});
+  },
+  observers: {
+    onDocumentTap() {
+      this.setData({
+        showToolTip: false
+      })
+    }
+  },
+
+  /**
+   * 组件的初始数据
+   */
+  data: {
+    showToolTip: false
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+    handleLongPress() {
+      if (!this.data.showCopyBtn) return;
+      this.setData({
+        showToolTip: true,
+      });
+    },
+    handleCopy() {
+      this.setData({
+        showToolTip: false
+      });
+      wx.setClipboardData({
+        data: this.data.value,
+      });
+      this.triggerEvent('copy', {});
+    },
+    stopPropagation: function stopPropagation(e) {}
+
+  }
+})
 
 /***/ })
 

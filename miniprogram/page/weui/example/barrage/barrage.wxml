@@ -1,0 +1,16 @@
+<video 
+  id="myVideo" 
+  class="video" 
+  src="{{src}}" 
+  loop controls 
+  bindfullscreenchange="fullscreenchange" 
+  vslide-gesture 
+  vslide-gesture-in-fullscreen 
+  autoplay 
+  enable-play-gesture
+>
+  <barrage 
+    class="barrage" 
+    wx:if="{{toggle}}"
+  ></barrage>
+</video>

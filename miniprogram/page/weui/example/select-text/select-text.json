@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "select-text",
+  "usingComponents": {
+    "mp-select-text": "../../components/select-text/select-text"
+  }
+}
