@@ -30,7 +30,13 @@ Page({
                 name: '搜索相关',
                 open: false,
                 pages: ['searchbar']
-            }
+            },
+            {
+                id: 'extended',
+                name: '扩展组件',
+                open: false,
+                pages: ['emoji', 'video-swiper', 'index-list']
+              }
         ]
     },
     kindToggle: function (e) {

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "mp-video-swiper": "../../components/video-swiper/video-swiper"
+  }
+}

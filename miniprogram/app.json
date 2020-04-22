@@ -136,7 +136,10 @@
     "page/weui/example/icons/icons",
     "page/weui/example/form-page/form-page",
     "page/weui/example/half-screen-dialog/half-screen-dialog",
-    "page/weui/example/actionsheet/actionsheet"
+    "page/weui/example/actionsheet/actionsheet",
+    "page/weui/example/video-swiper/video-swiper",
+    "page/weui/example/index-list/index-list",
+    "page/weui/example/emoji/emoji"
   ],
   "window": {
     "navigationBarTextStyle": "black",

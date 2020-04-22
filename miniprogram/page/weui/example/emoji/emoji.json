@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "mp-emoji": "../../components/emoji/emoji"
+
+  }
+}

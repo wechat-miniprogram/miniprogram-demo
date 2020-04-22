@@ -1,0 +1,63 @@
+<view class="record" hidden="{{parsedComment.length === 0}}">
+  <view class="avator"></view>
+  <view class="comment">
+    <block wx:for="{{parsedComment}}" wx:key="*this">
+      <block wx:if="{{item.type === 1}}">{{item.content}}</block>
+      <view 
+        wx:if="{{item.type === 2}}" 
+        style="display: inline-block; width: {{lineHeight}}px; height: {{lineHeight}}px">
+        <view 
+          class="{{item.imageClass}}"
+          style="background-image: url({{emojiSource}});transform-origin: 0 0; transform: scale({{lineHeight / 64}});"></view>
+      </view>
+    </block>
+  </view>
+</view>
+
+<view class="reply_wrp" style="bottom: {{keyboardHeight}}px">
+  <view class="reply_tool">
+    <view hover-class="active" class="reply_button replay_quick_button">
+      <image src="./images/reply_tool_keyboard.svg" mode='aspectFit' class="reply_tool_pic"></image>
+    </view>
+    <view class="reply_form_wrp">
+      <label for="" class="reply_label">
+        <input 
+          class="reply_input" 
+          cursor-spacing="8px" 
+          confirm-type="send" 
+          adjust-position="{{false}}" 
+          confirm-hold value="{{comment}}" 
+          cursor="{{cursor}}" 
+          focus="{{focus}}" 
+          bindblur="onBlur" 
+          bindfocus="onFocus" 
+          bindinput="onInput" 
+          bindconfirm="onConfirm" 
+          bindkeyboardheightchange="onkeyboardHeightChange"
+        />
+      </label>
+    </view>
+    <view hover-class="active" class="reply_button replay_emotion_button" bindtap="showEmoji">
+      <image src="./images/reply_tool_emoji.svg" mode='aspectFit' class="reply_tool_pic"></image>
+    </view>
+    <view hover-class="active" class="reply_button replay_media_button" bindtap="showFunction">
+      <image src="./images/reply_tool_add.png" mode='aspectFit' class="reply_tool_pic"></image>
+    </view>
+  </view>
+  <view class="reply_panel_wrp" style="height: {{emojiShow ? 300 : 200}}px;" hidden="{{!emojiShow && !functionShow}}">
+    <view class="reply_panel {{emojiShow ? 'show': ''}}" hidden="{{!emojiShow}}">
+      <mp-emoji source="{{emojiSource}}" class="mp-emoji" bindinsertemoji="insertEmoji" binddelemoji="deleteEmoji" bindsend="onsend"></mp-emoji>
+    </view>
+    <view class="reply_panel {{functionShow ? 'show': ''}}" hidden="{{!functionShow}}">
+      <swiper indicator-dots="{{true}}" indicator-color="#bbbbbb" indicator-active-color="#8c8c8c">
+        <swiper-item>
+          <view class="function_list">
+            <view class="function_item" bindtap="chooseImage">
+              <image src="./images/reply_function_image.svg" class="reply_function_pic"></image>
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+</view>
