@@ -1,0 +1,9 @@
+.item+.item {
+  border-top: 1px solid #ccc;
+}
+
+.item, .item > view {
+  display: flex;
+  align-items: center;
+  height: 300rpx;
+}

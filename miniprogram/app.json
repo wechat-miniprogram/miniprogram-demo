@@ -139,7 +139,10 @@
     "page/weui/example/actionsheet/actionsheet",
     "page/weui/example/video-swiper/video-swiper",
     "page/weui/example/index-list/index-list",
-    "page/weui/example/emoji/emoji"
+    "page/weui/example/emoji/emoji",
+    "page/weui/example/recycle-view/recycle-view",
+    "page/weui/example/sticky/sticky",
+    "page/weui/example/tabs/tabs"
   ],
   "window": {
     "navigationBarTextStyle": "black",

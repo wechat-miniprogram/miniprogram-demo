@@ -22,5 +22,8 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.0"
+  },
+  "dependencies": {
+    "miniprogram-recycle-view": "^0.1.5"
   }
 }
