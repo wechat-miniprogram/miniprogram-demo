@@ -147,7 +147,8 @@
     "page/weui/example/wxml-to-canvas/wxml-to-canvas",
     "page/weui/example/toptips/toptips",
     "page/component/pages/aria-component/aria-component",
-    "page/API/pages/audio/audio"
+    "page/API/pages/audio/audio",
+    "page/API/pages/mdns/mdns"
   ],
   "window": {
     "navigationBarTextStyle": "black",

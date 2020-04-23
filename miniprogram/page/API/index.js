@@ -163,6 +163,9 @@ Page({
           }, {
             zh: '下载文件',
             url: 'download-file/download-file'
+          }, {
+            zh: 'mDNS',
+            url: 'mdns/mdns'
           }
         ]
       }, {
