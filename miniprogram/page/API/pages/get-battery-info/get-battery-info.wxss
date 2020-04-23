@@ -1,0 +1,10 @@
+.battery-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40rpx 0;
+}
+
+.info-text {
+  line-height: 80rpx;
+}

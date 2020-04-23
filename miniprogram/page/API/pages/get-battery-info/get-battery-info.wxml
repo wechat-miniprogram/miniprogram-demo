@@ -1,0 +1,19 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: '获取手机电量'}}"/>
+
+  <view class="page-body">
+  	<view class="page-section">
+      <view class="battery-info">
+        <text class="info-text" wx:if="{{level}}">当前电量: {{level}} %</text>
+        <text class="info-text" wx:if="{{isCharging}}">充电中</text>
+      </view>
+      <button type="primary" bind:tap="getBatteryInfo" >
+        获取电量信息
+      </button>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

@@ -108,7 +108,10 @@ Page({
           }, {
             zh: '获取手机系统信息',
             url: 'get-system-info/get-system-info'
-          }, {
+          },  {
+            zh: '获取手机设备电量',
+            url: 'get-battery-info/get-battery-info'
+          },{
             zh: '监听重力感应数据',
             url: 'on-accelerometer-change/on-accelerometer-change'
           }, {
@@ -147,6 +150,16 @@ Page({
           }
         ]
       }, {
+        id: 'performance',
+        name: '性能',
+        open: false,
+        pages: [
+          {
+            zh: '获取性能数据',
+            url: 'get-performance/get-performance'
+          }
+        ]
+      },{
         id: 'network',
         name: '网络',
         open: false,
