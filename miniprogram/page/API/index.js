@@ -173,6 +173,9 @@ Page({
           {
             zh: '图片',
             url: 'image/image'
+          },{
+            zh: '音频',
+            url: 'audio/audio'
           }, {
             zh: '录音',
             url: 'voice/voice'

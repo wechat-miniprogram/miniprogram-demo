@@ -2,7 +2,8 @@ const util = require('../../../../util/util.js')
 
 let playTimeInterval
 let recordTimeInterval
-
+const recorderManager = wx.getRecorderManager()
+const innerAudioContext = wx.createInnerAudioContext();
 Page({
   onShareAppMessage() {
     return {
@@ -10,15 +11,14 @@ Page({
       path: 'page/API/pages/voice/voice'
     }
   },
-
   data: {
-    recording: false,
-    playing: false,
-    hasRecord: false,
-    recordTime: 0,
-    playTime: 0,
-    formatedRecordTime: '00:00:00',
-    formatedPlayTime: '00:00:00'
+    recording: false, // 录音中
+    playing: false, // 播放中
+    hasRecord: false, // 已经录音
+    recordTime: 0, // 录音时长
+    playTime: 0, // 播放时长
+    formatedRecordTime: '00:00:00', // 录音时间
+    formatedPlayTime: '00:00:00' // 播放时间
   },
 
   onHide() {
@@ -29,35 +29,74 @@ Page({
     }
   },
 
-  startRecord() {
-    this.setData({recording: true})
-
-    const that = this
-    recordTimeInterval = setInterval(function () {
-      const recordTime = that.data.recordTime += 1
-      that.setData({
-        formatedRecordTime: util.formatTime(that.data.recordTime),
-        recordTime
-      })
-    }, 1000)
-
-    wx.startRecord({
-      success(res) {
+  onLoad() {
+    const that = this;
+    // 监听录音开始事件
+    recorderManager.onStart(() => { 
+      console.log('recorderManage: onStart')
+      // 录音时长记录 每秒刷新
+      recordTimeInterval = setInterval(() => {
+        const recordTime = that.data.recordTime += 1
         that.setData({
-          hasRecord: true,
-          tempFilePath: res.tempFilePath,
-          formatedPlayTime: util.formatTime(that.data.playTime)
+          formatedRecordTime: util.formatTime(that.data.recordTime),
+          recordTime
         })
-      },
-      complete() {
-        that.setData({recording: false})
-        clearInterval(recordTimeInterval)
-      }
+      }, 1000)
+    });
+
+    // 监听录音停止事件
+    recorderManager.onStop((res) => {
+      console.log('recorderManage: onStop')
+      that.setData({
+        hasRecord: true, // 录音完毕
+        recording: false,
+        tempFilePath: res.tempFilePath,
+        formatedPlayTime: util.formatTime(that.data.playTime),
+      })
+      // 清除录音计时器
+      clearInterval(recordTimeInterval)
+    });
+
+    // 监听播放开始事件
+    innerAudioContext.onPlay(() => {
+      console.log('innerAudioContext: onPlay')
+      playTimeInterval = setInterval(() => {
+        const playTime = that.data.playTime + 1
+        if(that.data.playTime === that.data.recordTime) {
+          that.stopVoice();
+        } else {
+          console.log('update playTime', playTime)
+          that.setData({
+            formatedPlayTime: util.formatTime(playTime),
+            playTime
+          })
+        }
+      }, 1000);
+    });
+
+    innerAudioContext.onStop(() => {
+      
     })
   },
 
+  startRecord() {
+    this.setData({ 
+      recording: true // 录音开始
+    })
+    // 设置 Recorder 参数
+    const options = {
+      duration: 10000, // 持续时长
+      sampleRate: 44100,
+      numberOfChannels: 1,
+      encodeBitRate: 192000,
+      format: 'aac',
+      frameSize: 50
+    }
+    recorderManager.start(options) // 开始录音
+  },
+
   stopRecord() {
-    wx.stopRecord()
+    recorderManager.stop(); // 停止录音
   },
 
   stopRecordUnexpectedly() {
@@ -77,34 +116,20 @@ Page({
   },
 
   playVoice() {
-    const that = this
-    playTimeInterval = setInterval(function () {
-      const playTime = that.data.playTime + 1
-      console.log('update playTime', playTime)
-      that.setData({
-        playing: true,
-        formatedPlayTime: util.formatTime(playTime),
-        playTime
-      })
-    }, 1000)
-    wx.playVoice({
-      filePath: this.data.tempFilePath,
-      success() {
-        clearInterval(playTimeInterval)
-        const playTime = 0
-        console.log('play voice finished')
-        that.setData({
-          playing: false,
-          formatedPlayTime: util.formatTime(playTime),
-          playTime
-        })
-      }
+    innerAudioContext.src = this.data.tempFilePath;
+    this.setData({
+      playing: true,
+
+    }, () => {
+      innerAudioContext.play();
+
     })
+    
   },
 
   pauseVoice() {
     clearInterval(playTimeInterval)
-    wx.pauseVoice()
+    innerAudioContext.pause();
     this.setData({
       playing: false
     })
@@ -112,17 +137,17 @@ Page({
 
   stopVoice() {
     clearInterval(playTimeInterval)
+    innerAudioContext.stop();
     this.setData({
       playing: false,
       formatedPlayTime: util.formatTime(0),
       playTime: 0
     })
-    wx.stopVoice()
   },
 
   clear() {
     clearInterval(playTimeInterval)
-    wx.stopVoice()
+    innerAudioContext.stop();    
     this.setData({
       playing: false,
       hasRecord: false,

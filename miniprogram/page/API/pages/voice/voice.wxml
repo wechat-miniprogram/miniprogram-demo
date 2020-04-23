@@ -2,7 +2,7 @@
 <import src="../../../common/foot.wxml" />
 
 <view class="container">
-  <template is="head" data="{{title: 'start/stopRecord、play/stopVoice'}}"/>
+  <template is="head" data="{{title: '录音/音频'}}"/>
 
   <view class="page-body">
     <view class="page-section">
@@ -57,9 +57,9 @@
           <view class="page-body-button" bindtap="stopVoice">
             <image src="/image/stop.png"></image>
           </view>
-          <!-- <view class="page-body-button" bindtap="pauseVoice">
+          <view class="page-body-button" bindtap="pauseVoice">
             <image src="/image/pause.png"></image>
-          </view> -->
+          </view>
           <view class="page-body-button" bindtap="clear">
             <image src="/image/trash.png"></image>
           </view>
