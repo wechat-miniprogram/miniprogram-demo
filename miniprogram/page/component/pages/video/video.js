@@ -23,8 +23,7 @@ Page({
   inputValue: '',
   data: {
     src: '',
-    danmuList:
-    [{
+    danmuList: [{
       text: '第 1s 出现的弹幕',
       color: '#ff0000',
       time: 1
@@ -32,7 +31,8 @@ Page({
       text: '第 3s 出现的弹幕',
       color: '#ff00ff',
       time: 3
-    }]
+    }],
+    enableAutoRotation: true
   },
 
   bindInputBlur(e) {
@@ -63,5 +63,11 @@ Page({
   videoErrorCallback(e) {
     console.log('视频错误信息:')
     console.log(e.detail.errMsg)
+  },
+
+  handleSwitchChange(e) {
+    this.setData({
+      enableAutoRotation: e.detail.value
+    })
   }
 })

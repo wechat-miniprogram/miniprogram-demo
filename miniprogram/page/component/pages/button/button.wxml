@@ -28,7 +28,7 @@
         <button class="mini-btn" type="warn" size="mini">按钮</button>
       </view>
 
-      <button type="primary" open-type="contact" bindcontact="handleContact" show-message-card="true" send-message-title="临时会话">打开客服会话</button>
+      <button type="primary" open-type="contact" bindcontact="handleContact" show-message-card="{{true}}" send-message-title="临时会话">打开客服会话</button>
       <button type="primary" open-type="share">触发用户转发</button>
       <button type="primary" open-type="getPhoneNumber" bindgetphonenumber="handleGetPhoneNumber">获取用户手机号</button>
       <button type="primary" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleGetUserInfo">获取用户信息</button>

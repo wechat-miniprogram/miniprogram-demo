@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "video"
+    "navigationBarTitleText": "video",
+    "pageOrientation": "auto"
 }
