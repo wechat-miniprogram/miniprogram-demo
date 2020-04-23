@@ -1,1 +1,10 @@
-/* miniprogram/page/API/pages/get-performance/get-performance.wxss */
+.performance-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+.performance-item {
+  margin: 30rpx 0;
+  width: 80%;
+}
