@@ -1,8 +1,8 @@
 @import "../../../common/lib/weui.wxss";
 
-live-player {
+live-pusher {
   display: flex;
-  width: 100%;
+  margin: 12rpx auto;
   height: 350rpx;
 }
 
