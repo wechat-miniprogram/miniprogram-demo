@@ -35,7 +35,7 @@ Page({
         id: 'media',
         name: '媒体组件',
         open: false,
-        pages: ['image', 'audio', 'video', 'camera']
+        pages: ['image', 'audio', 'video', 'camera', 'live-pusher', 'live-player']
       }, {
         id: 'map',
         name: '地图',
