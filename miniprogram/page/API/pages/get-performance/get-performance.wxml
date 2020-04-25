@@ -12,7 +12,7 @@
       <view class="performance-item">
         <view>{{item.entryType}}：{{item.name}}</view>
         <view wx:if="{{item.duration}}">耗时：{{item.duration}}</view>
-        <view wx:if="item.startTime">时间：{{item.startTime}}</view>
+        <view wx:if="{{item.startTime}}">时间：{{item.startTime}}</view>
       </view>
     </view>
   </view>

@@ -150,7 +150,9 @@
     "page/API/pages/audio/audio",
     "page/API/pages/mdns/mdns",
     "page/API/pages/get-performance/get-performance",
-    "page/API/pages/get-battery-info/get-battery-info"
+    "page/API/pages/get-battery-info/get-battery-info",
+    "page/API/pages/bluetooth/slave/slave",
+    "page/API/pages/udp-socket/udp-socket"
   ],
   "window": {
     "navigationBarTextStyle": "black",

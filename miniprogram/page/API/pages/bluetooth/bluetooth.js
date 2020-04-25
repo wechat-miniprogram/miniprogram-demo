@@ -138,6 +138,11 @@ Page({
       canWrite: false,
     })
   },
+  changeMode() {
+    wx.navigateTo({
+      url: './slave/slave',
+    })
+  },
   getBLEDeviceServices(deviceId) {
     wx.getBLEDeviceServices({
       deviceId,
@@ -216,13 +221,14 @@ Page({
     const buffer = new ArrayBuffer(1)
     const dataView = new DataView(buffer)
     // eslint-disable-next-line
-    dataView.setUint8(0, Math.random() * 255 | 0)
+    dataView.setUint8(0, Math.random() * 20| 0)
     wx.writeBLECharacteristicValue({
       deviceId: this._deviceId,
-      serviceId: this._deviceId,
+      serviceId: this._serviceId,
       characteristicId: this._characteristicId,
       value: buffer,
     })
+    console.log('write data to slave')
   },
   closeBluetoothAdapter() {
     wx.closeBluetoothAdapter()

@@ -1,4 +1,3 @@
-const AUTH_MODE = 'fingerPrint'
 
 Page({
   onShareAppMessage() {
@@ -8,7 +7,10 @@ Page({
     }
   },
 
-  startAuth() {
+  startAuth(e) {
+    console.log(e)
+    const AUTH_MODE = e.currentTarget.dataset.mode;
+    console.log(AUTH_MODE)
     const startSoterAuthentication = () => {
       wx.startSoterAuthentication({
         requestAuthModes: [AUTH_MODE],
@@ -38,7 +40,7 @@ Page({
           if (parseInt(res.isEnrolled, 10) <= 0) {
             wx.showModal({
               title: '错误',
-              content: '您暂未录入指纹信息，请录入后重试',
+              content: `您暂未录入${AUTH_MODE === 'facial' ? '人脸' : '指纹'}信息，请录入后重试`,
               showCancel: false
             })
             return
@@ -54,7 +56,7 @@ Page({
     const notSupported = () => {
       wx.showModal({
         title: '错误',
-        content: '您的设备不支持指纹识别',
+        content: `您的设备不支持${AUTH_MODE === 'facial' ? '人脸' : '指纹'}识别`,
         showCancel: false
       })
     }
@@ -65,7 +67,7 @@ Page({
         if (
           !res ||
           res.supportMode.length === 0 ||
-          res.supportMode.indexOf('fingerPrint') < 0
+          res.supportMode.indexOf(AUTH_MODE) < 0
         ) {
           notSupported()
           return
@@ -77,5 +79,6 @@ Page({
         notSupported()
       }
     })
-  }
+  },
+
 })

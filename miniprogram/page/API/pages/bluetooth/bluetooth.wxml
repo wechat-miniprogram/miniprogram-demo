@@ -36,6 +36,12 @@ module.exports.len = function(arr) {
         <button type="primary" bindtap="openBluetoothAdapter">开始扫描</button>
         <button bindtap="stopBluetoothDevicesDiscovery">停止扫描</button>
       </view>
+       <view class="btn-area">
+        <button type="primary" 
+        bind:tap="changeMode">
+          进去从机模式
+        </button>
+       </view>
     </view>
   </view>
 

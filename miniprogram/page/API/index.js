@@ -177,6 +177,9 @@ Page({
             zh: '下载文件',
             url: 'download-file/download-file'
           }, {
+            zh: 'UDPSocket',
+            url: 'udp-socket/udp-socket'
+          },{
             zh: 'mDNS',
             url: 'mdns/mdns'
           }

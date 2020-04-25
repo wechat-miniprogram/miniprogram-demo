@@ -6,7 +6,10 @@
 
   <view class="page-body">
     <view class="btn-area">
-      <button type="primary" bindtap="startAuth">开始认证</button>
+      <button type="primary" data-mode="fingerPrint" bindtap="startAuth">指纹认证</button>
+    </view>
+     <view class="btn-area">
+      <button type="primary"data-mode="facial" bindtap="startAuth">人脸认证</button>
     </view>
   </view>
 

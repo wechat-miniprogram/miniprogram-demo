@@ -1,0 +1,22 @@
+<button bindtap="chaneMode">主机模式由此进入</button>
+<button bindtap="openBluetoothAdapter">创建server</button>
+<button bindtap="addService">创建服务</button>
+<button bindtap="startAdvertising">开启广播</button>
+<button bindtap="showInput">写数据</button>
+<button bindtap="stopAdvertising">关闭广播</button>
+<button bindtap="removeService">关闭服务</button>
+<button bindtap="closeServer">关闭server</button>
+<button bindtap="closeBluetoothAdapter">结束流程</button>
+<text>当前 serverId {{serverId}}</text>
+
+<view wx:if="{{input}}">
+  <input placeholder="写个数字" bindconfirm="onConfirm"></input>
+</view>
+<view>
+<view wx:for="{{connects}}" wx:if="{{connects.length > 0}}">
+  <view>
+    <text>{{item.deviceId}} : {{item.serverId}}</text>
+    <text>{{item.connected ? "已连接" : "断开"}}</text>
+  </view>
+</view>
+</view>
