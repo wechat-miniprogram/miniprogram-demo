@@ -35,7 +35,7 @@
         <button bindtap="bindSendDanmu" class="page-body-button" type="primary" formType="submit">发送弹幕</button>
       </view>
       <view class="btn-area">
-        <navigator url="picture-in-picture" hover-class="navigator-hover">
+        <navigator url="picture-in-picture" hover-class="other-navigator-hover">
           <button type="primary" class="page-body-button" bindtap="bindPlayVideo">小窗模式</button>
         </navigator>
       </view>

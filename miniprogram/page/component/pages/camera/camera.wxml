@@ -25,7 +25,7 @@
         <button type="primary" bindtap="stopRecord">结束录像</button>
       </view>
       <view class="btn-area">
-        <navigator url="/page/component/pages/camera-scan-code/camera-scan-code">
+        <navigator url="/page/component/pages/camera-scan-code/camera-scan-code" hover-class="none">
           <button type="primary">扫描一维码</button>
         </navigator>
       </view>
