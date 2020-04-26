@@ -35,7 +35,7 @@ Page({
         id: 'extended',
         name: '扩展组件',
         open: false,
-        pages: ['emoji', 'video-swiper', 'index-list', 'recycle-view', 'sticky', 'tabs', 'barrage', 'select-text', 'wxml-to-canvas']
+        pages: ['emoji', 'video-swiper', 'index-list', 'recycle-view', 'sticky', 'tabs', 'vtabs', 'barrage', 'select-text', 'wxml-to-canvas']
       }
     ]
   },

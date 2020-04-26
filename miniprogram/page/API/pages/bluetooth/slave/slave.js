@@ -1,6 +1,9 @@
-const uuid1 = '844F4F10-C9A7-4FA2-9A4D-84B55B4BDA7F'
-const uuid2 = '86026734-9356-0152-f726-02232202F9DF'
-const uuid3 = '0c76801a-62eb-45e5-96a8-37c8882abb2b'
+
+const uuid3 = '0C76801A-62EB-45E5-96A8-37C8882ABB2B'
+const serviceId = 'D0611E78-BBB4-4591-A5F8-487910AE4366'
+const characteristicId = '8667556C-9A37-4C91-84ED-54EE27D90049'
+// 上面需要配置主机的 serviceId 和 characteristicId
+
 
 // ArrayBuffer转16进制字符串示例
 function ab2hex(buffer) {
@@ -38,8 +41,7 @@ Page({
    */
   onLoad: function (options) {
     wx.onBLEPeripheralConnectionStateChanged(res => {
-      console.log('123')
-      console.log('ConnectionStateChanged', res)
+      console.log('connect')
       const connects = this.data.connects
       const idx = inArray(connects, 'deviceId', res.deviceId)
       if (idx >= 0) {
@@ -80,7 +82,6 @@ Page({
       this.server = res.server
       this.setData({serverId: this.server.serverId})
       this.server.onCharacteristicReadRequest(res => {
-        console.log('123')
         const { serviceId, characteristicId, callbackId } = res
         const buffer = new ArrayBuffer(1)
         const dataView = new DataView(buffer)
@@ -96,10 +97,13 @@ Page({
           callbackId
         })
       })
-
+      // 监听收到数据
       this.server.onCharacteristicWriteRequest(res => {
         console.log('onCharacteristicWriteRequest', res)
         const { serviceId, characteristicId, value, callbackId } = res
+        wx.showToast({
+          title: '收到主机数据'
+        })
         this.server.writeCharacteristicValue({
           serviceId,
           characteristicId,
@@ -123,8 +127,8 @@ Page({
     const dataView = new DataView(buffer)
     dataView.setUint8(0, n)
     this.server.writeCharacteristicValue({
-      serviceId: uuid1,
-      characteristicId: uuid2,
+      serviceId: serviceId,
+      characteristicId: characteristicId,
       value: buffer,
       needNotify: true
     })
@@ -143,9 +147,9 @@ Page({
     dataView2.setInt8(0, 3)
 
     const service = {
-      uuid: uuid1,
+      uuid: serviceId,
       characteristics: [{
-        uuid: uuid2,
+        uuid: characteristicId,
         properties: {
           write: true,
           read: true,
@@ -169,6 +173,7 @@ Page({
         }]
       }]
     }
+
     this.server.addService({
       service
     }).then(res => {
@@ -177,7 +182,7 @@ Page({
   },
   removeService() {
     this.server.removeService({
-      serviceId: uuid1
+      serviceId: serviceId
     }).then(res => {
       console.log('removeService', res)
     })
@@ -190,7 +195,7 @@ Page({
       advertiseRequest: {
         connectable: true,
         deviceName: 'sanford',
-        serviceUuids: [uuid1],
+        serviceUuids: [serviceId],
         manufacturerData: [{
           manufacturerId: 'sanfordsun-pc0',
           manufacturerSpecificData: buffer

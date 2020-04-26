@@ -1,0 +1,14 @@
+@import '../common.wxss';
+
+page{
+    background-color: #FFFFFF;
+    height: 100%;
+}
+
+.vtabs-content-item {
+    width: 100%;
+    height: 300px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}

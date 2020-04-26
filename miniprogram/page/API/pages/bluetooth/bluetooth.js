@@ -162,6 +162,7 @@ Page({
       serviceId,
       success: (res) => {
         console.log('getBLEDeviceCharacteristics success', res.characteristics)
+        
         for (let i = 0; i < res.characteristics.length; i++) {
           const item = res.characteristics[i]
           if (item.properties.read) {
@@ -178,6 +179,7 @@ Page({
             this._deviceId = deviceId
             this._serviceId = serviceId
             this._characteristicId = item.uuid
+            console.log('write')
             this.writeBLECharacteristicValue()
           }
           if (item.properties.notify || item.properties.indicate) {
@@ -209,6 +211,9 @@ Page({
           value: ab2hex(characteristic.value)
         }
       }
+      wx.showToast({
+        title: '收到从机数据',
+      })
       // data[`chs[${this.data.chs.length}]`] = {
       //   uuid: characteristic.characteristicId,
       //   value: ab2hex(characteristic.value)
@@ -221,14 +226,23 @@ Page({
     const buffer = new ArrayBuffer(1)
     const dataView = new DataView(buffer)
     // eslint-disable-next-line
-    dataView.setUint8(0, Math.random() * 20| 0)
+    dataView.setUint8(0, Math.random() * 19| 0)
     wx.writeBLECharacteristicValue({
       deviceId: this._deviceId,
       serviceId: this._serviceId,
       characteristicId: this._characteristicId,
       value: buffer,
+      success() {
+        console.log('writeBLECharacteristicValue: 成功')
+      },
+      fail() {
+        console.log('writeBLECharacteristicValue: 失败')
+      },
+      complete() {
+        console.log('writeBLECharacteristicValue: 结束')
+
+      }
     })
-    console.log('write data to slave')
   },
   closeBluetoothAdapter() {
     wx.closeBluetoothAdapter()
