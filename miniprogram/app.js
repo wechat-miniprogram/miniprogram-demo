@@ -12,6 +12,9 @@ App({
         traceUser: true,
       })
     }
+    wx.setBackgroundFetchToken({
+      token: 'getBackgroundFetchToken',
+    })
   },
   onShow(opts) {
     console.log('App Show', opts)

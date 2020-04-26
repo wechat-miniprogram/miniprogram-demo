@@ -152,7 +152,9 @@
     "page/API/pages/get-performance/get-performance",
     "page/API/pages/get-battery-info/get-battery-info",
     "page/API/pages/bluetooth/slave/slave",
-    "page/API/pages/udp-socket/udp-socket"
+    "page/API/pages/udp-socket/udp-socket",
+    "page/API/pages/get-background-fetch-data/get-background-fetch-data",
+    "page/API/pages/get-background-prefetch-data/get-background-prefetch-data"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -231,7 +231,17 @@ Page({
       }, {
         id: 'storage',
         name: '数据',
-        url: 'storage/storage'
+        pages: [{
+          zh: '本地存储',
+          url: 'storage/storage'
+        }, {
+          zh: '周期性更新',
+          url: 'get-background-fetch-data/get-background-fetch-data'
+
+        }, {
+          zh: '数据预拉取',
+          url: 'get-background-prefetch-data/get-background-prefetch-data'
+        }],
       }, {
         id: 'worker',
         name: '多线程',

@@ -21,6 +21,7 @@ Date.prototype.Format = function (fmt) {
     
   return fmt;
 }
+
 util.renderName = (name) => {
   switch (name) {
     case 'appLaunch':

@@ -24,7 +24,8 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"preloadBackgroundData": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.0",

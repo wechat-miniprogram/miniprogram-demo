@@ -1,0 +1,14 @@
+.page-body-info {
+  padding-bottom: 0;
+  height: 340px;
+}
+.page-body-title {
+  margin-bottom: 40rpx;
+}
+.page-body-text {
+  padding: 0 30rpx;
+  text-align: center;
+}
+.context-value {
+  font-size: 38rpx;
+}
