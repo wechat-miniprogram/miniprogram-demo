@@ -17,6 +17,7 @@ Page({
     const _this = this
     qqmapsdk.getCityList({
       success(res) {
+        console.log(res);
         const cities = res.result[1]
         // 按拼音排序
         cities.sort((c1, c2) => {

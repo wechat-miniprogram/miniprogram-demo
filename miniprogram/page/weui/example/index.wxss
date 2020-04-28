@@ -5,6 +5,18 @@
  */
 @import './common.wxss';
 
+.page-weui-large {
+  padding: 0 20px 0px;
+}
+
+.page__bd_spacing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.page__title__large {
+  font-size: 28px;
+  font-weight: 500;
+}
 .weui-flex {
   -webkit-box-align: center;
   -webkit-align-items: center;

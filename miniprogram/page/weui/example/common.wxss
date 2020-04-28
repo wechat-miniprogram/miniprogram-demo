@@ -8,13 +8,14 @@ page{
 .page__hd {
     padding: 40px;
 }
+
 .page__bd {
     padding-bottom: 40px;
 }
-.page__bd_spacing {
-    padding-left: 15px;
-    padding-right: 15px;
+.page-weui {
+    padding: 20px 20px 0;
 }
+
 
 .page__ft{
     padding-bottom: 10px;

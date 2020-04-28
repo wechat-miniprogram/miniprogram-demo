@@ -31,6 +31,9 @@ Page({
         open: false,
         pages: ['searchbar']
       },
+
+    ],
+    extendedList: [
       {
         id: 'extended',
         name: '扩展组件',
@@ -49,8 +52,27 @@ Page({
         list[i].open = false
       }
     }
+    const extendedList = this.data.extendedList.map((item) => ({...item, open: false}))
+
     this.setData({
-      list
+      list,
+      extendedList,
+    })
+  },
+  kindExtenedListToggle(e) {
+    const id = e.currentTarget.id; 
+    const extendedList = this.data.extendedList
+    for (let i = 0, len = extendedList.length; i < len; ++i) {
+      if (extendedList[i].id == id) {
+        extendedList[i].open = !extendedList[i].open
+      } else {
+        extenedList[i].open = false
+      }
+    }
+    const list = this.data.list.map((item) => ({...item, open: false}))
+    this.setData({
+      extendedList,
+      list,
     })
   }
 })
