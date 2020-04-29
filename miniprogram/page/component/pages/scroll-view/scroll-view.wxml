@@ -29,6 +29,19 @@
         </scroll-view>
       </view>
     </view>
+
+    <view class="page-section">
+      <view class="page-section-title">
+        <text>滚动驱动动画</text>
+      </view>
+      <view class="page-section-spacing">
+        <scroll-view id="scroll-view_D" scroll-y="true" style="height: 300rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+          <view class="scroll-view-item_H demo-text-1" id="scroll-sample-object1"></view>
+          <view class="scroll-view-item_H demo-text-2" id="scroll-sample-object2"></view>
+          <view class="scroll-view-item_H demo-text-3" id="scroll-sample-object3"></view>
+        </scroll-view>
+      </view>
+    </view>
   </view>
 
   <template is="foot" />

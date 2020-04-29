@@ -46,5 +46,52 @@ Page({
     this.setData({
       scrollTop: this.data.scrollTop + 10
     })
+  },
+
+  onLoad() {
+    this.animate('#scroll-sample-object1', [{
+      borderRadius: '0',
+      offset: 0,
+    }, {
+      borderRadius: '25%',
+      offset: .5,
+    }, {
+      borderRadius: '50%',
+      offset: 1
+    }], 2000, {
+      scrollSource: '#scroll-view_D',
+      timeRange: 2000,
+      startScrollOffset: 0,
+      endScrollOffset: 150,
+    })
+
+    this.animate('#scroll-sample-object2', [{
+      opacity: 1,
+      offset: 0,
+    }, {
+      opacity: .5,
+      offset: .5,
+    }, {
+      opacity: .3,
+      offset: 1
+    }], 2000, {
+      scrollSource: '#scroll-view_D',
+      timeRange: 2000,
+      startScrollOffset: 150,
+      endScrollOffset: 300,
+    })
+
+    this.animate('#scroll-sample-object3', [{
+      background: "white",
+      offset: 0,
+    }, {
+      background: "yellow",
+      offset: 1
+    }], 2000, {
+      scrollSource: '#scroll-view_D',
+      timeRange: 2000,
+      startScrollOffset: 300,
+      endScrollOffset: 400,
+    })
   }
 })

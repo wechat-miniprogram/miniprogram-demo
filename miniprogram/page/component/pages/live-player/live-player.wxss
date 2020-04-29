@@ -1,0 +1,11 @@
+@import "../../../common/lib/weui.wxss";
+
+live-player {
+  display: flex;
+  width: 100%;
+  height: 350rpx;
+}
+
+.page-body-button {
+  margin-bottom: 30rpx;
+}

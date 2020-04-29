@@ -32,6 +32,26 @@ const pageObject = {
     this.setData({
       loading: !this.data.loading
     })
+  },
+
+  handleContact(e) {
+    console.log(e.detail)
+  },
+
+  handleGetPhoneNumber(e) {
+    console.log(e.detail)
+  },
+
+  handleGetUserInfo(e) {
+    console.log(e.detail)
+  },
+
+  handleOpenSetting(e) {
+    console.log(e.detail.authSetting)
+  },
+
+  handleGetUserInfo(e) {
+    console.log(e.detail.userInfo)
   }
 }
 

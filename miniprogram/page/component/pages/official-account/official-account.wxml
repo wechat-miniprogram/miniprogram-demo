@@ -1,0 +1,3 @@
+    <view style="height: 300px;">
+    	<official-account style="height: 84px; width: 300px;" binderror="handleErr"></official-account>
+    </view>
