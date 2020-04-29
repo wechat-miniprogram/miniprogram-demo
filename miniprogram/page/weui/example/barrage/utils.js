@@ -10,17 +10,17 @@ const msgs = [
   '广东人民发来贺电',
 ]
 
-const color = ['red', 'rgb(0, 255, 0)', '#0000FF', '#fff']
+const color = ['red', 'rgb(0, 255, 0)', '#0000FF']
 
 const getRandom = (max = 10, min = 0) => Math.floor(Math.random() * (max - min) + min)
 
-const mockData = (num) => {
+const mockData = (num, message = msgs) => {
   const data = []
   for (let i = 0; i < num; i++) {
-    const msgId = getRandom(msgs.length)
+    const msgId = getRandom(message.length)
     const colorId = getRandom(color.length)
     data.push({
-      content: msgs[msgId],
+      content: message[msgId],
       color: color[colorId]
     })
   }

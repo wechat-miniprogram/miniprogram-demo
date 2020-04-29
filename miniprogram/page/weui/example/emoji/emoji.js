@@ -8,13 +8,20 @@ Page({
     cursor: 0,
     _keyboardShow: false,
     emojiSource: 'https://res.wx.qq.com/op_res/eROMsLpnNC10dC40vzF8qviz63ic7ATlbGg20lr5pYykOwHRbLZFUhgg23RtVorX',
-    parsedComment: []
+    // parsedComment: []
+    historyList:[],
+    layoutHeight: '0px',
   },
 
   onLoad() {
     const emojiInstance = this.selectComponent('.mp-emoji')
     this.emojiNames = emojiInstance.getEmojiNames()
     this.parseEmoji = emojiInstance.parseEmoji
+    console.log(wx.getSystemInfoSync());
+    const layoutHeight = wx.getSystemInfoSync().windowHeight - 56;
+    this.setData({
+      layoutHeight,
+    })
   },
 
   onkeyboardHeightChange(e) {
@@ -70,10 +77,14 @@ Page({
   },
   onsend() {
     const comment = this.data.comment
-    const parsedComment = this.parseEmoji(this.data.comment)
+    const parsedComment = {
+      emoji: this.parseEmoji(this.data.comment),
+      id: `emoji_${this.data.historyList.length}`
+    }
     this.setData({
-      parsedComment,
-      comment: ''
+      historyList: [...this.data.historyList, parsedComment],
+      comment: '',
+      emojiShow:false,
     })
   },
   deleteEmoji() {

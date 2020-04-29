@@ -14,3 +14,16 @@
     wx:if="{{toggle}}"
   ></barrage>
 </video>
+<button type="primary" bind:tap="handleOpenClick">开启弹幕</button>
+<button type="primary" bind:tap="handleCloseClick">关闭弹幕</button>
+<block wx:if="{{showBarrage}}" >
+  <input 
+    style="width: 80%;margin: 60rpx auto;border-bottom: 1px grey solid"
+    bindinput="handleInput"
+    placeholder="请输入弹幕信息" 
+    value="{{barrageValue}}"
+  />
+  <button type="primary" bind:tap="handleAddClick">发送弹幕</button>
+   <button type="primary" bind:tap="handleTunnelShowClick">显示弹道</button>
+    <button type="primary" bind:tap="handleTunnelHideClick">隐藏弹道</button>
+</block>

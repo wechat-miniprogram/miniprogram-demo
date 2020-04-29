@@ -3,7 +3,7 @@ page {
 }
 
 .record {
-  margin-top: 50px;
+  padding: 15px 0;
   margin-left: 10px;
   display: flex;
 }

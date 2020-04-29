@@ -4,6 +4,7 @@ page {
   height: 100%;
   font-size: 32rpx;
   line-height: 1.6;
+  margin-bottom: 1rpx;
 }
 checkbox, radio{
   margin-right: 10rpx;

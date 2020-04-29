@@ -1,7 +1,9 @@
-  <view class="record" hidden="{{parsedComment.length === 0}}">
+<scroll-view scroll-y style="height: {{layoutHeight}}px" scroll-into-view="{{historyList[historyList.length - 1].id}}">
+<block wx:for="{{historyList}}" wx:for-index="idx" wx:for-item="historyItem">
+  <view class="record" hidden="{{historyItem.length === 0}}" id="{{historyItem.id}}">
     <view class="avator"></view>
     <view class="comment">
-      <block wx:for="{{parsedComment}}" wx:key="*this">
+      <block wx:for="{{historyItem.emoji}}" wx:key="*this">
         <block wx:if="{{item.type === 1}}">{{item.content}}</block>
         <view 
           wx:if="{{item.type === 2}}" 
@@ -13,6 +15,7 @@
       </block>
     </view>
   </view>
+</block></scroll-view>
 
   <view class="reply_wrp" style="bottom: {{keyboardHeight}}px">
     <view class="reply_tool">

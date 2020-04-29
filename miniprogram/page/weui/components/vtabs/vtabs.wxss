@@ -6,7 +6,8 @@
 
 .weui-vtabs-bar__wrp {
   width: 110px;
-  height: 100%
+  height: 100%;
+  background: #eeeeee;
 }
 
 .weui-vtabs-bar__scrollview {

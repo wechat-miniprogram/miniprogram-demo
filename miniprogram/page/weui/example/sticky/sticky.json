@@ -1,6 +1,4 @@
 {
-  "disableScroll": true,
-
   "navigationBarTitleText": "sticky",
   "usingComponents": {
     "mp-sticky": "../../components/sticky/sticky"

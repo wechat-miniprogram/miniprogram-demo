@@ -7,7 +7,9 @@
 >
   <block wx:for="{{vtabs}}" wx:key="title" >
     <mp-vtabs-content tabIndex="{{index}}">
-      <view class="vtabs-content-item">我是第{{index + 1}}项： {{item.title}}</view>
+      <view class="vtabs-content-item" style="margin-bottom: {{vtabs.length - 1 === index ? 600 : 0}}px">我是第{{index + 1}}项： {{item.title}}</view>
     </mp-vtabs-content>
   </block>
+  <view style="height: 1rpx;width: 100%"></view>
+
 </mp-vtabs>
