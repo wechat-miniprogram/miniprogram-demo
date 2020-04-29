@@ -50,7 +50,7 @@ Page({
         id: 'open',
         name: '开放能力',
         open: false,
-        pages: ['ad', 'open-data', 'web-view']
+        pages: ['ad', 'open-data', 'web-view', 'official-account']
       }
     ]
   },

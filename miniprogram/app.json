@@ -31,6 +31,7 @@
     "page/component/pages/rich-text/rich-text",
     "page/component/pages/live-player/live-player",
     "page/component/pages/live-pusher/live-pusher",
+    "page/component/pages/official-account/official-account",
     "page/API/index",
     "page/API/pages/login/login",
     "page/API/pages/get-user-info/get-user-info",
