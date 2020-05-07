@@ -1,3 +1,4 @@
+const app = getApp();
 // 使用预缓存数据的时候，需要先调用setBackgroundFetchToken, 可在 app.js 中查看具体例子
 
 Date.prototype.Format = function (fmt) {
@@ -23,7 +24,7 @@ Date.prototype.Format = function (fmt) {
 
 Page({
   onShow() {
-    // 获取缓存的周期性更新数据
+    // 获取缓存的预拉取数据
     this.getBackgroundFetchData();
   },
   data: {
@@ -32,36 +33,18 @@ Page({
     getDataTime: '',
   },
   getBackgroundFetchData() {
-    console.log('读取周期性更新数据')
-    const that = this;
-    wx.getBackgroundFetchData({
-      fetchType: 'pre',
-      success(res) {
-        console.log(res)
-        const { fetchedData } = res;
-        const result = JSON.parse(fetchedData)
-        // 在 Iphone 下返回的 timeStamp 单位是秒
-        const systemInfo = wx.getSystemInfoSync();
-        const timeStamp = systemInfo.brand === 'iPhone' ? res.timeStamp * 1000 : res.timeStamp
-        const time = new Date(timeStamp).Format("yyyy-MM-dd hh:mm:ss");
-        that.setData({
-          appid: result.appid,
-          openid: result.openid,
-          getDataTime: time,
+    console.log('读取预拉取数据')
+    const res = app.globalData.backgroundFetchData;
+    const { fetchedData } = res;
+    const result = JSON.parse(fetchedData)
+    const systemInfo = wx.getSystemInfoSync();
+    const timeStamp = systemInfo.brand === 'iPhone' ? res.timeStamp * 1000 : res.timeStamp
+    const time = new Date(timeStamp).Format("yyyy-MM-dd hh:mm:ss");
+    this.setData({
+      appid: result.appid,
+      openid: result.openid,
+      getDataTime: time,
 
-        })
-        console.log('读取周期性更新数据成功')
-      },
-      fail() {
-        console.log('读取周期性更新数据失败')
-        wx.showToast({
-          title: '无缓存数据',
-          icon: 'none'
-        })
-      },
-      complete() {
-        console.log('结束读取')
-      }
     })
   }
 })

@@ -3,6 +3,24 @@ const config = require('./config')
 global.isDemo = true
 App({
   onLaunch(opts) {
+    const that = this;
+    wx.getBackgroundFetchData({
+      fetchType: 'pre',
+      success(res) {
+        that.globalData.backgroundFetchData  = res;
+        console.log('读取预拉取数据成功')
+      },
+      fail() {
+        console.log('读取预拉取数据失败')
+        wx.showToast({
+          title: '无缓存数据',
+          icon: 'none'
+        })
+      },
+      complete() {
+        console.log('结束读取')
+      }
+    })
     console.log('App Launch', opts)
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -15,6 +33,7 @@ App({
     wx.setBackgroundFetchToken({
       token: 'getBackgroundFetchToken',
     })
+
   },
   onShow(opts) {
     console.log('App Show', opts)
@@ -24,7 +43,8 @@ App({
   },
   globalData: {
     hasLogin: false,
-    openid: null
+    openid: null,
+    backgroundFetchData: null,
   },
   // lazy loading openid
   getUserOpenId(callback) {
