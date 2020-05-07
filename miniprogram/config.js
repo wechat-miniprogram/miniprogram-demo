@@ -37,7 +37,7 @@ const config = {
   uploadFileUrl: `https://${host}/upload`,
 
   // 下载示例图片接口
-  downloadExampleUrl: `https://${host}/static/weapp.jpg`,
+  downloadExampleUrl: 'cloud://release-b86096.7265-release-b86096-1258211818/demo.jpg',
 
   // 云开发环境 ID
   envId: 'release-b86096',
