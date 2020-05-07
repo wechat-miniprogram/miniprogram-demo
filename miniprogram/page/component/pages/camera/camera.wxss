@@ -32,3 +32,8 @@ form {
   padding: 20rpx 0;
   min-height: 60rpx;
 }
+
+.info-container {
+  margin: 24rpx;
+  text-align: center;
+}

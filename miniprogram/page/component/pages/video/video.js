@@ -26,6 +26,7 @@ Page({
 
   inputValue: '',
   data: {
+    enableAutoRotation: true,
     src: '',
     danmuList:
     [{
@@ -66,7 +67,6 @@ Page({
   },
 
   bindPlayVideo() {
-    console.log('1')
     this.videoContext.play()
   },
   bindSendDanmu() {
@@ -79,5 +79,10 @@ Page({
   videoErrorCallback(e) {
     console.log('视频错误信息:')
     console.log(e.detail.errMsg)
+  },
+  handleSwitchChange(e) {
+    this.setData({
+      enableAutoRotation: e.detail.value
+    })
   }
 })

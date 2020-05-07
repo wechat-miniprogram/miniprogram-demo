@@ -84,7 +84,7 @@ Page({
         playing: true,
       }, () => {
         // 设置src后会自动播放
-        backgroundAudioManager.src = 'http://m10.music.126.net/20200423144548/9310dfb45e03cc57fa116766d2851ac2/ymusic/ecc8/b580/8fe6/dfa670c1193ab03b34aeb574c3a735e0.mp3'
+        backgroundAudioManager.src = 'https://dldir1.qq.com/music/release/upload/t_mm_file_publish/2339610.m4a'
       });
     }
   },

@@ -1,0 +1,9 @@
+live-pusher {
+  display: flex;
+  margin: 12rpx auto;
+  height: 350rpx;
+}
+
+.page-body-button {
+  margin-bottom: 30rpx;
+}

@@ -11,10 +11,27 @@ Page({
     videoSrc: '',
     position: 'back',
     mode: 'scanCode',
-    result: {}
+    result: {},
+    frameWidth: 0,
+    frameHeight: 0
   },
   onLoad() {
     this.ctx = wx.createCameraContext()
+    const listener = this.ctx.onCameraFrame((frame) => {
+      const {
+        frameWidth,
+        frameHeight
+      } = this.data;
+
+      // you can print buffer data by executing codes below:
+      // console.log(frame.data)
+      if (frameWidth === frame.width && frameHeight == frame.height) return;
+      this.setData({
+        frameWidth: frame.width,
+        frameHeight: frame.height
+      })
+    })
+    listener.start()
   },
   takePhoto() {
     this.ctx.takePhoto({

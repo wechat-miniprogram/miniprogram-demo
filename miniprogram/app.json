@@ -137,7 +137,6 @@
     "page/weui/example/form-page/form-page",
     "page/weui/example/half-screen-dialog/half-screen-dialog",
     "page/weui/example/actionsheet/actionsheet",
-
     "page/weui/example/video-swiper/video-swiper",
     "page/weui/example/index-list/index-list",
     "page/weui/example/emoji/emoji",
@@ -156,7 +155,9 @@
     "page/API/pages/udp-socket/udp-socket",
     "page/API/pages/get-background-fetch-data/get-background-fetch-data",
     "page/API/pages/get-background-prefetch-data/get-background-prefetch-data",
-    "page/weui/example/vtabs/vtabs"
+    "page/weui/example/vtabs/vtabs",
+    "page/component/pages/live-pusher/live-pusher",
+    "page/component/pages/live-player/live-player"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -180,9 +181,8 @@
         "pagePath": "page/weui/example/index",
         "iconPath": "image/icon_component.png",
         "selectedIconPath": "image/icon_component_HL.png",
-        "text": "扩展组件"
+        "text": "扩展能力"
       },
-
       {
         "pagePath": "page/API/index",
         "iconPath": "image/icon_API.png",

@@ -22,7 +22,7 @@ Date.prototype.Format = function (fmt) {
 }
 
 Page({
-  onLoad() {
+  onShow() {
     // 获取缓存的周期性更新数据
     this.getBackgroundFetchData();
   },

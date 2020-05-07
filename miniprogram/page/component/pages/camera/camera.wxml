@@ -12,6 +12,14 @@
         binderror="error"
       >
       </camera>
+      <view class="info-container">
+        <view>
+          帧高度：{{ frameHeight }}
+        </view>
+        <view>
+          帧宽度：{{ frameWidth }}
+        </view>
+      </view>
       <view class="btn-area first-btn">
       <button type="primary" bindtap="togglePosition">切换摄像头</button>
       </view>

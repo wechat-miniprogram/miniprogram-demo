@@ -17,6 +17,12 @@
   font-size: 28px;
   font-weight: 500;
 }
+.page__desc {
+  margin-top: 20rpx;
+  color: #888888;
+  font-size: 28rpx;
+
+}
 .weui-flex {
   -webkit-box-align: center;
   -webkit-align-items: center;
@@ -81,3 +87,25 @@
 .kind-list__item-bd_show {
   height: auto
 }
+
+.index-hd {
+  padding: 80rpx 80rpx 40rpx;
+  text-align: center;
+}
+.index-bd {
+  padding: 0 30rpx 40rpx;
+}
+.index-ft {
+  padding-bottom: 20rpx;
+  text-align: center;
+}
+.index-logo {
+  width: 86rpx;
+  height: 86rpx;
+}
+.index-desc {
+  margin-top: 20rpx;
+  color: #888888;
+  font-size: 28rpx;
+}
+

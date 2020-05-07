@@ -1,6 +1,6 @@
 // 使用周期性数据的时候，需要先调用setBackgroundFetchToken, 可在 app.js 中查看具体例子
 Page({
-  onLoad() {
+  onShow() {
     // 获取缓存的周期性更新数据
     this.getBackgroundFetchData();
   },
