@@ -5,7 +5,9 @@ Page({
     placeholder: '开始输入...',
     editorHeight: 300,
     keyboardHeight: 0,
-    isIOS: false
+    isIOS: false,
+    safeHeight: 0,
+    toolBarHeight: 50,
   },
   readOnlyChange() {
     this.setData({
@@ -13,14 +15,19 @@ Page({
     })
   },
   onLoad() {
-    const platform = wx.getSystemInfoSync().platform
+    const { platform, safeArea } = wx.getSystemInfoSync()
+    const safeHeight = safeArea.bottom - safeArea.height;
+    this._safeHeight =  safeArea.bottom - safeArea.height;
     const isIOS = platform === 'ios'
-    this.setData({ isIOS})
+  console.log(safeArea)
+    this.setData({ isIOS, safeHeight, toolBarHeight: isIOS ? safeHeight + 50 : 50 })
     const that = this
     this.updatePosition(0)
     let keyboardHeight = 0
     wx.onKeyboardHeightChange(res => {
-      if (res.height === keyboardHeight) return
+      if (res.height === keyboardHeight) {
+        return
+      }      
       const duration = res.height > 0 ? res.duration * 1000 : 0
       keyboardHeight = res.height
       setTimeout(() => {
@@ -39,7 +46,19 @@ Page({
     const toolbarHeight = 50
     const { windowHeight, platform } = wx.getSystemInfoSync()
     let editorHeight = keyboardHeight > 0 ? (windowHeight - keyboardHeight - toolbarHeight) : windowHeight
-    this.setData({ editorHeight, keyboardHeight })
+    console.log(editorHeight);
+    if (keyboardHeight === 0) {
+      this.setData({
+        editorHeight, keyboardHeight,
+        toolBarHeight: this.data.isIOS ? 50 + this._safeHeight : 50,
+        safeHeight: this._safeHeight,
+      })
+    } else {
+      this.setData({ editorHeight, keyboardHeight, 
+        toolBarHeight: 50,
+        safeHeight: 0, 
+      })
+    }
   },
   calNavigationBarAndStatusBar() {
     const systemInfo = wx.getSystemInfoSync()

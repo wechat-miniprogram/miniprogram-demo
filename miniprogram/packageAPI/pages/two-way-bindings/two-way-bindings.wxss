@@ -1,0 +1,9 @@
+.input {
+  margin: 30rpx auto;
+  width: 80%;
+  /* border-bottom: 1px solid black; */
+}
+.text {
+  margin: 30rpx auto;
+  width: 80%;
+}

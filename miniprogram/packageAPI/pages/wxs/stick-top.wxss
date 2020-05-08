@@ -1,0 +1,25 @@
+.page-banner{height:100px;background-color: greenyellow;color:#fff;}
+.page-group{
+  display: table;
+  background-color: rgba(00, 00, 00, 1);
+  width: 100%;
+  table-layout: fixed;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.page-group-position{
+  position: fixed;
+}
+.page-nav-list{
+  padding:30rpx 0 ;
+  display: table-cell;
+  text-align: center;
+  color: #fff;
+}
+.goods-list{
+  height: 300px;
+  background-color: green;
+  padding: 20rpx;
+  color:#fff;
+}

@@ -8,8 +8,21 @@ page{
 .vtabs-content-item {
     width: 100%;
     height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     box-sizing: border-box;
     border-bottom: 1px solid #ccc;
     padding-bottom: 20px;
+}
+
+.item-title {
+    font-size: 18px;
+    margin: 0 20rpx;
+}
+.item-desc {
+    margin: 0 20rpx;
+
+    color: #00000080
 }
 

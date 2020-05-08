@@ -9,8 +9,11 @@
 	</view>
 
 	<view class="page-section">
-		<view>视频地址 (支持rtmp)</view>
+		<view class="page-url">视频地址 (支持rtmp):</view>
 		<input name="input" placeholder="视频推送链接" value="{{ videoSrc }}" bindinput="handleVideoSrcInput" />
+     <button type="primary" bindtap="handleScanQRCode">
+        扫码
+      </button>
 	</view>
 
 	<view class="page-section">

@@ -12,13 +12,14 @@ page{
 
 .weui-tabs-swiper {
     width: 100%;
-    height: 100px;
+    height: 400px;
 }
 
 .tab-content {
-    height: 100px;
+    /* height: 100px; */
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
@@ -32,5 +33,15 @@ page{
 .tab-bar-title__selected {
     font-size: 20px;
     font-weight: bold;
+}
+.item-title {
+    margin: 20rpx 20rpx 10rpx;
+    font-size: 18px;
+    width: 100%;
+}
+.item-desc {
+    margin: 10rpx 20rpx 0;
+    width: 100%;
+    color: #00000080
 }
 

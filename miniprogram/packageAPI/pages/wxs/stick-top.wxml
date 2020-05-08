@@ -1,0 +1,26 @@
+<wxs module="test" src="./stick-top.wxs"></wxs>
+<scroll-view bindscroll="{{test.funcA}}" style='height:{{height}}px;' scroll-y>
+  <view class="page-banner">
+    <image class="image" src="./image/1.jpeg" style='width:100%;'></image>
+  </view>
+  <view class="page-group-interaction page-group" style='background-color:rgba(00, 00, 00, 0);'>
+    <view class="page-nav-list"><text>抗疫专区</text></view>
+    <view class="page-nav-list"><text>技术开发</text></view>
+    <view class="page-nav-list"><text>运营专区</text></view>
+    <view class="page-nav-list"><text>我的</text></view>
+  </view>
+  <view class="goods-list">
+  </view>
+  <view class="goods-list">
+    goods-list
+  </view>
+  <view class="goods-list">
+    goods-list
+  </view>
+  <view class="goods-list">
+    goods-list
+  </view>
+  <view class="goods-list">
+    goods-list
+  </view>
+</scroll-view>

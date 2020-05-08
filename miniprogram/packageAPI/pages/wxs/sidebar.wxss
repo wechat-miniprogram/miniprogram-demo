@@ -1,0 +1,51 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+page,.page {
+  height: 100%;
+  font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, 'Droid Sans Fallback', 'Microsoft Yahei', sans-serif;
+}
+.page-bottom{
+  height: 100%;
+  width: 750rpx;
+  position: fixed; 
+  background-color: rgb(0, 68, 97);
+  z-index: 0;
+}
+.wc{
+  color: white;
+  padding: 30rpx 0 30rpx 40rpx;
+}
+.page-content{
+  padding-top: 300rpx;
+}
+.page-top{
+  height: 100%;
+  position: fixed;
+  width: 750rpx;
+  background-color: rgb(57, 125, 230);
+  z-index: 0;
+  transition: All 0.4s ease; 
+  -webkit-transition: All 0.4s ease;
+}
+.page-top image{
+  position: absolute;
+  width: 68rpx;
+  height: 38rpx;
+  left: 20rpx;
+  top: 20rpx;
+}
+.c-state1{
+  transform: rotate(0deg) scale(1) translate(75%,0%); 
+  -webkit-transform: rotate(0deg) scale(1) translate(75%,0%); 
+}
+.c-state2{
+  transform: rotate(0deg) scale(.8) translate(75%,0%); 
+  -webkit-transform: rotate(0deg) scale(.8) translate(75%,0%); 
+}

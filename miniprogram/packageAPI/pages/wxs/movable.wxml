@@ -1,0 +1,6 @@
+<!--pages/movable/movable.wxml-->
+<wxs module="test" src="./movable.wxs"></wxs> 
+<view wx:if="{{show}}" class="area" style='position:relative;width:100%;height:100%;'>
+  <view data-index="1" data-obj="{{dataObj}}" bindtouchstart="{{test.touchstart}}" bindtouchmove="{{test.touchmove}}" bindtouchend='{{test.touchmove}}' class="movable" style="position:absolute;width:100px;height:100px;background:red;left:{{left}}px;top:{{top}}px"></view>
+</view>
+<!-- <view bindtap='{{taptest}}'>testbindtap</view> -->

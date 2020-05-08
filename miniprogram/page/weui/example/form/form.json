@@ -1,5 +1,7 @@
 {
   "component": true,
+  "navigationBarTitleText": "form",
+
   "usingComponents": {
     "mp-form-page": "../../components/form-page/form-page",
     "mp-toptips": "../../components/toptips/toptips",

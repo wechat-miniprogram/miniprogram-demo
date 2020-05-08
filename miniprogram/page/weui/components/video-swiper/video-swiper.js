@@ -22,7 +22,7 @@ Component({
       value: [],
       observer: function observer() {
         const newVal = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : []
-
+        console.log(newVal)
         this._videoListChanged(newVal)
       }
     }

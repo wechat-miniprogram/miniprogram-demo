@@ -1,6 +1,6 @@
 {
   "disableScroll": true,
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "emoji",
   "usingComponents": {
     "mp-emoji": "../../components/emoji/emoji"
 

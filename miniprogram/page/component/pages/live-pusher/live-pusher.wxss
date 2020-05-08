@@ -7,3 +7,13 @@ live-pusher {
 .page-body-button {
   margin-bottom: 30rpx;
 }
+.page-url {
+  margin: 0 auto 30rpx;
+  width: 90%;
+}
+
+input {
+  width: 90%;
+  margin: 0 auto 30rpx;
+}
+

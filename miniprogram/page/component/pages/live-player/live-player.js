@@ -5,6 +5,16 @@ Page({
   onReady(res) {
     this.ctx = wx.createLivePlayerContext('player')
   },
+  handleScanQRCode() {
+    wx.scanCode({
+      complete: (res) => {
+        const { result } = res;
+        this.setData({
+          videoSrc: result
+        })
+      },
+    })
+  },
   handleLivePlayerStateChange(e) {
     console.log('live-player code:', e.detail.code)
   },

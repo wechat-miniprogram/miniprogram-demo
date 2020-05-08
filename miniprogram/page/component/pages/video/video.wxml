@@ -13,6 +13,8 @@
         danmu-list="{{danmuList}}" 
         enable-danmu 
         danmu-btn 
+        show-casting-button
+        show-screen-lock-button
         show-center-play-btn='{{false}}' 
         show-play-btn="{{true}}" 
         controls

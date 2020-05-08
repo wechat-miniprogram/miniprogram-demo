@@ -21,6 +21,16 @@ Page({
       }
     })
   },
+  handleScanQRCode() {
+    wx.scanCode({
+      complete: (res) => {
+        const { result } = res;
+        this.setData({
+          videoSrc: result
+        })
+      },
+    })
+  },
   handlePause() {
     this.ctx.pause({
       success: res => {

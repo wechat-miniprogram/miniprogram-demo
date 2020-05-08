@@ -1,0 +1,4 @@
+/* pages/nearby/nearby.wxss */
+.swiper {
+  width: 100%
+}

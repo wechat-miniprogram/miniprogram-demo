@@ -246,6 +246,19 @@ Page({
         id: 'worker',
         name: '多线程',
         url: 'worker/worker'
+      }, {
+        id: 'framework',
+        name: '框架',
+        pages: [{
+          zh: '双向绑定',
+          url: 'two-way-bindings/two-way-bindings',
+        }, {
+          zh: 'WXS',
+          url: 'wxs/wxs'
+        }, {
+          zh: '屏幕旋转',
+          url: 'resizable/resizable'
+        }]
       }
     ],
     isSetTabBarPage: false,
@@ -263,7 +276,7 @@ Page({
       if (list[i].id === id) {
         if (list[i].url) {
           wx.navigateTo({
-            url: 'pages/' + list[i].url
+            url: '../../packageAPI/pages/' + list[i].url
           })
           return
         }
