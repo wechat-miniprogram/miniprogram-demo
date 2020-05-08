@@ -48,6 +48,11 @@ Page({
   onChange(e) {
     const index = e.detail.index
     console.log('change', index)
+  },
+  handleClick() {
+    wx.navigateTo({
+      url: '../tabs/webview',
+    })
   }
 
 })

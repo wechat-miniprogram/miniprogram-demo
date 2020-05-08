@@ -7,7 +7,7 @@
 >
   <block wx:for="{{vtabs}}" wx:key="title" >
     <mp-vtabs-content tabIndex="{{index}}">
-      <view class="vtabs-content-item" style="margin-bottom: {{vtabs.length - 1 === index ? 600 : 0}}px">
+      <view class="vtabs-content-item" style="margin-bottom: {{vtabs.length - 1 === index ? 600 : 0}}px" bindtap="handleClick">
         <image src="{{item.img}}" mode="widthFix"></image>
         <view class="item-title">
           {{item.title2}}

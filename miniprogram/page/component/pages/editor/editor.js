@@ -19,7 +19,6 @@ Page({
     const safeHeight = safeArea.bottom - safeArea.height;
     this._safeHeight =  safeArea.bottom - safeArea.height;
     const isIOS = platform === 'ios'
-  console.log(safeArea)
     this.setData({ isIOS, safeHeight, toolBarHeight: isIOS ? safeHeight + 50 : 50 })
     const that = this
     this.updatePosition(0)
@@ -46,7 +45,6 @@ Page({
     const toolbarHeight = 50
     const { windowHeight, platform } = wx.getSystemInfoSync()
     let editorHeight = keyboardHeight > 0 ? (windowHeight - keyboardHeight - toolbarHeight) : windowHeight
-    console.log(editorHeight);
     if (keyboardHeight === 0) {
       this.setData({
         editorHeight, keyboardHeight,

@@ -11,7 +11,7 @@ Page({
     // })
   },
   data: {
-    src: 'https://developers.weixin.qq.com'
+    src: 'https://developers.weixin.qq.com/community/business'
   },
 
   /**
