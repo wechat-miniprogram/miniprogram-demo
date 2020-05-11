@@ -17,7 +17,7 @@
   </view>
 </block></scroll-view>
 
-  <view class="reply_wrp" style="bottom: {{keyboardHeight}}px">
+  <view class="reply_wrp" style="bottom: {{isIOS ? keyboardHeight + safeHeight : keyboardHeight}}px">
     <view class="reply_tool">
       <view hover-class="active" class="reply_button replay_quick_button">
         <image src="./images/reply_tool_keyboard.svg" mode='aspectFit' class="reply_tool_pic"></image>
@@ -64,3 +64,4 @@
       </view>
     </view>
   </view>
+  <view wx:if="{{isIOS}}" style="position:fixed; bottom: 0px; width: 100%; height: {{safeHeight}}px; background: {{emojiShow ? '#E8E8E8' : '#F9F9F9' }};"></view>

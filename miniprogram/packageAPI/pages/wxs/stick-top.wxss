@@ -1,7 +1,7 @@
-.page-banner{height:100px;background-color: greenyellow;color:#fff;}
+.page-banner{height:200px;background-color: #fff;color:#fff;}
 .page-group{
   display: table;
-  background-color: rgba(00, 00, 00, 1);
+  /* background-color: rgba(00, 00, 00, 1); */
   width: 100%;
   table-layout: fixed;
   position: relative;
@@ -15,11 +15,23 @@
   padding:30rpx 0 ;
   display: table-cell;
   text-align: center;
-  color: #fff;
+  color: #07c160;
 }
 .goods-list{
   height: 300px;
-  background-color: green;
+  background-color: #fff;
   padding: 20rpx;
-  color:#fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.item-title {
+  margin: 20rpx 20rpx 10rpx;
+  font-size: 18px;
+  width: 100%;
+}
+.item-desc {
+  margin: 10rpx 20rpx 0;
+  width: 100%;
+  color: #00000080
 }

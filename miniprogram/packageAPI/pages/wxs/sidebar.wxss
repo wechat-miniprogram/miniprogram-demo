@@ -15,7 +15,7 @@ page,.page {
   height: 100%;
   width: 750rpx;
   position: fixed; 
-  background-color: rgb(0, 68, 97);
+  background-color: #07c160;
   z-index: 0;
 }
 .wc{
@@ -29,23 +29,28 @@ page,.page {
   height: 100%;
   position: fixed;
   width: 750rpx;
-  background-color: rgb(57, 125, 230);
+  background-color: #FFFFFF;
   z-index: 0;
   transition: All 0.4s ease; 
   -webkit-transition: All 0.4s ease;
 }
-.page-top image{
-  position: absolute;
-  width: 68rpx;
-  height: 38rpx;
-  left: 20rpx;
-  top: 20rpx;
-}
+
 .c-state1{
-  transform: rotate(0deg) scale(1) translate(75%,0%); 
-  -webkit-transform: rotate(0deg) scale(1) translate(75%,0%); 
+  transform: rotate(0deg) scale(1) translate(40%,0%); 
+  -webkit-transform: rotate(0deg) scale(1) translate(40%,0%); 
 }
 .c-state2{
-  transform: rotate(0deg) scale(.8) translate(75%,0%); 
-  -webkit-transform: rotate(0deg) scale(.8) translate(75%,0%); 
+  transform: rotate(0deg) scale(.8) translate(40%,0%); 
+  -webkit-transform: rotate(0deg) scale(.8) translate(40%,0%); 
+}
+
+.item-title {
+  margin: 20rpx 20rpx 10rpx;
+  font-size: 18px;
+  width: 100%;
+}
+.item-desc {
+  margin: 10rpx 20rpx 0;
+  width: 100%;
+  color: #00000080
 }

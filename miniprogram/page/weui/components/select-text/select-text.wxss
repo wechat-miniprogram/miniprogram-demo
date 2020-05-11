@@ -86,3 +86,6 @@
   border-style: solid;
   border-color: transparent black transparent transparent
 }
+textarea {
+  height: 16px;
+}

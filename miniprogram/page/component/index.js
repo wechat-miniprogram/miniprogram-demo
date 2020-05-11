@@ -30,7 +30,7 @@ Page({
         id: 'nav',
         name: '导航',
         open: false,
-        pages: ['navigator']
+        pages: ['navigator', 'functional-page-navigator']
       }, {
         id: 'media',
         name: '媒体组件',

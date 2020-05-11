@@ -208,6 +208,9 @@ Page({
             zh: '视频',
             url: 'video/video'
           }, {
+            zh: '音视频合成',
+            url: 'media-container/media-container'
+          },{
             zh: '动态加载字体',
             url: 'load-font-face/load-font-face'
           }

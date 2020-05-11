@@ -11,9 +11,20 @@ Page({
     // parsedComment: []
     historyList:[],
     layoutHeight: '0px',
+    safeHeight: 0,
+    keyboardHeight: 0,
   },
 
   onLoad() {
+    const system = wx.getSystemInfoSync();
+    console.log(system)
+    const isIOS = system.platform === 'ios';
+    const { safeArea } = system;
+    this.safeHeight = safeArea.bottom - safeArea.height;
+    this.setData({
+      isIOS,
+      safeHeight: safeArea.bottom - safeArea.height,
+    })    
     const emojiInstance = this.selectComponent('.mp-emoji')
     this.emojiNames = emojiInstance.getEmojiNames()
     this.parseEmoji = emojiInstance.parseEmoji
@@ -26,9 +37,18 @@ Page({
 
   onkeyboardHeightChange(e) {
     const {height} = e.detail
-    this.setData({
-      keyboardHeight: height
-    })
+    if (height === 0) {
+      this.setData({
+        safeHeight: this.safeHeight,
+        keyboardHeight: height
+      })
+    } else {
+      this.setData({
+        safeHeight: 0,
+        keyboardHeight: height
+      })
+    }
+
   },
 
   hideAllPanel() {

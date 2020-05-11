@@ -96,7 +96,9 @@
     "page/component/pages/camera-scan-code/camera-scan-code",
     "page/component/pages/open-data/open-data",
     "page/component/pages/web-view/web-view",
-    "page/weui/example/tabs/webview"
+    "page/weui/example/tabs/webview",
+    "page/component/pages/functional-page-navigator/functional-page-navigator",
+    "page/component/pages/official-account/official-account"
   ],
   "subpackages": [
     {
@@ -155,7 +157,6 @@
         "pages/setting/setting",
         "pages/choose-invoice-title/choose-invoice-title",
         "pages/soter-authentication/soter-authentication",
-        "pages/audio/audio",
         "pages/mdns/mdns",
         "pages/get-performance/get-performance",
         "pages/get-battery-info/get-battery-info",
@@ -170,7 +171,8 @@
         "pages/wxs/stick-top",
         "pages/wxs/sidebar",
         "pages/doc-web-view/doc-web-view",
-        "pages/resizable/resizable"
+        "pages/resizable/resizable",
+        "pages/media-container/media-container"
       ]
     }
   ],
@@ -221,6 +223,9 @@
   "navigateToMiniProgramAppIdList": [
     "wx4f1b24bdc99fa23b"
   ],
+  "functionalPages": {
+    "independent": true
+  },
   "workers": "workers",
   "debug": false,
   "style": "v2",

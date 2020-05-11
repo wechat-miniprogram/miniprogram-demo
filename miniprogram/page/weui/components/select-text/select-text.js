@@ -60,6 +60,5 @@ Component({
       this.triggerEvent('copy', {});
     },
     stopPropagation: function stopPropagation(e) {}
-
   }
 })
