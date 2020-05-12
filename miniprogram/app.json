@@ -172,7 +172,8 @@
         "pages/wxs/sidebar",
         "pages/doc-web-view/doc-web-view",
         "pages/resizable/resizable",
-        "pages/media-container/media-container"
+        "pages/media-container/media-container",
+        "pages/audio/audio"
       ]
     }
   ],

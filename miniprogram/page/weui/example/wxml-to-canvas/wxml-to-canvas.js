@@ -5,12 +5,22 @@ Page({
   },
   onLoad() {
     this.widget = this.selectComponent('.widget')
+    wx.cloud.getTempFileURL({
+      fileList: ['cloud://release-b86096.7265-release-b86096-1258211818/开放社区.jpeg'],
+      success: res => {
+
+        const url = res.fileList[0].tempFileURL
+        console.log(url);
+        this.url = url;
+      },
+      fail: console.error
+    })
   },
   renderToCanvas() {
-    const p1 = this.widget.renderToCanvas({ wxml, style })
-    p1.then((res) => {
-      console.log('container', res.layoutBox)
-      this.container = res
+    const p1 = this.widget.renderToCanvas({ wxml: wxml(this.url), style })
+    p1.then((re) => {
+      console.log('container', re.layoutBox)
+      this.container = re
     })
   },
   extraImage() {

@@ -10,4 +10,3 @@
   bindprogress="onProgress"
   bindloadedmetadata="onLoadedMetaData"
 ></mp-video-swiper>
-<!-- <video src=""></video> -->
