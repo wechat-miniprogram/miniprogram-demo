@@ -219,7 +219,7 @@ Page({
     dataView.setUint8(0, Math.random() * 255 | 0)
     wx.writeBLECharacteristicValue({
       deviceId: this._deviceId,
-      serviceId: this._deviceId,
+      serviceId: this._serviceId,
       characteristicId: this._characteristicId,
       value: buffer,
     })
