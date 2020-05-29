@@ -32,8 +32,8 @@ Page({
             zh: '客服消息',
             url: 'custom-message/custom-message'
           }, {
-            zh: '模板消息',
-            url: 'template-message/template-message'
+            zh: '订阅消息',
+            url: 'subscribe-message/subscribe-message'
           }, {
             zh: '收货地址',
             url: 'choose-address/choose-address'
@@ -108,10 +108,10 @@ Page({
           }, {
             zh: '获取手机系统信息',
             url: 'get-system-info/get-system-info'
-          },  {
+          }, {
             zh: '获取手机设备电量',
             url: 'get-battery-info/get-battery-info'
-          },{
+          }, {
             zh: '监听重力感应数据',
             url: 'on-accelerometer-change/on-accelerometer-change'
           }, {
@@ -159,7 +159,7 @@ Page({
             url: 'get-performance/get-performance'
           }
         ]
-      },{
+      }, {
         id: 'network',
         name: '网络',
         open: false,
@@ -192,7 +192,7 @@ Page({
           {
             zh: '图片',
             url: 'image/image'
-          },{
+          }, {
             zh: '音频',
             url: 'audio/audio'
           }, {
@@ -207,7 +207,7 @@ Page({
           }, {
             zh: '视频',
             url: 'video/video'
-          }, {
+          },{
             zh: '音视频合成',
             url: 'media-container/media-container'
           },{
@@ -265,6 +265,18 @@ Page({
       }
     ],
     isSetTabBarPage: false,
+    theme: 'light'
+  },
+  onLoad() {
+    this.setData({
+      theme: wx.getSystemInfoSync().theme || 'light'
+    })
+
+    if (wx.onThemeChange) {
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
+      })
+    }
   },
   onShow() {
     this.leaveSetTabBarPage()

@@ -1,10 +1,12 @@
-const height = wx.getSystemInfoSync().windowHeight
+const height = wx.getSystemInfoSync().windowHeight;
+const app = getApp();
 Page({
   data: {
     sticky: false,
     opacity: 0,
     height: height,
-    tabs: []
+    tabs: [],
+    theme: app.globalData.theme,
   },
   //滚动条监听
   onPageScroll: function (e) {

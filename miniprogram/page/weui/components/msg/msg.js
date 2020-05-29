@@ -108,6 +108,7 @@ Component({
             value: ''
         },
         icon: {
+            // 可以自行设置 icon, 设置icon 之后，type 失效
             type: String,
             value: ''
         },
@@ -120,6 +121,7 @@ Component({
             value: ''
         },
         size: {
+            // 可以自行设置 icon, 设置icon 之后，type 失效
             type: Number,
             value: 64
         }

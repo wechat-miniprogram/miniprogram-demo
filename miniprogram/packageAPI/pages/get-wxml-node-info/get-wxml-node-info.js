@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '获取WXML节点信息',
-      path: 'page/API/pages/get-wxml-node-info/get-wxml-node-info'
+      path: 'packageAPI/pages/get-wxml-node-info/get-wxml-node-info'
     }
   },
 

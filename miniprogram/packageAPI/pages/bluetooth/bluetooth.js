@@ -22,7 +22,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '蓝牙',
-      path: 'page/API/pages/bluetooth/bluetooth'
+      path: 'packageAPI/pages/bluetooth/bluetooth'
     }
   },
 

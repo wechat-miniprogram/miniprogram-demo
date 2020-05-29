@@ -1,4 +1,10 @@
 Page({
+  onShareAppMessage() {
+    return {
+      title: 'live-pusher',
+      path: 'page/component/pages/live-pusher/live-pusher'
+    }
+  },
   data: {
     videoSrc: '',
   },

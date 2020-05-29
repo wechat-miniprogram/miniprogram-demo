@@ -27,18 +27,17 @@ function inArray(arr, key, val) {
 
 // slave/slave.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
+  onShareAppMessage() {
+    return {
+      title: '蓝牙',
+      path: 'packageAPI/pages/slave/slave'
+    }
+  },
   data: {
     connects: [],
     servers: []
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     wx.onBLEPeripheralConnectionStateChanged(res => {
       console.log('connect')
@@ -62,6 +61,11 @@ Page({
         this.createBLEPeripheralServer()
       },
       fail: (res) => {
+        console.log(res);
+        wx.showToast({
+          title: `创建失败 错误码: ${res.errCode}`,
+          icon:'none'
+        })
         if (res.errCode === 10001) {
           wx.onBluetoothAdapterStateChange(function (res) {
             console.log('onBluetoothAdapterStateChange', res)
@@ -80,7 +84,12 @@ Page({
       console.log('createBLEPeripheralServer', res)
       this.data.servers.push(res.server)
       this.server = res.server
-      this.setData({serverId: this.server.serverId})
+      this.setData({
+        serverId: this.server.serverId
+      })
+      wx.showToast({
+        title: '创建 server ',
+      })
       this.server.onCharacteristicReadRequest(res => {
         const { serviceId, characteristicId, callbackId } = res
         const buffer = new ArrayBuffer(1)
@@ -88,7 +97,6 @@ Page({
         const newValue = Math.ceil(Math.random() * 10)
         dataView.setUint8(0, newValue)
         console.log('onCharacteristicReadRequest', res, newValue)
-
         this.server.writeCharacteristicValue({
           serviceId,
           characteristicId,
@@ -116,6 +124,9 @@ Page({
   },
   closeServer() {
     this.server.close()
+    wx.showToast({
+      title: '关闭 server',
+    })
   },
   chaneMode() {
     wx.navigateBack();
@@ -132,6 +143,10 @@ Page({
       value: buffer,
       needNotify: true
     })
+    wx.showModal({
+      title: '写入成功',
+      content: '请在主机查看'
+    })
   },
   showInput() {
     this.setData({
@@ -145,7 +160,6 @@ Page({
     const descriptorBuffer = new ArrayBuffer(1)
     const dataView2 = new DataView(descriptorBuffer)
     dataView2.setInt8(0, 3)
-
     const service = {
       uuid: serviceId,
       characteristics: [{
@@ -178,12 +192,30 @@ Page({
       service
     }).then(res => {
       console.log('add Service', res)
+      wx.showToast({
+        title: '创建服务',
+      })
+    },(rej) => { 
+      console.log(rej);
+      if (rej.errCode === 10001) {
+        wx.showToast({
+          title: '请打开蓝牙',
+        })
+      } else {
+        wx.showModal({
+          title: '创建失败',
+          content: `错误码: ${rej.errCode}`
+        })
+      }
     })
   },
   removeService() {
     this.server.removeService({
       serviceId: serviceId
     }).then(res => {
+      wx.showToast({
+        title: '关闭服务',
+      })
       console.log('removeService', res)
     })
   },
@@ -204,64 +236,29 @@ Page({
       powerLevel: 'medium'
     }).then(res => {
       console.log('startAdvertising', res)
+      wx.showToast({
+        title: '开启广播',
+      })
     })
   },
+
   stopAdvertising() {
     this.server.stopAdvertising()
+    wx.showToast({
+      title: '关闭广播',
+    })
   },
 
   closeBluetoothAdapter() {
+    wx.showToast({
+      title: '结束流程',
+    })
     wx.closeBluetoothAdapter()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function () {
     this.data.servers.forEach(server => {
       // server.close()
     })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

@@ -3,6 +3,6 @@
 }
 
 .navigator {
-  color: #1AAD19;
+  color: var(--weui-LINK);
   display: inline-block;
 }

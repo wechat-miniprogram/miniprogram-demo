@@ -3,7 +3,7 @@
 }
 .page-body-text-small {
   font-size: 24rpx;
-  color: #000;
+  color: var(--weui-FG-0);
   margin-bottom: 100rpx;
 }
 .page-body-text-location {

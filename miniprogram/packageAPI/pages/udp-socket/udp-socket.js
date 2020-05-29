@@ -1,4 +1,3 @@
-const remoteUDPSocket = wx.createUDPSocket();
 
 const AB2String = (arrayBuffer) => {
   let unit8Arr = new Uint8Array(arrayBuffer) ;
@@ -8,14 +7,31 @@ const AB2String = (arrayBuffer) => {
 }
 
 Page({
+  onShareAppMessage() {
+    return {
+      title: 'UDPSocket',
+      path: 'packageAPI/pages/udp-socket/udp-socket'
+    }
+  },
   data: {
     port: undefined,
     remote_port: undefined,
     startUDP: false,
     mode: 'local',
     address: 'localhost',
+    canIUse: true,
   },
-
+  onLoad(){
+    const canIUse = wx.canIUse('createUDPSocket');
+    if(!canIUse) {
+      wx.showModal({
+        title: '微信版本过低，暂不支持本功能'
+      })
+      this.setData({
+        canIUse,
+      })
+    }
+  },
   handleCreateUDPTap() {
     this.UDPSocket = wx.createUDPSocket();
     this.remoteUDPSocket = wx.createUDPSocket();

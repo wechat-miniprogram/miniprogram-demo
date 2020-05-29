@@ -3,7 +3,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '生物认证',
-      path: 'page/API/pages/soter-authentication/soter-authentication'
+      path: 'packageAPI/pages/soter-authentication/soter-authentication'
     }
   },
 

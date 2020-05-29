@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '扫码',
-      path: 'page/API/pages/scan-code/scan-code'
+      path: 'packageAPI/pages/scan-code/scan-code'
     }
   },
 

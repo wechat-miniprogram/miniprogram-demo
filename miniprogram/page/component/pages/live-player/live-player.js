@@ -1,4 +1,10 @@
 Page({
+  onShareAppMessage() {
+    return {
+      title: 'live-player',
+      path: 'page/component/pages/live-player/live-player'
+    }
+  },
   data: {
     videoSrc: ""
   },

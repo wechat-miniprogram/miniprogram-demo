@@ -10,7 +10,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '拍摄/选择视频',
-      path: 'page/API/pages/video/video'
+      path: 'packageAPI/pages/video/video'
     }
   },
 

@@ -4,7 +4,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '创建画布',
-      path: 'page/API/pages/canvas/canvas'
+      path: 'packageAPI/pages/canvas/canvas'
     }
   },
 

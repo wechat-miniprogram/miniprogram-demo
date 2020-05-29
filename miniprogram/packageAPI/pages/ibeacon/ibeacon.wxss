@@ -16,9 +16,9 @@
   flex: 1;
 }
 .device_item {
-  border-bottom: 1rpx solid #EEE;
+  border-bottom: 1rpx solid var(--weui-FG-3);
   padding: 10rpx;
-  color: #666;
+  color: var(--weui-FG-HALF);
 }
 .device_item_hover {
   background-color: rgba(0, 0, 0, .1);

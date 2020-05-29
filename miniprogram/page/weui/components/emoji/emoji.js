@@ -152,6 +152,11 @@ Component({
         source: {
             type: String,
             value: ''
+        },
+        // 适配 darkmode
+        theme: {
+            type: String,
+            value: 'light' // light dark
         }
     },
     data: {

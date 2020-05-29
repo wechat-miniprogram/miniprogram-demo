@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '监听罗盘数据',
-      path: 'page/API/pages/on-compass-change/on-compass-change'
+      path: 'packageAPI/pages/on-compass-change/on-compass-change'
     }
   },
 

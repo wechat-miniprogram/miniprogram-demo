@@ -4,6 +4,6 @@
 
 .image {
   margin-top: 30rpx;
-  width: 580rpx;
-  height: 208rpx;
+  width: 690rpx;
+  height: 250rpx;
 }

@@ -3,7 +3,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '微信登录',
-      path: 'page/API/pages/login/login'
+      path: 'package/API/pages/login/login'
     }
   },
 

@@ -6,7 +6,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '使用原生地图选择位置',
-      path: 'page/API/pages/choose-location/choose-location'
+      path: 'packageAPI/pages/choose-location/choose-location'
     }
   },
 

@@ -1,4 +1,12 @@
-Page({
+import CustomPage from '../../base/CustomPage'
+
+CustomPage({
+  onShareAppMessage() {
+    return {
+      title: 'sticky',
+      path: 'page/weui/example/sticky/sticky'
+    }
+  },
   data: {
 
   },

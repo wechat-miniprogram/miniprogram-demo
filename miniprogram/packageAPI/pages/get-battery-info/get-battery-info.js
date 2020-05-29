@@ -1,5 +1,11 @@
 // miniprogram/page/API/pages/get-battery-info/get-battery-info.js
 Page({
+  onShareAppMessage() {
+    return {
+      title: '获取电池信息',
+      path: 'packageAPI/pages/get-battery-info/get-battery-info'
+    }
+  },
   data: {
     
   },

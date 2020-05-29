@@ -31,8 +31,5 @@
       </view>
     </view>
   </view>
-
-  <modal title="{{dialog.title}}" hidden="{{dialog.hidden}}" no-cancel bindconfirm="confirm">{{dialog.content}}</modal>
-
   <template is="foot" />
 </view>

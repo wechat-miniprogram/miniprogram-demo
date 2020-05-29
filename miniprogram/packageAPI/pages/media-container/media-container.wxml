@@ -19,7 +19,7 @@
       <video wx:if="{{two}}" src="{{two}}"></video>
     </view>
     <view class="btn-area">
-      <button type="primary" bind:tap="handleExport">合成</button>
+      <button disabled="{{!canIUse}}" type="primary" bind:tap="handleExport">合成</button>
     </view> 
     <block wx:if="{{targetSrc}}">
       <view class="page-section">

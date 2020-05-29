@@ -1,4 +1,12 @@
-Page({
+import CustomPage from '../../base/CustomPage'
+import { compareVersion } from '../../../../util/util';
+CustomPage({
+  onShareAppMessage() {
+    return {
+      title: 'emoji',
+      path: 'page/weui/example/emoji/emoji'
+    }
+  },
   data: {
     lineHeight: 24,
     functionShow: false,
@@ -13,38 +21,50 @@ Page({
     layoutHeight: '0px',
     safeHeight: 0,
     keyboardHeight: 0,
+    isIOS: false,
+    canIUse: true,
   },
 
   onLoad() {
     const system = wx.getSystemInfoSync();
-    console.log(system)
-    const isIOS = system.platform === 'ios';
-    const { safeArea } = system;
-    this.safeHeight = safeArea.bottom - safeArea.height;
+    let isIOS = system.platform === 'ios';
+    
+    this.safeHeight = (system.screenHeight - system.safeArea.bottom);
+    const layoutHeight = wx.getSystemInfoSync().windowHeight - (this.safeHeight / 2);
     this.setData({
       isIOS,
-      safeHeight: safeArea.bottom - safeArea.height,
+      safeHeight: this.safeHeight,
+      layoutHeight,
+
     })    
     const emojiInstance = this.selectComponent('.mp-emoji')
     this.emojiNames = emojiInstance.getEmojiNames()
-    this.parseEmoji = emojiInstance.parseEmoji
-    console.log(wx.getSystemInfoSync());
-    const layoutHeight = wx.getSystemInfoSync().windowHeight - 56;
-    this.setData({
-      layoutHeight,
-    })
+    this.parseEmoji = emojiInstance.parseEmoji;
   },
-
+  onReady() {
+    // 解决基础库小于 2.9.2 的兼容问题
+    const { SDKVersion } = wx.getSystemInfoSync();
+    if(!compareVersion(SDKVersion, '2.9.1')) {
+      this.setData({
+        canIUse: false,
+      })
+    }
+  },
   onkeyboardHeightChange(e) {
     const {height} = e.detail
     if (height === 0) {
+      this.data._keyboardShow = false
+
       this.setData({
         safeHeight: this.safeHeight,
         keyboardHeight: height
       })
     } else {
+      this.data._keyboardShow = true
       this.setData({
         safeHeight: 0,
+        functionShow: false,
+        emojiShow: false,
         keyboardHeight: height
       })
     }
@@ -72,6 +92,7 @@ Page({
   chooseImage() {},
   onFocus() {
     this.data._keyboardShow = true
+
     this.hideAllPanel()
   },
   onBlur(e) {

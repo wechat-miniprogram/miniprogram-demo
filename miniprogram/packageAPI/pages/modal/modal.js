@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '模态弹窗',
-      path: 'page/API/pages/modal/modal'
+      path: 'packageAPI/pages/modal/modal'
     }
   },
 

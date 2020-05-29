@@ -1,4 +1,12 @@
-Page({
+import CustomPage from '../../base/CustomPage'
+
+CustomPage({
+  onShareAppMessage() {
+    return {
+      title: 'vtabs',
+      path: 'page/weui/example/vtabs/vtabs'
+    }
+  },
   data: {
     vtabs: [],
     activeTab: 0,

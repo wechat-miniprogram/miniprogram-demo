@@ -4,7 +4,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '多线程Worker',
-      path: 'page/API/pages/worker/worker'
+      path: 'packageAPI/pages/worker/worker'
     }
   },
 

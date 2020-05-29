@@ -93,9 +93,17 @@ module.exports =
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var base64_1 = __webpack_require__(11);
-var icondata_1 = __webpack_require__(12);
+var _base = _interopRequireDefault(__webpack_require__(11));
+
+var _icondata = _interopRequireDefault(__webpack_require__(12));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const getFixedIconType = function (type) {
+  // 兼容旧版本 typo
+  return type === 'field' ? 'filled' : type;
+};
+
 Component({
     options: {
         addGlobalClass: true
@@ -130,19 +138,22 @@ Component({
         width: 20
     },
     methods: {
-        _genSrcByIcon: function _genSrcByIcon(v) {
-            this._genSrc(icondata_1.default[v][this.data.type]);
-        },
-        _genSrcByType: function _genSrcByType(v) {
-            this._genSrc(icondata_1.default[this.data.icon][v]);
-        },
-        _genSrc: function _genSrc(rawData) {
-            if (!rawData) return;
-            var base64 = base64_1.default.encode(rawData);
-            this.setData({
-                src: 'data:image/svg+xml;base64,' + base64
-            });
-        }
+        _genSrcByIcon(v) {
+            this._genSrc(_icondata.default[v][getFixedIconType(this.data.type)]);
+          },
+      
+				_genSrcByType(v) {
+					this._genSrc(_icondata.default[this.data.icon][getFixedIconType(v)]);
+				},
+				_genSrc(rawData) {
+					if (!rawData) return; // type 不存在
+		
+					const base64 = _base.default.encode(rawData);
+		
+					this.setData({
+						src: 'data:image/svg+xml;base64,' + base64
+					});
+				}
     }
 });
 

@@ -6,7 +6,7 @@
 
   <view class="page-body">
     <view class="page-section">
-      <view class="page-body-info">
+      <view wx:if="{{canIUse}}" class="page-body-info">
         <view class="page-body-title">数据预拉取</view>
         <block wx:if="{{appid}}">
           <block>

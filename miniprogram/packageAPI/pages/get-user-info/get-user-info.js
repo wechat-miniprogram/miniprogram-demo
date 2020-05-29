@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '获取用户信息',
-      path: 'page/API/pages/get-user-info/get-user-info'
+      path: 'packageAPI/pages/get-user-info/get-user-info'
     }
   },
 

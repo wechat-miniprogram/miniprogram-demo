@@ -1,3 +1,5 @@
+<view class="page" data-weui-theme="{{theme}}">
+
 <mp-tabs 
   tabs="{{tabs}}" 
   activeTab="{{activeTab}}" 
@@ -5,6 +7,7 @@
   bindtabclick="onTabClick"
   bindchange="onChange"
   activeClass="tab-bar-title__selected"
+  
 >
   <block wx:for="{{tabs}}" wx:key="title">
     <view class="tab-content" data-set="{{item}}" slot="tab-content-{{index}}" bind:tap="handleClick" >
@@ -18,3 +21,4 @@
     </view>
   </block>
 </mp-tabs>
+</view>

@@ -29,13 +29,12 @@
       <block wx:if="{{buttons && buttons.length}}">
         <button 
           wx:for="{{buttons}}" 
-          wx:key="{{item.text + item.index}}"
+          wx:key="index"
           type="{{item.type}}" 
           class="weui-btn {{item.className}}" 
           data-index="{{index}}" 
           bindtap="buttonTap"
         >{{item.text}}</button>
-        <!-- <view wx:for="{{buttons}}" class="weui-dialog__btn {{}} {{item.extClass}}" ></view> -->
       </block>
       <slot name="footer" wx:else></slot>
     </view>

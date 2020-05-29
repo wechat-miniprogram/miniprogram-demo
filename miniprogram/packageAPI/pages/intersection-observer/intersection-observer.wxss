@@ -1,6 +1,6 @@
 .scroll-view {
   height: 400rpx;
-  background: #fff;
+  background: var(--weui-BG-2);
 }
 
 .scroll-area {

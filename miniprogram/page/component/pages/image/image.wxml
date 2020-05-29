@@ -17,6 +17,12 @@
         <image class="image" src="{{imageUrl}}"/>
       </view>
     </view>
+     <view class="page-section page-section-gap">
+      <view class="page-section-title">Webp Image</view>
+      <view class="page-section-ctn">
+        <image class="image" webp src="{{webpImageUrl}}" mode="aspectFit"/>
+      </view>
+    </view>
   </view>
 
   <template is="foot"/>

@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '数据存储',
-      path: 'page/API/pages/storage/storage'
+      path: 'packageAPI/pages/storage/storage'
     }
   },
 
@@ -32,28 +32,31 @@ Page({
       this.setData({
         key,
         data,
-        'dialog.hidden': false,
-        'dialog.title': '读取数据失败',
-        'dialog.content': 'key 不能为空'
+      })
+      wx.showModal({
+        title: '读取数据失败',
+        content: 'key 不能为空'
       })
     } else {
       storageData = wx.getStorageSync(key)
+      console.log(storageData)
       if (storageData === '') {
         this.setData({
           key,
-          data,
-          'dialog.hidden': false,
-          'dialog.title': '读取数据失败',
-          'dialog.content': '找不到 key 对应的数据'
+          data: storageData
+        })
+        wx.showModal({
+          title: '读取数据失败',
+          content: '找不到 key 对应的数据'
         })
       } else {
         this.setData({
           key,
-          data,
-          'dialog.hidden': false,
-          'dialog.title': '读取数据成功',
-          // eslint-disable-next-line
-          'dialog.content': "data: '"+ storageData + "'"
+          data:storageData
+        })
+        wx.showModal({
+          title: '读取数据成功',
+          content: storageData,
         })
       }
     }
@@ -65,17 +68,20 @@ Page({
       this.setData({
         key,
         data,
-        'dialog.hidden': false,
-        'dialog.title': '保存数据失败',
-        'dialog.content': 'key 不能为空'
+      })
+      wx.showModal({
+        title: '保存数据失败',
+        content: 'key 不能为空'
       })
     } else {
       wx.setStorageSync(key, data)
       this.setData({
         key,
         data,
-        'dialog.hidden': false,
-        'dialog.title': '存储数据成功'
+      
+      })
+      wx.showModal({
+        title: '存储数据成功'
       })
     }
   },
@@ -85,17 +91,9 @@ Page({
     this.setData({
       key: '',
       data: '',
-      'dialog.hidden': false,
-      'dialog.title': '清除数据成功',
-      'dialog.content': ''
+    })
+    wx.showModal({
+      title: '清除数据成功'
     })
   },
-
-  confirm() {
-    this.setData({
-      'dialog.hidden': true,
-      'dialog.title': '',
-      'dialog.content': ''
-    })
-  }
 })

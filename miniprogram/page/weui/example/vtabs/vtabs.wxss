@@ -1,7 +1,7 @@
 @import '../common.wxss';
 
-page{
-    background-color: #FFFFFF;
+.page{
+    background-color: var(--weui-BG-2);
     height: 100%;
 }
 
@@ -12,7 +12,7 @@ page{
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
     padding-bottom: 20px;
 }
 
@@ -23,6 +23,23 @@ page{
 .item-desc {
     margin: 0 20rpx;
 
-    color: #00000080
+    color: var(--weui-FG-1)
+}
+
+.weui-vtabs-bar__wrp {
+    background-color: var(--weui-BG-0) !important;
+}
+
+.weui-vtabs-bar__item {
+    background-color: var(--weui-BG-0);
+    color: var(--weui-FG-0);
+    border-left-color: var(--weui-FG-0);
+
+}
+
+.weui-vtabs-bar__activeitem {
+    background-color: var(--weui-BG-2) !important;
+    color: var(--weui-FG-0)!important;
+    border-left-color: #07c160 !important;
 }
 

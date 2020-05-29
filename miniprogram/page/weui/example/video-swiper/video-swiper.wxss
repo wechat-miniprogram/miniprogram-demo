@@ -1,7 +1,7 @@
 @import '../common.wxss';
 
-page{
-    background-color: #FFFFFF;
+.page{
+    background-color: var(--weui-BG-0);
     height: 100%;
 }
 

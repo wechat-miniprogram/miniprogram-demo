@@ -1,4 +1,12 @@
-Page({
+import CustomPage from '../../base/CustomPage'
+
+CustomPage({
+    onShareAppMessage() {
+        return {
+          title: 'uploader',
+          path: 'page/weui/example/uploader/uploader'
+        }
+      },
     data: {
         files: [{
             url: 'http://mmbiz.qpic.cn/mmbiz_png/VUIF3v9blLsicfV8ysC76e9fZzWgy8YJ2bQO58p43Lib8ncGXmuyibLY7O3hia8sWv25KCibQb7MbJW3Q7xibNzfRN7A/0',

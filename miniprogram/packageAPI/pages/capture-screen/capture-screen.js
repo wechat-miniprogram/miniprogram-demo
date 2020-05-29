@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '用户截屏事件',
-      path: 'page/API/pages/capture-screen/capture-screen'
+      path: 'packageAPI/pages/capture-screen/capture-screen'
     }
   },
 

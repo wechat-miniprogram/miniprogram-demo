@@ -6,7 +6,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '获取位置',
-      path: 'page/API/pages/get-location/get-location'
+      path: 'packageAPI/pages/get-location/get-location'
     }
   },
 

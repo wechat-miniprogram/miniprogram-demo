@@ -805,14 +805,17 @@
 
 .weui-emotion_head {
   margin: 14px 5px 8px;
-  color: #000;
+  color: var(--weui-FG-0);
   font-size: 14px;
   text-align: left
 }
 
+
 .weui-emoji_area {
   position: relative;
-  width: 100%
+  width: 100%;
+  background: var(--weui-BG-0)
+
 }
 
 .weui-emoji_area__has-safe-bottom {
@@ -854,8 +857,9 @@
 .weui-emoji__operation__delete {
   position: relative;
   font-size: 0;
-  background-color: rgba(255, 255, 255)
+  background-color: var(--weui-BG-3)
 }
+
 
 .weui-emoji__operation__send {
   margin-left: 8px;

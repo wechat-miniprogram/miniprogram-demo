@@ -2,12 +2,12 @@
   width: auto;
   margin: 30rpx;
   padding: 64rpx 30rpx;
-  background-color: #fff;
+  background-color: var(--weui-BG-2);
   text-align: center;
   font-size: 28rpx;
 }
 .desc{
-  color: #B2B2B2;
+  color: var(--weui-FG-1);
 }
 .price{
   margin-top: 30rpx;

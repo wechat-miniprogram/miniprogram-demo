@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '获取手机系统信息',
-      path: 'page/API/pages/get-system-info/get-system-info'
+      path: 'packageAPI/pages/get-system-info/get-system-info'
     }
   },
 

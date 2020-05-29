@@ -1,5 +1,11 @@
 const windowWidth = wx.getSystemInfoSync().windowWidth
 Page({
+  onShareAppMessage() {
+    return {
+      title: 'nearby',
+      path: 'packageAPI/pages/wxs/nearby'
+    }
+  },
   data: {
     imgUrls: [
       'http://mmbiz.qpic.cn/sz_mmbiz_jpg/GEWVeJPFkSEV5QjxLDJaL6ibHLSZ02TIcve0ocPXrdTVqGGbqAmh5Mw9V7504dlEiatSvnyibibHCrVQO2GEYsJicPA/0?wx_fmt=jpeg',

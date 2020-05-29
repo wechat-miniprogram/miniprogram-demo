@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '屏幕亮度',
-      path: 'page/API/pages/screen-brightness/screen-brightness'
+      path: 'packageAPI/pages/screen-brightness/screen-brightness'
     }
   },
 

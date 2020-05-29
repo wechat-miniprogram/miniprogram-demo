@@ -1,4 +1,6 @@
-<mp-indexList class="city__list" list="{{list}}" bindchoose="onChoose">
+<view class="page" data-weui-theme="{{theme}}">
+
+<mp-indexList class="city__list" list="{{list}}">
     <view class="page">
         <view class="page__hd">
             <view class="page__title">Index List</view>
@@ -8,3 +10,4 @@
         </view>
     </view>
 </mp-indexList>
+</view>

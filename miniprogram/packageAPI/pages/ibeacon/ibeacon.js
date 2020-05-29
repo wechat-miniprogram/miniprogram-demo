@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: 'iBeacon',
-      path: 'page/API/pages/ibeacon/ibeacon'
+      path: 'packageAPI/pages/ibeacon/ibeacon'
     }
   },
 

@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '收货地址',
-      path: 'page/API/pages/choose-address/choose-address'
+      path: 'packageAPI/pages/choose-address/choose-address'
     }
   },
 

@@ -1,9 +1,24 @@
 .item+.item {
-  border-top: 1px solid #ccc;
+  /* border-top: 1px solid #ccc; */
 }
 
 .item, .item > view {
   display: flex;
   align-items: center;
   height: 300rpx;
+  width: 100%;
 }
+.item-content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 300rpx;
+  align-items: center;
+}
+/* .wrap {
+  height: 100% !important;
+} */
+/* .wx-recycle-item {
+  width: 100%;
+} */

@@ -17,7 +17,8 @@ Component({
     activeTab: {type: Number, value: 0},
     swipeable: {type: Boolean, value: true},
     animation: {type: Boolean, value: true},
-    duration: {type: Number, value: 500}
+    duration: {type: Number, value: 500},
+    theme: {type: String, value: 'light'} // light dark
   },
   data: {
     currentView: 0

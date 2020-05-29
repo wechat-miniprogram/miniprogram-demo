@@ -26,8 +26,9 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": true,
-		"userConfirmedUseCompilerModuleSwitch": true
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": true,
+		"compileHotReLoad": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.0",

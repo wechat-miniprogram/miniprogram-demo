@@ -1,4 +1,10 @@
 Page({
+  onShareAppMessage() {
+    return {
+      title: 'toptips',
+      path: 'page/weui/example/toptips/toptips'
+    }
+  },
   data: {
     value: '',
     showTopTips: false,

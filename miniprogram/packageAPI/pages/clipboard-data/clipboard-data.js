@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '剪切板',
-      path: 'page/API/pages/clipboard-data/clipboard-data'
+      path: 'packageAPI/pages/clipboard-data/clipboard-data'
     }
   },
 

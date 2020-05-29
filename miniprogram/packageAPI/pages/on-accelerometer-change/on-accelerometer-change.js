@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '监听重力感应数据',
-      path: 'page/API/pages/on-accelerometer-change/on-accelerometer-change'
+      path: 'packageAPI/pages/on-accelerometer-change/on-accelerometer-change'
     }
   },
 

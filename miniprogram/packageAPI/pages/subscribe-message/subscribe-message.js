@@ -101,7 +101,10 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
+  onShareAppMessage() {
+    return {
+      title: '订阅消息',
+      path: 'packageAPI/pages/subscribe-message/subscribe-message'
+    }
+  },
 })

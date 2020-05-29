@@ -27,24 +27,41 @@ Page({
     // 获取缓存的预拉取数据
     this.getBackgroundFetchData();
   },
+  onShareAppMessage() {
+    return {
+      title: '预拉取',
+      path: 'packageAPI/pages/get-background-prefetch-data/get-background-prefetch-data'
+    }
+  },
   data: {
     openid: '',
     appid: '',
     getDataTime: '',
+    canIUse: true,
   },
   getBackgroundFetchData() {
-    console.log('读取预拉取数据')
-    const res = app.globalData.backgroundFetchData;
-    const { fetchedData } = res;
-    const result = JSON.parse(fetchedData)
-    const systemInfo = wx.getSystemInfoSync();
-    const timeStamp = systemInfo.brand === 'iPhone' ? res.timeStamp * 1000 : res.timeStamp
-    const time = new Date(timeStamp).Format("yyyy-MM-dd hh:mm:ss");
-    this.setData({
-      appid: result.appid,
-      openid: result.openid,
-      getDataTime: time,
-
-    })
+    if (wx.getBackgroundFetchData) {
+      console.log('读取预拉取数据')
+      const res = app.globalData.backgroundFetchData;
+      const { fetchedData } = res;
+      const result = JSON.parse(fetchedData)
+      const systemInfo = wx.getSystemInfoSync();
+      const timeStamp = systemInfo.brand === 'iPhone' ? res.timeStamp * 1000 : res.timeStamp
+      const time = new Date(timeStamp).Format("yyyy-MM-dd hh:mm:ss");
+      this.setData({
+        appid: result.appid,
+        openid: result.openid,
+        getDataTime: time,
+  
+      })
+    } else {
+      this.setData({
+        canIUse: false,
+      })
+      wx.showModal({
+        title: '微信版本过低，暂不支持本功能',
+      })
+    }
+    
   }
 })

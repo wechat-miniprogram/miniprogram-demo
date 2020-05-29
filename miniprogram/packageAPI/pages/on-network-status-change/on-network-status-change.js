@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '监听手机网络变化',
-      path: 'page/API/pages/on-network-status-change/on-network-status-change'
+      path: 'packageAPI/pages/on-network-status-change/on-network-status-change'
     }
   },
 

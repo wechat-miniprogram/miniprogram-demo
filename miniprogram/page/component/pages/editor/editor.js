@@ -1,4 +1,10 @@
 Page({
+  onShareAppMessage() {
+    return {
+      title: 'editor',
+      path: 'page/component/pages/editor/editor'
+    }
+  },
   data: {
     formats: {},
     readOnly: false,
@@ -15,12 +21,15 @@ Page({
     })
   },
   onLoad() {
-    const { platform, safeArea, model} = wx.getSystemInfoSync()
-    const safeHeight = safeArea.bottom - safeArea.height;
-    this._safeHeight =  safeArea.bottom - safeArea.height;
+    const { platform, safeArea, model, screenHeight} = wx.getSystemInfoSync()
+    let safeHeight;
+    if (safeArea) {
+      safeHeight = (screenHeight - safeArea.bottom);
+    } else  {
+      safeHeight = 32;
+    }
+    this._safeHeight = safeHeight;
     let isIOS = platform === 'ios'
-    // 适配刘海品
-    isIOS = [...model.split(' ')[1][1]].includes('X');
     this.setData({ isIOS, safeHeight, toolBarHeight: isIOS ? safeHeight + 50 : 50 })
     const that = this
     this.updatePosition(0)

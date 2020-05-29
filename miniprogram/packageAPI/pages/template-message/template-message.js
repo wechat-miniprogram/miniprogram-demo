@@ -13,7 +13,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '模板消息',
-      path: 'page/API/pages/template-message/template-message'
+      path: 'packageAPI/pages/template-message/template-message'
     }
   },
 

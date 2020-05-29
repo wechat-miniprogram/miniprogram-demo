@@ -29,7 +29,7 @@ page,.page {
   height: 100%;
   position: fixed;
   width: 750rpx;
-  background-color: #FFFFFF;
+  background-color: var(--weui-BG-1);
   z-index: 0;
   transition: All 0.4s ease; 
   -webkit-transition: All 0.4s ease;

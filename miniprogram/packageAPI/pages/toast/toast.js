@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '消息提示框',
-      path: 'page/API/pages/toast/toast'
+      path: 'packageAPI/pages/toast/toast'
     }
   },
 

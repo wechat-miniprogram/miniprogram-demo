@@ -5,7 +5,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '图片',
-      path: 'page/API/pages/image/image'
+      path: 'packageAPI/pages/image/image'
     }
   },
 

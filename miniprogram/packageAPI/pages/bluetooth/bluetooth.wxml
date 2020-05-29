@@ -12,7 +12,6 @@ module.exports.len = function(arr) {
 </wxs>
 <view class="container">
   <template is="head" data="{{title: 'bluetooth'}}"/>
-
   <view class="page-body">
     <view class="page-section">
       <view class="page-body-info">
@@ -24,7 +23,7 @@ module.exports.len = function(arr) {
            bindtap="createBLEConnection" 
            class="device_item"
            hover-class="device_item_hover">
-            <view style="font-size: 16px; color: #333;">{{item.name}}</view>
+            <view style="font-size: 16px;">{{item.name}}</view>
             <view style="font-size: 10px">信号强度: {{item.RSSI}}dBm ({{utils.max(0, item.RSSI + 100)}}%)</view>
             <view style="font-size: 10px">UUID: {{item.deviceId}}</view>
             <view style="font-size: 10px">Service数量: {{utils.len(item.advertisServiceUUIDs)}}</view>

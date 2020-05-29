@@ -30,7 +30,7 @@ Page({
         id: 'nav',
         name: '导航',
         open: false,
-        pages: ['navigator', 'functional-page-navigator']
+        pages: ['navigator']
       }, {
         id: 'media',
         name: '媒体组件',
@@ -57,7 +57,20 @@ Page({
         open: false,
         pages: ['aria-component']
       }
-    ]
+    ],
+    theme: 'light'
+  },
+
+  onLoad() {
+    this.setData({
+      theme: wx.getSystemInfoSync().theme || 'light'
+    })
+
+    if (wx.onThemeChange) {
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
+      })
+    }
   },
 
   kindToggle(e) {

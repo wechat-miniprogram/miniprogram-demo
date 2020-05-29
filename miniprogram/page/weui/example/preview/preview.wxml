@@ -1,5 +1,4 @@
-<view class="page">
-    <view class="page__hd">
+<view class="page" data-weui-theme="{{theme}}">    <view class="page__hd">
         <view class="page__title">Preview</view>
         <view class="page__desc">表单预览</view>
     </view>

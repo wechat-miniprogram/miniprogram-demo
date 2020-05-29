@@ -1,0 +1,39 @@
+{
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#191919",
+    "backgroundColor": "#191919"
+  },
+  "tabBar": {
+    "color": "#FCFCFC",
+    "selectedColor": "#51A937",
+    "borderStyle": "white",
+    "backgroundColor": "#191919",
+    "list": [
+      {
+        "pagePath": "page/component/index",
+        "iconPath": "image/icon_component_HL.png",
+        "selectedIconPath": "image/icon_component_dark.png",
+        "text": "组件"
+      },
+      {
+        "pagePath": "page/weui/example/index",
+        "iconPath": "image/icon_component_HL.png",
+        "selectedIconPath": "image/icon_component_dark.png",
+        "text": "扩展能力"
+      },
+      {
+        "pagePath": "page/API/index",
+        "iconPath": "image/icon_API_HL.png",
+        "selectedIconPath": "image/icon_API_dark.png",
+        "text": "接口"
+      },
+      {
+        "pagePath": "page/cloud/index",
+        "iconPath": "image/icon_cloud_HL.png",
+        "selectedIconPath": "image/icon_cloud_dark.png",
+        "text": "云开发"
+      }
+    ]
+  }
+}

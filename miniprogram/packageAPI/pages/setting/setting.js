@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '设置',
-      path: 'page/API/pages/setting/setting'
+      path: 'packageAPI/pages/setting/setting'
     }
   },
 

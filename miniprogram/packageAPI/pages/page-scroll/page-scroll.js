@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '页面滚动',
-      path: 'page/API/pages/page-scroll/page-scroll'
+      path: 'packageAPI/pages/page-scroll/page-scroll'
     }
   },
 

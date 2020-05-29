@@ -21,34 +21,25 @@
     "page/component/pages/navigator/navigate",
     "page/component/pages/navigator/redirect",
     "page/component/pages/image/image",
-    "page/component/pages/audio/audio",
     "page/component/pages/video/video",
-    "page/component/pages/video/picture-in-picture",
     "page/component/pages/map/map",
     "page/component/pages/canvas/canvas",
     "page/component/pages/ad/ad",
     "page/component/pages/movable-view/movable-view",
     "page/component/pages/cover-view/cover-view",
     "page/component/pages/rich-text/rich-text",
-    "page/API/index",
+    "page/component/pages/picker-view/picker-view",
+    "page/component/pages/camera/camera",
+    "page/component/pages/camera-scan-code/camera-scan-code",
     "page/component/pages/map-styles/map-styles",
+    "page/component/pages/live-player/live-player",
+    "page/component/pages/live-pusher/live-pusher",
+    "page/component/pages/aria-component/aria-component",
+    "page/API/index",
     "page/cloud/index",
-    "page/cloud/pages/user-authentication/user-authentication",
-    "page/cloud/pages/get-wx-context/get-wx-context",
-    "page/cloud/pages/upload-file/upload-file",
-    "page/cloud/pages/download-file/download-file",
-    "page/cloud/pages/get-temp-file-url/get-temp-file-url",
-    "page/cloud/pages/delete-file/delete-file",
-    "page/cloud/pages/cloud-file-component/cloud-file-component",
-    "page/cloud/pages/crud/crud",
-    "page/cloud/pages/crud-detail/crud-detail",
-    "page/cloud/pages/db-permission/db-permission",
-    "page/cloud/pages/server-date/server-date",
-    "page/cloud/pages/scf-database/scf-database",
-    "page/cloud/pages/scf-storage/scf-storage",
-    "page/cloud/pages/scf-openapi/scf-openapi",
     "page/component/pages/doc-web-view/doc-web-view",
-    "page/cloud/pages/doc-web-view/doc-web-view",
+    "page/component/pages/open-data/open-data",
+    "page/component/pages/web-view/web-view",
     "page/component/pages/editor/editor",
     "page/weui/example/index",
     "page/weui/example/cell/cell",
@@ -78,27 +69,18 @@
     "page/weui/example/form-page/form-page",
     "page/weui/example/half-screen-dialog/half-screen-dialog",
     "page/weui/example/actionsheet/actionsheet",
+    "page/weui/example/toptips/toptips",
+    "page/weui/example/searchbar/searchbar",
+    "page/weui/example/emoji/emoji",
     "page/weui/example/video-swiper/video-swiper",
     "page/weui/example/index-list/index-list",
-    "page/weui/example/emoji/emoji",
     "page/weui/example/recycle-view/recycle-view",
     "page/weui/example/sticky/sticky",
     "page/weui/example/tabs/tabs",
-    "page/weui/example/barrage/barrage",
-    "page/weui/example/wxml-to-canvas/wxml-to-canvas",
-    "page/weui/example/toptips/toptips",
-    "page/component/pages/aria-component/aria-component",
     "page/weui/example/vtabs/vtabs",
-    "page/component/pages/live-pusher/live-pusher",
-    "page/component/pages/live-player/live-player",
-    "page/component/pages/picker-view/picker-view",
-    "page/component/pages/camera/camera",
-    "page/component/pages/camera-scan-code/camera-scan-code",
-    "page/component/pages/open-data/open-data",
-    "page/component/pages/web-view/web-view",
-    "page/weui/example/tabs/webview",
-    "page/component/pages/functional-page-navigator/functional-page-navigator",
-    "page/component/pages/official-account/official-account"
+    "page/weui/example/select-text/select-text",
+    "page/weui/example/barrage/barrage",
+    "page/weui/example/wxml-to-canvas/wxml-to-canvas"
   ],
   "subpackages": [
     {
@@ -157,60 +139,87 @@
         "pages/setting/setting",
         "pages/choose-invoice-title/choose-invoice-title",
         "pages/soter-authentication/soter-authentication",
-        "pages/mdns/mdns",
-        "pages/get-performance/get-performance",
+        "pages/subscribe-message/subscribe-message",
+        "pages/doc-web-view/doc-web-view",
+        "pages/audio/audio",
         "pages/get-battery-info/get-battery-info",
-        "pages/bluetooth/slave/slave",
+        "pages/get-performance/get-performance",
+        "pages/mdns/mdns",
         "pages/udp-socket/udp-socket",
+        "pages/two-way-bindings/two-way-bindings",
+        "pages/media-container/media-container",
         "pages/get-background-fetch-data/get-background-fetch-data",
         "pages/get-background-prefetch-data/get-background-prefetch-data",
-        "pages/two-way-bindings/two-way-bindings",
         "pages/wxs/wxs",
-        "pages/wxs/movable",
-        "pages/wxs/nearby",
-        "pages/wxs/stick-top",
-        "pages/wxs/sidebar",
-        "pages/doc-web-view/doc-web-view",
+        "pages/bluetooth/slave/slave",
         "pages/resizable/resizable",
-        "pages/media-container/media-container",
-        "pages/audio/audio"
+        "pages/wxs/movable",
+        "pages/wxs/sidebar",
+        "pages/wxs/stick-top",
+        "pages/wxs/nearby"
+      ]
+    },
+    {
+      "root": "packageCloud",
+      "pages": [
+        "pages/doc-web-view/doc-web-view",
+        "pages/user-authentication/user-authentication",
+        "pages/get-wx-context/get-wx-context",
+        "pages/upload-file/upload-file",
+        "pages/download-file/download-file",
+        "pages/get-temp-file-url/get-temp-file-url",
+        "pages/delete-file/delete-file",
+        "pages/cloud-file-component/cloud-file-component",
+        "pages/crud/crud",
+        "pages/crud-detail/crud-detail",
+        "pages/db-permission/db-permission",
+        "pages/server-date/server-date",
+        "pages/scf-database/scf-database",
+        "pages/scf-storage/scf-storage",
+        "pages/scf-openapi/scf-openapi"
       ]
     }
   ],
+  "preloadRule": {
+    "page/component/index": {
+      "network": "all",
+      "packages": ["packageAPI", "packageCloud"]
+    }
+  },
   "window": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "@navigationBarTextStyle",
     "navigationBarTitleText": "演示",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarBackgroundColor": "@navigationBarBackgroundColor",
+    "backgroundColor": "@backgroundColor"
   },
   "tabBar": {
-    "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
+    "color": "@tabBarColor",
+    "selectedColor": "@tabBarSelectedColor",
+    "borderStyle": "@tabBarBorderStyle",
+    "backgroundColor": "@tabBarBackgroundColor",
     "list": [
       {
         "pagePath": "page/component/index",
-        "iconPath": "image/icon_component.png",
-        "selectedIconPath": "image/icon_component_HL.png",
+        "iconPath": "@iconPathComponent",
+        "selectedIconPath": "@selectedIconPathComponent",
         "text": "组件"
       },
       {
         "pagePath": "page/weui/example/index",
-        "iconPath": "image/icon_component.png",
-        "selectedIconPath": "image/icon_component_HL.png",
+        "iconPath": "@iconPathComponent",
+        "selectedIconPath": "@selectedIconPathComponent",
         "text": "扩展能力"
       },
       {
         "pagePath": "page/API/index",
-        "iconPath": "image/icon_API.png",
-        "selectedIconPath": "image/icon_API_HL.png",
+        "iconPath": "@iconPathAPI",
+        "selectedIconPath": "@selectedIconPathAPI",
         "text": "接口"
       },
       {
         "pagePath": "page/cloud/index",
-        "iconPath": "image/icon_cloud.png",
-        "selectedIconPath": "image/icon_cloud_HL.png",
+        "iconPath": "@iconPathCloud",
+        "selectedIconPath": "@selectedIconPathCloud",
         "text": "云开发"
       }
     ]
@@ -224,9 +233,6 @@
   "navigateToMiniProgramAppIdList": [
     "wx4f1b24bdc99fa23b"
   ],
-  "functionalPages": {
-    "independent": true
-  },
   "workers": "workers",
   "debug": false,
   "style": "v2",
@@ -236,5 +242,7 @@
     }
   },
   "cloud": true,
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "themeLocation": "demo.theme.json",
+  "darkmode": true
 }

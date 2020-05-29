@@ -6,7 +6,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '网络请求',
-      path: 'page/API/pages/request/request'
+      path: 'packageAPI/pages/request/request'
     }
   },
 

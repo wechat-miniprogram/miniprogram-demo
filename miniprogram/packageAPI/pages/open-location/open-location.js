@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '查看位置',
-      path: 'page/API/pages/open-location/open-location'
+      path: 'packageAPI/pages/open-location/open-location'
     }
   },
 

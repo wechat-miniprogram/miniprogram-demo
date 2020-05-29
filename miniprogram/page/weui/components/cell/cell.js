@@ -180,36 +180,34 @@ Component({
         inForm: false
     },
     methods: {
-        setError: function setError(error) {
+        setError(error) {
             this.setData({
                 error: error || false
             });
         },
-        setInForm: function setInForm() {
+        setInForm() {
             this.setData({
                 inForm: true
             });
         },
-        setOuterClass: function setOuterClass(className) {
+        setOuterClass(className) {
             this.setData({
                 outerClass: className
             });
         },
         navigateTo: function navigateTo() {
-            var _this = this;
-
             var data = this.data;
             if (data.url && data.link) {
                 wx.navigateTo({
-                    url: data.url,
-                    success: function success(res) {
-                        _this.triggerEvent('navigatesuccess', res, {});
-                    },
-                    fail: function fail(_fail) {
-                        _this.triggerEvent('navigateerror', _fail, {});
-                    }
+                  url: data.url,
+                  success: res => {
+                    this.triggerEvent('navigatesuccess', res, {});
+                  },
+                  fail: fail => {
+                    this.triggerEvent('navigateerror', fail, {});
+                  }
                 });
-            }
+              }
         }
     }
 });

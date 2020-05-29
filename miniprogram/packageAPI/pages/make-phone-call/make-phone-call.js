@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '打电话',
-      path: 'page/API/pages/make-phone-call/make-phone-call'
+      path: 'packageAPI/pages/make-phone-call/make-phone-call'
     }
   },
 

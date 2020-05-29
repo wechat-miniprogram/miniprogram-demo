@@ -1,5 +1,13 @@
-var base64 = require("../images/base64");
-Page({
+var base64 = require("../images/base64")
+import CustomPage from '../../base/CustomPage'
+
+CustomPage({
+  onShareAppMessage() {
+    return {
+      title: 'cell',
+      path: 'page/weui/example/cell/cell'
+    }
+  },
     onLoad: function(){
         this.setData({
             icon: base64.icon20,

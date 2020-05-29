@@ -128,38 +128,45 @@ Component({
     data: {
         innerShow: false
     },
-    ready: function ready() {
-        var buttons = this.data.buttons;
-        var len = buttons.length;
-        buttons.forEach(function (btn, index) {
-            if (len === 1) {
-                btn.className = 'weui-dialog__btn_primary';
-            } else if (index === 0) {
-                btn.className = 'weui-dialog__btn_default';
-            } else {
-                btn.className = 'weui-dialog__btn_primary';
-            }
+    ready() {
+        const buttons = this.data.buttons;
+        const len = buttons.length;
+        buttons.forEach((btn, index) => {
+          if (len === 1) {
+            btn.className = 'weui-dialog__btn_primary';
+          } else if (index === 0) {
+            btn.className = 'weui-dialog__btn_default';
+          } else {
+            btn.className = 'weui-dialog__btn_primary';
+          }
         });
         this.setData({
-            buttons: buttons
+          buttons
         });
-    },
+      },
 
     methods: {
-        buttonTap: function buttonTap(e) {
-            var index = e.currentTarget.dataset.index;
-
-            this.triggerEvent('buttontap', { index: index, item: this.data.buttons[index] }, {});
+        buttonTap(e) {
+					const {
+						index
+					} = e.currentTarget.dataset;
+					this.triggerEvent('buttontap', {
+						index,
+						item: this.data.buttons[index]
+					}, {});
         },
-        close: function close() {
-            var data = this.data;
-            if (!data.maskClosable) return;
-            this.setData({
-                show: false
-            });
-            this.triggerEvent('close', {}, {});
+      
+        close() {
+					const data = this.data;
+					if (!data.maskClosable) return;
+					this.setData({
+							show: false
+					});
+					this.triggerEvent('close', {}, {});
         },
-        stopEvent: function stopEvent() {}
+      
+        stopEvent() {}
+      
     }
 });
 

@@ -9,7 +9,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '背景音乐',
-      path: 'page/API/pages/background-audio/background-audio'
+      path: 'packageAPI/pages/background-audio/background-audio'
     }
   },
   onShow() {

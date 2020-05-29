@@ -1,4 +1,4 @@
-<view class="page">
+<view class="page" data-weui-theme="{{theme}}">
     <mp-msg title="操作提示的text">
         <view slot="desc">内容详情，可根据实际需要安排，如果换行则不超过规定长度，居中展现<navigator url="" class="weui-msg__link">文字链接</navigator></view>
         <view slot="extend">

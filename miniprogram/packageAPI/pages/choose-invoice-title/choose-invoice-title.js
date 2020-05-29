@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '获取发票抬头',
-      path: 'page/API/pages/choose-invoice-title/choose-invoice-title'
+      path: 'packageAPI/pages/choose-invoice-title/choose-invoice-title'
     }
   },
 

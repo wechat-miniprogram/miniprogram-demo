@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '新增联系人',
-      path: 'page/API/pages/add-contact/add-contact'
+      path: 'packageAPI/pages/add-contact/add-contact'
     }
   },
 

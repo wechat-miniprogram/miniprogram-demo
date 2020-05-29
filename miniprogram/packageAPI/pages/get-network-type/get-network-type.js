@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '获取手机网络状态',
-      path: 'page/API/pages/get-network-type/get-network-type'
+      path: 'packageAPI/pages/get-network-type/get-network-type'
     }
   },
 

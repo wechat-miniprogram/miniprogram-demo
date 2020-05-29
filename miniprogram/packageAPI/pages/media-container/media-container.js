@@ -1,12 +1,29 @@
 
 Page({
+  onShareAppMessage() {
+    return {
+      title: '音视频合成',
+      path: 'packageAPI/pages/media-container/media-container'
+    }
+  },
   onLoad() {
-    this.mediaContainer = wx.createMediaContainer()
+    const canIUse = wx.canIUse('wx.createMediaContainer()')
+    if(canIUse) {
+      this.mediaContainer = wx.createMediaContainer()
+    } else {
+      this.setData({
+        canIUse: false,
+      })
+      wx.showModal({
+        title: '微信版本过低，暂不支持本功能',
+      })
+    }
   },
   data: {
     targetSrc: '',
     one: '',
     two: '',
+    canIUse: true,
   },
   handleChooseVideo(e) {
     const that = this;

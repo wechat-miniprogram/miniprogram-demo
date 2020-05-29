@@ -9,7 +9,9 @@
         本机port: {{port}} 模拟远程port: {{remote_port}}
     </view>
     <view wx:if="{{!startUDP}}" class="btn-area">
-      <button type="primary" bind:tap="handleCreateUDPTap">
+      <button type="primary" 
+        disabled="{{!canIUse}}"
+      bind:tap="handleCreateUDPTap">
         开启 UDPSocket
       </button>
     </view>

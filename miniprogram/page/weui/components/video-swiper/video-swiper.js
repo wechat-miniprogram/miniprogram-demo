@@ -15,7 +15,7 @@ Component({
     },
     loop: {
       type: Boolean,
-      value: true
+      value: false,
     },
     videoList: {
       type: Array,
@@ -55,7 +55,7 @@ Component({
         this.setData({
           curQueue: data.nextQueue.splice(0, 3)
         }, function () {
-          _this.playCurrent(1)
+          _this.playCurrent(0)
         })
       }
     },
@@ -71,6 +71,7 @@ Component({
       this.triggerEvent('change', {activeId: curQueue[current].id})
       const direction = diff === 1 || diff === -2 ? 'up' : 'down'
       if (direction === 'up') {
+        console.log(this.data)
         if (this.data._invalidDown === 0) {
           const change = (_change + 1) % 3
           const add = nextQueue.shift()

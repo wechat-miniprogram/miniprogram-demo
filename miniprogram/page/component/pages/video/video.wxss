@@ -1,4 +1,7 @@
 @import "../../../common/lib/weui.wxss";
+video {
+  width: 690rpx;
+}
 
 .weui-cells{
   margin: 40rpx 30rpx 0;

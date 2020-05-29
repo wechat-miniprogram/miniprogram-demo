@@ -1,4 +1,4 @@
-<view class="page">
+<view class="page" data-weui-theme="{{theme}}">
     <view class="page__hd">
         <view class="page__title">Icons</view>
         <view class="page__desc">图标</view>
@@ -20,7 +20,7 @@
             <view class="weui-grids">
                 <block wx:for="{{iconList}}" wx:key="*this">
                     <navigator url="" class="weui-grid">
-                        <mp-icon type="field" icon="{{item.icon}}" color="{{item.color}}" size="{{item.size}}"></mp-icon>
+                        <mp-icon type="filled" icon="{{item.icon}}" color="{{item.color}}" size="{{item.size}}"></mp-icon>
                         <view class="weui-grid__label">{{item.icon}}</view>
                     </navigator>
                 </block>

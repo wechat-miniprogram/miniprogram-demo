@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: 'Wi-Fi',
-      path: 'page/API/pages/wifi/wifi'
+      path: 'packageAPI/pages/wifi/wifi'
     }
   },
 

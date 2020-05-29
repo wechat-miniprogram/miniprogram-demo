@@ -8,7 +8,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '录音',
-      path: 'page/API/pages/voice/voice'
+      path: 'packageAPI/pages/voice/voice'
     }
   },
   data: {

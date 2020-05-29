@@ -1,24 +1,28 @@
-const QQMapWX = require('./lib/qqmap-wx-jssdk.min.js')
-const QQMapKey = 'NDLBZ-4Y6KF-S2LJ6-NAOAA-BOW56-LMB44'
-const qqmapsdk = new QQMapWX({ key: QQMapKey })
 
+import CustomPage from '../../base/CustomPage'
 
-Page({
-
+CustomPage({
+  onShareAppMessage() {
+    return {
+      title: 'index-list',
+      path: 'page/weui/example/index-list/index-list'
+    }
+  },
   onLoad(options) {
     this.getCitys()
   },
 
-  onChoose(e) {
-    console.log('onChoose', e)
-  },
-
   getCitys() {
+    const db = wx.cloud.database({
+      env: 'release-b86096'
+    });
+    const mapCity = db.collection('mapCity');
     const _this = this
-    qqmapsdk.getCityList({
-      success(res) {
-        console.log(res);
-        const cities = res.result[1]
+
+    mapCity.doc('6af880a55eb9574b008b78aa53a48405').get({
+      success: function(re) {
+        console.log(re);
+        const cities = re.data.cities;
         // 按拼音排序
         cities.sort((c1, c2) => {
           let pinyin1 = c1.pinyin.join('')
@@ -49,7 +53,8 @@ Page({
 
         _this.setData({list})
       }
-    })     
+    })
+    
   }
 
 })

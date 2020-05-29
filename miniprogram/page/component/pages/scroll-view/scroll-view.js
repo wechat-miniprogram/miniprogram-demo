@@ -1,6 +1,7 @@
 const order = ['demo1', 'demo2', 'demo3']
 
 Page({
+ 
   onLoad() {
     this.animate('#scroll-sample-object1', [{
       borderRadius: '0',

@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '文件',
-      path: 'page/API/pages/file/file'
+      path: 'packageAPI/pages/file/file'
     }
   },
 

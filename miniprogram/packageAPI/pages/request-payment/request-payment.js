@@ -1,4 +1,3 @@
-const paymentUrl = require('../../../config').paymentUrl
 
 const app = getApp()
 
@@ -6,7 +5,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '发起支付',
-      path: 'page/API/pages/request-payment/request-payment'
+      path: 'packageAPI/pages/request-payment/request-payment'
     }
   },
 
@@ -23,26 +22,35 @@ Page({
     // 具体文档参考https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html?t=20161230#wxloginobject
     app.getUserOpenId(function (err, openid) {
       if (!err) {
-        wx.request({
-          url: paymentUrl,
+        wx.cloud.callFunction({
+          name: 'pay',
           data: {
-            openid
+            action: 'unifiedorder',
+            userInfo: {
+              openId: openid
+            },
+            price: 0.01
           },
-          method: 'POST',
-          success(res) {
-            console.log('unified order success, response is:', res)
-            const payargs = res.data.payargs
+          success: res => {
+            console.warn('[云函数] [openapi] templateMessage.send 调用成功：', res)
+            const data = res.result.data
             wx.requestPayment({
-              timeStamp: payargs.timeStamp,
-              nonceStr: payargs.nonceStr,
-              package: payargs.package,
-              signType: payargs.signType,
-              paySign: payargs.paySign
+              timeStamp: data.time_stamp,
+              nonceStr: data.nonce_str,
+              package: `prepay_id=${data.prepay_id}`,
+              signType: 'MD5',
+              paySign: data.sign,
+              success: () => {
+                wx.showToast({ title: '支付成功' });
+              }
+            });
+          },
+          fail: err => {
+            wx.showToast({
+              icon: 'none',
+              title: '支付失败',
             })
-
-            self.setData({
-              loading: false
-            })
+            console.error('[云函数] [openapi] templateMessage.send 调用失败：', err)
           }
         })
       } else {

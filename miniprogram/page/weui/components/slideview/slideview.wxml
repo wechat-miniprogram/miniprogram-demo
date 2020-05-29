@@ -12,7 +12,7 @@
     </view>
     <view class="weui-slideview__right right">
       <view class="weui-slideview__buttons" style="height:100%;width:100%;" wx:if="{{buttons && buttons.length}}">
-        <view wx:for="{{buttons}}" class='btn weui-slideview__btn__wrp {{item.className}} {{item.extClass}}'>
+        <view wx:for="{{buttons}}" wx:key="index" class='btn weui-slideview__btn__wrp {{item.className}} {{item.extClass}}'>
           <view bindtap="{{handler.hideButton}}" data-data="{{item.data}}" data-index="{{index}}" class='weui-slideview__btn'>
             <text wx:if="{{!icon}}">{{item.text}}</text>
             <image class="weui-slideview__btn__icon" wx:else src="{{item.src}}"/>

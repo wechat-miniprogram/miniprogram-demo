@@ -15,7 +15,7 @@
 }
 .index-desc {
   margin-top: 20rpx;
-  color: #888888;
+  color: var(--weui-FG-1);
   font-size: 28rpx;
 }
 
@@ -23,7 +23,7 @@
 .navigator-box {
   opacity: 0;
   position: relative;
-  background-color: #FFFFFF;
+  background-color: var(--weui-BG-2);
   line-height: 1.41176471;
   font-size: 34rpx;
 
@@ -47,8 +47,8 @@
   top: 0;
   right: 30rpx;
   height: 1px;
-  border-top: 1rpx solid #D8D8D8;
-  color: #D8D8D8;
+  border-top: 1rpx solid var(--weui-FG-3);
+  color: var(--weui-FG-3);
 }
 .navigator:first-child:before {
   display: none;
@@ -66,7 +66,7 @@
   height: 18rpx;
   width: 18rpx;
   border-width: 2rpx 2rpx 0 0;
-  border-color: #888888;
+  border-color: var(--weui-FG-2);
   border-style: solid;
   transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
   position: absolute;
@@ -78,7 +78,7 @@
 
 .kind-list-item {
   margin: 20rpx 0;
-  background-color: #FFFFFF;
+  background-color: var(--weui-BG-2);
   border-radius: 4rpx;
   overflow: hidden;
 }

@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: 'WXML节点布局相交状态',
-      path: 'page/API/pages/intersection-observer/intersection-observer'
+      path: 'packageAPI/pages/intersection-observer/intersection-observer'
     }
   },
 

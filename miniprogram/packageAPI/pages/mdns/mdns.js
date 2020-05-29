@@ -2,6 +2,12 @@
 let serviceList = [];
 let resolveFailList = [];
 Page({
+  onShareAppMessage() {
+    return {
+      title: 'mdns',
+      path: 'packageAPI/pages/mdns/mdns'
+    }
+  },
   daga: {
     serviceList: [],
     resolveFailList: [],

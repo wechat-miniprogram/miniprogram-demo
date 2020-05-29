@@ -1,0 +1,40 @@
+{
+  "light": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#F7F7F7",
+    "backgroundColor": "#F7F7F7",
+
+    "tabBarColor": "#7A7E83",
+    "tabBarSelectedColor": "#3cc51f",
+    "tabBarBorderStyle": "black",
+    "tabBarBackgroundColor": "#F7F7F7",
+
+    "iconPathComponent": "image/icon_component.png",
+    "selectedIconPathComponent": "image/icon_component_HL.png",
+    "iconPathAPI": "image/icon_API.png",
+    "selectedIconPathAPI": "image/icon_API_HL.png",
+    "iconPathCloud": "image/icon_cloud.png",
+    "selectedIconPathCloud": "image/icon_cloud_HL.png",
+
+    "backgroundTextStyle": "dark"
+  },
+  "dark": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#1F1F1F",
+    "backgroundColor": "#1F1F1F",
+
+    "tabBarColor": "#FFFFFFCC",
+    "tabBarSelectedColor": "#51A937",
+    "tabBarBorderStyle": "white",
+    "tabBarBackgroundColor": "#1F1F1F",
+
+    "iconPathComponent": "image/icon_component_dark.png",
+    "selectedIconPathComponent": "image/icon_component_HL.png",
+    "iconPathAPI": "image/icon_API_dark.png",
+    "selectedIconPathAPI": "image/icon_API_HL.png",
+    "iconPathCloud": "image/icon_cloud_dark.png",
+    "selectedIconPathCloud": "image/icon_cloud_HL.png",
+
+    "backgroundTextStyle": "light"
+  }
+}

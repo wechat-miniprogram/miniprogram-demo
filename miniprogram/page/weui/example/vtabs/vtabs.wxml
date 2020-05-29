@@ -1,3 +1,5 @@
+<view class="page" data-weui-theme="{{theme}}">
+
 <mp-vtabs 
   vtabs="{{vtabs}}" 
   activeTab="{{activeTab}}" 
@@ -21,3 +23,4 @@
   <view style="height: 1rpx;width: 100%"></view>
 
 </mp-vtabs>
+</view>

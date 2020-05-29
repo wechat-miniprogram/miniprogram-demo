@@ -19,7 +19,7 @@ Page({
   onShareAppMessage() {
     return {
       title: 'Web Socket',
-      path: 'page/API/pages/web-socket/web-socket'
+      path: 'packageAPI/pages/web-socket/web-socket'
     }
   },
 

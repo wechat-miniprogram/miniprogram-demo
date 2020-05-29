@@ -11,9 +11,9 @@
         <block wx:for="{{vtabs}}" wx:key="title">
           <view 
             id="weui-vtabs-item__{{index}}"
-            class="weui-vtabs-bar__item"
+            class="{{activeTab === index ? 'weui-vtabs-bar__activeitem' : ''}} weui-vtabs-bar__item"
             data-index="{{index}}"
-            style="background-color: {{activeTab === index ? tabBarActiveBgColor : tabBarInactiveBgColor}}; color: {{activeTab === index ? tabBarActiveTextColor : tabBarInactiveTextColor}}; border-left-color: {{activeTab === index ? tabBarLineColor : tabBarInactiveBgColor}}"
+
             bindtap="handleTabClick"
           >
             <view class="weui-vtabs-bar__title {{activeTab === index ? activeClass : ''}}">
@@ -38,3 +38,5 @@
     </scroll-view>
   </view>
 </view>
+<!-- 
+            style="background-color: {{activeTab === index ? tabBarActiveBgColor : tabBarInactiveBgColor}}; color: {{activeTab === index ? tabBarActiveTextColor : tabBarInactiveTextColor}}; border-left-color: {{activeTab === index ? tabBarLineColor : tabBarInactiveBgColor}}" -->

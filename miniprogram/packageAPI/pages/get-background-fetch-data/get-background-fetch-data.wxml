@@ -6,23 +6,25 @@
 
   <view class="page-body">
     <view class="page-section">
-      <view class="page-body-info">
-        <view class="page-body-title">周期性缓存数据</view>
-        <block wx:if="{{appid}}">
-          <block>
-            <text class="page-body-text">OpenID</text>
-            <text class="context-value">{{openid}}</text>
+      <block wx:if="{{canIUse}}">
+        <view class="page-body-info">
+          <view class="page-body-title">周期性缓存数据</view>
+          <block wx:if="{{appid}}">
+            <block>
+              <text class="page-body-text">OpenID</text>
+              <text class="context-value">{{openid}}</text>
+            </block>
+            <block>
+              <text class="page-body-text">AppID</text>
+              <text class="context-value">{{appid}}</text>
+            </block>
           </block>
           <block>
-            <text class="page-body-text">AppID</text>
-            <text class="context-value">{{appid}}</text>
+            <text class="page-body-text">微信客户端每隔 12 个小时才会发起一次请求</text>
+            <text class="page-body-text">为了方便调试周期性数据，可以在 工具 -> 拉取周期性缓存数据 开启</text>
           </block>
-        </block>
-        <block>
-          <text class="page-body-text">微信客户端每隔 12 个小时才会发起一次请求</text>
-          <text class="page-body-text">为了方便调试周期性数据，可以在 工具 -> 拉取周期性缓存数据 开启</text>
-        </block>
-      </view>
+        </view>
+      </block>
     </view>
   </view>
   <template is="foot" />

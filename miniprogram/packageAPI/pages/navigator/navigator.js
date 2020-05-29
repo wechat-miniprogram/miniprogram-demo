@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '页面跳转',
-      path: 'page/API/pages/navigator/navigator'
+      path: 'packageAPI/pages/navigator/navigator'
     }
   },
 

@@ -1,4 +1,4 @@
-<view class="page">
+<view class="page" data-weui-theme="{{theme}}">
     <view class="page__hd">
         <view class="page__title">Cell</view>
         <view class="page__desc">列表</view>
@@ -25,13 +25,11 @@
         </mp-cells>
 
         <mp-cells title="带跳转的列表项">
-            <mp-cell link hover value="有hover效果" footer="说明文字">
+            <mp-cell hover value="有hover效果，无跳转URL" footer="说明文字">
                 <image slot="title" src="{{icon}}" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
             </mp-cell>
-            <mp-cell link value="无hover效果" footer="说明文字">
-                <image slot="icon" src="{{icon}}" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
-            </mp-cell>
-            <mp-cell link url="../index" value="无hover效果，带跳转URL" footer="说明文字">
+           
+            <mp-cell link url="./cell" value="有跳转URL" footer="说明文字">
                 <image slot="icon" src="{{icon}}" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
             </mp-cell>
         </mp-cells>

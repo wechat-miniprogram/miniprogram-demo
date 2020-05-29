@@ -1,4 +1,12 @@
-Page({
+import CustomPage from '../../base/CustomPage'
+
+CustomPage({
+  onShareAppMessage() {
+    return {
+      title: 'select-text',
+      path: 'page/weui/example/select-text/select-text'
+    }
+  },
   data: {
     arr: [{
       value: '长按，上侧复制',

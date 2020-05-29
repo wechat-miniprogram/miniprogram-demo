@@ -145,62 +145,78 @@ Component({
         }
     },
     methods: {
-        clearInput: function clearInput() {
-            this.setData({
-                value: ''
-            });
-            this.triggerEvent('clear');
-        },
-        inputFocus: function inputFocus(e) {
-            this.triggerEvent('focus', e.detail);
-        },
-        inputBlur: function inputBlur(e) {
-            this.setData({
-                focus: false
-            });
-            this.triggerEvent('blur', e.detail);
-        },
-        showInput: function showInput() {
-            this.setData({
-                focus: true,
-                searchState: true
-            });
-        },
-        hideInput: function hideInput() {
-            this.setData({
-                searchState: false
-            });
-        },
-        inputChange: function inputChange(e) {
-            var _this = this;
+        clearInput() {
+					// @ts-ignore
+					this.setData({
+						value: '',
+						focus: true,
+						result: []
+					}); // @ts-ignore
+		
+					this.triggerEvent('clear');
+				},
+        inputFocus(e) {
+					// this.setData({
+					//     searchState: true
+					// })
+					// @ts-ignore
+					this.triggerEvent('focus', e.detail);
+				},
+        inputBlur(e) {
+					this.setData({
+						focus: false
+					});
+					this.triggerEvent('blur', e.detail);
+				},
+				showInput() {
+					this.setData({
+						focus: true,
+						searchState: true
+					});
+				},
+		
+				hideInput() {
+					this.setData({
+						searchState: false
+					});
+				},
+		
+         // @ts-ignore
+				inputChange(e) {
+					this.setData({
+						value: e.detail.value
+					});
+					this.triggerEvent('input', e.detail);
 
-            this.setData({
-                value: e.detail.value
-            });
-            this.triggerEvent('input', e.detail);
-            if (Date.now() - this.lastSearch < this.data.throttle) {
-                return;
-            }
-            if (typeof this.data.search !== 'function') {
-                return;
-            }
-            this.lastSearch = Date.now();
-            this.timerId = setTimeout(function () {
-                _this.data.search(e.detail.value).then(function (json) {
-                    _this.setData({
-                        result: json
-                    });
-                }).catch(function (err) {
-                    console.log('search error', err);
-                });
-            }, this.data.throttle);
-        },
-        selectResult: function selectResult(e) {
-            var index = e.currentTarget.dataset.index;
+					if (Date.now() - this.lastSearch < this.data.throttle) {
+						return;
+					}
 
-            var item = this.data.result[index];
-            this.triggerEvent('selectresult', { index: index, item: item });
-        }
+					if (typeof this.data.search !== 'function') {
+						return;
+					}
+
+					this.lastSearch = Date.now();
+					this.timerId = setTimeout(() => {
+						this.data.search(e.detail.value).then(json => {
+							this.setData({
+								result: json
+							});
+						}).catch(err => {
+							console.error('search error', err);
+						});
+					}, this.data.throttle);
+				},
+				selectResult(e) {
+					const {
+						index
+					} = e.currentTarget.dataset;
+					const item = this.data.result[index];
+					this.triggerEvent('selectresult', {
+						index,
+						item
+					});
+				}
     }
 });
 

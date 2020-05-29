@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '操作菜单',
-      path: 'page/API/pages/action-sheet/action-sheet'
+      path: 'packageAPI/pages/action-sheet/action-sheet'
     }
   },
 

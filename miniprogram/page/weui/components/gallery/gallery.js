@@ -129,39 +129,50 @@ Component({
     data: {
         currentImgs: []
     },
-    ready: function ready() {
-        var data = this.data;
-        this.setData({ currentImgs: data.imgUrls });
-    },
+    ready() {
+        const data = this.data;
+        this.setData({
+          currentImgs: data.imgUrls
+        });
+      },
 
     methods: {
-        change: function change(e) {
+        change(e) {
             this.setData({
-                current: e.detail.current
+              current: e.detail.current
             });
-            this.triggerEvent('change', { current: e.detail.current }, {});
+            this.triggerEvent('change', {
+              current: e.detail.current
+            }, {});
         },
-        deleteImg: function deleteImg() {
-            var data = this.data;
-            var imgs = data.currentImgs;
-            var url = imgs.splice(data.current, 1);
-            this.triggerEvent('delete', { url: url[0], index: data.current }, {});
+        deleteImg() {
+            const data = this.data;
+            const imgs = data.currentImgs;
+            const url = imgs.splice(data.current, 1);
+            this.triggerEvent('delete', {
+              url: url[0],
+              index: data.current
+            }, {});
+      
             if (imgs.length === 0) {
-                this.hideGallery();
-                return;
+              // @ts-ignore
+              this.hideGallery();
+              return;
             }
+      
             this.setData({
-                current: 0,
-                currentImgs: imgs
+              current: 0,
+              currentImgs: imgs
             });
-        },
-        hideGallery: function hideGallery() {
-            var data = this.data;
+          },
+        hideGallery() {
+            const data = this.data;
+      
             if (data.hideOnClick) {
-                this.setData({
-                    show: false
-                });
-                this.triggerEvent('hide', {}, {});
+              this.setData({
+                show: false
+              });
+              this.triggerEvent('hide', {}, {});
             }
         }
     }

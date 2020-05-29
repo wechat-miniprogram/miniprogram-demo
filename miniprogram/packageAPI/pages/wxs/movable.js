@@ -1,6 +1,11 @@
 // pages/movable/movable.js
 Page({
-
+  onShareAppMessage() {
+    return {
+      title: 'movable',
+      path: 'packageAPI/pages/wxs/movable'
+    }
+  },
   /**
    * 页面的初始数据
    */

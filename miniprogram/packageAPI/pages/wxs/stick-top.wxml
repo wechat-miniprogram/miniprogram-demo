@@ -1,5 +1,5 @@
 <wxs module="test" src="./stick-top.wxs"></wxs>
-<scroll-view bindscroll="{{test.funcA}}" style='height:{{height}}px;' scroll-y>
+<scroll-view bindscroll="{{theme=== 'dark' ? test.funcD :test.funcA}}" style='height:{{height}}px;' scroll-y>
   <view class="page-banner">
     <image class="image" src="http://mmbiz.qpic.cn/mmbiz_jpg/TcDuyasB5T3Eg34AYwjMw7xbEK2n01ekiaicPiaMInEMTkOQtuv1yke5KziaYF4MLia4IAbxlm0m5NxkibicFg4IZ92EA/0?wx_fmt=jpeg" style='width:100%;height:200px' mode="aspectFit"></image>
   </view>

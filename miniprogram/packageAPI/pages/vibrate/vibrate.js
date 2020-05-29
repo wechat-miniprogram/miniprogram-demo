@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '振动',
-      path: 'page/API/pages/vibrate/vibrate'
+      path: 'packageAPI/pages/vibrate/vibrate'
     }
   },
 

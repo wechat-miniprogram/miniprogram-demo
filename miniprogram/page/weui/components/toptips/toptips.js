@@ -36,39 +36,38 @@ Component({
     }
   },
   lifetimes: {
-    attached: function attached() {
-      const data = this.data
+    attached() {
+      const data = this.data;
       this.setData({
         className: data.typeClassMap[data.type] || ''
-      })
+      });
     },
   },
 
   methods: {
-    _typeChange: function _typeChange(newVal) {
+    _typeChange(newVal) {
       this.setData({
         className: this.data.typeClassMap[newVal] || ''
-      })
-      return newVal
+      });
+      return newVal;
     },
-    _showChange: function _showChange(newVal) {
-      this._showToptips(newVal)
+    _showChange(newVal) {
+      this._showToptips(newVal);
     },
-    _showToptips: function _showToptips(newVal) {
-      const _this = this
-
+    _showToptips(newVal) {
       if (newVal && this.data.delay) {
-        setTimeout(function () {
-          _this.setData({
+        setTimeout(() => {
+          this.setData({
             show: false
-          }, function () {
-            _this.triggerEvent('hide', {}, {})
-          })
-        }, this.data.delay)
+          }, () => {
+            // tooltips 隐藏了，触发 hide 事件
+            this.triggerEvent('hide', {}, {});
+          });
+        }, this.data.delay);
       }
       this.setData({
         show: newVal
-      })
+      });
     }
   }
 })

@@ -1,7 +1,15 @@
 const { wxml, style } = require('./demo.js')
 Page({
+  onShareAppMessage() {
+    return {
+      title: 'wxml-to-canvas',
+      path: 'page/weui/example/wxml-to-canvas/wxml-to-canvas'
+    }
+  },
   data: {
-    src: ''
+    src: '',
+    wxmlTemplate:  wxml('your_img_url'),
+    showCanvas: false,
   },
   onLoad() {
     this.widget = this.selectComponent('.widget')
@@ -17,6 +25,7 @@ Page({
     })
   },
   renderToCanvas() {
+    console.log(wxml(this.url))
     const p1 = this.widget.renderToCanvas({ wxml: wxml(this.url), style })
     p1.then((re) => {
       console.log('container', re.layoutBox)

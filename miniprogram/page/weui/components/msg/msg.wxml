@@ -1,8 +1,7 @@
 <view class="weui-msg {{extClass}}">
   <view class="weui-msg__icon-area">
     <icon type="{{type}}" size="{{size}}" wx:if="{{type}}"></icon>
-    <image src="{{icon}}" mode="aspectFit" wx:elif="{{icon}}" />
-  </view>
+    <image class="weui-msg__icon-img" src="{{icon}}" mode="aspectFit" wx:elif="{{icon}}" />  </view>
   <view class="weui-msg__text-area">
     <view class="weui-msg__title">{{title}}</view>
     <view class="weui-msg__desc">
@@ -14,6 +13,11 @@
   <view class="weui-msg__opr-area">
     <view class="weui-btn-area">
       <slot name="handle"></slot>
+    </view>
+  </view>
+  <view class="weui-msg__tips-area">
+    <view class="weui-msg__tips">
+      <slot name="tips"></slot>
     </view>
   </view>
   <view class="weui-msg__extra-area">

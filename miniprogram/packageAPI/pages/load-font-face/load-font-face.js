@@ -2,7 +2,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '动态加载字体',
-      path: 'page/API/pages/load-font-face/load-font-face'
+      path: 'packageAPI/pages/load-font-face/load-font-face'
     }
   },
 
