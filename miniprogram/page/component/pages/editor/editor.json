@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "editor"
+  "navigationBarTitleText": "editor",
+  "disableScroll": true
 }

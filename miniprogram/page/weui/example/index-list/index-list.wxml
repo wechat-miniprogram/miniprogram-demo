@@ -1,0 +1,13 @@
+<view class="page" data-weui-theme="{{theme}}">
+
+<mp-indexList class="city__list" list="{{list}}">
+    <view class="page">
+        <view class="page__hd">
+            <view class="page__title">Index List</view>
+            <view class="page__desc">类通讯录列表</view>
+        </view>
+        <view class="page__bd">
+        </view>
+    </view>
+</mp-indexList>
+</view>

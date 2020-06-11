@@ -105,26 +105,28 @@ Component({
         show: {
             type: Boolean,
             value: true,
-            observer: function observer(newValue) {
+            observer(newValue) {
                 this._computedStyle(newValue, this.data.animated);
             }
         },
         animated: {
             type: Boolean,
             value: false,
-            observer: function observer(newValue) {
+            observer(newValue) {
                 this._computedStyle(this.data.show, newValue);
             }
         },
         duration: {
+            // 过渡动画时间
             type: Number,
             value: 350
         },
         type: {
             type: String,
-            value: 'dot-gray'
+            value: 'dot-gray' // 取值dot-white、dot-gray、circle
         },
         tips: {
+            // type是circle的时候才有效
             type: String,
             value: '加载中'
         }
@@ -135,45 +137,49 @@ Component({
         displayStyle: 'none'
     },
     methods: {
-        _computedStyle: function _computedStyle(show, animated) {
-            if (!show) {
-                if (!animated) {
-                    this.setData({
-                        displayStyle: 'none'
-                    });
-                } else {
-                    this._startAnimation();
-                }
+        _computedStyle(show, animated) {
+          if (!show) {
+            if (!animated) {
+              this.setData({
+                displayStyle: 'none'
+              });
             } else {
-                this.setData({
-                    displayStyle: ''
-                });
+              this._startAnimation();
             }
-        },
-        _startAnimation: function _startAnimation() {
-            var _this = this;
-
-            setTimeout(function () {
-                var data = _this.data;
-                var animation = data.animationInstance;
-                animation.height(0).step();
-                _this.setData({
-                    animationData: animation.export()
-                });
-            }, 0);
-        }
-    },
-    lifetimes: {
-        attached: function attached() {
-            var data = this.data;
-            var animationInstance = wx.createAnimation({
-                duration: data.duration,
-                timingFunction: 'ease'
+          } else {
+            this.setData({
+              displayStyle: ''
             });
-            this.setData({ animationInstance: animationInstance });
-            this._computedStyle(this.data.show, this.data.animated);
+          }
+        },
+    
+        _startAnimation() {
+          setTimeout(() => {
+            const data = this.data;
+            const animation = data.animationInstance;
+            animation.height(0).step();
+            this.setData({
+              animationData: animation.export()
+            });
+          }, 0);
         }
-    }
+    
+      },
+      lifetimes: {
+        attached() {
+          const data = this.data;
+          const animationInstance = wx.createAnimation({
+            duration: data.duration,
+            timingFunction: 'ease'
+          });
+          this.setData({
+            animationInstance
+          });
+    
+          this._computedStyle(this.data.show, this.data.animated);
+        }
+    
+      }
 });
 
 /***/ })

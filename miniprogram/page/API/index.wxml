@@ -10,12 +10,13 @@
         <view class="kind-list-item">
           <view id="{{item.id}}" class="kind-list-item-hd {{item.open ? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
             <view class="kind-list-text">{{item.name}}</view>
-            <image class="kind-list-img" src="resources/kind/{{item.id}}.png"></image>
+            <image wx:if="{{theme === 'dark'}}" class="kind-list-img" src="resources/kind/{{item.id}}_dark.png"></image>
+            <image wx:else class="kind-list-img" src="resources/kind/{{item.id}}.png"></image>
           </view>
           <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
               <block wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="*item">
-                <navigator url="pages/{{page.url}}" class="navigator" wx:if="{{page.url !== '@set-tab-bar'}}">
+                <navigator url="../../packageAPI/pages/{{page.url}}" class="navigator" wx:if="{{page.url !== '@set-tab-bar'}}">
                   <view class="navigator-text">{{page.zh}}</view>
                   <view class="navigator-arrow"></view>
                 </navigator>

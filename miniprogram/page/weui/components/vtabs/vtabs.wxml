@@ -1,0 +1,42 @@
+
+
+<view class="weui-vtabs">
+  <view class="weui-vtabs-bar__wrp {{tabBarClass}}">
+    <scroll-view 
+      scroll-y
+      class="weui-vtabs-bar__scrollview"
+      scroll-into-view="weui-vtabs-item__{{currentView}}"
+    >
+      <view class="weui-vtabs-bar__content">
+        <block wx:for="{{vtabs}}" wx:key="title">
+          <view 
+            id="weui-vtabs-item__{{index}}"
+            class="{{activeTab === index ? 'weui-vtabs-bar__activeitem' : ''}} weui-vtabs-bar__item"
+            data-index="{{index}}"
+
+            bindtap="handleTabClick"
+          >
+            <view class="weui-vtabs-bar__title {{activeTab === index ? activeClass : ''}}">
+              <text class="">{{item.title}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="weui-vtabs-content__wrp">
+    <scroll-view 
+      scroll-y
+      class="weui-vtabs-content__scrollview" 
+      scroll-top="{{contentScrollTop}}"
+      scroll-with-animation="{{animation}}"
+      bindscroll="handleContentScroll"
+    >
+      <view class="weui-vtabs-content">
+        <slot ></slot>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<!-- 
+            style="background-color: {{activeTab === index ? tabBarActiveBgColor : tabBarInactiveBgColor}}; color: {{activeTab === index ? tabBarActiveTextColor : tabBarInactiveTextColor}}; border-left-color: {{activeTab === index ? tabBarLineColor : tabBarInactiveBgColor}}" -->

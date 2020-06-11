@@ -5,7 +5,7 @@
   <template is="head" data="{{title: 'map'}}"/>
 
   <view class="page-body">
-    <view class="page-section-title">当前组件使用了墨渊底图样式，查看<navigator class="navigator" url="/page/component/pages/map-styles/map-styles">更多样式</navigator>。</view>
+    <view class="page-section-title">当前组件使用了墨渊底图样式，查看<navigator class="navigator" url="/page/component/pages/map-styles/map-styles">查看更多</navigator>。</view>
     <view class="page-section page-section-gap">
       <map
         subkey="{{subKey}}"

@@ -1,9 +1,23 @@
 @import "../../../common/lib/weui.wxss";
+video {
+  width: 690rpx;
+}
 
 .weui-cells{
-  margin-top: 80rpx;
+  margin: 40rpx 30rpx 0;
   text-align: left;
 }
 .weui-label{
   width: 5em;
+}
+.auto-rotate-container {
+  margin: 40rpx 40rpx 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.video-container {
+  margin: 12rpx 6rpx;
+  display: flex;
+  justify-content: center;
 }

@@ -4,5 +4,4 @@ textarea {
 }
 .textarea-wrp {
     padding: 0 25rpx;
-    background-color: #fff;
 }

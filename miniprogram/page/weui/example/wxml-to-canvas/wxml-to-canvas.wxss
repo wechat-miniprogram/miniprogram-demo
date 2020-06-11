@@ -1,0 +1,14 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  /* height: 100%; */
+  align-items: center;
+}
+.scroll-view-wxml {
+  background-color: var(--weui-BG-2);
+  margin: 10rpx;
+  border: 1rpx solid #1AAD19;
+  white-space: pre;
+  box-sizing: border-box;
+  padding: 10rpx 30rpx;
+}

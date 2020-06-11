@@ -11,9 +11,7 @@
       </view>
     </block>
   <view class="weui-form__control-area">
-    <view class="weui-cells__group weui-cells__group_form">
-        <slot></slot>
-    </view>
+    <slot></slot>
   </view>
   <view class="weui-form__tips-area">
     <slot name="tips"></slot>

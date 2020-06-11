@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "mp-toptips": "../../components/toptips/toptips"
+  },
+  "navigationBarTitleText": "toptips"
+
+
+}

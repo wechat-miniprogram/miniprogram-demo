@@ -1,9 +1,13 @@
+@import "./page/common/lib/weui.wxss";
+
+
 /* reset */
 page {
-  background-color: #F8F8F8;
+  background-color: var(--weui-BG-1);
   height: 100%;
   font-size: 32rpx;
   line-height: 1.6;
+  color: var(--weui-FG-0);
 }
 checkbox, radio{
   margin-right: 10rpx;
@@ -40,21 +44,20 @@ input {
   padding: 60rpx 50rpx 80rpx;
   text-align: center;
 }
-.page-head-title{
+.page-head-title {
   display: inline-block;
   padding: 0 40rpx 20rpx 40rpx;
   font-size: 32rpx;
-  color: #BEBEBE;
 }
 .page-head-line{
   margin: 0 auto;
   width: 150rpx;
   height: 2rpx;
-  background-color: #D8D8D8;
+  background-color: var(--weui-FG-1);
 }
 .page-head-desc{
   padding-top: 20rpx;
-  color: #9B9B9B;
+  color: var(--weui-FG-1);
   font-size: 32rpx;
 }
 
@@ -77,7 +80,7 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--weui-BG-2);
   width: 100%;
   padding: 50rpx 0 150rpx 0;
 }
@@ -88,16 +91,19 @@ input {
 .page-body-text {
   font-size: 30rpx;
   line-height: 26px;
-  color: #ccc;
+  color: var(--weui-FG-2);
 }
 .page-body-text-small {
   font-size: 24rpx;
-  color: #000;
+  color: var(--weui-FG-0);
   margin-bottom: 100rpx;
 }
 
 .page-foot{
-  margin: 100rpx 0 30rpx 0;
+  margin: 100rpx 0 0 0;
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+  padding-bottom: 30rpx;
   text-align: center;
   color: #1aad19;
   font-size: 0;
@@ -129,7 +135,7 @@ input {
 }
 .page-section-title{
   font-size: 28rpx;
-  color: #999999;
+  color: var(--weui-FG-1);
   margin-bottom: 10rpx;
   padding-left: 30rpx;
   padding-right: 30rpx;
@@ -153,21 +159,21 @@ input {
 .image-plus {
   width: 150rpx;
   height: 150rpx;
-  border: 2rpx solid #D9D9D9;
+  border: 2rpx solid var(--weui-FG-1);
   position: relative;
 }
 .image-plus-nb{
   border: 0;
 }
 .image-plus-text{
-  color: #888888;
+  color: var(--weui-FG-2);
   font-size: 28rpx;
 }
 .image-plus-horizontal {
   position: absolute;
   top: 50%;
   left: 50%;
-  background-color: #d9d9d9;
+  background-color: var(--weui-FG-1);
   width: 4rpx;
   height: 80rpx;
   transform: translate(-50%, -50%);
@@ -176,7 +182,7 @@ input {
   position: absolute;
   top: 50%;
   left: 50%;
-  background-color: #d9d9d9;
+  background-color: var(--weui-FG-1);
   width: 80rpx;
   height: 4rpx;
   transform: translate(-50%, -50%);

@@ -1,4 +1,10 @@
 Component({
+    onShareAppMessage() {
+        return {
+          title: 'input',
+          path: 'page/weui/example/input/input'
+        }
+      },
     data: {
         showTopTips: false,
 

@@ -1,0 +1,10 @@
+<view class="page">
+  <view>WXML</view>
+  <scroll-view scroll-y scroll-x class="scroll-view-wxml" >{{wxmlTemplate}}</scroll-view>
+  <button type="primary" bindtap="renderToCanvas">渲染到canvas</button>
+  <button type="primary" bindtap="extraImage">导出图片</button>
+  <view style="margin: 10rpx">canvas</view>
+  <wxml-to-canvas class="widget" height="200" width="200" ></wxml-to-canvas>
+  <view style="margin: 10rpx">图片</view>
+  <image wx:id="{{src}}" src="{{src}}" style="width: {{width}}px; height: {{height}}px"></image>
+</view>

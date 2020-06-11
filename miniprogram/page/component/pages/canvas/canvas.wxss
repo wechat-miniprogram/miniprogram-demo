@@ -1,5 +1,8 @@
+@import '../../../common//lib/weui.wxss';
+
 .canvas {
   width: 305px;
   height: 305px;
-  background-color: #fff;
+  background-color: var(--weui-BG-1);
+  margin-top: 60rpx;
 }

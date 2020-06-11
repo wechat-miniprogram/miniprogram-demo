@@ -142,21 +142,27 @@ Component({
         }
     },
     methods: {
-        close: function close(e) {
-            var type = e.currentTarget.dataset.type;
-
-            if (this.data.maskClosable || type === 'close') {
-                this.setData({
-                    show: false
-                });
-                this.triggerEvent('close');
-            }
+        close(e) {
+          const {
+          	type
+        	} = e.currentTarget.dataset;
+					if (this.data.maskClosable || type === 'close') {
+						this.setData({
+								show: false
+						}); // 关闭弹窗回调事件
+						this.triggerEvent('close');
+					}
         },
-        buttonTap: function buttonTap(e) {
-            var index = e.currentTarget.dataset.index;
-
-            this.triggerEvent('buttontap', { index: index, item: this.data.buttons[index] }, {});
-        }
+      
+				buttonTap(e) {
+					const {
+						index
+					} = e.currentTarget.dataset;
+					this.triggerEvent('buttontap', {
+						index,
+						item: this.data.buttons[index]
+					}, {});
+				}
     }
 });
 

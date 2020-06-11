@@ -1,0 +1,61 @@
+.barrage-area {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+.barrage-tunnel {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-top: 1px dashed #CCB24D;
+  width: 100%;
+}
+
+.tunnel-tips {
+  display: inline-block;
+  margin-left: 10px;
+  color: #CCB24D;
+}
+
+.bullet-item {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 100%;
+  white-space: nowrap;
+}
+
+.bullet-item.paused {
+  background: #000;
+  opacity: 0.6;
+  padding: 0 10px;
+  z-index: 1001;
+}
+
+.bullet-item_img {
+  max-height: 100%;
+  display: inline-block;
+}
+
+.bullet-item_text {
+  display: inline-block;
+  margin: 0;
+}
+
+.bullet-move {
+  animation: 0s linear slidein
+}
+
+@keyframes slidein {
+  0% {
+    transform: translate3d(0, 0, 0)
+  }
+  100% {
+   transform: translate3d(-2000px, 0, 0)
+  }
+}

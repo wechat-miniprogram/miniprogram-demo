@@ -3,5 +3,7 @@
     "mp-cells": "../../components/cells/cells",
     "mp-cell": "../../components/cell/cell",
     "mp-badge": "../../components/badge/badge"
-  }
+  },
+  "navigationBarTitleText": "badge"
+
 }

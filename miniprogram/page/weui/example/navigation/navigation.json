@@ -2,5 +2,7 @@
     "usingComponents": {
         "mp-navigation-bar": "../../components/navigation-bar/navigation-bar"
     },
-    "navigationStyle": "custom"
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "navigation"
+
 }

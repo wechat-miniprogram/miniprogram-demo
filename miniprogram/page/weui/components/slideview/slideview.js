@@ -104,11 +104,13 @@ Component({
             value: ''
         },
         buttons: {
-            type: Array,
-            value: [],
-            observer: function observer(newVal) {
-                this.addClassNameForButton();
-            }
+					type: Array,
+					value: [],
+					// type, data, text, src, extClass
+					observer() {
+						this.addClassNameForButton();
+					}
+		
         },
         disable: {
             type: Boolean,
@@ -138,65 +140,64 @@ Component({
     data: {
         size: null
     },
-    ready: function ready() {
-        this.updateRight();
-        this.addClassNameForButton();
-    },
+    ready() {
+			// @ts-ignore
+			this.updateRight();
+			this.addClassNameForButton();
+		},
 
     methods: {
-        updateRight: function updateRight() {
-            var _this = this;
-
-            var data = this.data;
-            var query = wx.createSelectorQuery().in(this);
-            query.select('.left').boundingClientRect(function (res) {
-                console.log('right res', res);
-                var btnQuery = wx.createSelectorQuery().in(_this);
-                btnQuery.selectAll('.btn').boundingClientRect(function (rects) {
-                    console.log('btn rects', rects);
-                    _this.setData({
-                        size: {
-                            buttons: rects,
-                            button: res,
-                            show: data.show,
-                            disable: data.disable,
-                            throttle: data.throttle,
-                            rebounce: data.rebounce
-                        }
-                    });
-                }).exec();
-            }).exec();
-        },
-        addClassNameForButton: function addClassNameForButton() {
-            var _data = this.data,
-                buttons = _data.buttons,
-                icon = _data.icon;
-
-            buttons.forEach(function (btn) {
-                if (icon) {
-                    btn.className = '';
-                } else if (btn.type === 'warn') {
-                    btn.className = 'weui-slideview__btn-group_warn';
-                } else {
-                    btn.className = 'weui-slideview__btn-group_default';
-                }
-            });
-            this.setData({
-                buttons: buttons
-            });
-        },
-        buttonTapByWxs: function buttonTapByWxs(data) {
-            this.triggerEvent('buttontap', data, {});
-        },
-        hide: function hide() {
-            this.triggerEvent('hide', {}, {});
-        },
-        show: function show() {
-            this.triggerEvent('show', {}, {});
-        },
-        transitionEnd: function transitionEnd() {
-            console.log('transitiion end');
-        }
+			updateRight() {
+				// 获取右侧滑动显示区域的宽度
+				const data = this.data;
+				const query = wx.createSelectorQuery().in(this);
+				query.select('.left').boundingClientRect(res => {
+					const btnQuery = wx.createSelectorQuery().in(this);
+					btnQuery.selectAll('.btn').boundingClientRect(rects => {
+						this.setData({
+							size: {
+								buttons: rects,
+								button: res,
+								show: data.show,
+								disable: data.disable,
+								throttle: data.throttle,
+								rebounce: data.rebounce
+							}
+						});
+					}).exec();
+				}).exec();
+			},
+			addClassNameForButton() {
+				// @ts-ignore
+				const {
+					buttons,
+					icon
+				} = this.data;
+				buttons.forEach(btn => {
+					if (icon) {
+						btn.className = '';
+					} else if (btn.type === 'warn') {
+						btn.className = 'weui-slideview__btn-group_warn';
+					} else {
+						btn.className = 'weui-slideview__btn-group_default';
+					}
+				});
+				this.setData({
+					buttons
+				});
+			},
+			buttonTapByWxs(data) {
+				this.triggerEvent('buttontap', data, {});
+			},
+			hide() {
+				this.triggerEvent('hide', {}, {});
+			},
+			show() {
+				this.triggerEvent('show', {}, {});
+			},
+	
+			transitionEnd() {}
+	
     }
 });
 

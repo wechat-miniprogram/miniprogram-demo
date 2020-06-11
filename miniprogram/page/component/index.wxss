@@ -2,5 +2,5 @@
 
 .weui-agree__link {
   display: inline;
-  color: #586c94;
+  color: var(--weui-LINK);
 }

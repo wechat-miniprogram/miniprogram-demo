@@ -22,5 +22,10 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.0"
+  },
+  "dependencies": {
+    "miniprogram-barrage": "^1.1.0",
+    "miniprogram-recycle-view": "^0.1.5",
+    "wxml-to-canvas": "^1.1.1"
   }
 }

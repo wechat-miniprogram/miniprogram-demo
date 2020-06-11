@@ -1,0 +1,14 @@
+.image {
+  width: 100%;
+  height: 360rpx;
+}
+.page-body-info {
+  display: flex;
+  box-sizing: border-box;
+  padding: 30rpx;
+  height: 420rpx;
+  border-top: 1rpx solid var(--weui-FG-3);
+  border-bottom: 1rpx solid var(--weui-FG-3);
+  align-items: center;
+  justify-content: center;
+}

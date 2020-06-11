@@ -22,7 +22,7 @@
     <slot name="title" wx:else></slot>
     <view 
         class="{{ !showCancel && index === actions.length-1 ? 'weui-actionsheet__action' : 'weui-actionsheet__menu' }}"
-        wx:key="{{index}}" 
+        wx:key="index"
         wx:for-item="actionItem" 
         wx:for-index="index"
         wx:for="{{actions}}"
@@ -30,7 +30,7 @@
         <block wx:if="{{utils.isNotSlot(actionItem)}}">
             <view
                 class="weui-actionsheet__cell {{item.type === 'warn' ? 'weui-actionsheet__cell_warn' : '' }}" 
-                wx:key="{{item.text}}" 
+                wx:key="actionIndex" 
                 wx:for="{{actionItem}}"
                 wx:for-index="actionIndex"
                 data-groupindex="{{index}}"

@@ -1,5 +1,5 @@
-<mp-navigation-bar loading="{{loading}}" show="{{show}}" animated="{{animated}}" color="{{color}}" background="{{background}}" title="UI组件库" back="{{true}}"></mp-navigation-bar>
-<view class="page">
+<view class="page" data-weui-theme="{{theme}}">
+    <mp-navigation-bar loading="{{loading}}" show="{{show}}" animated="{{animated}}" color="{{color}}" background="{{background}}" title="自定义Navigation" back="{{true}}"></mp-navigation-bar>
     <view class="page__hd">
         <view class="page__title">Navigation</view>
         <view class="page__desc">小程序自定义导航栏</view>

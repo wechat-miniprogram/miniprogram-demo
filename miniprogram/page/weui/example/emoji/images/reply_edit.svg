@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="19px" viewBox="0 0 19 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/Outlined/pencil</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.9">
+        <g id="Icons/Outlined/pencil" transform="translate(-3.000000, -2.000000)" fill="#000000">
+            <g id="Group" transform="translate(3.000000, 2.000000)">
+                <path d="M11,1 L11,2.2 L1.2,2.2 L1.2,17.8 L16.8,17.8 L16.8,8 L18,8 L18,18 C18,18.5522847 17.5522847,19 17,19 L1,19 C0.44771525,19 0,18.5522847 0,18 L0,2 C0,1.44771525 0.44771525,1 1,1 L11,1 Z M16.8608816,0.74608004 C17.0556551,0.551306526 17.3714454,0.551306526 17.5662189,0.74608004 L18.2715562,1.45141733 C18.4663297,1.64619084 18.4663297,1.9619811 18.2715562,2.15675462 L8.76190575,11.6664051 L6.445312,12.9618781 C6.30106541,13.0425463 6.11873594,12.9910058 6.03806772,12.8467592 C5.98683746,12.755152 5.98734579,12.6434011 6.03940732,12.5522637 L7.35135595,10.2556057 L16.8608816,0.74608004 Z" id="图标颜色"></path>
+            </g>
+        </g>
+    </g>
+</svg>

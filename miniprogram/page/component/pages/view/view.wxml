@@ -3,7 +3,6 @@
 
 <view class="container">
   <template is="head" data="{{title: 'view'}}"/>
-
   <view class="page-body">
     <view class="page-section">
       <view class="page-section-title">
@@ -28,6 +27,5 @@
       </view>
     </view>
   </view>
-
   <template is="foot" />
 </view>

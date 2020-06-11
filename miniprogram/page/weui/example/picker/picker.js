@@ -1,4 +1,10 @@
 Page({
+    onShareAppMessage() {
+        return {
+          title: 'picker',
+          path: 'page/weui/example/picker/picker'
+        }
+      },
     data: {
         array: ['美国', '中国', '巴西', '日本'],
         index: 0,

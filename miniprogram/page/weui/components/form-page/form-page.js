@@ -99,25 +99,26 @@ Component({
         multipleSlots: true
     },
     properties: {
-        title: {
-            type: String,
-            value: ''
-        },
-        subtitle: {
-            type: String,
-            value: ''
-        }
+			title: {
+				type: String,
+				value: ''
+			},
+			subtitle: {
+				type: String,
+				value: ''
+			}
     },
     relations: {
         '../cells/cells': {
             type: 'descendant',
-            linked: function linked(target) {
+            linked(target) {
                 if (!this.data.firstItem) {
                     this.data.firstItem = target;
                 }
+                target.setOuterClass('weui-cells__group weui-cells__group_form weui-cells_form');
                 if (target !== this.data.firstItem) {
-                    target.setOuterClass('weui-cells__group_wxss');
-                }
+                    target.setOuterClass('weui-cells__group_wxss weui-cells__group weui-cells__group_form weui-cells_form');
+                  }
             }
         }
     },

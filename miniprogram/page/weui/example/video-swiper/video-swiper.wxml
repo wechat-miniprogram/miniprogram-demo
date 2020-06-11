@@ -1,0 +1,16 @@
+<!-- <view class="page" data-weui-theme="{{theme}}"> -->
+
+<mp-video-swiper 
+  class="video-swiper" 
+  video-list="{{videoList}}" 
+  bindplay="onPlay"
+  bindpause="onPause"
+  bindtimeupdate="onTimeUpdate"
+  bindended="onEnded"
+  binderror="onError"
+  bindwaiting="onWaiting"
+  bindprogress="onProgress"
+  bindloadedmetadata="onLoadedMetaData"
+></mp-video-swiper>
+<!-- <video src=""></video> -->
+<!-- </view> -->

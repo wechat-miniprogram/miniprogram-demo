@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>answer</title>
+    <desc>Created with Sketch.</desc>
+    <g id="====slice====" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-235.000000, -123.000000)" fill-rule="nonzero">
+            <g id="Group-3" transform="translate(234.000000, 123.000000)">
+                <g id="左侧图标" opacity="0.800815217" fill="#FFFFFF">
+                    <g id="左侧图标-copy-2">
+                        <path d="M16,27.7333333 C22.4801411,27.7333333 27.7333333,22.4801411 27.7333333,16 C27.7333333,9.51985894 22.4801411,4.26666667 16,4.26666667 C9.51985894,4.26666667 4.26666667,9.51985894 4.26666667,16 C4.26666667,22.4801411 9.51985894,27.7333333 16,27.7333333 Z M16,29.3333333 C8.63620334,29.3333333 2.66666667,23.3637967 2.66666667,16 C2.66666667,8.63620334 8.63620334,2.66666667 16,2.66666667 C23.3637967,2.66666667 29.3333333,8.63620334 29.3333333,16 C29.3333333,23.3637967 23.3637967,29.3333333 16,29.3333333 Z" id="Combined-Shape"></path>
+                    </g>
+                </g>
+                <g id="Group" transform="translate(11.000000, 11.000000)" fill="#FFFFFF">
+                    <rect id="Rectangle" x="0" y="8" width="7" height="1.6"></rect>
+                    <rect id="Rectangle-Copy-2" x="0" y="4" width="10" height="1.6"></rect>
+                    <rect id="Rectangle-Copy-3" x="0" y="0" width="10" height="1.6"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
