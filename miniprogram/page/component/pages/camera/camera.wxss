@@ -1,15 +1,15 @@
 @import "../../../common/lib/weui.wxss";
 
 camera {
-  height: 500rpx;
+  height: 250px;
 }
 
 .preview-tips {
-  margin: 20rpx 0;  
+  margin: 10px 0;  
 }
 
 .photo, .video {
-  margin-top: 50rpx;
+  margin-top: 25px;
   width: 100%;
 }
 
@@ -18,22 +18,22 @@ camera {
 }
 
 .first-btn {
-  margin-top: 30rpx;
+  margin-top: 15px;
 }
 
 form {
-  margin-top: 30rpx;
+  margin-top: 15px;
 }
 
 .weui-cell__bd {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 20rpx 0;
-  min-height: 60rpx;
+  padding: 10px 0;
+  min-height: 30px;
 }
 
 .info-container {
-  margin: 24rpx;
+  margin: 12px;
   text-align: center;
 }

@@ -26,7 +26,7 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 40rpx;
+    padding: 20px;
 }
 
 .weui-tabs-bar__title {
@@ -38,12 +38,12 @@
     font-weight: bold;
 }
 .item-title {
-    margin: 20rpx 20rpx 10rpx;
+    margin: 10px 10px 5px;
     font-size: 18px;
     width: 100%;
 }
 .item-desc {
-    margin: 10rpx 20rpx 0;
+    margin: 5px 10px 0;
     width: 100%;
     color: var(--weui-FG-1)
 }

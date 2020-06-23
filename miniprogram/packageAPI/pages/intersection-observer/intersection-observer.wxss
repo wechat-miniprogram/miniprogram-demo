@@ -1,10 +1,10 @@
 .scroll-view {
-  height: 400rpx;
+  height: 200px;
   background: var(--weui-BG-2);
 }
 
 .scroll-area {
-  height: 1300rpx;
+  height: 1150px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,18 +12,18 @@
 }
 
 .notice {
-  margin-top: 150rpx;
+  margin-top: 75px;
 }
 
 .ball {
-  width: 200rpx;
-  height: 200rpx;
+  width: 100px;
+  height: 100px;
   background: #1AAD19;
   border-radius: 50%;
 }
 
 .filling {
-  height: 400rpx;
+  height: 200px;
 }
 
 .message {
@@ -33,6 +33,6 @@
 }
 
 .message text {
-  font-size: 40rpx;
+  font-size: 20px;
   font-family: -apple-system-font, Helvetica Neue,Helvetica,sans-serif;
 }

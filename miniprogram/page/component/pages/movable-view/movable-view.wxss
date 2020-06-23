@@ -2,37 +2,37 @@ movable-view {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100rpx;
-  width: 100rpx;
+  height: 50px;
+  width: 50px;
   background: #1AAD19;
   color: #fff;  
 }
 
 movable-area {
-  height: 400rpx;
-  width: 400rpx;
-  margin: 50rpx 0rpx 0 50rpx;
+  height: 200px;
+  width: 200px;
+  margin: 25px 0px 0 25px;
   background-color: #ccc;
   overflow: hidden;
 }
 
 .max {
-  width: 600rpx;
-  height: 600rpx;
+  width: 300px;
+  height: 300px;
 }
 
 .page-section {
   width: 100%;
-  margin-bottom: 20rpx;
+  margin-bottom: 10px;
 }
 
 .page-section-title {
-  margin-top: 50rpx;
-  font-size: 28rpx;
+  margin-top: 25px;
+  font-size: 14px;
   color: #999999;
-  margin-bottom: 10rpx;
-  padding-left: 30rpx;
-  padding-right: 30rpx;
+  margin-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .page-section-title.first {
@@ -40,5 +40,5 @@ movable-area {
 }
 
 .btn-area {
-  margin-top: 20rpx;
+  margin-top: 10px;
 }

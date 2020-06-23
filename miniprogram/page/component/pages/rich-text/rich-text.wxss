@@ -1,34 +1,34 @@
 .page-content {
   width: auto;
-  margin: 30rpx 0;
-  padding: 0 50rpx;
+  margin: 15px 0;
+  padding: 0 25px;
 }
 
 .code-fragment {
-  height: 350rpx;
+  height: 325px;
 }
 
 .code-textarea {
   width: auto;
-  height: 350rpx;
-  border: 1rpx solid #1AAD19;
+  height: 325px;
+  border: 1px solid #1AAD19;
 }
 
 .p {
   color: #1AAD19;
-  margin-top: 30rpx;
+  margin-top: 15px;
 }
 
 .space {
   display: inline-block;
   background: red;
-  width: 10rpx;
+  width: 5px;
 }
 
 scroll-view {
-  height: 350rpx;
-  border: 1rpx solid #1AAD19;
+  height: 325px;
+  border: 1px solid #1AAD19;
   white-space: pre;
-  padding: 10rpx;
+  padding: 5px;
   box-sizing: border-box;
 }

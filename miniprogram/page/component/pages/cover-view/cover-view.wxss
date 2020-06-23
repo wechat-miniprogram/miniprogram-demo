@@ -1,7 +1,7 @@
 .cover-view {
   position: absolute;
-  top: calc(50% - 150rpx);
-  left: calc(50% - 300rpx);
+  top: calc(50% - 75px);
+  left: calc(50% - 150px);
   /* opacity: .7; */
 }
 
@@ -10,9 +10,9 @@
 }
 
 .flex-item{
-  width: 200rpx;
-  height: 300rpx;
-  font-size: 26rpx;
+  width: 100px;
+  height: 150px;
+  font-size: 13px;
 }
 
 .demo-text-1 {

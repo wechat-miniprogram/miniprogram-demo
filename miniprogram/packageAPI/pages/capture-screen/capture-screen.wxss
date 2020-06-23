@@ -1,4 +1,4 @@
 .page-body-text {
-  font-size: 40rpx;
+  font-size: 20px;
   font-family: -apple-system-font, Helvetica Neue,Helvetica,sans-serif;
 }

@@ -20,7 +20,7 @@
       </view>
     </mp-vtabs-content>
   </block>
-  <view style="height: 1rpx;width: 100%"></view>
+  <view style="height: 1px;width: 100%"></view>
 
 </mp-vtabs>
 </view>

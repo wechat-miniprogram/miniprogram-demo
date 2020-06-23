@@ -1,6 +1,6 @@
 @import "../../../common/lib/weui.wxss";
 
 .picker{
-  padding: 19rpx 26rpx;
+  padding: 10px 13px;
   background-color: #FFFFFF;
 }

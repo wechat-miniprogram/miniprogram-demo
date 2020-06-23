@@ -55,7 +55,7 @@
   box-sizing: border-box;
   border-radius: 2px;
   background-color: #f7f7f7;
-  font-size: 24rpx;
+  font-size: 12px;
   position: relative
 }
 
@@ -83,7 +83,7 @@
 }
 
 .select-city__hd {
-  padding: 0 30rpx;
+  padding: 0 15px;
   position: fixed;
   height: 50px;
   background-color: #fff;
@@ -93,26 +93,26 @@
 }
 
 .select-city__hd.thin-border-bottom:after {
-  left: 24rpx;
-  right: 24rpx
+  left: 12px;
+  right: 12px
 }
 
 .current-city__name {
   display: inline-block;
-  margin-right: 20rpx;
-  margin-left: 12rpx
+  margin-right: 10px;
+  margin-left: 11px
 }
 
 .city-group_part .city-group__content {
-  padding: 0 30rpx
+  padding: 0 15px
 }
 
 .city-group_part .city-group__title {
-  padding-bottom: 24rpx
+  padding-bottom: 12px
 }
 
 .city-group__title {
-  padding: 24rpx 24rpx 12rpx
+  padding: 12px 12px 11px
 }
 
 .city-group__content {
@@ -120,13 +120,13 @@
 }
 
 .square-tag {
-  width: 200rpx;
+  width: 100px;
   display: inline-block;
-  margin-right: 24rpx;
-  margin-bottom: 24rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  font-size: 30rpx;
+  margin-right: 12px;
+  margin-bottom: 12px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 15px;
   color: #000;
   background-color: rgba(0, 0, 0, 0.02);
   overflow: hidden;
@@ -135,16 +135,16 @@
 }
 
 .city-group__item {
-  padding: 30rpx 24rpx;
-  font-size: 30rpx
+  padding: 15px 12px;
+  font-size: 15px
 }
 
 .city-group__item.thin-border-bottom:after {
-  left: 24rpx
+  left: 12px
 }
 
 .city-group_all {
-  padding-bottom: 100rpx
+  padding-bottom: 50px
 }
 
 .fixed__top {
@@ -157,7 +157,7 @@
   top: 0;
   bottom: 0;
   right: 0;
-  width: 60rpx;
+  width: 30px;
   z-index: 999
 }
 
@@ -168,13 +168,13 @@
 }
 
 .anchor-item__inner {
-  line-height: 28rpx;
-  height: 28rpx;
-  width: 28rpx;
+  line-height: 14px;
+  height: 14px;
+  width: 14px;
   border-radius: 50%;
   display: inline-block;
-  font-size: 20rpx;
-  margin: 2rpx 0;
+  font-size: 10px;
+  margin: 1px 0;
   font-weight: 500
 }
 
@@ -184,14 +184,14 @@
 
 .anchor-item__pop {
   position: absolute;
-  font-size: 64rpx;
-  width: 100rpx;
-  height: 100rpx;
-  line-height: 100rpx;
+  font-size: 62px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
   color: #fff;
   background-color: #C9C9C9;
   border-radius: 50%;
-  right: 80rpx;
+  right: 40px;
   top: 50%;
   transform: translateY(-50%);
   display: none
@@ -203,8 +203,8 @@
   position: absolute;
   width: 0;
   height: 0;
-  left: 80rpx;
-  border: 40rpx solid;
+  left: 40px;
+  border: 20px solid;
   border-color: transparent transparent transparent #C9C9C9;
   top: 50%;
   transform: translateY(-50%)

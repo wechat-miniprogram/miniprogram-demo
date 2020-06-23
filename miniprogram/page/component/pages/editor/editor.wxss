@@ -1,6 +1,10 @@
 @import "../../../weui/components/weui-wxss/dist/style/weui.wxss";
 @import "./assets/iconfont.wxss";
 
+page>view {
+  max-width: 100%;
+}
+
 .container {
   position: absolute; 
   top: 0; 
@@ -34,7 +38,7 @@
 .toolbar {
   box-sizing: border-box;
   padding: 0 10px;
-  /* height: 50px; */
+  height: 50px;
   width: 100%;
   position: fixed;
   left: 0;

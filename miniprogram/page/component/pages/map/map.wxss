@@ -1,5 +1,5 @@
 .page-section-title {
-  margin-bottom: 30rpx;
+  margin-bottom: 15px;
 }
 
 .navigator {

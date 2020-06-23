@@ -4185,7 +4185,7 @@ input[type=search]::-webkit-search-results-decoration {
 
 page {
   --height: 44px;
-  --right: 190rpx
+  --right: 95px
 }
 
 .weui-navigation-bar {
@@ -4195,7 +4195,7 @@ page {
 
 .weui-navigation-bar .android {
   --height: 48px;
-  --right: 222rpx
+  --right: 221px
 }
 
 .weui-navigation-bar__inner {

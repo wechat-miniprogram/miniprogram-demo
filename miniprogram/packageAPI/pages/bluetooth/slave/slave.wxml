@@ -5,7 +5,7 @@
 <view class="container">
   <template is="head" data="{{title: 'bluetooth'}}"/>
   <view class="page-body" style="display: flex; flex-direction: column">
-    <text style="text-align: center; margin: 32rpx">当前 serverId {{serverId}}</text>
+    <text style="text-align: center; margin: 16px">当前 serverId {{serverId}}</text>
     <view class="action-area">
       <button type="primary" bindtap="openBluetoothAdapter">创建server</button>
       <button type="primary" bindtap="closeServer">关闭server</button>
@@ -24,7 +24,7 @@
     </view>
     <button type="primary" bindtap="chaneMode">返回主机模式</button>
     <block wx:if="{{input}}">
-      <input style="width: 200px;margin: 0 auto;background: var(--weui-BG-2);padding: 10rpx;" 
+      <input style="width: 200px;margin: 0 auto;background: var(--weui-BG-2);padding: 5px;" 
         placeholder="写个数字" 
         bindconfirm="onConfirm"
       ></input>

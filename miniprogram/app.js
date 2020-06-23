@@ -49,6 +49,7 @@ App({
   
   onShow(opts) {
     console.log('App Show', opts)
+    // console.log(wx.getSystemInfoSync())
   },
   onHide() {
     console.log('App Hide')

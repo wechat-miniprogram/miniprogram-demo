@@ -11,7 +11,7 @@
         <text>Vertical Scroll\n纵向滚动</text>
       </view>
       <view class="page-section-spacing">
-        <scroll-view scroll-y="true" style="height: 300rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+        <scroll-view scroll-y="true" style="height: 150px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
           <view id="demo1" class="scroll-view-item demo-text-1"></view>
           <view id="demo2"  class="scroll-view-item demo-text-2"></view>
           <view id="demo3" class="scroll-view-item demo-text-3"></view>
@@ -85,7 +85,7 @@
         <text>滚动驱动动画</text>
       </view>
       <view class="page-section-spacing">
-        <scroll-view id="scroll-view_D" scroll-y="true" style="height: 300rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+        <scroll-view id="scroll-view_D" scroll-y="true" style="height: 150px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
           <view class="scroll-view-item_H demo-text-1" id="scroll-sample-object1"></view>
           <view class="scroll-view-item_H demo-text-2" id="scroll-sample-object2"></view>
           <view class="scroll-view-item_H demo-text-3" id="scroll-sample-object3"></view>

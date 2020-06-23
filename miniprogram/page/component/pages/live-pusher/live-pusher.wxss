@@ -1,19 +1,19 @@
 live-pusher {
   display: flex;
-  margin: 12rpx auto;
-  height: 350rpx;
+  margin: 11px auto;
+  height: 325px;
 }
 
 .page-body-button {
-  margin-bottom: 30rpx;
+  margin-bottom: 15px;
 }
 .page-url {
-  margin: 0 auto 30rpx;
+  margin: 0 auto 15px;
   width: 90%;
 }
 
 input {
   width: 90%;
-  margin: 0 auto 30rpx;
+  margin: 0 auto 15px;
 }
 

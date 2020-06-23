@@ -5,7 +5,7 @@
 .item, .item > view {
   display: flex;
   align-items: center;
-  height: 300rpx;
+  height: 150px;
   width: 100%;
 }
 .item-content {
@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 300rpx;
+  height: 150px;
   align-items: center;
 }
 /* .wrap {

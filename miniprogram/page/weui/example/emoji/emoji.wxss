@@ -48,6 +48,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: 600px;
   /* background-color: #F9F9F9; */
 }
 
@@ -73,7 +74,7 @@
   top: 0;
   right: 0;
   height: 1px;
-  border-top: 1 rpx solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.1);
 }
 
@@ -164,7 +165,7 @@
   top: 0;
   right: 0;
   height: 1px;
-  border-top: 1 rpx solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.1);
 }
 .reply_quick_item {
@@ -188,7 +189,7 @@
   bottom: 0;
   right: 0;
   height: 1px;
-  border-top: 1 rpx solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
   color: rgba(0, 0, 0, 0.05);
 }
 .reply_quick_item:last-child:after {

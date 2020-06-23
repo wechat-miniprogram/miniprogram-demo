@@ -5,34 +5,17 @@
   <template is="head" data="{{title: 'canvas'}}"/>
 
   <view class="page-body">
-    <view class="page-section">
-      <view class="page-section-title">
-      Canvas
-      </view>
-      <view class="page-section-spacing">
-        <view class="page-body-wrapper">
-          <canvas canvas-id="canvas" class="canvas"></canvas>
+    <block wx:if="{{canIUse}}">
+      <view class="page-section">
+        <view class="page-section-spacing">
+          <view class="page-body-wrapper">
+            <canvas canvas-id="canvas" class="canvas"></canvas>
+          </view>
         </view>
       </view>
-    </view>
-
-    <view class="page-section">
-      <view class="page-section-title">
-        Canvas 2D
-      </view>
-      <view class="page-section-spacing">
-        <view class="page-body-wrapper">
-          <canvas type="2d" id="canvas2D" class="canvas"></canvas>    
-        </view>
-      </view>
-    </view>
-    <view class="page-section">
-      <view class="page-section-title">
-        WebGL
-      </view>
-      <view class="page-body-wrapper">
-        <canvas class="canvas" type="webgl" id="canvasWebGL"></canvas>
-      </view>
+    </block>
+    <view wx:else style="margin: 15px; text-align:center">
+      微信版本过低，暂不支持本功能
     </view>
   </view>
 

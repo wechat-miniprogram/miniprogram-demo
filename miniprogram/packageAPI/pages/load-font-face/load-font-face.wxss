@@ -1,6 +1,6 @@
 .page-body-info {
   align-items: center;
-  padding: 200rpx 0;
+  padding: 100px 0;
 }
 
 .font-loaded {
@@ -8,5 +8,5 @@
 }
 
 .display-area {
-  font-size: 40rpx;
+  font-size: 20px;
 }

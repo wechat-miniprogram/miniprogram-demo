@@ -1,13 +1,13 @@
 .page-body-xyz {
   display: flex;
   justify-content: space-between;
-  width: 700rpx;
-  margin-top: 90rpx;
+  width: 350px;
+  margin-top: 45px;
   box-sizing: border-box;
   text-align: center;
 }
 .page-body-canvas {
-  margin-top: 30rpx;
+  margin-top: 15px;
   width: 302px;
   height: 302px;
   position: relative;
@@ -21,13 +21,13 @@
 }
 .page-body-title {
   margin-bottom: 0;
-  font-size: 32rpx;
-  width: 250rpx;
+  font-size: 16px;
+  width: 225px;
 }
 .page-body-controls {
-  margin-top: 30rpx;
+  margin-top: 15px;
 }
 .page-body-controls button {
-  margin-left: 20rpx;
+  margin-left: 10px;
   float: left;
 }

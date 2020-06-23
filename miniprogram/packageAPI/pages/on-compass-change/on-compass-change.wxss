@@ -1,15 +1,15 @@
 .direction {
   position: relative;
-  margin-top: 70rpx;
+  margin-top: 35px;
   display: flex;
-  width: 540rpx;
-  height: 540rpx;
+  width: 520px;
+  height: 520px;
   align-items: center;
   justify-content: center;
 }
 .direction-value {
   position: relative;
-  font-size: 200rpx;
+  font-size: 100px;
   color: #353535;
   line-height: 1;
   z-index: 1;
@@ -17,31 +17,31 @@
 .direction-degree {
   position: absolute;
   top: 0;
-  right: -40rpx;
-  font-size: 60rpx;
+  right: -20px;
+  font-size: 30px;
 }
 .bg-compass{
   position: absolute;
   top: 0;
   left: 0;
-  width: 540rpx;
-  height: 540rpx;
+  width: 520px;
+  height: 520px;
   transition: .1s;
 }
 .bg-compass-line{
   position: absolute;
-  left: 267rpx;
-  top: -10rpx;
-  width: 6rpx;
-  height: 56rpx;
+  left: 134px;
+  top: -5px;
+  width: 3px;
+  height: 28px;
   background-color: #1AAD19;
-  border-radius: 999rpx;
+  border-radius: 500px;
   z-index: 1;
 }
 .controls{
-  margin-top: 70rpx;
+  margin-top: 35px;
 }
 .controls button{
-  margin-left: 20rpx;
+  margin-left: 10px;
   float: left;
 }

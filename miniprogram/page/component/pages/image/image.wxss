@@ -3,7 +3,7 @@
 }
 
 .image {
-  margin-top: 30rpx;
-  width: 690rpx;
-  height: 250rpx;
+  margin-top: 15px;
+  width: 345px;
+  height: 225px;
 }

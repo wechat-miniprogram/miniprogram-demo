@@ -48,8 +48,8 @@ Page({
             showCancel: false
           })
           wx.onBluetoothAdapterStateChange(function (res) {
-            console.log('onBluetoothAdapterStateChange', res)
-            if (res.available) {
+
+            if (res && res.available) {
               this.startBluetoothDevicesDiscovery()
             }
           })

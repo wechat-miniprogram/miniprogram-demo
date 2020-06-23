@@ -44,7 +44,7 @@ CustomPage({
   onReady() {
     // 解决基础库小于 2.9.2 的兼容问题
     const { SDKVersion } = wx.getSystemInfoSync();
-    if(!compareVersion(SDKVersion, '2.9.1')) {
+    if(compareVersion(SDKVersion, '2.9.1') < 0) {
       this.setData({
         canIUse: false,
       })
