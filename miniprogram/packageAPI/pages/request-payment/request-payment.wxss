@@ -1,26 +1,26 @@
 .page-section{
   width: auto;
-  margin: 30rpx;
-  padding: 64rpx 30rpx;
+  margin: 15px;
+  padding: 62px 15px;
   background-color: var(--weui-BG-2);
   text-align: center;
-  font-size: 28rpx;
+  font-size: 14px;
 }
 .desc{
   color: var(--weui-FG-1);
 }
 .price{
-  margin-top: 30rpx;
-  margin-bottom: 25rpx;
+  margin-top: 15px;
+  margin-bottom: 13px;
   position: relative;
   display: inline-block;
-  font-size: 78rpx;
+  font-size: 39px;
   line-height: 1;
 }
 .price:before{
   content: "¥";
   position: absolute;
-  font-size: 40rpx;
-  top: 8rpx;
-  left: -40rpx;
+  font-size: 20px;
+  top: 4px;
+  left: -20px;
 }

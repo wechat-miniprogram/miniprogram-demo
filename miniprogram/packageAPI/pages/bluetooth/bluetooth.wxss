@@ -1,16 +1,16 @@
 
 .devices_summary {
-  padding: 10rpx;
-  font-size: 30rpx;
+  padding: 5px;
+  font-size: 15px;
 }
 .device_list {
-  height: 300rpx;
-  border-radius: 5rpx;
+  height: 150px;
+  border-radius: 3px;
   flex: 1;
 }
 .device_item {
-  border-bottom: 1rpx solid var(--weui-FG-3);
-  padding: 10rpx;
+  border-bottom: 1px solid var(--weui-FG-3);
+  padding: 5px;
   color: var(--weui-FG-HALF);
 }
 .device_item_hover {
@@ -21,19 +21,19 @@
   bottom: 0;
   width: 100%;
   background-color: var(--weui-BG-4);
-  padding: 10rpx;
-  padding-bottom: 20rpx;
+  padding: 5px;
+  padding-bottom: 10px;
   margin-bottom: env(safe-area-inset-bottom);
-  font-size: 28rpx;
-  min-height: 100rpx;
-  box-shadow: 0rpx 0rpx 3rpx 0rpx;
+  font-size: 14px;
+  min-height: 50px;
+  box-shadow: 0px 0px 2px 0px;
 }
 .connected_info .operation {
   position: absolute;
   display: inline-block;
-  right: 30rpx;
+  right: 15px;
 }
 .page-body-info {
-  padding: 30rpx;
+  padding: 15px;
   box-sizing: border-box;
 }

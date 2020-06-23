@@ -30,7 +30,7 @@ icon{
     box-sizing: border-box;
 }
 .icon-name {
-    font-size: 24rpx;
+    font-size: 12px;
     overflow: hidden;
     white-space:nowrap;
     text-overflow:ellipsis; 

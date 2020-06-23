@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
+  padding: 100px 0;
   box-sizing: border-box;
 } 
 page,.page {
@@ -13,22 +13,22 @@ page,.page {
 }
 .page-bottom{
   height: 100%;
-  width: 750rpx;
+  width: 725px;
   position: fixed; 
   background-color: #07c160;
   z-index: 0;
 }
 .wc{
   color: white;
-  padding: 30rpx 0 30rpx 40rpx;
+  padding: 15px 0 15px 20px;
 }
 .page-content{
-  padding-top: 300rpx;
+  padding-top: 150px;
 }
 .page-top{
   height: 100%;
   position: fixed;
-  width: 750rpx;
+  width: 725px;
   background-color: var(--weui-BG-1);
   z-index: 0;
   transition: All 0.4s ease; 
@@ -45,12 +45,12 @@ page,.page {
 }
 
 .item-title {
-  margin: 20rpx 20rpx 10rpx;
+  margin: 10px 10px 5px;
   font-size: 18px;
   width: 100%;
 }
 .item-desc {
-  margin: 10rpx 20rpx 0;
+  margin: 5px 10px 0;
   width: 100%;
   color: #00000080
 }

@@ -1,7 +1,7 @@
 @import '../common.wxss';
 
 page{
-    background-color: #FFFFFF;
+    /* background-color: #FFFFFF; */
 }
 image{
     margin: 4px 0;

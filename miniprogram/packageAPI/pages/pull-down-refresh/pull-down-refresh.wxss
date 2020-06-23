@@ -2,5 +2,5 @@
   background-color: transparent;
 }
 .btn-area{
-  margin-top: 300rpx;
+  margin-top: 150px;
 }

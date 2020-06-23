@@ -80,26 +80,29 @@
 }
 
 .index-hd {
-  padding: 80rpx 80rpx 40rpx;
+  padding: 40px 40px 20px;
   text-align: center;
 }
 
 .index-bd {
-  padding: 0 30rpx 40rpx;
+  padding: 0 15px 20px;
 }
 
 .index-ft {
-  padding-bottom: 20rpx;
+  padding-bottom: 10px;
   text-align: center;
 }
 
 .index-logo {
-  width: 86rpx;
-  height: 86rpx;
+  /* width: 43px;
+  height: 43px; */
+  width: 43px;
+  height: 43px;
 }
 
 .index-desc {
-  margin-top: 20rpx;
+  margin-top: 10px;
   color: #888888;
-  font-size: 28rpx;
+  /* font-size: 14px; */
+  font-size: 14px;
 }

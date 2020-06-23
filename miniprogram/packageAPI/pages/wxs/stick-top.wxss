@@ -16,7 +16,7 @@
   position: fixed;
 }
 .page-nav-list{
-  padding:30rpx 0 ;
+  padding:15px 0 ;
   display: table-cell;
   text-align: center;
   color: #07c160;
@@ -24,18 +24,18 @@
 .goods-list{
   height: 300px;
   background-color: var(--weui-BG-2);
-  padding: 20rpx;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .item-title {
-  margin: 20rpx 20rpx 10rpx;
+  margin: 10px 10px 5px;
   font-size: 18px;
   width: 100%;
 }
 .item-desc {
-  margin: 10rpx 20rpx 0;
+  margin: 5px 10px 0;
   width: 100%;
   color: var(--weui-FG-2)
 }

@@ -18,10 +18,10 @@
 
 .item-title {
     font-size: 18px;
-    margin: 0 20rpx;
+    margin: 0 10px;
 }
 .item-desc {
-    margin: 0 20rpx;
+    margin: 0 10px;
 
     color: var(--weui-FG-1)
 }

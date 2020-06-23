@@ -7,6 +7,8 @@
 
 page {
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .page {
@@ -14,7 +16,8 @@ page {
   background-color: var(--weui-BG-1);
   color: var(--weui-FG-0);
   font-size: 16px;
-  font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif
+  font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+  max-width: 600px;
 }
 
 image {

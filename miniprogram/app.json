@@ -80,7 +80,16 @@
     "page/weui/example/vtabs/vtabs",
     "page/weui/example/select-text/select-text",
     "page/weui/example/barrage/barrage",
-    "page/weui/example/wxml-to-canvas/wxml-to-canvas"
+    "page/weui/example/wxml-to-canvas/wxml-to-canvas",
+    "page/weui/example/telescopic/telescopic",
+    "page/weui/example/linebreak/linebreak",
+    "page/weui/example/sidenavigation/sidenavigation",
+    "page/weui/example/pagination/pagination",
+    "page/weui/example/freelayout/freelayout",
+    "page/weui/example/layeredpresentation/layeredpresentation",
+    "page/weui/example/horizontalexpansion/horizontalexpansion",
+    "page/component/pages/canvas-2d/canvas-2d",
+    "page/component/pages/webgl/webgl"
   ],
   "subpackages": [
     {
@@ -183,7 +192,10 @@
   "preloadRule": {
     "page/component/index": {
       "network": "all",
-      "packages": ["packageAPI", "packageCloud"]
+      "packages": [
+        "packageAPI",
+        "packageCloud"
+      ]
     }
   },
   "window": {
@@ -244,5 +256,6 @@
   "cloud": true,
   "sitemapLocation": "sitemap.json",
   "themeLocation": "demo.theme.json",
-  "darkmode": true
+  "darkmode": true,
+  "resizable": true
 }

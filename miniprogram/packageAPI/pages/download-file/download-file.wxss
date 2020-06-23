@@ -1,6 +1,6 @@
 .page-body image {
-  width: 600rpx;
-  height: 600rpx;
+  width: 300px;
+  height: 300px;
 
-  margin: 0 75rpx;
+  margin: 0 38px;
 }

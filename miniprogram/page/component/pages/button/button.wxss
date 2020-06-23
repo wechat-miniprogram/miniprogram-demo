@@ -1,11 +1,11 @@
 button{
-  margin-top: 30rpx;
-  margin-bottom: 30rpx;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .button-sp-area{
   margin: 0 auto;
   width: 60%;
 }
 .mini-btn{
-  margin-right: 10rpx;
+  margin-right: 5px;
 }

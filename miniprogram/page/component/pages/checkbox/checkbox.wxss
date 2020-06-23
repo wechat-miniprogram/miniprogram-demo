@@ -1,5 +1,5 @@
 @import "../../../common/lib/weui.wxss";
 
 .checkbox{
-  margin-right: 20rpx;
+  margin-right: 10px;
 }

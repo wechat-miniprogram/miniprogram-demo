@@ -68,7 +68,7 @@
     </view>
     <view wx:if="{{isIOS}}" class="{{(emojiShow || functionShow) ? 'safearea_emojiShow' : 'safearea'}}" style="position:fixed; bottom: 0px; width: 100%; height: {{safeHeight}}px;"></view>
   </block>
-  <view wx:else style="text-align: center; padding: 200rpx 0">
+  <view wx:else style="text-align: center; padding: 100px 0">
     微信版本过低，暂不支持本功能
   </view>
 </view>

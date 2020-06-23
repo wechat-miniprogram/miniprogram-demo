@@ -3,11 +3,11 @@
   height: 230px;
 }
 .userinfo-avatar {
-  border-radius: 128rpx;
-  width: 128rpx;
-  height: 128rpx;
+  border-radius: 114px;
+  width: 114px;
+  height: 114px;
 }
 .userinfo-nickname {
-  margin-top: 20rpx;
-  font-size: 38rpx;
+  margin-top: 10px;
+  font-size: 19px;
 }

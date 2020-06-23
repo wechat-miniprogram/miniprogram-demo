@@ -3,7 +3,7 @@
   <recycle-item wx:for="{{recycleList}}" wx:key="id" class="item">
     <view class="item-content">
       <text>{{item.title}}</text>
-      <image src="{{item.image_url}}" mode="aspectFit" style="height: 200rpx; width: 240px"></image>
+      <image src="{{item.image_url}}" mode="aspectFit" style="height: 100px; width: 240px"></image>
     </view>
   </recycle-item>
   <view slot="after" style="text-align: center">长列表后面的内容</view>

@@ -7,5 +7,5 @@
 }
 
 .page-section-title {
-  margin-top: 30rpx;
+  margin-top: 15px;
 }

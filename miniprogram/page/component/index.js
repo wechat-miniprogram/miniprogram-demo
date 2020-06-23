@@ -45,7 +45,7 @@ Page({
         id: 'canvas',
         name: '画布',
         open: false,
-        pages: ['canvas']
+        pages: ['canvas', 'canvas-2d', 'webgl']
       }, {
         id: 'open',
         name: '开放能力',

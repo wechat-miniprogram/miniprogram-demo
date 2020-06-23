@@ -2,15 +2,15 @@ movable-view {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100rpx;
-  width: 100rpx;
+  height: 50px;
+  width: 50px;
   background: #1AAD19;
   color: #fff;  
 }
 
 movable-area {
-  height: 400rpx;
-  width: 400rpx;
+  height: 200px;
+  width: 200px;
   background-color: #ccc;
   overflow: hidden;
 }
@@ -27,7 +27,7 @@ movable-area {
 }
 
 .metric {
-  width: 400rpx;
+  width: 200px;
   display: flex;
   justify-content: center;
   flex-direction:column;
@@ -36,11 +36,11 @@ movable-area {
 
 .b {
   display: inline-block;
-  width: 150rpx;
+  width: 75px;
   font-weight: bold;
 }
 
 .span {
   display: inline-block;
-  width: 100rpx;
+  width: 50px;
 }

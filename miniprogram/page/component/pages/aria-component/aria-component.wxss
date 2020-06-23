@@ -1,12 +1,12 @@
 .text-box{
-  margin-bottom: 70rpx;
-  padding: 40rpx 0;
+  margin-bottom: 35px;
+  padding: 20px 0;
   display: flex;
-  min-height: 300rpx;
+  min-height: 150px;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 30rpx;
+  font-size: 15px;
   color: #353535;
   line-height: 2em;
 }

@@ -3,11 +3,20 @@
 
 > 提示：请使用微信开发者工具或微信客户端 6.7.2 及以上版本运行。
 
-<img width="200" src="https://developers.weixin.qq.com/miniprogram/dev/image/demo.jpg">
+<img width="200" src="https://res.wx.qq.com/op_res/QqOF7ydl0dkpq-orpebXL-gBspr08VjoFOFGrWvKF9IULLhfT9XhnsSKlvc0gI8d">
 
 ## 使用
 
+```
+cd demo
+npm i
+cd miniprogram
+npm i
+```
+完成上述步骤后，使用微信开发者工具，点击【工具-构建npm】
+
 使用[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)打开该示例代码，云开发环境搭建请参考[云开发示例说明](https://github.com/wechat-miniprogram/miniprogram-demo/blob/master/miniprogram/page/cloud/README.md)。
+
 
 ## 贡献
 
@@ -25,4 +34,4 @@ npm run lint
 
 ## 截图
 
-![截图](https://developers.weixin.qq.com/miniprogram/dev/image/demo.png)
+<img width="375" src="https://res.wx.qq.com/op_res/0_vsSii5DaG-1hoXcqmBCT_tPShgSPKi3_FBVuVj1tu1ZdZD8lwYNrSQm3mdswI2">

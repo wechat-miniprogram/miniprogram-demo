@@ -1,16 +1,16 @@
 .page-section-spacing{
-  margin-top: 60rpx;
+  margin-top: 30px;
 }
 .scroll-view_H{
   white-space: nowrap;
 }
 .scroll-view-item{
-  height: 300rpx;
+  height: 150px;
 }
 .scroll-view-item_H{
   display: inline-block;
   width: 100%;
-  height: 300rpx;
+  height: 150px;
 }
 
 .demo-text-1{
@@ -19,7 +19,7 @@
   justify-content: center;
   background-color: #1AAD19;
   color: #FFFFFF;
-  font-size: 36rpx;
+  font-size: 18px;
 }
 .demo-text-1:before{
   content: 'A';
@@ -34,7 +34,7 @@
   justify-content: center;
   background-color: #2782D7;
   color: #FFFFFF;
-  font-size: 36rpx;
+  font-size: 18px;
 }
 .demo-text-2:before{
   content: 'B';
@@ -49,7 +49,7 @@
   justify-content: center;
   background-color: #F1F1F1;
   color: #353535;
-  font-size: 36rpx;
+  font-size: 18px;
 }
 .demo-text-3:before{
   content: 'C';

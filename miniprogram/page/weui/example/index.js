@@ -56,6 +56,20 @@ CustomPage({
                 name: '扩展组件',
                 open: false,
                 pages: ['emoji', 'video-swiper', 'index-list', 'recycle-view', 'sticky', 'tabs', 'vtabs', 'barrage', 'select-text', 'wxml-to-canvas']
+            },
+            {
+                id: 'adaptive',
+                name: '多端适配（需在PC端体验）',
+                open: false,
+                pages: [
+                    { zh: '左右伸缩', url: 'telescopic/telescopic' },
+                    { zh: '换行排列', url: 'linebreak/linebreak' },
+                    { zh: '侧边导航栏', url: 'sidenavigation/sidenavigation' },
+                    { zh: '分页展现', url: 'pagination/pagination' },
+                    { zh: '自由布局', url: 'freelayout/freelayout' },
+                    { zh: '分层展现', url: 'layeredpresentation/layeredpresentation' },
+                    { zh: '横向拓展', url: 'horizontalexpansion/horizontalexpansion' }
+                ]
             }
         ],     
         extendedList: [

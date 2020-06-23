@@ -1,7 +1,7 @@
 .page-body-info {
-  height: 200rpx;
+  height: 100px;
 }
 .page-body-text-network-type {
-  font-size: 80rpx;
+  font-size: 40px;
   font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
 }

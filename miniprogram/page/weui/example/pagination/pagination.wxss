@@ -1,0 +1,33 @@
+page>view {
+  width: 100vw;
+  max-width: 100vw;
+}
+
+view, image, navigator {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: block;
+  width: 100vw;
+  padding: 20rpx;
+  color: #ffffff;
+  font-size: 28px;
+}
+
+.item {
+  margin: 6px;
+  height: 240px;
+  line-height: 240px;
+  text-align: center;
+  background: #ecebec;
+  /* border: 1px solid #555050; */
+}
+.item-A {
+  background: #1aad19;
+}
+.item-B {
+  background: #2782d7;
+}

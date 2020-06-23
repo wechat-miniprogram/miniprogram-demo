@@ -1,7 +1,7 @@
 @import "../../../common/lib/weui.wxss";
 
 button{
-  margin-bottom: 30rpx;
+  margin-bottom: 15px;
 }
 button:last-child{
   margin-bottom: 0;
@@ -14,15 +14,15 @@ button:last-child{
   height: 150px;
 }
 .page-section-title{
-  margin-top: 60rpx;
+  margin-top: 30px;
   position: relative;
 }
 .info{
   position: absolute;
   right: 0;
   color: #353535;
-  font-size: 30rpx;
+  font-size: 15px;
 }
 .page-foot{
-  margin-top: 50rpx;
+  margin-top: 25px;
 }

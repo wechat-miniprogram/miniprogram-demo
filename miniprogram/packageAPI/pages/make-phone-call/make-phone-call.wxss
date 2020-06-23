@@ -1,18 +1,18 @@
 .page-section{
   width: auto;
-  margin: 30rpx;
-  padding: 44rpx 60rpx 60rpx;
+  margin: 15px;
+  padding: 42px 30px 30px;
   background-color: var(--weui-BG-2);
-  font-size: 28rpx;
+  font-size: 14px;
 }
 .desc{
-  margin-bottom: 20rpx;
+  margin-bottom: 10px;
 }
 .input{
-  height: 119rpx;
-  line-height: 119rpx;
-  font-size: 78rpx;
-  border-bottom: 1rpx solid var(--weui-FG-3);
+  height: 60px;
+  line-height: 60px;
+  font-size: 39px;
+  border-bottom: 1px solid var(--weui-FG-3);
 }
 .btn-area{
   padding: 0;

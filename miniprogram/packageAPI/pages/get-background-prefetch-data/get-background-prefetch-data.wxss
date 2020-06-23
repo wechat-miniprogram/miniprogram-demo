@@ -3,12 +3,12 @@
   height: 340px;
 }
 .page-body-title {
-  margin-bottom: 40rpx;
+  margin-bottom: 20px;
 }
 .page-body-text {
-  padding: 0 30rpx;
+  padding: 0 15px;
   text-align: center;
 }
 .context-value {
-  font-size: 38rpx;
+  font-size: 19px;
 }

@@ -6,7 +6,7 @@
 
   <view class="page-body">
     <view class="page-body-wrapper">
-    <view style="margin-bottom: 20rpx"> camera 组件 </view>
+    <view style="margin-bottom: 10px"> camera 组件 </view>
       <camera
         flash="off"
         device-position="{{position}}"
@@ -14,7 +14,7 @@
       >
       </camera>
        <view wx:if="{{showCanvas}}" class="info-container">
-          <view style="margin: 20rpx 0">使用实时数据帧在 canvas 组件的展示</view>
+          <view style="margin: 10px 0">使用实时数据帧在 canvas 组件的展示</view>
           <view>
             帧高度：{{ frameHeight }}  帧宽度：{{ frameWidth }}
           </view>

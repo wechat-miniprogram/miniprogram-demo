@@ -1,3 +1,6 @@
+.container {
+  display: block;
+}
 .performance-list {
   display: flex;
   flex-direction: column;
@@ -5,6 +8,6 @@
   align-items: center;
 }
 .performance-item {
-  margin: 30rpx 0;
+  margin: 15px 0;
   width: 80%;
 }
