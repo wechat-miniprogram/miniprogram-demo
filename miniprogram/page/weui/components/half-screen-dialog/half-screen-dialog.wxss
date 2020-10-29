@@ -1,1 +1,0 @@
-.weui-mask,.weui-half-screen-dialog{transition:all .3s}.weui-hidden .weui-mask{visibility:hidden;opacity:0}.weui-hidden .weui-half-screen-dialog{transform:translateY(100%)}.weui-show .weui-mask{opacity:1;visibility:visible}.weui-show .weui-half-screen-dialog{transform:translateY(0%)}

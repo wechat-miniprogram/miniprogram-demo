@@ -3,7 +3,7 @@
  * Copyright 2020 Tencent, Inc.
  * Licensed under the MIT license
  */
-@import '../components/weui-wxss/dist/style/weui.wxss';
+/* @import '../components/weui-wxss/dist/style/weui.wxss'; */
 
 page {
   height: 100%;

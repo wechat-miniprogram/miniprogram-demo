@@ -1,0 +1,20 @@
+<view class="weui-tabs">
+  <view class="weui-tabs-bar__wrp">
+    <scroll-view scroll-x scroll-into-view="item_{{currentView}}" scroll-with-animation="{{animation}}">
+      <view class="weui-tabs-bar__content">
+        <block wx:for="{{tabs}}" wx:key="title">
+          <view id="item_{{index}}" class="weui-tabs-bar__item" style="background-color: {{tabBackgroundColor}}; color: {{activeTab === index ? tabActiveTextColor : tabInactiveTextColor}};" bindtap="handleTabClick" data-index="{{index}}">
+            <view class="weui-tabs-bar__title {{tabClass}} {{activeTab === index ? activeClass : ''}}" style="border-bottom-color: {{activeTab === index ? tabUnderlineColor : 'transparent'}}">
+              <text class="">{{item.title}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+  <swiper class="{{swiperClass}}" current="{{activeTab}}" duration="{{duration}}" bindchange="handleSwiperChange">
+    <swiper-item wx:for="{{tabs}}" wx:key="title">
+      <slot name="tab-content-{{index}}"></slot>
+    </swiper-item>
+  </swiper>
+</view>

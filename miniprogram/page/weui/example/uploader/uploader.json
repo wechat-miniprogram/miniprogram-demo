@@ -1,8 +1,8 @@
 {
   "usingComponents": {
-    "mp-uploader": "../../components/uploader/uploader",
-    "mp-cells": "../../components/cells/cells",
-    "mp-cell": "../../components/cell/cell"
+    "mp-uploader": "weui-miniprogram/uploader/uploader",
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell"
   },
   "navigationBarTitleText": "uploader"
 

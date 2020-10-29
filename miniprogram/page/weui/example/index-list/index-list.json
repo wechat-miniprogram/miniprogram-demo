@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "mp-indexList": "../../components/index-list/index-list"
+    "mp-indexList": "@miniprogram-component-plus/index-list"
   },
   "navigationBarTitleText": "index-list"
 

@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "mp-video-swiper": "../../components/video-swiper/video-swiper"
+    "mp-video-swiper": "@miniprogram-component-plus/video-swiper"
   },
   "navigationBarTitleText": "video-swiper"
 

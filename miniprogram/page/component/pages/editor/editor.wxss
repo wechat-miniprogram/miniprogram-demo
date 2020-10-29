@@ -1,4 +1,4 @@
-@import "../../../weui/components/weui-wxss/dist/style/weui.wxss";
+/* @import "../../../weui/components/weui-wxss/dist/style/weui.wxss"; */
 @import "./assets/iconfont.wxss";
 
 page>view {
@@ -6,9 +6,9 @@ page>view {
 }
 
 .container {
-  position: absolute; 
-  top: 0; 
-  left: 0; 
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
 }
 

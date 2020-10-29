@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "mp-gallery": "../../components/gallery/gallery"
+    "mp-gallery": "weui-miniprogram/gallery/gallery"
   },
   "navigationBarTitleText": "gallery"
 

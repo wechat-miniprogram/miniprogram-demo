@@ -1,6 +1,6 @@
 {
     "usingComponents": {
-        "mp-navigation-bar": "../../components/navigation-bar/navigation-bar"
+        "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar"
     },
     "navigationStyle": "custom",
     "navigationBarTitleText": "navigation"

@@ -1,7 +1,7 @@
 {
   "usingComponents": {
-    "mp-col": "../../components/col/index",
-    "mp-row": "../../components/row/index"
+    "mp-col": "@miniprogram-component-plus/col",
+    "mp-row": "@miniprogram-component-plus/row"
   },
   "navigationBarTitleText": "分层展现"
 }

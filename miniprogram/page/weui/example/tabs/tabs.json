@@ -3,6 +3,6 @@
 
   "navigationBarTitleText": "tabs",
   "usingComponents": {
-    "mp-tabs": "../../components/tabs/tabs"
+    "mp-tabs": "@miniprogram-component-plus/tabs"
   }
 }

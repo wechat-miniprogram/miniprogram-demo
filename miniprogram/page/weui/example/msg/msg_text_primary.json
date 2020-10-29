@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "mp-msg": "../../components/msg/msg"
+    "mp-msg": "weui-miniprogram/msg/msg"
   }
 }

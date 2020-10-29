@@ -1,8 +1,8 @@
 {
   "usingComponents": {
-    "mp-cells": "../../components/cells/cells",
-    "mp-cell": "../../components/cell/cell",
-    "mp-slideview": "../../components/slideview/slideview"
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell",
+    "mp-slideview": "weui-miniprogram/slideview/slideview"
   },
   "navigationBarTitleText": "slider-view"
 

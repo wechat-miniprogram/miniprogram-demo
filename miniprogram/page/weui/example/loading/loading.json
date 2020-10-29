@@ -1,6 +1,6 @@
 {
     "usingComponents": {
-        "mp-loading": "../../components/loading/loading"
+        "mp-loading": "weui-miniprogram/loading/loading"
     },
     "navigationBarTitleText": "loading"
 

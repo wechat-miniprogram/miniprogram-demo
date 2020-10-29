@@ -1,12 +1,12 @@
 {
   "component": true,
   "usingComponents": {
-    "mp-toptips": "../../components/toptips/toptips",
-    "mp-cells": "../../components/cells/cells",
-    "mp-cell": "../../components/cell/cell",
-    "mp-checkbox": "../../components/checkbox/checkbox",
-    "mp-checkbox-group": "../../components/checkbox-group/checkbox-group",
-    "mp-form": "../../components/form/form"
+    "mp-toptips": "weui-miniprogram/toptips/toptips",
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell",
+    "mp-checkbox": "weui-miniprogram/checkbox/checkbox",
+    "mp-checkbox-group": "weui-miniprogram/checkbox-group/checkbox-group",
+    "mp-form": "weui-miniprogram/form/form"
   },
   "navigationBarTitleText": "input"
 

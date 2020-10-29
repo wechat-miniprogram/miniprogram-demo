@@ -1,9 +1,0 @@
-.weui-sticky {
-  position: relative
-}
-
-.weui-sticky__fixed {
-  position: fixed;
-  left: 0;
-  top: 0
-}

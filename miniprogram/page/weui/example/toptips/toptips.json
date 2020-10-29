@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "mp-toptips": "../../components/toptips/toptips"
+    "mp-toptips": "weui-miniprogram/toptips/toptips"
   },
   "navigationBarTitleText": "toptips"
 

@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "mp-icon": "../../components/icon/icon"
+    "mp-icon": "weui-miniprogram/icon/icon"
   },
   "navigationBarTitleText": "icons"
 

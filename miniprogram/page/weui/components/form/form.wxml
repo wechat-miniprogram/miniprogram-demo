@@ -1,3 +1,0 @@
-<view class="{{extClass}}">
-    <slot></slot>
-</view>

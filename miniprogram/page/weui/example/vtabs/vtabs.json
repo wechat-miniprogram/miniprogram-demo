@@ -1,7 +1,7 @@
 {
   "usingComponents": {
-    "mp-vtabs": "../../components/vtabs/vtabs",
-    "mp-vtabs-content": "../../components/vtabs-content/vtabs-content"
+    "mp-vtabs": "@miniprogram-component-plus/vtabs",
+    "mp-vtabs-content": "@miniprogram-component-plus/vtabs-content"
   },
   "navigationBarTitleText": "vtabs"
 

@@ -1,0 +1,22 @@
+<wxs src="./index.wxs" module="computed" />
+
+<view 
+  class="weui-select-text" 
+  style="{{computed.containerStyle({showToolTip, showCopyBtn, activeBgColor})}}"
+  catch:tap="stopPropagation"
+>
+  <text 
+    selectable="{{!showCopyBtn}}" 
+    space="{{space}}" 
+    decode="{{decode}}" 
+    catch:longpress="handleLongPress"
+  >{{value}}</text>
+  <view 
+    wx:if="{{showToolTip}}"
+    class="weui-tooltip weui-tooltip__{{placement}}"
+    style="z-index: {{zIndex}};"
+    catch:tap="handleCopy"
+  >
+    复制
+  </view>
+</view>
