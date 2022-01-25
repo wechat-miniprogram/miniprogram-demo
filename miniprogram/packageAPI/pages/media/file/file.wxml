@@ -1,0 +1,31 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'saveFile'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-body-info">
+        <block wx:if="{{tempFilePath != ''}}">
+          <image src="{{tempFilePath}}" class="image" mode="aspectFit"></image>
+        </block>
+        <block wx:if="{{tempFilePath === '' && savedFilePath != ''}}">
+          <image src="{{savedFilePath}}" class="image" mode="aspectFit"></image>
+        </block>
+        <block wx:if="{{tempFilePath === '' && savedFilePath === ''}}">
+          <view class="image-plus image-plus-nb" bindtap="chooseImage">
+            <view class="image-plus-horizontal"></view>
+            <view class="image-plus-vertical"></view>
+          </view>
+          <view class="image-plus-text">请选择文件</view>
+        </block>
+      </view>
+      <view class="btn-area">
+        <button type="primary" bindtap="saveFile">保存文件</button>
+        <button bindtap="clear">删除文件</button>
+      </view>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

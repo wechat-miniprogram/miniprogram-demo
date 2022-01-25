@@ -1,0 +1,21 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: '关键帧动画'}}"/>
+
+  <view class="page-body">
+  <view class="page-section">
+    <view class="page-section-title">
+      <text>关键帧动画\n\n从小程序基础库 2.9.0 开始支持一种更友好的动画创建方式，用于代替旧的 wx.createAnimation</text>
+    </view>  
+    <view id="container1" style="{{containerStyle1}}">
+      <button class="block1" style="width: 150px; margin: 50px auto;">示例按钮</button>
+      <a class="block1" style="display: block; margin: 50px auto; width: 150px; text-align: center;">示例超链接</a>
+      <text class="block1" style="display: block; margin: 50px auto; width: 150px; text-align: center;">示例文本</text>
+    </view>
+    <button disabled="{{!canIUse}}" type="primary" bindtap="change">开启动画</button>
+  </view>
+  </view>
+  <template is="foot" />
+</view>

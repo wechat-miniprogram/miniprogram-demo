@@ -1,0 +1,21 @@
+
+
+camera {
+  height: 250px;
+}
+
+.btn-area {
+  margin-top: 0;
+}
+
+form {
+  margin-top: 15px;
+}
+
+.weui-cell__bd {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 0;
+  min-height: 30px;
+}

@@ -1,0 +1,10 @@
+
+
+.page-body-info {
+  padding: 15px 0 15px 0;
+}
+
+.page-body-text {
+  padding: 0 15px;
+  text-align: center;
+}

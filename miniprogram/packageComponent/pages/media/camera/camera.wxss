@@ -1,0 +1,39 @@
+
+
+camera {
+  height: 250px;
+}
+
+.preview-tips {
+  margin: 10px 0;  
+}
+
+.photo, .video {
+  margin-top: 25px;
+  width: 100%;
+}
+
+.btn-area {
+  margin-top: 0;
+}
+
+.first-btn {
+  margin-top: 15px;
+}
+
+form {
+  margin-top: 15px;
+}
+
+.weui-cell__bd {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 0;
+  min-height: 30px;
+}
+
+.info-container {
+  margin: 12px;
+  text-align: center;
+}

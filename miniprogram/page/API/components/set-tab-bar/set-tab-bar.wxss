@@ -1,6 +1,9 @@
-@import "../../../common/lib/weui.wxss";
+
 @import "../../../../app.wxss";
 
+.container {
+  width: 100vw;
+}
 .weui-label {
   width: 5em;
 }

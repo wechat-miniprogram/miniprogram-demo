@@ -1,5 +1,0 @@
-@import '../common.wxss';
-
-.page {
-    background-color: var(--weui-BG-2)
-}

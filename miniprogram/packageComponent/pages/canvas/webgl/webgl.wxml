@@ -1,0 +1,21 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'webgl'}}"/>
+
+  <view class="page-body">
+    <block wx:if="{{canIUse}}">
+      <view class="page-section">
+        <view class="page-body-wrapper">
+          <canvas class="canvas" type="webgl" id="canvasWebGL"></canvas>
+        </view>
+      </view>
+    </block>
+    <view wx:else style="margin: 15px; text-align:center">
+      微信版本过低，暂不支持本功能
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

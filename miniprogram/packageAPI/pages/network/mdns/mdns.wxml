@@ -1,0 +1,23 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'mDNS'}}"/>
+  <view class="page-body">
+    <view class="page-section">
+      <button type="primary" bind:tap="startDiscovery">
+        开始搜索 mDNS
+      </button>
+      <button type="primary" bind:tap="stopDiscovery">
+        停止搜索 mDNS
+      </button>
+      <view>
+        <view wx:for="{{serviceList}}" wx:key="{{index}}" class='row'>
+          <text>设备服务名：{{item.serviceName}}</text>
+          <text>ip地址：{{item.ip}}:{{item.port}}</text>
+          <text>当前服务类型：{{item.serviceType}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

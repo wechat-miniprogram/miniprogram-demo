@@ -1,0 +1,53 @@
+.weui-vtabs {
+  width: 100%;
+  height: 100%;
+  display: flex
+}
+
+.weui-vtabs-bar__wrp {
+  width: 110px;
+  height: 100%;
+  background: #eeeeee;
+}
+
+.weui-vtabs-bar__scrollview {
+  height: 100%
+}
+
+.weui-vtabs-bar__content {
+  width: 110px;
+  height: 100%
+}
+
+.weui-vtabs-bar__item {
+  display: inline-block;
+  width: 110px;
+  height: 55px;
+  border-left: 4px solid transparent
+}
+
+.weui-vtabs-bar__title {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden
+}
+
+.weui-vtabs-content__wrp {
+  overflow: hidden;
+  flex: 1;
+  height: 100%
+}
+
+.weui-vtabs-content__scrollview {
+  height: 100%
+}
+
+.weui-vtabs-content {
+  height: 100%
+}

@@ -1,0 +1,95 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'open/get/Setting'}}"/>
+
+  <view class="page-body">
+    <form>
+      <view class="page-section">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">用户信息</view>
+            </view>
+            <view class="weui-cell__bd">
+              <icon wx:if="{{setting['scope.userInfo']}}" class="icon-small" type="success_no_circle" size="23"></icon>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">地理位置</view>
+            </view>
+            <view class="weui-cell__bd">
+              <icon wx:if="{{setting['scope.userLocation']}}" class="icon-small" type="success_no_circle" size="23"></icon>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input region">
+            <view class="weui-cell__hd">
+              <view class="weui-label">通讯地址</view>
+            </view>
+            <view class="weui-cell__bd">
+              <icon wx:if="{{setting['scope.address']}}" class="icon-small" type="success_no_circle" size="23"></icon>
+            </view>
+          </view>
+
+
+          <view class="weui-cell weui-cell_input detail">
+            <view class="weui-cell__hd">
+              <view class="weui-label">发票抬头</view>
+            </view>
+            <view class="weui-cell__bd">
+              <icon wx:if="{{setting['scope.invoiceTitle']}}" class="icon-small" type="success_no_circle" size="23"></icon>
+            </view>
+          </view>
+
+            <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">微信运动步数</view>
+            </view>
+            <view class="weui-cell__bd">
+              <icon wx:if="{{setting['scope.werun']}}" class="icon-small" type="success_no_circle" size="23"></icon>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">录音功能</view>
+            </view>
+            <view class="weui-cell__bd">
+              <icon wx:if="{{setting['scope.record']}}" class="icon-small" type="success_no_circle" size="23"></icon>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">保存到相册</view>
+            </view>
+            <view class="weui-cell__bd">
+              <icon wx:if="{{setting['scope.writePhotosAlbum']}}" class="icon-small" type="success_no_circle" size="23"></icon>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">摄像头</view>
+            </view>
+            <view class="weui-cell__bd">
+              <icon wx:if="{{setting['scope.camera']}}" class="icon-small" type="success_no_circle" size="23"></icon>
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </form>
+
+    <view class="btn-area">
+      <button type="primary" bindtap="getSetting">获取小程序设置</button>
+      <button open-type="openSetting" type="default">打开小程序设置</button>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

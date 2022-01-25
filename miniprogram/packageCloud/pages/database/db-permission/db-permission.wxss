@@ -1,0 +1,17 @@
+
+
+.permission-select {
+  display: flex;
+  align-items: center;
+  height: initial;
+  line-height: initial;
+}
+.weui-panel {
+  margin-top: 30px;
+}
+.input-area {
+  margin-top: 30px;
+}
+.btn-area {
+  margin-bottom: 30px;
+}

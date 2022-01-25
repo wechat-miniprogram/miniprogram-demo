@@ -1,0 +1,33 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'getBatteryInfo'}}"/>
+
+  <view class="page-body">
+  	<view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">当前电量</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" disabled="{{true}}" placeholder="未获取" value="{{level}}"></input>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">电池模式</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" disabled="{{true}}" placeholder="未获取" value="{{isCharging}}"></input>
+          </view>
+        </view>
+      </view>
+      <button type="primary" bind:tap="getBatteryInfo" >
+        获取电量信息信息
+      </button>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

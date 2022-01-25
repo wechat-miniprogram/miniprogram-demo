@@ -1,0 +1,21 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" />
+  <view class="page-body">
+    <view class="btn-area">
+      <button type="primary" data-mode="fingerPrint" bindtap="openhalfscreenminiprogram">打开半屏小程序</button>
+    </view>
+    <view class="btn-area">
+      <button type="primary" data-mode="fingerPrint" bindtap="openanotherminiprogram">打开小程序</button>
+    </view>
+    <!-- <view class="btn-area">
+      <button type="primary" data-mode="fingerPrint" bindtap="returnminiprogram">返回上一个小程序</button>
+    </view> -->
+    <view class="btn-area">
+      <button type="primary" data-mode="fingerPrint" bindtap="exitminiprogram">退出当前小程序</button>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

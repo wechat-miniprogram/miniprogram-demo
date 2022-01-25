@@ -1,0 +1,40 @@
+<view class="container page" data-weui-theme="{{theme}}">
+  <view>
+      <swiper class="item-swiper">
+         <swiper-item>
+            <view class="item item-A">A</view>
+          </swiper-item>
+          <swiper-item>
+            <view class="item item-B">B</view>
+          </swiper-item>
+          <swiper-item>
+            <view class="{{theme === 'dark' ? 'item dark-C' : 'item'}}">C</view>
+          </swiper-item>
+      </swiper>
+  </view>
+  <view>
+    <mp-row>
+      <mp-col xs="{{0}}" span="{{8}}">
+        <view>
+          <view class="item item-A">
+            A
+          </view>
+        </view>
+      </mp-col>
+      <mp-col xs="{{0}}" span="{{8}}">
+        <view>
+          <view class="item item-B">
+            B
+          </view>
+        </view>
+      </mp-col>
+      <mp-col xs="{{0}}" span="{{8}}">
+        <view>
+          <view class="{{theme === 'dark' ? 'item dark-C' : 'item item-C'}}">
+            C
+          </view>
+        </view>
+      </mp-col>
+    </mp-row>
+  </view>
+</view>

@@ -1,0 +1,11 @@
+@import '../../common.wxss';
+
+.page .demo0 {
+  height: 60px;
+  background: white;
+}
+
+.page .demo1 {
+  height: 60px;
+  background: rgba(0,0,0,.1);
+}

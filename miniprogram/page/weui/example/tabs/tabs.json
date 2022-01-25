@@ -1,8 +1,0 @@
-{
-  "disableScroll": true,
-
-  "navigationBarTitleText": "tabs",
-  "usingComponents": {
-    "mp-tabs": "@miniprogram-component-plus/tabs"
-  }
-}

@@ -1,0 +1,37 @@
+<view class="container page" data-weui-theme="{{theme}}">
+  <swiper 
+    class="video-swiper" 
+    circular="{{circular}}" 
+    easing-function="{{easingFunction}}" 
+    vertical 
+    current="1"
+    duration="{{duration}}" 
+    bindanimationfinish="animationfinish">
+    <!-- curQueue 循环会导致video重新插入，objectFit 不可变更 -->
+    <swiper-item wx:for="{{curQueue}}" wx:key="*this">
+      <video 
+        id="video_{{index}}" 
+        class="video_item" 
+        loop="{{loop}}" 
+        enable-play-gesture 
+        enable-progress-gesture 
+        show-center-play-btn="{{false}}"
+        controls="{{false}}"
+        src="{{item.url}}" 
+        data-id="{{item.id}}"
+        object-fit="{{item.objectFit || 'cover'}}"
+        data-index="{{index}}"
+        bindplay="onPlay"
+        bindpause="onPause"
+        bindended="onEnded"
+        binderror="onError"
+        bindtimeupdate="onTimeUpdate"
+        bindwaiting="onWaiting"
+        bindprogress="onProgress"
+        bindloadedmetadata="onLoadedMetaData"
+      >
+      </video>
+    </swiper-item>
+  </swiper>
+</view>
+

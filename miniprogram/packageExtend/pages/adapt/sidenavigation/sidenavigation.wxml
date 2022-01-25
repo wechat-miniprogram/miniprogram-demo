@@ -1,0 +1,28 @@
+<view class="container page" data-weui-theme="{{theme}}">
+  <view class="mobile {{show ? 'active' : ''}}">
+    <view class="{{theme === 'dark' ? 'left dark-bg' : 'left'}}">
+      <view class="{{theme === 'dark' ? 'item dark-C' : 'item'}}"></view>
+      <view class="{{theme === 'dark' ? 'item dark-C' : 'item'}}"></view>
+      <view class="{{theme === 'dark' ? 'item dark-C' : 'item'}}"></view>
+      <view class="{{theme === 'dark' ? 'item dark-C' : 'item'}}"></view>
+    </view>
+    <view class="right">
+      <view class="nav-bar">
+        <image class="button" bindtap="show" src="../../image/button.png" mode="aspectFill"></image>
+      </view>
+      <view class="section" bindtap="hide"></view>
+    </view>
+  </view>
+  <view class="laptop">
+    <view class="nav-bar"></view>
+    <view class="flexbox">
+      <view class="left">
+        <view class="{{theme === 'dark' ? 'item dark-C' : 'item'}}"></view>
+        <view class="{{theme === 'dark' ? 'item dark-C' : 'item'}}"></view>
+        <view class="{{theme === 'dark' ? 'item dark-C' : 'item'}}"></view>
+        <view class="{{theme === 'dark' ? 'item dark-C' : 'item'}}"></view>
+      </view>
+      <view class="right"></view>
+    </view>
+  </view>
+</view>

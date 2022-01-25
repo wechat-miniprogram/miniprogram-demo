@@ -1,0 +1,12 @@
+<mp-toptips msg="{{message}}" type="{{type}}" show="{{showTopTips}}" delay="{{3000}}"></mp-toptips>
+<view class="toptips-container">
+  <view class="toptips-content">
+    <input 
+      class="weui-input" 
+      focus 
+      placeholder="输入文本" 
+      bindinput="bindInputValue"
+      value="{{value}}"/>
+    <button bind:tap="bindConfirmTap" class="container-button" type="primary">确认</button>
+  </view>
+</view>

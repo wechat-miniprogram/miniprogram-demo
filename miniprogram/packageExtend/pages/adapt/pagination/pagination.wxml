@@ -1,0 +1,18 @@
+<view class="container page" data-weui-theme="{{theme}}">
+  <mp-row>
+    <mp-col xs="{{24}}" span="{{12}}">
+      <view>
+        <view class="item item-A">
+          A
+        </view>
+      </view>
+    </mp-col>
+    <mp-col xs="{{24}}" span="{{12}}">
+      <view>
+        <view class="item item-B">
+          B
+        </view>
+      </view>
+    </mp-col>
+  </mp-row>
+</view> 

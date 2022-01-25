@@ -1,0 +1,28 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'intersectionObserver'}}"/>
+
+  <view class="page-body">
+    <view class="page-section message">
+      <text wx:if="{{appear}}">
+        小球出现
+      </text>
+      <text wx:else>
+        小球消失
+      </text>
+    </view>
+    <view class="page-section">
+      <scroll-view class="scroll-view" scroll-y>
+        <view class="scroll-area" style="{{appear ? 'background: #ccc' : ''}}">
+          <text class="notice">向下滚动让小球出现</text>
+          <view class="filling"></view>
+          <view class="ball"></view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "mp-grids": "weui-miniprogram/grids/grids"
-  },
-  "navigationBarTitleText": "grid"
-
-}

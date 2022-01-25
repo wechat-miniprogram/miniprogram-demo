@@ -1,0 +1,7 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: '小窗模式'}}"/>
+  <template is="foot" />
+</view>

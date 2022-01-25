@@ -1,0 +1,17 @@
+<import src="../../../common/head.wxml"/>
+<import src="../../../common/foot.wxml"/>
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'startSoterAuthentication'}}"/>
+
+  <view class="page-body">
+    <view class="btn-area">
+      <button type="primary" data-mode="fingerPrint" bindtap="startAuth">指纹认证</button>
+    </view>
+     <view class="btn-area">
+      <button type="primary"data-mode="facial" bindtap="startAuth">人脸认证</button>
+    </view>
+  </view>
+
+  <template is="foot"/>
+</view>

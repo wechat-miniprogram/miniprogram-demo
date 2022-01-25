@@ -1,0 +1,64 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'map'}}"/>
+
+  <view class="page-body">
+    <view class="page-section-title">当前组件使用了墨渊底图样式，查看<navigator class="navigator" url="/packageComponent/pages/map-styles/map-styles">查看更多</navigator>。</view>
+    <view class="page-section page-section-gap">
+      <map
+        subkey="{{subKey}}"
+        style="width: 100%; height: 300px;"
+        latitude="{{latitude}}"
+        longitude="{{longitude}}"
+        scale="{{18}}"
+        markers="{{markers}}"
+        enable-3D="{{enable3d}}"
+        show-compass="{{showCompass}}"
+        enable-zoom="{{enableZoom}}"
+        enable-rotate="{{enableRotate}}"
+        enable-satellite="{{enableSatellite}}"
+        enable-traffic="{{enableTraffic}}"
+        enable-overlooking="{{enableOverlooking}}"
+        enable-scroll="{{enableScroll}}"
+        polygons="{{drawPolygon ? polygons : []}}"
+      >
+      </map>
+    </view>
+  </view>
+
+  <view class="page-section">
+    <view class="btn-area">
+      <button  type="default" bindtap="toggle3d">
+        {{ !enable3d ? '启用' : '关闭'}}3D效果
+      </button>
+      <button type="default" bindtap="toggleShowCompass">
+        {{ !showCompass ? '显示' : '关闭' }}指南针
+      </button>
+      <button type="default" bindtap="toggleOverlooking">
+        {{ !enableOverlooking ? '开启' : '关闭' }}俯视支持
+      </button>
+      <button type="default" bindtap="toggleRotate">
+        {{ !enableRotate ? '开启' : '关闭' }}旋转支持
+      </button>
+      <button type="default" bindtap="togglePolygon">
+        {{ !drawPolygon ? '绘制' : '清除' }}多边形
+      </button>
+      <button type="default" bindtap="toggleZoom">
+        {{ !enableZoom ? '开启' : '关闭' }}缩放支持
+      </button>
+      <button type="default" bindtap="toggleScroll">
+        {{ !enableScroll ? '开启' : '关闭' }}拖动支持
+      </button>
+       <button type="default" bindtap="toggleSatellite">
+        {{ !enableSatellite ? '开启' : '关闭' }}卫星图
+      </button>
+       <button type="default" bindtap="toggleTraffic">
+        {{ !enableTraffic ? '开启' : '关闭' }}实时路况
+      </button>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

@@ -1,0 +1,36 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'iBeacon'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="weui-cells__title">输入iBeacon设备广播的UUID</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" bindinput="enterUuid" />
+        </view>
+      </view>
+    </view>
+    <view class="btn-area">
+      <button type="primary" bindtap="startSearch">搜索iBeacon</button>
+      <button bindtap="stopSearch">停止搜索</button>
+    </view>
+    <view class="page-body-info">
+      <view class="devices_summary">已发现 {{beacons.length}} 个外围设备：</view>
+      <scroll-view class="device_list" scroll-y scroll-with-animation>
+        <view wx:for="{{beacons}}" wx:key="index"
+         class="device_item"
+         hover-class="device_item_hover">
+          <view style="font-size: 16px; color: #333;">主ID: {{item.major}} <text style="font-size: 12px;">次ID: {{item.minor}}</text></view>
+          <view style="font-size: 10px">信号强度: {{item.rssi}}dBm</view>
+          <view style="font-size: 10px">UUID: {{item.uuid}}</view>
+          <view style="font-size: 10px">Proximity: {{item.proximity}} Accuracy: {{item.accuracy}}</view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

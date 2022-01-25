@@ -1,0 +1,26 @@
+
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'getPerformance'}}"/>
+  <block wx:if="{{support}}">
+    <button type="primary" bind:tap="getPerformanceInfo">
+      获取性能数据
+    </button>
+    <view class="page-section">
+      <view wx:for="{{array}}" class="performance-list">
+        <view class="performance-item">
+          <view>{{item.entryType}}：{{item.name}}</view>
+          <view wx:if="{{item.duration}}">耗时：{{item.duration}}</view>
+          <view wx:if="{{item.startTime}}">时间：{{item.startTime}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <view style="text-align: center" wx:else>
+    微信版本过低，暂不支持本功能
+  </view>
+
+  <template is="foot"/>
+</view>

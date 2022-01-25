@@ -1,0 +1,45 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'uploadFile'}}" />
+
+  <view class="page-body">
+    <view class="page-section">
+      <block wx:if="{{fileUploaded}}">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">文件 ID</view>
+            </view>
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value="{{fileId}}" style="height: 3.3em" disabled />
+            </view>
+          </view>
+
+          <view class="weui-cell page-section-ctn">
+            <image src="{{filePath}}" class="image" mode="aspectFit"></image>
+          </view>
+        </view>
+
+        <view class="btn-area" wx:if="{{fromOtherPage}}">
+          <navigator open-type="navigateBack">
+            <button type="primary" size="40">返回</button>
+          </navigator>
+        </view>
+      </block>
+
+      <block wx:else>
+        <view class="page-body-info">
+          <view class="image-plus image-plus-nb" bindtap="chooseImage">
+            <view class="image-plus-horizontal"></view>
+            <view class="image-plus-vertical"></view>
+          </view>
+          <view class="image-plus-text">选择图片</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

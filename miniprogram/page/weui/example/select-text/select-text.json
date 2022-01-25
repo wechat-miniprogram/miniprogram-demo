@@ -1,8 +1,0 @@
-{
-  "disableScroll": true,
-
-  "navigationBarTitleText": "select-text",
-  "usingComponents": {
-    "mp-select-text": "@miniprogram-component-plus/select-text"
-  }
-}

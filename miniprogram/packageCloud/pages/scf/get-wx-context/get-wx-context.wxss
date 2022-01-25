@@ -1,0 +1,11 @@
+.page-body-info {
+  padding-bottom: 0;
+  height: 260px;
+}
+.page-body-text {
+  padding: 0 15px;
+  text-align: center;
+}
+.context-value {
+  font-size: 19px;
+}

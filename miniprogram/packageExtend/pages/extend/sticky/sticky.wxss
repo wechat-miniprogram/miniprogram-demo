@@ -1,0 +1,26 @@
+@import '../../common.wxss';
+
+.page{
+    background-color: var(--weui-BG-0);
+    height: 100%;
+}
+
+.demo-block {
+    /* margin: 10px 0; */
+}
+
+button {
+    font-size: 14px;
+    border-radius: 0;
+}
+
+.demo-title {
+    font-size: 14px;
+    color: gray;
+    padding-left: 15px;
+}
+
+.demo-body {
+    margin: 20px 0;
+    height: 100px;
+}

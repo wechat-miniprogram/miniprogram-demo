@@ -1,0 +1,42 @@
+<view class="page" data-weui-theme="{{theme}}">
+    <!-- <view class="page__hd page-weui-large">
+      <view class="page__title__large">扩展能力</view>
+      <view class="page__desc">扩展组件是对小程序内置组件能力的补充，包括一些常见的功能组件。</view>
+    </view> -->
+     <view class="index-hd">
+    <image class="index-logo" src="./images/logo_extended.png"></image>
+    <view class="index-desc">以下是对小程序内置组件能力的补充，包括 WeUI 组件库和一些常见的功能组件，具体属性参数详见 <navigator url="/page/component/pages/doc-web-view/doc-web-view" class="weui-agree__link">小程序开发文档</navigator>。</view>
+  </view>
+    <!-- <view class="page__hd page-weui">
+      <view class="page__title">WeUI</view>
+    </view> -->
+    <view class="page__bd page-weui page__bd_spacing">
+        <view class="kind-list">
+            <block wx:for="{{list}}" wx:key="id">
+                <view class="kind-list__item">
+                    <view id="{{item.id}}" class="weui-flex kind-list__item-hd {{item.open ? 'kind-list__item-hd_show' : ''}}" bindtap="kindToggle">
+                        <view class="weui-flex__item">{{item.name}}</view>
+                        <image class="kind-list__img" src="images/icon_nav_{{item.id}}.png"></image>
+                    </view>
+                    <view class="kind-list__item-bd {{item.open ? 'kind-list__item-bd_show' : ''}}">
+                        <view class="weui-cells {{item.open ? 'weui-cells_show' : ''}}">
+                            <block wx:for="{{item.pages}}" wx:for-item="page" wx:key="*this">
+                                <navigator wx:if="{{page.url}}" url="../../packageExtend/pages/{{page.url}}" class="weui-cell weui-cell_access">
+                                    <view class="weui-cell__bd">{{page.zh}}</view>
+                                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                                </navigator>
+                                <navigator wx:else url="../../packageExtend/pages/{{item.father}}/{{page}}/{{page}}" class="weui-cell weui-cell_access">
+                                    <view class="weui-cell__bd">{{page}}</view>
+                                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                                </navigator>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="page__ft">
+        <!-- <image bindtap="themeToggle" src="images/icon_footer.png" style="width: 84px; height: 19px;"></image> -->
+    </view>
+</view>

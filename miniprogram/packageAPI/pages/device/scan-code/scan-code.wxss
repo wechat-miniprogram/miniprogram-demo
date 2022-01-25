@@ -1,0 +1,6 @@
+
+
+.weui-cell__bd{
+  min-height: 24px;
+  word-break: break-all;
+}

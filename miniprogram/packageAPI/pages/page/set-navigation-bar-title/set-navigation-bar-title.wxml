@@ -1,0 +1,24 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'setNaivgationBarTitle'}}"/>
+
+  <form class="page-body" bindsubmit="setNaivgationBarTitle">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">页面标题</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" placeholder="请输入页面标题并点击设置即可" name="title"></input>
+        </view>
+      </view>
+    </view>
+    <view class="btn-area">
+      <button type="primary" formType="submit">设置</button>
+    </view>
+  </form>
+
+  <template is="foot" />
+</view>

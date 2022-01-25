@@ -1,0 +1,59 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'Storage'}}" />
+
+  <view class="page-body">
+    <view class="page-section">
+      <block wx:if="{{fileTempURLDone}}">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">文件 ID</view>
+            </view>
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value="{{fileId}}" style="height: 3.3em" disabled />
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">临时链接</view>
+            </view>
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value="{{tempFileURL}}" style="height: 3.3em" disabled />
+            </view>
+          </view>
+
+          <view class="weui-cell">
+            <view class="page-section-ctn">
+              <image src="{{tempFileURL}}" class="image" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+        
+      </block>
+
+      <block wx:else>
+        <view class="weui-cells__title">云函数亦可操作文件存储，点击按钮换取临时链接</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">文件 ID</view>
+            </view>
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value="{{fileId}}" style="height: 3.3em" disabled />
+            </view>
+          </view>
+        </view>
+
+        <view class="btn-area">
+          <button type="primary" size="40" bindtap="getTempFileURL" loading="{{loading}}">通过云函数换取临时链接</button>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

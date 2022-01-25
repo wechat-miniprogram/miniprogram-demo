@@ -1,0 +1,17 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: '订阅消息'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <block>
+        <text class="page-body-text">点击提交，调用示例订阅消息</text>
+        <button class="page-body-button" type="primary" bindtap="requestSubscribeMessage">提交</button>
+      </block>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

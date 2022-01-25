@@ -1,0 +1,55 @@
+<view class="container page" data-weui-theme="{{theme}}">
+  <view class="flexbox">
+    <mp-row>
+      <mp-col xs="{{24}}" span="{{0}}">
+        <view>
+          <view class="item item-A">
+            A
+          </view>
+        </view>
+      </mp-col>
+      <mp-col xs="{{24}}" span="{{0}}">
+        <view>
+          <view class="item item-B">
+            B
+          </view>
+        </view>
+      </mp-col>
+      <mp-col xs="{{24}}" span="{{0}}">
+        <view>
+          <view class="{{theme === 'dark' ? 'item dark-C' : 'item item-C'}}">
+            C
+          </view>
+        </view>
+      </mp-col>
+    </mp-row>
+    <!-- 宽屏左右布局 -->
+    <mp-row>
+      <mp-col xs="{{0}}" span="{{16}}">
+       <mp-row>
+        <mp-col>
+           <view>
+            <view class="item item-A">
+              A
+            </view>
+          </view>
+        </mp-col>
+        <mp-col>
+           <view>
+            <view class="item item-B">
+              B
+            </view>
+          </view>
+        </mp-col>
+       </mp-row>
+      </mp-col>
+      <mp-col xs="{{0}}" span="{{8}}">
+          <view>
+            <view class="{{theme === 'dark' ? 'item dark-C' : 'item item-C'}}" style="height: 490px; line-height:480px;">
+              C
+            </view>
+          </view>
+        </mp-col>
+    </mp-row>
+  </view>
+</view>

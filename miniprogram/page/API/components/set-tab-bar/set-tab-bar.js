@@ -3,6 +3,11 @@ const defaultTabBarStyle = {
   selectedColor: '#3cc51f',
   backgroundColor: '#ffffff',
 }
+const darkDefaultTabBarStyle = {
+  color: '#FFFFFF',
+  selectedColor: '#51A937',
+  backgroundColor: '#1F1F1F',
+}
 
 const defaultItemName = '接口'
 
@@ -13,9 +18,24 @@ Component({
     hasCustomedStyle: false,
     hasCustomedItem: false,
     hasHiddenTabBar: false,
+    theme: 'light'
   },
 
   attached() {
+    this.setData({
+      theme: wx.getSystemInfoSync().theme || 'light'
+    })
+
+    if (wx.onThemeChange) {
+      wx.onThemeChange(({theme}) => {
+        this.setData({theme})
+        if (this.data.theme == 'dark') {
+          wx.setTabBarStyle(darkDefaultTabBarStyle)
+        } else {
+          wx.setTabBarStyle(defaultTabBarStyle)
+        }
+      })
+    }
     wx.pageScrollTo({
       scrollTop: 0,
       duration: 0
@@ -109,7 +129,11 @@ Component({
 
     removeCustomStyle() {
       this.setData({hasCustomedStyle: false})
-      wx.setTabBarStyle(defaultTabBarStyle)
+      if (this.data.theme == 'dark') {
+        wx.setTabBarStyle(darkDefaultTabBarStyle)
+      } else {
+        wx.setTabBarStyle(defaultTabBarStyle)
+      }
     },
 
     customItem() {

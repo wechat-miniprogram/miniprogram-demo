@@ -1,0 +1,6 @@
+/* example/input/input.wxss */
+@import '../../common.wxss';
+
+.weui-agree .weui-agree__text {
+  display: inline;
+}

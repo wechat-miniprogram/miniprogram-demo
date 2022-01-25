@@ -1,0 +1,12 @@
+
+
+.page-body-info {
+  display: flex;
+  margin-top: 20px;
+  padding: 0;
+  height: 330px;
+  border-top: 1px solid var(--weui-FG-3);
+  border-bottom: 1px solid var(--weui-FG-3);
+  align-items: center;
+  justify-content: center;
+}

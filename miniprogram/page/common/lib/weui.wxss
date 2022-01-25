@@ -2784,7 +2784,7 @@ a.weui-media-box:active {
   font-size: 10px
 }
 
-.weui-half-screen-dialog__bd {
+. {
   word-wrap: break-word;
   -webkit-hyphens: auto;
   hyphens: auto;

@@ -1,0 +1,153 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'Permission'}}" />
+
+  <view class="page-body" wx:if="{{openid}}">
+    <view class="page-section">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_select">
+          <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">权限类型</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker bindchange="onPermissionChange" value="{{currentPermissionIndex}}" range="{{permissions}}">
+              <view class="weui-select permission-select" weui-select_in-select-after>{{permissions[currentPermissionIndex]}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-panel">
+        <view class="weui-panel__bd">
+
+          <block wx:if="{{currentPermissionIndex === 0}}">
+            <view class="weui-tab">
+              <view class="weui-navbar">
+                <block wx:for="{{tabs[currentPermissionIndex]}}" wx:key="*this">
+                  <view id="{{index}}" class="weui-navbar__item {{activeTabIndex === index ? 'weui-bar__item_on' : ''}}" bindtap="onTabClick">
+                    <view class="weui-navbar__title">{{item}}</view>
+                  </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+              </view>
+              <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeTabIndex !== 0}}">
+                  <view class="weui-cells weui-cells_after-title input-area">
+                    <view class="weui-cell weui-cell_input">
+                      <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder="请输入个性签名" value="{{myWhatsUp}}" focus="{{!hasMyWhatsUp}}" data-name="myWhatsUp" bindinput="bindInput" bindconfirm="updateMyWhatsUp" />
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="btn-area">
+                    <button type="primary" bindtap="updateMyWhatsUp" loading="{{updating}}">设置个性签名</button>
+                    <button bindtap="queryMyWhatsUp" loading="{{querying}}">获取个性签名</button>
+                  </view>
+                </view>
+
+                <view class="weui-tab__content" hidden="{{activeTabIndex !== 1}}">
+                  <view class="weui-cells weui-cells_after-title input-area">
+                    <view class="weui-cell weui-cell_input">
+                      <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder="请输入个性签名" value="{{adminWhatsUp}}" data-name="adminWhatsUp" bindinput="bindInput" />
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="btn-area">
+                    <button type="primary" bindtap="updateAdminWhatsUp" loading="{{updating}}">设置个性签名</button>
+                    <button bindtap="queryAdminWhatsUp" loading="{{querying}}">获取个性签名</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+
+          <block wx:elif="{{currentPermissionIndex === 1}}">
+            <view class="weui-tab">
+              <view class="weui-navbar">
+                <block wx:for="{{tabs[currentPermissionIndex]}}" wx:key="*this">
+                  <view id="{{index}}" class="weui-navbar__item {{activeTabIndex === index ? 'weui-bar__item_on' : ''}}" bindtap="onTabClick">
+                    <view class="weui-navbar__title">{{item}}</view>
+                  </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+              </view>
+              <view class="weui-tab__panel">
+                <view class="weui-tab__content" hidden="{{activeTabIndex !== 0}}">
+                  <view class="weui-cells weui-cells_after-title input-area">
+                    <view class="weui-cell weui-cell_input">
+                      <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder="请输入邮箱" value="{{myEmail}}" data-name="myEmail" bindinput="bindInput" />
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="btn-area">
+                    <button type="primary" bindtap="updateMyEmail" loading="{{updating}}">设置邮箱</button>
+                    <button bindtap="queryMyEmail" loading="{{querying}}">获取邮箱</button>
+                  </view>
+                </view>
+
+                <view class="weui-tab__content" hidden="{{activeTabIndex !== 1}}">
+                  <view class="weui-cells weui-cells_after-title input-area">
+                    <view class="weui-cell weui-cell_input">
+                      <view class="weui-cell__bd">
+                        <input class="weui-input" placeholder="请输入邮箱" value="{{adminEmail}}" data-name="adminEmail" bindinput="bindInput" />
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="btn-area">
+                    <button type="primary" bindtap="updateAdminEmail" loading="{{updating}}">设置邮箱</button>
+                    <button bindtap="queryAdminEmail" loading="{{querying}}">获取邮箱</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+
+          <block wx:elif="{{currentPermissionIndex === 2}}">
+            <view>
+              <view class="weui-cells weui-cells_after-title input-area">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入商品价格" value="{{product.price}}" data-name="product.price" bindinput="bindInput" />
+                  </view>
+                </view>
+              </view>
+
+              <view class="btn-area">
+                <button type="primary" bindtap="updateProductPrice" loading="{{updating}}">设置商品价格</button>
+                <button bindtap="queryProduct" loading="{{querying}}">获取商品价格</button>
+              </view>
+            </view>
+          </block>
+
+          <block wx:elif="{{currentPermissionIndex === 3}}">
+            <view>
+              <view class="weui-cells weui-cells_after-title input-area">
+                <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入后台流水数据" value="{{serverData}}" data-name="serverData" bindinput="bindInput" />
+                  </view>
+                </view>
+              </view>
+
+              <view class="btn-area">
+                <button type="primary" bindtap="updateServerData" loading="{{updating}}">设置后台流水数据</button>
+                <button bindtap="queryServerData" loading="{{querying}}">获取后台流水数据</button>
+              </view>
+            </view>
+          </block>
+
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

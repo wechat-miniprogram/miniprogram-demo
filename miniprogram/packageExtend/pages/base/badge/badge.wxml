@@ -1,0 +1,36 @@
+<view class="page" data-weui-theme="{{theme}}">
+    <view class="page__hd">
+        <view class="page__title">Badge</view>
+        <view class="page__desc">徽章</view>
+    </view>
+
+    <view class="page__bd">
+        <mp-cells title="新消息提示跟摘要信息后，统一在列表右侧">
+            <mp-cell title="单行列表" link>
+                <view slot="footer">
+                    <view style="display: inline-block;vertical-align:middle; font-size: 17px;">详细信息</view>
+                    <mp-badge style="margin-left: 5px;margin-right: 5px;" ext-class="blue"/>
+                </view>
+            </mp-cell>
+        </mp-cells>
+
+        <mp-cells title="未读数红点跟在主题信息后，统一在列表左侧">
+            <mp-cell>
+                <view slot="title" style="position: relative;margin-right: 10px;">
+                    <image src="../../images/pic_160.png" style="width: 50px; height: 50px; display: block"/>
+                    <mp-badge content="99+" style="position: absolute;top: -.4em;right: -.4em;"/>
+                </view>
+                <view>联系人名称</view>
+                <view style="font-size: 13px;color: #888888;">摘要信息</view>
+            </mp-cell>
+            <mp-cell link>
+                <view style="display: inline-block; vertical-align: middle">单行列表</view>
+                <mp-badge content="8" style="margin-left: 5px;"/>
+            </mp-cell>
+            <mp-cell link>
+                <view style="display: inline-block; vertical-align: middle">单行列表</view>
+                <mp-badge style="margin-left: 5px;" content="New"/>
+            </mp-cell>
+        </mp-cells>
+    </view>
+</view>

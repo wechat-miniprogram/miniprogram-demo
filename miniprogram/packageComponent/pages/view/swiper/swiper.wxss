@@ -1,0 +1,28 @@
+
+
+button{
+  margin-bottom: 15px;
+}
+button:last-child{
+  margin-bottom: 0;
+}
+.page-section-title{
+  padding: 0;
+}
+.swiper-item{
+  display: block;
+  height: 150px;
+}
+.page-section-title{
+  margin-top: 30px;
+  position: relative;
+}
+.info{
+  position: absolute;
+  right: 0;
+  color: #353535;
+  font-size: 15px;
+}
+.page-foot{
+  margin-top: 25px;
+}

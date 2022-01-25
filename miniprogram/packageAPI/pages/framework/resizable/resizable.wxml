@@ -1,0 +1,20 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+<wxs src="./resizable.wxs" module="resizable" />
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: '屏幕旋转'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view style="text-align:center">
+        <!-- 当前屏幕状态：{{resizable.renderResizable(status)}} -->
+        旋转屏幕
+      </view>
+      <image src="http://mmbiz.qpic.cn/sz_mmbiz_png/GEWVeJPFkSHALb0g5rCc4Jf5IqDfdwhWJ43I1IvriaV5uFr9fLAuv3uxHR7DQstbIxhNXFoQEcxGzWwzQUDBd6Q/0?wx_fmt=png" mode="aspectFit" style="width: 100%"></image>
+      <!-- <button type="primary" data-status="unlock" bind:tap="handleStatusChange">打开屏幕旋转</button>
+      <button type="primary" data-status="lock" bind:tap="handleStatusChange">锁定屏幕</button> -->
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

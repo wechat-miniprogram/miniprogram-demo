@@ -1,0 +1,34 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'getBackgroundFetchData'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view wx:if="{{canIUse}}" class="page-body-info">
+        <view class="page-body-title">数据预拉取</view>
+        <block wx:if="{{appid}}">
+          <block>
+            <text class="page-body-text">OpenID</text>
+            <text class="context-value">{{openid}}</text>
+          </block>
+          <block>
+            <text class="page-body-text">AppID</text>
+            <text class="context-value">{{appid}}</text>
+          </block>
+          <block>
+            <text class="page-body-text">数据缓存的时间</text>
+            <text class="context-value">{{getDataTime}}</text>
+          </block>
+        </block>
+        <block>
+          <text class="page-body-text">用户启动小程序时，调用 wx.getBackgroundFetchData() 获取已缓存到本地的数据。
+          </text>
+        </block>
+        
+      </view>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

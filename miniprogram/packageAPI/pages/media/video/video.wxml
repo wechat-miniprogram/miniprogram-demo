@@ -1,0 +1,56 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'chooseVideo'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">视频来源</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker range="{{sourceType}}" bindchange="sourceTypeChange" value="{{sourceTypeIndex}}">
+              <view class="weui-input">{{sourceType[sourceTypeIndex]}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">摄像头</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker range="{{camera}}" bindchange="cameraChange" value="{{cameraIndex}}">
+              <view class="weui-input">{{camera[cameraIndex]}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">拍摄长度</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker range="{{duration}}" bindchange="durationChange" value="{{durationIndex}}">
+              <view class="weui-input">{{duration[durationIndex]}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+
+      <view class="page-body-info">
+        <block wx:if="{{src === ''}}">
+          <view class="image-plus image-plus-nb" bindtap="chooseVideo">
+            <view class="image-plus-horizontal"></view>
+            <view class="image-plus-vertical"></view>
+          </view>
+          <view class="image-plus-text">添加视频</view>
+        </block>
+        <block wx:if="{{src != ''}}">
+          <video src="{{src}}" class="video"></video>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

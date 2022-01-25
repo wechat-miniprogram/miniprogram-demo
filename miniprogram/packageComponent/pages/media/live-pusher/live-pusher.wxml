@@ -1,0 +1,29 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'live-pusher'}}"/>
+  <view class="page-body">
+    	<view class="page-section">
+		<live-pusher id="pusher" url="{{ videoSrc }}" mode="RTC" autopush bindstatechange="handleLivePusherStateChange" binderror="handleLivePusherError"></live-pusher>
+	</view>
+
+	<view class="page-section">
+		<view class="page-url">视频地址 (支持rtmp):</view>
+		<input name="input" placeholder="视频推送链接" value="{{ videoSrc }}" bindinput="handleVideoSrcInput" />
+     <button type="primary" bindtap="handleScanQRCode">
+        扫码
+      </button>
+	</view>
+
+	<view class="page-section">
+		<button bindtap="handleStart" class="page-body-button" type="primary">开始</button>
+		<button bindtap="handlePause" class="page-body-button" type="primary">暂停</button>
+		<button bindtap="handleStop" class="page-body-button" type="primary">停止</button>
+		<button bindtap="handleResume" class="page-body-button" type="primary">恢复</button>
+		<button bindtap="handleSwitchCamera" class="page-body-button" type="primary">切换摄像头</button>
+	</view>
+  </view>
+
+  <template is="foot" />
+</view>

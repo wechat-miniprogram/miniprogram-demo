@@ -1,5 +1,0 @@
-@import '../common.wxss';
-
-.weui-form-preview{
-    margin-bottom: 25px;
-}

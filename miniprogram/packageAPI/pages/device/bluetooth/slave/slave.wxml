@@ -1,0 +1,42 @@
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
+
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'bluetooth'}}"/>
+  <view class="page-body" style="display: flex; flex-direction: column">
+    <text style="text-align: center; margin: 16px">当前 serverId {{serverId}}</text>
+    <view class="action-area">
+      <button type="primary" bindtap="openBluetoothAdapter">创建server</button>
+      <button type="primary" bindtap="closeServer">关闭server</button>
+    </view>
+    <view class="action-area">
+      <button type="primary" bindtap="addService">创建服务</button>
+      <button type="primary" bindtap="removeService">关闭服务</button>
+    </view>
+    <view class="action-area">
+      <button type="primary" bindtap="startAdvertising">开启广播</button>
+      <button type="primary" bindtap="stopAdvertising">关闭广播</button>
+    </view>
+    <view class="action-area">
+      <button type="primary" bindtap="showInput">写数据</button>
+      <button type="primary" bindtap="closeBluetoothAdapter">结束流程</button>
+    </view>
+    <button type="primary" bindtap="chaneMode">返回主机模式</button>
+    <block wx:if="{{input}}">
+      <input style="width: 200px;margin: 0 auto;background: var(--weui-BG-2);padding: 5px;" 
+        placeholder="写个数字" 
+        bindconfirm="onConfirm"
+      ></input>
+    </block>
+    <view>
+      <view wx:for="{{connects}}" wx:if="{{connects.length > 0}}">
+        <view>
+          <text>{{item.deviceId}} : {{item.serverId}}</text>
+          <text>{{item.connected ? "已连接" : "断开"}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <template is="foot"></template>
+</view>

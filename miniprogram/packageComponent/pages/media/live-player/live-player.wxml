@@ -1,0 +1,32 @@
+	<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'live-player'}}"/>
+
+  <view class="page-body">
+
+    <view class="page-section">
+      <live-player id="player" src="{{ videoSrc }}" mode="RTC" autoplay bindstatechange="handleLivePlayerStateChange" binderror="handleLivePlayerError"></live-player>
+    </view>
+
+    <view class="page-section">
+      <view class="page-url">视频地址 (支持flv, rtmp):</view>
+      <input class="input" name="input" placeholder="视频播放链接" value="{{ videoSrc }}" bindinput="handleVideoSrcInput" />
+      <button type="primary" bindtap="handleScanQRCode">
+        扫码
+      </button>
+    </view>
+    <view class="page-section">
+      <button bindtap="handlePlay" class="page-body-button" type="primary">播放</button>
+      <button bindtap="handlePause" class="page-body-button" type="primary">暂停</button>
+      <button bindtap="handleStop" class="page-body-button" type="primary">停止</button>
+      <button bindtap="handleResume" class="page-body-button" type="primary">恢复</button>
+      <button bindtap="handleMute" class="page-body-button" type="primary">静音</button>
+    </view>
+  </view>
+  <template is="foot" />
+</view>
+
+  
+  

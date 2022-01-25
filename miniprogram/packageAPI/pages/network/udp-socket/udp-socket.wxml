@@ -1,0 +1,46 @@
+<import src="../../../common/head.wxml"/>
+<import src="../../../common/foot.wxml"/>
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'startSoterAuthentication'}}"/>
+
+  <view class="page-body">
+    <view wx:if="{{startUDP}}" style="text-align: center">
+        本机port: {{port}} 模拟远程port: {{remote_port}}
+    </view>
+    <view wx:if="{{!startUDP}}" class="btn-area">
+      <button type="primary" 
+        disabled="{{!canIUse}}"
+      bind:tap="handleCreateUDPTap">
+        开启 UDPSocket
+      </button>
+    </view>
+    <block wx:else>
+      <view class="btn-area">
+        <button type="primary" bind:tap="handleSendMessage">
+          本机发送测试
+        </button>
+      </view>
+      <view class="btn-area">
+        <button type="primary" bind:tap="changeMode">
+          远程发送测试
+        </button>
+      </view>
+      <block wx:if="{{mode === 'remote'}}">
+        <input placeholder="请输入目标主机 IP 地址 默认: 127.0.0.1" bind:input="handleInputChange"></input>
+        <view class="btn-area">
+          <button type="primary" bind:tap="handleSendRemoteMessage">
+            发送
+          </button>
+        </view>
+      </block>
+      <view class="btn-area">
+        <button type="primary" bind:tap="handleCloseUDPTap">
+          关闭 UDPSocket
+        </button>
+      </view>
+    </block>
+  </view>
+
+  <template is="foot"/>
+</view>

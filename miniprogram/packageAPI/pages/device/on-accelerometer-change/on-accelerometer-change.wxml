@@ -1,0 +1,27 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'onAccelerometerChange'}}"/>
+
+  <view class="page-body">
+    <view class="page-section page-section_center">
+      <text class="page-body-text">倾斜手机即可移动下方小球</text>
+      <view class="page-body-canvas">
+        <canvas class="page-body-ball" show="{{true}}" canvas-id="big-ball"></canvas>
+        <canvas class="page-body-ball" show="{{true}}" canvas-id="small-ball"></canvas>
+      </view>
+      <view class="page-body-xyz">
+        <text class="page-body-title">X: {{x}}</text>
+        <text class="page-body-title">Y: {{y}}</text>
+        <text class="page-body-title">Z: {{z}}</text>
+      </view>
+      <view class="page-body-controls">
+        <button bindtap="startAccelerometer" disabled="{{enabled}}">开始监听</button>
+        <button bindtap="stopAccelerometer" disabled="{{!enabled}}">停止监听</button>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

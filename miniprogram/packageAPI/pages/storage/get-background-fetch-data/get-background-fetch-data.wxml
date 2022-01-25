@@ -1,0 +1,31 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'getBackgroundFetchData'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <block wx:if="{{canIUse}}">
+        <view class="page-body-info">
+          <view class="page-body-title">周期性缓存数据</view>
+          <block wx:if="{{appid}}">
+            <block>
+              <text class="page-body-text">OpenID</text>
+              <text class="context-value">{{openid}}</text>
+            </block>
+            <block>
+              <text class="page-body-text">AppID</text>
+              <text class="context-value">{{appid}}</text>
+            </block>
+          </block>
+          <block>
+            <text class="page-body-text">微信客户端每隔 12 个小时才会发起一次请求</text>
+            <text class="page-body-text">为了方便调试周期性数据，可以在 工具 -> 拉取周期性缓存数据 开启</text>
+          </block>
+        </view>
+      </block>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

@@ -1,0 +1,46 @@
+
+
+.page-body-info {
+  padding-bottom: 15px;
+}
+.progress-figure {
+  font-size: 16px;
+}
+.progress-icon {
+  width: 30px;
+  height: 30px;
+}
+.progress-line {
+  border-top: 2px solid #2F2F2F;
+  padding: 0 30px;
+  margin: 0 10px;
+}
+.progress-line.pending {
+  border-top-style: dashed;
+}
+.progress-line.success {
+  border-top-color: #0bb20c;
+}
+.progress-line.fail {
+  border-top-color: #e64340;
+}
+.progress-line.lg {
+  padding: 0 50px;
+}
+.data-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+  height: 15px;
+}
+.data-area .data-text {
+  display: flex;
+  align-items: center;
+}
+.data-area .data-text icon {
+  margin-right: 5px;
+}
+.btn-area {
+  margin-top: 15px;
+}

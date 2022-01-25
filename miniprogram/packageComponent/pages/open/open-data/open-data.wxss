@@ -1,0 +1,17 @@
+
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.avatar-img {
+  width: 50%;
+  border-radius: 50%;
+}
+
+.country, .province, .city {
+  padding-right: 5px;
+}
+

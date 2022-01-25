@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "mp-col": "@miniprogram-component-plus/col",
-    "mp-row": "@miniprogram-component-plus/row"
-  },
-  "navigationBarTitleText": "分页展现"
-}

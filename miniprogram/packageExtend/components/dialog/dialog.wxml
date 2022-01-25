@@ -1,0 +1,21 @@
+<view bindtap="close" class="weui-mask {{!show ? 'weui-mask_hidden' : '' }}" wx:if="{{mask}}"></view>
+<view wx:if="{{show}}" bindtap="close" class="weui-dialog__wrp {{extClass}}">
+    <view class="weui-dialog" catchtap="stopEvent">
+      <view class="weui-dialog__hd">
+        <view class="weui-dialog__title">{{title}}
+          <slot name="title"></slot>
+        </view>
+      </view>
+      <view class="weui-dialog__bd">
+        <slot></slot>
+      </view>
+      <view class="weui-dialog__ft">
+        <block wx:if="{{buttons && buttons.length}}">
+          <view wx:for="{{buttons}}" wx:key="index" class="weui-dialog__btn {{item.className}} {{item.extClass}}" data-index="{{index}}" bindtap="buttonTap">{{item.text}}</view>
+          <!-- <view class="weui-dialog__btn" bindtap="confirm">确认</view> -->
+        </block>
+        <slot name="footer" wx:else></slot>
+      </view>
+    </view>
+</view>
+

@@ -1,0 +1,40 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: '音视频合成'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-section-title">
+       源视频
+      </view>
+    </view>
+    <view class="page-section">
+     <button type="primary" bindtap="handleChooseVideo" data-video="one">选择源视频1</button>
+     <video wx:if="{{one}}" src="{{one}}"></video>
+    </view>
+    <view class="page-section">
+      <button type="primary" bindtap="handleChooseVideo" data-video="two">选择源视频2</button>
+      <video wx:if="{{two}}" src="{{two}}"></video>
+    </view>
+    <view class="btn-area">
+      <button disabled="{{!canIUse}}" type="primary" bind:tap="handleExport">合成</button>
+    </view> 
+    <block wx:if="{{targetSrc}}">
+      <view class="page-section">
+        <view class="page-section-title">
+           <text>合成视频</text>
+        </view>
+        <view class="page-section-title">
+           <text>合成视频轨道为：源视频1视频轨道 + 源视频2音频轨道</text>
+        </view>
+      </view>
+      <view class="page-section">
+        <video src="{{targetSrc}}">
+        </video>
+      </view>
+    </block>
+  </view>
+  <template is="foot" />
+</view>

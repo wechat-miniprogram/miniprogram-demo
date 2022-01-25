@@ -1,0 +1,45 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'CRUD'}}" />
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd" style="margin-right: 5px">
+            <icon type="search" size="20"></icon>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="精确搜索或使用正则表达式搜索" value="{{searchContent}}" bindinput="onInputSearchContent" bindconfirm="searchTodo"/>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells__title">Todo List</view>
+      <view class="weui-cells weui-cells_after-title" wx:if="{{openid}}">
+        <view wx:for="{{todoList}}" wx:key="_id" class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-id="{{item._id}}" bindtap="toDetail">
+          <view class="weui-cell__hd" data-id="{{item._id}}" data-index="{{index}}" catchtap="toggleComplete" style="margin-right: 5px">
+            <icon type="circle" wx:if="{{!item.done}}"></icon>
+            <icon type="success" wx:else></icon>
+          </view>
+          <view class="weui-cell__bd">{{item.description}}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+
+        <view class="weui-cell weui-cell_input" wx:if="{{todoList.length < 5 && !filtered}}">
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="添加新的 Todo" value="{{newContent}}" focus="{{todoListFetched && !todoList.length}}" bindinput="onInputNewContent" bindconfirm="createTodo" />
+          </view>
+        </view>
+      </view>
+
+      <view class="page-body-info" wx:if="{{!todoList.length && filtered}}">
+        <text class="page-body-text">无数据</text>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

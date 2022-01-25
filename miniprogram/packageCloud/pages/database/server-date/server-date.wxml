@@ -1,0 +1,38 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'db.serverDate'}}"/>
+
+  <view class="page-body" wx:if="{{openid}}">
+    <view class="page-section">
+      <view class="page-body-info">
+        <view class="page-body-title">服务端时间</view>
+        <block wx:if="{{!serverDate}}">
+          <text class="page-body-text">很多时候我们希望记录数据的创建时间</text>
+          <text class="page-body-text">在小程序端使用 Date 对象创建的是客户端时间（可被任意修改），而非服务端时间</text>
+          <text class="page-body-text">这时可以使用云开发提供的 serverDate 对象，在请求被处理时会自动转换成服务端时间</text>
+        </block>
+        <block wx:else>
+          <block>
+            <text class="page-body-text">客户端时间</text>
+            <text class="context-value">{{clientDateFormatted}}</text>
+          </block>
+          <block>
+            <text class="page-body-text">服务端时间</text>
+            <text class="context-value">{{serverDateFormatted}}</text>
+          </block>
+          <block>
+            <text class="page-body-text">时间差距</text>
+            <text class="context-value">{{delta}} 毫秒</text>
+          </block>
+        </block>
+      </view>
+      <view class="btn-area">
+        <button type="primary" bindtap="insertData" loading="{{loading}}">插入数据</button>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

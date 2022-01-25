@@ -1,0 +1,50 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'downloadFile'}}" />
+
+  <view class="page-body">
+    <view class="page-section">
+      <block wx:if="{{fileDownloaded}}">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">文件 ID</view>
+            </view>
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value="{{fileId}}" style="height: 3.3em" disabled />
+            </view>
+          </view>
+
+          <view class="weui-cell">
+            <view class="page-section-ctn">
+              <image src="{{filePath}}" class="image" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+        
+      </block>
+
+      <block wx:else>
+        <view class="weui-cells__title">点击按钮即可从云端存储下载指定云文件</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">文件 ID</view>
+            </view>
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" value="{{fileId}}" style="height: 3.3em" disabled />
+            </view>
+          </view>
+        </view>
+
+        <view class="btn-area">
+          <button type="primary" size="40" bindtap="downloadFile" loading="{{loading}}">下载文件</button>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

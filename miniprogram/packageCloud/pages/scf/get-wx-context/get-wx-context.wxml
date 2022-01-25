@@ -1,0 +1,39 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'getWXContext'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-body-info">
+        <view class="page-body-title">WXContext</view>
+        <block wx:if="{{!hasWXContext}}">
+          <text class="page-body-text">云函数是在云端（服务器端）运行的函数</text>
+          <text class="page-body-text">点击绿色按钮可调用云函数获取微信调用上下文</text>
+          <text class="page-body-text">返回内容包括用户 OpenID、小程序 AppID 以及用户 UnionID（满足 UnionID 获取条件时）</text>
+        </block>
+        <block wx:else>
+          <block>
+            <text class="page-body-text">OpenID</text>
+            <text class="context-value">{{wxContext.openid}}</text>
+          </block>
+          <block>
+            <text class="page-body-text">AppID</text>
+            <text class="context-value">{{wxContext.appid}}</text>
+          </block>
+          <block wx:if="{{wxContext.unionid}}">
+            <text class="page-body-text">UnionID</text>
+            <text class="context-value">{{wxContext.unionid}}</text>
+          </block>
+        </block>
+      </view>
+      <view class="btn-area">
+        <button type="primary" bindtap="getWXContext" loading="{{loading}}">获取 WXContext</button>
+        <button bindtap="clear">清空</button>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

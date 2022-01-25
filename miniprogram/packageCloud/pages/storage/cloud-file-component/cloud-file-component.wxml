@@ -1,0 +1,48 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'Component Support'}}" />
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="weui-cells__title">小程序组件支持传入云文件 ID</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">文件 ID</view>
+          </view>
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" value="{{imageFileId}}" style="height: 3.3em" disabled />
+          </view>
+        </view>
+
+        <view class="weui-cell">
+          <view class="page-section-ctn">
+            <image src="{{imageFileId}}" class="image" mode="aspectFit"></image>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells__title"></view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">文件 ID</view>
+          </view>
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" value="{{videoFileId}}" style="height: 3.3em" disabled />
+          </view>
+        </view>
+
+        <view class="weui-cell">
+          <view class="page-section-ctn">
+            <video src="{{videoFileId}}" show-center-play-btn="{{false}}"></video>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

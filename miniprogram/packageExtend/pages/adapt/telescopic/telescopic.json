@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mp-col": "../../../components/col/index",
+    "mp-row": "../../../components/row/index"
+  },
+  "navigationBarTitleText": "左右伸缩"
+}

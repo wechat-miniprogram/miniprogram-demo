@@ -1,8 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "mp-form-page": "weui-miniprogram/form-page/form-page"
-  },
-  "navigationBarTitleText": "form-page"
-
-}

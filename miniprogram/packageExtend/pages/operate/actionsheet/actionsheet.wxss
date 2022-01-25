@@ -1,0 +1,17 @@
+@import '../../common.wxss';
+
+
+.custom-action {
+  padding: 16px 0;
+  text-align: center;
+
+}
+.custom-action .custom-action_desc {
+    color: #999999
+}
+
+.custom-action .custom-action_name {
+  margin: 10px 5px;
+  line-height: 1;
+  vertical-align: middle;
+}

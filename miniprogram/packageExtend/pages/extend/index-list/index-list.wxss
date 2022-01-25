@@ -1,0 +1,11 @@
+@import '../../common.wxss';
+
+page{
+    background-color: #FFFFFF;
+    height: 100%;
+}
+
+.city__list {
+    height: 100%;
+}
+

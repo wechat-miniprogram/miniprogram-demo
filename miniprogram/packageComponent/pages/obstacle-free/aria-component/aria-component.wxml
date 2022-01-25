@@ -1,0 +1,27 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: '无障碍访问'}}"/>
+  <view class="page-body">
+   <view class="page-section">
+      <view class="page-section-title">
+        <text>无障碍访问说明</text>
+      </view>
+      <view class="page-section-spacing">
+        <view class="text-box">
+          <text>为了更好地满足视障人士\n对于小程序的访问需求\n基础库自2.7.1起，支持部分ARIA标签\n无障碍特性在读屏模式下可以访问</text>
+        </view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="page-section-title">
+        <text>例子</text>
+      </view>
+      <view class="page-section-spacing">
+        <view aria-role="button" aria-label="提交表单" style="text-align: center">提交</view>
+      </view>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

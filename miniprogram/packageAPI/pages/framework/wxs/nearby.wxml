@@ -1,0 +1,13 @@
+<view class="container page" data-weui-theme="{{theme}}">
+
+  <wxs module="test" src="./nearby.wxs"></wxs>
+
+  <swiper class="swiper" data-width="{{windowWidth}}" data-imgsize="{{imgSize}}" bindchange='{{test.change}}' bindanimationfinish="{{test.animationFinish}}" bindtransition="{{test.func}}" indicator-dots="{{indicatorDots}}"
+    autoplay="{{true}}" interval="{{interval}}" circular='' duration="{{duration}}">
+    <block wx:for="{{imgUrls}}">
+      <swiper-item style="height:100%;">
+        <image src="{{item}}" class="slide-image" style="height:100%;width:100%;" mode="center" height="300" mode='aspectFit'/>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>

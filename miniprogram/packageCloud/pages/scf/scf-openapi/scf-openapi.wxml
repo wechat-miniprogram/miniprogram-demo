@@ -1,0 +1,84 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: '云函数中使用微信开放能力'}}" />
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="weui-cells__title">
+        <view>云调用是云开发提供的基于云函数使用小程序开放接口的能力</view>
+      </view>
+
+      <view class="weui-cells__title">
+        <view>发送模板消息需在手机上测试</view>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="page-body-info">
+          <view class="progress-figure">
+            <image wx:if="{{theme === 'dark'}}" src="/page/API/resources/kind/device_dark.png" class="progress-icon"></image>
+            <image wx:else src="/page/API/resources/kind/device.png" class="progress-icon"></image>
+            <text class="progress-line {{sendTemplateMessageLoading && 'pending'}} {{sendTemplateMessageResult && 'success'}} {{sendTemplateMessageError && 'fail'}}"></text>
+            <image wx:if="{{theme === 'dark'}}" src="/page/cloud/resources/kind/scf_dark.png" class="progress-icon"></image>
+            <image wx:else src="/page/cloud/resources/kind/scf.png" class="progress-icon"></image>
+            <text class="progress-line {{sendTemplateMessageLoading && 'pending'}} {{sendTemplateMessageResult && 'success'}} {{sendTemplateMessageError && 'fail'}}"></text>
+            <image wx:if="{{theme === 'dark'}}" src="/page/API/resources/kind/device_dark.png" class="progress-icon"></image>
+            <image wx:else src="/page/API/resources/kind/device.png" class="progress-icon"></image>
+          </view>
+
+          <view class="data-area">
+            <view class="data-text" wx:if="{{sendTemplateMessageResult}}">
+              <icon type="success"></icon>
+              <text>发送模板消息成功，返回微信主窗口查看</text>
+            </view>
+            <view class="data-text" wx:elif="{{sendTemplateMessageError}}">
+              <icon type="warn" color="#F43530"></icon>
+              <text>发送失败</text>
+            </view>
+          </view>
+
+          <view class="btn-area">
+            <form bindsubmit="sendTemplateMessageViaCloudFunction" report-submit>
+              <button form-type="submit" loading="{{cloudLoading}}">发送模板消息</button>
+            </form>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells__title"></view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="page-body-info">
+          <view class="progress-figure">
+            <image wx:if="{{theme === 'dark'}}" src="/page/API/resources/kind/device_dark.png" class="progress-icon"></image>
+            <image wx:else src="/page/API/resources/kind/device.png" class="progress-icon"></image>
+            <text class="progress-line {{getWXACodeLoading && 'pending'}} {{getWXACodeResult && 'success'}} {{getWXACodeError && 'fail'}}"></text>
+            <image wx:if="{{theme === 'dark'}}" src="/page/cloud/resources/kind/scf_dark.png" class="progress-icon"></image>
+            <image wx:else src="/page/cloud/resources/kind/scf.png" class="progress-icon"></image>
+          </view>
+
+          <view class="progress-figure" wx:if="{{getWXACodeResult}}">
+            <image src="{{getWXACodeResult.result}}" mode="aspectFit"></image>
+          </view>
+
+          <view class="data-area">
+            <view class="data-text" wx:if="{{getWXACodeResult}}">
+              <icon type="success"></icon>
+              <text>获取成功</text>
+            </view>
+            <view class="data-text" wx:elif="{{getWXACodeError}}">
+              <icon type="warn" color="#F43530"></icon>
+              <text>获取失败</text>
+            </view>
+          </view>
+
+          <view class="btn-area">
+            <button bindtap="getWXACodeViaCloudFunction" loading="{{cloudLoading}}">获取小程序码</button>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

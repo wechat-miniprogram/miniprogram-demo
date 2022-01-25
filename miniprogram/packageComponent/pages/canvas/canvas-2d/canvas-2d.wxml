@@ -1,0 +1,25 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <template is="head" data="{{title: 'canvas 2d'}}"/>
+
+  <view class="page-body">
+    <block wx:if="{{canIUse}}">
+      <view class="page-section">
+        <view class="page-section-spacing">
+          <view class="page-body-wrapper">
+            <canvas type="2d" id="canvas2D" class="canvas"></canvas>    
+          </view>
+        </view>
+      </view>
+    </block>
+    <view wx:else style="margin: 15px; text-align:center">
+      微信版本过低，暂不支持本功能
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>
+
+

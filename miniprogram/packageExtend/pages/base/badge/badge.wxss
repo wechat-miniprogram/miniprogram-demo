@@ -1,0 +1,6 @@
+/* example/badge/badge.wxss */
+@import '../../common.wxss';
+
+.blue {
+  background: blue;
+}

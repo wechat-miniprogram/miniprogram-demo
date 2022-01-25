@@ -1,0 +1,14 @@
+
+
+.page-section-ctn {
+  text-align: center;
+  margin: 100px auto 0;
+  width: 100%;
+}
+
+.page-body-text {
+  color: #bbb;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
