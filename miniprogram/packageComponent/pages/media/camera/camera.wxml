@@ -1,12 +1,13 @@
 <import src="../../../common/head.wxml" />
 <import src="../../../common/foot.wxml" />
 
+<mp-navigation-bar title="camera" back="{{true}}"></mp-navigation-bar>
+<scroll-view class="page-scroll-view" scroll-y type="list">
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" data="{{title: 'camera'}}"/>
 
   <view class="page-body">
-    <view class="page-body-wrapper">
-    <view style="margin-bottom: 10px"> camera 组件 </view>
+    <view class="page-section">
       <camera
         flash="off"
         device-position="{{position}}"
@@ -54,3 +55,4 @@
 
   <template is="foot" />
 </view>
+</scroll-view>

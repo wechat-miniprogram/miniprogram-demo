@@ -11,7 +11,12 @@ Page({
     theme: 'light',
     canIUse: true,
   },
-  onReady() {
+  onShow() {
+    setTimeout(() => {
+      this._onReady()
+    }, 200)
+  },
+  _onReady() {
     // 解决基础库小于 2.7.0 的兼容问题
     const {SDKVersion} = wx.getSystemInfoSync()
     console.log(SDKVersion)
@@ -124,6 +129,9 @@ Page({
 
   onUnload() {
     // clearInterval(this.interval)
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
   },
   onLoad() {
     this.setData({

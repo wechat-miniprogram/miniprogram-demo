@@ -1,0 +1,44 @@
+<view class="weui-navigation-bar {{extClass}}" data-weui-theme="{{theme}}">
+  <view class="weui-navigation-bar__inner" style="padding-top: {{statusBarHeight}}px; height: {{44 + statusBarHeight}}px; color: {{color}}; background: {{background}}; {{displayStyle}}; {{innerPaddingRight}};">
+
+    <view class='weui-navigation-bar__left' style="{{leftWidth}}">
+      <block wx:if="{{back}}">
+        <view class="weui-navigation-bar__buttons">
+          <view
+            bindtap="back"
+            class="weui-navigation-bar__btn_goback_wrapper"
+            hover-class="weui-active"
+            aria-role="button"
+            aria-label="返回"
+          >
+            <view class="weui-navigation-bar__button weui-navigation-bar__btn_goback"></view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <slot name="left"></slot>
+      </block>
+    </view>
+
+    <view class='weui-navigation-bar__center'>
+      <view wx:if="{{loading}}" class="weui-navigation-bar__loading" aria-role="alert">
+        <view
+          class="weui-loading"
+          style="width:{{size.width}}rpx;height:{{size.height}}rpx;"
+          aria-role="img"
+          aria-label="加载中"
+        ></view>
+      </view>
+      <block wx:if="{{title}}">
+        <text>{{title}}</text>
+      </block>
+      <block wx:else>
+        <slot name="center"></slot>
+      </block>
+    </view>
+
+    <view class='weui-navigation-bar__right'>
+      <slot name="right"></slot>
+    </view>
+  </view>
+</view>

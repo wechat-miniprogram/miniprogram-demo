@@ -1,8 +1,10 @@
+<mp-navigation-bar title="小程序接口能力展示" back="{{false}}"></mp-navigation-bar>
+<scroll-view class="page-scroll-view" scroll-y type="list">
 <set-tab-bar wx:if="{{isSetTabBarPage}}" bindunmount="leaveSetTabBarPage"></set-tab-bar>
 <view wx:else class="index page" data-weui-theme="{{theme}}">
   <view class="index-hd">
     <image class="index-logo" src="resources/kind/logo.png"></image>
-    <view class="index-desc">以下将演示小程序接口能力，具体属性参数详见 <navigator url="/page/component/pages/doc-web-view/doc-web-view" class="weui-agree__link">小程序开发文档</navigator>。</view>
+    <text class="index-desc">以下将演示小程序接口能力，具体属性参数详见 <text class="weui-agree__link" bindtap="navToDoc">小程序开发文档</text>。</text>
   </view>
   <view class="index-bd">
     <view class="kind-list">
@@ -16,12 +18,12 @@
           <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
               <block wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="*item">
-                <navigator url="../../packageAPI/pages/{{item.id}}/{{page.url}}" class="navigator" wx:if="{{page.url !== '@set-tab-bar'}}">
-                  <view class="navigator-text">{{page.zh}}</view>
+                <view wx:if="{{page.url !== '@set-tab-bar'}}">
+                  <navigator url="../../packageAPI/pages/{{item.id}}/{{page.url}}" class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page.zh}}</navigator>
                   <view class="navigator-arrow"></view>
-                </navigator>
-                <view wx:else class="navigator" bindtap="enterSetTabBarPage">
-                  <view class="navigator-text">{{page.zh}}</view>
+                </view>
+                <view wx:else bindtap="enterSetTabBarPage">
+                  <view class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page.zh}}</view>
                   <view class="navigator-arrow"></view>
                 </view>
               </block>
@@ -32,3 +34,4 @@
     </view>
   </view>
 </view>
+</scroll-view>

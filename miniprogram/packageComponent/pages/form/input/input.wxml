@@ -1,6 +1,8 @@
-<import src="../../../common/head.wxml" />
-<import src="../../../common/foot.wxml" />
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
 
+<mp-navigation-bar title="input" back="{{true}}"></mp-navigation-bar>
+<scroll-view class="page-scroll-view" scroll-y type="list">
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" data="{{title: 'input'}}"/>
 
@@ -9,7 +11,7 @@
       <view class="weui-cells__title">可以自动聚焦的input</view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
-          <input class="weui-input" focus placeholder="将会获取焦点"/>
+          <input class="weui-input" focus placeholder-style="{{style}}" placeholder="将会获取焦点"/>
         </view>
       </view>
     </view>
@@ -81,7 +83,7 @@
       <view class="weui-cells__title">控制占位符颜色的input</view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
-          <input class="weui-input" placeholder-style="color:#F76260" placeholder="占位符字体是红色的" />
+          <input class="weui-input" placeholder-style="{{style}}" placeholder-class="placeholder" placeholder="占位符字体是红色的" />
         </view>
       </view>
     </view>
@@ -89,3 +91,4 @@
 
   <template is="foot" />
 </view>
+</scroll-view>

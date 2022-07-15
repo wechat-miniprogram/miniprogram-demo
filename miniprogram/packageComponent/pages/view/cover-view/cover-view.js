@@ -11,6 +11,11 @@ Page({
     latitude: 23.099994,
     longitude: 113.324520,
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

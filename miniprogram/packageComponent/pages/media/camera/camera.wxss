@@ -1,4 +1,4 @@
-
+@import "../../../../common/reset.wxss";
 
 camera {
   height: 250px;
@@ -6,6 +6,7 @@ camera {
 
 .preview-tips {
   margin: 10px 0;  
+  text-align: center;
 }
 
 .photo, .video {

@@ -1,0 +1,228 @@
+{
+  "nested": {
+    "enARModelStatus": {
+      "values": {
+        "ARModel_Status_Default": 0,
+        "ARModel_Status_Init": 1,
+        "ARModel_Status_Sparse_Finished": 2,
+        "ARModel_Status_3d_Finished": 3,
+        "ARModel_Status_Object_Finished": 4,
+        "ARModel_Status_Marker_Finished": 5
+      }
+    },
+    "enARAlgorithmType": {
+      "values": {
+        "Algorithm_Type_3D_Object": 1,
+        "Algorithm_Type_3D_Marker": 2
+      }
+    },
+    "enARModelType": {
+      "values": {
+        "ARModel_Type_Sparse": 1,
+        "ARModel_Type_3D": 2,
+        "ARModel_Type_Marker": 3
+      }
+    },
+    "ModelCos": {
+      "fields": {
+        "modelList": {
+          "rule": "repeated",
+          "type": "ModelCosId",
+          "id": 1
+        }
+      },
+      "nested": {
+        "ModelCosId": {
+          "fields": {
+            "modelType": {
+              "type": "enARModelType",
+              "id": 1
+            },
+            "modelCosid": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    "ARModel": {
+      "options": {
+        "(mmbizintpkv.KvTableTestID)": 916
+      },
+      "fields": {
+        "cosid": {
+          "type": "string",
+          "id": 1
+        },
+        "bizuin": {
+          "type": "uint32",
+          "id": 2
+        },
+        "name": {
+          "type": "string",
+          "id": 3
+        },
+        "uploadTime": {
+          "type": "uint32",
+          "id": 4
+        },
+        "modelStatus": {
+          "type": "enARModelStatus",
+          "id": 5
+        },
+        "algoType": {
+          "type": "enARAlgorithmType",
+          "id": 6
+        },
+        "modelCos": {
+          "type": "ModelCos",
+          "id": 7
+        }
+      }
+    },
+    "GenerateARModelReq": {
+      "fields": {
+        "bizuin": {
+          "type": "uint32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "buffer": {
+          "type": "bytes",
+          "id": 3
+        },
+        "url": {
+          "type": "string",
+          "id": 4
+        },
+        "algoType": {
+          "type": "enARAlgorithmType",
+          "id": 5
+        }
+      }
+    },
+    "GenerateARModelResp": {
+      "fields": {
+        "url": {
+          "type": "string",
+          "id": 1
+        },
+        "host": {
+          "type": "string",
+          "id": 2
+        },
+        "cosid": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "GetARModelListReq": {
+      "fields": {
+        "bizuin": {
+          "type": "uint32",
+          "id": 1
+        },
+        "modelStatus": {
+          "type": "uint32",
+          "id": 2
+        },
+        "startTime": {
+          "type": "uint32",
+          "id": 3
+        },
+        "endTime": {
+          "type": "uint32",
+          "id": 4
+        },
+        "offset": {
+          "type": "uint32",
+          "id": 5
+        },
+        "limit": {
+          "type": "uint32",
+          "id": 6
+        },
+        "algoType": {
+          "type": "uint32",
+          "id": 7
+        }
+      }
+    },
+    "GetARModelListResp": {
+      "fields": {
+        "modelList": {
+          "rule": "repeated",
+          "type": "ARModel",
+          "id": 1
+        }
+      }
+    },
+    "ARModelData": {
+      "fields": {
+        "meshModel": {
+          "type": "bytes",
+          "id": 1
+        },
+        "textureModel": {
+          "type": "bytes",
+          "id": 2
+        }
+      }
+    },
+    "GetARModelReq": {
+      "fields": {
+        "bizuin": {
+          "type": "uint32",
+          "id": 1
+        },
+        "cosid": {
+          "type": "string",
+          "id": 2
+        },
+        "modelType": {
+          "type": "uint32",
+          "id": 3
+        },
+        "needData": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "default": 1
+          }
+        },
+        "useIntranet": {
+          "type": "uint32",
+          "id": 5,
+          "options": {
+            "default": 0
+          }
+        },
+        "expireTime": {
+          "type": "uint32",
+          "id": 6
+        }
+      }
+    },
+    "GetARModelResp": {
+      "fields": {
+        "modelData": {
+          "type": "ARModelData",
+          "id": 1
+        },
+        "url": {
+          "type": "string",
+          "id": 2
+        },
+        "host": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    }
+  }
+}

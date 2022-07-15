@@ -58,10 +58,14 @@ function compareVersion(v1, v2) {
   return 0
 }
 
+const getType = obj => Object.prototype.toString.call(obj).slice(8,-1)
+const isArray = obj => getType(obj) === 'Array'
+
 module.exports = {
   getStrLen,
   substring,
   getRandom,
   getFontSize,
-  compareVersion
+  compareVersion,
+  isArray
 }

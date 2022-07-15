@@ -1,6 +1,9 @@
-<import src="../../../common/head.wxml" />
-<import src="../../../common/foot.wxml" />
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
 
+<mp-navigation-bar title="navigatePage" back="{{true}}"></mp-navigation-bar>
+<scroll-view class="page-scroll-view" scroll-y type="list">
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" data="{{title: '新建的页面'}}"/>
 </view>
+</scroll-view>

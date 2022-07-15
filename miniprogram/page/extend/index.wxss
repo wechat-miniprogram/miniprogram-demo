@@ -1,53 +1,37 @@
-/*!
- * WeUI v2.3.0 (https://github.com/weui/weui-wxss)
- * Copyright 2020 Tencent, Inc.
- * Licensed under the MIT license
- */
- @import "../common/common.wxss";
+@import "../../common/reset.wxss";
+@import "../common/index-skyline.wxss";
+
 .weui-agree__link {
   display: inline;
-  color: var(--weui-LINK);
+  color: #576b95;
 }
 
 .weui-flex {
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  align-items: center
+  align-items: center;
+  flex-direction: row;
 }
 
 .weui-cells {
   margin-top: 0;
   opacity: 0;
-  -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
-  -webkit-transition: .3s;
-  transition: .3s
+  transition: .3s;
+  border-top: .5px solid rgba(0,0,0,0.1);
 }
-
-.weui-cells:after,
-.weui-cells:before {
-  display: none
+.weui-cells::before {
+  display: none;
 }
 
 .weui-cells_show {
   opacity: 1;
-  -webkit-transform: translateY(0);
-  transform: translateY(0)
-}
-
-.weui-cell:before {
-  right: 15px
+  transform: translateY(0);
 }
 
 .kind-list__item {
   margin: 10px 0;
-  background-color: var(--weui-BG-2);
+  background-color: #fff;
   border-radius: 2px;
-  overflow: hidden
-}
-
-.kind-list__item:first-child {
-  margin-top: 0
+  overflow: hidden;
 }
 
 .kind-list__img {
@@ -56,13 +40,11 @@
 }
 
 [data-weui-theme=dark] .kind-list__img {
-  -webkit-filter: invert(100) hue-rotate(180deg);
   filter: invert(100) hue-rotate(180deg)
 }
 
 .kind-list__item-hd {
   padding: 20px;
-  -webkit-transition: opacity .3s;
   transition: opacity .3s
 }
 
@@ -94,8 +76,6 @@
 }
 
 .index-logo {
-  /* width: 43px;
-  height: 43px; */
   width: 43px;
   height: 43px;
 }
@@ -103,6 +83,12 @@
 .index-desc {
   margin-top: 10px;
   color: #888888;
-  /* font-size: 14px; */
   font-size: 14px;
+}
+
+[data-weui-theme=dark] .weui-agree__link {
+  color: #7d90a9;
+}
+[data-weui-theme=dark] .kind-list__item {
+  background-color: #232323;
 }

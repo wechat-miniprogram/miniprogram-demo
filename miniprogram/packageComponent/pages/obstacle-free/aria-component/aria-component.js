@@ -9,6 +9,11 @@ Page({
       path: 'packageComponent/pages/obstacle-free/aria-component/aria-component'
     }
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

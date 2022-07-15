@@ -250,9 +250,34 @@ Page({
         zh: '屏幕旋转',
         url: 'resizable/resizable'
       }]
+    }, {
+      id: 'ar',
+      name: 'VisionKit视觉能力',
+      pages: [{
+        zh: 'VisionKit基础',
+        url: 'visionkit-basic/visionkit-basic'
+      },
+      {
+        zh: '水平面AR',
+        url: 'plane-ar/plane-ar'
+      },
+      {
+        zh: '2DMarkerAR',
+        url: '2dmarker-ar/2dmarker-ar'
+      },
+       {
+        zh: '单样本检测(OSD)',
+        url: 'osd-ar/osd-ar'
+      }
+    ],
     }],
     isSetTabBarPage: false,
     theme: 'light'
+  },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
   },
   onLoad() {
     this.setData({

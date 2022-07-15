@@ -1,6 +1,10 @@
+@import "../../../../common/reset.wxss";
+
 .flex-wrp{
   margin-top: 30px;
   display:flex;
+  width: 100vw;
+  align-items: center;
 }
 .flex-item{
   width: 100px;
@@ -8,7 +12,8 @@
   font-size: 13px;
 }
 .flex-item-V{
-  margin: 0 auto;
+  /* skyline不支持auto，改为 align-items: center; */
+  /* margin: 0 auto; */
   width: 150px;
   height: 100px;
 }

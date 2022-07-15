@@ -1,0 +1,36 @@
+page, view, text, image, button, video, map, scroll-view, swiper, input, textarea, navigator {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: stretch;
+  box-sizing: border-box;
+  background-origin: border-box;
+}
+
+page {
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+navigator text,
+text text,
+text navigator {
+  display: inline;
+}
+
+image {
+  align-self: flex-start;
+}
+
+.wx-scroll-view-flex :is(div):not(.wx-scroll-view-flex) {
+  width: auto!important;
+}
+
+.page-scroll-view {
+  flex: 1;
+  overflow: auto;
+}

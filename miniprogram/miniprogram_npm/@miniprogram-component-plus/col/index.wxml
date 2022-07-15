@@ -1,3 +1,0 @@
-<view class="{{classList}}" style="padding-left:{{paddingLeft}};padding-right:{{paddingRight}}">
-    <slot></slot>
-</view>

@@ -1,0 +1,102 @@
+.index-hd {
+  padding: 40px 40px 20px;
+  text-align: center;
+}
+.index-bd {
+  padding: 0 15px 20px;
+}
+.index-ft {
+  padding-bottom: 10px;
+  text-align: center;
+}
+.index-logo {
+  width: 43px;
+  height: 43px;
+  align-self: center;
+}
+.index-desc {
+  margin-top: 10px;
+  color: rgba(0, 0, 0, .5);
+  font-size: 14px;
+}
+
+
+.navigator-box {
+  opacity: 0;
+  position: relative;
+  background-color: #fff;
+  line-height: 1.41176471;
+  font-size: 17px;
+  transform: translateY(-50%);
+  transition: .3s;
+  border-top: .5px solid rgba(0,0,0,0.1);
+}
+.navigator-box-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.navigator {
+  padding: 10px 0;
+  margin: 0 15px;
+}
+.navigator-arrow {
+  position: absolute;
+  right: 28px;
+  top: 10px;
+  color: rgba(0, 0, 0, .3);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='12' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.454 6.58l1.06-1.06 5.78 5.779a.996.996 0 010 1.413l-5.78 5.779-1.06-1.061 5.425-5.425-5.425-5.424z' fill='%23B2B2B2' fill-rule='evenodd'/%3E%3C/svg%3E");
+  width: 12px;
+  height: 24px;
+}
+.navigator-bottom-line {
+  border-bottom: .5px solid rgba(0, 0, 0, 0.1);
+}
+
+
+.kind-list-item {
+  margin: 10px 0;
+  background-color: #fff;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.kind-list-text{
+  flex: 1;
+}
+.kind-list-img {
+  width: 30px;
+  height: 30px;
+}
+.kind-list-item-hd {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  transition: opacity .3s;
+}
+.kind-list-item-hd-show {
+  opacity: .2;
+}
+.kind-list-item-bd {
+  height: 0;
+  overflow: hidden;
+}
+.kind-list-item-bd-show {
+  height: auto;
+}
+
+[data-weui-theme=dark] .index-desc {
+  color: hsla(0, 0%, 100%, .5);
+}
+[data-weui-theme=dark] .navigator-box {
+  background-color: #232323;
+}
+[data-weui-theme=dark] .navigator:before {
+  border-top-color: hsla(0, 0%, 100%, .05);
+  color: hsla(0, 0%, 100%, .05);
+}
+[data-weui-theme=dark] .navigator-arrow:after {
+  border-color: hsla(0, 0%, 100%, .3);
+}
+[data-weui-theme=dark] .kind-list-item {
+  background-color: #232323;
+}

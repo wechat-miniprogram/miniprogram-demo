@@ -9,7 +9,8 @@ Page({
   data: {
     theme: 'light',
     focus: false,
-    inputValue: ''
+    inputValue: '',
+    style: {color: '#F76260', fontSize: 16},
   },
 
   bindKeyInput(e) {
@@ -43,6 +44,11 @@ Page({
     if (e.detail.value === '123') {
       // 收起键盘
       wx.hideKeyboard()
+    }
+  },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
     }
   },
   onLoad() {

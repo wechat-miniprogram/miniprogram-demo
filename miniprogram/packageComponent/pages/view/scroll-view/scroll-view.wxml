@@ -1,7 +1,9 @@
 
-<import src="../../../common/head.wxml" />
-<import src="../../../common/foot.wxml" />
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
 
+<mp-navigation-bar title="scroll-view" back="{{true}}"></mp-navigation-bar>
+<scroll-view class="page-scroll-view" scroll-y type="list">
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" data="{{title: 'scroll-view'}}"/>
 
@@ -11,10 +13,10 @@
         <text>Vertical Scroll\n纵向滚动</text>
       </view>
       <view class="page-section-spacing">
-        <scroll-view scroll-y="true" style="height: 150px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-          <view id="demo1" class="scroll-view-item demo-text-1"></view>
-          <view id="demo2"  class="scroll-view-item demo-text-2"></view>
-          <view id="demo3" class="scroll-view-item demo-text-3"></view>
+        <scroll-view scroll-y type="list" style="height: 150px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+          <view id="demo1" class="scroll-view-item demo-text-1">A</view>
+          <view id="demo2"  class="scroll-view-item demo-text-2">B</view>
+          <view id="demo3" class="scroll-view-item demo-text-3">C</view>
         </scroll-view>
       </view>
     </view>
@@ -23,10 +25,10 @@
         <text>Horizontal Scroll\n横向滚动</text>
       </view>
       <view class="page-section-spacing">
-        <scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%">
-          <view id="demo1" class="scroll-view-item_H demo-text-1"></view>
-          <view id="demo2"  class="scroll-view-item_H demo-text-2"></view>
-          <view id="demo3" class="scroll-view-item_H demo-text-3"></view>
+        <scroll-view class="scroll-view_H" scroll-x type="list" enable-flex bindscroll="scroll" style="width: 100%; height: 150px; flex-direction: row;">
+          <view id="demo1" class="scroll-view-item_H demo-text-1">A</view>
+          <view id="demo2"  class="scroll-view-item_H demo-text-2">B</view>
+          <view id="demo3" class="scroll-view-item_H demo-text-3">C</view>
         </scroll-view>
       </view>
     </view>
@@ -35,7 +37,7 @@
         <text>自定义下拉刷新\n自定义：</text>
       </view>
       <view class="page-section-spacing">
-        <scroll-view
+        <scroll-view type="list"
           scroll-y style="width: 100%; height: 400px;"
           refresher-enabled="{{true}}"
           refresher-threshold="{{80}}"
@@ -51,9 +53,9 @@
             </view>
           </view>
 
-          <view id="demo1" class="scroll-view-item_H demo-text-1"></view>
-          <view id="demo2"  class="scroll-view-item_H demo-text-2"></view>
-          <view id="demo3" class="scroll-view-item_H demo-text-3"></view>
+          <view id="demo1" class="scroll-view-item demo-text-1">A</view>
+          <view id="demo2" class="scroll-view-item demo-text-2">B</view>
+          <view id="demo3" class="scroll-view-item demo-text-3">C</view>
         </scroll-view>
       </view>
     </view>
@@ -62,7 +64,7 @@
         <text>默认：</text>
       </view>
       <view class="page-section-spacing">
-        <scroll-view
+        <scroll-view type="list"
           scroll-y style="width: 100%; height: 400px;"
           refresher-enabled="{{true}}"
           refresher-threshold="{{100}}"
@@ -74,9 +76,9 @@
           bindrefresherrestore="onRestore"
           bindrefresherabort="onAbort"
         >
-          <view id="demo1" class="scroll-view-item_H demo-text-1"></view>
-          <view id="demo2"  class="scroll-view-item_H demo-text-2"></view>
-          <view id="demo3" class="scroll-view-item_H demo-text-3"></view>
+          <view id="demo1" class="scroll-view-item demo-text-1">A</view>
+          <view id="demo2"  class="scroll-view-item demo-text-2">B</view>
+          <view id="demo3" class="scroll-view-item demo-text-3">C</view>
         </scroll-view>
       </view>
     </view>
@@ -85,16 +87,18 @@
         <text>滚动驱动动画</text>
       </view>
       <view class="page-section-spacing">
-        <scroll-view id="scroll-view_D" scroll-y="true" style="height: 150px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-          <view class="scroll-view-item_H demo-text-1" id="scroll-sample-object1"></view>
-          <view class="scroll-view-item_H demo-text-2" id="scroll-sample-object2"></view>
-          <view class="scroll-view-item_H demo-text-3" id="scroll-sample-object3"></view>
+        <scroll-view type="list"
+         id="scroll-view_D" scroll-y="true" style="height: 150px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+          <view class="scroll-view-item demo-text-1" id="scroll-sample-object1">A</view>
+          <view class="scroll-view-item demo-text-2" id="scroll-sample-object2">B</view>
+          <view class="scroll-view-item demo-text-3" id="scroll-sample-object3">C</view>
         </scroll-view>
       </view>
     </view>
   </view>
   <template is="foot" />
 </view>
+</scroll-view>
 
 
 <wxs module="refresh">

@@ -15,6 +15,11 @@ Page({
       status: e.currentTarget.dataset.status,
     })
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

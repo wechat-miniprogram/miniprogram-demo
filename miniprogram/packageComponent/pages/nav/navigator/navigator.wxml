@@ -1,22 +1,31 @@
-<import src="../../../common/head.wxml" />
-<import src="../../../common/foot.wxml" />
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
 
+<mp-navigation-bar title="navigator" back="{{true}}"></mp-navigation-bar>
+<scroll-view class="page-scroll-view" scroll-y type="list">
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" data="{{title: 'navigator'}}"/>
 
   <view class="page-body">
     <view class="btn-area">
-      <navigator url="navigate?title=navigate" hover-class="ohter-navigator">
-       <button type="default">跳转到新页面</button>
-      </navigator>
-      <navigator url="redirect?title=redirect" redirect hover-class="other-navigator-hover">
-        <button type="default">在当前页打开</button>
-      </navigator>
-      <navigator target="miniProgram" hover-class="other-navigator-hover" open-type="navigate" app-id="wx4f1b24bdc99fa23b" version="release">
-        <button type="default">打开小程序</button>
-      </navigator>
+      <button type="default">
+        <navigator url="navigate?title=navigate" open-type="navigate" hover-class="ohter-navigator">
+          跳转到新页面
+        </navigator>
+      </button>
+      <button type="default">
+        <navigator url="redirect?title=redirect" open-type="redirect" hover-class="other-navigator-hover">
+          在当前页打开
+        </navigator>
+      </button>
+      <button type="default">
+        <navigator target="miniProgram" hover-class="other-navigator-hover" open-type="navigate" app-id="wx4f1b24bdc99fa23b" version="release">
+          打开小程序
+        </navigator>
+      </button>
     </view>
   </view>
 
   <template is="foot" />
 </view>
+</scroll-view>

@@ -155,12 +155,20 @@ function compareVersion(v1, v2) {
   return 0;
 }
 
+var getType = function getType(obj) {
+  return Object.prototype.toString.call(obj).slice(8, -1);
+};
+var isArray = function isArray(obj) {
+  return getType(obj) === 'Array';
+};
+
 module.exports = {
   getStrLen: getStrLen,
   substring: substring,
   getRandom: getRandom,
   getFontSize: getFontSize,
-  compareVersion: compareVersion
+  compareVersion: compareVersion,
+  isArray: isArray
 };
 
 /***/ }),
@@ -242,7 +250,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var _require = __webpack_require__(0),
     substring = _require.substring,
     getRandom = _require.getRandom,
-    getFontSize = _require.getFontSize;
+    getFontSize = _require.getFontSize,
+    isArray = _require.isArray;
 
 var Bullet = function () {
   function Bullet() {
@@ -438,10 +447,14 @@ var Barrage = function () {
     this._deferred = [];
   };
 
-  Barrage.prototype._delay = function _delay(method, args) {
+  Barrage.prototype._delay = function _delay(method) {
+    for (var _len = arguments.length, params = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      params[_key - 1] = arguments[_key];
+    }
+
     this._deferred.push({
       callback: method,
-      args: args
+      args: params
     });
   };
 
@@ -591,6 +604,8 @@ var Barrage = function () {
     var _this4 = this;
 
     var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+    if (!isArray(data)) return;
 
     if (!this._ready) {
       this._delay('addData', data);
@@ -757,9 +772,10 @@ var Barrage = function () {
         bulletId = opt.bulletId;
 
     var tunnel = this.tunnels[tunnelId];
-    var bullet = tunnel.bullets[bulletId];
+    if (!tunnel) return;
 
-    if (!tunnel || !bullet) return;
+    var bullet = tunnel.bullets[bulletId];
+    if (!bullet) return;
 
     tunnel.removeBullet(bulletId);
     this.addIdleTunnel(tunnelId);

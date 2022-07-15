@@ -17,7 +17,11 @@ Page({
     filePath: '',
     fromOtherPage: false
   },
-
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad(options) {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

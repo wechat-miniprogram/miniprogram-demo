@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "button"
+  "navigationBarTitleText": "button",
+  "renderer": "skyline",
+  "disableScroll": true,
+  "navigationStyle": "custom"
 }

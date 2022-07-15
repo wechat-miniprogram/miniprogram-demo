@@ -9,6 +9,11 @@ Page({
     console.log(e.detail.path)
     console.log(e.detail.query)
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

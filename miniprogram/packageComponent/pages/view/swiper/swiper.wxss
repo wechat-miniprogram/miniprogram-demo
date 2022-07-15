@@ -1,4 +1,4 @@
-
+@import "../../../../common/reset.wxss";
 
 button{
   margin-bottom: 15px;
@@ -10,7 +10,6 @@ button:last-child{
   padding: 0;
 }
 .swiper-item{
-  display: block;
   height: 150px;
 }
 .page-section-title{

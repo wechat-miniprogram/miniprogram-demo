@@ -1,3 +1,0 @@
-<span class="weui-row-before"></span>
-<slot></slot>
-<span class="weui-row-after"></span>

@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "navigatePage"
+  "navigationBarTitleText": "navigatePage",
+  "renderer": "skyline",
+  "disableScroll": true,
+  "navigationStyle": "custom"
 }

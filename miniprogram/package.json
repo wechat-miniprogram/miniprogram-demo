@@ -10,18 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@miniprogram-component-plus/col": "^1.0.0",
-    "@miniprogram-component-plus/emoji": "^1.0.1",
-    "@miniprogram-component-plus/index-list": "^1.0.0",
-    "@miniprogram-component-plus/row": "^1.0.0",
-    "@miniprogram-component-plus/select-text": "^1.0.1",
-    "@miniprogram-component-plus/sticky": "^1.0.0",
-    "@miniprogram-component-plus/tabs": "^1.0.0",
-    "@miniprogram-component-plus/video-swiper": "^1.0.1",
-    "@miniprogram-component-plus/vtabs": "^1.0.0",
-    "@miniprogram-component-plus/vtabs-content": "^1.0.0",
     "miniprogram-barrage": "^1.1.0",
     "miniprogram-recycle-view": "^0.1.5",
-    "wxml-to-canvas": "^1.1.1"
+    "wxml-to-canvas": "^1.1.1",
+    "protobufjs": "^6.11.3",
+    "threejs-miniprogram": "0.0.3"
   }
 }

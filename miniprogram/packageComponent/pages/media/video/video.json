@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "video"
+    "navigationBarTitleText": "video",
+    "renderer": "skyline",
+    "disableScroll": true,
+    "navigationStyle": "custom"
 }

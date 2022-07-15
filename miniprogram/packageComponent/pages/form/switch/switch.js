@@ -16,6 +16,11 @@ Page({
   switch2Change(e) {
     console.log('switch2 发生 change 事件，携带值为', e.detail.value)
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

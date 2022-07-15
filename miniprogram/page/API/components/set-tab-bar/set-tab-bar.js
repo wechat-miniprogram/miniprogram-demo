@@ -48,6 +48,9 @@ Component({
     this.showTabBar()
     this.removeCustomStyle()
     this.removeCustomItem()
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
   },
 
   methods: {

@@ -1,1 +1,1 @@
-/* packageComponent/pages/nav/navigator/redirect.wxss */
+@import "../../../../common/reset.wxss";

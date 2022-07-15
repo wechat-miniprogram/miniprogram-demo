@@ -8,6 +8,11 @@ Page({
       path: 'packageComponent/pages/open/web-view/web-view'
     }
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

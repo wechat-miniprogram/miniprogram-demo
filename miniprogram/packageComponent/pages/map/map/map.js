@@ -89,6 +89,11 @@ Page({
       enableTraffic: !this.data.enableTraffic
     })
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

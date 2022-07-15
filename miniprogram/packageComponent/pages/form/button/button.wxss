@@ -1,5 +1,7 @@
+@import "../../../../common/reset.wxss";
+
 button{
-  margin-top: 15px;
+  margin-top: 0px;
   margin-bottom: 15px;
 }
 .button-sp-area{
@@ -8,4 +10,15 @@ button{
 }
 .mini-btn{
   margin-right: 5px;
+}
+
+button[loading] {
+  flex-direction: row;
+  align-items: center;
+}
+
+button[loading]::before {
+  margin: 0;
+  flex-shrink: 0;
+  font-size: 0;
 }

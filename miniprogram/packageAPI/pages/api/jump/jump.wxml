@@ -4,9 +4,10 @@
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" />
   <view class="page-body">
-    <view class="btn-area">
+    <!-- 暂时下架 -->
+    <!-- <view class="btn-area">
       <button type="primary" data-mode="fingerPrint" bindtap="openhalfscreenminiprogram">打开半屏小程序</button>
-    </view>
+    </view> -->
     <view class="btn-area">
       <button type="primary" data-mode="fingerPrint" bindtap="openanotherminiprogram">打开小程序</button>
     </view>

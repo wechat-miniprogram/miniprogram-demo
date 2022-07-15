@@ -1,3 +1,5 @@
+@import "../../../../common/reset.wxss";
+
 button{
   margin: 20px 0;
 }
@@ -12,5 +14,5 @@ button{
   text-align: center;
   font-size: 15px;
   color: #353535;
-  line-height: 2em;
+  line-height: 2;
 }

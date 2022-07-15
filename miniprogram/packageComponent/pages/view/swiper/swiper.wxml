@@ -1,6 +1,8 @@
-<import src="../../../common/head.wxml" />
-<import src="../../../common/foot.wxml" />
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
 
+<mp-navigation-bar title="swiper" back="{{true}}"></mp-navigation-bar>
+<scroll-view class="page-scroll-view" scroll-y type="list">
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" data="{{title: 'swiper'}}"/>
 
@@ -10,7 +12,7 @@
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
         <block wx:for="{{background}}" wx:key="*this">
           <swiper-item>
-            <view class="swiper-item {{item}}"></view>
+            <view class="swiper-item demo-text-{{index+1}}">{{item}}</view>
           </swiper-item>
         </block>
       </swiper>
@@ -23,6 +25,7 @@
             <switch checked="{{indicatorDots}}" bindchange="changeIndicatorDots" />
           </view>
         </view>
+        <view class="weui-cell_before"></view>
         <view class="weui-cell weui-cell_switch">
           <view class="weui-cell__bd">自动播放</view>
           <view class="weui-cell__ft">
@@ -48,3 +51,4 @@
 
   <template is="foot" />
 </view>
+</scroll-view>

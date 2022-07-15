@@ -6,6 +6,11 @@ Page({
       path: 'packageComponent/pages/media/image/image'
     }
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

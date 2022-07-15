@@ -8,7 +8,7 @@ Page({
 
   data: {
     theme: 'light',
-    background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
+    background: ['A', 'B', 'C'],
     indicatorDots: true,
     vertical: false,
     autoplay: false,
@@ -38,6 +38,11 @@ Page({
     this.setData({
       duration: e.detail.value
     })
+  },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
   },
   onLoad() {
     this.setData({

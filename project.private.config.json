@@ -1,0 +1,8 @@
+{
+  "libVersion": "2.24.7",
+  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "setting": {
+    "useIsolateContext": true
+  },
+  "projectname": "%25E5%25B0%258F%25E7%25A8%258B%25E5%25BA%258F%25E7%25A4%25BA%25E4%25BE%258B%2520%25E5%2586%2585%25E7%25BD%2591"
+}

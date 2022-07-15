@@ -1,11 +1,17 @@
-<import src="../../../common/head.wxml" />
-<import src="../../../common/foot.wxml" />
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
 
+<mp-navigation-bar title="map" back="{{true}}"></mp-navigation-bar>
+<scroll-view class="page-scroll-view" scroll-y type="list">
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" data="{{title: 'map'}}"/>
 
   <view class="page-body">
-    <view class="page-section-title">当前组件使用了墨渊底图样式，查看<navigator class="navigator" url="/packageComponent/pages/map-styles/map-styles">查看更多</navigator>。</view>
+    <view style="flex-direction: row; font-size: 14px;">
+      <text class="page-section-title">当前组件使用了墨渊底图样式，</text>
+      <navigator class="navigator" url="/packageComponent/pages/map-styles/map-styles">查看更多</navigator>
+      <text>。</text>
+    </view>
     <view class="page-section page-section-gap">
       <map
         subkey="{{subKey}}"
@@ -62,3 +68,4 @@
 
   <template is="foot" />
 </view>
+</scroll-view>

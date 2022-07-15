@@ -6,6 +6,11 @@ Page({
       path: 'packageAPI/pages/media/media-container/media-container'
     }
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

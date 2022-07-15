@@ -1,10 +1,11 @@
 const config = require('./config')
+
 const themeListeners = []
 global.isDemo = true
 App({
-  
+
   onLaunch(opts, data) {
-    const that = this;
+    const that = this
     const canIUseSetBackgroundFetchToken = wx.canIUse('setBackgroundFetchToken')
     if (canIUseSetBackgroundFetchToken) {
       wx.setBackgroundFetchToken({
@@ -15,7 +16,7 @@ App({
       wx.getBackgroundFetchData({
         fetchType: 'pre',
         success(res) {
-          that.globalData.backgroundFetchData  = res;
+          that.globalData.backgroundFetchData = res
           console.log('读取预拉取数据成功')
         },
         fail() {
@@ -46,36 +47,37 @@ App({
     }
   },
 
-  
+
   onShow(opts) {
     console.log('App Show', opts)
+    console.log('USER_DATA_PATH', wx.env.USER_DATA_PATH)
     // console.log(wx.getSystemInfoSync())
   },
   onHide() {
     console.log('App Hide')
   },
-  onThemeChange({ theme }) {
+  onThemeChange({theme}) {
     this.globalData.theme = theme
     themeListeners.forEach((listener) => {
-        listener(theme)
+      listener(theme)
     })
   },
   watchThemeChange(listener) {
-      if (themeListeners.indexOf(listener) < 0) {
-          themeListeners.push(listener)
-      }
+    if (themeListeners.indexOf(listener) < 0) {
+      themeListeners.push(listener)
+    }
   },
   unWatchThemeChange(listener) {
-      const index = themeListeners.indexOf(listener)
-      if (index > -1) {
-          themeListeners.splice(index, 1)
-      }
+    const index = themeListeners.indexOf(listener)
+    if (index > -1) {
+      themeListeners.splice(index, 1)
+    }
   },
   globalData: {
     theme: wx.getSystemInfoSync().theme,
     hasLogin: false,
     openid: null,
-    iconTabbar: '/page/weui/example/images/icon_tabbar.png',
+    iconTabbar: '/page/extend/images/icon_tabbar.png',
   },
   // lazy loading openid
   getUserOpenId(callback) {
@@ -85,7 +87,7 @@ App({
       callback(null, self.globalData.openid)
     } else {
       wx.login({
-        success(data) {
+        success() {
           wx.cloud.callFunction({
             name: 'login',
             data: {
@@ -97,8 +99,8 @@ App({
               callback(null, self.globalData.openid)
             },
             fail: err => {
-              console.log('拉取用户openid失败，将无法正常使用开放接口等服务', res)
-              callback(res)
+              console.log('拉取用户openid失败，将无法正常使用开放接口等服务', err)
+              callback(err)
             }
           })
         },

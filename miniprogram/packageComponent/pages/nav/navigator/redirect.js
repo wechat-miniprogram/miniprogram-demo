@@ -8,7 +8,11 @@ Page({
       path: 'packageComponent/pages/nav/navigator/redirect'
     }
   },
-
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad(options) {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

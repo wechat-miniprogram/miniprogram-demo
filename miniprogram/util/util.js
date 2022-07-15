@@ -11,7 +11,7 @@ function formatTime(time) {
 
   return ([hour, minute, second]).map(function (n) {
     n = n.toString()
-    return n[1] ? n : '0' + n
+    return n[1] ? n : `0${n}`
   }).join(':')
 }
 
@@ -51,10 +51,9 @@ function formatDateTime(date, withMs = false) {
   const second = date.getSeconds()
   const ms = date.getMilliseconds()
 
-  let ret = [year, month, day].map(value => formatLeadingZeroNumber(value, 2)).join('-') +
-    ' ' + [hour, minute, second].map(value => formatLeadingZeroNumber(value, 2)).join(':')
+  let ret = `${[year, month, day].map(value => formatLeadingZeroNumber(value, 2)).join('-')} ${[hour, minute, second].map(value => formatLeadingZeroNumber(value, 2)).join(':')}`
   if (withMs) {
-    ret += '.' + formatLeadingZeroNumber(ms, 3)
+    ret += `.${formatLeadingZeroNumber(ms, 3)}`
   }
   return ret
 }

@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "view"
+  "navigationBarTitleText": "view",
+  "renderer": "skyline",
+  "disableScroll": true,
+  "navigationStyle": "custom"
 }

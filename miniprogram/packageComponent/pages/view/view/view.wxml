@@ -1,6 +1,8 @@
-<import src="../../../common/head.wxml" />
-<import src="../../../common/foot.wxml" />
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
 
+<mp-navigation-bar title="view" back="{{true}}"></mp-navigation-bar>
+<scroll-view class="page-scroll-view" scroll-y type="list">
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" data="{{title: 'view'}}"/>
   <view class="page-body">
@@ -10,9 +12,9 @@
       </view>
       <view class="page-section-spacing">
         <view class="flex-wrp" style="flex-direction:row;">
-          <view class="flex-item demo-text-1"></view>
-          <view class="flex-item demo-text-2"></view>
-          <view class="flex-item demo-text-3"></view>
+          <view class="flex-item demo-text-1">A</view>
+          <view class="flex-item demo-text-2">B</view>
+          <view class="flex-item demo-text-3">C</view>
         </view>
       </view>
     </view>
@@ -21,11 +23,12 @@
         <text>flex-direction: column\n纵向布局</text>
       </view>
       <view class="flex-wrp" style="flex-direction:column;">
-        <view class="flex-item flex-item-V demo-text-1"></view>
-        <view class="flex-item flex-item-V demo-text-2"></view>
-        <view class="flex-item flex-item-V demo-text-3"></view>
+        <view class="flex-item flex-item-V demo-text-1">A</view>
+        <view class="flex-item flex-item-V demo-text-2">B</view>
+        <view class="flex-item flex-item-V demo-text-3">C</view>
       </view>
     </view>
   </view>
   <template is="foot" />
 </view>
+</scroll-view>

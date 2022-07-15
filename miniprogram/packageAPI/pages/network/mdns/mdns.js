@@ -128,6 +128,11 @@ Page({
       console.log('取消监听 mDNS 服务停止搜索的事件 成功')
     })
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

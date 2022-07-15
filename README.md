@@ -8,10 +8,7 @@
 ## 使用
 
 ```
-cd demo
-npm i
-cd miniprogram
-npm i
+npm run init
 ```
 完成上述步骤后，使用微信开发者工具，点击【工具-构建npm】
 

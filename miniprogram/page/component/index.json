@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "小程序官方组件展示"
+  "navigationBarTitleText": "小程序官方组件展示",
+  "renderer": "skyline",
+  "disableScroll": true,
+  "navigationStyle": "custom"
 }

@@ -48,6 +48,11 @@ Page({
   tapEvent() {
     console.log('按钮被点击')
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'

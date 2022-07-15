@@ -19,16 +19,12 @@ Page({
     theme: 'light'
   },
 
-  onLoad() {
-    this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
-    })
-
-    if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
-      })
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
     }
+  },
+  onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'
     })

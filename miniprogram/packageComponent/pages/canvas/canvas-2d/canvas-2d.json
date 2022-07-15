@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "canvas 2d"
+  "navigationBarTitleText": "canvas 2d",
+  "renderer": "skyline",
+  "disableScroll": true,
+  "navigationStyle": "custom"
 }

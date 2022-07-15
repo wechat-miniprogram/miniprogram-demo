@@ -1,0 +1,102 @@
+enum enARModelStatus
+{
+    ARModel_Status_Default = 0;
+    ARModel_Status_Init = 1;
+    ARModel_Status_Sparse_Finished = 2;
+    ARModel_Status_3d_Finished = 3;
+    ARModel_Status_Object_Finished = 4;
+    ARModel_Status_Marker_Finished = 5;
+}
+
+enum enARAlgorithmType
+{
+    Algorithm_Type_3D_Object = 1;
+    Algorithm_Type_3D_Marker = 2;
+}
+
+enum enARModelType
+{
+    ARModel_Type_Sparse = 1;
+    ARModel_Type_3D = 2;
+    ARModel_Type_Marker = 3;
+}
+
+message ModelCos
+{
+    message ModelCosId
+    {
+        optional enARModelType model_type = 1;
+        optional string model_cosid = 2;
+    }
+    repeated ModelCosId model_list = 1;
+}
+
+message ARModel
+{
+    //option(mmbizintpkv.KvTableID) = 493;
+    option(mmbizintpkv.KvTableTestID) = 916;
+    optional string cosid = 1;  // 原始文件的cosid
+    optional uint32 bizuin = 2;
+    optional string name = 3; // 原始文件的名称
+    optional uint32 upload_time = 4;
+    optional enARModelStatus model_status = 5;
+    optional enARAlgorithmType algo_type = 6;
+    optional ModelCos model_cos = 7;
+}
+
+
+message GenerateARModelReq
+{
+    optional uint32 bizuin = 1;
+    optional string name = 2;
+    optional bytes buffer = 3;
+    optional string url = 4;
+    optional enARAlgorithmType algo_type = 5;
+}
+
+message GenerateARModelResp
+{
+    optional string url = 1;
+    optional string host = 2;
+    optional string cosid = 3;
+}
+
+message GetARModelListReq
+{
+    optional uint32 bizuin = 1;
+    optional uint32 model_status = 2;  // enARModelStatus
+    optional uint32 start_time = 3;
+    optional uint32 end_time = 4;
+    optional uint32 offset = 5;
+    optional uint32 limit = 6;
+    optional uint32 algo_type = 7;  // enARAlgorithmType
+}
+
+message GetARModelListResp
+{
+    repeated ARModel model_list = 1;
+}
+
+
+message ARModelData
+{
+    optional bytes mesh_model = 1;  // 文本(点面信息)
+    optional bytes texture_model = 2; // 图像png
+}
+
+message GetARModelReq
+{
+    optional uint32 bizuin = 1;
+    optional string cosid = 2;
+    optional uint32 model_type = 3; // 1:稀疏点云  2:3d模型
+    optional uint32 need_data = 4[default=1]; // 0:不需要数据 1:需要数据
+    optional uint32 use_intranet = 5[default=0]; // 当need_data为0时生效 0:生成外网链接 1:内网链接
+    optional uint32 expire_time = 6; // url过期时间,默认5分钟,单位为秒
+}
+
+message GetARModelResp
+{
+    optional ARModelData model_data = 1;
+    optional string url = 2;
+    optional string host = 3;
+}

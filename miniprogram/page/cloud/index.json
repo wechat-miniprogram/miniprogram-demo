@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "小程序云开发展示"
+  "navigationBarTitleText": "小程序云开发展示",
+  "renderer": "skyline",
+  "disableScroll": true,
+  "navigationStyle": "custom"
 }

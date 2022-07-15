@@ -1,0 +1,22 @@
+
+<view class="container page" data-weui-theme="{{theme}}">
+  <canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px">
+  </canvas>
+
+  <view class="btn-cnt">
+      <button type="primary" disabled="{{!imgUrl}}" bindtap="addMarker">添加 marker</button>
+      <button type="primary" disabled="{{!imgUrl}}" bindtap="removeMarker">删除 marker</button>
+      <button type="primary" disabled="{{!imgUrl}}" bindtap="getAllMarker">获取所有 marker</button>
+  </view>
+  <view class="photo-cnt"> 
+  <view class="page-body-text tc">提示：选择图片作为marker, 点击添加marker, 然后手机摄像头对准下方所选图片</view>
+  <view>
+  <image wx:if="{{imgUrl}}" src="{{imgUrl}}" style="width: 50vw; height: 20vh; margin-left:25%" mode="aspectFit" />
+  <image wx:else="{{imgUrl}}" src="./choose.png" style="width: 50vw; height: 20vh; margin-left:25%" mode="aspectFit" />
+  </view>
+  </view>
+  <view class="btn-cnt">
+      <button type="primary" class="btn-choose" bindtap="chooseMedia">选择图片</button>
+  </view>
+</view>
+

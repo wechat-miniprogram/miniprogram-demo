@@ -5,6 +5,9 @@
     "page/cloud/index",
     "page/extend/index"
   ],
+  "usingComponents": {
+    "mp-navigation-bar": "/component/navigation-bar/navigation-bar"
+  },
   "subpackages": [
     {
       "root": "packageComponent",
@@ -31,6 +34,8 @@
         "pages/form/textarea/textarea",
         "pages/form/editor/editor",
         "pages/nav/navigator/navigator",
+        "pages/nav/navigator/navigate",
+        "pages/nav/navigator/redirect",
         "pages/media/image/image",
         "pages/media/video/video",
         "pages/media/camera/camera",
@@ -42,7 +47,8 @@
         "pages/open/ad/ad",
         "pages/open/open-data/open-data",
         "pages/open/web-view/web-view",
-        "pages/obstacle-free/aria-component/aria-component"
+        "pages/obstacle-free/aria-component/aria-component",
+        "pages/doc-web-view/doc-web-view"
       ]
     },
     {
@@ -60,6 +66,10 @@
         "pages/api/choose-invoice-title/choose-invoice-title",
         "pages/api/soter-authentication/soter-authentication",
         "pages/api/setting/setting",
+        "pages/ar/visionkit-basic/visionkit-basic",
+        "pages/ar/plane-ar/plane-ar",
+        "pages/ar/2dmarker-ar/2dmarker-ar",
+        "pages/ar/osd-ar/osd-ar",
         "pages/page/set-navigation-bar-title/set-navigation-bar-title",
         "pages/page/navigation-bar-loading/navigation-bar-loading",
         "pages/page/navigator/navigator",
@@ -158,6 +168,10 @@
         "pages/base/preview/preview",
         "pages/operate/dialog/dialog",
         "pages/operate/msg/msg",
+        "pages/operate/msg/msg_success",
+        "pages/operate/msg/msg_text",
+        "pages/operate/msg/msg_text_primary",
+        "pages/operate/msg/msg_fail",
         "pages/operate/half-screen-dialog/half-screen-dialog",
         "pages/operate/actionsheet/actionsheet",
         "pages/operate/toptips/toptips",
@@ -268,7 +282,7 @@
   "darkmode": true,
   "resizable": true,
   "useExtendedLib": {
-    "weui": true
+    "weui": "latest"
   },
   "frameset": true,
   "requiredBackgroundModes": ["audio", "location"],

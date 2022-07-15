@@ -8,7 +8,11 @@ Page({
       path: 'packageComponent/pages/nav/navigator/navigate'
     }
   },
-
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad(options) {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'
@@ -19,9 +23,5 @@ Page({
         this.setData({theme})
       })
     }
-    console.log(options)
-    this.setData({
-      title: options.title
-    })
   }
 })

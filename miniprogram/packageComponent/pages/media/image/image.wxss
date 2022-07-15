@@ -1,9 +1,11 @@
+@import "../../../../common/reset.wxss";
+
 .page-section-ctn {
   text-align: center;
 }
 
 .image {
   margin-top: 15px;
-  width: 345px;
+  width: 100%;
   height: 225px;
 }

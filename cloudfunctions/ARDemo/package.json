@@ -1,0 +1,19 @@
+{
+  "name": "ARDemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "svrkit": "svrkit-utils --config ./svrkit.config.js --output ./svrkit-utils.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tencent/wx-server-sdk-wxg-service": "^0.7.0",
+    "wx-server-sdk": "^2.6.3"
+  },
+  "devDependencies": {
+    "@tencent/cloud-functions-tools": "^1.5.1"
+  }
+}

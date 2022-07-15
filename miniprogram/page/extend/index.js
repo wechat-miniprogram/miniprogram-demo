@@ -61,7 +61,7 @@ CustomPage({
         name: '扩展组件',
         open: false,
         father: 'extend', // 父文件夹
-        pages: ['emoji', 'video-swiper', 'index-list', 'recycle-view', 'sticky', 'tabs', 'vtabs', 'barrage', 'select-text', 'wxml-to-canvas']
+        pages: ['video-swiper', 'index-list', 'recycle-view', 'sticky', 'tabs', 'vtabs', 'barrage', 'select-text', 'wxml-to-canvas']
       },
       {
         id: 'adaptive',

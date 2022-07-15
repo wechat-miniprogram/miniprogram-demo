@@ -1,29 +1,62 @@
-@import "./page/common/lib/weui.wxss";
-
-
 /* reset */
+@import './common/common-skyline.wxss';
+
 page {
-  background-color: var(--weui-BG-1);
+  background-color: #f7f7f7;
   height: 100%;
-  /* font-size: 16px; */
   font-size: 16px;
   line-height: 1.6;
-  color: var(--weui-FG-0);
+  color: rgba(0, 0, 0, .9);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
-page>view {
+page > view, page > scroll-view {
   width: 100vw;
   max-width: 600px;
 }
-checkbox, radio{
+checkbox, radio {
   margin-right: 5px;
 }
-button{
-  margin-top: 10px;
-  margin-bottom: 10px;
+
+canvas {
+  position: fixed;
+  top:0;
 }
-form{
+
+.info {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 20px;
+  line-height: 20px;
+  background-color: rgb(5, 16, 112);
+  color: #fff;
+  padding-left: 10px;
+  font-size: 12px;
+  z-index: 1000;
+}
+
+.memory {
+  top: 20px;
+}
+
+.cpu {
+  top: 40px;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+form {
   width: 100%;
 }
 input {
@@ -31,10 +64,10 @@ input {
 }
 
 /* lib */
-.strong{
+.strong {
   font-weight: bold;
 }
-.tc{
+.tc {
   text-align: center;
 }
 
@@ -61,22 +94,19 @@ input {
 }
 .page-head-line{
   margin: 0 auto;
-  /* width: 75px;
-  height: 1px; */
   width: 75px;
   height: 1px;
-  background-color: var(--weui-FG-1);
+  background-color: rgba(0, 0, 0, .5);
 }
 .page-head-desc{
   padding-top: 10px;
-  color: var(--weui-FG-1);
+  color: rgba(0, 0, 0, .5);
   font-size: 16px;
 }
 
 .page-body {
   width: 100%;
   flex-grow: 1;
-  /* overflow-x: hidden; */
 }
 .page-body-wrapper {
   display: flex;
@@ -92,7 +122,7 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--weui-BG-2);
+  background-color: #fff;
   width: 100%;
   padding: 25px 0 75px 0;
 }
@@ -103,20 +133,18 @@ input {
 .page-body-text {
   font-size: 15px;
   line-height: 26px;
-  color: var(--weui-FG-2);
+  color: rgba(0, 0, 0, .3);
 }
 .page-body-text-small {
   font-size: 12px;
-  color: var(--weui-FG-0);
+  color: rgba(0, 0, 0, .9);
   margin-bottom: 50px;
 }
 
 .page-foot{
-  /* margin: 50px 0 0 0; */
   margin: 50px 0 0 0;
   margin-bottom: constant(safe-area-inset-bottom);
   margin-bottom: env(safe-area-inset-bottom);
-  /* padding-bottom: 15px; */
   padding-bottom: 15px;
   text-align: center;
   color: #1aad19;
@@ -127,6 +155,7 @@ input {
   height: 12px; */
   width: 76px;
   height: 12px;
+  margin: 0 auto;
 }
 
 .page-section{
@@ -150,15 +179,11 @@ input {
   padding: 0 40px;
 }
 .page-section-title{
-  /* font-size: 14px; */
   font-size: 14px;
-  color: var(--weui-FG-1);
-  /* margin-bottom: 5px;
-  padding-left: 15px;
-  padding-right: 15px; */
+  color: rgba(0, 0, 0, .5);
   margin-bottom: 5px;
   padding-left: 15px;
-  padding-right: 15px;
+  /* padding-right: 15px; */
 }
 .page-section-gap .page-section-title{
   padding-left: 0;
@@ -179,21 +204,21 @@ input {
 .image-plus {
   width: 75px;
   height: 75px;
-  border: 1px solid var(--weui-FG-1);
+  border: 1px solid rgba(0, 0, 0, .5);
   position: relative;
 }
 .image-plus-nb{
   border: 0;
 }
 .image-plus-text{
-  color: var(--weui-FG-2);
+  color: rgba(0, 0, 0, .3);
   font-size: 14px;
 }
 .image-plus-horizontal {
   position: absolute;
   top: 50%;
   left: 50%;
-  background-color: var(--weui-FG-1);
+  background-color: rgba(0, 0, 0, .5);
   width: 2px;
   height: 40px;
   transform: translate(-50%, -50%);
@@ -202,7 +227,7 @@ input {
   position: absolute;
   top: 50%;
   left: 50%;
-  background-color: var(--weui-FG-1);
+  background-color: rgba(0, 0, 0, .5);
   width: 40px;
   height: 2px;
   transform: translate(-50%, -50%);
@@ -216,13 +241,14 @@ input {
   color: #FFFFFF;
   font-size: 18px;
 }
-.demo-text-1:before{
+/* skyline不支持:before */
+/* .demo-text-1:before{
   content: 'A';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+} */
 .demo-text-2{
   position: relative;
   align-items: center;
@@ -231,13 +257,14 @@ input {
   color: #FFFFFF;
   font-size: 18px;
 }
-.demo-text-2:before{
+/* skyline不支持:before */
+/* .demo-text-2:before{
   content: 'B';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+} */
 .demo-text-3{
   position: relative;
   align-items: center;
@@ -246,10 +273,54 @@ input {
   color: #353535;
   font-size: 18px;
 }
-.demo-text-3:before{
+/* skyline不支持:before */
+/* .demo-text-3:before{
   content: 'C';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+} */
+/* pick from weui */
+.weui-cells__title {
+  margin-top: 16px;
+  margin-bottom: 3px;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: rgba(0,0,0,0.5);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* skyline 未生效，用 .weui-cells_after-title 代替 */
+.weui-cells__title + .weui-cells {
+  margin-top: 0;
+}
+.weui-cells {
+  margin-top: 8px;
+  line-height: 1.41176471;
+  font-size: 17px;
+  overflow: hidden;
+  position: relative;
+  border-top: .5px solid rgba(0,0,0,0.1);
+  border-bottom: .5px solid rgba(0,0,0,0.1);
+}
+.weui-cells_after-title {
+  margin-top: 0;
+}
+.weui-cell {
+  padding: 16px;
+  flex-direction: row;
+  align-items: center;
+}
+.weui-cell_before {
+  left: 16px;
+  border-top: .5px solid rgba(0, 0, 0, .1);
+}
+.weui-cell::before {
+  display: none;
+}
+
+[data-weui-theme=dark] .weui-cell_before {
+  border-top-color: hsla(0, 0%, 100%, .1);
 }

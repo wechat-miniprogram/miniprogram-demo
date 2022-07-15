@@ -80,6 +80,11 @@ Page({
     theme: 'light'
   },
 
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onLoad() {
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'
@@ -106,5 +111,11 @@ Page({
       list
     })
     wx.reportAnalytics('click_view_programmatically', {})
-  }
+  },
+
+  navToDoc(e) {
+    wx.navigateTo({
+      url: '/packageComponent/pages/doc-web-view/doc-web-view',
+    })
+  },
 })

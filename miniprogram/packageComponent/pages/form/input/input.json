@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "input"
+  "navigationBarTitleText": "input",
+  "renderer": "skyline",
+  "disableScroll": true,
+  "navigationStyle": "custom"
 }
