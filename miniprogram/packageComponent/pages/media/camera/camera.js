@@ -136,8 +136,8 @@ Page({
     result: {},
     frameWidth: 0,
     frameHeight: 0,
-    width: 288,
-    height: 358,
+    width: 1280,
+    height: 720,
     showCanvas: false,
   },
 
@@ -153,24 +153,24 @@ Page({
       this.listener.stop()
     }
     const canvas = res.node
-    const render = createRenderer(canvas, this.data.width, this.data.height)
+    let render
 
     // if (!render || typeof render !== 'function') return
 
+    let initDone = false
     this.listener = this.ctx.onCameraFrame((frame) => {
-      render(new Uint8Array(frame.data), frame.width, frame.height)
-
-      const {
-        frameWidth,
-        frameHeight,
-      } = this.data
-
-      if (frameWidth === frame.width && frameHeight === frame.height) return
-      this.setData({
-        frameWidth: frame.width,
-        frameHeight: frame.height,
-
-      })
+      if (initDone) {
+        render(new Uint8Array(frame.data), frame.width, frame.height)
+      } else {
+        render = createRenderer(canvas, frame.width, frame.height)
+        this.setData({
+          frameWidth: frame.width,
+          frameHeight: frame.height,
+          width: frame.width / 3,
+          height: frame.height / 3,
+        })
+        initDone = true
+      }
     })
     this.listener.start()
   },

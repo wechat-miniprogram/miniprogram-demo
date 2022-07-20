@@ -12,6 +12,8 @@
         flash="off"
         device-position="{{position}}"
         binderror="error"
+        resolution="high"
+        frame-size="large"
       >
       </camera>
        <view wx:if="{{showCanvas}}" class="info-container">
