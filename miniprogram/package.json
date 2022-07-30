@@ -14,7 +14,6 @@
     "miniprogram-recycle-view": "^0.1.5",
     "wxml-to-canvas": "^1.1.1",
     "protobufjs": "^6.11.3",
-    "threejs-miniprogram": "0.0.3",
-    "vant-weapp": "^0.5.29"
+    "threejs-miniprogram": "0.0.3"
   }
 }
