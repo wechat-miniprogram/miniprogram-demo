@@ -1,0 +1,42 @@
+.page-container {
+  width: 100%;
+  height: 100%;
+  background: #ccc;
+  display: flex;
+  flex-direction: column;
+}
+.place-hodler-widget {
+  width: 100%;
+  height: 300px;
+}
+.list-wrp {
+  border-radius: 15px;
+  background: #fff;
+  width: 100%;
+  flex: 1;
+  padding-top: 20px;
+}
+.item {
+  width: 100%;
+  height: 60px;
+  padding: 10px 20px;
+  background: #fff;
+  flex-direction: row;
+  align-items: center;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+  border-radius: 50%;
+  background: #ccc;
+}
+.comment {
+  height: 40px;
+  flex-grow: 1;
+  background: #ccc;
+}
+
+
+
+/* # sourceMappingURL=index.wxss.map */

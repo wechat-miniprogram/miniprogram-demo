@@ -1,0 +1,14 @@
+<!-- index.wxml -->
+<mp-navigation-bar title="card" back="{{true}}"></mp-navigation-bar>
+<view class="page-container">
+	<view class="card-wrp">
+		<view class="card-item">
+			<share-element key="{{ cardData.description }}">
+				<view class="img-wrp">
+					<image mode="aspectFit" src="{{ cardData.imgSrc }}"/>
+				</view>
+			</share-element>
+		</view>
+		<view class="description">{{cardData.description}}</view>
+	</view>
+</view>

@@ -22,6 +22,16 @@
                     <navigator target="miniProgram" open-type="navigate" app-id="{{page.appid}}" path="" extra-data="" version="release" class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page.name}}</navigator>
                     <view class="navigator-arrow"></view>
                   </view>
+                  <!-- custom-route，自定义路由暂时不能用 navigator -->
+                  <view wx:elif="{{page.key == 'custom-route'}}">
+                    <view bindtap="goToCustomRoute" class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page.name}}</view>
+                    <view class="navigator-arrow"></view>
+                  </view>
+                  <!-- skyline -->
+                  <view wx:elif="{{item.id == 'Skyline'}}">
+                    <navigator url="/packageSkyline/pages/{{page.url}}" class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page.name}}</navigator>
+                    <view class="navigator-arrow"></view>
+                  </view>
                   <view wx:else>
                     <navigator url="/packageComponent/pages/{{item.id}}/{{page}}/{{page}}" class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page}}</navigator>
                     <view class="navigator-arrow"></view>

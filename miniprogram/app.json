@@ -196,6 +196,18 @@
         "pages/adapt/layeredpresentation/layeredpresentation",
         "pages/adapt/horizontalexpansion/horizontalexpansion"
       ]
+    },
+    {
+      "root": "packageSkyline",
+      "pages": [
+        "pages/worklet/animation/index",
+        "pages/worklet/gesture/index",
+        "pages/worklet/bottom-sheet/index",
+        "pages/share-element/list/index",
+        "pages/share-element/card/index",
+        "pages/flutter/scale-page/index",
+        "pages/flutter/half-page/index"
+      ]
     }
   ],
   "preloadRule": {
@@ -276,6 +288,11 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
+  "requiredPrivateInfos": [
+    "chooseAddress",
+    "chooseLocation",
+    "getLocation"
+  ],
   "cloud": true,
   "sitemapLocation": "sitemap.json",
   "themeLocation": "demo.theme.json",
@@ -285,7 +302,12 @@
     "weui": "latest"
   },
   "frameset": true,
-  "requiredBackgroundModes": ["audio", "location"],
-  "embeddedAppIdList": ["wxfdcee92a299bcaf1"],
+  "requiredBackgroundModes": [
+    "audio",
+    "location"
+  ],
+  "embeddedAppIdList": [
+    "wxfdcee92a299bcaf1"
+  ],
   "lazyCodeLoading": "requiredComponents"
 }

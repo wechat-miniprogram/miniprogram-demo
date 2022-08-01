@@ -1,0 +1,5 @@
+<scroll-view style="flex: 1; overflow: auto; width: 100%;" scroll-y scroll-anchoring enable-back-to-top enhanced scroll-into-view="{{ scrollIntoView }}" refresher-enabled="{{ refresherEnabled }}" refresher-threshold="{{ refresherThreshold }}" refresher-default-style="{{ refresherDefaultStyle }}" refresher-background="{{ refresherBackground }}" refresher-triggered="{{ refresherTriggered }}" bindscroll="onScroll" lower-threshold="{{ lowerThreshold }}" bindscrolltolower="onScrollToLower" bindrefresherpulling="onPulling" bindrefresherrefresh="onRefresh" bindrefresherrestore="onRestore" bindrefresherabort="onAbort" type="list">
+	<view>
+		<slot/>
+	</view>
+</scroll-view>

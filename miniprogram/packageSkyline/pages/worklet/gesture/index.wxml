@@ -1,0 +1,9 @@
+<mp-navigation-bar title="手势系统" back="{{true}}"></mp-navigation-bar>
+<view class="section-item">
+	<pan-gesture-handler onGestureEvent="handlepan">
+		<view class="circle"/>
+	</pan-gesture-handler>
+  <view class="title">拖动小球</view>
+</view>
+
+

@@ -1,0 +1,33 @@
+page, view, text, image, button, video, map, cover-view, cover-image, scroll-view, swiper, input, textarea, navigator {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: stretch;
+  box-sizing: border-box;
+  background-origin: border-box;
+}
+
+.container {
+  align-items: center;
+  margin-top: 200px;
+  min-height: auto;
+}
+.card {
+  background-color: #88d514;
+  width: 80%;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 10px ;
+}
+button {
+  height: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+
+/* # sourceMappingURL=index.wxss.map */

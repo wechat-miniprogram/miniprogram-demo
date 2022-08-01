@@ -1,0 +1,15 @@
+<!-- index.wxml -->
+<mp-navigation-bar title="手势协商" back="{{true}}"></mp-navigation-bar>
+<view class="page-container">
+		<view class="place-hodler-widget"/>
+		<pan-gesture-handler id="pan" shouldResponseOnMove="shouldPanResponse" simultaneousHandlers="{{['scroll']}}" onGestureEvent="handlePan">
+				<vertical-drag-gesture-handler id="scroll" native-view="scroll-view" shouldResponseOnMove="shouldScrollViewResponse" simultaneousHandlers="{{['pan']}}">
+						<scroll-view class="list-wrp" scroll-y bounces="{{false}}" refresher-enabled="{{false}}" adjustDecelerationVelocity="adjustDecelerationVelocity" bindscroll="handleScroll" type="list">
+								<view class="item" wx:for="{{list}}">
+										<view class="avatar"/>
+										<view class="comment"/>
+								</view>
+						</scroll-view>
+				</vertical-drag-gesture-handler>
+		</pan-gesture-handler>
+</view>

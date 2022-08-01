@@ -1,5 +1,4 @@
 const config = require('./config')
-
 const themeListeners = []
 global.isDemo = true
 App({
@@ -45,6 +44,16 @@ App({
         traceUser: true,
       })
     }
+    // skyline
+    var systemInfo = wx.getSystemInfoSync();
+    console.log('@@@ systemInfo ', systemInfo)
+    Object.assign(this.globalData, systemInfo);
+    require.async('./packageSkyline/common/custom-route/index.js').then(utils => {
+      console.log('--------begin installRouteBuilder')
+      utils.installRouteBuilder() // 'common'
+    }).catch(({mod, errMsg}) => {
+      console.error(`installRouteBuilder path: ${mod}, ${errMsg}`)
+    })
   },
 
 

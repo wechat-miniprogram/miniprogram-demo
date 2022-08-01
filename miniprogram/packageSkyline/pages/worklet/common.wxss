@@ -1,0 +1,44 @@
+.section-item {
+  margin: 10px;
+}
+
+.title {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.action-area {
+  display: flex;
+  flex-direction: row;
+}
+
+.float-btn {
+  margin: 0 20px;
+  font-size: 20px;
+  border-radius: 8px;
+  padding: 6px 10px;
+  background-color: #5f9ea0;
+}
+
+.center {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background-color: #adff2f;
+  margin: 10px 0;
+}
+
+.action-item {
+  font-size: 20px;
+  text-align: center;
+  padding: 6px 10px;
+  margin: 0 20px;
+  border: 1px solid #ccc;
+}

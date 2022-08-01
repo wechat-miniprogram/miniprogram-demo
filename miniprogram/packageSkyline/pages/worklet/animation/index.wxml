@@ -1,0 +1,15 @@
+<mp-navigation-bar title="worklet 动画" back="{{true}}"></mp-navigation-bar>
+<page-scroll>
+	<view>
+		<view class="section-item page-section" wx:for="{{list}}">
+			<view class="page-section-title">{{item}}</view>
+			<view class="box {{'box' + index}}"/>
+		</view>
+		<view>
+			<button type="primary" bind:tap="startAnimation">start animation</button>
+			<button type="primary" bind:tap="cancelAnimation">cancel</button>
+		</view>
+	</view>
+</page-scroll>
+
+

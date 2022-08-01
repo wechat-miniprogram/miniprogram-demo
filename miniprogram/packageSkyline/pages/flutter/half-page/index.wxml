@@ -1,0 +1,21 @@
+<!-- index.wxml -->
+<vertical-drag-gesture-handler id="pan" shouldResponseOnMove="shouldPanResponse" simultaneousHandlers="{{ ['scroll'] }}" onGestureEvent="handleVerticalDrag" style="flex: 1; overflow: auto;width: 100%;">
+	<view style="width: 100%; height: 100%;">
+		<view class="bottom-sheet">
+			<view class="btn-wrp" bind:tap="back">
+				<view class="btn">
+					<image class="icon" src="/_assets/icon_down_arrow.09a0011d.svg" mode="aspectFit"/>
+				</view>
+			</view>
+			<view class="title">评论列表</view>
+		</view>
+		<vertical-drag-gesture-handler id="scroll" native-view="scroll-view" shouldResponseOnMove="shouldScrollViewResponse" simultaneousHandlers="{{ ['pan'] }}">
+			<scroll-view style="flex: 1; overflow: auto; width: 100%;" scroll-y bindscroll="handleScroll" adjustDecelerationVelocity="adjustDecelerationVelocity" bounces="{{ false }}" refresher-enabled="{{ false }}" type="list">
+				<view class="comment-item" wx:for="{{ list }}">
+					<view class="avatar"/>
+					<view class="comment"/>
+				</view>
+			</scroll-view>
+		</vertical-drag-gesture-handler>
+	</view>
+</vertical-drag-gesture-handler>

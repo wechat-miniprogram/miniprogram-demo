@@ -1,0 +1,12 @@
+<!-- index.wxml -->
+<!-- <navigation-bar title="共享元素动画"/> -->
+<mp-navigation-bar title="共享元素动画" back="{{true}}"></mp-navigation-bar>
+<view class="card-list">
+	<view class="card-item" wx:for="{{ cardList }}" wx:key="{{ id }}">
+		<share-element key="{{ item.description }}">
+			<view class="img-wrp" bind:tap="go" data-idx="{{ index }}">
+				<image mode="aspectFit" src="{{ item.imgSrc }}"/>
+			</view>
+		</share-element>
+	</view>
+</view>

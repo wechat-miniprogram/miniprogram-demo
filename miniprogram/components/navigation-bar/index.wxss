@@ -1,0 +1,82 @@
+page, view, text, image, button, video, map, cover-view, cover-image, scroll-view, swiper, input, textarea, navigator {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: stretch;
+  box-sizing: border-box;
+  background-origin: border-box;
+}
+
+.navigation-bar {
+  background-color: #f7f7f7;
+}
+.navigation-bar .android {
+  height: 48px;
+}
+.navigation-bar__inner {
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.navigation-bar__inner .navigation-bar__left {
+  position: relative;
+  padding-left: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.navigation-bar__inner .navigation-bar__left .navigation-bar__buttons {
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+  min-width: 50px;
+}
+.navigation-bar__inner .navigation-bar__left .navigation-bar__btn {
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+}
+.navigation-bar__inner .navigation-bar__left .navigation-bar__btn_goback {
+  width: 8px;
+  height: 14px;
+}
+.navigation-bar__inner .navigation-bar__left .navigation-bar__btn_goback:active {
+  opacity: 0.5;
+}
+.navigation-bar__inner .navigation-bar__center {
+  font-size: 17px;
+  text-align: center;
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navigation-bar__inner .navigation-bar__center.title {
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.navigation-bar__inner .navigation-bar__loading {
+  margin-right: 4px;
+  display: inline-flex;
+  align-items: center;
+}
+.navigation-bar__inner .navigation-bar__loading .loading {
+  margin-left: 0;
+}
+.navigation-bar__inner .navigation-bar__right {
+  padding-right: 16px;
+}
+
+
+
+/* # sourceMappingURL=index.wxss.map */

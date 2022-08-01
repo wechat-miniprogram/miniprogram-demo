@@ -1,0 +1,35 @@
+.page-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-wrp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+}
+.card-item {
+  width: 256px;
+  height: 256px;
+}
+share-element {
+  width: 100%;
+  height: 100%;
+}
+.img-wrp {
+  background-color: #a1cfec8b;
+  border-radius: 32px;
+  overflow: hidden;
+}
+.description {
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 16px;
+}
+
+
+
+/* # sourceMappingURL=index.wxss.map */

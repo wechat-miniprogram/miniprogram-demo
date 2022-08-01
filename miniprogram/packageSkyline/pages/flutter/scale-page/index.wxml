@@ -1,0 +1,6 @@
+<!-- index.wxml -->
+<mp-navigation-bar title="自定义路由" back="{{true}}"></mp-navigation-bar>
+<view class="container">
+	<button type="primary" bind:tap="jump">打开半屏页面</button>
+	<button type="primary" bind:tap="back">返回上一级</button>
+</view>
