@@ -1,0 +1,22 @@
+<view class="container page" data-weui-theme="{{theme}}">
+<view style="display: flex; justify-content: center;margin: 12px;">
+    <view>原图：</view>
+    <image src="{{faceImgUrl}}" style="width: 100px; height: 100px;" mode="aspectFit" />
+</view>
+<canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px">
+</canvas>
+<view class="btn-cnt">
+    <button type="primary" bindtap="chooseMedia">选择图片</button>
+    <button type="primary" disabled="{{!faceImgUrl}}" style="margin-top: 20px;" bindtap="detectFace">开始检测</button>
+</view>
+
+
+<view wx:if="{{anchor2DList}}">
+    <view wx:for="{{anchor2DList}}" style="margin: 30px auto; position: relative; width: {{faceImgWidth}}px; height: {{faceImgHeight}}px;">
+        <image src="{{faceImgUrl}}" style="width: {{faceImgWidth}}px; height: {{faceImgHeight}}px;" />
+        <view style="position: absolute; left: {{item.origin.x * faceImgWidth}}px; top: {{item.origin.y * faceImgHeight}}px; width: {{item.size.width * faceImgWidth}}px; height: {{item.size.height * faceImgHeight}}px; border: solid red 2px"></view>
+        <view wx:for="{{item.points}}" wx:key="id" style="position: absolute; left: {{item.x * faceImgWidth}}px; top: {{item.y * faceImgHeight}}px; width: 4px; height: 4px; background-color: #00ff00; border-radius: 50%;"></view>
+    </view>
+</view>
+<view class="page-body-text tc" style="height:20%">提示：点击选择图片，上传本地人脸照片，然后开始检测，对应人脸将会显示识别框和人脸标记点</view>
+</view>

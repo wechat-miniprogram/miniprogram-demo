@@ -1,0 +1,6 @@
+<view class="container page" data-weui-theme="{{theme}}">
+<view><canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px" bindtouchend="onTouchEnd">
+    <cover-view wx:for="{{anchor2DList}}" wx:key="id" style="position: absolute; top: {{item.x}}px; left: {{item.y}}px; width: {{item.w}}px; height: {{item.h}}px; background-color: #FFF; opacity: 0.7;"></cover-view>
+</canvas></view>
+<view class="page-body-text tc" style="height:20%">提示：触碰屏幕任意点, 可在真实水平位置生成示例的机器小人, 其中光标标记指示的是真实水平面</view>
+</view>

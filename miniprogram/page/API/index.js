@@ -258,17 +258,33 @@ Page({
         url: 'visionkit-basic/visionkit-basic'
       },
       {
+        zh: 'VisionKit基础-v2',
+        url: 'visionkit-basic-v2/visionkit-basic-v2'
+      },
+      {
         zh: '水平面AR',
         url: 'plane-ar/plane-ar'
+      },
+      {
+        zh: '水平面AR-v2',
+        url: 'plane-ar-v2/plane-ar-v2'
       },
       {
         zh: '2DMarkerAR',
         url: '2dmarker-ar/2dmarker-ar'
       },
-       {
+      {
         zh: '单样本检测(OSD)',
         url: 'osd-ar/osd-ar'
-      }
+      },
+      {
+        zh: '实时人脸检测',
+        url: 'face-detect/face-detect'
+      },
+      {
+        zh: '照片人脸检测',
+        url: 'photo-face-detect/photo-face-detect'
+      },
     ],
     }],
     isSetTabBarPage: false,
