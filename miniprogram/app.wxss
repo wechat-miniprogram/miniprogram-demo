@@ -51,7 +51,6 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60px;
   font-size: 16px;
   line-height: 1.2;
 }
