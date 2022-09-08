@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "WeChat miniprogram demo",
   "scripts": {
-    "init": "cd cloudfunctions/ && tnpm i --production && cd ../miniprogram/ && tnpm i --production",
+    "init": "cd miniprogram/ && npm i --production",
     "lint": "eslint .",
     "wxss:transform-vars": "gulp transform-css-vars"
   },
