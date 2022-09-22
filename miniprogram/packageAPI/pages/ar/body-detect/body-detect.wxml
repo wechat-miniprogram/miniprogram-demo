@@ -1,0 +1,5 @@
+<view class="container page" data-weui-theme="{{theme}}">
+  <view><canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px" bindtouchend="onTouchEnd">
+    </canvas></view>
+  <view class="page-body-text tc" style="height:20%">提示：将摄像头对准人体, 检测到的人体将会被标记出识别框和人体部位标记点</view>
+</view>

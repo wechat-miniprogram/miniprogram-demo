@@ -165,22 +165,10 @@ export default function getBehavior() {
             anchors.forEach(anchor => {
               const size = anchor.size
               let object
-              if (size && DEBUG_SIZE) {
+              if (size) {
                 // object = createPlane(size)
               } else {
-                if (options.anchorModel) {
-                  if (!this.model) {
-                    console.warn('this.model 还没加载完成 ！！！！！')
-                    return
-                  }
-
-                  object = new THREE.Object3D()
-                  const model = this.getRobot()
-                  model.rotateX(-Math.PI / 2)
-                  object.add(model)
-                } else {
-                  object = new THREE.GridHelper(0.2, 10, 0xffffff, 0xffffff)
-                }
+                object = new THREE.GridHelper(0.2, 10, 0xffffff, 0xffffff)
               }
 
               object._id = anchor.id
@@ -198,7 +186,7 @@ export default function getBehavior() {
               if (object._id && map[object._id]) {
                 const anchor = map[object._id]
                 const size = anchor.size
-                if (size && DEBUG_SIZE && object._size && (size.width !== object._size.width || size.height !== object._size.height)) {
+                if (size && object._size && (size.width !== object._size.width || size.height !== object._size.height)) {
                   this.planeBox.remove(object)
                   object = createPlane(size)
                   this.planeBox.add(object)

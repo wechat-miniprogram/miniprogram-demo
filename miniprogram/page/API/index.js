@@ -285,6 +285,14 @@ Page({
         zh: '照片人脸检测',
         url: 'photo-face-detect/photo-face-detect'
       },
+      {
+        zh: '实时人体检测',
+        url: 'body-detect/body-detect'
+      },
+      {
+        zh: '照片人体检测',
+        url: 'photo-body-detect/photo-body-detect'
+      },
     ],
     }],
     isSetTabBarPage: false,
