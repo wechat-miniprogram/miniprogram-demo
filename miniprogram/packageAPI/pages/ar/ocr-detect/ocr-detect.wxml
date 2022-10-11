@@ -1,0 +1,10 @@
+<view class="container page" data-weui-theme="{{theme}}">
+  <view><canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px" bindtouchend="onTouchEnd">
+    </canvas></view>
+  <view wx:if="{{textContentList}}">
+    <view wx:for="{{textContentList}}" style="margin: 30px auto; position: relative; width: {{faceImgWidth}}px; height: {{faceImgHeight}}px;">
+        <text>{{item.text}}</text>
+    </view> 
+  </view>
+  <view class="page-body-text tc" style="height:20%">提示：将摄像头对准图片的文字, 将会显示检测到的文字</view>
+</view>
