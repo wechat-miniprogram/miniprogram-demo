@@ -293,6 +293,14 @@ Page({
         zh: '照片人体检测',
         url: 'photo-body-detect/photo-body-detect'
       },
+      {
+        zh: '实时手势检测',
+        url: 'hand-detect/hand-detect'
+      },
+      {
+        zh: '照片手势检测',
+        url: 'photo-hand-detect/photo-hand-detect'
+      },
     ],
     }],
     isSetTabBarPage: false,
