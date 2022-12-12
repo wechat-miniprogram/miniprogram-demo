@@ -74,6 +74,8 @@
         "pages/ar/osd-ar/osd-ar",
         "pages/ar/face-detect/face-detect",
         "pages/ar/photo-face-detect/photo-face-detect",
+        "pages/ar/hand-detect/hand-detect",
+        "pages/ar/photo-hand-detect/photo-hand-detect",
         "pages/ar/body-detect/body-detect",
         "pages/ar/photo-body-detect/photo-body-detect",
         "pages/page/set-navigation-bar-title/set-navigation-bar-title",
