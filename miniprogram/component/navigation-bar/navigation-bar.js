@@ -106,10 +106,21 @@ Component({
       },
       back() {
           const data = this.data
+          console.log('---------222',getCurrentPages().length)
           if (data.delta) {
               wx.navigateBack({
                   delta: data.delta
               })
+          }
+          // 如果是直接打开的，就默认回首页
+          if (getCurrentPages().length == 1) {
+            console.log('---------333')
+            wx.switchTab({
+              url: '/page/component/index',
+              complete: (res) => {
+                console.log(res)
+              }
+            })
           }
           this.triggerEvent('back', { delta: data.delta }, {})
       }

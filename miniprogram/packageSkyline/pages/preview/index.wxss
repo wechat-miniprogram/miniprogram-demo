@@ -1,0 +1,14 @@
+page {
+  background-color: transparent;
+}
+
+.box-cotainer {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.previewer {
+  width: 100%;
+  height: 100%;
+}

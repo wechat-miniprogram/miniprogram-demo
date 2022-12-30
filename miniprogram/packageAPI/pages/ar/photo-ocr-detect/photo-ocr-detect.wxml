@@ -1,0 +1,20 @@
+<view class="container page" data-weui-theme="{{theme}}">
+<view style="display: flex; justify-content: center;margin: 12px;">
+    <view>原图：</view>
+    <image src="{{faceImgUrl}}" style="width: 100px; height: 100px;" mode="aspectFit" />
+</view>
+<canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px">
+</canvas>
+<view class="btn-cnt">
+    <button type="primary" bindtap="chooseMedia">选择图片</button>
+    <button type="primary" disabled="{{!faceImgUrl}}" style="margin-top: 20px;" bindtap="runOCR">开始检测</button>
+</view>
+
+
+<view wx:if="{{textContentList}}">
+    <view wx:for="{{textContentList}}">
+        <text>{{item.text}}</text>
+    </view>
+</view>
+<view class="page-body-text tc" style="height:20%">提示：点击选择图片，上传本地照片，然后开始文字检测，将会显示检测到的文字</view>
+</view>

@@ -51,7 +51,6 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60px;
   font-size: 16px;
   line-height: 1.2;
 }
@@ -323,4 +322,15 @@ input {
 
 [data-weui-theme=dark] .weui-cell_before {
   border-top-color: hsla(0, 0%, 100%, .1);
+}
+
+.center {
+  align-items: center;
+  justify-content: center; 
+}
+
+grid-tile {
+  align-items: center;
+  justify-content: center; 
+  overflow: hidden;
 }

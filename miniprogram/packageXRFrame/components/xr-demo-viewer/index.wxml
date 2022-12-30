@@ -1,0 +1,48 @@
+<scroll-view class="demo-viewer" scroll-y="{{true}}">
+  <block bind:sceneReady="handleSceneReady">
+    <slot></slot>
+  </block>
+  <view class="intro">
+    <view class="intro-detail">
+      <view class="intro-title" ><text>{{title}}</text> <button class="share" open-type="share">分享给好友</button></view>
+      <view class="description" >{{intro}}</view>
+    </view>
+  </view>
+  <view wx:if="{{hint.length > 0}}">
+    <view class="hint-wrap">
+      <text class="hint-words" >{{hint}}</text>
+    </view>
+  </view>
+  <view wx:if="{{code.length > 0}}">
+    <view class="intro">
+      <view class="intro-detail">
+        <view class="title">代码演示</view>
+        <view class="code-inner">
+          <rich-text nodes="{{code}}"></rich-text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{js.length > 0}}">
+    <view class="intro">
+      <view class="intro-detail">
+        <view class="title">脚本演示</view>
+        <view class="code-inner">
+          <rich-text nodes="{{js}}"></rich-text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{json.length > 0}}">
+    <view class="intro">
+      <view class="intro-detail">
+        <view class="title">动画数据结构</view>
+        <view class="code-inner">
+          <rich-text nodes="{{json}}"></rich-text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="holder"></view>
+</scroll-view>

@@ -1,0 +1,21 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="texture" asset-id="waifu" src="/assets/waifu.png" />
+    <xr-asset-material asset-id="shining-mat" effect="shining" uniforms="u_color:1 1 0 1" />
+  </xr-assets>
+  <xr-node node-id="target">
+    <xr-mesh geometry="star" material="shining-mat" rotation="90 0 0" />
+    <xr-node wx:for="{{stars}}" wx:for-item="star">
+      <xr-shining-star rotation="90 0 0" position="{{star.pos}}" uniforms="u_color:{{star.color}},u_reflection:waifu,u_speed:{{star.speed}}" />
+    </xr-node>
+    <xr-camera
+      id="camera" node-id="camera" position="0 0 10" clear-color="0.4 0.6 0.7 1"
+      background="default" target="target"
+      camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="{{test}}}" intensity="1" />
+    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

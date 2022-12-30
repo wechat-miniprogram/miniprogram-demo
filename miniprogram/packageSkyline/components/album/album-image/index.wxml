@@ -1,0 +1,5 @@
+<share-element class="share-element" key="{{shareKey}}" rect-tween-type="cubic-bezier(0, 1, .8, 1.1)" onFrame="onFrame">
+  <view class="img-cut-cnt">
+    <image class="img" src="{{src}}" mode="aspectFill" bindload="onImageLoad"></image>
+  </view>
+</share-element>

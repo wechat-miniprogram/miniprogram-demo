@@ -1,0 +1,21 @@
+<xr-scene id="xr-scene" bind:ready="handleReady" bind:log="handleLog">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load
+      type="env-data" asset-id="env1" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin"
+    />
+    <xr-asset-load type="gltf" asset-id="gltf-damageHelmet" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.glb" />
+  </xr-assets>
+  <xr-env env-data="env1" />
+  <xr-node node-id="target">
+    <xr-gltf model="gltf-damageHelmet" position="2 0 0" auto-rotate="speed:2 1 3" />
+    <xr-auto-rotate-touchable-gltf id="artg" position="-2 0 0" model="gltf-damageHelmet" speed="1 0 0" bind:drag-shape="handleDrag" bind:touch-shape="handleTouchStart" bind:untouch-shape="handleTouchEnd" />
+    <xr-camera
+      id="camera" node-id="camera" position="0 0 8" clear-color="0.925 0.925 0.925 1"
+      background="skybox" target="target"
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

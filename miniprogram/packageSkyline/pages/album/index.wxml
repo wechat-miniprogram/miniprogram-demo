@@ -1,0 +1,12 @@
+<view class="cnt">
+  <mp-navigation-bar title="图片预览" back="{{true}}"></mp-navigation-bar>
+  <album
+    class="album"
+    list="{{list}}"
+    width="{{width}}"
+    imageWidth="{{imageWidth}}"
+    bindtapimage="onTapImage"
+  ></album>
+</view>
+<!-- 占位，用于进入预览页时的动画效果 -->
+<share-element-empty class="share-element-empty"></share-element-empty>

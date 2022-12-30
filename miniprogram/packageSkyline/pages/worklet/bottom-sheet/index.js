@@ -59,4 +59,14 @@ Page({
     'worklet';
     this.scrollTop.value = evt.detail.scrollTop;
   },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage() {
+    return {
+      title: '手势协商',
+      path: 'packageSkyline/pages/worklet/bottom-sheet/index'
+    }
+  },
 });

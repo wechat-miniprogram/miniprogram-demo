@@ -1,0 +1,57 @@
+{
+  "keyframe": {
+    "directionalLight": {
+      "0": {
+        "rotation": [40, 170, 0]
+      },
+      "50": {
+        "rotation": [30, 140, 0]
+      },
+      "100": {
+        "rotation": [40, 170, 0]
+      }
+    },
+    "pointLight": {
+      "0": {
+        "position": [10, 0, 0]
+      },
+      "100": {
+        "position": [-10, 0, 0]
+      }
+    },
+    "spotLight": {
+      "0": {
+        "rotation": [0,90,0]
+      },
+      "100": {
+        "rotation": [0, 270, 4]
+      }
+    }
+  },
+  "animation": {
+    "default": {
+      "keyframe": "directionalLight",
+      "duration": 60,
+      "ease": "linear",
+      "loop": 400000,
+      "delay": 1,
+      "direction": "both"
+    },
+    "pointLight": {
+      "keyframe": "pointLight",
+      "duration": 6,
+      "ease": "linear",
+      "loop": 400000,
+      "delay": 1,
+      "direction": "both"
+    },
+    "spotLight": {
+      "keyframe": "spotLight",
+      "duration": 200,
+      "ease": "linear",
+      "loop": 400000,
+      "delay": 1,
+      "direction": "both"
+    }
+  }
+}

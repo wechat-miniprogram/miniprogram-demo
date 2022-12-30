@@ -1,0 +1,14 @@
+<xr-demo-viewer
+  title="无光照glTF案例"
+  intro="应用于KHR_materials_unlit材质的glTF案例，常见于已烘焙光照到贴图与卡通渲染模型"
+  code="{{xmlCode}}"
+>
+  <xr-gltf-unlit
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    a="123"
+  />
+</xr-demo-viewer>

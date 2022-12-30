@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/index",
+    "page-scroll": "/components/page-scroll/index",
+    "tabs": "../../components/tabs"
+  },
+  "disableScroll": true,
+  "renderer": "skyline",
+  "navigationStyle": "custom"
+}

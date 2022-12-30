@@ -11,4 +11,4 @@ export const cardList = [{
   imgSrc: 'https://res.wx.qq.com/op_res/BctIVId6FBWoAwrQ6I0FrK3_9PJxusGs559eLA7Fa0xDR23BpoYarHJNH89kDhEtKNqXq98WhEksowUFkNLI2Q',
   description: 'Beach ball',
 }
-];
+]

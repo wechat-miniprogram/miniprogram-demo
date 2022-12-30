@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="RenderTexture案例"
+  intro="使用`xr-asset-render-texture`生成渲染目标。"
+  code="{{xmlCode}}"
+>
+  <xr-basic-render-texture
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

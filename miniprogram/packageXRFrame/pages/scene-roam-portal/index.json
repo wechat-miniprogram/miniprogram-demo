@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../components/xr-demo-viewer/index",
+    "xr-roam-portal": "../../components/xr-roam-portal/index"
+  },
+  "disableScroll": true,
+  "navigationStyle": "custom"
+}

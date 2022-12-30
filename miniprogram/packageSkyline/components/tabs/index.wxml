@@ -1,0 +1,31 @@
+<view class="tab-container">
+  <view class="tab-list">
+    <view wx:for="{{tabs}}" wx:key="*this" class="tab-item {{selectedTab === item ? 'actived' : ''}}" data-tab="{{item}}" bindtap="onTapTab">
+      <!-- <image class="icon-{{item}}" src="../../resources/tab-{{item}}{{selectedTab === item ? '-actived' : ''}}.png"></image> -->
+      <view>{{ item.title }}</view>
+    </view>
+    <view class="tab-border"></view>
+  </view>
+  <swiper class="scroll-list" current="{{swiperSelect}}" bind:change="onTabChanged" bind:transition="onTabTransition" duration="{{400}}">
+    <swiper-item wx:for="{{tabs}}" wx:key="title">
+      <!-- <slot name="tab-content-{{index}}"></slot> -->
+      <!-- <slot name="tab-content-0"></slot> -->
+
+      <!-- 先用着 -->
+      <image class="item-image" src="{{item.img}}" mode="widthFix"></image>
+      <view class="item-title">
+        {{item.title2}}
+      </view>
+      <view class="item-desc">
+        {{item.desc}}
+      </view>
+    </swiper-item>
+    <!-- <swiper-item>
+      <slot></slot>
+    </swiper-item> -->
+    <!-- 纪念册 -->
+    <!-- <swiper-item>
+      <view class="empty">纪念册</view>
+    </swiper-item> -->
+  </swiper>
+</view>

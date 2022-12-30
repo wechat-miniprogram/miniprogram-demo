@@ -1,0 +1,18 @@
+.btn-cnt {
+  display: flex;
+}
+
+.photo-cnt {
+  margin-top: 50vh;
+}
+
+.btn-choose {
+  flex: 0 50%;
+  display: flex;
+  height: 5vh;
+  margin-bottom: 5vh;
+}
+
+.scroll-view_H {
+  white-space: nowrap;
+}

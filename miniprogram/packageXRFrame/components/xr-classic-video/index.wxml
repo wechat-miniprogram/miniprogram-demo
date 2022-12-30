@@ -1,0 +1,18 @@
+<xr-scene ar-system="modes:Marker" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+   <xr-asset-load
+      type="video-texture" asset-id="hikari"
+      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/2dmarker/hikari-v.mp4" options="loop:true"
+    />
+    <xr-asset-material asset-id="mat" effect="simple" uniforms="u_baseColorMap: video-hikari" />
+  </xr-assets>
+  <xr-node wx:if="{{loaded}}">
+    <xr-ar-tracker mode="Marker" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/2dmarker/hikari.jpg" bind:ar-tracker-switch="handleTrackerSwitch">
+      <xr-mesh node-id="mesh-plane" geometry="plane" material="mat" />
+    </xr-ar-tracker>
+    <xr-camera
+      id="camera" node-id="camera" position="1 1 1" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    />
+  </xr-node>
+</xr-scene>
