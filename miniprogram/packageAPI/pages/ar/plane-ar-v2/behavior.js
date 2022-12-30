@@ -102,7 +102,6 @@ export default function getBehavior() {
           version: 'v2',
           gl: this.gl
         })
-
         session.start(err => {
           if (err) return console.error('VK error: ', err)
 

@@ -105,7 +105,6 @@ export default function getBehavior() {
                 })
                 session.start(err => {
                     if (err) return console.error('VK error: ', err)
-
                     console.log('@@@@@@@@ VKSession.version', session.version)
 
                     const canvas = this.canvas
