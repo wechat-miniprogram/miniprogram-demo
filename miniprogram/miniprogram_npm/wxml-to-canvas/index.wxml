@@ -1,2 +1,0 @@
-<canvas wx:if="{{use2dCanvas}}" id="weui-canvas" type="2d" style="width: {{width}}px; height: {{height}}px;"></canvas>
-<canvas wx:else canvas-id="weui-canvas" style="width: {{width}}px; height: {{height}}px;"></canvas>

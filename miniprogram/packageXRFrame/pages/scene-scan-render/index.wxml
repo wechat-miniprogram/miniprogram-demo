@@ -1,0 +1,20 @@
+<xr-demo-viewer
+  title="扫描渲染案例"
+  intro="根据三维重建模型与扫描全景图还原的案例，仅使用IBL作为光源，可切换天空盒"
+  code="{{xmlCode}}"
+>
+  <xr-scan-render
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    envIndex="{{envIndex}}"
+  />
+  <view class="env-words"><span class="tips">目前使用: </span><span class="content">{{envWord}}</span></view>
+  <view class="button-wrap">
+    <view class="change-button" bindtap="handleEnv0">TiT创意园白天</view>
+    <view class="change-button" bindtap="handleEnv1">TiT创意园晚上</view>
+    <view class="change-button" bindtap="handleEnv2">海滩天空盒</view>
+  </view>
+</xr-demo-viewer>

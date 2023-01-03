@@ -1,0 +1,12 @@
+.image-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}

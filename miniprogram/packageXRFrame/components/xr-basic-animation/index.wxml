@@ -1,0 +1,44 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load asset-id="basic-anim" type="keyframe" src="/assets/animation/basic-animation.json"/>
+    <xr-asset-load type="texture" asset-id="waifu" src="/assets/waifu.png" />
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+  </xr-assets>
+  <xr-node>
+    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
+    <xr-mesh
+      node-id="mesh-plane" position="0 -0.8 0" rotation="0 0 0" scale="10 1 8" geometry="plane" material="standard-mat" uniforms="u_baseColorFactor:0.48 0.78 0.64 1" states="cullOn: false"
+      anim-keyframe="basic-anim" anim-autoplay="clip:plane, speed:4"
+      receive-shadow
+    ></xr-mesh>
+    <xr-mesh
+      node-id="mesh-cube" position="-3 0 2" scale="1 1 1" rotation="0 0 0" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:0.298 0.764 0.85 1"
+      anim-keyframe="basic-anim" anim-clipmap="default:cube" anim-autoplay="clip:cube, speed:2"
+      cast-shadow
+    ></xr-mesh>
+    <xr-mesh 
+      node-id="mesh-sphere" position="-3 0 0" scale="0.8 0.8 0.8" geometry="sphere" material="standard-mat" uniforms="u_baseColorFactor:0.937 0.176 0.368 1"
+      anim-keyframe="basic-anim" anim-autoplay="clip:sphere, speed:2"
+      cast-shadow
+    ></xr-mesh>
+    <xr-mesh 
+      node-id="mesh-cylinder" position="-3 0 -2" scale="1 0.6 1" geometry="cylinder" material="standard-mat" uniforms="u_baseColorFactor:1 0.776 0.364 1"
+      anim-keyframe="basic-anim" anim-autoplay="clip:cylinder, speed:2"
+      cast-shadow
+    ></xr-mesh>
+    <xr-mesh node-id="mesh-light-cube" position="-5 1 0" scale="0.5 10 10" rotation="0 0 0" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:0.3 0.3 0.3 1, u_baseColorMap: waifu"></xr-mesh>
+    <xr-camera
+      id="camera" node-id="camera" position="5 3 0" clear-color="0.925 0.925 0.925 1"
+      target="camera-target"
+      camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="30 230 0" color="1 1 1" intensity="3" cast-shadow/>
+    <xr-light
+      type="spot" position="-4 1 0" rotation="0 -90 0" color="0 1 0" range="20" intensity="100" inner-cone-angle="20" outer-cone-angle="60"
+      anim-keyframe="basic-anim" anim-autoplay="clip:spotLight, speed:2"
+    />
+</xr-node>
+</xr-scene>

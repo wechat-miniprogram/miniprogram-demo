@@ -1,0 +1,30 @@
+.button-wrap {
+  line-height: 60rpx;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.change-button {
+  display: inline-block;
+  background-color: #000;
+  color: #fff;
+  font-size: 22rpx;
+  margin: 10rpx;
+  padding: 5rpx 24rpx;
+  border-radius: 6rpx;
+}
+
+.env-words {
+  text-align: center;
+  vertical-align: baseline;
+  margin: 10rpx 0;
+}
+
+.env-words .tips {
+    font-size: 20rpx;
+}
+
+.env-words .content {
+  font-size: 28rpx;
+  font-weight: bold;
+}

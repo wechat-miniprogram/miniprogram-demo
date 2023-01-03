@@ -1,4 +1,5 @@
 const config = require('./config')
+
 const themeListeners = []
 global.isDemo = true
 App({
@@ -45,9 +46,10 @@ App({
       })
     }
     // skyline
-    var systemInfo = wx.getSystemInfoSync();
+    const systemInfo = wx.getSystemInfoSync()
     console.log('@@@ systemInfo ', systemInfo)
-    Object.assign(this.globalData, systemInfo);
+    Object.assign(this.globalData, systemInfo)
+    // eslint-disable-next-line promise/always-return
     require.async('./packageSkyline/common/custom-route/index.js').then(utils => {
       console.log('--------begin installRouteBuilder')
       utils.installRouteBuilder() // 'common'

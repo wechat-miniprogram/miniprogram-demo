@@ -1,0 +1,8 @@
+<!--packageSkyline/pages/custom-route/index.wxml-->
+<mp-navigation-bar title="自定义" back="{{true}}"></mp-navigation-bar>
+<!-- <button bindtap="godetail">go</button> -->
+<share-element key="portrait" transitionOnGesture>
+  <view class="small-head-image" bindtap="godetail">
+    <image src="https://res.wx.qq.com/op_res/7_miJnK0wxIrh5bV2QqvYcv7mQABQVg50gh51-Kb1mlBq0c8Difu3rXn0ldrZdZwVx9REPbKVyZb3E9Wq6YFLA"></image>
+  </view>
+</share-element>

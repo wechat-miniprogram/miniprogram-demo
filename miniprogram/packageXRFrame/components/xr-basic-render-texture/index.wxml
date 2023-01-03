@@ -1,0 +1,32 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+    <xr-asset-render-texture asset-id="rt" width="2048" height="1024" />
+  </xr-assets>
+
+  <xr-node layer="1">
+    <xr-mesh id="cube" node-id="mesh-cube" position="-1 0.5 1.5" scale="1 1 1" rotation="0 45 0" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:0.298 0.764 0.85 1" />
+    <xr-mesh node-id="mesh-sphere" position="0 1.25 0" scale="1.25 1.25 1.25" geometry="sphere" material="standard-mat" uniforms="u_baseColorFactor:0.937 0.176 0.368 1" />
+    <xr-mesh node-id="mesh-cylinder" position="1 0.7 1.5" scale="1 0.7 1" geometry="cylinder" material="standard-mat" uniforms="u_baseColorFactor:1 0.776 0.364 1" />
+  </xr-node>
+
+  <xr-node layer="2">
+    <xr-mesh node-id="mesh-plane" position="0 0 -6" rotation="-90 0 0" scale="16 1 12" geometry="plane" material="standard-mat"
+    uniforms="u_baseColorMap:render-rt" states="cullOn:false" />
+  </xr-node>
+
+  <xr-node node-id="rt-camera-target" position="0 1 0"></xr-node>
+  <xr-camera
+    position="0 1 4" clear-color="0.925 0.925 0.925 1"
+    target="rt-camera-target" render-target="rt" cull-mask="0b011"
+  />
+  <xr-camera
+    position="0 4 6" clear-color="0.925 0.925 0.925 1"
+    target="mesh-plane" cull-mask="0b111" camera-orbit-control=""
+  ></xr-camera>
+
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

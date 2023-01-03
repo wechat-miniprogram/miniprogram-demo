@@ -1,12 +1,13 @@
-import { IRouteContext, Curves } from './common';
+import {Curves} from './common'
 
-const OpacityTransitionRouteBuilder = ({ primaryAnimation }) => {
+const OpacityTransitionRouteBuilder = ({primaryAnimation}) => {
   const handlePrimaryAnimation = () => {
-    'worklet';
+    'worklet'
+
     return {
       opacity: Curves.fastOutSlowIn(primaryAnimation.value),
-    };
-  };
+    }
+  }
 
   return {
     handlePrimaryAnimation,
@@ -14,7 +15,7 @@ const OpacityTransitionRouteBuilder = ({ primaryAnimation }) => {
     reverseTransitionDuration: 1000,
     canTransitionTo: true,
     canTransitionFrom: false,
-  };
-};
+  }
+}
 
-export default OpacityTransitionRouteBuilder;
+export default OpacityTransitionRouteBuilder

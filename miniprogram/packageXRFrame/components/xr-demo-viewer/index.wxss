@@ -1,0 +1,91 @@
+.demo-viewer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.holder {
+  height: 60rpx;
+}
+
+.hint-wrap {
+  text-align: center;
+}
+
+.hint-words {
+  display: inline-block;
+  color: #000;
+  text-align:center;
+  font-weight:bold;
+  max-width: 300px;
+  padding: 10px 20px;
+  border: 2px dashed #000;
+  background-color: #fff;
+}
+
+.intro {
+  display: block;
+  margin: 20rpx 0;
+  background: #fff;
+}
+
+.intro .title {
+  font-size: 36rpx;
+  padding-bottom: 20rpx;
+}
+
+.intro .description {
+  color: #8f8f8f;
+  font-size: 28rpx;
+}
+
+.intro-detail {
+  padding: 30rpx;
+}
+
+
+.code-inner {
+  margin: 0rpx;
+  padding: 30rpx;
+  font-size: 30rpx;
+  background-color: #f9f9fa;
+}
+
+.code-inner rich-text {
+  word-wrap: break-word;
+}
+
+.block-name {
+  display: inline-block;
+  color: #b457ff;
+}
+
+.attr-name {
+  display: inline-block;
+  color: #ff4d00;
+}
+
+.ml20 {
+  margin-left: 20rpx;
+}
+
+.intro-title {
+  font-size: 36rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24rpx;
+}
+
+.share {
+  margin: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0;
+  width: 160rpx !important;
+  background: none;
+  font-size: 28rpx;
+  color: #ff4d00;
+}

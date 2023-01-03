@@ -1,0 +1,22 @@
+<scroll-view class="scroll-view_H" scroll-x type="list" enable-flex style="width: 100%; height: 20vh; display:flex;">
+  <view class="addButton" bindtap="uploadARModel">
+    <image class="image" src="./add.png"></image>
+  </view>
+  <block wx:for="{{models}}" wx:key="cosid" wx:for-item="modelItem">
+    <view class="addButton" wx:if="{{modelItem.modelStatus == 0}}" bindtap="showARModel" data-cosid="{{modelItem.cosid}}">
+      <image class="image" src="./red.jpg"></image>
+      <image class="choose" wx:if="{{targetCosId != null && modelItem.cosid == targetCosId}}" src="./choose-blue.png"></image>
+      <text class="timeStamp">{{modelItem.uploadTime}}</text>
+      <text class="status" wx:if="{{modelItem.errMsg!=undefined}}">{{modelItem.errMsg}}</text>
+      <text class="status" wx:else>准备中</text>
+    </view>
+    <view class="addButton" wx:else bindtap="showARModel" data-cosid="{{modelItem.cosid}}">
+      <image class="image" src="./green.jpg"></image>
+      <image class="choose" wx:if="{{targetCosId != null && modelItem.cosid == targetCosId}}" src="./choose-blue.png"></image>
+      <text class="timeStamp">{{modelItem.uploadTime}}</text>
+      <text class="status" wx:if="{{modelItem.errMsg!=undefined}}">{{modelItem.errMsg}}</text>
+      <text class="status" wx:else>已完成</text>
+    </view>
+  </block>
+
+</scroll-view>

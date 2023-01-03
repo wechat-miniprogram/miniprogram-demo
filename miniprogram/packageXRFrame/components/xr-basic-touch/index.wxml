@@ -1,0 +1,29 @@
+<xr-scene id="xr-scene" bind:tick="handleTick" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="texture" asset-id="earth-texture" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/2k_earth_daymap.jpeg" />
+    <xr-asset-load type="texture" asset-id="moon-texture" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/2k_moon.jpeg" />
+    <xr-asset-load type="texture" asset-id="sky" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/dark-cosmos.jpg" />
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+    <xr-asset-material asset-id="earth-mat" effect="standard" uniforms="u_baseColorMap: earth-texture" render-queue="501"/>
+    <xr-asset-material asset-id="earth-silhouette" effect="simple" uniforms="u_baseColorFactor: 1.0 0.5 0 1.0" states="depthTestWrite: false" render-queue="500"/>
+    <xr-asset-material asset-id="moon-mat" effect="standard" uniforms="u_baseColorMap: moon-texture" render-queue="503"/>
+    <xr-asset-material asset-id="moon-silhouette" effect="simple" uniforms="u_baseColorFactor: 0.476 0.82 0.957 1.0" states="depthTestWrite: false" render-queue="502"/>
+  </xr-assets>
+  <xr-env sky-map="sky" is-sky2d/>
+  <xr-node>
+    <xr-mesh node-id="mesh-earth" position="0 0 0" scale="8 8 8" geometry="sphere" material="earth-mat" bind:touch-shape="handleTouchEarth" bind:untouch-shape="handleUntouchEarth" bind:drag-shape="handleEarthRotation" sphere-shape receive-shadow cast-shadow></xr-mesh>
+    <xr-mesh node-id="earth-silhouette" scale="8.15 8.15 8.15" geometry="sphere" material="earth-silhouette" visible="{{touchingEarth}}"></xr-mesh>
+    <xr-mesh node-id="mesh-moon" position="10 0 0" scale="1.5 1.5 1.5" rotation="0 90 0" geometry="sphere" material="moon-mat" bind:drag-shape="handleDragMoon" bind:touch-shape="handleTouchMoon" bind:untouch-shape="handleUntouchMoon" sphere-shape="radius: 1.5" receive-shadow cast-shadow>
+    <xr-mesh node-id="moon-silhouette" scale="1.1 1.1 1.1" geometry="sphere" material="moon-silhouette" visible="{{touchingMoon}}"></xr-mesh>
+    </xr-mesh>
+    <xr-camera
+      id="camera" node-id="camera" position="0 20 -35" clear-color="0 0 0 1"
+      target="mesh-earth"
+      background="skybox"
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.1" />
+    <xr-light id="directional-light" type="directional" rotation="0 60 0" color="1 1 1" intensity="5"  shadow-distance="40" cast-shadow shadow-bias="0.004"/>
+  </xr-node>
+</xr-scene>

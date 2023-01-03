@@ -1,0 +1,14 @@
+.preview-top, .preview-bottom {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 50px;
+}
+
+.preview-top {
+  top: 0;
+}
+
+.preview-bottom {
+  bottom: 0;
+}

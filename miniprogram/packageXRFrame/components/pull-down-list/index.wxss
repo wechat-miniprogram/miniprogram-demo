@@ -1,0 +1,49 @@
+.pullDownList {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 8rpx;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+}
+.pullDownList .switchBox {
+  height: 120rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32rpx;
+  font-size: 32rpx;
+  line-height: 48rpx;
+  color: #333;
+}
+.pullDownList .name,
+.pullDownList .icon {
+  transition: opacity 0.3s;
+}
+.pullDownList .name {
+  opacity: 0.9;
+}
+.pullDownList.actived .name {
+  opacity: 0.4;
+}
+.pullDownList.actived .icon {
+  opacity: 0.4;
+}
+.pullDownList .childBox {
+  transition: height 0.3s;
+}
+.pullDownList .childBox .child {
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #e5e5e5;
+  height: 112rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+  font-size: 32rpx;
+  opacity: 0.9;
+}
+.pullDownList .childBox .child:last-of-type {
+  border-bottom-color: transparent;
+}

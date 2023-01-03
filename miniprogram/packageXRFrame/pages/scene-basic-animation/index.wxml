@@ -1,0 +1,15 @@
+<xr-demo-viewer
+  title="动画案例"
+  intro="keyframe动画案例，包含三个图形的旋转位移缩放动画，底层平面的颜色变化动画，以及一个聚光的位移动画。具体动画结构可以拉到底部查看。"
+  code="{{xmlCode}}"
+  json="{{json}}"
+>
+  <xr-basic-animation
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    a="123"
+  />
+</xr-demo-viewer>

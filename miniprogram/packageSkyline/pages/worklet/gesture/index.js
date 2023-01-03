@@ -42,4 +42,14 @@ Page({
       this.y.value += gestureEvent.deltaY;
     }
   },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage() {
+    return {
+      title: '手势系统',
+      path: 'packageSkyline/pages/worklet/gesture/index'
+    }
+  },
 });

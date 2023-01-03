@@ -1,0 +1,48 @@
+<!-- 主列表 -->
+<scroll-view
+  type="custom"
+  scroll-y
+  show-scrollbar="{{false}}"
+  scroll-into-view="{{intoView}}"
+  class="scroll-view"
+  bindscroll="handleScroll"
+>
+  <view><slot></slot></view>
+  <sticky-section wx:for="{{list}}" wx:key="alpha">
+    <sticky-header>
+      <view class="city-group__title tips-color" id="{{item.alpha}}">{{item.alpha}}</view>
+    </sticky-header>
+    <list-view>
+      <view class="city-group__content">
+        <view class="city-group__list">
+          <block wx:for="{{item.subItems}}" wx:for-item="subItem" wx:key="name">
+            <view class="city-group__item thin-border-bottom" hover-class="bg-highlight">
+              {{subItem.name}}
+            </view>
+          </block>
+        </view>
+      </view>
+    </list-view>
+  </sticky-section>
+</scroll-view>
+<!-- 右侧目录 -->
+<root-portal>
+  <!-- 这里也可以用 pan-gesture-handler -->
+  <view class="wx-flex right-directory" catch:touchstart='handlePan' catch:touchmove='handlePan' catch:touchend='cancelPan'>
+    <view class="anchor-bar">
+      <view class="anchor-list">
+        <block wx:for="{{alphabet}}" wx:key="*this" wx:for-item="alpha">
+          <view data-alpha="{{alpha}}">
+            <view class="anchor-item {{current == alpha ? ( touching ? 'selected tapped' : 'selected' ): ''}}">
+              <view class="anchor-item__inner">{{alpha}}</view>
+              <view class="anchor-item__pop">
+                {{alpha}}
+                <view class="anchor-item__pop_after"></view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</root-portal>

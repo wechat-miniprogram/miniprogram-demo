@@ -1,0 +1,30 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load
+      type="video-texture" asset-id="cat"
+      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.mp4" options="autoPlay:true,loop:true,placeHolder:https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.jpg"
+    />
+    <xr-asset-load
+      type="video-texture" asset-id="skybox"
+      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/office-skybox.mp4" options="autoPlay:true,loop:true,placeHolder:https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/office-skybox.jpg"
+    />
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+  </xr-assets>
+  <xr-env sky-map="video-skybox" />
+  <xr-node>
+    <xr-node node-id="target" />
+    <xr-mesh
+      node-id="mesh-cube" scale="1.6 0.9 0.9"
+      geometry="cube" material="standard-mat"
+      uniforms="u_baseColorMap:video-cat"
+    />
+    <xr-camera
+      id="camera" node-id="camera" position="0 0 3" clear-color="0.925 0.925 0.925 1"
+      target="target" background="skybox" camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="40 0 0" color="1 1 1" intensity="3"/>
+  </xr-node>
+</xr-scene>

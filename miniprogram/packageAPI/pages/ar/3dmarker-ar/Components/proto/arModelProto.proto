@@ -1,0 +1,5 @@
+message ARModelData
+{
+    optional bytes mesh_model = 1;  // 文本(点面信息)
+    optional bytes texture_model = 2; // 图像png
+}

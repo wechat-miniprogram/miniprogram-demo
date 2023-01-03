@@ -1,0 +1,71 @@
+<xr-demo-viewer
+  title="后处理效果案例"
+  intro="展示了xrFrame内置的几种后处理效果。"
+  code="{{xmlCode}}"
+>
+  <xr-gltf-postprocessing
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+
+    type="{{type}}"
+    blurRadius="{{blurRadius}}"
+    bloomRadius="{{bloomRadius}}"
+    bloomIntensity="{{bloomIntensity}}"
+    bloomThreshold="{{bloomThreshold}}"
+    vignetteIntensity="{{vignetteIntensity}}"
+    vignetteSmoothness="{{vignetteSmoothness}}"
+    vignetteRoundness="{{vignetteRoundness}}"
+    fxaaEnabled="{{fxaaEnabled}}"
+    bind:assetsProgress="handleProgress"
+    bind:assetsLoaded="handleLoaded"
+    loaded="{{loaded}}"
+  />
+  <view wx:if="{{!loaded}}" style="position: absolute;display: flex; justify-content: center; align-items: center; left: 0;top: 0;width: {{width}}px;height: {{height}}px;background-color: #6aa; text-align: center;line-height: 24px;">
+    <text style="color: white;font-size: 18px;">{{progressInfo}}</text>
+  </view>
+  <view class="form-entry">
+    <view class="form-entry-title">后处理类型</view>
+    <radio-group name="pp-type" bindchange="changeType">
+      <label class="radio-item"><radio value="blur" checked/>模糊</label>
+      <label class="radio-item"><radio value="vignette"/>渐晕</label>
+      <label class="radio-item"><radio value="bloom"/>泛光</label>
+      <label class="radio-item"><radio value="fxaa"/>抗锯齿</label>
+    </radio-group>
+  </view>
+  <!-- <view class="divider"></view> -->
+  <view wx:if="{{type == 0}}" class="form-entry">
+    <view class="form-entry-title">模糊半径</view>
+    <slider bindchange="changeBlurRadius" value="{{blurRadius}}"></slider>
+  </view>
+  <view wx:if="{{type == 2}}" class="form-entry">
+    <view class="form-entry-title">渐晕强度</view>
+    <slider bindchange="changeVignetteIntensity" value="{{vignetteIntensity}}" min="{{0}}" max="{{8}}" step="{{0.1}}"></slider>
+  </view>
+  <view wx:if="{{type == 2}}" class="form-entry">
+    <view class="form-entry-title">渐晕平滑</view>
+    <slider bindchange="changeVignetteSmoothness" value="{{vignetteSmoothness}}" min="{{0}}" max="{{8}}" step="{{0.1}}"></slider>
+  </view>
+  <view wx:if="{{type == 2}}" class="form-entry">
+    <view class="form-entry-title">渐晕圆度</view>
+    <slider bindchange="changeVignetteRoundness" value="{{vignetteRoundness}}"  min="{{0}}" max="{{1}}" step="{{0.1}}"></slider>
+  </view>
+  <view wx:if="{{type == 1}}" class="form-entry">
+    <view class="form-entry-title">泛光半径</view>
+    <slider bindchange="changeBloomRadius" value="{{bloomRadius}}"></slider>
+  </view>
+  <view wx:if="{{type == 1}}" class="form-entry">
+    <view class="form-entry-title">泛光强度</view>
+    <slider bindchange="changeBloomIntensity" max="5" value="2" step="0.1" value="{{bloomIntensity}}"></slider>
+  </view>
+  <view wx:if="{{type == 1}}" class="form-entry">
+    <view class="form-entry-title">泛光阈值</view>
+    <slider bindchange="changeBloomThreshold" max="2" value="0.5" step="0.1" value="{{bloomThreshold}}"></slider>
+  </view>
+  <view wx:if="{{type == 3}}" class="form-entry">
+    <view class="form-entry-title">开启FXAA</view>
+    <switch checked="{{fxaaEnabled}}" bindchange="switchFXAA"/>
+  </view>
+</xr-demo-viewer>

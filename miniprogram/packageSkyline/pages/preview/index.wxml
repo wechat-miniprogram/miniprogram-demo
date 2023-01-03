@@ -1,0 +1,7 @@
+<view class="box-cotainer">
+  <previewer
+    imageId="{{imageId}}"
+    sourcePageId="{{sourcePageId}}"
+    list="{{list}}"
+  ></previewer>
+</view>

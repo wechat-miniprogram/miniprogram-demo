@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "preview-home": "./preview-home/index"
+  }
+}

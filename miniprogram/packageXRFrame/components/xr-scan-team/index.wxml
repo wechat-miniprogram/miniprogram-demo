@@ -1,0 +1,20 @@
+<xr-scene id="xr-scene" bind:ready="handleReady" bind:tick="handleRaf">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="hikari" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/hikari-unlit.glb" />
+    <xr-asset-load type="gltf" asset-id="roam" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/roam-unlit.glb" />
+    <xr-asset-load type="gltf" asset-id="xinyi" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/xinyi-unlit.glb" />
+  </xr-assets>
+  <xr-env env-data="xr-frame-team-workspace-day" />
+  <xr-node wx:if="{{loaded}}">
+    <xr-gltf bind:gltf-loaded="handleModelLoaded" id="hikari" position="0 0 0" rotation="0 180 0" model="hikari" anim-autoplay="clip:Idle" capsule-shape="height:2;raduis:0.3;center:0 1 0"></xr-gltf>
+    <xr-gltf bind:gltf-loaded="handleModelLoaded" id="roam" position="-1 0 0" rotation="0 180 0" model="roam" anim-autoplay="clip:Idle" capsule-shape="height:1;raduis:0.3;center:0 1 0"></xr-gltf>
+    <xr-gltf bind:gltf-loaded="handleModelLoaded" id="xinyi" position="1 0 0" rotation="0 180 0" model="xinyi" anim-autoplay="clip:Idle" capsule-shape="height:1;raduis:0.3;center:0 1 0"></xr-gltf>
+  </xr-node>
+  <xr-node node-id="camera-target" position="0 0.8 0"></xr-node>
+  <xr-camera
+    id="camera" position="0 0.8 3" clear-color="0.925 0.925 0.925 1"
+    background="skybox" target="camera-target"
+    camera-orbit-control=""
+  ></xr-camera>
+  <xr-light type="ambient" color="1 1 1" intensity="0.4" />
+</xr-scene>

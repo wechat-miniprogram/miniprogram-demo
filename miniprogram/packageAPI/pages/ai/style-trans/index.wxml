@@ -1,0 +1,17 @@
+<!--packageAPI/pages/ai/style-trans/index.wxml-->
+
+<view class="container page" data-weui-theme="{{theme}}"> 
+  <text>packageAPI/pages/ai/style-trans/index.wxml</text>
+
+  <camera class="camera" device-position="back" flash="off" binderror="error" style="width: 70%; height: 200px;"></camera>
+
+
+  <view class="btn-area">
+    <button type="primary" bindtap="takePhoto">拍照</button>
+  </view>
+
+  <view>预览</view>
+  <image style="width: 224px; height: 224px; margin-left:25%"  src="{{src}}"></image> 
+
+  <canvas class="offcanvas"  canvas-id="trans"></canvas>
+</view> 

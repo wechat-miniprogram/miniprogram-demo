@@ -3,7 +3,8 @@
     "page/component/index",
     "page/API/index",
     "page/cloud/index",
-    "page/extend/index"
+    "page/extend/index",
+    "page/animation/index"
   ],
   "usingComponents": {
     "mp-navigation-bar": "/component/navigation-bar/navigation-bar"
@@ -70,12 +71,18 @@
         "pages/ar/visionkit-basic-v2/visionkit-basic-v2",
         "pages/ar/plane-ar/plane-ar",
         "pages/ar/plane-ar-v2/plane-ar-v2",
+        "pages/ar/plane-ar-3dof/plane-ar-3dof",
         "pages/ar/2dmarker-ar/2dmarker-ar",
+        "pages/ar/3dmarker-ar/3dmarker-ar",
         "pages/ar/osd-ar/osd-ar",
         "pages/ar/face-detect/face-detect",
-        "pages/ar/photo-face-detect/photo-face-detect",
         "pages/ar/body-detect/body-detect",
+        "pages/ar/hand-detect/hand-detect",
+        "pages/ar/ocr-detect/ocr-detect",
+        "pages/ar/photo-ocr-detect/photo-ocr-detect",
+        "pages/ar/photo-hand-detect/photo-hand-detect",
         "pages/ar/photo-body-detect/photo-body-detect",
+        "pages/ar/photo-face-detect/photo-face-detect",
         "pages/page/set-navigation-bar-title/set-navigation-bar-title",
         "pages/page/navigation-bar-loading/navigation-bar-loading",
         "pages/page/navigator/navigator",
@@ -133,7 +140,9 @@
         "pages/framework/wxs/movable",
         "pages/framework/wxs/sidebar",
         "pages/framework/wxs/stick-top",
-        "pages/framework/wxs/nearby"
+        "pages/framework/wxs/nearby",
+        "pages/ai/mobilenet/index",
+        "pages/ai/style-trans/index"
       ]
     },
     {
@@ -211,8 +220,55 @@
         "pages/worklet/bottom-sheet/index",
         "pages/share-element/list/index",
         "pages/share-element/card/index",
-        "pages/flutter/scale-page/index",
-        "pages/flutter/half-page/index"
+        "pages/half-page/scale-page/index",
+        "pages/half-page/half-page/index",
+        "pages/address-book/index",
+        "pages/half-screen/index",
+        "pages/tabs/index",
+        "pages/album/index",
+        "pages/preview/index",
+        "pages/custom-route/index",
+        "pages/custom-route/detail",
+        "pages/scroll-view/index"
+      ]
+    },
+    {
+      "root": "packageXRFrame",
+      "pages": [
+        "pages/index/index",
+        "pages/scene-basic/index",
+        "pages/scene-basic-light/index",
+        "pages/scene-basic-animation/index",
+        "pages/scene-basic-particle/index",
+        "pages/scene-basic-touch/index",
+        "pages/scene-basic-visible-layer/index",
+        "pages/scene-basic-shadow/index",
+        "pages/scene-basic-video/index",
+        "pages/scene-basic-render-texture/index",
+        "pages/scene-basic-postprocessing/index",
+        "pages/scene-gltf-damageHelmet/index",
+        "pages/scene-gltf-unlit/index",
+        "pages/scene-gltf-animation/index",
+        "pages/scene-gltf-morph/index",
+        "pages/scene-gltf-light-loading/index",
+        "pages/scene-ar-basic/index",
+        "pages/scene-ar-2dmarker/index",
+        "pages/scene-ar-osdmarker/index",
+        "pages/scene-ar-camera/index",
+        "pages/scene-ar-face/index",
+        "pages/scene-ar-hand/index",
+        "pages/scene-ar-body/index",
+        "pages/scene-custom-logic/index",
+        "pages/scene-custom-render/index",
+        "pages/scene-scan-render/index",
+        "pages/scene-scan-team/index",
+        "pages/scene-classic-wxball/index",
+        "pages/scene-classic-video/index",
+        "pages/scene-classic-perspect/index",
+        "pages/scene-classic-portal/index",
+        "pages/scene-classic-osd/index",
+        "pages/scene-classic-face/index",
+        "pages/scene-last-record/index"
       ]
     }
   ],
@@ -261,10 +317,10 @@
         "text": "组件"
       },
       {
-        "pagePath": "page/extend/index",
+        "pagePath": "page/animation/index",
         "iconPath": "@iconPathComponent",
         "selectedIconPath": "@selectedIconPathComponent",
-        "text": "扩展能力"
+        "text": "交互动画"
       },
       {
         "pagePath": "page/API/index",
@@ -294,11 +350,6 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "requiredPrivateInfos": [
-    "chooseAddress",
-    "chooseLocation",
-    "getLocation"
-  ],
   "cloud": true,
   "sitemapLocation": "sitemap.json",
   "themeLocation": "demo.theme.json",

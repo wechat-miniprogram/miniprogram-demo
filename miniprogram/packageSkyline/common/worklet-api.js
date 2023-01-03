@@ -33,3 +33,7 @@ if (wx.router) {
 export function supportWorklet() {
   return typeof wx.worklet === 'object' && typeof wx.worklet.shared === 'function';
 }
+
+export function shared(args) {
+  return wx.worklet.shared(args)
+}

@@ -1,0 +1,52 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets>
+    <xr-asset-load type="texture" asset-id="flarePicture" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/flare.png" />
+    <xr-asset-load type="texture" asset-id="sky" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/dark-cosmos.jpg" />
+    <xr-asset-load type="texture" asset-id="blue-texture" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/plane.png" />
+    <xr-asset-load type="texture" asset-id="particle-texture" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/point.png" />
+    <xr-asset-load type="texture" asset-id="lightray" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/lightray.png" />
+    <xr-asset-material asset-id="blue-mat" effect="standard" uniforms="u_baseColorMap: blue-texture" />
+    <xr-asset-load type="texture" asset-id="glow_circle" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/glow_circle.png" />
+    <xr-asset-load type="atlas" asset-id="portal-atlas" src="./portal.json" />
+  </xr-assets>
+
+  <xr-node>
+    <xr-mesh node-id="mesh-plane" position="0 -1 0" rotation="0 0 0" scale="5 0.2 5"
+      geometry="cube" material="blue-mat" uniforms="u_baseColorFactor:0.48 0.78 0.64 1"
+    ></xr-mesh>
+    <xr-env sky-map="sky" is-sky2d/>
+
+    <xr-particle  position="2 1 2" start-color="0 1 0 1" end-color="1 1 0 1" capacity="1000" speed="-5" size="0.1 0.2" emit-rate="80" life-time="0.2 0.4" angle="0 360" angular-speed="-300" emitter-type="SphereShape" emitter-props="radius:1.5" texture="particle-texture">
+    </xr-particle>
+
+    <xr-particle id="size-change" position="2 0 -2" capacity="20" emit-rate="5" life-time="3" start-color="0 1 1 1" start-color2="0 1 1 1" end-color="0 1 1 1" size="0.5" emitter-type="BoxShape" texture="particle-texture"></xr-particle>
+
+    <xr-particle id="lightray" position="0 0 0" capacity="50" emit-rate="20" render-mode="stretched" life-time="1 1" speed="0" start-color="1 1 0 1" start-color2="1 1 0 1" end-color="1 1 0 1" size="0.5 0.5" emitter-type="SphereShape" emitter-props="radius:1,radiusRange:0" texture="lightray"></xr-particle>
+
+    <!-- <xr-particle id="standard" position="2 0 -2" material="particle-mat" capacity="{{capacity}}" emit-rate="{{emitRate}}" life-time="{{lifeTime}} {{lifeTime}}" start-color="1 0 0 1" start-color2="1 0 0 1" end-color="1 0 0 1" emitter-type="BoxShape" uniforms="u_baseColorMap:particle-texture"></xr-particle> -->
+
+    <xr-particle position="-2 0 2" capacity="200" speed="1" emit-rate="100" life-time="3" size="0.2" emitter-type="ConeShape" emitter-props="radius:1, heightRange:1, radiusRange:1, angle:60" texture="particle-texture">
+    </xr-particle>
+
+    <!-- <xr-particle position="-3 0 -2" atlas="portal-atlas" capacity="1000" speed="0" size="0.5" emit-rate="12" life-time="4" angle="0 360" cell-speed="0" cell-random="true" angular-speed="-300">
+    </xr-particle> -->
+
+    <xr-particle id="human-face" position="-3 0 -2" capacity="3000" emit-rate="2000" size="0.1" start-color="1 1 1 0" start-color2="1 1 1 0" texture="particle-texture"></xr-particle>
+
+    <!-- <xr-particle  position="-3 0 -2" rotation="0 0 180" capacity="20" speed="0" size="1" emit-rate="5" angle="0 90" life-time="20" render-mode="mesh" mesh="specialCylinder" start-color="0.5 0.5 0 0.5" texture="glow_circle">
+    </xr-particle> -->
+
+
+    <xr-camera
+      id="camera" node-id="camera" position="0 6 -6" clear-color="0.1 0.1 0.1 1"
+      target="mesh-plane" background="skybox"
+      camera-orbit-control=""
+    ></xr-camera>
+    
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.3" />
+    <xr-light type="directional" rotation="90 0 0" color="1 1 1" intensity="2.5"  />
+  </xr-node>
+
+</xr-scene>

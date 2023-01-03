@@ -1,0 +1,84 @@
+.tip {
+  font-size: 23rpx;
+  color: rgba(0, 0, 0, 0.5);
+  width: 90%;
+  text-align: center;
+  margin: 30rpx auto 0 auto;
+}
+
+.top_tip {
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.5);
+  width: 90%;
+  text-align: left;
+  margin-top: 30rpx;
+  margin-left: 20rpx;
+}
+
+.box_text {
+  background-color: white;
+  text-align: center;
+  padding: 10rpx 0;
+  margin-top: 10rpx;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.modelList {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.addButton {
+  margin: 0vw 0px 0px 3vw;
+  width: 30vw;
+  text-align: center;
+  height: 30vw;
+  line-height: 80rpx;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.image {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.choose {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+}
+
+.addButton .timeStamp {
+  position: relative;
+  top: -100%;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(165, 165, 165);
+  font-size: 1em;
+}
+
+.addButton .status {
+  position: relative;
+  top: -95%;
+  left: 15%;
+  background-color: white;
+  height: 25%;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(104, 104, 104);
+  font-size: 1em;
+  border-radius: 5px;
+
+}

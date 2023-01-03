@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "小程序交互动画展示",
+  "renderer": "skyline",
+  "disableScroll": true,
+  "navigationStyle": "custom"
+}
