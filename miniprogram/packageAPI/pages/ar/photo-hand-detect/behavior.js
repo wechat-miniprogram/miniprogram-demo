@@ -4,7 +4,6 @@ import {
 import {
     registerGLTFLoader
 } from '../loaders/gltf-loader'
-import cloneGltf from '../loaders/gltf-clone'
 
 const info = wx.getSystemInfoSync()
 
@@ -86,7 +85,6 @@ export default function getBehavior() {
             initVK() {
                 // 初始化 threejs
                 this.initTHREE()
-                const THREE = this.THREE
 
                 // 自定义初始化
                 if (this.init) this.init()
@@ -98,6 +96,9 @@ export default function getBehavior() {
                         plane: {
                             mode: 3
                         },
+                        hand: {
+                            mode: 2
+                        }
                     },
                     version: 'v1',
                     gl: this.gl
@@ -124,17 +125,38 @@ export default function getBehavior() {
                         calcSize(info.windowWidth, info.windowHeight * 0.8, info.pixelRatio)
                     })
 
-                    const loader = new THREE.GLTFLoader()
-                    loader.load('https://dldir1.qq.com/weixin/miniprogram/RobotExpressive_aa2603d917384b68bb4a086f32dabe83.glb', gltf => {
-                        this.model = {
-                            scene: gltf.scene,
-                            animations: gltf.animations,
-                        }
+                    session.on('addAnchors', anchors => {
+                        this.setData({
+                            anchor2DList: anchors.map(anchor => ({
+                                points: anchor.points,
+                                origin: anchor.origin,
+                                size: anchor.size,
+                                gesture: anchor.gesture
+                            })),
+                        })
                     })
 
-                    this.clock = new THREE.Clock()
+                    session.on('updateAnchors', anchors => {
+                        this.data.anchor2DList = []
+                        // 手动传入图像的时候用dom画点和框就行
+                        this.setData({
+                            anchor2DList: anchors.map(anchor => ({
+                                points: anchor.points,
+                                origin: anchor.origin,
+                                size: anchor.size,
+                                gesture: anchor.gesture
+                            })),
+                        }) 
+                    })
+                    
+                    session.on('removeAnchors', anchors => {
+                        this.setData({
+                            anchor2DList: [],
+                        })
+                        this.data.anchor2DList = []
+                    })
 
-                   
+                    
                     //限制调用帧率
                     let fps = 30
                     let fpsInterval = 1000 / fps
@@ -183,71 +205,6 @@ export default function getBehavior() {
                 renderer.gammaOutput = true
                 renderer.gammaFactor = 2.2
             },
-
-            copyRobot() {
-                const THREE = this.THREE
-                const {
-                    scene,
-                    animations
-                } = cloneGltf(this.model, THREE)
-                scene.scale.set(0.05, 0.05, 0.05)
-
-                // 动画混合器
-                const mixer = new THREE.AnimationMixer(scene)
-                for (let i = 0; i < animations.length; i++) {
-                    const clip = animations[i]
-                    if (clip.name === 'Dance') {
-                        const action = mixer.clipAction(clip)
-                        action.play()
-                    }
-                }
-
-                this.mixers = this.mixers || []
-                this.mixers.push(mixer)
-
-                scene._mixer = mixer
-                return scene
-            },
-            getRobot() {
-                const THREE = this.THREE
-
-                const model = new THREE.Object3D()
-                model.add(this.copyRobot())
-
-                this._insertModels = this._insertModels || []
-                this._insertModels.push(model)
-
-                if (this._insertModels.length > 5) {
-                    const needRemove = this._insertModels.splice(0, this._insertModels.length - 5)
-                    needRemove.forEach(item => {
-                        if (item._mixer) {
-                            const mixer = item._mixer
-                            this.mixers.splice(this.mixers.indexOf(mixer), 1)
-                            mixer.uncacheRoot(mixer.getRoot())
-                        }
-                        if (item.parent) item.parent.remove(item)
-                    })
-                }
-
-                return model
-            },
-            onTouchEnd(evt) {
-                // 点击位置放一个机器人
-                const touches = evt.changedTouches.length ? evt.changedTouches : evt.touches
-                if (touches.length === 1) {
-                    const touch = touches[0]
-                    if (this.session && this.scene && this.model) {
-                        const hitTestRes = this.session.hitTest(touch.x / this.data.width, touch.y / this.data.height, this.resetPanel)
-                        this.resetPanel = false
-                        if (hitTestRes.length) {
-                            const model = this.getRobot()
-                            model.matrixAutoUpdate = false
-                            model.matrix.fromArray(hitTestRes[0].transform)
-                            this.scene.add(model)
-                        }
-                    }
-                }
-            }
         },
     })
 }

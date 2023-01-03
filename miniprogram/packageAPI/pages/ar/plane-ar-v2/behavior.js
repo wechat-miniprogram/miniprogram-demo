@@ -102,6 +102,7 @@ export default function getBehavior() {
           version: 'v2',
           gl: this.gl
         })
+
         session.start(err => {
           if (err) return console.error('VK error: ', err)
 
@@ -168,7 +169,19 @@ export default function getBehavior() {
               if (size) {
                 // object = createPlane(size)
               } else {
-                object = new THREE.GridHelper(0.2, 10, 0xffffff, 0xffffff)
+                if (options.anchorModel) {
+                  if (!this.model) {
+                    console.warn('this.model 还没加载完成 ！！！！！')
+                    return
+                  }
+
+                  object = new THREE.Object3D()
+                  const model = this.getRobot()
+                  model.rotateX(-Math.PI / 2)
+                  object.add(model)
+                } else {
+                  object = new THREE.GridHelper(0.2, 10, 0xffffff, 0xffffff)
+                }
               }
 
               object._id = anchor.id
@@ -212,15 +225,24 @@ export default function getBehavior() {
           const planeBox = this.planeBox = new THREE.Object3D()
           this.scene.add(planeBox)
 
+          //限制调用帧率
+          let fps = 30
+          let fpsInterval = 1000 / fps
+          let last = Date.now()
+
           // 逐帧渲染
           const onFrame = timestamp => {
-            // let start = Date.now()
-            const frame = session.getVKFrame(canvas.width, canvas.height)
-            if (frame) {
-              this.render(frame)
-            }
-
-            session.requestAnimationFrame(onFrame)
+              let now = Date.now()
+              const mill = now - last
+              // 经过了足够的时间
+              if (mill > fpsInterval) {
+                  last = now - (mill % fpsInterval); //校正当前时间
+                  const frame = session.getVKFrame(canvas.width, canvas.height)
+                  if (frame) {
+                  this.render(frame)
+                  }
+              }
+              session.requestAnimationFrame(onFrame)
           }
           session.requestAnimationFrame(onFrame)
         })

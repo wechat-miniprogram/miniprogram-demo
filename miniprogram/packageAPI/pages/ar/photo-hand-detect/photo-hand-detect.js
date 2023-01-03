@@ -7,11 +7,11 @@ const FAR = 1000
 Component({
     behaviors: [getBehavior(), yuvBehavior],
     data: {
-        bodyImgUrl: '',
-        bodyImgWidth: 0,
-        bodyImgHeight: 0,
-        bodyImgOriginWidth: 0,
-        bodyImgOriginHeight: 0,
+        handImgUrl: '',
+        handImgWidth: 0,
+        handImgHeight: 0,
+        handImgOriginWidth: 0,
+        handImgOriginHeight: 0,
         theme: 'light',
     },
     lifetimes: {
@@ -55,11 +55,11 @@ Component({
                             } = res
                             console.log('getImageInfo res', res)
                             this.setData({
-                                bodyImgUrl: imgUrl,
-                                bodyImgWidth: fixWidth,
-                                bodyImgHeight: (fixWidth / width) * height,
-                                bodyImgOriginWidth: width,
-                                bodyImgOriginHeight: height
+                                handImgUrl: imgUrl,
+                                handImgWidth: fixWidth,
+                                handImgHeight: (fixWidth / width) * height,
+                                handImgOriginWidth: width,
+                                handImgOriginHeight: height
                             })
                         },
                         fail: res => {
@@ -95,37 +95,37 @@ Component({
 
             this.renderer.autoClearColor = false
             this.renderer.render(this.scene, this.camera)
-            this.renderer.state.setCullbody(this.THREE.CullbodyNone)
+            this.renderer.state.setCullhand(this.THREE.CullhandNone)
         },
-        async detectbody() {
-            if (this.data.bodyImgUrl) {
+        async detectHand() {
+            if (this.data.handImgUrl) {
                 const canvas = wx.createOffscreenCanvas({
                     type: '2d',
-                    width: this.data.bodyImgOriginWidth,
-                    height: this.data.bodyImgOriginHeight,
+                    width: this.data.handImgOriginWidth,
+                    height: this.data.handImgOriginHeight,
                 })
                 const context = canvas.getContext('2d')
                 const img = canvas.createImage()
                 await new Promise(resolve => {
                     img.onload = resolve
-                    img.src = this.data.bodyImgUrl
+                    img.src = this.data.handImgUrl
                 })
 
-                context.clearRect(0, 0, this.data.bodyImgOriginWidth, this.data.bodyImgOriginHeight)
-                context.drawImage(img, 0, 0, this.data.bodyImgOriginWidth, this.data.bodyImgOriginHeight)
+                context.clearRect(0, 0, this.data.handImgOriginWidth, this.data.handImgOriginHeight)
+                context.drawImage(img, 0, 0, this.data.handImgOriginWidth, this.data.handImgOriginHeight)
 
-                this.imgData = context.getImageData(0, 0, this.data.bodyImgOriginWidth, this.data.bodyImgOriginHeight)
+                this.imgData = context.getImageData(0, 0, this.data.handImgOriginWidth, this.data.handImgOriginHeight)
 
                 console.log('[frameBuffer] --> ', this.imgData.data.buffer)
-                console.log('this.session.detectbody', this.session.detectbody)
-                console.log('width', this.data.bodyImgOriginWidth)
-                console.log('height', this.data.bodyImgOriginHeight)
-                this.session.detectBody({
+                console.log('this.session.detectHand', this.session.detectHand)
+                console.log('width', this.data.handImgOriginWidth)
+                console.log('height', this.data.handImgOriginHeight)
+                this.session.detectHand({
                     frameBuffer: this.imgData.data.buffer,
-                    width: this.data.bodyImgOriginWidth,
-                    height: this.data.bodyImgOriginHeight,
+                    width: this.data.handImgOriginWidth,
+                    height: this.data.handImgOriginHeight,
                     scoreThreshold: 0.5, // 评分阈值
-                    sourceType: 1
+                    algoMode: 2
                 })
             }
         },

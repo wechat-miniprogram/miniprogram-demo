@@ -36,7 +36,6 @@ export default function getBehavior() {
                             })
                         }
                         calcSize(info.windowWidth, info.windowHeight * 0.8)
-
                         this.initVK()
                     })
             },
@@ -100,9 +99,11 @@ export default function getBehavior() {
                             mode: 1
                         }
                     },
+                    cameraPosition: 0,
                     version: 'v1',
                     gl: this.gl
                 })
+
                 session.start(err => {
                     if (err) return console.error('VK error: ', err)
 
@@ -145,14 +146,28 @@ export default function getBehavior() {
                         this.data.anchor2DList = []
                     })
 
+                    this.setData({
+                      buttonDisable:false
+                    })
+
+                    
+                    //限制调用帧率
+                    let fps = 30
+                    let fpsInterval = 1000 / fps
+                    let last = Date.now()
+
                     // 逐帧渲染
                     const onFrame = timestamp => {
-                        // let start = Date.now()
-                        const frame = session.getVKFrame(canvas.width, canvas.height)
-                        if (frame) {
+                        let now = Date.now()
+                        const mill = now - last
+                        // 经过了足够的时间
+                        if (mill > fpsInterval) {
+                            last = now - (mill % fpsInterval); //校正当前时间
+                            const frame = session.getVKFrame(canvas.width, canvas.height)
+                            if (frame) {
                             this.render(frame)
+                            }
                         }
-
                         session.requestAnimationFrame(onFrame)
                     }
                     session.requestAnimationFrame(onFrame)
