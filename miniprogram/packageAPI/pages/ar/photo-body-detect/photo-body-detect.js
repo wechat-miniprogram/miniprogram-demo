@@ -97,7 +97,7 @@ Component({
             this.renderer.render(this.scene, this.camera)
             this.renderer.state.setCullbody(this.THREE.CullbodyNone)
         },
-        async detectbody() {
+        async detectBody() {
             if (this.data.bodyImgUrl) {
                 const canvas = wx.createOffscreenCanvas({
                     type: '2d',
@@ -117,14 +117,15 @@ Component({
                 this.imgData = context.getImageData(0, 0, this.data.bodyImgOriginWidth, this.data.bodyImgOriginHeight)
 
                 console.log('[frameBuffer] --> ', this.imgData.data.buffer)
-                console.log('this.session.detectbody', this.session.detectbody)
+                console.log('this.session.detectBody', this.session.detectBody)
                 console.log('width', this.data.bodyImgOriginWidth)
                 console.log('height', this.data.bodyImgOriginHeight)
                 this.session.detectBody({
                     frameBuffer: this.imgData.data.buffer,
                     width: this.data.bodyImgOriginWidth,
                     height: this.data.bodyImgOriginHeight,
-                    scoreThreshold: 0.5 // 评分阈值
+                    scoreThreshold: 0.5, // 评分阈值
+                    sourceType: 1
                 })
             }
         },
