@@ -1,5 +1,5 @@
-<import src="../../../common/head.wxml" />
-<import src="../../../common/foot.wxml" />
+<import src="/common/head.wxml" />
+<import src="/common/foot.wxml" />
 <wxs src="./resizable.wxs" module="resizable" />
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" data="{{title: '屏幕旋转'}}"/>

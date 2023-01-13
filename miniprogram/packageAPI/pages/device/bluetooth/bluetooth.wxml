@@ -1,5 +1,5 @@
-<import src="../../../common/head.wxml" />
-<import src="../../../common/foot.wxml" />
+<import src="/common/head.wxml" />
+<import src="/common/foot.wxml" />
 
 <wxs module="utils">
 module.exports.max = function(n1, n2) {

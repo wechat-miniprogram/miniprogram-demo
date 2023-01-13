@@ -3,7 +3,6 @@
     "previewer": "../../components/previewer/index"
   },
   "navigationStyle": "custom",
-  "backgroundColorContent": "#00000000",
   "disableScroll": true,
   "renderer": "skyline"
 }
