@@ -4,7 +4,7 @@
 }
 
 .scroll-view {
-  flex: 1
+  height: 100%;
 }
 
 .thin-border-bottom {
@@ -137,6 +137,9 @@
   top: 50%;
   transform: translateY(-50%);
   display: none;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
 }
 
 .anchor-item__pop_after {
@@ -156,7 +159,7 @@
 }
 
 .right-directory {
-  position: relative;
+  position: fixed;
   top: 0;
   right: 0;
   width: 30px;

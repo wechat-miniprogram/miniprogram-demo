@@ -129,25 +129,69 @@ export default function getBehavior() {
                         console.log("anchor add")
                     })
                     session.on('updateAnchors', anchors => {
-                        // 手动传入图像的时候用dom画点和框就行
+                        this.data.textContentList = []
+
+                        // 摄像头实时检测人脸的时候 updateAnchors 会在每帧触发，所以性能要求更高，用 gl 画
+                        this.data.textContentList = this.data.textContentList.concat(anchors.map(anchor => {
+                                let lt = anchor.box[0]
+                                let lr = anchor.box[1]
+                                let rb = anchor.box[2]
+                                let lb = anchor.box[3]
+                                let width = lr.x - lt.x
+                                let height = lb.y - lt.y
+                                let avgX =  (lt.x +  lr.x +  rb.x +  lb.x) / 4;
+                                let avgY =  (lt.y +  lr.y +  rb.y +  lb.y) / 4; 
+                                anchor.centerX = avgX * this.data.faceImgWidth;
+                                anchor.centerY = avgY * this.data.faceImgHeight;
+                            return {
+                                text: anchor.text,
+                                subtext: anchor.subtext,
+                                box: anchor.box,
+                                centerX: anchor.centerX,
+                                centerY: anchor.centerY,
+                                origin: {
+                                    x: lt.x,
+                                    y: lt.y,
+                                },
+                                size: {
+                                    width: width,
+                                    height: height,
+                                }
+                            };
+                        }))
+
+                        var wholeText = undefined
+                        if(this.data.textContentList.length != 0){
+                            wholeText = this.data.textContentList[0].text
+                        }
+
                         this.setData({
-                          textContentList: anchors.map(anchor => ({
-                                text: anchor.text
-                            })),
+                            textContentList: this.data.textContentList,
+                            wholeText: wholeText
                         })
                     })
                     session.on('removeAnchors', anchors => {
                         console.log("anchor remove")
                     })
 
+                    
+                    //限制调用帧率
+                    let fps = 30
+                    let fpsInterval = 1000 / fps
+                    let last = Date.now()
+
                     // 逐帧渲染
                     const onFrame = timestamp => {
-                        // let start = Date.now()
-                        const frame = session.getVKFrame(canvas.width, canvas.height)
-                        if (frame) {
+                        let now = Date.now()
+                        const mill = now - last
+                        // 经过了足够的时间
+                        if (mill > fpsInterval) {
+                            last = now - (mill % fpsInterval); //校正当前时间
+                            const frame = session.getVKFrame(canvas.width, canvas.height)
+                            if (frame) {
                             this.render(frame)
+                            }
                         }
-
                         session.requestAnimationFrame(onFrame)
                     }
                     session.requestAnimationFrame(onFrame)

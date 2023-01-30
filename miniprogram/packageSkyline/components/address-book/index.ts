@@ -79,6 +79,16 @@ Component({
   lifetimes: {
     created() {
       this._handlePan = throttle(this._handlePan, 100, {})
+      if (this.renderer !== 'skyline') {
+        wx.worklet.shared = function (initVal) {
+          return { value: initVal }
+        }
+        wx.worklet.runOnJS = function (fn) {
+          return function (arg) {
+            return fn(arg)
+          }
+        }
+      }
       this._sharedTops = wx.worklet.shared([])
       this._sharedScrollTop = wx.worklet.shared(0)
       this._sharedHeight = wx.worklet.shared(0)
@@ -126,26 +136,40 @@ Component({
     },
     computedSize() {
       this.data.alphabet.forEach((element, index) => {
-        this.createIntersectionObserver().relativeToViewport().observe(`#${element}`, (res) => {
-          const ratio = res.intersectionRatio
-          const rect = res.intersectionRect
-          if (ratio === 1 && rect.top === 0 && rect.bottom >= rect.height) {
-            // 得出每个 header 距离 scroll-view 滚动顶部的 offsetTop
-            this.data._tops[index] = res.boundingClientRect.top + this._sharedScrollTop.value
+        if (this.renderer === 'skyline') {
+          // Skyline 下的列表是按需渲染的，无法通过 NodesRef.boundingClientRect 直接
+          // 获取 header 的 offsetTop，而是通过 IntersectionObserver 监听 header 即
+          // 将进入可视区域时，才能计算得出 offsetTop
+          this.createIntersectionObserver().relativeToViewport().observe(`#${element}`, (res) => {
+            const ratio = res.intersectionRatio
+            const rect = res.intersectionRect
+            if (ratio === 1 && rect.top === 0 && rect.bottom >= rect.height) {
+              // 得出每个 header 距离 scroll-view 滚动顶部的 offsetTop
+              this.data._tops[index] = res.boundingClientRect.top + this._sharedScrollTop.value
+              this._sharedTops.value = this.data._tops
+            }
+          })
+        } else {
+          this.createSelectorQuery().select(`#${element}`).boundingClientRect(res => {
+            this.data._tops[index] = res.top
             this._sharedTops.value = this.data._tops
-          }
-        })
+          }).exec()
+        }
       })
     },
     handleScroll(e) {
       'worklet'
       const scrollTop = e.detail.scrollTop
+      // 用于计算每个 header 的 offsetTop
       this._sharedScrollTop.value = scrollTop
+
+      // 下面判断当前选中态，按需更新
       const tops = this._sharedTops.value
       for (let i = tops.length - 1; i >= 0; i--) {
         // header 超过屏幕一半就改为选中态
         if (scrollTop + this._sharedHeight.value / 2 > tops[i]) {
           if (i !== this._sharedCurrentIdx.value) {
+            // worklet 函数运行在 UI 线程，setData 调用要抛回 JS 线程执行
             wx.worklet.runOnJS(this.updateCurrent.bind(this))(i)
           }
           break
