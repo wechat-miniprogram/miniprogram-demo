@@ -33,8 +33,10 @@ Component({
       var callback = this.generateARModel.bind(this)
       var timeNow = Date.now() / 1000 | 0;
       var value = wx.getStorageSync('modelsInfo');
+      console.log("value的值为：")
+      console.log(value)
       if(value && value.length != 0){
-        if(timeNow - value[0].timeStamp < 1200){
+        if(timeNow - value[0].timeStamp < 7200){
           wx.showToast({
             title: "仅两小时允许上传一次视频",
             icon: 'none',

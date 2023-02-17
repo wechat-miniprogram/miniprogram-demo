@@ -11,10 +11,15 @@
 </view>
 
 
-<view wx:if="{{textContentList}}">
-    <view wx:for="{{textContentList}}">
-        <text>{{item.text}}</text>
+<view wx:if="{{textContentList}}" style="position:relative; height:30%">
+    <image src="{{faceImgUrl}}" style="position:absolute; left:50%; transform:translate(-50%); width: {{faceImgWidth}}px; height: {{faceImgHeight}}px;" />
+    <view wx:for="{{textContentList}}" style="position:absolute; top: 0px; margin: 30px; width: {{faceImgWidth}}px; height: {{faceImgHeight}}px;">
+      <text wx:if="{{item.subtext != undefined && item.centerX != undefined}}" style="position:absolute; top:{{item.centerY}}px; left:{{item.centerX}}px">{{item.subtext}}</text>
+      <view style="position: absolute; left: {{item.origin.x * faceImgWidth}}px; top: {{item.origin.y * faceImgHeight}}px; width: {{item.size.width * faceImgWidth}}px; height: {{item.size.height * faceImgHeight}}px; border: solid red 2px"></view>
     </view>
 </view>
-<view class="page-body-text tc" style="height:20%">提示：点击选择图片，上传本地照片，然后开始文字检测，将会显示检测到的文字</view>
+<view class="page-body-text tc" style="position:relative; height:20%">
+<text>提示：点击选择图片，上传本地照片，然后开始文字检测，将会显示检测到的文字</text>
+<text style="position:absolute; top:50%; left:0%">{{wholeText}}</text>
+</view>
 </view>
