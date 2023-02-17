@@ -140,8 +140,8 @@ var EDGE_FSHADER_SOURCE =
   varying vec2 posJudge;
 
   float box(float x, float y){
-    float xc = clamp (x - centerPoint.x, -1.0 , 1.0);
-    float yc = clamp (y - centerPoint.y, -1.0 , 1.0);
+    float xc = x - centerPoint.x;
+    float yc = y - centerPoint.y;
     vec2 point = vec2(xc, yc);
     float right = rightTopPoint.x;
     float top =  rightTopPoint.y;
@@ -291,9 +291,11 @@ Component({
         gl.useProgram(this.rectEdgeProgram)
         gl.program = this.rectEdgeProgram
 
-        for (var i = 0; i < anchor2DList.length; i++) {
-          onDrawRectEdge(gl, anchor2DList[i].origin.x, anchor2DList[i].origin.y, anchor2DList[i].size.width, anchor2DList[i].size.height)
-        }
+        // for (var i = 0; i < anchor2DList.length; i++) {
+        //   onDrawRectEdge(gl, anchor2DList[i].origin.x, anchor2DList[i].origin.y, anchor2DList[i].size.width, anchor2DList[i].size.height)
+        // }
+
+        onDrawRectEdge(gl, anchor2DList[0].origin.x, anchor2DList[0].origin.y, anchor2DList[0].size.width, anchor2DList[0].size.height)
       }
     },
   },
