@@ -240,7 +240,9 @@
         "examples/album/pages/album/index",
         "examples/album/pages/preview/index",
         "examples/half-screen/pages/index/index",
-        "examples/segmented-half-screen/pages/index/index"
+        "examples/segmented-half-screen/pages/index/index",
+        "examples/card_transition/pages/list/list",
+        "examples/card_transition/pages/detail/detail"
       ]
     },
     {

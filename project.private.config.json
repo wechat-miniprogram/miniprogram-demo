@@ -1,9 +1,37 @@
 {
-  "libVersion": "2.29.0",
+  "libVersion": "2.30.1",
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
   "setting": {
     "useIsolateContext": true,
-    "urlCheck": false
+    "urlCheck": false,
+    "compileHotReLoad": false,
+    "lazyloadPlaceholderEnable": false
   },
-  "projectname": "小程序示例"
+  "projectname": "小程序示例",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "page/API/pages/storage/storage",
+          "pathName": "page/API/pages/storage/storage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "card_transition",
+          "pathName": "packageSkylineExamples/examples/card_transition/pages/list/list",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "card_transition/detail",
+          "pathName": "packageSkylineExamples/examples/card_transition/pages/detail/detail",
+          "query": "index=1&url=https%253A%252F%252Fpicsum.photos%252F300%252F400%253Frandom%253D1&content=%E6%8E%A8%E8%8D%90%20Skyline%EF%BC%8C%E4%BD%BF%E7%94%A8%E5%90%8E%E4%BD%93%E9%AA%8C%E6%B5%81%E7%95%85%E5%BE%88%E5%A4%9A~&ratio=0.75",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

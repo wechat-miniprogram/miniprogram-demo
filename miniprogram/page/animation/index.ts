@@ -46,10 +46,11 @@ Page({
         open: false,
         pages: [
           { url: '/packageSkylineExamples/examples/address-book/pages/index/index', name: '通讯录'},
-          { url: '/packageSkylineExamples/examples/half-screen/pages/index/index', name: '半屏'},
-          { url: '/packageSkylineExamples/examples/segmented-half-screen/pages/index/index', name: '分段半屏'},
-          { key: 'custom-route', url: '/packageSkylineExamples/examples/album/pages/album/index', name: '图片预览'},
-          { url: '/packageSkylineExamples/examples/tab-indicator/pages/index/index', name: 'Tab 组件'}
+          { key: 'custom-route', url: '/packageSkylineExamples/examples/album/pages/album/index', name: '相册'},
+          { url: '/packageSkylineExamples/examples/card_transition/pages/list/list', name: '卡片转场'},
+          { url: '/packageSkylineExamples/examples/half-screen/pages/index/index', name: '半屏弹窗'},
+          { url: '/packageSkylineExamples/examples/segmented-half-screen/pages/index/index', name: '分段式半屏'},
+          { url: '/packageSkylineExamples/examples/tab-indicator/pages/index/index', name: 'Tab 指示条'}
         ]
       }, {
         id: 'XRFrame',
@@ -91,20 +92,6 @@ Page({
         this.setData({theme})
       })
     }
-    wx.cloud.callFunction({
-      name: 'openapi',
-      data: {
-        action: 'getqrcode',
-        page: 'packageSkylineExamples/examples/segmented-half-screen/pages/index/index'
-      },
-      success: res => {
-        console.log(res.result)
-        console.log('getqrcode成功', 'data:image/png;base64,' + wx.arrayBufferToBase64(res.result.buffer.data))
-      },
-      fail: err => {
-        console.log('getqrcode error', err)
-      }
-    })
   },
 
   kindToggle(e) {

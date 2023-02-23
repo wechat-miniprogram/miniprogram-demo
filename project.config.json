@@ -34,8 +34,7 @@
     "disableUseStrict": false,
     "showES6CompileOption": false,
     "useCompilerPlugins": [
-      "typescript",
-      "less"
+      "typescript"
     ],
     "ignoreDevUnusedFiles": false,
     "ignoreUploadUnusedFiles": false,
