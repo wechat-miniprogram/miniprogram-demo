@@ -233,6 +233,17 @@
       ]
     },
     {
+      "root": "packageSkylineExamples",
+      "pages": [
+        "examples/address-book/pages/index/index",
+        "examples/tab-indicator/pages/index/index",
+        "examples/album/pages/album/index",
+        "examples/album/pages/preview/index",
+        "examples/half-screen/pages/index/index",
+        "examples/segmented-half-screen/pages/index/index"
+      ]
+    },
+    {
       "root": "packageXRFrame",
       "pages": [
         "pages/index/index",
@@ -268,7 +279,8 @@
         "pages/scene-classic-portal/index",
         "pages/scene-classic-osd/index",
         "pages/scene-classic-face/index",
-        "pages/scene-last-record/index"
+        "pages/scene-last-record/index",
+        "pages/scene-beside-edge/index"
       ]
     }
   ],
@@ -366,5 +378,6 @@
   "embeddedAppIdList": [
     "wxfdcee92a299bcaf1"
   ],
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "__lazyCodeLoadingChunk": true
 }

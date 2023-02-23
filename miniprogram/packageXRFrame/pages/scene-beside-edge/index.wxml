@@ -1,0 +1,38 @@
+<view>
+  <xr-beside-edge
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    nextAction="{{nextAction}}"
+    bind:requireLight="handleRequireLight"
+    bind:requireDialog="handleRequireDialog"
+  />
+
+  <view
+    wx:if="{{showLightButton}}"
+    bindtap="handleTriggerLight"
+    style="position: absolute;width: 4rem;height: 4rem;background:rgba(140, 140, 140, 0.4);bottom: 4rem;left: 50%;transform: translateX(-50%);border-radius: 50%;"
+  >
+  <view style="position: absolute; left: 0; top: 0;width: 100%;height: 100%;background:rgba(227, 230, 66, {{lightProgress * 0.8}});border-radius: 50%;color: white; text-align: center;line-height: 4rem;font-size: 2rem;">
+    {{lightProgress === 1 ? '○' : ''}}
+  </view>
+  </view>
+
+  <view
+    wx:if="{{showDialog}}"
+    style="position: absolute; left: 0; top: 0;background:{{bg}};width: 100vw;height: 100vh;"
+  >
+    <view
+      bindtap="handleClickDialog" wx:if="{{text != ''}}"
+      style="position: absolute; left: 5%; bottom: 5%;background:rgba(44, 44, 44, 0.5);width: 90%;height: 25vh;word-break: break-all;color:white;border-radius: 1rem;"
+    >
+      <view style="position: absolute;left: 1rem;top: 1rem;font-size: 1.4rem;text-align: center;">{{name}}</view>
+      <view style="position: absolute;left: 5%;top: 4rem;font-size: 1.2rem;width: 90%;height: 100%;">
+        <text wx:if="{{hint == ''}}">{{text}}</text>
+        <view wx:if="{{hint != ''}}">{{start}}<span style="color:red">{{hint}}</span>{{end}}</view>
+      </view>
+    </view>
+  </view>
+</view>

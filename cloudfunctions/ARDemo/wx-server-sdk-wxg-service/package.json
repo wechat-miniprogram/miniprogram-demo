@@ -1,0 +1,11 @@
+{
+  "name": "@tencent/wx-server-sdk-wxg-service",
+  "version": "0.7.0",
+  "description": "wxg service plugin for mini program cloud server sdk",
+  "main": "index.js",
+  "author": "wechat mini program team",
+  "license": "MIT",
+  "dependencies": {
+    "tslib": "^1.9.3"
+  }
+}

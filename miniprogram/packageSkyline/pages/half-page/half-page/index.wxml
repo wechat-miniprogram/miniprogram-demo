@@ -4,7 +4,7 @@
 		<view class="bottom-sheet">
 			<view class="btn-wrp" bind:tap="back">
 				<view class="btn">
-					<image class="icon" src="/_assets/icon_down_arrow.09a0011d.svg" mode="aspectFit"/>
+					<image class="icon" src="../../../resources/icon_down_arrow.svg" mode="aspectFit"/>
 				</view>
 			</view>
 			<view class="title">评论列表</view>

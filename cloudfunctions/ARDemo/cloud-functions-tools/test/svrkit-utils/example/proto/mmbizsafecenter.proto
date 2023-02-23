@@ -1,0 +1,20 @@
+message GetWeAppMemberByUserReq
+{
+    optional uint32 useruin = 1;
+    optional uint32 type = 2; //1:管理员 2:运营者 3:开发人员 4:体验者
+    optional uint32 status = 3; //SAFECENTER_WEAPP_STATUS_XXX
+}
+message WeAppMemberInfo
+{
+    optional uint32 type = 1;
+    optional uint32 weappuin = 2;
+    optional uint32 useruin = 3;
+    optional uint32 status = 4;
+    optional uint32 createtime = 5;
+    optional uint32 updatetime = 6;
+    optional string ticket = 7;
+}
+message WeAppMemberInfoList
+{
+    repeated WeAppMemberInfo infos = 1;
+}

@@ -2,7 +2,6 @@ Page({
   onShow() {
     wx.reportAnalytics('enter_home_programmatically', {})
 
-    // http://tapd.oa.com/miniprogram_experiment/prong/stories/view/1020425689866413543
     if (wx.canIUse('getExptInfoSync')) {
       console.log('getExptInfoSync expt_args_1', wx.getExptInfoSync(['expt_args_1']))
       console.log('getExptInfoSync expt_args_2', wx.getExptInfoSync(['expt_args_2']))
@@ -39,19 +38,18 @@ Page({
           { url: 'worklet/gesture/index', name: '手势系统'},
           { url: 'share-element/list/index', name: '共享元素动画'},
           { url: 'worklet/bottom-sheet/index', name: '手势协商'},
-          { key: 'custom-route', url: 'half-page/scale-page/index', name: '自定义路由' },
-          // { url: 'scroll-view/index', name: '滚动交互'},
+          { key: 'custom-route', url: '/packageSkyline/pages/half-page/scale-page/index', name: '自定义路由' }
         ]
       }, {
         id: 'SkylineDemo',
         name: '常见交互组件',
         open: false,
         pages: [
-          { url: 'address-book/index', name: '通讯录'},
-          { url: 'half-screen/index', name: '半屏'},
-          { key: 'custom-route', url: 'album/index', name: '图片预览'},
-          { url: 'tabs/index', name: 'Tab 组件'},
-          // { key: 'custom-route', url: 'custom-route/index', name: '星巴克自定义路由'},
+          { url: '/packageSkylineExamples/examples/address-book/pages/index/index', name: '通讯录'},
+          { url: '/packageSkylineExamples/examples/half-screen/pages/index/index', name: '半屏'},
+          { url: '/packageSkylineExamples/examples/segmented-half-screen/pages/index/index', name: '分段半屏'},
+          { key: 'custom-route', url: '/packageSkylineExamples/examples/album/pages/album/index', name: '图片预览'},
+          { url: '/packageSkylineExamples/examples/tab-indicator/pages/index/index', name: 'Tab 组件'}
         ]
       }, {
         id: 'XRFrame',
@@ -93,6 +91,20 @@ Page({
         this.setData({theme})
       })
     }
+    wx.cloud.callFunction({
+      name: 'openapi',
+      data: {
+        action: 'getqrcode',
+        page: 'packageSkylineExamples/examples/segmented-half-screen/pages/index/index'
+      },
+      success: res => {
+        console.log(res.result)
+        console.log('getqrcode成功', 'data:image/png;base64,' + wx.arrayBufferToBase64(res.result.buffer.data))
+      },
+      fail: err => {
+        console.log('getqrcode error', err)
+      }
+    })
   },
 
   kindToggle(e) {
@@ -121,7 +133,7 @@ Page({
     const { url } = evt.currentTarget.dataset
     wx.navigateTo({
       routeType: 'ScaleTransition',
-      url: `/packageSkyline/pages/${url}`
+      url: `${url}`
     });
   },
 })

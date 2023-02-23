@@ -39,15 +39,22 @@ Page({
     let root = this.data.root;
     let { name, path } = e.detail.item;
 
-    if (path) {
-      wx.navigateTo({
-        url: root + path + `?path=${path}`,
-        success: () => {
-        },
-        fail: () => {
-        },
-      });
+    if (!path) {
+      return;
     }
+
+    if (path === '/pages/scene-last-record/index') {
+      this.handleLastRecord();
+      return;
+    }
+
+    wx.navigateTo({
+      url: root + path + `?path=${path}`,
+      success: () => {
+      },
+      fail: () => {
+      },
+    });
   },
   handleLastRecord: async function () {
     if (lastOpened) {

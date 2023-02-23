@@ -89,6 +89,7 @@ App({
     hasLogin: false,
     openid: null,
     iconTabbar: '/page/extend/images/icon_tabbar.png',
+    systemInfo: {}
   },
   // lazy loading openid
   getUserOpenId(callback) {

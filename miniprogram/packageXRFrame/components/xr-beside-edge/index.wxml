@@ -1,0 +1,98 @@
+<xr-scene ar-system="modes:Plane" id="xr-scene" bind:ready="handleReady" bind:ar-ready="handleARReady" bind:pause="handlePause" bind:resume="handleResume">
+  <xr-assets bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="loading" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/loading.glb" />
+    <xr-asset-load type="gltf" asset-id="sky" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/sky.gltf" />
+    <xr-asset-load type="gltf" asset-id="office" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ggj2023-scene.glb" />
+    <xr-asset-load type="gltf" asset-id="hikari" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/hikari-unlit.glb" />
+    <xr-asset-load type="gltf" asset-id="roam" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/roam-unlit.glb" />
+    <xr-asset-load type="gltf" asset-id="xinyi" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/xinyi-unlit.glb" />
+    <xr-asset-load type="texture" asset-id="particle-point" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/point.png" />
+  </xr-assets>
+  <xr-node>
+    <xr-node id="setitem" node-id="setitem" visible="false">
+      <xr-gltf
+        id="sky" model="sky"
+        states="cullOn: false"
+      />
+
+      <xr-gltf
+        id="scene-mesh" model="office"
+      />
+
+      <xr-node wx:if="{{step === 0}}" position="5.6 -0.5 2.27">
+        <xr-node
+          id="wine" wx:if="{{!subStep}}"
+          cube-shape="size:0.2 0.4 1.6" bind:touch-shape="handleTouchObj"
+        />
+        <xr-gltf id="xinyi" wx:if="{{subStep}}"
+          position="-1.2 -1.8 -0.5" rotation="0 80 0" model="xinyi"
+          anim-autoplay="clip:Idle" capsule-shape="height:1;raduis:0.2;center:0 0.7 0"
+          bind:touch-shape="handleTouchChar"
+        />
+      </xr-node>
+
+      <xr-node wx:if="{{step === 1}}" position="-3.2 -1.3 -5" >
+        <xr-node
+          id="vending" wx:if="{{!subStep}}" rotation="0 0 0"
+          cube-shape="size:2 2 0.4" bind:touch-shape="handleTouchObj"
+        />
+        <xr-gltf id="roam" wx:if="{{subStep}}"
+          position="-0.4 -1 0.6" rotation="0 180 0" model="roam"
+          anim-autoplay="clip:Idle" capsule-shape="height:1;raduis:0.2;center:0 0.7 0"
+          bind:touch-shape="handleTouchChar"
+        />
+      </xr-node>
+
+      <xr-node wx:if="{{step === 2}}" position="-5.7 -1.17 4.47">
+        <xr-node
+          id="corner" wx:if="{{!subStep}}"
+          cube-shape="size:1 1 1" bind:touch-shape="handleTouchObj"
+        />
+        <xr-gltf id="hikari" wx:if="{{subStep}}"
+          position="1.5 -0.6 -0.6" rotation="0 90 0" model="hikari"
+          anim-autoplay="clip:Idle" capsule-shape="height:1;raduis:0.2;center:0 0.7 0"
+          bind:touch-shape="handleTouchChar"
+        />
+      </xr-node>
+
+      <xr-node wx:if="{{step === 3}}" position="0 -2 -4.5">
+        <xr-node
+          id="sofa" wx:if="{{!subStep}}" rotation="0 16 0"
+          cube-shape="size:2 0.6 1" bind:touch-shape="handleTouchObj"
+        />
+        <xr-node wx:if="{{subStep}}" position="0 -0.4 0.2">
+          <xr-gltf id="xinyi"
+            position="-0.6 0 0" rotation="0 180 0" model="xinyi"
+            anim-autoplay="clip:Sitting" capsule-shape="height:1;raduis:0.2;center:0 0.7 0"
+            bind:touch-shape="handleTouchChar"
+          />
+          <xr-gltf id="roam"
+            position="0.6 0 0" rotation="0 180 0" model="roam"
+            anim-autoplay="clip:Sitting" capsule-shape="height:1;raduis:0.2;center:0 0.7 0"
+            bind:touch-shape="handleTouchChar"
+          />
+          <xr-gltf id="hikari"
+            position="0 0 0" rotation="0 180 0" model="hikari"
+            anim-autoplay="clip:Sitting" capsule-shape="height:1;raduis:0.2;center:0 0.7 0"
+            bind:touch-shape="handleTouchChar"
+          />
+        </xr-node>
+      </xr-node>
+    </xr-node>
+
+    <xr-asset-post-process asset-id="blur" type="blur" data="radius:0" />
+    <xr-camera
+      id="main-camera" node-id="main-camera"
+      background="ar" is-ar-camera
+      near="0.1" far="2000"
+      is-ar-camera clear-color="0 0 0 1" post-process="blur"
+    >
+      <xr-gltf wx:if="{{arReady && !loaded}}" position="0 0 10" model="loading" anim-autoplay />
+    </xr-camera>
+  </xr-node>
+
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="{{ambient}}" />
+    <xr-light node-id="light" type="spot" color="1 1 1" intensity="4" inner-cone-angle="5" outer-cone-angle="25" range="4" wx:if="{{step < 3}}" />
+  </xr-node>
+</xr-scene>

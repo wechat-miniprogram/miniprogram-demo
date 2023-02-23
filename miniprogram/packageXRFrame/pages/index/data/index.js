@@ -207,4 +207,21 @@ const custom = {
   ]
 };
 
-export default [base, gltf, ar, classic, scan, custom];
+const production = {
+  name: '产品级案例',
+  icon: 'tools',
+  childArr: [
+    {
+      name: 'Beside Edge',
+      label: '边缘迷走',
+      path: '/pages/scene-beside-edge/index'
+    },
+    {
+      name: '',
+      label: '■■■■',
+      path: '/pages/scene-last-record/index'
+    }
+  ]
+};
+
+export default [base, gltf, ar, classic, scan, custom, production];
