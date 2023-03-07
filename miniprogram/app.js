@@ -17,7 +17,7 @@ App({
         fetchType: 'pre',
         success(res) {
           that.globalData.backgroundFetchData = res
-          console.log('读取预拉取数据成功')
+          console.log('读取预拉取数据成功', res)
         },
         fail() {
           console.log('读取预拉取数据失败')

@@ -29,6 +29,10 @@ share-element {
   font-weight: bold;
   margin-top: 16px;
 }
+image {
+  width: 100%;
+  height: 100%;
+}
 
 
 
