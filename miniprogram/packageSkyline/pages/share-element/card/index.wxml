@@ -5,7 +5,7 @@
 		<view class="card-item">
 			<share-element key="{{ cardData.description }}">
 				<view class="img-wrp">
-					<image mode="aspectFit" src="{{ cardData.imgSrc }}"/>
+					<image mode="aspectFit" src="{{ cardData.imgSrc }}" style="height: 64px; width: 64px;"/>
 				</view>
 			</share-element>
 		</view>
