@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "navigator",
+  "componentFramework": "glass-easel",
   "renderer": "skyline",
   "disableScroll": true,
   "navigationStyle": "custom"
