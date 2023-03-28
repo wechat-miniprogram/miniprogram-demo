@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+const path = require('path')
+const yargs = require('yargs')
+
+yargs
+  .usage('Usage: $0 -c [config] -o [output]')
+  .example('$0 -c ./svrkit.config.js -o ./svrkit-utils.js')
+  .alias('c', 'config')
+  .describe('c', 'svrkit config js file path')
+  .alias('o', 'output')
+  .describe('o', 'svrkit-utils output file path, defaults to svrkit-utils.js under the same folder of svrkit config file')
+  .describe('--keep-case', 'keeps field casing instead of converting to camcel case')
+  .demandOption(['c'])
+  .help('h')
+  .alias('h', 'help')
+  .argv
+
+const cli = require(path.join(__dirname, '../cli/svrkit-utils.js'))
+const ret = cli.main(process.argv.slice(2))
+
+if (typeof ret === 'number') {
+  process.exit(ret)
+}

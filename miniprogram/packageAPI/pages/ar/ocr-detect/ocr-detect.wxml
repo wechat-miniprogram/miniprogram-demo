@@ -2,9 +2,12 @@
   <view><canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px" bindtouchend="onTouchEnd">
     </canvas></view>
   <view wx:if="{{textContentList}}">
-    <view wx:for="{{textContentList}}" style="margin: 30px auto; position: relative; width: {{faceImgWidth}}px; height: {{faceImgHeight}}px;">
-        <text>{{item.text}}</text>
-    </view> 
+    <view wx:for="{{textContentList}}">
+      <text wx:if="{{item.subtext != undefined && item.centerX != undefined}}" style="position:absolute; top:{{item.centerY}}px; left:{{item.centerX}}px">{{item.subtext}}</text>
+    </view>
   </view>
-  <view class="page-body-text tc" style="height:20%">提示：将摄像头对准图片的文字, 将会显示检测到的文字</view>
+  <view class="page-body-text tc" style="position:relative; height:20%">
+    <text>提示：将摄像头对准图片的文字, 下方显示检测到的文字</text>
+    <text style="position:absolute; top:30%; left:0%">{{wholeText}}</text>
+  </view>
 </view>

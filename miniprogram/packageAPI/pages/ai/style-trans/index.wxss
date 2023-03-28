@@ -1,0 +1,17 @@
+/* packageAPI/pages/ai/style-trans/index.wxss */
+.camera {
+  width: 100%;
+  height: 80vh;
+}
+
+.offcanvas {
+  width: 224px;
+  height: 224px;
+  position: relative;
+  margin-left: 25%;
+}
+
+.btn-area {
+  margin-top: 0;
+}
+

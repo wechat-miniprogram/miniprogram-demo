@@ -1,0 +1,3 @@
+[submodule "miniprogram/packageSkylineExamples"]
+	path = miniprogram/packageSkylineExamples
+	url = https://github.com/wechat-miniprogram/awesome-skyline.git

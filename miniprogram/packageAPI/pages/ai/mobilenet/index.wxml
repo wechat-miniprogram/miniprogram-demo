@@ -1,0 +1,14 @@
+<!--pages/mobilenet/index.wxml-->
+<app-nav />
+<camera class="camera" device-position="back" flash="off" frame-size="medium">
+  <canvas class="canvas" canvas-id="ssd"></canvas>
+</camera>
+
+<text class="subtitle"> 分类结果： {{predClass}}</text>
+
+<view wx:if="{{enableSpeedTest}}">
+  <text class="subtitle"> 平均耗时(ms)： {{avgTime}}</text>
+  <text class="subtitle"> 最小耗时(ms)： {{minTime}}</text>
+</view>
+
+<van-toast id="van-toast" />

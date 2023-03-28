@@ -1,0 +1,10 @@
+.btn-strap {
+    /* background-color: white; */
+}
+.btn {
+    display: inline-block;
+    font-size: 80%;
+    padding:  5px 0;
+    margin: 5px 1% !important;
+    width: 48% !important;
+}

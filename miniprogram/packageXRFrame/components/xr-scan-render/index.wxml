@@ -1,0 +1,34 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load
+      type="env-data" asset-id="env0" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-scan-test/dayb4.bin"
+    />
+    <xr-asset-load
+      type="env-data" asset-id="env1" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-scan-test/nightb1.bin"
+    />
+    <xr-asset-load
+      type="env-data" asset-id="env2" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin"
+    />
+    <xr-asset-load type="gltf" asset-id="gltf-wxdog" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/model-scan-test/wxdog/index.gltf" />
+    <xr-asset-load type="gltf" asset-id="gltf-wxmail" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/model-scan-test/wxmail/index.gltf" />
+
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+  </xr-assets>
+    <xr-env env-data="env{{envIndex}}" />
+  <xr-node>
+    <xr-node node-id="id2" position="0 0 0"></xr-node>
+    <xr-gltf node-id="mesh-gltf-wxdog" position="-0.4 0 -1" rotation="0 55 0" scale="0.7 0.7 0.7" model="gltf-wxdog"></xr-gltf>
+    <xr-gltf node-id="mesh-gltf-wxmail" position="1 0 1" rotation="0 -10 0" scale="0.7 0.7 0.7" model="gltf-wxmail"></xr-gltf>
+    <xr-mesh node-id="mesh-floor-wxdog" position="-0.35 -0.62 -1" rotation="-3 80 -2" scale="1 0.02 1.8" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor: 0.32 0.32 0.36 1, u_metallicRoughnessValues: 0 0.1"></xr-mesh>
+    <xr-mesh node-id="mesh-floor-wxmail" position="0.95 -0.63 0.9" rotation="5 -10 -2" scale="0.9 0.02 1.7" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor: 0.32 0.32 0.36 1, u_metallicRoughnessValues: 0 0.1"></xr-mesh>
+    <xr-mesh node-id="mesh-floor-roughmetal" position="-0.6 -0.6 0.6" rotation="0 -10 0" scale="1.6 0.02 1.6" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor: 0.28 0.51 0.34 1, u_metallicRoughnessValues: 0.6 0.1"></xr-mesh>
+    <xr-camera
+      id="camera" node-id="camera" position="-1.4 1.4 1.4" clear-color="0.8 0.8 0.8 1"
+      target="id2" far="2000" background="skybox"
+      camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.3" />
+  </xr-node>
+</xr-scene>

@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="gltf morph案例"
+  intro="gltf morph targets的使用。"
+  code="{{xmlCode}}"
+>
+  <xr-gltf-morph
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

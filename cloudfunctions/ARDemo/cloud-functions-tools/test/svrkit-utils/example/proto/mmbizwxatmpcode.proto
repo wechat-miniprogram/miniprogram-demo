@@ -1,0 +1,11 @@
+message GenWxaCloudTmpCodeReq
+{
+    optional uint32 CloudPlatform = 1;
+    optional uint32 AppUin = 2;
+    optional uint32 UserUin = 3;
+}
+
+message GenWxaCloudTmpCodeResp
+{
+    optional string TmpCode = 1;
+}

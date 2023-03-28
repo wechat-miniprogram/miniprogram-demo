@@ -58,11 +58,18 @@ Component({
    */
   methods: {
     back() {
+      console.log('------back')
       const { data } = this;
       if (data.delta) {
         wx.navigateBack({
           delta: data.delta,
         });
+      }
+      // 如果是直接打开的，就默认回首页
+      if (getCurrentPages().length == 1) {
+        wx.switchTab({
+          url: 'page/component/index'
+        })
       }
       this.triggerEvent('back', { delta: data.delta }, {});
     },

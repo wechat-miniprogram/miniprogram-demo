@@ -1,0 +1,24 @@
+<xr-scene ar-system="modes:OSD" id="xr-scene" bind:ready="handleReady" bind:ar-ready="handleARReady" bind:log="handleLog">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="env-data" asset-id="env1" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin" />
+    <xr-asset-load type="gltf" asset-id="gltf-wxball" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/wxball/wxball.gltf" />
+  </xr-assets>
+  <xr-env env-data="env1"/>
+  <xr-node>
+    <xr-ar-tracker mode="OSD" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/wxball.jpg">
+      <xr-gltf id="wxball" node-id="mesh-gltf-wxball" position="0 -0.1 0" rotation="-45 30 0" scale="0.16 0.16 0.16" model="gltf-wxball"
+        bind:gltf-loaded="handleGltfLoaded"
+        bind:touch-shape="handleTouchWXball" sphere-shape="radius: 1.5"
+        anim-stop:="gltfAnimation: handleAnimationStop"
+      />
+    </xr-ar-tracker>
+    <xr-camera
+      id="camera" node-id="camera" position="1 1 1" clear-color="0.925 0.925 0.925 1"
+      far="2000" background="ar" is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.3" />
+    <xr-light type="directional" rotation="30 60 0" color="1 1 1" intensity="1" />
+  </xr-node>
+</xr-scene>

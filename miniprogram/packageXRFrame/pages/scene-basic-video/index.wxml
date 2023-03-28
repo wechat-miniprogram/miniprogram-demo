@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="视频纹理案例"
+  intro="使用视频纹理，作为uniform使用，也可用于天空盒，注意使用时id为`video-${asset-id}`"
+  code="{{xmlCode}}"
+>
+  <xr-basic-video
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

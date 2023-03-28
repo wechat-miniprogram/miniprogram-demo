@@ -1,0 +1,22 @@
+
+.image-previewer {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.swiper-cnt {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,20 @@
+<xr-demo-viewer
+  title="多光源glTF案例"
+  intro="组件和页面通信实现资源加载时覆盖加载界面，以及多个进行动画光源(红色spotLight、白色点光源、白色平行光)，于glTF光照测试场景中的渲染效果。"
+  code="{{xmlCode}}"
+>
+  <xr-gltf-light-loading
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    loaded="{{loaded}}"
+    bind:assetsProgress="handleProgress"
+    bind:assetsLoaded="handleLoaded"
+  />
+
+  <view wx:if="{{!loaded}}" style="position: absolute;display: flex; justify-content: center; align-items: center; left: 0;top: 0;width: {{width}}px;height: {{height}}px;background-color: #6aa; text-align: center;line-height: 24px;">
+    <text style="color: white;font-size: 18px;">{{progressInfo}}</text>
+  </view>
+</xr-demo-viewer>

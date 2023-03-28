@@ -13,13 +13,14 @@ var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 /**
  * enARModelStatus enum.
  * @exports enARModelStatus
- * @enum {number}
+ * @enum {string}
  * @property {number} ARModel_Status_Default=0 ARModel_Status_Default value
  * @property {number} ARModel_Status_Init=1 ARModel_Status_Init value
  * @property {number} ARModel_Status_Sparse_Finished=2 ARModel_Status_Sparse_Finished value
  * @property {number} ARModel_Status_3d_Finished=3 ARModel_Status_3d_Finished value
  * @property {number} ARModel_Status_Object_Finished=4 ARModel_Status_Object_Finished value
  * @property {number} ARModel_Status_Marker_Finished=5 ARModel_Status_Marker_Finished value
+ * @property {number} ARModel_Status_Fail=100 ARModel_Status_Fail value
  */
 $root.enARModelStatus = (function() {
     var valuesById = {}, values = Object.create(valuesById);
@@ -29,13 +30,14 @@ $root.enARModelStatus = (function() {
     values[valuesById[3] = "ARModel_Status_3d_Finished"] = 3;
     values[valuesById[4] = "ARModel_Status_Object_Finished"] = 4;
     values[valuesById[5] = "ARModel_Status_Marker_Finished"] = 5;
+    values[valuesById[100] = "ARModel_Status_Fail"] = 100;
     return values;
 })();
 
 /**
  * enARAlgorithmType enum.
  * @exports enARAlgorithmType
- * @enum {number}
+ * @enum {string}
  * @property {number} Algorithm_Type_3D_Object=1 Algorithm_Type_3D_Object value
  * @property {number} Algorithm_Type_3D_Marker=2 Algorithm_Type_3D_Marker value
  */
@@ -49,7 +51,7 @@ $root.enARAlgorithmType = (function() {
 /**
  * enARModelType enum.
  * @exports enARModelType
- * @enum {number}
+ * @enum {string}
  * @property {number} ARModel_Type_Sparse=1 ARModel_Type_Sparse value
  * @property {number} ARModel_Type_3D=2 ARModel_Type_3D value
  * @property {number} ARModel_Type_Marker=3 ARModel_Type_Marker value
@@ -275,6 +277,7 @@ $root.ModelCos = (function() {
          * @interface IModelCosId
          * @property {enARModelType|null} [modelType] ModelCosId modelType
          * @property {string|null} [modelCosid] ModelCosId modelCosid
+         * @property {string|null} [errmsg] ModelCosId errmsg
          */
 
         /**
@@ -309,6 +312,14 @@ $root.ModelCos = (function() {
         ModelCosId.prototype.modelCosid = "";
 
         /**
+         * ModelCosId errmsg.
+         * @member {string} errmsg
+         * @memberof ModelCos.ModelCosId
+         * @instance
+         */
+        ModelCosId.prototype.errmsg = "";
+
+        /**
          * Creates a new ModelCosId instance using the specified properties.
          * @function create
          * @memberof ModelCos.ModelCosId
@@ -332,10 +343,12 @@ $root.ModelCos = (function() {
         ModelCosId.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.modelType != null && Object.hasOwnProperty.call(message, "modelType"))
+            if (message.modelType != null && message.hasOwnProperty("modelType"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.modelType);
-            if (message.modelCosid != null && Object.hasOwnProperty.call(message, "modelCosid"))
+            if (message.modelCosid != null && message.hasOwnProperty("modelCosid"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.modelCosid);
+            if (message.errmsg != null && message.hasOwnProperty("errmsg"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.errmsg);
             return writer;
         };
 
@@ -375,6 +388,9 @@ $root.ModelCos = (function() {
                     break;
                 case 2:
                     message.modelCosid = reader.string();
+                    break;
+                case 3:
+                    message.errmsg = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -423,6 +439,9 @@ $root.ModelCos = (function() {
             if (message.modelCosid != null && message.hasOwnProperty("modelCosid"))
                 if (!$util.isString(message.modelCosid))
                     return "modelCosid: string expected";
+            if (message.errmsg != null && message.hasOwnProperty("errmsg"))
+                if (!$util.isString(message.errmsg))
+                    return "errmsg: string expected";
             return null;
         };
 
@@ -454,6 +473,8 @@ $root.ModelCos = (function() {
             }
             if (object.modelCosid != null)
                 message.modelCosid = String(object.modelCosid);
+            if (object.errmsg != null)
+                message.errmsg = String(object.errmsg);
             return message;
         };
 
@@ -473,11 +494,14 @@ $root.ModelCos = (function() {
             if (options.defaults) {
                 object.modelType = options.enums === String ? "ARModel_Type_Sparse" : 1;
                 object.modelCosid = "";
+                object.errmsg = "";
             }
             if (message.modelType != null && message.hasOwnProperty("modelType"))
                 object.modelType = options.enums === String ? $root.enARModelType[message.modelType] : message.modelType;
             if (message.modelCosid != null && message.hasOwnProperty("modelCosid"))
                 object.modelCosid = message.modelCosid;
+            if (message.errmsg != null && message.hasOwnProperty("errmsg"))
+                object.errmsg = message.errmsg;
             return object;
         };
 
@@ -608,19 +632,19 @@ $root.ARModel = (function() {
     ARModel.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.cosid != null && Object.hasOwnProperty.call(message, "cosid"))
+        if (message.cosid != null && message.hasOwnProperty("cosid"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.cosid);
-        if (message.bizuin != null && Object.hasOwnProperty.call(message, "bizuin"))
+        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
             writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.bizuin);
-        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+        if (message.name != null && message.hasOwnProperty("name"))
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
-        if (message.uploadTime != null && Object.hasOwnProperty.call(message, "uploadTime"))
+        if (message.uploadTime != null && message.hasOwnProperty("uploadTime"))
             writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.uploadTime);
-        if (message.modelStatus != null && Object.hasOwnProperty.call(message, "modelStatus"))
+        if (message.modelStatus != null && message.hasOwnProperty("modelStatus"))
             writer.uint32(/* id 5, wireType 0 =*/40).int32(message.modelStatus);
-        if (message.algoType != null && Object.hasOwnProperty.call(message, "algoType"))
+        if (message.algoType != null && message.hasOwnProperty("algoType"))
             writer.uint32(/* id 6, wireType 0 =*/48).int32(message.algoType);
-        if (message.modelCos != null && Object.hasOwnProperty.call(message, "modelCos"))
+        if (message.modelCos != null && message.hasOwnProperty("modelCos"))
             $root.ModelCos.encode(message.modelCos, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
         return writer;
     };
@@ -734,6 +758,7 @@ $root.ARModel = (function() {
             case 3:
             case 4:
             case 5:
+            case 100:
                 break;
             }
         if (message.algoType != null && message.hasOwnProperty("algoType"))
@@ -796,6 +821,10 @@ $root.ARModel = (function() {
         case "ARModel_Status_Marker_Finished":
         case 5:
             message.modelStatus = 5;
+            break;
+        case "ARModel_Status_Fail":
+        case 100:
+            message.modelStatus = 100;
             break;
         }
         switch (object.algoType) {
@@ -961,15 +990,15 @@ $root.GenerateARModelReq = (function() {
     GenerateARModelReq.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.bizuin != null && Object.hasOwnProperty.call(message, "bizuin"))
+        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
             writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.bizuin);
-        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+        if (message.name != null && message.hasOwnProperty("name"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-        if (message.buffer != null && Object.hasOwnProperty.call(message, "buffer"))
+        if (message.buffer != null && message.hasOwnProperty("buffer"))
             writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.buffer);
-        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+        if (message.url != null && message.hasOwnProperty("url"))
             writer.uint32(/* id 4, wireType 2 =*/34).string(message.url);
-        if (message.algoType != null && Object.hasOwnProperty.call(message, "algoType"))
+        if (message.algoType != null && message.hasOwnProperty("algoType"))
             writer.uint32(/* id 5, wireType 0 =*/40).int32(message.algoType);
         return writer;
     };
@@ -1176,6 +1205,7 @@ $root.GenerateARModelResp = (function() {
      * @property {string|null} [url] GenerateARModelResp url
      * @property {string|null} [host] GenerateARModelResp host
      * @property {string|null} [cosid] GenerateARModelResp cosid
+     * @property {string|null} [errmsg] GenerateARModelResp errmsg
      */
 
     /**
@@ -1218,6 +1248,14 @@ $root.GenerateARModelResp = (function() {
     GenerateARModelResp.prototype.cosid = "";
 
     /**
+     * GenerateARModelResp errmsg.
+     * @member {string} errmsg
+     * @memberof GenerateARModelResp
+     * @instance
+     */
+    GenerateARModelResp.prototype.errmsg = "";
+
+    /**
      * Creates a new GenerateARModelResp instance using the specified properties.
      * @function create
      * @memberof GenerateARModelResp
@@ -1241,12 +1279,14 @@ $root.GenerateARModelResp = (function() {
     GenerateARModelResp.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+        if (message.url != null && message.hasOwnProperty("url"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
-        if (message.host != null && Object.hasOwnProperty.call(message, "host"))
+        if (message.host != null && message.hasOwnProperty("host"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.host);
-        if (message.cosid != null && Object.hasOwnProperty.call(message, "cosid"))
+        if (message.cosid != null && message.hasOwnProperty("cosid"))
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.cosid);
+        if (message.errmsg != null && message.hasOwnProperty("errmsg"))
+            writer.uint32(/* id 4, wireType 2 =*/34).string(message.errmsg);
         return writer;
     };
 
@@ -1289,6 +1329,9 @@ $root.GenerateARModelResp = (function() {
                 break;
             case 3:
                 message.cosid = reader.string();
+                break;
+            case 4:
+                message.errmsg = reader.string();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -1334,6 +1377,9 @@ $root.GenerateARModelResp = (function() {
         if (message.cosid != null && message.hasOwnProperty("cosid"))
             if (!$util.isString(message.cosid))
                 return "cosid: string expected";
+        if (message.errmsg != null && message.hasOwnProperty("errmsg"))
+            if (!$util.isString(message.errmsg))
+                return "errmsg: string expected";
         return null;
     };
 
@@ -1355,6 +1401,8 @@ $root.GenerateARModelResp = (function() {
             message.host = String(object.host);
         if (object.cosid != null)
             message.cosid = String(object.cosid);
+        if (object.errmsg != null)
+            message.errmsg = String(object.errmsg);
         return message;
     };
 
@@ -1375,6 +1423,7 @@ $root.GenerateARModelResp = (function() {
             object.url = "";
             object.host = "";
             object.cosid = "";
+            object.errmsg = "";
         }
         if (message.url != null && message.hasOwnProperty("url"))
             object.url = message.url;
@@ -1382,6 +1431,8 @@ $root.GenerateARModelResp = (function() {
             object.host = message.host;
         if (message.cosid != null && message.hasOwnProperty("cosid"))
             object.cosid = message.cosid;
+        if (message.errmsg != null && message.hasOwnProperty("errmsg"))
+            object.errmsg = message.errmsg;
         return object;
     };
 
@@ -1509,19 +1560,19 @@ $root.GetARModelListReq = (function() {
     GetARModelListReq.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.bizuin != null && Object.hasOwnProperty.call(message, "bizuin"))
+        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
             writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.bizuin);
-        if (message.modelStatus != null && Object.hasOwnProperty.call(message, "modelStatus"))
+        if (message.modelStatus != null && message.hasOwnProperty("modelStatus"))
             writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.modelStatus);
-        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+        if (message.startTime != null && message.hasOwnProperty("startTime"))
             writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.startTime);
-        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+        if (message.endTime != null && message.hasOwnProperty("endTime"))
             writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.endTime);
-        if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
+        if (message.offset != null && message.hasOwnProperty("offset"))
             writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.offset);
-        if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+        if (message.limit != null && message.hasOwnProperty("limit"))
             writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.limit);
-        if (message.algoType != null && Object.hasOwnProperty.call(message, "algoType"))
+        if (message.algoType != null && message.hasOwnProperty("algoType"))
             writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.algoType);
         return writer;
     };
@@ -1992,9 +2043,9 @@ $root.ARModelData = (function() {
     ARModelData.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.meshModel != null && Object.hasOwnProperty.call(message, "meshModel"))
+        if (message.meshModel != null && message.hasOwnProperty("meshModel"))
             writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.meshModel);
-        if (message.textureModel != null && Object.hasOwnProperty.call(message, "textureModel"))
+        if (message.textureModel != null && message.hasOwnProperty("textureModel"))
             writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.textureModel);
         return writer;
     };
@@ -2256,17 +2307,17 @@ $root.GetARModelReq = (function() {
     GetARModelReq.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.bizuin != null && Object.hasOwnProperty.call(message, "bizuin"))
+        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
             writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.bizuin);
-        if (message.cosid != null && Object.hasOwnProperty.call(message, "cosid"))
+        if (message.cosid != null && message.hasOwnProperty("cosid"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.cosid);
-        if (message.modelType != null && Object.hasOwnProperty.call(message, "modelType"))
+        if (message.modelType != null && message.hasOwnProperty("modelType"))
             writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modelType);
-        if (message.needData != null && Object.hasOwnProperty.call(message, "needData"))
+        if (message.needData != null && message.hasOwnProperty("needData"))
             writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.needData);
-        if (message.useIntranet != null && Object.hasOwnProperty.call(message, "useIntranet"))
+        if (message.useIntranet != null && message.hasOwnProperty("useIntranet"))
             writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.useIntranet);
-        if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+        if (message.expireTime != null && message.hasOwnProperty("expireTime"))
             writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.expireTime);
         return writer;
     };
@@ -2462,6 +2513,7 @@ $root.GetARModelResp = (function() {
      * @property {IARModelData|null} [modelData] GetARModelResp modelData
      * @property {string|null} [url] GetARModelResp url
      * @property {string|null} [host] GetARModelResp host
+     * @property {string|null} [errMsg] GetARModelResp errMsg
      */
 
     /**
@@ -2504,6 +2556,14 @@ $root.GetARModelResp = (function() {
     GetARModelResp.prototype.host = "";
 
     /**
+     * GetARModelResp errMsg.
+     * @member {string} errMsg
+     * @memberof GetARModelResp
+     * @instance
+     */
+    GetARModelResp.prototype.errMsg = "";
+
+    /**
      * Creates a new GetARModelResp instance using the specified properties.
      * @function create
      * @memberof GetARModelResp
@@ -2527,12 +2587,14 @@ $root.GetARModelResp = (function() {
     GetARModelResp.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.modelData != null && Object.hasOwnProperty.call(message, "modelData"))
+        if (message.modelData != null && message.hasOwnProperty("modelData"))
             $root.ARModelData.encode(message.modelData, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+        if (message.url != null && message.hasOwnProperty("url"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-        if (message.host != null && Object.hasOwnProperty.call(message, "host"))
+        if (message.host != null && message.hasOwnProperty("host"))
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.host);
+        if (message.errMsg != null && message.hasOwnProperty("errMsg"))
+            writer.uint32(/* id 4, wireType 2 =*/34).string(message.errMsg);
         return writer;
     };
 
@@ -2575,6 +2637,9 @@ $root.GetARModelResp = (function() {
                 break;
             case 3:
                 message.host = reader.string();
+                break;
+            case 4:
+                message.errMsg = reader.string();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -2622,6 +2687,9 @@ $root.GetARModelResp = (function() {
         if (message.host != null && message.hasOwnProperty("host"))
             if (!$util.isString(message.host))
                 return "host: string expected";
+        if (message.errMsg != null && message.hasOwnProperty("errMsg"))
+            if (!$util.isString(message.errMsg))
+                return "errMsg: string expected";
         return null;
     };
 
@@ -2646,6 +2714,8 @@ $root.GetARModelResp = (function() {
             message.url = String(object.url);
         if (object.host != null)
             message.host = String(object.host);
+        if (object.errMsg != null)
+            message.errMsg = String(object.errMsg);
         return message;
     };
 
@@ -2666,6 +2736,7 @@ $root.GetARModelResp = (function() {
             object.modelData = null;
             object.url = "";
             object.host = "";
+            object.errMsg = "";
         }
         if (message.modelData != null && message.hasOwnProperty("modelData"))
             object.modelData = $root.ARModelData.toObject(message.modelData, options);
@@ -2673,6 +2744,8 @@ $root.GetARModelResp = (function() {
             object.url = message.url;
         if (message.host != null && message.hasOwnProperty("host"))
             object.host = message.host;
+        if (message.errMsg != null && message.hasOwnProperty("errMsg"))
+            object.errMsg = message.errMsg;
         return object;
     };
 

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-beside-edge": "../../components/xr-beside-edge/index"
+  },
+  "disableScroll": true,
+  "navigationStyle": "custom"
+}

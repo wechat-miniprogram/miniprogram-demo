@@ -23,11 +23,17 @@ share-element {
   background-color: #a1cfec8b;
   border-radius: 32px;
   overflow: hidden;
+  height: 100%; 
+  width: 100%
 }
 .description {
   font-size: 40px;
   font-weight: bold;
   margin-top: 16px;
+}
+image {
+  width: 100%;
+  height: 100%;
 }
 
 

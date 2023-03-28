@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="gltf动画案例"
+  intro="包含gltf动画，以及和keyframe动画的协作（为什么会这里会出现Miku？因为很可爱啊（笑"
+  code="{{xmlCode}}"
+>
+  <xr-gltf-animation
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

@@ -19,8 +19,17 @@ share-element {
   background-color: #a1cfec8b;
   border-radius: 32px;
   overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
-
+image {
+  width: 100%;
+  height: 100%;
+}
+/* image {
+  width: 100%;
+  height: 100%;
+} */
 
 
 /* # sourceMappingURL=index.wxss.map */

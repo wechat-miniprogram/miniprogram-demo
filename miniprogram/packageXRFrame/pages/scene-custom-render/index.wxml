@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="定制渲染资源"
+  intro="使用xrFrameSystem定制Effect和Geometry，并使用。"
+  code="{{xmlCode}}"
+>
+  <xr-custom-render
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

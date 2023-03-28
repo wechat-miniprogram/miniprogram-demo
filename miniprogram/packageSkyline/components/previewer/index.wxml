@@ -1,0 +1,15 @@
+<scale-gesture-handler
+  tag="scale"
+  simultaneousHandlers="{{['swiper']}}"
+  onGestureEvent="onScale"
+  shouldResponseOnMove="shouldResponseOnMove"
+>
+  <preview-home
+    id="preview-home"
+    class="preview-home"
+    imageId="{{imageId}}"
+    sourcePageId="{{sourcePageId}}"
+    list="{{list}}"
+    bindback="onBack"
+  ></preview-home>
+</scale-gesture-handler>

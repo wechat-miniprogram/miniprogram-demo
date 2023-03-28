@@ -1,0 +1,11 @@
+.button-wrap {
+  display: flex;
+}
+
+.change-button {
+  background-color: #000;
+  color: #fff;
+  font-size: 26rpx;
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+}

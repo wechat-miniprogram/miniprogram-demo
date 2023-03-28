@@ -22,8 +22,8 @@ page {
 }
 
 image {
-  max-width: 100%;
-  max-height: 100%
+  /* max-width: 100%;
+  max-height: 100% */
 }
 
 .link {
@@ -169,3 +169,4 @@ image {
 [data-weui-theme=dark] .page__desc {
   color: hsla(0, 0%, 100%, .5);
 }
+

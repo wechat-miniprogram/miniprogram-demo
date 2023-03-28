@@ -251,57 +251,85 @@ Page({
         url: 'resizable/resizable'
       }]
     }, {
+      id: 'ai',
+      name: '通用AI推理能力',
+      pages: [{
+        zh: 'mobileNet',
+        url: 'mobilenet/index',
+      },
+      {
+        zh: 'style transfer',
+        url: 'style-trans/index',
+      },
+    ]
+    }, {
       id: 'ar',
       name: 'VisionKit视觉能力',
       pages: [{
-        zh: 'VisionKit基础',
-        url: 'visionkit-basic/visionkit-basic'
-      },
-      {
-        zh: 'VisionKit基础-v2',
-        url: 'visionkit-basic-v2/visionkit-basic-v2'
-      },
-      {
-        zh: '水平面AR',
-        url: 'plane-ar/plane-ar'
-      },
-      {
-        zh: '水平面AR-v2',
-        url: 'plane-ar-v2/plane-ar-v2'
-      },
-      {
-        zh: '2DMarkerAR',
-        url: '2dmarker-ar/2dmarker-ar'
-      },
-      {
-        zh: '单样本检测(OSD)',
-        url: 'osd-ar/osd-ar'
-      },
-      {
-        zh: '实时人脸检测',
-        url: 'face-detect/face-detect'
-      },
-      {
-        zh: '照片人脸检测',
-        url: 'photo-face-detect/photo-face-detect'
-      },
-      {
-        zh: '实时人体检测',
-        url: 'body-detect/body-detect'
-      },
-      {
-        zh: '照片人体检测',
-        url: 'photo-body-detect/photo-body-detect'
-      },
-      {
-        zh: '实时手势检测',
-        url: 'hand-detect/hand-detect'
-      },
-      {
-        zh: '照片手势检测',
-        url: 'photo-hand-detect/photo-hand-detect'
-      },
-    ],
+          zh: 'VisionKit基础',
+          url: 'visionkit-basic/visionkit-basic'
+        },
+        {
+          zh: 'VisionKit基础-v2',
+          url: 'visionkit-basic-v2/visionkit-basic-v2'
+        },
+        {
+          zh: '水平面AR',
+          url: 'plane-ar/plane-ar'
+        },
+        {
+          zh: '水平面AR-v2',
+          url: 'plane-ar-v2/plane-ar-v2'
+        },
+        {
+          zh: '水平面旋转AR',
+          url: 'plane-ar-3dof/plane-ar-3dof'
+        },
+        {
+          zh: '2DMarkerAR',
+          url: '2dmarker-ar/2dmarker-ar'
+        },
+        {
+          zh: '3DMarkerAR',
+          url: '3dmarker-ar/3dmarker-ar'
+        },
+        {
+          zh: '单样本检测(OSD)',
+          url: 'osd-ar/osd-ar'
+        },
+        {
+          zh: '实时OCR检测',
+          url: 'ocr-detect/ocr-detect'
+        },
+        {
+          zh: '照片OCR检测',
+          url: 'photo-ocr-detect/photo-ocr-detect'
+        },
+        {
+          zh: '实时人脸检测',
+          url: 'face-detect/face-detect'
+        },
+        {
+          zh: '照片人脸检测',
+          url: 'photo-face-detect/photo-face-detect'
+        },
+        {
+          zh: '实时人体检测',
+          url: 'body-detect/body-detect'
+        },
+        {
+          zh: '照片人体检测',
+          url: 'photo-body-detect/photo-body-detect'
+        },
+        {
+          zh: '实时手势检测',
+          url: 'hand-detect/hand-detect'
+        },
+        {
+          zh: '照片手势检测',
+          url: 'photo-hand-detect/photo-hand-detect'
+        },
+      ],
     }],
     isSetTabBarPage: false,
     theme: 'light'

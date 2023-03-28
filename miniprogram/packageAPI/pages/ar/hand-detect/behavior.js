@@ -105,6 +105,7 @@ export default function getBehavior() {
                 })
                 session.start(err => {
                     if (err) return console.error('VK error: ', err)
+
                     console.log('@@@@@@@@ VKSession.version', session.version)
 
                     const canvas = this.canvas
@@ -134,7 +135,7 @@ export default function getBehavior() {
 
                     session.on('updateAnchors', anchors => {
                         this.data.anchor2DList = []
-                        // 摄像头实时检测人手的时候 updateAnchors 会在每帧触发，所以性能要求更高，用 gl 画
+                        // 摄像头实时检测人脸的时候 updateAnchors 会在每帧触发，所以性能要求更高，用 gl 画
                         this.data.anchor2DList = this.data.anchor2DList.concat(anchors.map(anchor => ({
                             points: anchor.points,
                             origin: anchor.origin,
@@ -146,14 +147,24 @@ export default function getBehavior() {
                         this.data.anchor2DList = []
                     })
 
+                    
+                    //限制调用帧率
+                    let fps = 30
+                    let fpsInterval = 1000 / fps
+                    let last = Date.now()
+
                     // 逐帧渲染
                     const onFrame = timestamp => {
-                        // let start = Date.now()
-                        const frame = session.getVKFrame(canvas.width, canvas.height)
-                        if (frame) {
+                        let now = Date.now()
+                        const mill = now - last
+                        // 经过了足够的时间
+                        if (mill > fpsInterval) {
+                            last = now - (mill % fpsInterval); //校正当前时间
+                            const frame = session.getVKFrame(canvas.width, canvas.height)
+                            if (frame) {
                             this.render(frame)
+                            }
                         }
-
                         session.requestAnimationFrame(onFrame)
                     }
                     session.requestAnimationFrame(onFrame)

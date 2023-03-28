@@ -1,0 +1,112 @@
+{
+  "keyframe": {
+    "cube": {
+      "0": {
+        "position": [-3, 0, 2]
+      },
+      "50": {
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 1]
+      },
+      "100": {
+        "position": [3, 0, 2],
+        "rotation": [0, 3.14, 0],
+        "scale": [1.4, 1.4, 1.4]
+      }
+    },
+    "sphere": {
+      "0": {
+        "position": [-3, 0, 0],
+        "scale": [0.8, 0.8, 0.8]
+      },
+      "50": {
+        "position": [0, 0.2, 0],
+        "scale": [1, 1, 1]
+      },
+      "100": {
+        "position": [3, 0, 0],
+        "scale": [0.8, 0.8, 0.8]
+      }
+    },
+    "cylinder": {
+      "0": {
+        "position": [-3, 0, -2],
+        "rotation": [0, 0, 0]
+      },
+      "50": {
+        "rotation": [0, 0, -3.14]
+      },
+      "100": {
+        "position": [3, 0, -2],
+        "rotation": [0, 0, 3.14]
+      }
+    },
+    "plane": {
+      "0": {
+        "material.u_baseColorFactor": [0.48, 0.78, 0.64, 1]
+      },
+      "50": {
+        "material.u_baseColorFactor": [0.368, 0.937, 0.176, 1]
+      },
+      "100": {
+        "material.u_baseColorFactor": [0.176, 0.368, 0.937, 1]
+      }
+    },
+    "spotLight": {
+      "0": {
+        "position": [-4, 1, -4]
+      },
+      "25": {
+        "position": [-4.3, 0.5, -2]
+      },
+      "75": {
+        "position": [-3, 1.5, 2]
+      },
+      "100": {
+        "position": [-4, 1, 4]
+      }
+    }
+  },
+  "animation": {
+    "default": {
+      "keyframe": "cube",
+      "duration": 1,
+      "ease": "ease-in-out",
+      "loop": 400000,
+      "delay": 1,
+      "direction": "both"
+    },
+    "sphere": {
+      "keyframe": "sphere",
+      "duration": 1,
+      "ease": "ease-out",
+      "loop": 400000,
+      "delay": 1,
+      "direction": "both"
+    },
+    "cylinder": {
+      "keyframe": "cylinder",
+      "duration": 1,
+      "ease": "ease-in",
+      "loop": 400000,
+      "delay": 1,
+      "direction": "both"
+    },
+    "plane": {
+      "keyframe": "plane",
+      "duration": 4,
+      "ease": "linear",
+      "loop": 400000,
+      "delay": 1,
+      "direction": "both"
+    },
+    "spotLight": {
+      "keyframe": "spotLight",
+      "duration": 2,
+      "ease": "ease-in-out",
+      "loop": 400000,
+      "delay": 1,
+      "direction": "both"
+    }
+  }
+}

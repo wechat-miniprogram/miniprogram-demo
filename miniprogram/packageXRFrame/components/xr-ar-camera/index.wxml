@@ -1,0 +1,20 @@
+<xr-scene id="xr-scene" ar-system bind:ready="handleReady" bind:ar-ready="handleARReady" bind:ar-error="handleARError">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="gltf-table" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/metal_table/scene.gltf" />
+  </xr-assets>
+  <xr-env env-data="gz-haixinsha"/>
+  <xr-node>
+    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
+    <xr-node node-id="table-wrap" position="0 0 0">
+      <xr-gltf node-id="mesh-gltf-table" position="0 -1 0" rotation="0 45 0" scale="0.5 0.5 0.5" model="gltf-table" />
+    </xr-node>
+    <xr-camera
+      position="2 1 2" clear-color="0.925 0.925 0.925 1"
+      background="ar" target="camera-target" camera-orbit-control=""
+    />
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.2" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="2" />
+  </xr-node>
+</xr-scene>

@@ -2,10 +2,6 @@
   "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
   "miniprogramRoot": "miniprogram/",
   "cloudfunctionRoot": "cloudfunctions/",
-  "packOptions": {
-    "ignore": [],
-    "include": []
-  },
   "setting": {
     "urlCheck": true,
     "es6": true,
@@ -25,8 +21,6 @@
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -39,17 +33,19 @@
     "minifyWXSS": true,
     "disableUseStrict": false,
     "showES6CompileOption": false,
-    "useCompilerPlugins": false,
-    "ignoreUploadUnusedFiles": true,
+    "useCompilerPlugins": [
+      "typescript",
+      "less"
+    ],
+    "ignoreDevUnusedFiles": false,
+    "ignoreUploadUnusedFiles": false,
     "minifyWXML": true,
     "lazyloadPlaceholderEnable": false,
     "useStaticServer": true,
-    "localPlugins": false
+    "localPlugins": false,
+    "condition": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.19.5",
-  "appid": "wxe5f52902cf4de896",
-  "projectname": "%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A4%BA%E4%BE%8B%20%E5%86%85%E7%BD%91",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
@@ -69,5 +65,10 @@
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  }
+  },
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "appid": "wxe5f52902cf4de896"
 }

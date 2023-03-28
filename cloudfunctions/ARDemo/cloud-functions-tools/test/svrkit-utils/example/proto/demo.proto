@@ -1,0 +1,9 @@
+message ApiDemoReq
+{
+    optional string str = 2;
+}
+
+message ApiDemoResp
+{
+    optional string str = 2;
+}

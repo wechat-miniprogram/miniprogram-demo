@@ -1,0 +1,30 @@
+  <scroll-view
+    class="scroll-list"
+    style="padding-top: {{imageMargin}}px;"
+    scroll-y
+    type="list"
+    scroll-into-view="{{scrollIntoView}}"
+    scroll-into-view-alignment="nearest"
+  >
+    <view
+      wx:for="{{showList}}"
+      wx:key="index"
+      wx:for-item="line"
+      id="line-{{index}}"
+      class="line"
+      style="width: {{showWidth}}px; padding-bottom: {{imageMargin}}px;"
+    >
+      <view wx:for="{{line.list}}" wx:key="id" style="width: {{showImageWidth}}px; height: {{showImageWidth}}px;">
+        <album-image
+          class="album-image"
+          shareKey="{{item.id}}"
+          image="{{item}}"
+          src="{{item.src}}"
+          width="{{showImageWidth}}"
+          height="{{showImageWidth}}"
+          data-index="{{item.index}}"
+          bindtap="onTapImage"
+        ></album-image>
+      </view>
+    </view>
+  </scroll-view>

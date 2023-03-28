@@ -1,0 +1,11 @@
+@import "../../common/reset.wxss";
+@import "../common/index-skyline.wxss";
+
+.weui-agree__link {
+  display: inline;
+  color: #576b95;
+}
+
+[data-weui-theme=dark] .weui-agree__link {
+  color: #7d90a9;
+}

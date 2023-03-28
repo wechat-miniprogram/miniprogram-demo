@@ -1,4 +1,0 @@
-<!--components/recycle-item/recycle-item.wxml-->
-<view class="wx-recycle-item">
-  <slot></slot>
-</view>

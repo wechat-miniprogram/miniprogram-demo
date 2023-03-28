@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "ar-model-component": "./Components/arModelComponent"
+  },
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "MarkerAR"
+}

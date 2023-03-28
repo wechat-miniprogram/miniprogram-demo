@@ -1,0 +1,25 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+  </xr-assets>
+  <xr-node>
+    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
+    <xr-mesh node-id="mesh-cube-floor" position="2 -1.01 0" rotation="0 0 0" scale="10 1 10" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:0.2 0.2 0.2 1" states="cullOn: false"></xr-mesh>
+    <xr-mesh node-id="mesh-cube" position="0.6 -0.25 0.8" rotation="0 30 0" scale="0.5 0.5 0.5" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:1 1 1 1"></xr-mesh>
+    <xr-mesh node-id="mesh-sphere" position="2 -0.15 -1" scale="0.4 0.4 0.4" geometry="sphere" material="standard-mat" uniforms="u_baseColorFactor:1 1 1 1"></xr-mesh>
+    <xr-mesh node-id="mesh-cylinder" position="-0.2 -0.2 -0.8" scale="0.5 0.4 0.5" geometry="cylinder" material="standard-mat" uniforms="u_baseColorFactor:1 1 1 1"></xr-mesh>
+    <xr-mesh node-id="mesh-cube-far" position="3 -0.25 1" rotation="0 -30 0" scale="0.5 0.5 0.5" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:1 1 1 1"></xr-mesh>
+  <xr-camera
+      id="camera" node-id="camera" position="-2 1 0" clear-color="0 0 0 1"
+      target="camera-target"
+      camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.1" />
+    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="0.2" />
+    <xr-light type="point" position="0 0 0" color="1 0 0" range="3" intensity="3" />
+    <xr-light type="point" position="2 0 1" color="0 1 0" range="3" intensity="3" />
+    <xr-light type="spot" position="0 0 0" color="0 0 1" range="12" intensity="12" rotation="0 120 0" inner-cone-angle="30" outer-cone-angle="35" />
+  </xr-node>
+</xr-scene>

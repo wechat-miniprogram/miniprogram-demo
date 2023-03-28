@@ -1,0 +1,35 @@
+{
+  "keyframe": {
+    "parent": {
+      "0": {
+        "rotation": [0, 0, 0]
+      },
+      "100": {
+        "rotation": [0, 6.28, 0]
+      }
+    },
+    "child": {
+      "0": {
+        "position.y": -0.5
+      },
+      "100": {
+        "position.y": 1.5
+      }
+    }
+  },
+  "animation": {
+    "parent": {
+      "keyframe": "parent",
+      "duration": 8,
+      "ease": "linear",
+      "loop": -1
+    },
+    "child": {
+      "keyframe": "child",
+      "duration": 4,
+      "ease": "ease-in-out",
+      "direction": "both",
+      "loop": -1
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<xr-demo-viewer
+  title="交互案例"
+  intro="简易地月模型。拖拽地球可使其旋转；拖拽月球可使其移动。"
+  code="{{xmlCode}}"
+>
+  <xr-basic-touch
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    a="123"
+  />
+</xr-demo-viewer>

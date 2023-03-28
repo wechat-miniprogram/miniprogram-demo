@@ -1,0 +1,41 @@
+<!-- index.wxml -->
+<vertical-drag-gesture-handler id="pan" shouldResponseOnMove="shouldPanResponse" simultaneousHandlers="{{ ['scroll'] }}" onGestureEvent="handleVerticalDrag" style="flex: 1; overflow: auto;width: 100%;">
+	<view style="width: 100%; height: 100%;">
+		<view class="bottom-sheet">
+			<view class="btn-wrp" bind:tap="back">
+				<view class="btn">
+					<image class="icon" src="../../../resources/icon_down_arrow.svg" mode="aspectFit"/>
+				</view>
+			</view>
+			<view class="title">评论列表</view>
+		</view>
+		<vertical-drag-gesture-handler id="scroll" native-view="scroll-view" shouldResponseOnMove="shouldScrollViewResponse" simultaneousHandlers="{{ ['pan'] }}">
+			<scroll-view style="flex: 1; overflow: auto; width: 100%;" scroll-y bindscroll="handleScroll" adjustDecelerationVelocity="adjustDecelerationVelocity" bounces="{{ false }}" refresher-enabled="{{ false }}" type="list">
+				<view class="comment-item comment" wx:for="{{ list }}">
+					<!-- <image class="avatar" src="{{ item.userHeadImg }}"/>
+					<view class="comment">
+            {{ item.comment }}
+          </view> -->
+          <view class="main-comment">
+            <image class="user-head-img" src="{{item.userHeadImg}}"></image>
+            <view class="others">
+              <text class="user-name">{{item.userName}}</text>
+              <text class="content">{{item.comment}}</text>
+            </view>
+          </view>
+
+          <view wx:if="{{item.subCommentList.length}}" class="sub-comment-list">
+            <view class="sub-comment" wx:for="{{item.subCommentList}}" wx:key="id" wx:for-item="subItem" wx:for-index="subIndex">
+              <image class="user-head-img" src="{{subItem.userHeadImg}}"></image>
+              <view class="others">
+                <text class="user-name">{{subItem.userName}} 回复 {{subItem.replyUserName}}</text>
+                <text class="content">{{subItem.comment}}</text>
+              </view>
+            </view>
+          </view>
+            
+				</view>
+			</scroll-view>
+		</vertical-drag-gesture-handler>
+	</view>
+</vertical-drag-gesture-handler>

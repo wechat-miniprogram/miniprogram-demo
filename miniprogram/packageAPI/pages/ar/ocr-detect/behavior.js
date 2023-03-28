@@ -130,26 +130,48 @@ export default function getBehavior() {
                     })
                     session.on('updateAnchors', anchors => {
                       this.data.textContentList = []
+
                         // 摄像头实时检测人脸的时候 updateAnchors 会在每帧触发，所以性能要求更高，用 gl 画
-                        this.data.textContentList = this.data.textContentList.concat(anchors.map(anchor => ({
-                            text: anchor.text
-                        })))
+                        this.data.textContentList = this.data.textContentList.concat(anchors.map(anchor => {
+                            return {
+                                text: anchor.text,
+                                subtext: anchor.subtext,
+                                box: anchor.box
+                            };
+                        }))
+
+                        var wholeText = undefined
+                        if(this.data.textContentList.length != 0){
+                            wholeText = this.data.textContentList[0].text
+                        }
+
                         this.setData({
-                            textContentList: this.data.textContentList
+                            textContentList: this.data.textContentList,
+                            wholeText: wholeText
                         })
                     })
                     session.on('removeAnchors', anchors => {
                       console.log("anchor remove")
                     })
 
+                    
+                    //限制调用帧率
+                    let fps = 30
+                    let fpsInterval = 1000 / fps
+                    let last = Date.now()
+
                     // 逐帧渲染
                     const onFrame = timestamp => {
-                        // let start = Date.now()
-                        const frame = session.getVKFrame(canvas.width, canvas.height)
-                        if (frame) {
+                        let now = Date.now()
+                        const mill = now - last
+                        // 经过了足够的时间
+                        if (mill > fpsInterval) {
+                            last = now - (mill % fpsInterval); //校正当前时间
+                            const frame = session.getVKFrame(canvas.width, canvas.height)
+                            if (frame) {
                             this.render(frame)
+                            }
                         }
-
                         session.requestAnimationFrame(onFrame)
                     }
                     session.requestAnimationFrame(onFrame)

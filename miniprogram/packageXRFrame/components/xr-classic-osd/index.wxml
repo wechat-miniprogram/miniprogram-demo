@@ -1,0 +1,66 @@
+<xr-scene ar-system="modes:OSD" id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-material asset-id="simple" effect="simple" />
+    <xr-asset-material asset-id="text-simple" effect="simple" />
+  </xr-assets>
+  <xr-node>
+    <xr-ar-tracker mode="OSD" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/osdmarker-test.jpg"  bind:ar-tracker-switch="handleToySwitch">
+      <xr-node wx:if="{{toyReady}}" rotation="0 180 0">
+        <xr-mesh node-id="text-wrap" position="0.9 0.4 0" rotation="90 0 0" scale="0.8 1 0.2" geometry="plane" material="simple"
+          uniforms="u_baseColorFactor: 0.2 0.6 0.4 0.95"
+          states="alphaMode: BLEND"
+        ></xr-mesh>
+        <xr-mesh node-id="text-wrap-sub" position="0.9 0.1 0" rotation="90 0 0" scale="0.8 1 0.4" geometry="plane" material="simple"
+          uniforms="u_baseColorFactor: 0 0 0 0.95"
+          states="alphaMode: BLEND"
+        ></xr-mesh>
+        <!-- 文本处于beta版本，功能不完备，仅支持使用独立材质的基础渲染，不能更新渲染（修复中） -->
+        <xr-text node-id="text-name" position="0.7 0.36 0.01" scale="0.1 0.1 1" material="text-simple"
+          value="牛年公仔"
+        ></xr-text>
+        <xr-text node-id="text-name" position="0.6 0.16 0.01" scale="0.06 0.06 1" material="text-simple"
+          value="牛年发布的奶牛公仔"
+        ></xr-text>
+        <xr-text node-id="text-name" position="0.6 0.06 0.01" scale="0.06 0.06 1" material="text-simple"
+          value="礼盒中还包含玩具盲盒"
+        ></xr-text>
+      </xr-node>
+    </xr-ar-tracker>
+
+    <xr-ar-tracker mode="OSD" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/gz-tower/day.jpg"  bind:ar-tracker-switch="handleDaySwitch">
+      <xr-node wx:if="{{gzDayReady}}" rotation="0 180 0" >
+        <xr-mesh node-id="text-wrap" position="1 0.4 0" rotation="90 0 0" scale="1 1 0.2" geometry="plane" material="simple"
+          uniforms="u_baseColorFactor: 0.2 0.6 0.4 0.95"
+          states="alphaMode: BLEND"
+        ></xr-mesh>
+        <xr-mesh node-id="text-wrap-sub" position="1 0.1 0" rotation="90 0 0" scale="1 1 0.4" geometry="plane" material="simple"
+          uniforms="u_baseColorFactor: 0 0 0 0.95"
+          states="alphaMode: BLEND"
+        ></xr-mesh>
+        <!-- 文本处于beta版本，功能不完备，仅支持使用独立材质的基础渲染，不能更新渲染（修复中） -->
+        <xr-text node-id="text-name" position="0.85 0.36 0.01" scale="0.1 0.1 1" material="text-simple"
+          value="广州塔"
+        ></xr-text>
+        <xr-text node-id="text-name" position="0.6 0.18 0.01" scale="0.05 0.05 1" material="text-simple"
+          value="广州塔（英语：Canton Tower）"
+        ></xr-text>
+        <xr-text node-id="text-name" position="0.6 0.08 0.01" scale="0.05 0.05 1" material="text-simple"
+          value="又称广州新电视塔，昵称小蛮腰"
+        ></xr-text>
+        <xr-text node-id="text-name" position="0.6 -0.02 0.01" scale="0.05 0.05 1" material="text-simple"
+          value="海拔高程600米，距离珠江南岸125米"
+        ></xr-text>
+      </xr-node>
+    </xr-ar-tracker>
+
+
+    <xr-camera
+      id="camera" node-id="camera" position="1 1 1" clear-color="0.925 0.925 0.925 1"
+      far="2000" background="ar" is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.3" />
+    <xr-light type="directional" rotation="30 60 0" color="1 1 1" intensity="1" />
+  </xr-node>
+</xr-scene>

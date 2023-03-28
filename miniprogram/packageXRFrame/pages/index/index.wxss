@@ -1,0 +1,45 @@
+
+.main {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+  padding-top: 48rpx;
+  padding-bottom: 80rpx;
+}
+.slogen-wrap {
+  padding-left: 16rpx;
+  padding-right: 16rpx;
+  margin-bottom: 48rpx;
+}
+.slogen {
+  text-align: left;
+  font-size: 70rpx;
+  font-weight: bold;
+  color: rgb(115, 239, 43);
+  line-height: 80rpx;
+}
+.slogen .special {
+  display: inline-block;
+  font-size: 80rpx;
+  font-weight: 300;
+  color: #000;
+}
+
+.intro {
+  text-align: left;
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.nav-btn {
+  text-align: center;
+  background: #eeeeee;
+  margin: 20rpx 0;
+  padding: 30rpx;
+  border-radius: 5px;
+}

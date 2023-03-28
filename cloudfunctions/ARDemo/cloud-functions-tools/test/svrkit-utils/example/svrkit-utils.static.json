@@ -1,0 +1,101 @@
+{
+  "nested": {
+    "ApiDemoReq": {
+      "fields": {
+        "str": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "ApiDemoResp": {
+      "fields": {
+        "str": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "GenWxaCloudTmpCodeReq": {
+      "fields": {
+        "CloudPlatform": {
+          "type": "uint32",
+          "id": 1
+        },
+        "AppUin": {
+          "type": "uint32",
+          "id": 2
+        },
+        "UserUin": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "GenWxaCloudTmpCodeResp": {
+      "fields": {
+        "TmpCode": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "GetWeAppMemberByUserReq": {
+      "fields": {
+        "useruin": {
+          "type": "uint32",
+          "id": 1
+        },
+        "type": {
+          "type": "uint32",
+          "id": 2
+        },
+        "status": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "WeAppMemberInfo": {
+      "fields": {
+        "type": {
+          "type": "uint32",
+          "id": 1
+        },
+        "weappuin": {
+          "type": "uint32",
+          "id": 2
+        },
+        "useruin": {
+          "type": "uint32",
+          "id": 3
+        },
+        "status": {
+          "type": "uint32",
+          "id": 4
+        },
+        "createtime": {
+          "type": "uint32",
+          "id": 5
+        },
+        "updatetime": {
+          "type": "uint32",
+          "id": 6
+        },
+        "ticket": {
+          "type": "string",
+          "id": 7
+        }
+      }
+    },
+    "WeAppMemberInfoList": {
+      "fields": {
+        "infos": {
+          "rule": "repeated",
+          "type": "WeAppMemberInfo",
+          "id": 1
+        }
+      }
+    }
+  }
+}

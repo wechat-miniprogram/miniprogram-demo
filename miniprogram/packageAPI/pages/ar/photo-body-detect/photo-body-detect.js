@@ -124,7 +124,8 @@ Component({
                     frameBuffer: this.imgData.data.buffer,
                     width: this.data.bodyImgOriginWidth,
                     height: this.data.bodyImgOriginHeight,
-                    scoreThreshold: 0.5 // 评分阈值
+                    scoreThreshold: 0.5, // 评分阈值
+                    sourceType: 1
                 })
             }
         },

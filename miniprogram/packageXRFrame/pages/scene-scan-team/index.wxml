@@ -1,0 +1,26 @@
+<xr-demo-viewer
+  title="卡 其 脱 离 太"
+  intro="xr-frame团队的办公区和成员三维重建，以及与小程序音频系统、2dview协作的例子。点击`卡其脱离太`开始奔跑，奔跑之后点击成员可以跳跃（建议打开声音（不是"
+  code="{{xmlCode}}"
+>
+  <xr-scan-team
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    loaded="{{loaded}}"
+    run="{{run}}"
+    bind:assetsLoaded="handleLoaded"
+    bind:syncPositions="handleSyncPositions"
+  />
+
+  <block wx:if="{{loaded}}" wx:for="{{positions}}" wx:for-item="pos" wx:key="*this">
+    <view style="display: block; position: absolute;left: {{pos[0]}}px;top: {{pos[1]}}px;background: rgba(44, 44, 44, 0.5);transform: translate(-50%, -50%);">
+      <view style="text-align: center;color: white;font-size: 16px;padding: 8px;">{{pos[2]}}</view>
+    </view>
+  </block>
+
+  <view wx:if="{{!loaded}}" style="text-align: center;">等待加载完成...</view>
+  <button wx:if="{{loaded}}" bindtap="handleRun" style="margin-top: 12px; padding: 8px; font-size: 20px; background: #f22; color: white; text-align: center;">卡 其 脱 离 太！</button>
+</xr-demo-viewer>

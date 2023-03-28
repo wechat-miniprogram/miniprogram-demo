@@ -1,0 +1,35 @@
+<xr-scene id="xr-scene" ar-system="modes:Marker" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="env-data" asset-id="env1" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin" />
+    <xr-asset-load type="gltf" asset-id="gltf-fiesta_tea" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/fiesta_tea/scene.gltf" />
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+  </xr-assets>
+  <xr-env env-data="env1"/>
+  <xr-node wx:if="{{loaded}}">
+
+    <xr-ar-tracker mode="Marker" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/portalImage.jpg">
+      <xr-node scale="1 1 1">
+        <xr-gltf node-id="mesh-gltf-fiesta_tea" position="0 -1.6 1" rotation="-90 0 0" scale="0.6 0.6 0.6" model="gltf-fiesta_tea"
+          states="stencilTestOn: true, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
+        ></xr-gltf>
+
+        <!-- <xr-mesh node-id="door" position="0 1.5 0" rotation="0 0 0" scale="1 0.1 1" geometry="cube" material="standard-mat"
+          states="renderQueue: 2, depthTestOn: false"
+        ></xr-mesh> -->
+
+        <xr-mesh node-id="plane-cull" position="0 0 0" rotation="0 0 0" scale="1 0.1 0.9" geometry="plane"
+          states="renderQueue: 1, stencilTestOn: true, stencilComp: 7, stencilRef: 1, stencilReadMask: 1, stencilWriteMask: 1, stencilPass: 1, stencilFail: 2, stencilZFail: 2"
+        ></xr-mesh>
+      </xr-node>
+    </xr-ar-tracker>
+
+    <xr-camera
+      id="camera" node-id="camera" position="2 0.4 0" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.3" />
+    <xr-light type="directional" rotation="30 60 0" color="1 1 1" intensity="1" />
+  </xr-node>
+</xr-scene>

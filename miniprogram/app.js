@@ -1,4 +1,5 @@
 const config = require('./config')
+
 const themeListeners = []
 global.isDemo = true
 App({
@@ -16,7 +17,7 @@ App({
         fetchType: 'pre',
         success(res) {
           that.globalData.backgroundFetchData = res
-          console.log('读取预拉取数据成功')
+          console.log('读取预拉取数据成功', res)
         },
         fail() {
           console.log('读取预拉取数据失败')
@@ -45,9 +46,10 @@ App({
       })
     }
     // skyline
-    var systemInfo = wx.getSystemInfoSync();
+    const systemInfo = wx.getSystemInfoSync()
     console.log('@@@ systemInfo ', systemInfo)
-    Object.assign(this.globalData, systemInfo);
+    Object.assign(this.globalData, systemInfo)
+    // eslint-disable-next-line promise/always-return
     require.async('./packageSkyline/common/custom-route/index.js').then(utils => {
       console.log('--------begin installRouteBuilder')
       utils.installRouteBuilder() // 'common'
@@ -87,6 +89,7 @@ App({
     hasLogin: false,
     openid: null,
     iconTabbar: '/page/extend/images/icon_tabbar.png',
+    systemInfo: {}
   },
   // lazy loading openid
   getUserOpenId(callback) {
