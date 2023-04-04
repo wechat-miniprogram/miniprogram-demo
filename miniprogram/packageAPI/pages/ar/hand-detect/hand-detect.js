@@ -243,6 +243,17 @@ Component({
     init() {
       this.initGL()
     },
+    switchCamera(event){
+      if(this.session.config){
+        const config = this.session.config
+        let pos = Number(event.currentTarget.dataset.value)
+        config.cameraPosition = pos
+        this.session.config = config
+        this.setData({
+          cameraPosition:event.currentTarget.dataset.value
+        })
+      }
+    },
     render(frame) {
       var gl = this.gl
 
@@ -291,11 +302,9 @@ Component({
         gl.useProgram(this.rectEdgeProgram)
         gl.program = this.rectEdgeProgram
 
-        // for (var i = 0; i < anchor2DList.length; i++) {
-        //   onDrawRectEdge(gl, anchor2DList[i].origin.x, anchor2DList[i].origin.y, anchor2DList[i].size.width, anchor2DList[i].size.height)
-        // }
-
-        onDrawRectEdge(gl, anchor2DList[0].origin.x, anchor2DList[0].origin.y, anchor2DList[0].size.width, anchor2DList[0].size.height)
+        for (var i = 0; i < anchor2DList.length; i++) {
+          onDrawRectEdge(gl, anchor2DList[i].origin.x, anchor2DList[i].origin.y, anchor2DList[i].size.width, anchor2DList[i].size.height)
+        }
       }
     },
   },

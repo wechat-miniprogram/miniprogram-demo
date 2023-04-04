@@ -140,8 +140,8 @@ var EDGE_FSHADER_SOURCE =
   varying vec2 posJudge;
 
   float box(float x, float y){
-    float xc = clamp (x - centerPoint.x, -1.0 , 1.0);
-    float yc = clamp (y - centerPoint.y, -1.0 , 1.0);
+    float xc = x - centerPoint.x;
+    float yc = y - centerPoint.y;
     vec2 point = vec2(xc, yc);
     float right = rightTopPoint.x;
     float top =  rightTopPoint.y;
@@ -248,7 +248,8 @@ Component({
     switchCamera(event){
       if(this.session.config){
         const config = this.session.config
-        config.cameraPosition = Number(event.currentTarget.dataset.value)
+        let pos = Number(event.currentTarget.dataset.value)
+        config.cameraPosition = pos
         this.session.config = config
         this.setData({
           cameraPosition:event.currentTarget.dataset.value

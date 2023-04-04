@@ -102,14 +102,14 @@ exports.main = async (event, context) => {
 首先在需要使用该能力的云函数的目录下安装 `@tencent/cloud-functions-tools`：
 
 ```shell
-tnpm install --save-dev @tencent/cloud-functions-tools@latest
+npm install --save-dev @tencent/cloud-functions-tools@latest
 ```
 
 注意，云函数中同时需安装 `wx-server-sdk` 和 `@tencent/wx-server-sdk-wxg-service`
 
 ```bash
 npm install --save wx-server-sdk@latest
-tnpm install --save @tencent/wx-server-sdk-wxg-service@latest
+npm install --save @tencent/wx-server-sdk-wxg-service@latest
 ```
 
 
