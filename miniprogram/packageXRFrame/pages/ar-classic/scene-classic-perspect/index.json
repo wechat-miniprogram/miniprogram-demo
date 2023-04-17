@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+    "xr-classic-perspect": "../../../components/xr-classic-perspect/index"
+  },
+  "disableScroll": true
+}

@@ -1,0 +1,69 @@
+<xr-demo-viewer
+  title="加载案例"
+  intro="点击按钮进行对应资源的加载与使用。（目前视频纹理属于beta状态，真机情况下，多张视频纹理不可以同时加载与渲染，但是可以取消一份后渲染另外一份）"
+  code=""
+  showBackBtn="{{showBackBtn}}"
+>
+  <xr-template-loading
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    gltfListRaw="{{gltfList}}"
+    imageListRaw="{{imageList}}"
+    videoListRaw="{{videoList}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+  <!-- <view class="xr-info">
+    <view class="info-text title">加载列表</view>
+    <view class="info-text">加载进度:</view>
+    <view class="info-process">
+      <view class="info-bar" style="width: {{0}}%"></view>
+    </view>
+  </view> -->
+  <view class="xr-res-panel">
+    <view class="res-row">
+      <view class="res-name">glTF</view>
+      <view class="res-btn {{onFlags[0] ? 'on': ''}}"
+        bindtap="tapResBtn"
+        data-type="gltf"
+        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.gltf"
+        data-index="0"
+      >头盔</view>
+      <view class="res-btn {{onFlags[1] ? 'on': ''}}"
+        bindtap="tapResBtn"
+        data-type="gltf"
+        data-src="/assets/gltf/Fox.glb"
+        data-index="1"
+      >狐狸</view>
+      <view class="res-name">图片</view>
+      <view class="res-btn"
+        bindtap="tapResBtn"
+        data-type="image"
+        data-src="/assets/waifu.png"
+        data-index="2"
+      >暂无</view>
+    </view>
+    <view class="res-row">
+      <view class="res-name">视频纹理</view>
+      <view class="res-btn {{onFlags[3] ? 'on': ''}}"
+        bindtap="tapResBtn"
+        data-type="video"
+        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/paris.mp4"
+        data-index="3"
+      >巴黎路边</view>
+      <view class="res-btn {{onFlags[4] ? 'on': ''}}"
+        bindtap="tapResBtn"
+        data-type="video"
+        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.mp4"
+        data-index="4"
+      >猫咪视频</view>
+      <view class="res-btn {{onFlags[5] ? 'on': ''}}"
+        bindtap="tapResBtn"
+        data-type="video"
+        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/yulong.mp4"
+        data-index="5"
+      >玉龙山顶</view>
+    </view>
+  </view>
+</xr-demo-viewer>

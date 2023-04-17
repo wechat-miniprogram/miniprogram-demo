@@ -3,8 +3,7 @@
     <xr-asset-load
       type="env-data" asset-id="env1" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin"
     />
-    <xr-asset-load type="gltf" asset-id="gltf-damageHelmet" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.glb" />
-    <xr-asset-material asset-id="standard-mat" effect="standard" />
+    <xr-asset-load type="gltf" asset-id="gltf-damageHelmet" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.gltf" />
   </xr-assets>
   <xr-env env-data="env1" />
   <xr-node>

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+    "xr-template-lookat": "../../../components/template/xr-template-lookat/index"
+  },
+  "disableScroll": true,
+  "navigationStyle": "custom"
+}

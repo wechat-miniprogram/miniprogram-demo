@@ -1,0 +1,31 @@
+<xr-demo-viewer
+  title="基础案例"
+  intro="使用`xr-particle`，控制粒子系统的显示。从远到近，从左到右依次是：案例1：球形发射器与颜色过渡效果的粒子展示 案例2：闪电球效果的粒子展示 案例3：光环效果展示 案例4：传送门效果展示 案例5： 《戴珍珠耳环的少女》人像效果展示"
+  code="{{xmlCode}}"
+>
+
+<xr-basic-particle
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    capacity="{{capacity}}"
+    emitRate="{{emitRate}}"
+    lifeTime="{{lifeTime}}"
+/>
+
+<view class="env-words">
+  <!-- <span class="tips">粒子上限: </span><span class="content">{{capacity}}</span><text>\n</text>
+  <span class="tips">粒子速率: </span><span class="content">{{emitRate}}</span><text>\n</text>
+  <span class="tips">粒子生命周期: </span><span class="content">{{lifeTime}}</span><text>\n</text> -->
+</view>
+<view class="button-wrap">
+  <!-- <view class="change-button" bindtap="handleAdd">增加粒子</view>
+  <view class="change-button" bindtap="handleSub">减少粒子</view>
+  <view class="change-button" bindtap="handleRateAdd">增加粒子速率</view>
+  <view class="change-button" bindtap="handleRateSub">减少粒子速率</view>
+  <view class="change-button" bindtap="handleTimeAdd">增加粒子生命周期</view>
+  <view class="change-button" bindtap="handleTimeSub">减少粒子生命周期</view> -->
+</view>
+</xr-demo-viewer>

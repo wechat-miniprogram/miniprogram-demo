@@ -1,0 +1,51 @@
+{
+  "keyframe": {
+    "parent": {
+      "0": {
+        "rotation": [0, 0, 0]
+      },
+      "100": {
+        "rotation": [0, 6.28, 0]
+      }
+    },
+    "child": {
+      "0": {
+        "position.y": 0.8
+      },
+      "50": {
+        "position.y": 1
+      },
+      "100": {
+        "position.y": 0.8
+      }
+    },
+    "door": {
+      "0": {
+        "scale": [0, 1, 1]
+      },
+      "100": {
+        "scale": [1, 1, 1]
+      }
+    }
+  },
+  "animation": {
+    "parent": {
+      "keyframe": "parent",
+      "duration": 8,
+      "ease": "linear",
+      "loop": -1
+    },
+    "child": {
+      "keyframe": "child",
+      "duration": 4,
+      "ease": "linear",
+      "direction": "both",
+      "loop": -1
+    },
+    "door": {
+      "keyframe": "door",
+      "duration": 0.6,
+      "ease": "linear"
+    }
+  }
+}

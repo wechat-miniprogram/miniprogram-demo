@@ -1,0 +1,19 @@
+<xr-scene ar-system="modes:threeDof" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="gltf-item" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/just_a_girl/index.glb" />
+  </xr-assets>
+  <xr-node>
+    <xr-gltf model="gltf-item" position="1 0 1" scale="0.006 0.006 0.006"></xr-gltf>
+    <xr-gltf model="gltf-item" position="1 0 -1" scale="0.006 0.006 0.006"></xr-gltf>
+    <xr-gltf model="gltf-item" position="-1 0 1" scale="0.006 0.006 0.006"></xr-gltf>
+    <xr-gltf model="gltf-item" position="-1 0 -1" scale="0.006 0.006 0.006"></xr-gltf>
+    <xr-camera
+      id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

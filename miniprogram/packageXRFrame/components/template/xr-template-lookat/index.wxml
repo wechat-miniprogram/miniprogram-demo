@@ -1,0 +1,32 @@
+<xr-scene ar-system="modes:Plane" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+  </xr-assets>
+  <xr-node>
+    <xr-ar-tracker mode="Plane">
+      <xr-gltf id="anchor" model="anchor"></xr-gltf>
+    </xr-ar-tracker>
+    <xr-node id="f" position="0 0 3.0">
+      <xr-mesh rotation="90 0 0" geometry="plane" uniforms="u_baseColorFactor:0.4 0.2 0.2 1, u_metallicRoughnessValues: 0 0.6" states="cullOn: false"></xr-mesh>
+    </xr-node>
+    <xr-node id="b" position="0 0 -3.0">
+      <xr-mesh rotation="90 0 0" geometry="plane" uniforms="u_baseColorFactor:0.2 0.4 0.2 1, u_metallicRoughnessValues: 0 0.6" states="cullOn: false"></xr-mesh>
+    </xr-node>
+    <xr-node id="l" position="-3.0 0 0.0">
+      <xr-mesh rotation="90 0 0" geometry="plane" uniforms="u_baseColorFactor:0.2 0.2 0.4 1, u_metallicRoughnessValues: 0 0.6" states="cullOn: false"></xr-mesh>
+    </xr-node>
+    <xr-node id="r" position="3.0 0 0.0">
+      <xr-mesh rotation="90 0 0" geometry="plane" uniforms="u_baseColorFactor:0.4 0.2 0.6 1, u_metallicRoughnessValues: 0 0.6" states="cullOn: false"></xr-mesh>
+    </xr-node>
+
+    <xr-camera
+      id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

@@ -1,0 +1,12 @@
+<xr-demo-viewer
+  title="序列帧动画（雪碧图、GIF）"
+  intro="使用自定义材质实现的序列帧动画案例。序列帧来源为雪碧图切片，通过 columCount、rowCount、during 控制播放。如需使用GIF，可以使用工具将GIF转化为特定格式的雪碧图。本案例由 “一二侠” 提供。"
+>
+  <xr-template-frameEffect
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

@@ -1,0 +1,20 @@
+<xr-demo-viewer
+  title="显示和图层"
+  intro="使用`xr-node`以及派生节点上的`visible`和`layer`，配合`camera`的`cull-mask`，控制节点树的显示。"
+  code="{{xmlCode}}"
+>
+  <xr-basic-visible-layer
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    visibleIndex="{{visibleIndex}}"
+    cullMask="{{cullMask}}"
+  />
+
+  <view class="btn-strap">
+    <button class="btn" bind:tap="handleChangeVisible" style="background-color: rgb(237, 211, 231)">通过visible属性控制</button>
+    <button class="btn" bind:tap="handleChangeCullMask" style="background-color: rgb(214, 226, 243)">通过layer和cullmask控制</button>
+  </view>
+</xr-demo-viewer>

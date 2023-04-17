@@ -1,0 +1,24 @@
+<xr-demo-viewer
+  title="AR OSDMarker案例"
+  intro="Marker识别案例，点击可以上传OSDMarker。识别成功后，会于屏幕绘制一个纯色立方体展示位置。"
+  hint="默认扫描图片见官网开发文档\n组件->xr-frame->示例"
+>
+  <xr-ar-osdmarker
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    markerImg="{{markerImg}}"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+
+  <button bindtap="handleChangeMarkerImg">
+    点击替换Marker图像
+  </button>
+</xr-demo-viewer>

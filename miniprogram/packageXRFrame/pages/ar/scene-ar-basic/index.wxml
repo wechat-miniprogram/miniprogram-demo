@@ -1,0 +1,19 @@
+<xr-demo-viewer
+  title="AR 平面识别案例"
+  intro="基础的平面识别案例，有一个图标用于展示目前平面定位的区域。每次点击渲染区域，会触发新的一次模型的的加载与模型放置到对应的平面区域。"
+  code="{{xmlCode}}"
+>
+  <xr-ar-basic
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+</xr-demo-viewer>

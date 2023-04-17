@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+    "xr-gltf-textureTransform": "../../../components/xr-gltf-textureTransform/index"
+  },
+  "disableScroll": true
+}

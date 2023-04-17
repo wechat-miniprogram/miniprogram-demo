@@ -5,7 +5,6 @@
     <xr-asset-material asset-id="standard-mat" effect="standard" />
   </xr-assets>
   <xr-node>
-    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
     <xr-ar-tracker mode="Plane">
       <xr-gltf model="anchor"></xr-gltf>
     </xr-ar-tracker>

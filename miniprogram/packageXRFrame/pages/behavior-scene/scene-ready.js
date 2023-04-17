@@ -4,20 +4,25 @@ module.exports = Behavior({
   },
   data: {
     left: 0,
-    right: 0,
-    width: 300,
-    height: 300,
-    renderWidth: 300,
-    renderHeight: 300,
+    top: 0,
+    width: 0,
+    height: 0,
+    renderWidth: 0,
+    renderHeight: 0,
     windowHeight: 1000,
+    heightScale: 0.75,
+    showBackBtn: false,
     activeValues: [1],
+    arTrackerShow: false,
+    arTrackerState: 'Init',
+    arTrackerError: ''
   },
   attached: function(){},
   ready() {
     const info = wx.getSystemInfoSync();
     const width = info.windowWidth;
     const windowHeight = info.windowHeight;
-    const height = windowHeight * 0.6;
+    const height = windowHeight * this.data.heightScale;
     const dpi = info.pixelRatio;
     this.setData({
       width,
@@ -70,10 +75,13 @@ module.exports = Behavior({
     getTitle() {
       return wx.xrTitle ? `XR - ${wx.xrTitle}` : 'XR-FRAME官方示例';
     },
-    handleChange(e) {
+    handleARTrackerState({detail}) {
+      const {state, error} = detail;
       this.setData({
-        activeValues: e.detail.value,
+        arTrackerShow: true,
+        arTrackerState: wx.getXrFrameSystem().EARTrackerState[state],
+        arTrackerError: error
       });
-    },
+    }
   }
 })

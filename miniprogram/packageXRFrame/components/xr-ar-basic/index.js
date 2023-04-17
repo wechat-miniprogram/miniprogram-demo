@@ -23,7 +23,7 @@ Component({
     },
     handleAssetsLoaded: function({detail}) {
       console.log('assets loaded', detail.value);
-    //   this.setData({loaded: true});
+      // this.setData({loaded: true});
       this.scene.event.addOnce('touchstart', this.placeNode.bind(this));
     },
     handleARReady: function({detail}) {
@@ -33,7 +33,7 @@ Component({
       const {clientX, clientY} = event.touches[0];
       const {frameWidth: width, frameHeight: height} = this.scene;
 
-      if (clientY / height < 0.2 && clientX / width < 0.2) {
+      if (clientY / height > 0.8 && clientX / width < 0.2) {
         this.scene.getNodeById('setitem').visible = false;
         this.scene.ar.resetPlane();
       } else {
@@ -41,6 +41,6 @@ Component({
       }
 
       this.scene.event.addOnce('touchstart', this.placeNode.bind(this));
-    },
+    }
   }
 })

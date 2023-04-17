@@ -1,0 +1,27 @@
+<xr-scene ar-system="modes:Plane" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="gltf-item" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/just_a_girl/index.glb" />
+    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+  </xr-assets>
+  <xr-node>
+    <xr-ar-tracker mode="Plane">
+      <xr-gltf id="anchor" model="anchor"></xr-gltf>
+    </xr-ar-tracker>
+    <xr-node node-id="setitem" visible="false">
+      <xr-node id="preview-model">
+        <xr-node scale="0.005 0.005 0.005">
+          <xr-gltf id="setitem-gltf" model="gltf-item" never-cull/>
+        </xr-node>
+      </xr-node>
+    </xr-node>
+    <xr-camera
+      id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

@@ -9,7 +9,7 @@
     <xr-mesh node-id="mesh-sphere" position="2 -0.15 -1" scale="0.4 0.4 0.4" geometry="sphere" material="standard-mat" uniforms="u_baseColorFactor:1 1 1 1"></xr-mesh>
     <xr-mesh node-id="mesh-cylinder" position="-0.2 -0.2 -0.8" scale="0.5 0.4 0.5" geometry="cylinder" material="standard-mat" uniforms="u_baseColorFactor:1 1 1 1"></xr-mesh>
     <xr-mesh node-id="mesh-cube-far" position="3 -0.25 1" rotation="0 -30 0" scale="0.5 0.5 0.5" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:1 1 1 1"></xr-mesh>
-  <xr-camera
+    <xr-camera
       id="camera" node-id="camera" position="-2 1 0" clear-color="0 0 0 1"
       target="camera-target"
       camera-orbit-control=""

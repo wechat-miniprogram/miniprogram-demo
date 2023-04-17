@@ -26,10 +26,56 @@ Component({
       console.log('xr-scene', xrScene);
       const xrFrameSystem = wx.getXrFrameSystem()
 
-      const sizeChange = xrScene.getElementById("size-change");
-      sizeChange.getComponent(xrFrameSystem.Particle).addSizeGradient(0,0.1,0.1);
-      sizeChange.getComponent(xrFrameSystem.Particle).addSizeGradient(0.5,0.3,0.3);
-      sizeChange.getComponent(xrFrameSystem.Particle).addSizeGradient(1,0.6,0.6);
+      let tempSystem
+
+
+      // const el = this.scene.getElementById('lightray');
+      // el.event.add('stop', handleTest);
+
+      // const sizeChange = xrScene.getElementById("size-change");
+      // sizeChange.getComponent(xrFrameSystem.Particle).addSizeGradient(0,0.1,0.1);
+      // sizeChange.getComponent(xrFrameSystem.Particle).addSizeGradient(0.5,0.3,0.3);
+      // sizeChange.getComponent(xrFrameSystem.Particle).addSizeGradient(1,0.6,0.6);
+
+
+      const magicField = xrScene.getElementById("magicField");
+      tempSystem = magicField.getComponent(xrFrameSystem.Particle)
+      tempSystem.addSizeGradient(0,0.7);
+      tempSystem.addSizeGradient(0.5,1.0);
+      tempSystem.addColorGradient(0, xrFrameSystem.Vector4.createFromNumber(1,0.89,0.27,1));
+      tempSystem.addColorGradient(1, xrFrameSystem.Vector4.createFromNumber(1,0.64,0,1));
+      tempSystem.addAlphaGradient(0,0,0);
+      tempSystem.addAlphaGradient(0.5,1,1);
+      tempSystem.addAlphaGradient(1,0,0);
+
+      const portal = xrScene.getElementById("portal");
+      tempSystem = portal.getComponent(xrFrameSystem.Particle)
+      tempSystem.addSizeGradient(0,1,1);
+      tempSystem.addSizeGradient(0.5,0.8,0.8);
+      tempSystem.addSizeGradient(0.75,0.5,0.5);
+      tempSystem.addSizeGradient(0.9,0.2,0.2);
+      tempSystem.addSizeGradient(1,0,0);
+
+
+      //orb vfx
+      const orb = xrScene.getElementById("orb");
+      tempSystem = orb.getComponent(xrFrameSystem.Particle);
+      tempSystem.addAlphaGradient(0,0,0);
+      tempSystem.addAlphaGradient(0.5,1,1);
+      tempSystem.addAlphaGradient(1,0,0);
+      tempSystem.addSizeGradient(0,1,1);
+      tempSystem.addSizeGradient(1,0,0);
+
+      //orbline vfx
+      const orbLine = xrScene.getElementById("orbLine");
+      tempSystem = orbLine.getComponent(xrFrameSystem.Particle);
+      tempSystem.addColorGradient(0, xrFrameSystem.Vector4.createFromNumber(1,1,0,1));
+      tempSystem.addColorGradient(1, xrFrameSystem.Vector4.createFromNumber(1,0.68,0,1));
+      tempSystem.addAlphaGradient(0,0,0);
+      tempSystem.addAlphaGradient(0.5,1,1);
+      tempSystem.addAlphaGradient(1,0,0);
+      tempSystem.addSizeGradient(0,1,1);
+      tempSystem.addSizeGradient(1,0,0);
       
       const particle = xrScene.getElementById("human-face");
       // // 来自图片数据的二元数组content

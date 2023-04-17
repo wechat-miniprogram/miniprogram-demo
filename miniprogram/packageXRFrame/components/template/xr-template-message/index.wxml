@@ -1,0 +1,22 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+  </xr-assets>
+  <xr-node>
+    <xr-mesh node-id="floor-plane" position="0 -1 0" rotation="0 0 0" scale="10 1 10" geometry="plane"
+      uniforms="u_baseColorFactor:1 1 1 1" receive-shadow
+    ></xr-mesh>
+    <xr-mesh id="move-sphere" node-id="move-sphere"
+      position="0 0 0" scale="1 1 1" geometry="sphere"
+      uniforms="u_metallicRoughnessValues: 0 1"
+      cast-shadow
+    ></xr-mesh>
+    <xr-camera
+      id="camera" node-id="camera" position="0 5 10" clear-color="0.8 0.8 0.8 1"
+      target="move-sphere"
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="3" cast-shadow/>
+  </xr-node>
+</xr-scene>

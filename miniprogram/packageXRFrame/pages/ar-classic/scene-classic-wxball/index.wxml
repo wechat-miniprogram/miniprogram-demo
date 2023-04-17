@@ -1,0 +1,20 @@
+<xr-demo-viewer
+  title="微信球案例"
+  intro="扫描手握着的微信纪念球，会显示三维纪念球.点击三维纪念球会播放动画."
+  hint="默认扫描图片见官网开发文档\n组件 -> xr-frame -> 示例"
+
+>
+  <xr-classic-wxball
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+</xr-demo-viewer>

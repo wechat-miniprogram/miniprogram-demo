@@ -1,0 +1,29 @@
+<xr-demo-viewer
+  title="加载案例"
+  intro="点击按钮进行对应资源的加载与使用。（目前视频纹理属于beta状态，真机情况下，多张视频纹理不可以同时加载与渲染，但是可以取消一份后渲染另外一份）"
+  code=""
+  showBackBtn="{{showBackBtn}}"
+>
+  <xr-template-featherVideo
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    gltfListRaw="{{gltfList}}"
+    imageListRaw="{{imageList}}"
+    videoListRaw="{{videoList}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  /> 
+  <view class="xr-res-panel">
+    <view class="res-row">
+    </view>
+    <view class="res-row">
+      <view class="res-btn {{onFlags ? 'on': ''}}"
+        bindtap="tapResBtn"
+        data-index="0"
+        data-type="video"
+        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/paris.mp4"
+      >巴黎路边</view>
+    </view>
+  </view>
+</xr-demo-viewer>

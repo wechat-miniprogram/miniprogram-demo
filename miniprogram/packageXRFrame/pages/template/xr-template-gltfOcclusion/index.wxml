@@ -1,0 +1,12 @@
+<xr-demo-viewer
+  title="遮挡模型案例"
+  intro="使用模型做遮挡剔除，让该模型剔除其他物体"
+>
+  <xr-template-gltfOcclusion
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

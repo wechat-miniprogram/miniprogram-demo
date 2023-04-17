@@ -1,0 +1,19 @@
+.form-entry {
+  margin: 15px;
+}
+
+.radio-item {
+margin-right: 3%;
+}
+
+.form-entry-title {
+  margin-bottom: 10px;
+}
+
+.divider {
+width: 20%;
+height: 2px;
+background-color: rgb(230, 230, 230);
+/* margin-left: 15px; */
+margin: 0 auto 0 auto;
+}

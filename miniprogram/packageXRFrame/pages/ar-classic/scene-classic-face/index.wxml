@@ -1,0 +1,19 @@
+<xr-demo-viewer
+  title="扫描人脸穿戴"
+  intro="基于 人脸识别 的穿戴"
+  hint="要求基础库 v2.28.1 及以上，前置相机需要客户端 8.0.31 及以上"
+>
+  <xr-classic-face
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+</xr-demo-viewer>

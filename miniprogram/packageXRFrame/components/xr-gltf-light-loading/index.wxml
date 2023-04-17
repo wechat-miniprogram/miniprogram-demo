@@ -14,13 +14,11 @@
   </xr-node>
   <xr-node node-id="lights">
     <xr-light type="ambient" color="1 1 1" intensity="0.8" />
-    <xr-light
-      type="directional" rotation="120 -40 0" color="1 1 1" intensity="4"
-    />
+    <xr-light type="directional" rotation="120 -40 0" color="1 1 1" intensity="4" />
     <xr-light
       type="point" position="10 0 0" color="1 1 1" range="10" intensity="30"
       anim-keyframe="gltf-anim" anim-autoplay="clip:pointLight, speed:2"
-      />
+    />
     <xr-light
       type="spot" color="0.8 0.8 0.2" position="10 4 -0.3" range="20" intensity="100" rotation="16 90 0" inner-cone-angle="5" outer-cone-angle="24"
     />

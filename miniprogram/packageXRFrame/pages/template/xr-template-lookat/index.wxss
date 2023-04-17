@@ -1,0 +1,125 @@
+
+.xr-control {
+  position: absolute;
+  left: 50%;
+  width: 720rpx;
+  height: 200rpx;
+  margin-left: -360rpx;
+  margin-top: -220rpx;
+  text-align: center;
+}
+
+.control-item {
+  display: inline-block;
+  vertical-align: middle;
+  width: 160rpx;
+  margin: 0 10rpx;
+  height: 100%;
+  border-radius: 10rpx;
+  text-align: center;
+}
+
+.control-item.active .item-title {
+  color: #fff;
+  background-color: forestgreen;
+  border: 4rpx solid #fff;
+}
+
+
+.item-title {
+  font-size: 18rpx;
+  line-height: 60rpx;
+  border-radius: 10rpx;
+  border: 4rpx solid #000;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+
+.img-wrap {
+  display: inline-block;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50rpx;
+  margin: 10rpx 5rpx;
+  overflow: hidden;
+  border: 4rpx solid #fff;
+}
+
+.hint-img {
+  width: 100%;
+  height: 100%;
+}
+
+.hint-img.lh {
+  height: 110%;
+  padding-top: -5%;
+}
+
+.hint-img.lw {
+  width: 130%;
+  margin-left: -15%;
+}
+
+.marker-wrap {
+  position: absolute;
+  left: -50%;
+  top: 50%;
+  transition: left 0.1s, top 0.1s, width 0.1s, height 0.1s;
+}
+
+.marker-img-lt {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 34px;
+  height: 34px;
+}
+.marker-img-rt {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 34px;
+  height: 34px;
+  transform: scaleX(-1);
+}
+.marker-img-lb {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 34px;
+  height: 34px;
+  transform: scaleY(-1);
+}
+.marker-img-rb {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 34px;
+  height: 34px;
+  transform: scale(-1, -1);
+}
+
+
+.border-lt {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.border-rt {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: rotate(90deg);
+}
+.border-lb {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: rotate(270deg);
+}
+.border-rb {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: rotate(180deg);
+}

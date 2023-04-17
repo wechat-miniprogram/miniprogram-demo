@@ -1,0 +1,21 @@
+<xr-demo-viewer
+  title="扫描物体查看信息"
+  intro="基于 OSD 实现的扫描 广州塔 或 虎年公仔，识别成功后会在物体右上角加上信息提示"
+  hint="默认扫描图片见官网开发文档\n组件 -> xr-frame -> 示例"
+
+>
+  <xr-classic-osd
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    markerImg="{{markerImg}}"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+</xr-demo-viewer>

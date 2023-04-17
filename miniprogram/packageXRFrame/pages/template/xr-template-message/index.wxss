@@ -1,0 +1,43 @@
+.xr-info {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 200rpx;
+  height: 160rpx;
+  padding: 20rpx;
+  background-color: #000;
+  border-radius: 5px 0 0 5px;
+}
+.info-text {
+  font-size: 20rpx;
+  line-height: 30rpx;
+  padding: 0;
+  color: #fff;
+}
+.info-text.title {
+  font-size: 24rpx;
+  line-height: 40rpx;
+  font-weight: bold;
+}
+
+.xr-control {
+  position: absolute;
+  left: 20rpx;
+  width: 700rpx;
+  height: 80rpx;
+  margin-top: -100rpx;
+  text-align: left;
+}
+
+.xr-control button {
+  display: inline-block;
+  font-size: 24rpx;
+  background-color: #fff;
+  border-radius: 10rpx; 
+  width: 160rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0;
+  margin-right: 10rpx;
+  border: 1px solid #000;
+}

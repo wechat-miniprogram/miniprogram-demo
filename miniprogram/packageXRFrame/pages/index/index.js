@@ -48,13 +48,15 @@ Page({
       return;
     }
 
-    wx.navigateTo({
-      url: root + path + `?path=${path}`,
-      success: () => {
-      },
-      fail: () => {
-      },
-    });
+    if (path) {
+      wx.navigateTo({
+        url: root + path + `?path=${path}`,
+        success: () => {
+        },
+        fail: () => {
+        },
+      });
+    }
   },
   handleLastRecord: async function () {
     if (lastOpened) {

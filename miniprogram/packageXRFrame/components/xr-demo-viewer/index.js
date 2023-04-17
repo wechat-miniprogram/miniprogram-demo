@@ -24,6 +24,10 @@ Component({
       type: String,
       value: '',
     },
+    showBackBtn: {
+      type: Boolean,
+      value: false,
+    },
   },
   data: {
   },
@@ -32,5 +36,9 @@ Component({
       wx.xrTitle = this.data.title;
     }
   },
-  methods: {}
+  methods: {
+    onClickBack() {
+      wx.navigateBack()
+    },
+  }
 })

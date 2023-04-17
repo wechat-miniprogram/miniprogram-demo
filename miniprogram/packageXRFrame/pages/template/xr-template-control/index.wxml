@@ -1,0 +1,40 @@
+<xr-demo-viewer
+	title="第一人称控制器"
+	intro="左下角的虚拟摇杆区域进行操纵位移，右下角对摄像头进行位置重置，其它区域为影响旋转视角的区域"
+  hint="要求基础库 v2.30.3 及以上"
+	showBackBtn="{{true}}"
+>
+
+	<xr-template-control
+		disable-scroll
+		id="main-frame"
+		width="{{renderWidth}}"
+		height="{{renderHeight}}"
+    reset="{{reset}}"
+    transferData="{{transferData}}"
+		style="width:{{width}}px; height:{{height}}px; top:{{top}}px; left:{{left}}px; display:block;"
+	  bindinfoListener="handleInfoListener" 
+  />
+
+	<!-- 旋转区域 -->
+	<view class="rt-area"
+		style="height: {{height}}px"
+		catchtouchstart='touchRotateStart'
+		catchtouchmove='touchRotateMove'
+		bindtouchend='touchRotateEnd'>
+  </view>
+
+	<!-- 摇杆区域 -->
+  <view class="mv-area" 
+		style="top: {{height - 100}}px;"
+		catchtouchstart='touchStart'
+		catchtouchmove='touchMove'
+		bindtouchend='touchEnd'>
+		<image class="mv-bg" src="/assets/image/background.png" />
+		<image class="mv-handle" style="left:{{hLeft}}px; top:{{hTop}}px;" src="/assets/image/handle.png" />
+  </view>
+
+	<view class="reset-btn" style="top: {{height}}px;">
+		<button bindtap="reset">位置重置</button>
+	</view>
+</xr-demo-viewer>

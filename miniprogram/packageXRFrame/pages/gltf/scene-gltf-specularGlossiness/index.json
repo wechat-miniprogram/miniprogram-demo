@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+    "xr-gltf-specularGlossiness": "../../../components/xr-gltf-specularGlossiness/index"
+  },
+  "disableScroll": true
+}

@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="AR threeDof"
+  intro="threeDof案例，用于在不需要SLAM的场景，支持手持相机旋转，兼容性较好。"
+  hint="需要基础库版本 v2.30.4 及以上"
+>
+  <xr-ar-threeDof
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

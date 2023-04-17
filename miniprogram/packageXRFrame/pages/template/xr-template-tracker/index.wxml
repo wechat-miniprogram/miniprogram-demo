@@ -1,0 +1,57 @@
+<xr-demo-viewer
+  title="多Tracker案例"
+  intro="点击按钮，对应不同识别效果 Marker 的添加与删除。视频纹理加载过程会有白色透明层，加载完成后直接播放。视频目前属于beta阶段，存在加载失败超时的情况，为了避免目前版本的Crash问题，每次扫描会重新拉取视频。"
+  code=""
+  showBackBtn="{{showBackBtn}}"
+>
+  <view wx:if="{{dataReady}}">
+    <xr-template-tracker
+      disable-scroll
+      id="main-frame"
+      width="{{renderWidth}}"
+      height="{{renderHeight}}"
+      style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+      markerListRaw="{{markerList}}"
+      bindtrackerchange="handleTrackerChange"
+      bindtrackermove="handleTrackerMove"
+    />
+  </view>
+
+  <!-- Marker控制 -->
+  <view class="xr-control" style="top: {{height}}px;">
+    <view class="control-item {{useScan? 'active' : ''}}" bind:tap="tapScan">
+      <view class="item-title">扫描显示识别框</view>
+      <view class="img-wrap">
+        <image class="hint-img" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/wxball.jpg" />
+      </view>
+    </view>
+    <view class="control-item {{useGLTF? 'active' : ''}}" bind:tap="tapGLTF">
+      <view class="item-title">扫描显示glTF</view>
+      <view class="img-wrap">
+        <image class="hint-img" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/portalImage.jpg" />
+      </view>
+    </view>
+
+    <view class="control-item {{useVideo1? 'active' : ''}}" bind:tap="tapVideo1">
+      <view class="item-title">扫描显示视频1</view>
+      <view class="img-wrap">
+        <image class="hint-img" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/2dmarker-test.jpg" />
+      </view>
+    </view>
+    <view class="control-item {{useVideo2? 'active' : ''}}" bind:tap="tapVideo2">
+      <view class="item-title">扫描显示视频2</view>
+      <view class="img-wrap">
+        <image class="hint-img lh" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/osdmarker-test.jpg" />
+      </view>
+    </view>
+  </view>
+
+  <!-- scan 提示框 -->
+  <view class="marker-wrap" wx:if="{{showMarkerWrap}}" style="left: {{markerLeft}}%; top: {{markerTop}}%; width: {{markerWidth}}px; height: {{markerHeight}}px; margin-left: -{{markerWidth / 2}}px; margin-top: -{{markerHeight / 2}}px;">
+    <image class="marker-img-lt" src="/assets/image/ar-box-border.png"></image>
+    <image class="marker-img-lb" src="/assets/image/ar-box-border.png"></image>
+    <image class="marker-img-rt" src="/assets/image/ar-box-border.png"></image>
+    <image class="marker-img-rb" src="/assets/image/ar-box-border.png"></image>
+  </view>
+
+</xr-demo-viewer>

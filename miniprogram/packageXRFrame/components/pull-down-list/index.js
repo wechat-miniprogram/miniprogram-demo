@@ -13,7 +13,7 @@ Component({
             type: String,
             value: '',
         },
-        icon: {
+        tag: {
             type: String,
             value: '',
         },

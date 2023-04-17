@@ -9,7 +9,7 @@
       <xr-gltf id="wxball" node-id="mesh-gltf-wxball" position="0 -0.1 0" rotation="-45 30 0" scale="0.16 0.16 0.16" model="gltf-wxball"
         bind:gltf-loaded="handleGltfLoaded"
         bind:touch-shape="handleTouchWXball" sphere-shape="radius: 1.5"
-        anim-stop:="gltfAnimation: handleAnimationStop"
+        bind:anim-stop="handleAnimationStop"
       />
     </xr-ar-tracker>
     <xr-camera
