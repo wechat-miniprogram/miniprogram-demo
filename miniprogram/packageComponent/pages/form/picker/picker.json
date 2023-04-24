@@ -1,6 +1,7 @@
 {
     "navigationBarTitleText": "picker",
-    "renderer": "skyline",
+    "componentFramework": "glass-easel",
+  "renderer": "skyline",
     "disableScroll": true,
     "navigationStyle": "custom"
 }

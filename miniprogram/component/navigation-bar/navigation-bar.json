@@ -1,5 +1,7 @@
 {
   "component": true,
   "usingComponents": {},
-  "renderer": "skyline"
+  "componentFramework": "glass-easel",
+  "renderer": "skyline",
+  "addGlobalClass": true
 }
