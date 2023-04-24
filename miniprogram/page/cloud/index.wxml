@@ -8,7 +8,7 @@
     </view>
     <view class="index-bd">
       <view class="kind-list">
-        <block wx:for-items="{{list}}" wx:key="{{item.id}}">
+        <block wx:for-items="{{list}}" wx:key="id">
           <view class="kind-list-item">
             <view id="{{item.id}}" class="kind-list-item-hd {{item.open ? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
               <view class="kind-list-text">{{item.name}}</view>
@@ -17,7 +17,7 @@
             </view>
             <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
               <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
-                <block wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="*item">
+                <block wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="url">
                   <view>
                     <navigator url="../../packageCloud/pages/{{item.id}}/{{page.url}}" class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page.zh}}</navigator>
                     <view class="navigator-arrow"></view>
