@@ -1,9 +1,0 @@
-{
-  "usingComponents": {
-    "album": "../../components/album/index",
-    "share-element-empty": "../../components/share-element-empty/index"
-  },
-  "disableScroll": true,
-  "renderer": "skyline",
-  "navigationStyle": "custom"
-}

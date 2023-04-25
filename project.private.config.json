@@ -37,6 +37,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "packageSkyline/pages/scroll-view/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
