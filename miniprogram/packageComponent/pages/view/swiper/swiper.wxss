@@ -16,7 +16,7 @@ button:last-child{
   margin-top: 30px;
   position: relative;
 }
-.info{
+.swiper-info{
   position: absolute;
   right: 0;
   color: #353535;

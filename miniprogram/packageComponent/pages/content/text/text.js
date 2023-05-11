@@ -26,7 +26,8 @@ Page({
     theme: 'light',
     text: '',
     canAdd: true,
-    canRemove: false
+    canRemove: false,
+    extraLine: []
   },
   extraLine: [],
 
@@ -34,8 +35,10 @@ Page({
     this.extraLine.push(texts[this.extraLine.length % 12])
     this.setData({
       text: this.extraLine.join('\n'),
+      // text: this.extraLine.join('&#10;'),
       canAdd: this.extraLine.length < 12,
-      canRemove: this.extraLine.length > 0
+      canRemove: this.extraLine.length > 0,
+      extraLine: this.extraLine
     })
     setTimeout(() => {
       this.setData({
@@ -50,6 +53,7 @@ Page({
         text: this.extraLine.join('\n'),
         canAdd: this.extraLine.length < 12,
         canRemove: this.extraLine.length > 0,
+        extraLine: this.extraLine
       })
     }
     setTimeout(() => {
