@@ -1,4 +1,5 @@
 import {CurveAnimation, Curves} from './common'
+import { isOfficialSkyline } from './util'
 
 const ScaleTransitionRouteBuilder = ({
   primaryAnimation,
@@ -10,6 +11,8 @@ const ScaleTransitionRouteBuilder = ({
   const {windowWidth} = getApp().globalData
   const {screenHeight} = getApp().globalData
   console.info('ScaleTransitionRouteBuilder ', windowWidth)
+
+  const isSupportOverflow = isOfficialSkyline()
 
   const _curvePrimaryAnimation = CurveAnimation({
     animation: primaryAnimation,
@@ -57,11 +60,14 @@ const ScaleTransitionRouteBuilder = ({
     const translateY = screenHeight * (top - 0.5 * scaleRatio) * t
     const scale = 1 - scaleRatio * t
     const radius = 12 * t
-    return {
+
+    const style = {
       borderRadius: `${radius}px`,
-			overflow: `${radius > 0 ? 'hidden' : 'visible'}`,
+      overflow: radius > 0 ? 'hidden' : 'visible',
       transform: `translateY(${translateY}px) scale(${scale})`,
     }
+    if (!isSupportOverflow) delete style.overflow
+    return style
   }
 
   return {
