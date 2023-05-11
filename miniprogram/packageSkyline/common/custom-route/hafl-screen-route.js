@@ -35,6 +35,7 @@ const HalfScreenDialogRouteBuilder = ({
     return {
       marginTop: `${marginTop}px`,
       borderRadius: '10px',
+      overflow: 'hidden',
       height: `${selfHeight}px`,
       transform: `translateY(${translateY}px)`,
     }

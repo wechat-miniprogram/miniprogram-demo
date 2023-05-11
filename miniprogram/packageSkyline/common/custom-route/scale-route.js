@@ -20,12 +20,12 @@ const ScaleTransitionRouteBuilder = ({
 
   const handlePrimaryAnimation = () => {
     'worklet'
-
     /**
      * 1. 手势拖动时采用原始值
      * 2. 页面进入时采用 curve 曲线生成的值
      * 3. 页面返回时采用 reverseCurve 生成的值
      */
+
     let t = primaryAnimation.value
 
     if (!userGestureInProgress.value) {
@@ -46,7 +46,7 @@ const ScaleTransitionRouteBuilder = ({
 
   const handleSecondaryAnimation = () => {
     'worklet'
-
+    
     let t = secondaryAnimation.value
     if (!userGestureInProgress.value) {
       t = _curveSecondaryAnimation.value
@@ -59,6 +59,7 @@ const ScaleTransitionRouteBuilder = ({
     const radius = 12 * t
     return {
       borderRadius: `${radius}px`,
+			overflow: `${radius > 0 ? 'hidden' : 'visible'}`,
       transform: `translateY(${translateY}px) scale(${scale})`,
     }
   }
