@@ -6,6 +6,7 @@ enum enARModelStatus
     ARModel_Status_3d_Finished = 3;
     ARModel_Status_Object_Finished = 4;
     ARModel_Status_Marker_Finished = 5;
+    ARModel_Status_Fail = 100;   
 }
 
 enum enARAlgorithmType
@@ -27,6 +28,7 @@ message ModelCos
     {
         optional enARModelType model_type = 1;
         optional string model_cosid = 2;
+        optional string errmsg = 3;
     }
     repeated ModelCosId model_list = 1;
 }
@@ -59,6 +61,7 @@ message GenerateARModelResp
     optional string url = 1;
     optional string host = 2;
     optional string cosid = 3;
+    optional string errmsg = 4;
 }
 
 message GetARModelListReq
@@ -99,4 +102,5 @@ message GetARModelResp
     optional ARModelData model_data = 1;
     optional string url = 2;
     optional string host = 3;
+    optional string errMsg = 4;
 }

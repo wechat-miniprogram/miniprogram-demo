@@ -1,0 +1,43 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="gltf-door" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/door.glb" /> 
+    <xr-asset-load type="gltf" asset-id="gltf-twa" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/twa.glb" /> 
+
+  </xr-assets>
+  <xr-env env-data="xr-frame-team-workspace-day2" />
+  <xr-node>
+    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
+
+    <!-- 设置为遮挡的模型，需设置模版剔除状态 -->
+    <!-- 参数逻辑：
+      1. 该实现流程核心为 模版测试，首先 stencilTestOn 开启模版测试
+      2. stencilComp 设为 7(NEVER)，相当于永远不通过模板测试，会丢弃这个模型的渲染片段。
+      3. stencilPass 设为 1(KEEP)，stencilFail 设为 2(REPLACE)，由于 stencilComp 为 NEVER，一定会走到失败，执行 stencilFail 的行为，将 stencilRef (案例设定为 1) 写入深度缓冲。
+      4. 设置 renderQueue 为 1，保证遮挡物体优先渲染，保证遮挡所需 ref ，在后续模型渲染前，已经写入模版缓存。
+    -->
+    <xr-gltf id="occlusion" node-id="occlusion" position="0 0 0" rotation="0 0 0" scale="0.01 0.01 0.01" model="gltf-door"
+      states="renderQueue: 1, stencilTestOn: true, stencilComp: 7, stencilRef: 1, stencilReadMask: 1, stencilWriteMask: 1, stencilPass: 1, stencilFail: 2"
+    ></xr-gltf>
+
+    <!-- 需要被遮挡显示的模型，需保证渲染状态设置为合理，进行模版测试被剔除 -->
+    <!-- 参数逻辑：
+      1. 该实现流程核心为 模版测试，首先 stencilTestOn 开启模版测试
+      2. stencilComp 设为 6(NOTEQUAL)，相当于只有模版缓冲的 Ref 匹配时，才保留实际的渲染片段。
+      3. stencilRef 设为 1，保证与遮挡物体写入的 ref 值一致；stencilReadMask 为读取 ref 值的数字掩码，一般存在多个 ref 的情况会使用这个掩码。
+      4. 设置 renderQueue 为 10 (相同数字会通过远近确定顺序)，保证被遮挡物体后于遮挡物体渲染，保证已有模版缓存值。
+    -->
+    <xr-gltf node-id="renderItem" position="0 0 0" rotation="0 0 0" scale="1.6 1.6 1.6" model="gltf-twa"
+      states="renderQueue: 10, stencilTestOn: true, stencilComp: 6, stencilRef: 1, stencilReadMask: 1"
+    ></xr-gltf>
+
+    <xr-camera
+      id="camera" node-id="camera" position="6 0 0" clear-color="0.925 0.925 0.925 1"
+      target="camera-target" background="skybox"
+      camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.6" />
+    <xr-light type="directional" rotation="20 120 0" color="1 1 1" intensity="2"/>
+  </xr-node>
+</xr-scene>

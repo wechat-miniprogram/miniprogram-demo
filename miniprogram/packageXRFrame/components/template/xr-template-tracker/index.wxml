@@ -1,0 +1,51 @@
+<xr-scene id="xr-scene" ar-system="modes:Marker" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <xr-assets >
+    <xr-asset-material asset-id="video-bg-mat" effect="simple" uniforms="u_baseColorFactor: 0.0 0.0 0.0 1" />
+    <xr-asset-material asset-id="loading-mat" effect="simple" uniforms="u_baseColorFactor: 1.0 1.0 1.0 0.8" />
+  </xr-assets>
+  <xr-node wx:if="{{arReady}}">
+    <xr-ar-tracker
+      mode="Marker"
+      wx:for="{{markerList}}" wx:for-item="markerItem"
+      id="marker-{{markerItem.id}}"
+      src="{{markerItem.markerImage}}" bind:ar-tracker-switch="handleTrackerSwitch"
+    >
+      <!-- 扫描情况 --> 
+      <xr-node position="0.5 0 0" id="normal-right-{{markerItem.id}}" wx:if="{{markerItem.renderType === 'scan'}}"></xr-node>
+      <!-- gltf情况 -->
+      <xr-node wx:if="{{markerItem.renderType === 'gltf' && gltfLoaded}}">
+        <xr-gltf node-id="mesh-gltf-fiesta_tea" position="0 -1.6 1" rotation="-90 0 0" scale="0.6 0.6 0.6" model="gltf-{{markerItem.id}}"
+          states="stencilTestOn: true, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
+        ></xr-gltf>
+        <xr-mesh node-id="plane-cull" position="0 0 0" rotation="0 0 0" scale="1 0.1 0.9" geometry="plane"
+          states="renderQueue: 1, stencilTestOn: true, stencilComp: 7, stencilRef: 1, stencilReadMask: 1, stencilWriteMask: 1, stencilPass: 1, stencilFail: 2, stencilZFail: 2"
+        ></xr-mesh>
+      </xr-node>
+      <!-- 视频情况 -->
+      <xr-node wx:if="{{markerItem.renderType === 'video'}}">
+        <xr-node wx:if="{{videoLoaded}}">
+          <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="video-bg-mat"
+            states="cullOn: false"
+          />
+          <xr-mesh position="0 0.01 0" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="video-mat-{{markerItem.id}}" />
+        </xr-node>
+        <xr-node wx:else>
+          <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="loading-mat"
+            states="cullOn: false, alphaMode: BLEND,renderQueue: 2501"
+          />
+        </xr-node>
+      </xr-node>
+    </xr-ar-tracker>
+    <xr-camera
+      id="camera" node-id="camera" position="0 0 4" clear-color="0.925 0.925 0.925 1"
+      background="ar"
+      near="0.1"
+      far="2000"
+      is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

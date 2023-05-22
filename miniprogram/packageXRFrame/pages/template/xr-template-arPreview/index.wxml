@@ -1,0 +1,14 @@
+<xr-demo-viewer
+  title="模型摆放与手势控制"
+  intro="点击屏幕摆放，然后单指拖动屏幕进行旋转，双指拖动进行放大缩小"
+  code=""
+  showBackBtn="{{showBackBtn}}"
+>
+  <xr-template-arPreview
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

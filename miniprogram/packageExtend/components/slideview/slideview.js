@@ -144,9 +144,9 @@ module.exports =
           updateRight() {
             // 获取右侧滑动显示区域的宽度
             const data = this.data
-            const query = wx.createSelectorQuery().in(this)
+            const query = this.createSelectorQuery()
             query.select('.left').boundingClientRect(res => {
-              const btnQuery = wx.createSelectorQuery().in(this)
+              const btnQuery = this.createSelectorQuery()
               btnQuery.selectAll('.btn').boundingClientRect(rects => {
                 this.setData({
                   size: {

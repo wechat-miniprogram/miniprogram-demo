@@ -1,0 +1,28 @@
+<xr-demo-viewer
+  title="小程序通信模版"
+  intro="通过小程序按钮事件，传递速度变量到 xr-Frame 控制小球移动，并将小球状态同步到小程序侧显示。（工具存在同层渲染问题，请于真机体验）"
+  code="{{}}"
+>
+  <xr-template-message
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    messageData="{{messageData}}"
+    bindinfoListener="handleInfoListener"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+  <view class="xr-info">
+    <view class="info-text title">监听列表</view>
+    <view class="info-text">小球速度:</view>
+    <view class="info-text">X: {{speedX}}  Z: {{speedZ}}</view>
+    <view class="info-text">小球位置:</view>
+    <view class="info-text">X: {{posX}}  Z: {{posZ}}</view>
+  </view>
+  <view class="xr-control" style="top: {{height}}px;">
+    <button bindtap="tapPlusX">X轴加速</button>
+    <button bindtap="tapSubX">X轴减速</button>
+    <button bindtap="tapPlusZ">Z轴加速</button>
+    <button bindtap="tapSubZ">Z轴减速</button>
+  </view>
+</xr-demo-viewer>

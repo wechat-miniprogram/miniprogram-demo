@@ -1,0 +1,12 @@
+<xr-demo-viewer
+  title="环境数据案例"
+  intro="案例包含四个基础小球，分别为光滑金属与粗糙非金属。分别为，对应全局环境信息的两个反光小球，与定制局部环境数据的两个发光小球"
+>
+  <xr-basic-envData
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

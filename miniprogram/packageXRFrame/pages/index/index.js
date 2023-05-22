@@ -39,6 +39,15 @@ Page({
     let root = this.data.root;
     let { name, path } = e.detail.item;
 
+    if (!path) {
+      return;
+    }
+
+    if (path === '/pages/scene-last-record/index') {
+      this.handleLastRecord();
+      return;
+    }
+
     if (path) {
       wx.navigateTo({
         url: root + path + `?path=${path}`,

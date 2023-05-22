@@ -1,0 +1,79 @@
+.xr-info {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 300rpx;
+  height: 100rpx;
+  padding: 20rpx;
+  background-color: #000;
+  border-radius: 5px 0 0 5px;
+}
+.info-text {
+  font-size: 20rpx;
+  line-height: 30rpx;
+  padding: 0;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.info-text.title {
+  font-size: 24rpx;
+  line-height: 40rpx;
+  font-weight: bold;
+}
+
+.info-process {
+  position: relative;
+  margin-top: 10rpx;
+  background-color: #fff;
+  height: 16rpx;
+  border-radius: 5rpx;
+}
+
+.info-process .info-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0%;
+  height: 100%;
+  background-color: green;
+  border-radius: 5rpx;
+}
+
+.xr-res-panel {
+  margin: 10rpx 20rpx;
+}
+
+.res-row {
+  padding: 10rpx;
+  vertical-align: middle;
+  text-align: center;
+}
+.res-name, .res-btn {
+  display: inline-block;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
+}
+
+.res-name {
+  font-size: 22rpx;
+  background-color: #000;
+  padding: 0 20rpx;
+  line-height: 60rpx;
+  color: #fff;
+}
+
+.res-btn {
+  font-size: 26rpx;
+  background-color: #fff;
+  padding: 0 30rpx;
+  line-height: 70rpx;
+  border: 1px solid #000;
+}
+
+.res-btn.on {
+  background-color: forestgreen;
+  color: #fff;
+  transition: all 0.2s;
+}

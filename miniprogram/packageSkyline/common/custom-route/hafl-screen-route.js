@@ -1,4 +1,5 @@
 import {CurveAnimation, Curves} from './common'
+import { isOfficialSkyline } from './util'
 
 const HalfScreenDialogRouteBuilder = ({
   primaryAnimation,
@@ -7,6 +8,8 @@ const HalfScreenDialogRouteBuilder = ({
 }) => {
   const {screenHeight} = getApp().globalData
   console.info('HalfScreenDialogRouteBuilder ', screenHeight)
+
+  const isSupportOverflow = isOfficialSkyline()
 
   const _curvePrimaryAnimation = CurveAnimation({
     animation: primaryAnimation,
@@ -32,12 +35,16 @@ const HalfScreenDialogRouteBuilder = ({
 
     const marginTop = top * screenHeight
     const translateY = selfHeight * (1 - t)
-    return {
+
+    const style = {
       marginTop: `${marginTop}px`,
       borderRadius: '10px',
+      overflow: 'hidden',
       height: `${selfHeight}px`,
       transform: `translateY(${translateY}px)`,
     }
+    if (!isSupportOverflow) delete style.overflow
+    return style
   }
 
   return {

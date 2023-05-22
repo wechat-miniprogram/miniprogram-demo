@@ -1,0 +1,12 @@
+<xr-demo-viewer
+  title="glTF更改"
+  intro="加载 glTF 模型，调整 glTF 的材质的贴图"
+>
+  <xr-template-gltfEdit
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

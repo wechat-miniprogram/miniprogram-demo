@@ -130,34 +130,37 @@ export default function getBehavior() {
                     })
                     session.on('updateAnchors', anchors => {
                         this.data.textContentList = []
-
-                        // 摄像头实时检测人脸的时候 updateAnchors 会在每帧触发，所以性能要求更高，用 gl 画
+                        console.log(anchors)
                         this.data.textContentList = this.data.textContentList.concat(anchors.map(anchor => {
-                                let lt = anchor.box[0]
-                                let lr = anchor.box[1]
-                                let rb = anchor.box[2]
-                                let lb = anchor.box[3]
-                                let width = lr.x - lt.x
-                                let height = lb.y - lt.y
-                                let avgX =  (lt.x +  lr.x +  rb.x +  lb.x) / 4;
-                                let avgY =  (lt.y +  lr.y +  rb.y +  lb.y) / 4; 
-                                anchor.centerX = avgX * this.data.faceImgWidth;
-                                anchor.centerY = avgY * this.data.faceImgHeight;
-                            return {
+                               let result = {}
+                               result = {
                                 text: anchor.text,
                                 subtext: anchor.subtext,
                                 box: anchor.box,
                                 centerX: anchor.centerX,
                                 centerY: anchor.centerY,
-                                origin: {
-                                    x: lt.x,
-                                    y: lt.y,
-                                },
-                                size: {
-                                    width: width,
-                                    height: height,
                                 }
-                            };
+                               if(anchor.box){
+                                    let lt = anchor.box[0]
+                                    let lr = anchor.box[1]
+                                    let rb = anchor.box[2]
+                                    let lb = anchor.box[3]
+                                    let width = lr.x - lt.x
+                                    let height = lb.y - lt.y
+                                    let avgX =  (lt.x +  lr.x +  rb.x +  lb.x) / 4;
+                                    let avgY =  (lt.y +  lr.y +  rb.y +  lb.y) / 4; 
+                                    anchor.centerX = avgX * this.data.faceImgWidth;
+                                    anchor.centerY = avgY * this.data.faceImgHeight;
+                                    result.origin = {
+                                        x: lt.x,
+                                        y: lt.y,
+                                    }
+                                    result.size = {
+                                        width: width,
+                                        height: height,
+                                    }
+                                }
+                            return result
                         }))
 
                         var wholeText = undefined

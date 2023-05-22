@@ -7,7 +7,8 @@
         "ARModel_Status_Sparse_Finished": 2,
         "ARModel_Status_3d_Finished": 3,
         "ARModel_Status_Object_Finished": 4,
-        "ARModel_Status_Marker_Finished": 5
+        "ARModel_Status_Marker_Finished": 5,
+        "ARModel_Status_Fail": 100
       }
     },
     "enARAlgorithmType": {
@@ -41,6 +42,10 @@
             "modelCosid": {
               "type": "string",
               "id": 2
+            },
+            "errmsg": {
+              "type": "string",
+              "id": 3
             }
           }
         }
@@ -118,6 +123,10 @@
         "cosid": {
           "type": "string",
           "id": 3
+        },
+        "errmsg": {
+          "type": "string",
+          "id": 4
         }
       }
     },
@@ -221,6 +230,10 @@
         "host": {
           "type": "string",
           "id": 3
+        },
+        "errMsg": {
+          "type": "string",
+          "id": 4
         }
       }
     }

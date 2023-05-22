@@ -1,0 +1,42 @@
+<xr-demo-viewer
+  title="透明画布"
+  intro="使用透明画布能力，透出背景，背景的waifu是CSS写的。"
+  code="{{xmlCode}}"
+>
+  <xr-basic-alpha
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;background-image: url(https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/waifu.png);background-size: cover;background-position-x: center;"
+    clearColor="{{clearR / 100}} {{clearG / 100}} {{clearB / 100}} {{clearA / 100}}"
+    cubeAlpha="{{cubeAlpha / 100}}"
+    sphereAlpha="{{sphereAlpha / 100}}"
+  />
+
+  <view style="margin-top: 1rem;"></view>
+  <view class="form-entry">
+    <view class="form-entry-title">清屏颜色（红色）</view>
+    <slider bindchange="changeClearR" value="{{clearR}}"></slider>
+  </view>
+  <view class="form-entry">
+    <view class="form-entry-title">清屏颜色（绿色）</view>
+    <slider bindchange="changeClearG" value="{{clearG}}"></slider>
+  </view>
+  <view class="form-entry">
+    <view class="form-entry-title">清屏颜色（蓝色）</view>
+    <slider bindchange="changeClearB" value="{{clearB}}"></slider>
+  </view>
+  <view class="form-entry">
+    <view class="form-entry-title">清屏颜色（透明度）</view>
+    <slider bindchange="changeClearA" value="{{clearA}}"></slider>
+  </view>
+  <view class="form-entry">
+    <view class="form-entry-title">立方体透明度</view>
+    <slider bindchange="changeCubeAlpha" value="{{cubeAlpha}}"></slider>
+  </view>
+  <view class="form-entry">
+    <view class="form-entry-title">球透明度</view>
+    <slider bindchange="changeSphereAlpha" value="{{sphereAlpha}}"></slider>
+  </view>
+</xr-demo-viewer>

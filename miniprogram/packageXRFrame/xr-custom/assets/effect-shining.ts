@@ -65,7 +65,7 @@ void main()
   `,
     `#version 100
 #define RECIPROCAL_PI 0.3183098861837907
-precision mediump float;
+precision highp float;
 precision highp int;
 
 #ifdef WX_USE_NORMAL

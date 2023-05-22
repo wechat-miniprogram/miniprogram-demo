@@ -9,7 +9,10 @@
   <view class="page-body">
     <view class="page-section page-section-spacing">
       <view class="text-box" scroll-y="true" scroll-top="{{scrollTop}}">
-        <text>{{text}}</text>
+        <block wx:for="{{extraLine}}">
+          <text>{{item}}</text>
+        </block>
+        <!-- <text>{{text}}</text> -->
       </view>
       <button disabled="{{!canAdd}}" bindtap="add">add line</button>
       <button disabled="{{!canRemove}}" bindtap="remove">remove line</button>

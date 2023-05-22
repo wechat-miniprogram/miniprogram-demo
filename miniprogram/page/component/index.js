@@ -76,31 +76,6 @@ Page({
         open: false,
         pages: ['aria-component']
       }
-      // 迁移到交互动画tab（第二个）
-      // , {
-      //   id: 'Skyline',
-      //   name: 'Skyline 渲染引擎',
-      //   open: false,
-      //   pages: [
-      //     { url: 'worklet/animation/index', name: 'worklet 动画'},
-      //     { url: 'worklet/gesture/index', name: '手势系统'},
-      //     { url: 'share-element/list/index', name: '共享元素动画'},
-      //     { url: 'worklet/bottom-sheet/index', name: '手势协商'},
-      //     { key: 'custom-route', url: 'half-page/scale-page/index', name: '自定义路由' },
-      //     { url: 'address-book/index', name: '类通讯录'},
-      //     { url: 'half-screen/index', name: '半屏'},
-      //     { url: 'tabs/index', name: 'tabs'},
-      //     { key: 'custom-route', url: 'album/index', name: '相册'},
-      //     { key: 'custom-route', url: 'custom-route/index', name: '星巴克自定义路由'},
-      //   ]
-      // }, {
-      //   id: 'XRFrame',
-      //   name: 'XRFrame 高性能XR解决方案',
-      //   open: false,
-      //   pages: [
-      //     { url: 'pages/index/index', name: '总览'}
-      //   ]
-      // }
     ],
     theme: 'light'
   },

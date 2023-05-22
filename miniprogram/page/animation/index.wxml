@@ -12,8 +12,6 @@
           <view class="kind-list-item">
             <view id="{{item.id}}" class="kind-list-item-hd {{item.open ? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
               <view class="kind-list-text">{{item.name}}</view>
-              <image wx:if="{{theme === 'dark'}}" class="kind-list-img" src="resources/kind/{{item.id}}_dark.png"></image>
-              <image wx:else class="kind-list-img" src="resources/kind/{{item.id}}.png"></image>
             </view>
             <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
               <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
@@ -28,8 +26,13 @@
                     <view class="navigator-arrow"></view>
                   </view>
                   <!-- skyline -->
-                  <view wx:elif="{{item.id == 'SkylineBase' || item.id == 'SkylineDemo'}}">
+                  <view wx:elif="{{item.id == 'SkylineBase'}}">
                     <navigator url="/packageSkyline/pages/{{page.url}}" class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page.name}}</navigator>
+                    <view class="navigator-arrow"></view>
+                  </view>
+                  <!-- 暂时混合，后面会都迁移到 skylineExamples -->
+                  <view wx:elif="{{item.id == 'SkylineDemo'}}">
+                    <navigator url="{{page.url}}" class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page.name}}</navigator>
                     <view class="navigator-arrow"></view>
                   </view>
                   <!-- XRFrame -->

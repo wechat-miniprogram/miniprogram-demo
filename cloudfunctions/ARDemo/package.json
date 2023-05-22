@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tencent/wx-server-sdk-wxg-service": "^0.7.0",
     "wx-server-sdk": "^2.6.3"
   },
   "devDependencies": {

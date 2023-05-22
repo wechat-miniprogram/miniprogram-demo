@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+    "xr-ar-2dmarker": "../../../components/xr-ar-2dmarker/index"
+  },
+  "disableScroll": true
+}

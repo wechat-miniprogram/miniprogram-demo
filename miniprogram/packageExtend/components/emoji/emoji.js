@@ -387,7 +387,6 @@ module.exports =
       })
       Component({
         options: {
-          styleIsolation: 'page-shared',
           addGlobalClass: true,
           pureDataPattern: /^_/
         },

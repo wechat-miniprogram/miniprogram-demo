@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="AR 相机渲染案例"
+  intro="AR相机与glTF一同渲染的基础案例"
+  code="{{xmlCode}}"
+>
+  <xr-ar-camera
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

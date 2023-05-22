@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="KHR_materials_pbrSpecularGlossiness"
+  intro="glTF 高光光泽度扩展。model From SketchFab @Willy Decarpentrie"
+>
+  <xr-gltf-specularGlossiness
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    a="123"
+  />
+</xr-demo-viewer>

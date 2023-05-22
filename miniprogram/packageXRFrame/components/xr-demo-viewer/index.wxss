@@ -1,3 +1,10 @@
+.demo-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
 .demo-viewer {
   position: absolute;
   left: 0;
@@ -72,7 +79,8 @@
 }
 
 .intro-title {
-  font-size: 36rpx;
+  font-size: 30rpx;
+  font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -88,4 +96,32 @@
   background: none;
   font-size: 28rpx;
   color: #ff4d00;
+}
+
+.back-btn-wrap {
+  position: absolute;
+  left: 30rpx;
+  top: 100rpx;
+  width: 90rpx;
+  height: 80rpx;
+}
+.back-line-t {
+  position: absolute;
+  left: 20rpx;
+  top: 15rpx;
+  width: 30rpx;
+  height: 6rpx;
+  background-color: #000;
+  transform: rotate(-45deg);
+  border-radius: 5rpx;
+}
+.back-line-b {
+  position: absolute;
+  left: 20rpx;
+  top: 32rpx;
+  width: 30rpx;
+  height: 6rpx;
+  background-color: #000;
+  transform: rotate(45deg);
+  border-radius: 5rpx;
 }

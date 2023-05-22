@@ -12,6 +12,7 @@
   padding-bottom: 80rpx;
 }
 .slogen-wrap {
+  padding-top: 100rpx;
   padding-left: 16rpx;
   padding-right: 16rpx;
   margin-bottom: 48rpx;

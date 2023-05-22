@@ -16,6 +16,27 @@
   line-height: 48rpx;
   color: #333;
 }
+.pullDownList .tag {
+  width: 100rpx;
+  text-align: center;
+  border-radius: 5rpx;
+  font-size: 26rpx;
+}
+
+.pullDownList .tag.type-func {
+  color: #fff;
+  background-color: #29bf12;
+}
+
+.pullDownList .tag.type-template {
+  color: #fff;
+  background-color: #ff9914;
+}
+
+.pullDownList .tag.type-case {
+  color: #fff;
+  background-color: #08bdbd;
+}
 .pullDownList .name,
 .pullDownList .icon {
   transition: opacity 0.3s;
@@ -41,7 +62,7 @@
   align-items: center;
   margin-left: 32rpx;
   margin-right: 32rpx;
-  font-size: 32rpx;
+  font-size: 28rpx;
   opacity: 0.9;
 }
 .pullDownList .childBox .child:last-of-type {

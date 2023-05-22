@@ -1,0 +1,19 @@
+<xr-demo-viewer
+  title="传送门效果案例"
+  intro="基于 平面识别与模版剔除 实现的基本传送门效果案例."
+  hint="进入后等待资源加载完成，然后按照弹出提示操作"
+>
+  <xr-classic-portal
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+</xr-demo-viewer>

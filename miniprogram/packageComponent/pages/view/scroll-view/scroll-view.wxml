@@ -101,7 +101,7 @@
 </scroll-view>
 
 
-<wxs module="refresh">
+<wxs module="refresh"> // 先不切 glass-easel
 
 module.exports = {
   onPulling: function(evt, instance) {

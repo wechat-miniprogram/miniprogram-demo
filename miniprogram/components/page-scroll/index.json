@@ -1,5 +1,6 @@
 {
   "component": true,
   "usingComponents": {},
+  "componentFramework": "glass-easel",
   "renderer": "skyline"
 }

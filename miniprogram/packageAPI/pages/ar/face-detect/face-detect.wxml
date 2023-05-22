@@ -9,6 +9,4 @@
         <button type="primary" bindtap="switchCamera" data-value="0" disabled="{{buttonDisable}}">切换为后置摄像头</button>
     </view>
   </view>
-
-
 </view>

@@ -1,7 +1,0 @@
-<!--packageSkyline/pages/custom-route/detail.wxml-->
-<mp-navigation-bar title="自定义路由" back="{{true}}"></mp-navigation-bar>
-<share-element key="portrait" transitionOnGesture>
-  <view class="big-head-image">
-    <image src="https://res.wx.qq.com/op_res/M7QQWUgrgr8RNpASEwylCY36qBcIVKn69RZTtidzxyYz05MJXHAJbWsnitiyJdB14Qjme0i2904Mprw4Xn-HFw"></image>
-  </view>
-</share-element>

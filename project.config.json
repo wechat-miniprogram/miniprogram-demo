@@ -42,7 +42,8 @@
     "minifyWXML": true,
     "lazyloadPlaceholderEnable": false,
     "useStaticServer": true,
-    "localPlugins": false
+    "localPlugins": false,
+    "condition": false
   },
   "compileType": "miniprogram",
   "simulatorType": "wechat",

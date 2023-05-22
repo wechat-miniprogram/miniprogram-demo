@@ -1,0 +1,26 @@
+<xr-scene id="xr-scene" bind:ready="handleReady" bind:tick="handleTick">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+  </xr-assets>
+  <xr-env env-data="xr-frame-team-workspace-day"/>
+  
+  <xr-node>
+    <xr-mesh node-id="mesh-plane" position="0 -0.02 -4" rotation="0 0 0" scale="5 1 5" geometry="plane" material="standard-mat" uniforms="u_baseColorFactor:0.48 0.78 0.64 1" receive-shadow></xr-mesh>
+    <xr-mesh id="cube" node-id="mesh-cube" position="-1 0.5 -3.5" scale="1 1 1" rotation="0 45 0" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:0.298 0.764 0.85 1" cast-shadow></xr-mesh>
+    <xr-mesh node-id="mesh-cylinder" position="1 0.7 -3.5" scale="1 0.7 1" geometry="cylinder" material="standard-mat" uniforms="u_baseColorFactor:1 0.776 0.364 1" cast-shadow></xr-mesh>
+    <xr-mesh node-id="mesh-sphere" position="0 1.25 -5" scale="1.25 1.25 1.25" geometry="sphere" material="standard-mat" uniforms="u_baseColorFactor:0.937 0.176 0.368 1" cast-shadow></xr-mesh>
+
+    <xr-node id="player" node-id="player" position="0 1.6 1" rotation="0 180 0">
+      <xr-camera
+        id="camera" node-id="camera"
+        position="0 0 0" rotation="0 0 0"
+        clear-color="0.925 0.925 0.925 1"
+        background="skybox"
+      ></xr-camera>
+    </xr-node>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="3" cast-shadow />
+  </xr-node>
+</xr-scene>

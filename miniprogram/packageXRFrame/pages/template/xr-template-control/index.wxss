@@ -1,0 +1,36 @@
+.rt-area{
+  left:0;
+  top:0;
+  width: 100%;
+  position:absolute;
+}
+
+.rt-bg{
+  width: 100px; 
+  height: 100px; 
+  position: absolute;
+}
+
+.mv-area{
+  left:30px; 
+  position:absolute;
+}
+
+.mv-bg{
+  width: 100px; 
+  height: 100px; 
+}
+
+.mv-handle{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+}
+
+.reset-btn {
+  position: absolute;
+  left: 50%;
+  width: 30rpx;
+  height: 80rpx;
+  margin-top: -100rpx;
+}

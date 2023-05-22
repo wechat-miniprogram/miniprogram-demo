@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+    "xr-template-gltfOcclusion": "../../../components/template/xr-template-gltfOcclusion/index"
+  },
+  "disableScroll": true
+}

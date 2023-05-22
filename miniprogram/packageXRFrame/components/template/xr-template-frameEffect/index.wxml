@@ -1,0 +1,18 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets>
+  </xr-assets>
+  <xr-node>
+    <xr-shadow id="shadow-root"></xr-shadow>
+    <xr-mesh position="0 -0.06 0" scale="1.4 0.1 1.4" uniforms="u_baseColorFactor:0.3 0.4 0.6 1" geometry="cube"></xr-mesh>
+    <xr-mesh id="animation-mesh" node-id="animation-mesh" position="0 0 0" scale="1 1 1" geometry="plane"></xr-mesh>
+    <xr-camera
+      id="camera" node-id="camera" position="0 3 0" clear-color="0.925 0.925 0.925 1"
+      target="animation-mesh"
+      camera-orbit-control="true"
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="3"/>
+  </xr-node>
+</xr-scene>

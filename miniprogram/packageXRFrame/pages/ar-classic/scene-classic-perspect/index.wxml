@@ -1,0 +1,19 @@
+<xr-demo-viewer
+  title="扫描图片模型透视案例"
+  intro="基于 Stencil裁剪 实现的基本模型透视效果案例. Model from SketchFab By @Omar Faruq Tawsif"
+  hint="默认扫描图片见官网开发文档\n组件 -> xr-frame -> 示例"
+>
+  <xr-classic-perspect
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+</xr-demo-viewer>

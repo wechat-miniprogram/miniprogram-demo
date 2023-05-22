@@ -1,0 +1,56 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+  </xr-assets>
+  <xr-node>
+    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
+    <xr-mesh node-id="floor-plane" position="0 -1 0" rotation="0 0 0" scale="10 1 10" geometry="plane"
+      uniforms="u_baseColorFactor:1 1 1 1" receive-shadow
+    ></xr-mesh>
+    <!-- glTF -->
+    <xr-node wx:if="{{gltfLoaded}}">
+      <xr-node
+        wx:for="{{gltfIdList}}" wx:for-item="gltfId"
+        wx:key="gltfId"
+      >
+        <xr-gltf
+          wx:if="{{gltfId == 0}}"
+          position="-1 -0.46 -1" rotation="0 0 0"
+          scale="0.6 0.6 0.6"
+          model="gltf-{{gltfId}}"
+          cast-shadow
+        ></xr-gltf>
+        <xr-gltf
+          wx:if="{{gltfId == 1}}"
+          position="1 -0.98 -1" rotation="0 0 0"
+          scale="0.015 0.015 0.015"
+          model="gltf-{{gltfId}}"
+          cast-shadow
+        ></xr-gltf>
+      </xr-node>
+    </xr-node>
+    <!-- Video -->
+    <xr-node wx:if="{{videoLoaded}}">
+      <xr-node
+        wx:for="{{videoIdList}}" wx:for-item="videoId"
+        wx:key="videoId"
+      >
+      <xr-mesh
+        wx:if="{{videoId == 0}}"
+        node-id="mesh-cube" position="-1 -0.5 1" scale="0.8 1.4 0.8"
+        geometry="cube" material="video-mat-{{videoId}}"
+        cast-shadow
+      />
+      </xr-node>
+    </xr-node>
+    <xr-camera
+      id="camera" node-id="camera" position="0 2 4" clear-color="0.8 0.8 0.8 1"
+      target="camera-target"
+      camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="3" cast-shadow/>
+  </xr-node>
+</xr-scene>

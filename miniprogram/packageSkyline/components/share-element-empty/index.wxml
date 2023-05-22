@@ -1,6 +1,0 @@
-<share-element key="preview-top" class="preview-top" style="height: {{statusBarHeight + navigationBarHeight}}px;" rect-tween-type="linear" shuttleOnPop="from">
-  <view><!-- 占位 --></view>
-</share-element>
-<share-element key="preview-bottom" class="preview-bottom" style="height: {{safeAreaInsetBottom + THUMBNAIL_CNT_HEIGHT}}px;" rect-tween-type="linear" shuttleOnPop="from">
-  <view><!-- 占位 --></view>
-</share-element>
