@@ -1,0 +1,14 @@
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
+<mp-navigation-bar title="sticky" back="{{true}}"></mp-navigation-bar>
+<view class="container page-body">
+   <view class="grid-aligned-title">
+    <view >吸顶布局容器，仅支持作为 scroll-view 自定义模式下的直接子节点或 sticky-section 组件直接子节点</view>
+    <button class="btn" type="primary" bind:tap="go1">sticky-header</button>
+   </view>
+  
+    <view class="grid-aligned-title  page-body">
+        <view>吸顶布局容器，仅支持作为 scroll-view 自定义模式下的直接子节点</view>
+         <button class="btn" type="primary" bind:tap="goGrid1">sticky-section</button>
+    </view>
+</view>

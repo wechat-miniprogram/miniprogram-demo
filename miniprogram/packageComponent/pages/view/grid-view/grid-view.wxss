@@ -1,0 +1,22 @@
+@import "../../../../common/reset.wxss";
+.container {
+    margin-top: 150px;
+    min-height: 42%;
+  }
+  
+  .btn {
+    margin-top: 15px;
+    line-height: 42px;
+  }
+.grid-aligned-title{
+    font-size: 16px;
+    color: #999999;  
+    padding-left: 15px;
+    margin-bottom: 80px;
+  }
+.grid-masonry-title{
+    font-size: 16px;
+    color: #999999;
+    padding-left: 15px;
+ 
+  }

@@ -1,0 +1,9 @@
+.header {
+  height: 100px;
+}
+
+.cell {
+  height: 50px; 
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,13 @@
+.intro {
+  margin: 30px;
+  text-align: center;
+}
+button {
+	width: 240px !important;
+	margin-top: 40px;
+	line-height: 40px;
+}
+view {
+	text-align: center;
+	margin-top: 50px;
+}

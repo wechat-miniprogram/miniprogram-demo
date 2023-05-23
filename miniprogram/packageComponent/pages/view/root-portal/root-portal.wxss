@@ -1,0 +1,13 @@
+@import "../../../../common/reset.wxss";
+.dialog {
+    height: 100px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: white;
+    border: .5px solid #EEE;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  

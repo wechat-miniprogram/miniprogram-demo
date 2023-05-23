@@ -1,0 +1,5 @@
+<view class="center" style="width: 100%; height: {{height}}px; background-color: #6bbc7a;">
+  <view class="center" style="width: 60px; height: 60px; border-radius: 30px; background-color: white; color: black;">
+    {{index}}
+  </view>
+</view>
