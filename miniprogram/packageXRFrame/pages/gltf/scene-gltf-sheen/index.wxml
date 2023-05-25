@@ -1,9 +1,8 @@
 <xr-demo-viewer
-  title="无光照glTF案例"
-  intro="应用 KHR_materials_unlit 材质的glTF案例，常见于已烘焙光照到贴图与卡通渲染模型"
-  code="{{xmlCode}}"
+  title="KHR_materials_sheen"
+  intro="glTF Sheen 扩展，主要用于布料与织物材质的模拟。基础库 2.32.1 支持。model Copyright 2020 Wayfair LLC, CC-BY 4.0"
 >
-  <xr-gltf-unlit
+  <xr-gltf-sheen
     disable-scroll
     id="main-frame"
     width="{{renderWidth}}"

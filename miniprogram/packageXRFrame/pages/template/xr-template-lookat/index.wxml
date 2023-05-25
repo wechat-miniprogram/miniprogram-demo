@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="AR面向屏幕的平面"
-  intro="四个方向各有一个面向屏幕的平面"
+  intro="通过脚本控制的，四个方向各有一个面向屏幕的平面"
   code=""
   showBackBtn="{{showBackBtn}}"
 >

@@ -1,0 +1,20 @@
+<xr-demo-viewer
+  title="投球小游戏Demo"
+  intro="等待AR平面识别完成，然后在较远的地面上放置篮筐。按住右侧按钮准备投球，然后挥动手机并放开按钮将球投出。(该demo目前在安卓上可能表现不佳，受限于安卓的平面识别功能。)"
+  code="{{xmlCode}}"
+>
+  <view class="overlay button" style="right: 50px; bottom: 300px;" 
+  wx:if="{{arDetected}}"
+  bindtouchstart="handleThrowStart" bindtouchend="handleThrowEnd">
+  <text>按住\n投球</text>
+  </view>
+  <xr-basic
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    throwing="{{throwing}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:ar_detected="handleARDetected"
+  />
+</xr-demo-viewer>

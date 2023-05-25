@@ -1,0 +1,14 @@
+<xr-demo-viewer
+  title="射击积木案例"
+  intro="扫描绿底的微信logo(如下所示)，出现积木。点击屏幕射出小球。"
+  code="{{xmlCode}}"
+>
+  <xr-basic
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+  <view slot="intro"><image src="/components/xr-physics-shoot/weixin.png" style="height: 100px; width: 100px"></image></view>
+</xr-demo-viewer>

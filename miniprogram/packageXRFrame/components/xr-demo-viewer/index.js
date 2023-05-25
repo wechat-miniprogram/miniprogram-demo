@@ -40,5 +40,8 @@ Component({
     onClickBack() {
       wx.navigateBack()
     },
+  },
+  options: {
+    multipleSlots: true
   }
 })

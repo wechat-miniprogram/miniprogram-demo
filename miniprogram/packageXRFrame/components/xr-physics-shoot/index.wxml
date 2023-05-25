@@ -1,0 +1,26 @@
+<xr-scene id="xr-scene" bind:ready="handleReady" ar-system="modes:Marker;camera:Back">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+    <xr-asset-load type="raw" asset-id="logo" src="/assets/wx_logo.bmp.bin"></xr-asset-load>
+  </xr-assets>
+  <xr-physics></xr-physics>
+  <xr-node>
+    <xr-ar-tracker id="arTracker" mode="Marker" src="/components/xr-physics-shoot/weixin.png" bind:ar-tracker-state="handleARTrackerState">
+    <xr-node></xr-node>
+    </xr-ar-tracker>
+    <xr-node layer="1">
+      <xr-shadow id="bricksRoot" node-id="bricksRoot"></xr-shadow>
+    </xr-node>
+    <xr-camera
+      id="camera2" node-id="camera2" clear-color="0.925 0.925 0.925 1" position="0 0 5"
+      background="ar" is-ar-camera cull-mask="1"
+    ></xr-camera>
+    <xr-camera
+      id="camera" node-id="camera" position="1 2 4" is-clear-color="false" target="bricksRoot"
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

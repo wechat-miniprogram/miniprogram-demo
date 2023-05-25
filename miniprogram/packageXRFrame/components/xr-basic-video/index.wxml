@@ -17,6 +17,8 @@
       node-id="mesh-cube" scale="1.6 0.9 0.9"
       geometry="cube" material="standard-mat"
       uniforms="u_baseColorMap:video-cat"
+      cube-shape="autoFit:true"
+      bind:touch-shape="handleTouchCube"
     />
     <xr-camera
       id="camera" node-id="camera" position="0 0 3" clear-color="0.925 0.925 0.925 1"

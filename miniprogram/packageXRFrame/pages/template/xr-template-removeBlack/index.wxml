@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="过滤黑色视频"
-  intro=""
+  intro="通过自定义材质，过滤掉视频黑色部分的案例。（无法处理次像素）"
 >
   <xr-template-removeBlack
     disable-scroll

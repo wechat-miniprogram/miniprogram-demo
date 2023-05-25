@@ -107,6 +107,16 @@ const gltf = {
       label: 'KHR_materials_pbrSpecularGlossiness',
       path: '/pages/gltf/scene-gltf-specularGlossiness/index',
     },
+    {
+      name: '扩展',
+      label: 'KHR_materials_sheen',
+      path: '/pages/gltf/scene-gltf-sheen/index',
+    },
+    {
+      name: '扩展',
+      label: 'KHR_lights_punctual',
+      path: '/pages/gltf/scene-gltf-lightsPunctual/index',
+    },
   ],
 };
 
@@ -152,8 +162,30 @@ const ar = {
       name: 'Body',
       label: 'AR 人体',
       path: '/pages/ar/scene-ar-body/index',
-    }
+    },
+    {
+      name: 'Plane+Marker',
+      label: 'AR 平面Marker融合',
+      path: '/pages/ar/scene-ar-vio-marker/index',
+    },
   ],
+};
+
+const physics = {
+  name: '物理能力',
+  tag: 'func',
+  childArr: [
+    {
+      name: 'Shoot',
+      label: '射击积木',
+      path: '/pages/physics/scene-physics-shoot/index'
+    },
+    {
+      name: 'Throw',
+      label: '投球入筐',
+      path: '/pages/physics/scene-physics-throw/index'
+    }
+  ]
 };
 
 const custom = {
@@ -214,6 +246,11 @@ const template = {
     },
     {
       name: 'glTF',
+      label: '模型动画（脚本、骨骼）',
+      path: '/pages/template/xr-template-gltfAnimation/index',
+    },
+    {
+      name: 'glTF',
       label: '设置 glTF 为遮挡模型',
       path: '/pages/template/xr-template-gltfOcclusion/index',
     },
@@ -223,15 +260,15 @@ const template = {
       path: '/pages/template/xr-template-frameEffect/index',
     },
     {
+      name: 'Touch',
+      label: '点选物体与动画控制',
+      path: '/pages/template/xr-template-select/index',
+    },
+    {
       name: 'Share',
       label: '截图与分享',
       path: '/pages/template/xr-template-share/index',
     },
-    // {
-    //   name: 'Touch',
-    //   label: '点选物体与小程序面板控制',
-    //   path: '/pages/template/xr-template-select/index',
-    // },
     {
       name: 'Video',
       label: '过滤黑色背景视频',
@@ -322,4 +359,4 @@ const production = {
   ]
 };
 
-export default [base, ar, gltf, custom, template, classic, scan, production];
+export default [base, ar, gltf, physics, custom, template, classic, scan, production];
