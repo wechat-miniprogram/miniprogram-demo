@@ -43,7 +43,8 @@
     "lazyloadPlaceholderEnable": false,
     "useStaticServer": true,
     "localPlugins": false,
-    "condition": false
+    "condition": false,
+    "skylineRenderEnable": true
   },
   "compileType": "miniprogram",
   "simulatorType": "wechat",

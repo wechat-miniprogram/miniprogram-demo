@@ -19,12 +19,12 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: '小程序官方组件展示',
-      path: 'page/component/index'
+      title: '小程序交互动画展示',
+      path: 'page/animation/index'
     }
   },
   onShareTimeline() {
-    '小程序官方组件展示'
+    '小程序交互动画展示'
   },
 
   data: {
@@ -50,7 +50,9 @@ Page({
           { url: '/packageSkylineExamples/examples/card_transition/pages/list/list', name: '卡片转场'},
           { url: '/packageSkylineExamples/examples/half-screen/pages/index/index', name: '半屏弹窗'},
           { url: '/packageSkylineExamples/examples/segmented-half-screen/pages/index/index', name: '分段式半屏'},
-          { url: '/packageSkylineExamples/examples/tab-indicator/pages/index/index', name: 'Tab 指示条'}
+          { url: '/packageSkylineExamples/examples/tab-indicator/pages/index/index', name: 'Tab 指示条'},
+          { url: '/packageSkylineExamples/examples/product-list/pages/index/index', name: '搜索栏吸附'},
+          { url: '/packageSkylineExamples/examples/expanded-scroll-view/pages/index/index', name: '沉浸式商品浏览'}
         ]
       }, {
         id: 'XRFrame',
