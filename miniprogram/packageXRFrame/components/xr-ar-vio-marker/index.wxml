@@ -1,0 +1,29 @@
+<xr-scene ar-system="modes:Plane Marker" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
+    <xr-asset-load type="gltf" asset-id="gltf-item" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/just_a_girl/index.glb" />
+    <xr-asset-load type="gltf" asset-id="butterfly" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/butterfly/index.glb" />
+  </xr-assets>
+  <xr-node>
+    <xr-ar-tracker mode="Marker" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/2dmarker-test.jpg">
+      <xr-gltf model="butterfly" anim-autoplay position="0.2 0 -0.2" scale="0.6 0.6 0.6" rotation="0 -50 0" />
+      <xr-gltf model="butterfly" anim-autoplay position="0.4 0 0.3" scale="0.5 0.5 0.5" rotation="0 -50 0" />
+      <xr-gltf model="butterfly" anim-autoplay position="-0.3 0 0.3" scale="0.4 0.4 0.4" rotation="0 -50 0" />
+    </xr-ar-tracker>
+
+    <xr-ar-tracker mode="Plane">
+      <xr-gltf model="anchor"></xr-gltf>
+    </xr-ar-tracker>
+    <xr-node node-id="setitem" visible="false">
+      <xr-gltf model="gltf-item" scale="0.006 0.006 0.006"></xr-gltf>
+    </xr-node>
+    <xr-camera
+      id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

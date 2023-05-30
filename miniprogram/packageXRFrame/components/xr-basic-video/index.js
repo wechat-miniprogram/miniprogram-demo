@@ -18,6 +18,20 @@ Component({
     handleAssetsLoaded: function({detail}) {
       console.log('assets loaded', detail.value);
       this.setData({loaded: true});
+    },
+    handleTouchCube: async function() {
+      const xrSystem = wx.getXrFrameSystem();
+      const video = this.scene.assets.getAsset('video-texture', 'cat');
+
+      if (!video) {
+        return;
+      }
+
+      if (video.state === xrSystem.EVideoState.Playing) {
+        video.pause();
+      } else if (video.state === xrSystem.EVideoState.Paused) {
+        video.resume();
+      }
     }
   }
 })

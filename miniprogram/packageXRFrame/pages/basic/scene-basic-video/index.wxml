@@ -1,6 +1,7 @@
 <xr-demo-viewer
   title="视频纹理案例"
-  intro="使用视频纹理，作为uniform使用，也可用于天空盒，注意使用时id为`video-${asset-id}`"
+  intro="使用视频纹理，开始播放后，点击立方体可以暂停/唤醒播放。作为uniform使用，也可用于天空盒，注意使用时id为`video-${asset-id}`"
+  hint="正式版本以及`pause`/`resume`方法，在基础库 v2.32.0 及以上支持。"
   code="{{xmlCode}}"
 >
   <xr-basic-video

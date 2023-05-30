@@ -1,9 +1,8 @@
 <xr-demo-viewer
-  title="无光照glTF案例"
-  intro="应用 KHR_materials_unlit 材质的glTF案例，常见于已烘焙光照到贴图与卡通渲染模型"
-  code="{{xmlCode}}"
+  title="KHR_lights_punctual"
+  intro="glTF Punctual Light 支持。Copyright 2021 DGG. CC BY 4.0 International https://creativecommons.org/licenses/by/4.0/"
 >
-  <xr-gltf-unlit
+  <xr-gltf-lightsPunctual
     disable-scroll
     id="main-frame"
     width="{{renderWidth}}"

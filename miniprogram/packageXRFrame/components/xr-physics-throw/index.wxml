@@ -1,0 +1,35 @@
+<xr-scene id="xr-scene" bind:ready="handleReady" bind:tick="handleTick" ar-system="modes:Plane;camera:Back">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
+    <xr-asset-load type="gltf" asset-id="basket" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/laundry_basket/scene.gltf" />
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+  </xr-assets>
+  <xr-physics></xr-physics>
+  <xr-node>
+    <xr-ar-tracker mode="Plane" bind:ar-tracker-state="handleARTrackerState">
+      <xr-gltf model="anchor" wx:if="{{!showTarget}}"></xr-gltf>
+    </xr-ar-tracker>
+    <xr-node node-id="targetTransform">
+      <xr-node id="targetRoot" wx:if="{{showTarget}}">
+        <xr-node scale="0.2 0.2 0.2" position="0 -0.3 0">
+          <xr-gltf model="basket"></xr-gltf>
+          <xr-node cube-shape="size: 0.01 3 2" position="-1.3 0 0" shape-interact="collide: true"></xr-node>
+          <xr-node cube-shape="size: 0.01 3 2" position="1.3 0 0" shape-interact="collide: true"></xr-node>
+          <xr-node cube-shape="size: 2.3 3 0.01" position="0 0 -1" shape-interact="collide: true"></xr-node>
+          <xr-node cube-shape="size: 2.3 3 0.01" position="0 0 1" shape-interact="collide: true"></xr-node>
+        </xr-node>
+        <xr-node cube-shape="size: 10 0.001 10" position="0 -0.3 0" shape-interact="collide: true"></xr-node>
+      </xr-node>
+    </xr-node>
+    <xr-camera
+      id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1" position="0 0 50" 
+      background="ar" is-ar-camera
+    >
+    </xr-camera>
+    <xr-shadow id="ballRoot" node-id="ballRoot"></xr-shadow>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

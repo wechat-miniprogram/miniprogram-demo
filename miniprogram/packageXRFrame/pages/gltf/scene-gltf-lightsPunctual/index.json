@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+    "xr-gltf-lightsPunctual": "../../../components/xr-gltf-lightsPunctual/index"
+  },
+  "disableScroll": true
+}
