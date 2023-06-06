@@ -234,7 +234,9 @@
         "examples/half-screen/pages/index/index",
         "examples/segmented-half-screen/pages/index/index",
         "examples/card_transition/pages/list/list",
-        "examples/card_transition/pages/detail/detail"
+        "examples/card_transition/pages/detail/detail",
+        "examples/product-list/pages/index/index",
+        "examples/expanded-scroll-view/pages/index/index"
       ]
     },
     {
