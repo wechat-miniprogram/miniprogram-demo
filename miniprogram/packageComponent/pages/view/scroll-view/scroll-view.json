@@ -3,5 +3,6 @@
   "pageOrientation": "auto",
   "renderer": "skyline",
   "disableScroll": true,
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "componentFramework": "glass-easel"
 }
