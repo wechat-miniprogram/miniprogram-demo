@@ -6,7 +6,7 @@
     "urlCheck": false,
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
-    "skylineRenderEnable": false
+    "skylineRenderEnable": true
   },
   "projectname": "小程序示例",
   "condition": {
