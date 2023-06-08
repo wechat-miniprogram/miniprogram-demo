@@ -1,0 +1,11 @@
+<!--pages/mobilenet_int8/index.wxml-->
+<view class="container page" data-weui-theme="{{theme}}">
+  <camera style="  width: 100%; height: 70vh;" device-position="back" flash="off" frame-size="medium">
+    <canvas  canvas-id="ssd"></canvas>
+  </camera>
+  <view style="margin: 30px auto; position: relative"> 分类结果： {{predClass}}</view>  
+  <view style="margin: 30px auto; position: relative" wx:if="{{enableSpeedTest}}">
+    <text class="subtitle"> 平均耗时(ms)： {{avgTime}}</text>
+    <text class="subtitle"> 最小耗时(ms)： {{minTime}}</text>
+  </view>
+</view>

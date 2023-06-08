@@ -1041,7 +1041,7 @@ export class Classifier {
   load() {
     return new Promise((resolve, reject) => {
 
-       const modelPath = `${wx.env.USER_DATA_PATH}/mobilenetv2-12.onnx`;
+       const modelPath = `${wx.env.USER_DATA_PATH}/mobilenetv2_qat.onnx`;
 
        // 判断之前是否已经下载过onnx模型
         wx.getFileSystemManager().access({
@@ -1060,7 +1060,7 @@ export class Classifier {
             wx.cloud.init();
             console.log("begin download model");
 
-            const cloudPath = 'cloud://containertest-0gmw3ulnd8d9bc7b.636f-containertest-0gmw3ulnd8d9bc7b-1258211818/mobilenetv2-12.onnx'
+            const cloudPath = 'cloud://containertest-0gmw3ulnd8d9bc7b.636f-containertest-0gmw3ulnd8d9bc7b-1258211818/mobilenetv2_qat.onnx'
             this.downloadFile(cloudPath, function(r) {
               console.log(`下载进度：${r.progress}%，已下载${r.totalBytesWritten}B，共${r.totalBytesExpectedToWrite}B`)
             }).then(result => {
@@ -1070,7 +1070,6 @@ export class Classifier {
                 filePath: modelPath,
                 success: (res) => { // 注册回调函数
                   console.log(res)
-                  // const modelPath = res.savedFilePath +'/mobilenetv2-12.onnx'
     
                   const modelPath = res.savedFilePath;
                   console.log("save onnx model at path: " + modelPath)
@@ -1104,7 +1103,7 @@ export class Classifier {
         */
         precisionLevel : 4,
         allowNPU : false,     // wheather use NPU for inference, only useful for IOS
-        allowQuantize: false, // wheather generate quantize model
+        allowQuantize: true,  // wheather generate quantize model
       });
 
       // 监听error事件
@@ -1222,7 +1221,7 @@ export class Classifier {
 
         this.session.run({
           // Here string "input" Should be the same with the input name in onnx file
-          "input": xinput,
+          "onnx::QuantizeLinear_0": xinput,
         })
         .then((res) => {
           inferenceEnd = new Date().getTime();
@@ -1231,7 +1230,7 @@ export class Classifier {
   
           // Here use res.outputname.data, outputname 
           // Should be the same with the output name in onnx file
-          let num = new Float32Array(res.output.data)
+          let num = new Float32Array(res["1962"].data)
 
           var maxVar = num[0];
   
@@ -1245,11 +1244,11 @@ export class Classifier {
               index = i     
             }
           }
-   
+
           this.getClass(index);
 
           resolve();
-        }).catch(error => alert(error.message));
+        }).catch(error => console.log("runing error!: ", error.message));
       })
 
     });

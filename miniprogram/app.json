@@ -142,7 +142,8 @@
         "pages/framework/wxs/stick-top",
         "pages/framework/wxs/nearby",
         "pages/ai/mobilenet/index",
-        "pages/ai/style-trans/index"
+        "pages/ai/style-trans/index",
+        "pages/ai/mobilenet_int8/index"
       ]
     },
     {

@@ -261,6 +261,10 @@ Page({
         zh: 'style transfer',
         url: 'style-trans/index',
       },
+      {
+        zh: 'mobileNetInt8',
+        url: 'mobilenet_int8/index',
+      }
     ]
     }, {
       id: 'ar',
