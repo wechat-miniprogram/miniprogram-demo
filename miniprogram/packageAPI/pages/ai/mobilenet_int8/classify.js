@@ -1025,7 +1025,7 @@ export class Classifier {
 
   speedTime = 0.0;
 
-  //modelInput = null;
+  modelInput = null;
 
   constructor(displaySize) {
     this.displaySize = {
@@ -1033,7 +1033,7 @@ export class Classifier {
       height: displaySize.height,
     };
 
-    //this.modelInput = new Float32Array(modelWidth * modelHeight * 3);
+    this.modelInput = new Float32Array(modelWidth * modelHeight * modelChannel);
   
     this.ready = false;
   }
@@ -1208,12 +1208,10 @@ export class Classifier {
   {
     return new Promise((resolve, reject) =>
     {
-      var dstInput = new Float32Array(modelChannel * modelHeight * modelWidth);
-
-      this.preProcess(frame, dstInput).then(() => {
+      this.preProcess(frame, this.modelInput).then(() => {
         const xinput = {
           shape: [1, 3, 224, 224],  // Input data shape in NCHW
-          data: dstInput.buffer,
+          data: this.modelInput.buffer,
           type: 'float32',  // Input data type
         };
 

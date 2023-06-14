@@ -2,7 +2,7 @@
 /* pages/mobilenet/index.wxss */
 .camera {
   width: 100%;
-  height: 80vh;
+  height: 70vh;
 }
 
 .canvas {
@@ -10,8 +10,8 @@
   height: 100vh;
 }
 
-.subtitle {
-  color: #5f6368;
+.textstyle {
+  color: #e0a165;
   font-size: 28rpx;
   line-height: 1.6;
 }
