@@ -35,7 +35,7 @@ export default function getBehavior() {
                 height,
               })
             }
-            calcSize(info.windowWidth, info.windowHeight * 0.6)
+            calcSize(info.windowWidth, info.windowHeight * 0.8)
 
             this.initVK()
           })
@@ -85,7 +85,6 @@ export default function getBehavior() {
       initVK() {
         // 初始化 threejs
         this.initTHREE()
-        const THREE = this.THREE
 
         // 自定义初始化
         if (this.init) this.init()
@@ -94,11 +93,11 @@ export default function getBehavior() {
 
         const session = this.session = wx.createVKSession({
           track: {
-            plane: {
-              mode: 3
-            },
-            OSD: true,
-          },
+            depth: {
+              mode: 2
+            }
+          },                                                                                                                                                                                                                                                    
+          cameraPosition: 0,
           version: 'v1',
           gl: this.gl
         })
@@ -121,34 +120,37 @@ export default function getBehavior() {
 
           session.on('resize', () => {
             const info = wx.getSystemInfoSync()
-            calcSize(info.windowWidth, info.windowHeight * 0.6, info.pixelRatio)
+            calcSize(info.windowWidth, info.windowHeight * 0.8, info.pixelRatio)
           })
 
-          if (this.afterVKSessionCreated) {
-            this.afterVKSessionCreated()
-          }
-
-          
-          //限制调用帧率
-          let fps = 30
-          let fpsInterval = 1000 / fps
-          let last = Date.now()
-
-          // 逐帧渲染
-          const onFrame = timestamp => {
-            let now = Date.now()
-            const mill = now - last
-            // 经过了足够的时间
-            if (mill > fpsInterval) {
-                last = now - (mill % fpsInterval); //校正当前时间
-                const frame = session.getVKFrame(canvas.width, canvas.height)
-                if (frame) {
-                  this.render(frame)
-                }
+          session.on('addAnchors', anchors => {
+          })
+          session.on('updateAnchors', anchors => {
+            let depthArray = []
+            // 手动传入图像的时候用dom画点和框就行
+            let anchor2DList =  anchors.map(anchor => {
+                return {
+                value: anchor.depthArray,
+                size: anchor.size
+              }})
+              wx.hideLoading()
+              if (anchor2DList.length > 0) {       
+                let width = 80
+                let height = 80                               
+                anchor2DList.forEach(anchor => {
+                    width = anchor.size[0]
+                    height = anchor.size[1]
+                    anchor.value.forEach(item =>{
+                    depthArray.push(item.value)
+                  })
+                  this.renderDepthGL(depthArray, width, height)
+                  
+              })
+              }
             }
-            session.requestAnimationFrame(onFrame)
-          }
-          session.requestAnimationFrame(onFrame)
+          )
+          session.on('removeAnchors', anchors => {
+          })
         })
       },
       initTHREE() {

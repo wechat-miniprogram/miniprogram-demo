@@ -7,7 +7,6 @@ import {
 import cloneGltf from '../loaders/gltf-clone'
 
 const info = wx.getSystemInfoSync()
-let DEBUG_SIZE = false // 目前支持不完善
 
 export default function getBehavior() {
   return Behavior({
@@ -20,6 +19,7 @@ export default function getBehavior() {
     },
     methods: {
       onReady() {
+
         wx.createSelectorQuery()
           .select('#webgl')
           .node()
@@ -37,7 +37,7 @@ export default function getBehavior() {
                 height,
               })
             }
-            calcSize(info.windowWidth, info.windowHeight * 0.6)
+            calcSize(info.windowWidth, info.windowHeight * 0.8)
 
             this.initVK()
           })
@@ -55,11 +55,16 @@ export default function getBehavior() {
           this.scene.dispose()
           this.scene = null
         }
+        if (this.scene2) {
+          this.scene2.dispose()
+          this.scene2 = null
+        }
         if (this.camera) this.camera = null
         if (this.model) this.model = null
         if (this._insertModel) this._insertModel = null
         if (this._insertModels) this._insertModels = null
         if (this.planeBox) this.planeBox = null
+        if (this.robotBox) this.robotBox = null
         if (this.mixers) {
           this.mixers.forEach(mixer => mixer.uncacheRoot(mixer.getRoot()))
           this.mixers = null
@@ -94,18 +99,27 @@ export default function getBehavior() {
 
         console.log('this.gl', this.gl)
 
-        const session = this.session = wx.createVKSession({
+        this.session = wx.createVKSession({
           track: {
             plane: {
-              mode: 3
+              mode: 1
             },
-            marker: true,
+            depth: {
+              mode: 1
+            },
           },
-          version: 'v1',
-          gl: this.gl
+          version: 'v2',
+          gl: this.gl,
         })
+      const session = this.session
         session.start(err => {
-          if (err) return console.error('VK error: ', err)
+          
+          if (err) {
+            this.setData({
+              errMsg:'VK error: ' + err
+            })
+            return console.error('VK error: ', err)
+          }
 
           console.log('@@@@@@@@ VKSession.version', session.version)
 
@@ -123,7 +137,7 @@ export default function getBehavior() {
 
           session.on('resize', () => {
             const info = wx.getSystemInfoSync()
-            calcSize(info.windowWidth, info.windowHeight * 0.6, info.pixelRatio)
+            calcSize(info.windowWidth, info.windowHeight * 0.8, info.pixelRatio)
           })
 
           const loader = new THREE.GLTFLoader()
@@ -132,11 +146,19 @@ export default function getBehavior() {
               scene: gltf.scene,
               animations: gltf.animations,
             }
-            console.log("模型加载完成")
           })
 
           this.clock = new THREE.Clock()
 
+          loader.load('https://dldir1.qq.com/weixin/miniprogram/reticle_4b6cc19698ca4a08b31fd3c95ce412ec.glb', gltf => {
+            const reticle = this.reticle = gltf.scene
+
+            reticle.visible = false
+            this.planeBox.add(reticle)
+          })
+
+
+          // anchor 检测
           const createPlane = size => {
             const geometry = new THREE.PlaneGeometry(size.width, size.height)
             const material = new THREE.MeshBasicMaterial({
@@ -149,6 +171,9 @@ export default function getBehavior() {
             mesh.rotateX(Math.PI / 2)
             const cnt = new THREE.Object3D()
             cnt.add(mesh)
+            this.plane = cnt
+            this.plane.width = size.width
+            this.plane.height = size.height
             return cnt
           }
           const updateMatrix = (object, m) => {
@@ -159,24 +184,26 @@ export default function getBehavior() {
             anchors.forEach(anchor => {
               const size = anchor.size
               let object
-              if (size && DEBUG_SIZE) {
-                object = createPlane(size)
+              if (size) {
+               //  object = createPlane(size)
+                 this.planeBox.add(object)
               } else {
                 if (!this.model) {
                   console.warn('this.model 还没加载完成 ！！！！！')
                   return
                 }
-
-                object = new THREE.Object3D()
-                const model = this.getRobot()
-                model.rotateX(-Math.PI / 2)
-                object.add(model)
+                  object = new THREE.Object3D()
+                  const model = this.getRobot()
+                  model.rotateX(-Math.PI / 2)
+                  object.add(model)
+                  this.robotBox.add(object)
               }
 
-              object._id = anchor.id
-              object._size = size
-              updateMatrix(object, anchor.transform)
-              this.planeBox.add(object)
+              if(object){
+                object._id = anchor.id
+                object._size = size
+                updateMatrix(object, anchor.transform)
+              }
             })
           })
           session.on('updateAnchors', anchors => {
@@ -188,12 +215,12 @@ export default function getBehavior() {
               if (object._id && map[object._id]) {
                 const anchor = map[object._id]
                 const size = anchor.size
-                if (size && DEBUG_SIZE && object._size && (size.width !== object._size.width || size.height !== object._size.height)) {
+                if (size && object._size && (size.width !== object._size.width || size.height !== object._size.height)) {
                   this.planeBox.remove(object)
-                  object = createPlane(size)
+                //  object = createPlane(size)
+                  this.plane = object
                   this.planeBox.add(object)
                 }
-
                 object._id = anchor.id
                 object._size = size
                 updateMatrix(object, anchor.transform)
@@ -208,13 +235,11 @@ export default function getBehavior() {
             this.planeBox.children.forEach(object => {
               if (object._id && map[object._id]) this.planeBox.remove(object)
             })
+            this.robotBox.children.forEach(object => {
+              if (object._id && map[object._id]) this.robotBox.remove(object)
+            })
           })
 
-          // 平面集合
-          const planeBox = this.planeBox = new THREE.Object3D()
-          this.scene.add(planeBox)
-
-          
           //限制调用帧率
           let fps = 30
           let fpsInterval = 1000 / fps
@@ -222,17 +247,22 @@ export default function getBehavior() {
 
           // 逐帧渲染
           const onFrame = timestamp => {
-            let now = Date.now()
-            const mill = now - last
-            // 经过了足够的时间
-            if (mill > fpsInterval) {
-                last = now - (mill % fpsInterval); //校正当前时间
-                const frame = session.getVKFrame(canvas.width, canvas.height)
-                if (frame) {
-                  this.render(frame)
-                }
-            }
-            session.requestAnimationFrame(onFrame)
+              let now = Date.now()
+              const mill = now - last
+              // 经过了足够的时间
+              if (mill > fpsInterval) {
+                  last = now - (mill % fpsInterval); //校正当前时间
+                  const frame = session.getVKFrame(canvas.width, canvas.height)
+                  if (frame) {
+                    try{
+                      this.render(frame)
+                    }catch(e){
+                      console.log(e)
+                    }
+                  
+                  }
+              }
+              session.requestAnimationFrame(onFrame)
           }
           session.requestAnimationFrame(onFrame)
         })
@@ -246,6 +276,13 @@ export default function getBehavior() {
 
         // 场景
         const scene = this.scene = new THREE.Scene()
+        // 平面集合
+        this.robotBox = new THREE.Object3D()
+        this.planeBox = new THREE.Object3D()
+        scene.add(this.robotBox)
+
+        this.scene2 = new THREE.Scene()
+        this.scene2.add(this.planeBox)
 
         // 光源
         const light1 = new THREE.HemisphereLight(0xffffff, 0x444444) // 半球光
@@ -311,24 +348,19 @@ export default function getBehavior() {
             if (item.parent) item.parent.remove(item)
           })
         }
-
         return model
       },
       onTouchEnd(evt) {
-        // 点击位置放一个机器人
-        const touches = evt.changedTouches.length ? evt.changedTouches : evt.touches
-        if (touches.length === 1) {
-          const touch = touches[0]
-          if (this.session && this.scene && this.model) {
-            const hitTestRes = this.session.hitTest(touch.x / this.data.width, touch.y / this.data.height, this.resetPanel)
-            this.resetPanel = false
-            if (hitTestRes.length) {
-              const model = this.getRobot()
-              model.matrixAutoUpdate = false
-              model.matrix.fromArray(hitTestRes[0].transform)
-              this.scene.add(model)
-            }
-          }
+        if(this.reticle.visible){
+          //0.05 -0.47 -0.14
+          this.hitPosition = this.reticle.position.clone()
+          console.log(this.hitPosition)
+
+
+          const model = this.getRobot()
+          model.position.copy(this.hitPosition)
+          model.rotation.copy(this.reticle.rotation)
+          this.robotBox.add(model)
         }
       }
     },

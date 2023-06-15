@@ -1,6 +1,9 @@
 <view class="container page" data-weui-theme="{{theme}}">
 <view><canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px" bindtouchend="onTouchEnd">
+    <view wx:if="{{errMsg}}" class="page-body-text tc" style="position: absolute; top: {{height / 2}}px; left: {{width / 4}}px;  width:50%; color:red">{{errMsg}}</view>
     <cover-view wx:for="{{anchor2DList}}" wx:key="id" style="position: absolute; top: {{item.x}}px; left: {{item.y}}px; width: {{item.w}}px; height: {{item.h}}px; background-color: #FFF; opacity: 0.7;"></cover-view>
-</canvas></view>
+    <image wx:if="{{showTip}}" style="position: absolute; top: 25%; left: 25%; width: 50%; height: 50%;" src="./move.gif"></image>
+</canvas>
+</view>
 <view class="page-body-text tc" style="height:20%">提示：触碰屏幕任意点, 可在真实水平位置生成示例的机器小人, 其中光标标记指示的是真实水平面</view>
 </view>

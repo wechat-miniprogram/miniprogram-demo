@@ -1,0 +1,6 @@
+<view class="container page" data-weui-theme="{{theme}}">
+<view><canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px" bindtouchend="onTouchEnd">
+    <view wx:if="{{errMsg}}" class="page-body-text tc" style="position: absolute; top: {{height / 2}}px; left: {{width / 4}}px;  width:50%; color:red">{{errMsg}}</view>
+</canvas></view>
+<view class="page-body-text tc" style="height:20%">提示：触碰屏幕任意点, 可在真实水平位置生成示例的机器小人, 其中光标标记指示的是真实水平面, 通过场景深度信息可遮挡小人</view>
+</view>

@@ -7,7 +7,9 @@ import {
 import cloneGltf from '../loaders/gltf-clone'
 
 const info = wx.getSystemInfoSync()
-let DEBUG_SIZE = false // 目前支持不完善
+ // 此处如果为jpeg,则后缀名也需要改成对应后缀
+// const filePath = `${wx.env.USER_DATA_PATH}/marker-ar1.jpg`
+// const mapfilePath = `${wx.env.USER_DATA_PATH}/marker-ar.jpg`
 
 export default function getBehavior() {
   return Behavior({
@@ -17,6 +19,8 @@ export default function getBehavior() {
       fps: 0,
       memory: 0,
       cpu: 0,
+      markerId: [],
+      imgList: [],
     },
     methods: {
       onReady() {
@@ -38,6 +42,8 @@ export default function getBehavior() {
               })
             }
             calcSize(info.windowWidth, info.windowHeight * 0.6)
+
+          //  this.downloadFile()
 
             this.initVK()
           })
@@ -84,28 +90,194 @@ export default function getBehavior() {
         if (this.session) this.session = null
         if (this.anchor2DList) this.anchor2DList = []
       },
+      chooseMedia() {
+        wx.chooseMedia({
+          count: 1,
+          mediaType: ['image'],
+          success: res => {
+            console.log('chooseMedia res', res)
+            const imgUrl = res.tempFiles[0].tempFilePath
+            wx.getImageInfo({
+              src: imgUrl,
+              success: res => {
+                const {
+                  width,
+                  height
+                } = res
+                console.log('getImageInfo res', res)
+
+                this.addMarker(imgUrl)
+              },
+              fail: res => {
+                console.error(res)
+              }
+            })
+  
+          },
+          fail: res => {
+            console.error(res)
+          }
+        })
+      },
+      errImg(e){
+        console.log("err img",e)
+      },
+      loadImg(){
+        console.log("load img")
+      },
+      add3DMarker(){
+        const mapfilePath = `${wx.env.USER_DATA_PATH}/marker-ar1.map`
+
+        console.log('now download....')
+
+        const fs = wx.getFileSystemManager()
+  
+        const download = callback => wx.downloadFile({
+            // 此处设置为识别的2d对象的jpg地址
+            url: 'http://dldir1.qq.com/weixin/checkresupdate/ncov_7bf1a739c43f4f80b3fb3488b592f355.map',
+            success(res) {
+              console.log("downloadFile success:", res)
+                fs.saveFile({
+                  mapfilePath,
+                    tempFilePath: res.tempFilePath,
+                    success: callback,
+                })
+            },
+            fail(e) {
+              console.log("downloadFile fail:", e)
+            }
+        })
+
+        const add = () => {
+          console.log('[add3DMarker] --> ', mapfilePath)
+
+          fs.access({
+            path: mapfilePath,
+            success(res) {
+              // 文件存在
+              console.log("文件存在")
+              console.log(res)
+            },
+            fail(res) {
+              // 文件不存在或其他错误
+              console.log("文件不存在")
+              console.error(res)
+            }
+          })
+          this.session.addMarker(mapfilePath)
+        }
+        download(add)
+      },
+      add3DMarker2(){
+        const mapfilePath = `${wx.env.USER_DATA_PATH}/marker-ar.map`
+
+        console.log('now download....')
+
+        const fs = wx.getFileSystemManager()
+  
+        const download = callback => wx.downloadFile({
+            // 此处设置为识别的2d对象的jpg地址
+            url: 'http://dldir1.qq.com/weixin/checkresupdate/ncov_7bf1a739c43f4f80b3fb3488b592f355.map',
+            success(res) {
+              console.log("downloadFile success:", res)
+                fs.saveFile({
+                  mapfilePath,
+                    tempFilePath: res.tempFilePath,
+                    success: callback,
+                })
+            },
+            fail(e) {
+              console.log("downloadFile fail:", e)
+            }
+        })
+
+        const add = () => {
+          console.log('[add3DMarker] --> ', mapfilePath)
+          this.session.addMarker(mapfilePath)
+        }
+        download(add)
+      },
+      addMarker(url) {
+        // if (this.data.markerId) return
+        const fs = wx.getFileSystemManager()
+        // 此处如果为jpeg,则后缀名也需要改成对应后缀
+        // const filePath = `${wx.env.USER_DATA_PATH}/marker-ar.map`
+        const filePath = `${wx.env.USER_DATA_PATH}/marker-ar`+this.data.markerId.length+`.jpeg`
+  
+        const download = callback => {
+          fs.saveFile({
+            filePath,
+            tempFilePath: url,
+            success: callback,
+            fail: res => {
+              console.error(res)
+            }
+          })
+        }
+        const add = () => {
+          console.log('[addMarker'+this.data.markerId.length+'] --> ', filePath)
+          var id = this.session.addMarker(filePath)
+          this.data.markerId.push(id)
+          this.data.imgList.push(filePath)
+
+          this.setData({
+            markerId:this.data.markerId,
+            imgList: this.data.imgList
+          })
+        }
+        download(add)
+      },
+
+      removeAllMarker() {
+        if (this.data.markerId.length!=0) {
+          for(let i = 0; i <this.data.markerId.length; i++){
+          this.session.removeMarker(this.data.markerId[i])
+          }
+          this.data.markerId = []
+          this.data.imgList = []
+          this.setData({
+            markerId: this.data.markerId,
+            imgList: this.data.imgList
+          })
+          this.removeRobot()
+        }
+      },
+      getAllMarker() {
+        console.log(this.session.getAllMarker())
+      },
+      
       initVK() {
         // 初始化 threejs
         this.initTHREE()
-        const THREE = this.THREE
 
         // 自定义初始化
         if (this.init) this.init()
 
         console.log('this.gl', this.gl)
 
-        const session = this.session = wx.createVKSession({
+        this.session = wx.createVKSession({
           track: {
             plane: {
-              mode: 3
+              mode: 1
             },
             marker: true,
           },
-          version: 'v1',
-          gl: this.gl
+          version: 'v2',
+          gl: this.gl,
         })
+
+        const THREE = this.THREE 
+
+
+       const session = this.session
         session.start(err => {
-          if (err) return console.error('VK error: ', err)
+          
+          if (err) {
+            this.setData({
+              errMsg:'VK error: ' + err
+            })
+            return console.error('VK error: ', err)
+          }
 
           console.log('@@@@@@@@ VKSession.version', session.version)
 
@@ -132,11 +304,29 @@ export default function getBehavior() {
               scene: gltf.scene,
               animations: gltf.animations,
             }
-            console.log("模型加载完成")
+
+            console.log("model加载完成")
           })
 
           this.clock = new THREE.Clock()
 
+          loader.load('https://dldir1.qq.com/weixin/miniprogram/reticle_4b6cc19698ca4a08b31fd3c95ce412ec.glb', gltf => {
+            const reticle = this.reticle = gltf.scene
+
+            reticle.visible = false
+            this.scene.add(reticle)
+          })
+
+          this.setData({
+            showTip: true
+          })
+          setTimeout(()=>{
+            this.setData({
+              showTip: false
+            })
+          }, 10000)
+
+          // anchor 检测
           const createPlane = size => {
             const geometry = new THREE.PlaneGeometry(size.width, size.height)
             const material = new THREE.MeshBasicMaterial({
@@ -156,21 +346,25 @@ export default function getBehavior() {
             object.matrix.fromArray(m)
           }
           session.on('addAnchors', anchors => {
+            console.log("add anchor")
             anchors.forEach(anchor => {
+              console.log("type: ", anchor.type)
               const size = anchor.size
               let object
-              if (size && DEBUG_SIZE) {
-                object = createPlane(size)
+              if (anchor.type == 0) {
+                 object = createPlane(size)
+                 this.setData({
+                    showTip: false
+                  })
               } else {
                 if (!this.model) {
                   console.warn('this.model 还没加载完成 ！！！！！')
                   return
                 }
-
-                object = new THREE.Object3D()
-                const model = this.getRobot()
-                model.rotateX(-Math.PI / 2)
-                object.add(model)
+                  object = new THREE.Object3D()
+                  const model = this.getRobot()
+                  model.rotateX(-Math.PI / 2)
+                  object.add(model)
               }
 
               object._id = anchor.id
@@ -180,15 +374,17 @@ export default function getBehavior() {
             })
           })
           session.on('updateAnchors', anchors => {
+            console.log("update")
             const map = anchors.reduce((temp, item) => {
               temp[item.id] = item
+              console.log(item.id, item)
               return temp
             }, {})
             this.planeBox.children.forEach(object => {
               if (object._id && map[object._id]) {
                 const anchor = map[object._id]
                 const size = anchor.size
-                if (size && DEBUG_SIZE && object._size && (size.width !== object._size.width || size.height !== object._size.height)) {
+                if (size && object._size && (size.width !== object._size.width || size.height !== object._size.height)) {
                   this.planeBox.remove(object)
                   object = createPlane(size)
                   this.planeBox.add(object)
@@ -201,7 +397,9 @@ export default function getBehavior() {
             })
           })
           session.on('removeAnchors', anchors => {
+             console.log("remove anchor")
             const map = anchors.reduce((temp, item) => {
+              console.log("type:", item.type)
               temp[item.id] = item
               return temp
             }, {})
@@ -214,7 +412,6 @@ export default function getBehavior() {
           const planeBox = this.planeBox = new THREE.Object3D()
           this.scene.add(planeBox)
 
-          
           //限制调用帧率
           let fps = 30
           let fpsInterval = 1000 / fps
@@ -222,20 +419,25 @@ export default function getBehavior() {
 
           // 逐帧渲染
           const onFrame = timestamp => {
-            let now = Date.now()
-            const mill = now - last
-            // 经过了足够的时间
-            if (mill > fpsInterval) {
-                last = now - (mill % fpsInterval); //校正当前时间
-                const frame = session.getVKFrame(canvas.width, canvas.height)
-                if (frame) {
+              let now = Date.now()
+              const mill = now - last
+              // 经过了足够的时间
+              if (mill > fpsInterval) {
+                  last = now - (mill % fpsInterval); //校正当前时间
+                  const frame = session.getVKFrame(canvas.width, canvas.height)
+                  if (frame) {
                   this.render(frame)
-                }
-            }
-            session.requestAnimationFrame(onFrame)
+                  }
+              }
+              session.requestAnimationFrame(onFrame)
           }
           session.requestAnimationFrame(onFrame)
         })
+      },
+      removeRobot(){
+        this.planeBox.children.forEach(object => {
+           this.planeBox.remove(object)
+         })
       },
       initTHREE() {
         const THREE = this.THREE = createScopedThreejs(this.canvas)
@@ -311,24 +513,14 @@ export default function getBehavior() {
             if (item.parent) item.parent.remove(item)
           })
         }
-
         return model
       },
       onTouchEnd(evt) {
-        // 点击位置放一个机器人
-        const touches = evt.changedTouches.length ? evt.changedTouches : evt.touches
-        if (touches.length === 1) {
-          const touch = touches[0]
-          if (this.session && this.scene && this.model) {
-            const hitTestRes = this.session.hitTest(touch.x / this.data.width, touch.y / this.data.height, this.resetPanel)
-            this.resetPanel = false
-            if (hitTestRes.length) {
-              const model = this.getRobot()
-              model.matrixAutoUpdate = false
-              model.matrix.fromArray(hitTestRes[0].transform)
-              this.scene.add(model)
-            }
-          }
+        if (this.scene && this.model && this.reticle) {
+          const model = this.getRobot()
+          model.position.copy(this.reticle.position)
+          model.rotation.copy(this.reticle.rotation)
+          this.scene.add(model)
         }
       }
     },

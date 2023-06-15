@@ -36,7 +36,6 @@ export default function getBehavior() {
                             })
                         }
                         calcSize(info.windowWidth, info.windowHeight * 0.8)
-
                         this.initVK()
                     })
             },
@@ -80,7 +79,7 @@ export default function getBehavior() {
                 if (this.canvas) this.canvas = null
                 if (this.gl) this.gl = null
                 if (this.session) this.session = null
-                if (this.textContentList) this.textContentList = []
+                if (this.anchor2DList) this.anchor2DList = []
             },
             initVK() {
                 // 初始化 threejs
@@ -93,16 +92,15 @@ export default function getBehavior() {
 
                 const session = this.session = wx.createVKSession({
                     track: {
-                        plane: {
-                            mode: 3
-                        },
-                        OCR: {
-                          mode: 2
+                        depth: {
+                          mode: 1
                         }
                     },
-                    version: 'v1',
-                    gl: this.gl
+                    cameraPosition: 0,
+                    gl: this.gl,
+                    version: 'v1'
                 })
+
                 session.start(err => {
                     if (err) return console.error('VK error: ', err)
 
@@ -125,56 +123,8 @@ export default function getBehavior() {
                         calcSize(info.windowWidth, info.windowHeight * 0.8, info.pixelRatio)
                     })
 
-                    session.on('addAnchors', anchors => {
-                        console.log("anchor add")
-                    })
-                    session.on('updateAnchors', anchors => {
-                        this.data.textContentList = []
-                        console.log(anchors)
-                        this.data.textContentList = this.data.textContentList.concat(anchors.map(anchor => {
-                               let result = {}
-                               result = {
-                                text: anchor.text,
-                                subtext: anchor.subtext,
-                                box: anchor.box,
-                                centerX: anchor.centerX,
-                                centerY: anchor.centerY,
-                                }
-                               if(anchor.box){
-                                    let lt = anchor.box[0]
-                                    let lr = anchor.box[1]
-                                    let rb = anchor.box[2]
-                                    let lb = anchor.box[3]
-                                    let width = lr.x - lt.x
-                                    let height = lb.y - lt.y
-                                    let avgX =  (lt.x +  lr.x +  rb.x +  lb.x) / 4;
-                                    let avgY =  (lt.y +  lr.y +  rb.y +  lb.y) / 4; 
-                                    anchor.centerX = avgX * this.data.faceImgWidth;
-                                    anchor.centerY = avgY * this.data.faceImgHeight;
-                                    result.origin = {
-                                        x: lt.x,
-                                        y: lt.y,
-                                    }
-                                    result.size = {
-                                        width: width,
-                                        height: height,
-                                    }
-                                }
-                            return result
-                        }))
-
-                        var wholeText = undefined
-                        if(this.data.textContentList.length != 0){
-                            wholeText = this.data.textContentList[0].text
-                        }
-
-                        this.setData({
-                            textContentList: this.data.textContentList,
-                            wholeText: wholeText
-                        })
-                    })
-                    session.on('removeAnchors', anchors => {
-                        console.log("anchor remove")
+                    this.setData({
+                      buttonDisable:false
                     })
 
                     
@@ -209,14 +159,6 @@ export default function getBehavior() {
 
                 // 场景
                 const scene = this.scene = new THREE.Scene()
-
-                // 光源
-                const light1 = new THREE.HemisphereLight(0xffffff, 0x444444) // 半球光
-                light1.position.set(0, 0.2, 0)
-                scene.add(light1)
-                const light2 = new THREE.DirectionalLight(0xffffff) // 平行光
-                light2.position.set(0, 0.2, 0.1)
-                scene.add(light2)
 
                 // 渲染层
                 const renderer = this.renderer = new THREE.WebGLRenderer({
