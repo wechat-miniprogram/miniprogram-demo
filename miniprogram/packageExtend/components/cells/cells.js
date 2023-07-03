@@ -89,7 +89,6 @@ module.exports =
     /***/ (function (module, exports, __webpack_require__) {
       Component({
         options: {
-          addGlobalClass: true,
           multipleSlots: true
         },
         properties: {

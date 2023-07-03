@@ -3,5 +3,5 @@
   "usingComponents": {},
   "componentFramework": "glass-easel",
   "renderer": "skyline",
-  "addGlobalClass": true
+  "styleIsolation": "apply-shared"
 }
