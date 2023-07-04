@@ -90,7 +90,6 @@ module.exports =
       console.log(module, exports)
       Component({
         options: {
-          addGlobalClass: true
         },
         properties: {
           title: {

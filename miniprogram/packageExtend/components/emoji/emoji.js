@@ -387,7 +387,6 @@ module.exports =
       })
       Component({
         options: {
-          addGlobalClass: true,
           pureDataPattern: /^_/
         },
         properties: {

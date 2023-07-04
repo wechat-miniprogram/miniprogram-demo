@@ -1,5 +1,5 @@
 {
   "component": true,
   "usingComponents": {},
-  "styleIsolation": "page-shared"
+  "styleIsolation": "shared"
 }
