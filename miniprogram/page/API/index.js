@@ -290,7 +290,7 @@ Page({
           url: 'plane-ar-v2-marker/plane-ar-v2-marker'
         },
         {
-          zh: '水平面深度AR-v2',
+          zh: '水平面AR-v2-虚实遮挡',
           url: 'plane-ar-v2-depth/plane-ar-v2-depth'
         },
         {
@@ -310,7 +310,7 @@ Page({
           url: 'osd-ar/osd-ar'
         },
         {
-          zh: '实时相机帧检测',
+          zh: '相机帧测试',
           url: 'cameraBuffer-detect/cameraBuffer-detect'
         },
         {
