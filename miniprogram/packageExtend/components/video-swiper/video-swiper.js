@@ -1,7 +1,6 @@
 Component({
   behaviors: [],
   options: {
-    addGlobalClass: true,
     pureDataPattern: /^_/
   },
   properties: {
