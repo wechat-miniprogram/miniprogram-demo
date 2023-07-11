@@ -92,7 +92,6 @@ module.exports =
 
       Component({
         options: {
-          addGlobalClass: true,
           pureDataPattern: /^_/,
           multipleSlots: true
         },

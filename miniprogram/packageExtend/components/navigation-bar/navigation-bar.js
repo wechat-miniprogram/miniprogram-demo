@@ -90,7 +90,6 @@ module.exports =
       Component({
         options: {
           multipleSlots: true,
-          addGlobalClass: true
         },
         properties: {
           extClass: {

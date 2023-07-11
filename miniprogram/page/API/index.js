@@ -261,6 +261,10 @@ Page({
         zh: 'style transfer',
         url: 'style-trans/index',
       },
+      {
+        zh: 'mobileNetInt8',
+        url: 'mobilenet_int8/index',
+      }
     ]
     }, {
       id: 'ar',
@@ -282,6 +286,14 @@ Page({
           url: 'plane-ar-v2/plane-ar-v2'
         },
         {
+          zh: '水平面AR-v2-marker识别',
+          url: 'plane-ar-v2-marker/plane-ar-v2-marker'
+        },
+        {
+          zh: '水平面AR-v2-虚实遮挡',
+          url: 'plane-ar-v2-depth/plane-ar-v2-depth'
+        },
+        {
           zh: '水平面旋转AR',
           url: 'plane-ar-3dof/plane-ar-3dof'
         },
@@ -296,6 +308,18 @@ Page({
         {
           zh: '单样本检测(OSD)',
           url: 'osd-ar/osd-ar'
+        },
+        {
+          zh: '相机帧测试',
+          url: 'cameraBuffer-detect/cameraBuffer-detect'
+        },
+        {
+          zh: '实时深度图检测',
+          url: 'depth-detect/depth-detect'
+        },
+        {
+          zh: '照片深度图检测',
+          url: 'photo-depth-detect/photo-depth-detect'
         },
         {
           zh: '实时OCR检测',

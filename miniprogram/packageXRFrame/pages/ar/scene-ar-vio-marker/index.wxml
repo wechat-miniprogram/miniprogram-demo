@@ -1,0 +1,20 @@
+<xr-demo-viewer
+  title="AR Plane和Marker混合案例"
+  intro="在设备支持V2的`Plane`模式时，可以同时开启`Plane`和`Makrer`模式进行融合识别。"
+  hint="预计在基础库版本 v2.33.1 正式支持。"
+  code="{{xmlCode}}"
+>
+  <xr-ar-vio-marker
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+</xr-demo-viewer>

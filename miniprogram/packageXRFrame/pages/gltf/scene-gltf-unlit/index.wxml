@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="无光照glTF案例"
-  intro="应用于KHR_materials_unlit材质的glTF案例，常见于已烘焙光照到贴图与卡通渲染模型"
+  intro="应用 KHR_materials_unlit 材质的glTF案例，常见于已烘焙光照到贴图与卡通渲染模型"
   code="{{xmlCode}}"
 >
   <xr-gltf-unlit

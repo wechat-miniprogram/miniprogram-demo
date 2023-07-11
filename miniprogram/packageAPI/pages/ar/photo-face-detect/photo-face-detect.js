@@ -74,7 +74,7 @@ Component({
             })
         },
         init() {
-            this.initGL()
+           // this.initGL()
         },
         render(frame) {
             return
@@ -120,6 +120,7 @@ Component({
                 console.log('this.session.detectFace', this.session.detectFace)
                 console.log('width', this.data.faceImgOriginWidth)
                 console.log('height', this.data.faceImgOriginHeight)
+
                 this.session.detectFace({
                     frameBuffer: this.imgData.data.buffer,
                     width: this.data.faceImgOriginWidth,

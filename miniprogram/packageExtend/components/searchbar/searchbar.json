@@ -1,7 +1,8 @@
 {
-    "component": true,
-    "usingComponents": {
-        "mp-cells": "../cells/cells",
-        "mp-cell": "../cell/cell"
-    }
+  "component": true,
+  "usingComponents": {
+    "mp-cells": "../cells/cells",
+    "mp-cell": "../cell/cell"
+  },
+  "styleIsolation": "apply-shared"
 }

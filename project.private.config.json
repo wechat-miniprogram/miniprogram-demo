@@ -4,8 +4,9 @@
   "setting": {
     "useIsolateContext": true,
     "urlCheck": false,
-    "compileHotReLoad": true,
-    "lazyloadPlaceholderEnable": false
+    "compileHotReLoad": false,
+    "lazyloadPlaceholderEnable": false,
+    "skylineRenderEnable": true
   },
   "projectname": "miniprogram-demo-master",
   "condition": {
@@ -41,6 +42,20 @@
         {
           "name": "",
           "pathName": "packageSkyline/pages/scroll-view/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "product-list",
+          "pathName": "packageSkylineExamples/examples/product-list/pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "expanded-scroll-view",
+          "pathName": "packageSkylineExamples/examples/expanded-scroll-view/pages/index/index",
           "query": "",
           "launchMode": "default",
           "scene": null

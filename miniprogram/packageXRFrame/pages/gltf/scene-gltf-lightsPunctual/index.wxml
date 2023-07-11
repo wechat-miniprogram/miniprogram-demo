@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="KHR_lights_punctual"
+  intro="glTF Punctual Light 支持。Copyright 2021 DGG. CC BY 4.0 International https://creativecommons.org/licenses/by/4.0/"
+>
+  <xr-gltf-lightsPunctual
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    a="123"
+  />
+</xr-demo-viewer>

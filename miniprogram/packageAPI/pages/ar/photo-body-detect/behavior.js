@@ -28,8 +28,8 @@ export default function getBehavior() {
                         const pixelRatio = info.pixelRatio
                         const calcSize = (width, height) => {
                             console.log(`canvas size: width = ${width} , height = ${height}`)
-                            this.canvas.width = width * pixelRatio / 2
-                            this.canvas.height = height * pixelRatio / 2
+                            this.canvas.width = width * pixelRatio
+                            this.canvas.height = height * pixelRatio
                             this.setData({
                                 width,
                                 height,
@@ -112,8 +112,8 @@ export default function getBehavior() {
 
                     const calcSize = (width, height, pixelRatio) => {
                         console.log(`canvas size: width = ${width} , height = ${height}`)
-                        this.canvas.width = width * pixelRatio / 2
-                        this.canvas.height = height * pixelRatio / 2
+                        this.canvas.width = width * pixelRatio
+                        this.canvas.height = height * pixelRatio
                         this.setData({
                             width,
                             height,

@@ -76,18 +76,31 @@ Component({
       console.log("触发事件")
       console.log(e.detail)
       this.setData({
-        imgUrl: e.detail.myChooseMapUrl
+        imgUrl: e.detail.myChooseMapUrl,
+        mapUrl: e.detail.myChooseMapUrl
       })
+    },
+    saveMap(){
+        wx.openDocument({
+          filePath: this.data.mapUrl,
+          fileType: 'pdf',
+          showMenu: true,
+          success: function (res) {
+            console.log('下载map至本地成功')
+          }
+        }) 
     },
     addMarker() {
       if (this.data.markerId) return
       const fs = wx.getFileSystemManager()
       // 此处如果为jpeg,则后缀名也需要改成对应后缀
       const filePath = `${wx.env.USER_DATA_PATH}/model.map`
+      console.log("filePath is:", filePath)
       //const filePath = `${wx.env.USER_DATA_PATH}/marker-ar.jpeg`
       const download = callback => wx.downloadFile({
         // 此处设置为识别的3d对象的map地址
-          url: 'http://dldir1.qq.com/weixin/checkresupdate/coco_bad_autov2_41add464411f40279704b6cffe660a1c.map',
+          // url: 'http://dldir1.qq.com/weixin/checkresupdate/coco_bad_autov2_41add464411f40279704b6cffe660a1c.map',
+          url: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/output_bad.map',
           // url: 'http://dldir1.qq.com/weixin/checkresupdate/marker1_7d97094792854249a860640e985a743c.jpeg',
           success(res) {
             fs.saveFile({
@@ -114,6 +127,7 @@ Component({
           "filePathNow": filePath,
           "markerId": markerId
         })
+        console.log("[markerId] -->", markerId)
       }
 
       const getFilePathNow = () => {

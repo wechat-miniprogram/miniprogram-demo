@@ -1,0 +1,19 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="gltf-LightsPunctualLamp" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/LightsPunctualLamp.glb" />
+  </xr-assets>
+  <xr-env env-data="xr-frame-team-workspace-day" />
+  <xr-node>
+    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
+    <xr-gltf node-id="gltf-LightsPunctualLamp" position="0 -1 0" rotation="0 0 0" scale="1 1 1" model="gltf-LightsPunctualLamp"></xr-gltf>
+    <xr-camera
+      id="camera" node-id="camera" position="0 0 3" clear-color="0.1 0.1 0.1 1"
+      near="0.1"
+      far="2000"
+      target="camera-target"  camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <!-- 场上最多只允许4个光源，所以不需要场景光源，由模型提供实际光源 -->
+  </xr-node>
+</xr-scene>

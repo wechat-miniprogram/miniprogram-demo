@@ -33,7 +33,6 @@ const throttle = function throttle(func, wait, options) {
 Component({
   behaviors: [],
   options: {
-    addGlobalClass: true,
     pureDataPattern: /^_/
   },
   properties: {

@@ -80,6 +80,8 @@
         "pages/ar/visionkit-basic-v2/visionkit-basic-v2",
         "pages/ar/plane-ar/plane-ar",
         "pages/ar/plane-ar-v2/plane-ar-v2",
+        "pages/ar/plane-ar-v2-marker/plane-ar-v2-marker",
+        "pages/ar/plane-ar-v2-depth/plane-ar-v2-depth",
         "pages/ar/plane-ar-3dof/plane-ar-3dof",
         "pages/ar/2dmarker-ar/2dmarker-ar",
         "pages/ar/3dmarker-ar/3dmarker-ar",
@@ -87,11 +89,14 @@
         "pages/ar/face-detect/face-detect",
         "pages/ar/body-detect/body-detect",
         "pages/ar/hand-detect/hand-detect",
+        "pages/ar/depth-detect/depth-detect",
+        "pages/ar/cameraBuffer-detect/cameraBuffer-detect",
         "pages/ar/ocr-detect/ocr-detect",
         "pages/ar/photo-ocr-detect/photo-ocr-detect",
         "pages/ar/photo-hand-detect/photo-hand-detect",
         "pages/ar/photo-body-detect/photo-body-detect",
         "pages/ar/photo-face-detect/photo-face-detect",
+        "pages/ar/photo-depth-detect/photo-depth-detect",
         "pages/page/set-navigation-bar-title/set-navigation-bar-title",
         "pages/page/navigation-bar-loading/navigation-bar-loading",
         "pages/page/navigator/navigator",
@@ -151,7 +156,8 @@
         "pages/framework/wxs/stick-top",
         "pages/framework/wxs/nearby",
         "pages/ai/mobilenet/index",
-        "pages/ai/style-trans/index"
+        "pages/ai/style-trans/index",
+        "pages/ai/mobilenet_int8/index"
       ]
     },
     {
@@ -243,7 +249,9 @@
         "examples/half-screen/pages/index/index",
         "examples/segmented-half-screen/pages/index/index",
         "examples/card_transition/pages/list/list",
-        "examples/card_transition/pages/detail/detail"
+        "examples/card_transition/pages/detail/detail",
+        "examples/product-list/pages/index/index",
+        "examples/expanded-scroll-view/pages/index/index"
       ]
     },
     {
@@ -268,7 +276,9 @@
         "pages/gltf/scene-gltf-morph/index",
         "pages/gltf/scene-gltf-light-loading/index",
         "pages/gltf/scene-gltf-specularGlossiness/index",
+        "pages/gltf/scene-gltf-sheen/index",
         "pages/gltf/scene-gltf-textureTransform/index",
+        "pages/gltf/scene-gltf-lightsPunctual/index",
         "pages/ar/scene-ar-basic/index",
         "pages/ar/scene-ar-2dmarker/index",
         "pages/ar/scene-ar-osdmarker/index",
@@ -277,6 +287,7 @@
         "pages/ar/scene-ar-body/index",
         "pages/ar/scene-ar-threeDof/index",
         "pages/ar/scene-ar-camera/index",
+        "pages/ar/scene-ar-vio-marker/index",
         "pages/custom/scene-custom-logic/index",
         "pages/custom/scene-custom-render/index",
         "pages/scan/scene-scan-render/index",
@@ -291,6 +302,7 @@
         "pages/template/xr-template-control/index",
         "pages/template/xr-template-loading/index",
         "pages/template/xr-template-gltfEdit/index",
+        "pages/template/xr-template-gltfAnimation/index",
         "pages/template/xr-template-gltfOcclusion/index",
         "pages/template/xr-template-frameEffect/index",
         "pages/template/xr-template-tracker/index",
@@ -301,7 +313,9 @@
         "pages/template/xr-template-arPreview/index",
         "pages/template/xr-template-lookat/index",
         "pages/scene-last-record/index",
-        "pages/scene-beside-edge/index"
+        "pages/scene-beside-edge/index",
+        "pages/physics/scene-physics-shoot/index",
+        "pages/physics/scene-physics-throw/index"
       ]
     }
   ],

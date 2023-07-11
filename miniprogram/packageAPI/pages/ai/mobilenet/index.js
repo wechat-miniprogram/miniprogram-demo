@@ -41,7 +41,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
  onReady() {
-    this.ctx = wx.createCanvasContext('ssd');
+    this.ctx = wx.createCanvasContext('ssd1');
     const context = wx.createCameraContext(this);
     this.initClassifier();
     this.fpsHelper = new FpsHelper();

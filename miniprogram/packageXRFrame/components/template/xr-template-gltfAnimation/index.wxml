@@ -1,0 +1,22 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="gltf-floating_castle" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/floating_castle.glb" /> 
+  </xr-assets>
+  <xr-env env-data="xr-frame-team-workspace-day2" />
+  <xr-node>
+    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
+
+    <xr-node id="wrap">
+      <xr-gltf id="gltf" position="0 0 0" rotation="0 0 0" scale="6 6 6" model="gltf-floating_castle" bind:gltf-loaded="handleGLTFLoaded"></xr-gltf>
+    </xr-node>
+    <xr-camera
+      id="camera" node-id="camera" position="2 3 -5" clear-color="0.2 0.2 0.2 1"
+      target="camera-target"
+      camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.6" />
+    <xr-light type="directional" rotation="20 120 0" color="1 1 1" intensity="2"/>
+  </xr-node>
+</xr-scene>

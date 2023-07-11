@@ -29,8 +29,8 @@ export default function getBehavior() {
             const pixelRatio = info.pixelRatio
             const calcSize = (width, height) => {
               console.log(`canvas size: width = ${width} , height = ${height}`)
-              this.canvas.width = width * pixelRatio / 2
-              this.canvas.height = height * pixelRatio / 2
+              this.canvas.width = width * pixelRatio
+              this.canvas.height = height * pixelRatio
               this.setData({
                 width,
                 height,
@@ -93,18 +93,24 @@ export default function getBehavior() {
 
         console.log('this.gl', this.gl)
 
-        const session = this.session = wx.createVKSession({
+        this.session = wx.createVKSession({
           track: {
             plane: {
-              mode: 3
+              mode: 1
             },
           },
           version: 'v2',
-          gl: this.gl
+          gl: this.gl,
         })
-
+      const session = this.session
         session.start(err => {
-          if (err) return console.error('VK error: ', err)
+          
+          if (err) {
+            this.setData({
+              errMsg:'VK error: ' + err
+            })
+            return console.error('VK error: ', err)
+          }
 
           console.log('@@@@@@@@ VKSession.version', session.version)
 
@@ -112,8 +118,8 @@ export default function getBehavior() {
 
           const calcSize = (width, height, pixelRatio) => {
             console.log(`canvas size: width = ${width} , height = ${height}`)
-            this.canvas.width = width * pixelRatio / 2
-            this.canvas.height = height * pixelRatio / 2
+            this.canvas.width = width * pixelRatio
+            this.canvas.height = height * pixelRatio
             this.setData({
               width,
               height,
@@ -142,6 +148,14 @@ export default function getBehavior() {
             this.scene.add(reticle)
           })
 
+          this.setData({
+            showTip: true
+          })
+          setTimeout(()=>{
+            this.setData({
+              showTip: false
+            })
+          }, 10000)
 
           // anchor 检测
           const createPlane = size => {
@@ -166,22 +180,20 @@ export default function getBehavior() {
             anchors.forEach(anchor => {
               const size = anchor.size
               let object
-              if (size) {
-                // object = createPlane(size)
+              if (anchor.type == 0) {
+                 object = createPlane(size)
+                 this.setData({
+                    showTip: false
+                  })
               } else {
-                if (options.anchorModel) {
-                  if (!this.model) {
-                    console.warn('this.model 还没加载完成 ！！！！！')
-                    return
-                  }
-
+                if (!this.model) {
+                  console.warn('this.model 还没加载完成 ！！！！！')
+                  return
+                }
                   object = new THREE.Object3D()
                   const model = this.getRobot()
                   model.rotateX(-Math.PI / 2)
                   object.add(model)
-                } else {
-                  object = new THREE.GridHelper(0.2, 10, 0xffffff, 0xffffff)
-                }
               }
 
               object._id = anchor.id

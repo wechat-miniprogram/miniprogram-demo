@@ -1,0 +1,29 @@
+<view class="container page" data-weui-theme="{{theme}}">
+  <canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px" bindtouchend="onTouchEnd">
+      <view wx:if="{{errMsg}}" class="page-body-text tc" style="position: absolute; top: {{height / 2}}px; left: {{width / 4}}px;  width:50%; color:red">{{errMsg}}</view>
+      <image wx:if="{{showTip}}" style="position: absolute; top: 25%; left: 25%; width: 50%; height: 50%;" src="./move.gif"></image>
+    </canvas>
+
+  <cover-view class="btn-cnt">
+      <!-- <button type="primary" style="width: 50vw;" bindtap="add3DMarker">添加3D marker</button>
+      <button type="primary" style="width: 50vw;" bindtap="add3DMarker2">添加3D marker 2</button> -->
+      <button type="primary" disabled="{{markerId.length == 0}}"  style="width: 50vw;" bindtap="removeAllMarker">删除全部 marker</button>
+      <button type="primary" disabled="{{markerId.length == 0}}"  style="width: 50vw;" bindtap="getAllMarker">获取所有 marker</button>
+  </cover-view>
+
+
+  <view class="photo-cnt">
+    <view class="page-body-text tc" style="height:20%">提示：触碰屏幕任意点, 光标标记指示的是真实水平面，触碰平面可以生成机器人，通过点击加号添加多张图片,进行marker识别</view>
+  </view>
+
+  <scroll-view class="scroll-view_H" scroll-x type="list" enable-flex style="width: 100%; height: 20vh; display:flex;">
+  <view>
+    <image style="border-radius: 15px; width: 30vw; height: 30vw; margin-left: 0%" bindtap="chooseMedia" src="./add.png" />
+  </view>  
+  <view wx:for="{{imgList}}" wx:for-index="imgIndex" wx:for-item="imgItem">
+      <image  src="{{imgItem}}" wx:if="{{imgItem}}" style=" border-radius: 15px; width: 30vw; height: 30vw; margin-left: 25 + {{imgIndex}} * 25%" mode="aspectFit" binderror="errImg" bindload="loadImg" data-err-img="{{imgIndex}}" />
+  </view>
+      
+  </scroll-view>
+
+</view>

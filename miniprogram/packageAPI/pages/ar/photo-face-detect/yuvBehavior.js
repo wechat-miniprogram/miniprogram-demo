@@ -1,6 +1,7 @@
 const yuvBehavior = Behavior({
     methods: {
         initShader() {
+            console.log("初始化shader完成")
             const gl = this.gl = this.renderer.getContext()
             const currentProgram = gl.getParameter(gl.CURRENT_PROGRAM)
             const vs = `
@@ -9,7 +10,7 @@ const yuvBehavior = Behavior({
         uniform mat3 displayTransform;
         varying vec2 v_texCoord;
         void main() {
-          vec3 p = displayTransform * vec3(a_position, 0);
+          vec3 p =  vec3(a_position, 0);
           gl_Position = vec4(p, 1);
           v_texCoord = a_texCoord;
         }

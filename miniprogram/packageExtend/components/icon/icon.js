@@ -100,7 +100,6 @@ module.exports =
 
       Component({
         options: {
-          addGlobalClass: true
         },
         properties: {
           extClass: {

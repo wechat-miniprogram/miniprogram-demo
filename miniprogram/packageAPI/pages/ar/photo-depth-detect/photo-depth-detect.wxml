@@ -1,0 +1,15 @@
+<view class="container page" data-weui-theme="{{theme}}">
+<view style="display: flex; justify-content: center;margin: 12px;">
+    <view>原图：</view>
+    <image src="{{depthImgUrl}}" style="width: 100px; height: 100px;" mode="aspectFit" />
+</view>
+<view class="btn-cnt">
+    <button type="primary" bindtap="chooseMedia">选择图片</button>
+    <button type="primary" disabled="{{!depthImgUrl}}" style="margin-top: 20px;" bindtap="detectDepth">开始检测</button>
+</view>
+
+<canvas type="webgl" id="webgl" style="left:50%; transform: translate(-50%, 0); width: {{depthImgWidth}}px; height: {{depthImgHeight}}px; position:relative">
+</canvas>
+
+<view class="page-body-text tc" style="height:20%">提示：点击选择图片，上传本地深度图照片，然后开始检测，将会显示深度图信息</view>
+</view>
