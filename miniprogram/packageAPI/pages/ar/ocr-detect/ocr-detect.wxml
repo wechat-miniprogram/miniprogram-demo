@@ -1,7 +1,7 @@
 <view class="container page" data-weui-theme="{{theme}}">
   <view><canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px" bindtouchend="onTouchEnd">
     </canvas></view>
-  <view wx:if="{{textContentList.length != 0}}">
+  <view wx:if="{{textContentList}}">
     <view wx:for="{{textContentList}}">
       <text wx:if="{{item.subtext != undefined && item.centerX != undefined}}" style="position:absolute; top:{{item.centerY}}px; left:{{item.centerX}}px">{{item.subtext}}</text>
     </view>

@@ -2,7 +2,7 @@
   <view class="navigation-bar__inner {{ios ? 'ios' : 'android'}}" style="margin-top: {{statusBarHeight}}px; color: {{color}};background: {{background}}">
     <view class='navigation-bar__left' style="width: {{sideWidth}}px;">
       <block wx:if="{{back}}">
-        <view class="navigation-bar__buttons" bindtap="back">
+        <view class="navigation-bar__buttons" bindtap="back" >
           <image class="navigation-bar__button navigation-bar__btn_goback" hover-class="active" src="../../images/back-arrow.png"></image>
         </view>
       </block>

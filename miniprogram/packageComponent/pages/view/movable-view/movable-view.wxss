@@ -15,12 +15,10 @@ movable-area {
   background-color: #ccc;
   overflow: hidden;
 }
-
 .max {
   width: 300px;
   height: 300px;
 }
-
 .page-section {
   width: 100%;
   margin-bottom: 10px;
@@ -38,7 +36,7 @@ movable-area {
 .page-section-title.first {
   margin-top: 0;
 }
-
 .btn-area {
   margin-top: 10px;
+  padding-bottom: 50px;
 }

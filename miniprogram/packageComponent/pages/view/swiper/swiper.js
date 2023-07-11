@@ -6,7 +6,7 @@ Page({
     }
   },
 
-  data: {
+ data: {
     theme: 'light',
     background: ['A', 'B', 'C'],
     indicatorDots: true,
@@ -18,8 +18,9 @@ Page({
 
   changeIndicatorDots() {
     this.setData({
-      indicatorDots: !this.data.indicatorDots
+      indicatorDots: !this.data.indicatorDots,
     })
+    console.log(indicatorDots)
   },
 
   changeAutoplay() {

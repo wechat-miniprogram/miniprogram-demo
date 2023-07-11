@@ -8,7 +8,7 @@
     "lazyloadPlaceholderEnable": false,
     "skylineRenderEnable": true
   },
-  "projectname": "小程序示例",
+  "projectname": "miniprogram-demo-master",
   "condition": {
     "miniprogram": {
       "list": [

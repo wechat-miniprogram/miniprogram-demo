@@ -1,12 +1,11 @@
 <import src="../../../../common/head.wxml" />
 <import src="../../../../common/foot.wxml" />
 
-<mp-navigation-bar title="swiper" back="{{true}}"></mp-navigation-bar>
+<!-- <mp-navigation-bar title="swiper" back="{{true}}"></mp-navigation-bar> -->
+<!-- <template is="head" data="{{title: 'swiper'}}"/> -->
 <scroll-view class="page-scroll-view" scroll-y type="list">
 <view class="container page" data-weui-theme="{{theme}}">
-  <template is="head" data="{{title: 'swiper'}}"/>
-
-  <view class="page-body">
+ <view class="page-body">
     <view class="page-section page-section-spacing swiper">
       <swiper indicator-dots="{{indicatorDots}}"
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
@@ -20,23 +19,23 @@
     <view class="page-section" style="margin-top: 20px;margin-bottom: 0;">
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_switch">
-          <view class="weui-cell__bd">指示点</view>
+          <view class="weui-cell__bd" style="width:600rpx;">指示点 </view>
           <view class="weui-cell__ft">
-            <switch checked="{{indicatorDots}}" bindchange="changeIndicatorDots" />
+            <radio checked="{{indicatorDots}}"  catchtap="changeIndicatorDots"/>
           </view>
         </view>
         <view class="weui-cell_before"></view>
         <view class="weui-cell weui-cell_switch">
-          <view class="weui-cell__bd">自动播放</view>
+          <view class="weui-cell__bd" style="width:602rpx;">自动播放</view>
           <view class="weui-cell__ft">
-            <switch checked="{{autoplay}}" bindchange="changeAutoplay" />
+            <radio checked="{{autoplay}}" catchtap="changeAutoplay"/>
           </view>
         </view>
-      </view>
+       </view>
     </view>
-
+    <!-- slider在skyline模式下暂时不支持 
     <view class="page-section page-section-spacing">
-      <view class="page-section-title">
+       <view class="page-section-title">
         <text>幻灯片切换时长(ms)</text>
         <text class="swiper-info">{{duration}}</text>
       </view>
@@ -45,10 +44,10 @@
         <text>自动播放间隔时长(ms)</text>
         <text class="swiper-info">{{interval}}</text>
       </view>
-      <slider bindchange="intervalChange" value="{{interval}}" min="2000" max="10000"/>
-    </view>
+      <slider bindchange="intervalChange" value="{{interval}}" min="2000" max="10000" color="#e9e9e9"/>
+    </view>  -->
   </view>
 
-  <template is="foot" />
+  <template is="foot"/> 
 </view>
 </scroll-view>

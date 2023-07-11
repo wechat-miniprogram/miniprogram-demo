@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+      "grid-tile": "../../../../../components/grid-tile/index"
+    },
+    "renderer": "skyline"
+  }

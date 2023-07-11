@@ -15,7 +15,6 @@ export default function getBehavior() {
             fps: 0,
             memory: 0,
             cpu: 0,
-            pause: false
         },
         methods: {
             onReady() {
@@ -29,8 +28,8 @@ export default function getBehavior() {
                         const pixelRatio = info.pixelRatio
                         const calcSize = (width, height) => {
                             console.log(`canvas size: width = ${width} , height = ${height}`)
-                            this.canvas.width = width * pixelRatio
-                            this.canvas.height = height * pixelRatio
+                            this.canvas.width = width * pixelRatio / 2
+                            this.canvas.height = height * pixelRatio / 2
                             this.setData({
                                 width,
                                 height,
@@ -113,8 +112,8 @@ export default function getBehavior() {
 
                     const calcSize = (width, height, pixelRatio) => {
                         console.log(`canvas size: width = ${width} , height = ${height}`)
-                        this.canvas.width = width * pixelRatio
-                        this.canvas.height = height * pixelRatio
+                        this.canvas.width = width * pixelRatio / 2
+                        this.canvas.height = height * pixelRatio / 2
                         this.setData({
                             width,
                             height,
@@ -130,23 +129,29 @@ export default function getBehavior() {
                        console.log("anchor add")
                     })
                     session.on('updateAnchors', anchors => {
-                      if(this.data.pause){
-                        console.log("update anchor暂停")
-                        return;
-                      }
-                        this.textContentList = []
+                      this.data.textContentList = []
 
-                        this.textContentList = this.textContentList.concat(anchors.map(anchor => {
+                        // 摄像头实时检测人脸的时候 updateAnchors 会在每帧触发，所以性能要求更高，用 gl 画
+                        this.data.textContentList = this.data.textContentList.concat(anchors.map(anchor => {
                             return {
                                 text: anchor.text,
                                 subtext: anchor.subtext,
-                                box: anchor.box,
+                                box: anchor.box
                             };
                         }))
+
+                        var wholeText = undefined
+                        if(this.data.textContentList.length != 0){
+                            wholeText = this.data.textContentList[0].text
+                        }
+
+                        this.setData({
+                            textContentList: this.data.textContentList,
+                            wholeText: wholeText
+                        })
                     })
                     session.on('removeAnchors', anchors => {
-                     // console.log("anchor remove")
-                      this.textContentList = []
+                      console.log("anchor remove")
                     })
 
                     
@@ -154,7 +159,6 @@ export default function getBehavior() {
                     let fps = 30
                     let fpsInterval = 1000 / fps
                     let last = Date.now()
-                    let lastText =  Date.now()
 
                     // 逐帧渲染
                     const onFrame = timestamp => {
@@ -164,21 +168,9 @@ export default function getBehavior() {
                         if (mill > fpsInterval) {
                             last = now - (mill % fpsInterval); //校正当前时间
                             const frame = session.getVKFrame(canvas.width, canvas.height)
-                            if (frame && !this.data.pause) {
+                            if (frame) {
                             this.render(frame)
                             }
-                        }
-                        const millText = now - lastText
-                        const interval = fpsInterval * 10
-                        //减缓setData频率
-                        if(millText > interval){
-                          lastText = now - (millText % interval)
-                          try{
-                            this.renderText()
-                          }catch(e){
-                            console.log(e)
-                          }
-                          
                         }
                         session.requestAnimationFrame(onFrame)
                     }
