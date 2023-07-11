@@ -1,8 +1,7 @@
 {
-  "libVersion": "2.32.0",
+  "libVersion": "2.33.0",
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
   "setting": {
-    "useIsolateContext": true,
     "urlCheck": false,
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
@@ -56,6 +55,13 @@
         {
           "name": "expanded-scroll-view",
           "pathName": "packageSkylineExamples/examples/expanded-scroll-view/pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "demo-1",
+          "pathName": "packageComponent/pages/view/grid-view/demo-1/demo-1",
           "query": "",
           "launchMode": "default",
           "scene": null

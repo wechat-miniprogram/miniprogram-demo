@@ -10,7 +10,8 @@
   <view class="page-body">
     <view class="page-section">
       <view class="page-section-title">
-        <text>Vertical Scroll\n纵向滚动</text>
+        <text>Vertical Scroll</text>
+        <text>纵向滚动</text>
       </view>
       <view class="page-section-spacing">
         <scroll-view scroll-y type="list" style="height: 150px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
@@ -22,7 +23,8 @@
     </view>
     <view class="page-section">
       <view class="page-section-title">
-        <text>Horizontal Scroll\n横向滚动</text>
+        <text>Horizontal Scroll</text>
+        <text>横向滚动</text>
       </view>
       <view class="page-section-spacing">
         <scroll-view class="scroll-view_H" scroll-x type="list" enable-flex bindscroll="scroll" style="width: 100%; height: 150px; flex-direction: row;">
@@ -34,7 +36,8 @@
     </view>
     <view class="page-section">
       <view class="page-section-title">
-        <text>自定义下拉刷新\n自定义：</text>
+        <text>自定义下拉刷新</text>
+        <text>自定义：</text>
       </view>
       <view class="page-section-spacing">
         <scroll-view type="list"

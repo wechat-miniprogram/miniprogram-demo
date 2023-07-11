@@ -410,6 +410,10 @@
     "audio",
     "location"
   ],
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation"
+  ],
   "embeddedAppIdList": [
     "wxfdcee92a299bcaf1"
   ],

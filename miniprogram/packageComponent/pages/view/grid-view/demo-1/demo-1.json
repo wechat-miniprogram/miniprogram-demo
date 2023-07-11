@@ -2,5 +2,6 @@
     "usingComponents": {
       "grid-tile": "../../../../../components/grid-tile/index"
     },
-    "renderer": "skyline"
+    "renderer": "skyline",
+    "componentFramework": "glass-easel"
   }

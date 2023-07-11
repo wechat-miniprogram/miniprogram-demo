@@ -23,6 +23,9 @@ Page({
           hasLocation: true,
           location: formatLocation(res.longitude, res.latitude)
         })
+      },
+      complete(res) {
+        console.log('getLocation: ', res)
       }
     })
   },
