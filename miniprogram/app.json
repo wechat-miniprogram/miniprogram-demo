@@ -412,7 +412,8 @@
   ],
   "requiredPrivateInfos": [
     "getLocation",
-    "chooseLocation"
+    "chooseLocation",
+    "chooseAddress"
   ],
   "embeddedAppIdList": [
     "wxfdcee92a299bcaf1"
