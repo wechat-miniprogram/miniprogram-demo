@@ -50,6 +50,7 @@ Component({
         count: 9,
         mediaType: ['video'],
         sourceType: ['camera', 'album'],
+        sizeType: ['original'], // 关闭压缩
         maxDuration: 60,
         camera: 'back',
         success: (res) => {
@@ -57,25 +58,35 @@ Component({
           console.log(res)
           const tempFileInfo = res.tempFiles[0]
           let flag = true;
-          if(tempFileInfo.duration>=10 && tempFileInfo.duration<=30){
-            let min = tempFileInfo.width < tempFileInfo.height ? tempFileInfo.width : tempFileInfo.height;
-            let max = tempFileInfo.width > tempFileInfo.height ? tempFileInfo.width : tempFileInfo.height;
-            if(min<480){
-              flag = false;
-              wx.showToast({
-                title: '保证短边在480px以上',
-                icon: 'none',
-                duration: 2000
-              })
-            }else{
-              if(max*9 != min*16 && max*3!= min*4){
+          // 保证视频时长在 10-30秒 之间
+          if (tempFileInfo.duration >= 10 && tempFileInfo.duration <= 30) {
+            const rate = tempFileInfo.width / tempFileInfo.height;
+
+            let min = tempFileInfo.width;
+            let max = tempFileInfo.height;
+            if (rate > 1) {
+              min = tempFileInfo.height;
+              max = tempFileInfo.width;
+            }
+
+            // 保证长边在 720 以上
+            if (max > 720) {
+              // 不接受比例在 3:1 以上的视频
+              if(rate < 1 / 3 || rate > 3){
                 flag = false;
                 wx.showToast({
-                  title: '长宽比尽量为16:9或4:3',
+                  title: '长宽比尽量为16:9或4:3，不接受比例大于3:1的视频',
                   icon: 'none',
                   duration: 2000
                 })
               }
+            }else{
+              flag = false;
+              wx.showToast({
+                title: '保证长边在720以上',
+                icon: 'none',
+                duration: 2000
+              })  
             }
           }else{
             flag = false;
