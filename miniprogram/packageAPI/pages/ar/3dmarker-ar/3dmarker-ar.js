@@ -86,6 +86,11 @@ Component({
           fileType: 'pdf',
           showMenu: true,
           success: function (res) {
+            wx.showModal({
+              content: '下载map至本地成功, 通过右上角点击转发获取pdf，更改后缀名为map即可获得',
+              confirmText: '好的',
+              cancelText: '我已知晓',
+            })
             console.log('下载map至本地成功')
           }
         }) 

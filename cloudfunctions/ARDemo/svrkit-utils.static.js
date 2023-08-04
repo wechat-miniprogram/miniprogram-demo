@@ -13,7 +13,7 @@ var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 /**
  * enARModelStatus enum.
  * @exports enARModelStatus
- * @enum {string}
+ * @enum {number}
  * @property {number} ARModel_Status_Default=0 ARModel_Status_Default value
  * @property {number} ARModel_Status_Init=1 ARModel_Status_Init value
  * @property {number} ARModel_Status_Sparse_Finished=2 ARModel_Status_Sparse_Finished value
@@ -37,7 +37,7 @@ $root.enARModelStatus = (function() {
 /**
  * enARAlgorithmType enum.
  * @exports enARAlgorithmType
- * @enum {string}
+ * @enum {number}
  * @property {number} Algorithm_Type_3D_Object=1 Algorithm_Type_3D_Object value
  * @property {number} Algorithm_Type_3D_Marker=2 Algorithm_Type_3D_Marker value
  */
@@ -51,7 +51,7 @@ $root.enARAlgorithmType = (function() {
 /**
  * enARModelType enum.
  * @exports enARModelType
- * @enum {string}
+ * @enum {number}
  * @property {number} ARModel_Type_Sparse=1 ARModel_Type_Sparse value
  * @property {number} ARModel_Type_3D=2 ARModel_Type_3D value
  * @property {number} ARModel_Type_Marker=3 ARModel_Type_Marker value
@@ -343,11 +343,11 @@ $root.ModelCos = (function() {
         ModelCosId.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.modelType != null && message.hasOwnProperty("modelType"))
+            if (message.modelType != null && Object.hasOwnProperty.call(message, "modelType"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.modelType);
-            if (message.modelCosid != null && message.hasOwnProperty("modelCosid"))
+            if (message.modelCosid != null && Object.hasOwnProperty.call(message, "modelCosid"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.modelCosid);
-            if (message.errmsg != null && message.hasOwnProperty("errmsg"))
+            if (message.errmsg != null && Object.hasOwnProperty.call(message, "errmsg"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.errmsg);
             return writer;
         };
@@ -632,19 +632,19 @@ $root.ARModel = (function() {
     ARModel.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.cosid != null && message.hasOwnProperty("cosid"))
+        if (message.cosid != null && Object.hasOwnProperty.call(message, "cosid"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.cosid);
-        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
+        if (message.bizuin != null && Object.hasOwnProperty.call(message, "bizuin"))
             writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.bizuin);
-        if (message.name != null && message.hasOwnProperty("name"))
+        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
-        if (message.uploadTime != null && message.hasOwnProperty("uploadTime"))
+        if (message.uploadTime != null && Object.hasOwnProperty.call(message, "uploadTime"))
             writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.uploadTime);
-        if (message.modelStatus != null && message.hasOwnProperty("modelStatus"))
+        if (message.modelStatus != null && Object.hasOwnProperty.call(message, "modelStatus"))
             writer.uint32(/* id 5, wireType 0 =*/40).int32(message.modelStatus);
-        if (message.algoType != null && message.hasOwnProperty("algoType"))
+        if (message.algoType != null && Object.hasOwnProperty.call(message, "algoType"))
             writer.uint32(/* id 6, wireType 0 =*/48).int32(message.algoType);
-        if (message.modelCos != null && message.hasOwnProperty("modelCos"))
+        if (message.modelCos != null && Object.hasOwnProperty.call(message, "modelCos"))
             $root.ModelCos.encode(message.modelCos, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
         return writer;
     };
@@ -909,6 +909,9 @@ $root.GenerateARModelReq = (function() {
      * @property {Uint8Array|null} [buffer] GenerateARModelReq buffer
      * @property {string|null} [url] GenerateARModelReq url
      * @property {enARAlgorithmType|null} [algoType] GenerateARModelReq algoType
+     * @property {number|null} [lod] GenerateARModelReq lod
+     * @property {boolean|null} [getmesh] GenerateARModelReq getmesh
+     * @property {boolean|null} [gettexture] GenerateARModelReq gettexture
      */
 
     /**
@@ -967,6 +970,30 @@ $root.GenerateARModelReq = (function() {
     GenerateARModelReq.prototype.algoType = 1;
 
     /**
+     * GenerateARModelReq lod.
+     * @member {number} lod
+     * @memberof GenerateARModelReq
+     * @instance
+     */
+    GenerateARModelReq.prototype.lod = 0;
+
+    /**
+     * GenerateARModelReq getmesh.
+     * @member {boolean} getmesh
+     * @memberof GenerateARModelReq
+     * @instance
+     */
+    GenerateARModelReq.prototype.getmesh = false;
+
+    /**
+     * GenerateARModelReq gettexture.
+     * @member {boolean} gettexture
+     * @memberof GenerateARModelReq
+     * @instance
+     */
+    GenerateARModelReq.prototype.gettexture = false;
+
+    /**
      * Creates a new GenerateARModelReq instance using the specified properties.
      * @function create
      * @memberof GenerateARModelReq
@@ -990,16 +1017,22 @@ $root.GenerateARModelReq = (function() {
     GenerateARModelReq.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
+        if (message.bizuin != null && Object.hasOwnProperty.call(message, "bizuin"))
             writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.bizuin);
-        if (message.name != null && message.hasOwnProperty("name"))
+        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-        if (message.buffer != null && message.hasOwnProperty("buffer"))
+        if (message.buffer != null && Object.hasOwnProperty.call(message, "buffer"))
             writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.buffer);
-        if (message.url != null && message.hasOwnProperty("url"))
+        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
             writer.uint32(/* id 4, wireType 2 =*/34).string(message.url);
-        if (message.algoType != null && message.hasOwnProperty("algoType"))
+        if (message.algoType != null && Object.hasOwnProperty.call(message, "algoType"))
             writer.uint32(/* id 5, wireType 0 =*/40).int32(message.algoType);
+        if (message.lod != null && Object.hasOwnProperty.call(message, "lod"))
+            writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.lod);
+        if (message.getmesh != null && Object.hasOwnProperty.call(message, "getmesh"))
+            writer.uint32(/* id 7, wireType 0 =*/56).bool(message.getmesh);
+        if (message.gettexture != null && Object.hasOwnProperty.call(message, "gettexture"))
+            writer.uint32(/* id 8, wireType 0 =*/64).bool(message.gettexture);
         return writer;
     };
 
@@ -1048,6 +1081,15 @@ $root.GenerateARModelReq = (function() {
                 break;
             case 5:
                 message.algoType = reader.int32();
+                break;
+            case 6:
+                message.lod = reader.uint32();
+                break;
+            case 7:
+                message.getmesh = reader.bool();
+                break;
+            case 8:
+                message.gettexture = reader.bool();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -1104,6 +1146,15 @@ $root.GenerateARModelReq = (function() {
             case 2:
                 break;
             }
+        if (message.lod != null && message.hasOwnProperty("lod"))
+            if (!$util.isInteger(message.lod))
+                return "lod: integer expected";
+        if (message.getmesh != null && message.hasOwnProperty("getmesh"))
+            if (typeof message.getmesh !== "boolean")
+                return "getmesh: boolean expected";
+        if (message.gettexture != null && message.hasOwnProperty("gettexture"))
+            if (typeof message.gettexture !== "boolean")
+                return "gettexture: boolean expected";
         return null;
     };
 
@@ -1140,6 +1191,12 @@ $root.GenerateARModelReq = (function() {
             message.algoType = 2;
             break;
         }
+        if (object.lod != null)
+            message.lod = object.lod >>> 0;
+        if (object.getmesh != null)
+            message.getmesh = Boolean(object.getmesh);
+        if (object.gettexture != null)
+            message.gettexture = Boolean(object.gettexture);
         return message;
     };
 
@@ -1168,6 +1225,9 @@ $root.GenerateARModelReq = (function() {
             }
             object.url = "";
             object.algoType = options.enums === String ? "Algorithm_Type_3D_Object" : 1;
+            object.lod = 0;
+            object.getmesh = false;
+            object.gettexture = false;
         }
         if (message.bizuin != null && message.hasOwnProperty("bizuin"))
             object.bizuin = message.bizuin;
@@ -1179,6 +1239,12 @@ $root.GenerateARModelReq = (function() {
             object.url = message.url;
         if (message.algoType != null && message.hasOwnProperty("algoType"))
             object.algoType = options.enums === String ? $root.enARAlgorithmType[message.algoType] : message.algoType;
+        if (message.lod != null && message.hasOwnProperty("lod"))
+            object.lod = message.lod;
+        if (message.getmesh != null && message.hasOwnProperty("getmesh"))
+            object.getmesh = message.getmesh;
+        if (message.gettexture != null && message.hasOwnProperty("gettexture"))
+            object.gettexture = message.gettexture;
         return object;
     };
 
@@ -1279,13 +1345,13 @@ $root.GenerateARModelResp = (function() {
     GenerateARModelResp.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.url != null && message.hasOwnProperty("url"))
+        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
-        if (message.host != null && message.hasOwnProperty("host"))
+        if (message.host != null && Object.hasOwnProperty.call(message, "host"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.host);
-        if (message.cosid != null && message.hasOwnProperty("cosid"))
+        if (message.cosid != null && Object.hasOwnProperty.call(message, "cosid"))
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.cosid);
-        if (message.errmsg != null && message.hasOwnProperty("errmsg"))
+        if (message.errmsg != null && Object.hasOwnProperty.call(message, "errmsg"))
             writer.uint32(/* id 4, wireType 2 =*/34).string(message.errmsg);
         return writer;
     };
@@ -1560,19 +1626,19 @@ $root.GetARModelListReq = (function() {
     GetARModelListReq.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
+        if (message.bizuin != null && Object.hasOwnProperty.call(message, "bizuin"))
             writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.bizuin);
-        if (message.modelStatus != null && message.hasOwnProperty("modelStatus"))
+        if (message.modelStatus != null && Object.hasOwnProperty.call(message, "modelStatus"))
             writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.modelStatus);
-        if (message.startTime != null && message.hasOwnProperty("startTime"))
+        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
             writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.startTime);
-        if (message.endTime != null && message.hasOwnProperty("endTime"))
+        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
             writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.endTime);
-        if (message.offset != null && message.hasOwnProperty("offset"))
+        if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
             writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.offset);
-        if (message.limit != null && message.hasOwnProperty("limit"))
+        if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
             writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.limit);
-        if (message.algoType != null && message.hasOwnProperty("algoType"))
+        if (message.algoType != null && Object.hasOwnProperty.call(message, "algoType"))
             writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.algoType);
         return writer;
     };
@@ -1986,6 +2052,9 @@ $root.ARModelData = (function() {
      * @interface IARModelData
      * @property {Uint8Array|null} [meshModel] ARModelData meshModel
      * @property {Uint8Array|null} [textureModel] ARModelData textureModel
+     * @property {Uint8Array|null} [preview] ARModelData preview
+     * @property {Uint8Array|null} [meshBlob] ARModelData meshBlob
+     * @property {Uint8Array|null} [textureBlob] ARModelData textureBlob
      */
 
     /**
@@ -2020,6 +2089,30 @@ $root.ARModelData = (function() {
     ARModelData.prototype.textureModel = $util.newBuffer([]);
 
     /**
+     * ARModelData preview.
+     * @member {Uint8Array} preview
+     * @memberof ARModelData
+     * @instance
+     */
+    ARModelData.prototype.preview = $util.newBuffer([]);
+
+    /**
+     * ARModelData meshBlob.
+     * @member {Uint8Array} meshBlob
+     * @memberof ARModelData
+     * @instance
+     */
+    ARModelData.prototype.meshBlob = $util.newBuffer([]);
+
+    /**
+     * ARModelData textureBlob.
+     * @member {Uint8Array} textureBlob
+     * @memberof ARModelData
+     * @instance
+     */
+    ARModelData.prototype.textureBlob = $util.newBuffer([]);
+
+    /**
      * Creates a new ARModelData instance using the specified properties.
      * @function create
      * @memberof ARModelData
@@ -2043,10 +2136,16 @@ $root.ARModelData = (function() {
     ARModelData.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.meshModel != null && message.hasOwnProperty("meshModel"))
+        if (message.meshModel != null && Object.hasOwnProperty.call(message, "meshModel"))
             writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.meshModel);
-        if (message.textureModel != null && message.hasOwnProperty("textureModel"))
+        if (message.textureModel != null && Object.hasOwnProperty.call(message, "textureModel"))
             writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.textureModel);
+        if (message.preview != null && Object.hasOwnProperty.call(message, "preview"))
+            writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.preview);
+        if (message.meshBlob != null && Object.hasOwnProperty.call(message, "meshBlob"))
+            writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.meshBlob);
+        if (message.textureBlob != null && Object.hasOwnProperty.call(message, "textureBlob"))
+            writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.textureBlob);
         return writer;
     };
 
@@ -2086,6 +2185,15 @@ $root.ARModelData = (function() {
                 break;
             case 2:
                 message.textureModel = reader.bytes();
+                break;
+            case 3:
+                message.preview = reader.bytes();
+                break;
+            case 4:
+                message.meshBlob = reader.bytes();
+                break;
+            case 5:
+                message.textureBlob = reader.bytes();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -2128,6 +2236,15 @@ $root.ARModelData = (function() {
         if (message.textureModel != null && message.hasOwnProperty("textureModel"))
             if (!(message.textureModel && typeof message.textureModel.length === "number" || $util.isString(message.textureModel)))
                 return "textureModel: buffer expected";
+        if (message.preview != null && message.hasOwnProperty("preview"))
+            if (!(message.preview && typeof message.preview.length === "number" || $util.isString(message.preview)))
+                return "preview: buffer expected";
+        if (message.meshBlob != null && message.hasOwnProperty("meshBlob"))
+            if (!(message.meshBlob && typeof message.meshBlob.length === "number" || $util.isString(message.meshBlob)))
+                return "meshBlob: buffer expected";
+        if (message.textureBlob != null && message.hasOwnProperty("textureBlob"))
+            if (!(message.textureBlob && typeof message.textureBlob.length === "number" || $util.isString(message.textureBlob)))
+                return "textureBlob: buffer expected";
         return null;
     };
 
@@ -2153,6 +2270,21 @@ $root.ARModelData = (function() {
                 $util.base64.decode(object.textureModel, message.textureModel = $util.newBuffer($util.base64.length(object.textureModel)), 0);
             else if (object.textureModel.length)
                 message.textureModel = object.textureModel;
+        if (object.preview != null)
+            if (typeof object.preview === "string")
+                $util.base64.decode(object.preview, message.preview = $util.newBuffer($util.base64.length(object.preview)), 0);
+            else if (object.preview.length)
+                message.preview = object.preview;
+        if (object.meshBlob != null)
+            if (typeof object.meshBlob === "string")
+                $util.base64.decode(object.meshBlob, message.meshBlob = $util.newBuffer($util.base64.length(object.meshBlob)), 0);
+            else if (object.meshBlob.length)
+                message.meshBlob = object.meshBlob;
+        if (object.textureBlob != null)
+            if (typeof object.textureBlob === "string")
+                $util.base64.decode(object.textureBlob, message.textureBlob = $util.newBuffer($util.base64.length(object.textureBlob)), 0);
+            else if (object.textureBlob.length)
+                message.textureBlob = object.textureBlob;
         return message;
     };
 
@@ -2184,11 +2316,38 @@ $root.ARModelData = (function() {
                 if (options.bytes !== Array)
                     object.textureModel = $util.newBuffer(object.textureModel);
             }
+            if (options.bytes === String)
+                object.preview = "";
+            else {
+                object.preview = [];
+                if (options.bytes !== Array)
+                    object.preview = $util.newBuffer(object.preview);
+            }
+            if (options.bytes === String)
+                object.meshBlob = "";
+            else {
+                object.meshBlob = [];
+                if (options.bytes !== Array)
+                    object.meshBlob = $util.newBuffer(object.meshBlob);
+            }
+            if (options.bytes === String)
+                object.textureBlob = "";
+            else {
+                object.textureBlob = [];
+                if (options.bytes !== Array)
+                    object.textureBlob = $util.newBuffer(object.textureBlob);
+            }
         }
         if (message.meshModel != null && message.hasOwnProperty("meshModel"))
             object.meshModel = options.bytes === String ? $util.base64.encode(message.meshModel, 0, message.meshModel.length) : options.bytes === Array ? Array.prototype.slice.call(message.meshModel) : message.meshModel;
         if (message.textureModel != null && message.hasOwnProperty("textureModel"))
             object.textureModel = options.bytes === String ? $util.base64.encode(message.textureModel, 0, message.textureModel.length) : options.bytes === Array ? Array.prototype.slice.call(message.textureModel) : message.textureModel;
+        if (message.preview != null && message.hasOwnProperty("preview"))
+            object.preview = options.bytes === String ? $util.base64.encode(message.preview, 0, message.preview.length) : options.bytes === Array ? Array.prototype.slice.call(message.preview) : message.preview;
+        if (message.meshBlob != null && message.hasOwnProperty("meshBlob"))
+            object.meshBlob = options.bytes === String ? $util.base64.encode(message.meshBlob, 0, message.meshBlob.length) : options.bytes === Array ? Array.prototype.slice.call(message.meshBlob) : message.meshBlob;
+        if (message.textureBlob != null && message.hasOwnProperty("textureBlob"))
+            object.textureBlob = options.bytes === String ? $util.base64.encode(message.textureBlob, 0, message.textureBlob.length) : options.bytes === Array ? Array.prototype.slice.call(message.textureBlob) : message.textureBlob;
         return object;
     };
 
@@ -2307,17 +2466,17 @@ $root.GetARModelReq = (function() {
     GetARModelReq.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
+        if (message.bizuin != null && Object.hasOwnProperty.call(message, "bizuin"))
             writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.bizuin);
-        if (message.cosid != null && message.hasOwnProperty("cosid"))
+        if (message.cosid != null && Object.hasOwnProperty.call(message, "cosid"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.cosid);
-        if (message.modelType != null && message.hasOwnProperty("modelType"))
+        if (message.modelType != null && Object.hasOwnProperty.call(message, "modelType"))
             writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.modelType);
-        if (message.needData != null && message.hasOwnProperty("needData"))
+        if (message.needData != null && Object.hasOwnProperty.call(message, "needData"))
             writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.needData);
-        if (message.useIntranet != null && message.hasOwnProperty("useIntranet"))
+        if (message.useIntranet != null && Object.hasOwnProperty.call(message, "useIntranet"))
             writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.useIntranet);
-        if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+        if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
             writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.expireTime);
         return writer;
     };
@@ -2587,13 +2746,13 @@ $root.GetARModelResp = (function() {
     GetARModelResp.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.modelData != null && message.hasOwnProperty("modelData"))
+        if (message.modelData != null && Object.hasOwnProperty.call(message, "modelData"))
             $root.ARModelData.encode(message.modelData, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-        if (message.url != null && message.hasOwnProperty("url"))
+        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
-        if (message.host != null && message.hasOwnProperty("host"))
+        if (message.host != null && Object.hasOwnProperty.call(message, "host"))
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.host);
-        if (message.errMsg != null && message.hasOwnProperty("errMsg"))
+        if (message.errMsg != null && Object.hasOwnProperty.call(message, "errMsg"))
             writer.uint32(/* id 4, wireType 2 =*/34).string(message.errMsg);
         return writer;
     };

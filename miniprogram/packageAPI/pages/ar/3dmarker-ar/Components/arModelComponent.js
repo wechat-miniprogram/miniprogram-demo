@@ -31,6 +31,7 @@ Component({
   methods: {
     uploadARModel() {
       var callback = this.generateARModel.bind(this)
+      var cloudUpload = this.cloudUploadARModel.bind(this)
       var timeNow = Date.now() / 1000 | 0;
       var value = wx.getStorageSync('modelsInfo');
       console.log("value的值为：")
@@ -57,7 +58,6 @@ Component({
           console.log("录制成功，结果为")
           console.log(res)
           const tempFileInfo = res.tempFiles[0]
-          let flag = true;
           // 保证视频时长在 10-30秒 之间
           if (tempFileInfo.duration >= 10 && tempFileInfo.duration <= 30) {
             const rate = tempFileInfo.width / tempFileInfo.height;
@@ -73,74 +73,84 @@ Component({
             if (max > 720) {
               // 不接受比例在 3:1 以上的视频
               if(rate < 1 / 3 || rate > 3){
-                flag = false;
-                wx.showToast({
-                  title: '长宽比尽量为16:9或4:3，不接受比例大于3:1的视频',
-                  icon: 'none',
-                  duration: 2000
+                wx.showModal({
+                  content: '长宽比尽量为16:9或4:3，不接受比例大于3:1的视频',
+                  confirmText: '继续上传',
+                  cancelText: '取消上传',
+                  success: (button) => {
+                    if (button.confirm) {
+                      cloudUpload(res, callback)
+                    } else if (button.cancel) {
+                    }
+                  }
                 })
               }
             }else{
-              flag = false;
-              wx.showToast({
-                title: '保证长边在720以上',
-                icon: 'none',
-                duration: 2000
-              })  
+              wx.showModal({
+                content: '保证长边在720以上',
+                confirmText: '继续上传',
+                cancelText: '取消上传',
+                success: (button) => {
+                  if (button.confirm) {
+                    cloudUpload(res, callback)
+                  } else if (button.cancel) {
+                  }
+                }
+              })
             }
           }else{
-            flag = false;
             wx.showToast({
-              title: '录制10~30秒内的视频',
+              title: '请录制10~30秒内的视频',
               icon: 'none',
               duration: 2000
             })
           }
-          if(!flag)
-            return;
-          wx.showLoading({
-            title: '文件上传中……',
-          });
-          wx.cloud.uploadFile({
-            cloudPath: 'arVideo.mp4',
-            filePath: res.tempFiles[0].tempFilePath, // 文件路径
-            config: {
-              env: this.data.envId
-            },
-            success(res) {
-              wx.hideLoading()
-              const data = res.data
-              console.log("上传文件success:", res)
-              wx.showToast({
-                title: "上传文件成功",
-                icon: 'none',
-                duration: 2000
-              })
-              wx.cloud.getTempFileURL({
-                fileList: [res.fileID],
-                success: res => {
-                  callback(res.fileList[0].tempFileURL)
-                  console.log("生成模型中……")
-                },
-                fail: err => {
-                  console.log("发生错误：", err)
-                  wx.showToast({
-                    title: err.errMsg,
-                    icon: 'none',
-                    duration: 2000
-                  })
-                }
-              })
+        }
+      })
+    },
+    cloudUploadARModel(res, callback){
+      wx.showLoading({
+        title: '文件上传中……',
+      });
+      wx.cloud.uploadFile({
+        cloudPath: 'arVideo.mp4',
+        filePath: res.tempFiles[0].tempFilePath, // 文件路径
+        config: {
+          env: this.data.envId
+        },
+        timeout: 60000,
+        success(res) {
+          wx.hideLoading()
+          const data = res.data
+          console.log("上传文件success:", res)
+          wx.showToast({
+            title: "上传文件成功",
+            icon: 'none',
+            duration: 2000
+          })
+          wx.cloud.getTempFileURL({
+            fileList: [res.fileID],
+            success: res => {
+              callback(res.fileList[0].tempFileURL)
+              console.log("生成模型中……")
             },
             fail: err => {
-              wx.hideLoading()
-              console.log("上传文件error:", err)
+              console.log("发生错误：", err)
               wx.showToast({
                 title: err.errMsg,
                 icon: 'none',
                 duration: 2000
               })
             }
+          })
+        },
+        fail: err => {
+          wx.hideLoading()
+          console.log("上传文件error:", err)
+          wx.showToast({
+            title: err.errMsg,
+            icon: 'none',
+            duration: 2000
           })
         }
       })
@@ -156,17 +166,23 @@ Component({
         console.log("使用默认地址")
       }
 
+      const reqData =  {
+        type: 'GenerateARModel',
+        name: this.data.modelName,
+        url: url,
+        algoType: 2,
+        getMesh: true,
+        getTexture: true
+      }
+
+      console.log("调用参数为:",reqData)
+
       wx.cloud.callFunction({
         name: 'ARDemo',
         config: {
           env: this.data.envId
         },
-        data: {
-          type: 'GenerateARModel',
-          name: this.data.modelName,
-          url: url,
-          algoType: 2
-        }
+        data: reqData
       }).then((resp) => {
         console.log("生成模型成功")
         console.log(resp)
