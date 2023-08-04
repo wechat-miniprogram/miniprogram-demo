@@ -87,6 +87,7 @@
         "pages/ar/3dmarker-ar/3dmarker-ar",
         "pages/ar/osd-ar/osd-ar",
         "pages/ar/face-detect/face-detect",
+        "pages/ar/face-detect-3d/face-detect-3d",
         "pages/ar/body-detect/body-detect",
         "pages/ar/hand-detect/hand-detect",
         "pages/ar/depth-detect/depth-detect",

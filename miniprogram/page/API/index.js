@@ -334,6 +334,10 @@ Page({
           url: 'face-detect/face-detect'
         },
         {
+          zh: '实时人脸检测3D',
+          url: 'face-detect-3d/face-detect-3d'
+        },
+        {
           zh: '照片人脸检测',
           url: 'photo-face-detect/photo-face-detect'
         },
