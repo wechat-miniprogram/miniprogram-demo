@@ -1,0 +1,22 @@
+<scroll-view scroll-y style="width: 100%; height: 100%;" type="custom">
+  <sticky-section>
+    <sticky-header>
+      <view class="header" style="background-color: #78b5fe;"></view>
+    </sticky-header>
+    <list-view>
+      <view class="cell" wx:for="{{list}}" wx:key="id" style="background-color: {{item.color}};">
+        list item {{index}}
+      </view>
+    </list-view>
+  </sticky-section>
+  <sticky-section>
+    <sticky-header>
+      <view class="header" style="background-color: #6bbc7a;"></view>
+    </sticky-header>
+    <list-view>
+      <view class="cell" wx:for="{{list}}" wx:key="id" style="background-color: {{item.color}};">
+        list item {{index}}
+      </view>
+    </list-view>
+  </sticky-section>
+</scroll-view>

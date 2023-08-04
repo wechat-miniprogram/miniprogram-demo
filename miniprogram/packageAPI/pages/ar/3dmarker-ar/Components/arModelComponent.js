@@ -51,32 +51,30 @@ Component({
         count: 9,
         mediaType: ['video'],
         sourceType: ['camera', 'album'],
-        sizeType: ['original'],
+        sizeType: ['original'], // 关闭压缩
         maxDuration: 60,
         camera: 'back',
         success: (res) => {
           console.log("录制成功，结果为")
           console.log(res)
           const tempFileInfo = res.tempFiles[0]
-          if(tempFileInfo.duration>=10 && tempFileInfo.duration<=30){
-            let min = tempFileInfo.width < tempFileInfo.height ? tempFileInfo.width : tempFileInfo.height;
-            let max = tempFileInfo.width > tempFileInfo.height ? tempFileInfo.width : tempFileInfo.height;
-            if(min<480){
-              wx.showModal({
-                content: '建议视频短边在480px以上',
-                confirmText: '继续上传',
-                cancelText: '取消上传',
-                success: (button) => {
-                  if (button.confirm) {
-                    cloudUpload(res, callback)
-                  } else if (button.cancel) {
-                  }
-                }
-              })
-            }else{
-              if(max*9 != min*16 && max*3!= min*4){
+          // 保证视频时长在 10-30秒 之间
+          if (tempFileInfo.duration >= 10 && tempFileInfo.duration <= 30) {
+            const rate = tempFileInfo.width / tempFileInfo.height;
+
+            let min = tempFileInfo.width;
+            let max = tempFileInfo.height;
+            if (rate > 1) {
+              min = tempFileInfo.height;
+              max = tempFileInfo.width;
+            }
+
+            // 保证长边在 720 以上
+            if (max > 720) {
+              // 不接受比例在 3:1 以上的视频
+              if(rate < 1 / 3 || rate > 3){
                 wx.showModal({
-                  content: '建议视频长宽比为16:9或4:3',
+                  content: '长宽比尽量为16:9或4:3，不接受比例大于3:1的视频',
                   confirmText: '继续上传',
                   cancelText: '取消上传',
                   success: (button) => {
@@ -87,6 +85,18 @@ Component({
                   }
                 })
               }
+            }else{
+              wx.showModal({
+                content: '保证长边在720以上',
+                confirmText: '继续上传',
+                cancelText: '取消上传',
+                success: (button) => {
+                  if (button.confirm) {
+                    cloudUpload(res, callback)
+                  } else if (button.cancel) {
+                  }
+                }
+              })
             }
           }else{
             wx.showToast({

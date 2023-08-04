@@ -61,6 +61,6 @@
       <button bindtap="tap2" class="page-body-button" type="primary">点击放大3倍</button>
     </view>
   </view>
-
   <template is="foot"/>
+  
 </view>

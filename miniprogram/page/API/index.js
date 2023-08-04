@@ -321,10 +321,10 @@ Page({
           zh: '照片深度图检测',
           url: 'photo-depth-detect/photo-depth-detect'
         },
-        {
-          zh: '实时OCR检测',
-          url: 'ocr-detect/ocr-detect'
-        },
+        // {
+        //   zh: '实时OCR检测',
+        //   url: 'ocr-detect/ocr-detect'
+        // },
         {
           zh: '照片OCR检测',
           url: 'photo-ocr-detect/photo-ocr-detect'

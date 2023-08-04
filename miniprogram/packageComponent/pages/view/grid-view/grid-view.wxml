@@ -1,0 +1,14 @@
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
+<mp-navigation-bar title="grid-view"back="{{true}}"></mp-navigation-bar>
+<view class="container page-body">
+   <view class="grid-aligned-title">
+    <view>grid-view高度由同行最大高度子节点决定</view>
+    <button class="btn" type="primary" bind:tap="go1">grid aligned</button>
+   </view>
+  
+    <view class="grid-aligned-title page-body">
+        <view>grid-view根据子元素高度自动布局</view>
+         <button class="btn" type="primary" bind:tap="goGrid1">grid masonry</button>
+    </view>
+</view>

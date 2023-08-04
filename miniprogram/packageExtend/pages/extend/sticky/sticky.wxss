@@ -8,7 +8,6 @@
 .demo-block {
     /* margin: 10px 0; */
 }
-
 button {
     font-size: 14px;
     border-radius: 0;
@@ -19,7 +18,6 @@ button {
     color: gray;
     padding-left: 15px;
 }
-
 .demo-body {
     margin: 20px 0;
     height: 100px;

@@ -34,7 +34,7 @@ Page({
         id: 'view',
         name: '视图容器',
         open: false,
-        pages: ['view', 'scroll-view', 'swiper', 'movable-view', 'cover-view']
+        pages: ['view', 'scroll-view', 'swiper', 'movable-view', 'cover-view','root-portal','grid-view','sticky',]
       }, {
         id: 'content',
         name: '基础内容',
@@ -54,7 +54,7 @@ Page({
         id: 'media',
         name: '媒体组件',
         open: false,
-        pages: ['image', 'video', 'camera', 'live-pusher', 'live-player']
+        pages: ['image', 'video', 'camera', 'live-pusher', 'live-player','channel-live','channel-video']
       }, {
         id: 'map',
         name: '地图',

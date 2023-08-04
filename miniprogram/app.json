@@ -16,8 +16,15 @@
         "pages/view/view/view",
         "pages/view/scroll-view/scroll-view",
         "pages/view/swiper/swiper",
+        "pages/view/root-portal/root-portal",
+        "pages/view/grid-view/grid-view",
+        "pages/view/grid-view/demo-1/demo-1",
+        "pages/view/grid-view/demo-2/demo-2",
+        "pages/view/sticky/sticky-header/sticky-header",
+        "pages/view/sticky/sticky-section/sticky-section",
         "pages/view/movable-view/movable-view",
         "pages/view/cover-view/cover-view",
+        "pages/view/sticky/sticky",
         "pages/content/text/text",
         "pages/content/icon/icon",
         "pages/content/progress/progress",
@@ -42,6 +49,8 @@
         "pages/media/camera/camera",
         "pages/media/live-pusher/live-pusher",
         "pages/media/live-player/live-player",
+        "pages/media/channel-video/channel-video",
+        "pages/media/channel-live/channel-live",
         "pages/map/map/map",
         "pages/canvas/canvas-2d/canvas-2d",
         "pages/canvas/webgl/webgl",
@@ -400,6 +409,11 @@
   "requiredBackgroundModes": [
     "audio",
     "location"
+  ],
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation",
+    "chooseAddress"
   ],
   "embeddedAppIdList": [
     "wxfdcee92a299bcaf1"

@@ -1,0 +1,5 @@
+<root-portal wx:if="{{show}}" enable="{{enable}}">
+  <view class="popup" bindtap="close">
+    <slot></slot>
+  </view>
+</root-portal>
