@@ -13,6 +13,6 @@
     "wx-server-sdk": "^2.6.3"
   },
   "devDependencies": {
-    "@tencent/cloud-functions-tools": "^1.5.1"
+    "@tencent/cloud-functions-tools": "^1.7.0"
   }
 }

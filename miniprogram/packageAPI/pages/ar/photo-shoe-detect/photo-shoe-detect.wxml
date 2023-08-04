@@ -1,0 +1,24 @@
+<view class="container page" data-weui-theme="{{theme}}">
+<view style="display: flex; justify-content: center;margin: 12px;">
+    <view>原图：</view>
+    <image src="{{shoeImgUrl}}" style="width: 100px; height: 100px;" mode="aspectFit" />
+</view>
+<canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px">
+</canvas>
+<view class="btn-cnt">
+    <button type="primary" bindtap="chooseMedia">选择图片</button>
+    <button type="primary" disabled="{{!shoeImgUrl}}" style="margin-top: 20px;" bindtap="detectShoe">开始检测</button>
+</view>
+
+
+<view wx:if="{{textContentList}}" style="position:relative; height:30%">
+    <image src="{{shoeImgUrl}}" style="position:absolute; left:50%; transform:translate(-50%); width: {{shoeImgWidth}}px; height: {{shoeImgHeight}}px;" />
+    <view wx:for="{{anchor2DList}}" style="position:absolute; top: 0px; margin: 30px;  width: {{shoeImgWidth}}px; height: {{shoeImgHeight}}px;">
+        <view style="position: absolute; left: {{item.origin.x * shoeImgWidth}}px; top: {{item.origin.y * shoeImgHeight}}px; width: {{item.size.width * shoeImgWidth}}px; height: {{item.size.height * shoeImgHeight}}px; border: solid red 2px"></view>
+        <view wx:for="{{item.points}}" wx:key="id" style="position: absolute; left: {{item.x * shoeImgWidth}}px; top: {{item.y * shoeImgHeight}}px; width: 4px; height: 4px; background-color: #00ff00; border-radius: 50%;"></view>
+    </view>
+</view>
+<view class="page-body-text tc" style="position:relative; height:20%">
+<text>提示：点击选择图片，上传本地鞋部照片，然后开始检测，对应鞋部将会显示识别框和鞋部标记点</text>
+</view>
+</view>

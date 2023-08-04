@@ -2,4 +2,7 @@ message ARModelData
 {
     optional bytes mesh_model = 1;  // 文本(点面信息)
     optional bytes texture_model = 2; // 图像png
+    optional bytes preview = 3;
+    optional bytes mesh_blob = 4; // obj二进制, getmesh = true时返回
+    optional bytes texture_blob = 5; // 纹理二进制, gettexture = true时返回
 }

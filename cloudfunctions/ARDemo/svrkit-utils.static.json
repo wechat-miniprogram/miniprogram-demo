@@ -107,6 +107,18 @@
         "algoType": {
           "type": "enARAlgorithmType",
           "id": 5
+        },
+        "lod": {
+          "type": "uint32",
+          "id": 6
+        },
+        "getmesh": {
+          "type": "bool",
+          "id": 7
+        },
+        "gettexture": {
+          "type": "bool",
+          "id": 8
         }
       }
     },
@@ -180,6 +192,18 @@
         "textureModel": {
           "type": "bytes",
           "id": 2
+        },
+        "preview": {
+          "type": "bytes",
+          "id": 3
+        },
+        "meshBlob": {
+          "type": "bytes",
+          "id": 4
+        },
+        "textureBlob": {
+          "type": "bytes",
+          "id": 5
         }
       }
     },

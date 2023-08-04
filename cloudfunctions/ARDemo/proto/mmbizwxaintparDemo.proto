@@ -54,6 +54,9 @@ message GenerateARModelReq
     optional bytes buffer = 3;
     optional string url = 4;
     optional enARAlgorithmType algo_type = 5;
+    optional uint32 lod = 6; // 重建模型精度, 最高精度为0, 取1,2,3时精度依次下降
+    optional bool getmesh = 7;
+    optional bool gettexture = 8;
 }
 
 message GenerateARModelResp
@@ -85,6 +88,9 @@ message ARModelData
 {
     optional bytes mesh_model = 1;  // 文本(点面信息)
     optional bytes texture_model = 2; // 图像png
+    optional bytes preview = 3;
+    optional bytes mesh_blob = 4; // obj二进制, getmesh = true时返回
+    optional bytes texture_blob = 5; // 纹理二进制, gettexture = true时返回
 }
 
 message GetARModelReq

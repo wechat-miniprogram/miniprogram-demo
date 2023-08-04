@@ -20,7 +20,9 @@ exports.main = async (event, context) => {
             bizuin: bizuin,
             name: event.name,
             url: event.url,
-            algoType: event.algoType
+            algoType: event.algoType,
+            getmesh: event.getMesh,
+            gettexture: event.getTexture
           },
         }),
         timeout: 30000,
