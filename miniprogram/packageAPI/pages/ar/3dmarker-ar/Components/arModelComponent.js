@@ -84,10 +84,12 @@ Component({
                     }
                   }
                 })
+              }else{
+                cloudUpload(res, callback)
               }
             }else{
               wx.showModal({
-                content: '保证长边在720以上',
+                content: '建议长边在720以上',
                 confirmText: '继续上传',
                 cancelText: '取消上传',
                 success: (button) => {
