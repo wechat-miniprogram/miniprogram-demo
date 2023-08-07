@@ -65,6 +65,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/component/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "packageSkylineExamples/examples/refresher-two-level/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
