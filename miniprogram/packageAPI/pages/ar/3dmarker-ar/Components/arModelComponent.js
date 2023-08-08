@@ -1,7 +1,8 @@
-let protobufjs = require("protobufjs");
-let json = require("./proto/arModelProto.js")
-let root = protobufjs.Root.fromJSON(json)
+let protobuf = require("./protobuf/protobuf.js");
+let json = require("./proto/arModelProto.js");
+let root = protobuf.Root.fromJSON(json)
 let message = root.lookupType("ARModelData");
+
 
 Component({
   behaviors: ['wx://component-export'],
@@ -456,13 +457,25 @@ Component({
                 console.log("结果返回为")
                 console.log(res)
                 try{
+                  console.log('res start')
+                  console.log(res.data.byteLength);
                   var data = message.decode(res.data);
+                  
                   console.log("反序列化 >>", data);
                 } catch(e){
                     wx.hideLoading();
                     console.log("模型数据解析有误")
                     console.log(e)
-                    return;
+                    if(e instanceof protobuf.util.ProtocolError){
+                        //missing required field
+                        console.log('missing required field')
+                    }else{
+                        //wire format is invalid
+                        console.log('wire format is invalid')
+
+                    }
+
+                    throw e;
                 }
                 var byteOffset = data.meshModel.byteOffset
                 var byteLength = data.meshModel.byteLength
