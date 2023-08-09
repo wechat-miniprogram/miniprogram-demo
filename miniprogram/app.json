@@ -254,7 +254,9 @@
         "examples/card_transition/pages/list/list",
         "examples/card_transition/pages/detail/detail",
         "examples/product-list/pages/index/index",
-        "examples/expanded-scroll-view/pages/index/index"
+        "examples/expanded-scroll-view/pages/index/index",
+        "examples/refresher-two-level/index/index",
+        "examples/refresher-two-level/goods/index"
       ]
     },
     {
@@ -422,5 +424,10 @@
     "wxfdcee92a299bcaf1"
   ],
   "lazyCodeLoading": "requiredComponents",
-  "__lazyCodeLoadingChunk": true
+  "__lazyCodeLoadingChunk": true,
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true
+    }
+  }
 }
