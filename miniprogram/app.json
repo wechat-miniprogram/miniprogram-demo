@@ -421,5 +421,10 @@
     "wxfdcee92a299bcaf1"
   ],
   "lazyCodeLoading": "requiredComponents",
-  "__lazyCodeLoadingChunk": true
+  "__lazyCodeLoadingChunk": true,
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true
+    }
+  }
 }
