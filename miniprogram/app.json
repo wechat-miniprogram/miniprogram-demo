@@ -93,6 +93,8 @@
         "pages/ar/depth-detect/depth-detect",
         "pages/ar/cameraBuffer-detect/cameraBuffer-detect",
         "pages/ar/ocr-detect/ocr-detect",
+        "pages/ar/shoe-detect/shoe-detect",
+        "pages/ar/photo-shoe-detect/photo-shoe-detect",
         "pages/ar/photo-ocr-detect/photo-ocr-detect",
         "pages/ar/photo-hand-detect/photo-hand-detect",
         "pages/ar/photo-body-detect/photo-body-detect",

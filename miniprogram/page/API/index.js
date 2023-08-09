@@ -357,6 +357,14 @@ Page({
           zh: '照片手势检测',
           url: 'photo-hand-detect/photo-hand-detect'
         },
+        {
+          zh: '实时鞋部检测',
+          url: 'shoe-detect/shoe-detect'
+        },
+        {
+          zh: '照片鞋部检测',
+          url: 'photo-shoe-detect/photo-shoe-detect'
+        },
       ],
     }],
     isSetTabBarPage: false,
