@@ -14,7 +14,10 @@ Page({
     const x = shared(0);
     const y = shared(0);
     const pressed = shared(false);
-    const scale = derived(() => spring(pressed.value ? 1.2 : 1));
+    const scale = derived(() => {
+      'worklet'
+      return spring(pressed.value ? 1.2 : 1)
+    });
     this.applyAnimatedStyle('.circle', () => {
       'worklet';
       return {
