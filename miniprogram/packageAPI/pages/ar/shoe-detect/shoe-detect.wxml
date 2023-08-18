@@ -1,12 +1,15 @@
-<view class="container page" data-weui-theme="{{theme}}">
-  <view><canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px" bindtouchend="onTouchEnd">
-    </canvas></view>
-  <view class="page-body-text tc" style="height:20%">提示：将摄像头对准鞋部, 检测到的鞋部将会被标记出识别框和鞋部标记点
-    <view wx:if="{{cameraPosition == 0}}">
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="canvas-wrap" style="height: {{heightScale * 100}}%">
+    <canvas type="webgl" id="webgl" style="width: {{widthScale * 100}}%;" bindtouchend="onTouchEnd">
+    </canvas>
+  </view>
+  <view class="bottom-wrap">
+    <p class="page-body-text tc">提示：将摄像头对准鞋部, 检测到的鞋部将会被标记出识别框和鞋部标记点</p>
+    <!-- <view wx:if="{{cameraPosition == 0}}">
         <button type="primary" bindtap="switchCamera" data-value="1" disabled="{{buttonDisable}}">切换为前置摄像头</button>
     </view>
     <view wx:else>
         <button type="primary" bindtap="switchCamera" data-value="0" disabled="{{buttonDisable}}">切换为后置摄像头</button>
-    </view>
+    </view> -->
   </view>
 </view>

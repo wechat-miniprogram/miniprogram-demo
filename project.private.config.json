@@ -12,6 +12,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "photo-shoe-detect",
+          "pathName": "packageAPI/pages/ar/photo-shoe-detect/photo-shoe-detect",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "shoe-detect",
+          "pathName": "packageAPI/pages/ar/shoe-detect/shoe-detect",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "page/API/pages/storage/storage",
           "pathName": "page/API/pages/storage/storage",
           "query": "",

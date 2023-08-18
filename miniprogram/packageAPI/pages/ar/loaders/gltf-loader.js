@@ -999,7 +999,7 @@ export function registerGLTFLoader(THREE) {
       var json = this.json;
       var options = this.options;
       var textureLoader = this.textureLoader;
-      var URL = global.URL;
+      // var URL = global.URL;
       var textureDef = json.textures[textureIndex];
       var textureExtensions = textureDef.extensions || {};
       var source;
@@ -1013,10 +1013,9 @@ export function registerGLTFLoader(THREE) {
       if (source.bufferView !== undefined) {
         sourceURI = parser.getDependency('bufferView', source.bufferView).then(function(bufferView) {
           isObjectURL = true;
-          var blob = new global.Blob([bufferView], {
-            type: source.mimeType
-          });
-          sourceURI = URL.createObjectURL(blob);
+          // 微信小程序不支持 Blob 对象，则使用 base64 编码的字符串来创建 data URI
+          const base64Str = wx.arrayBufferToBase64(bufferView);
+          sourceURI = `data:${source.mimeType};base64,${base64Str}`;
           return sourceURI
         })
       }
@@ -1030,7 +1029,7 @@ export function registerGLTFLoader(THREE) {
         })
       }).then(function(texture) {
         if (isObjectURL === true) {
-          URL.revokeObjectURL(sourceURI)
+          // URL.revokeObjectURL(sourceURI)
         }
         texture.flipY = false;
         if (textureDef.name !== undefined) texture.name = textureDef.name;

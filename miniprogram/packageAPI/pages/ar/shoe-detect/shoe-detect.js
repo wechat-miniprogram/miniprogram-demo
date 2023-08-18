@@ -1,213 +1,15 @@
-import getBehavior from './behavior'
-import yuvBehavior from './yuvBehavior'
+import arBehavior from '../behavior/behavior-ar'
+import yuvBehavior from '../behavior/behavior-yuv'
+// import edgeBehavior from "../behavior/behavior-edge"
 
+// VK 投影矩阵参数定义
 const NEAR = 0.001
 const FAR = 1000
 
-//顶点着色器
-var VSHADER_SOURCE = '' +
-  'attribute vec4 a_Position;\n' + //声明attribute变量a_Position，用来存放顶点位置信息
-  'void main(){\n' +
-  '  gl_Position = a_Position;\n' + //将顶点坐标赋值给顶点着色器内置变量gl_Position
-  '  gl_PointSize = 4.0;\n' + //设置顶点大小
-  '}\n'
-
-//片元着色器
-var FSHADER_SOURCE = '' +
-  '#ifdef GL_ES\n' +
-  ' precision mediump float;\n' + // 设置精度
-  '#endif\n' +
-  'varying vec4 v_Color;\n' + //声明varying变量v_Color，用来接收顶点着色器传送的片元颜色信息
-  'void main(){\n' +
-  '  float d = distance(gl_PointCoord, vec2(0.5, 0.5));\n' + //计算像素距离中心点的距离
-  '  if(d < 0.5) {\n' + //距离大于0.5放弃片元，小于0.5保留片元
-  '    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);\n' +
-  '  } else { discard; }\n' +
-  '}\n'
-
-
-//初始化着色器函数
-let initShadersDone = false
-
-function initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE) {
-  //创建顶点着色器对象
-  var vertexShader = loadShader(gl, gl.VERTEX_SHADER, VSHADER_SOURCE)
-  //创建片元着色器对象
-  var fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, FSHADER_SOURCE)
-
-  if (!vertexShader || !fragmentShader) {
-    return null
-  }
-
-  //创建程序对象program
-  var program = gl.createProgram()
-  if (!gl.createProgram()) {
-    return null
-  }
-  //分配顶点着色器和片元着色器到program
-  gl.attachShader(program, vertexShader)
-  gl.attachShader(program, fragmentShader)
-  //链接program
-  gl.linkProgram(program)
-
-  //检查程序对象是否连接成功
-  var linked = gl.getProgramParameter(program, gl.LINK_STATUS)
-  if (!linked) {
-    var error = gl.getProgramInfoLog(program)
-    console.log('程序对象连接失败: ' + error)
-    gl.deleteProgram(program)
-    gl.deleteShader(fragmentShader)
-    gl.deleteShader(vertexShader)
-    return null
-  }
-  //返回程序program对象
-  initShadersDone = true
-  return program
-}
-
-function loadShader(gl, type, source) {
-  // 创建顶点着色器对象
-  var shader = gl.createShader(type)
-  if (shader == null) {
-    console.log('创建着色器失败')
-    return null
-  }
-
-  // 引入着色器源代码
-  gl.shaderSource(shader, source)
-
-  // 编译着色器
-  gl.compileShader(shader)
-
-  // 检查顶是否编译成功
-  var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS)
-  if (!compiled) {
-    var error = gl.getShaderInfoLog(shader)
-    console.log('编译着色器失败: ' + error)
-    gl.deleteShader(shader)
-    return null
-  }
-
-  return shader
-}
-
-//初始化顶点坐标和顶点颜色
-function initVertexBuffers(gl, anchor2DList) {
-
-  const flattenPoints = []
-  anchor2DList.forEach(anchor => {
-    anchor.points.forEach(point => {
-      const {
-        x,
-        y
-      } = point
-      flattenPoints.push(x * 2 - 1, 1 - y * 2)
-    })
-  })
-
-  var vertices = new Float32Array(flattenPoints)
-  var n = flattenPoints.length / 2
-
-  //创建缓冲区对象
-  var buffer = gl.createBuffer()
-  //将顶点坐标和顶点颜色信息写入缓冲区对象
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
-  gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW)
-
-  //获取顶点着色器attribute变量a_Position存储地址, 分配缓存并开启
-  var a_Position = gl.getAttribLocation(gl.program, 'a_Position')
-  gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0)
-  gl.enableVertexAttribArray(a_Position)
-  return n
-}
-
-var EDGE_VSHADER_SOURCE =
-  `
-  attribute vec2 aPosition; 
-  varying vec2 posJudge;
-
-  void main(void) {
-    gl_Position = vec4(aPosition.x, aPosition.y, 1.0, 1.0);
-    posJudge = aPosition;
-  }
-`
-
-var EDGE_FSHADER_SOURCE =
-  `
-  precision highp float;
-  uniform vec2 rightTopPoint;
-  uniform vec2 centerPoint;
-  varying vec2 posJudge;
-
-  float box(float x, float y){
-    float xc = x - centerPoint.x;
-    float yc = y - centerPoint.y;
-    vec2 point = vec2(xc, yc);
-    float right = rightTopPoint.x;
-    float top =  rightTopPoint.y;
-    float line_width = 0.01;
-    vec2 b1 = 1.0 - step(vec2(right,top), abs(point));
-    float outer = b1.x * b1.y;
-    vec2 b2 = 1.0 - step(vec2(right-line_width,top-line_width), abs(point));
-    float inner = b2.x * b2.y;
-    return outer - inner;
-  }
-
-  void main(void) {
-      if(box(posJudge.x, posJudge.y) == 0.0 ) discard;
-
-      gl_FragColor = vec4(box(posJudge.x, posJudge.y), 0.0, 0.0, 1.0);
-
-  }
-`
-
-function initRectEdgeBuffer(gl, x, y, width, height) {
-  let shaderProgram = gl.program;
-  let centerX = x * 2 - 1 + width;
-  let centerY = -1 * (y * 2 - 1) - height;
-  let right = width;
-  let top = height;
-  var vertices = [
-    -1.0, 1.0,
-    -1.0, -1.0,
-    1.0, 1.0,
-    1.0, -1.0
-  ];
-
-  var vertexBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-  var aPosition = gl.getAttribLocation(shaderProgram, 'aPosition');
-  gl.enableVertexAttribArray(aPosition);
-  gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
-
-
-  var rightTop = [
-    right, top
-  ];
-  var rightTopLoc = gl.getUniformLocation(shaderProgram, 'rightTopPoint');
-  gl.uniform2fv(rightTopLoc, rightTop);
-
-  var centerPoint = [
-    centerX, centerY
-  ];
-  var centerPointLoc = gl.getUniformLocation(shaderProgram, 'centerPoint');
-  gl.uniform2fv(centerPointLoc, centerPoint);
-
-  var length = vertices.length / 2;
-
-  return length;
-}
-
-function onDrawRectEdge(gl, x, y, width, height) {
-  width = Math.round(width * 100) / 100
-  height = Math.round(height * 100) / 100
-  var n = initRectEdgeBuffer(gl, x, y, width, height);
-  gl.drawArrays(gl.TRIANGLE_STRIP, 0, n);
-}
+let loggerOnce = false;
 
 Component({
-  behaviors: [getBehavior(), yuvBehavior],
+  behaviors: [arBehavior, yuvBehavior],
   data: {
     theme: 'light',
     cameraPosition: 0,
@@ -218,7 +20,6 @@ Component({
      * 生命周期函数--监听页面加载
      */
     detached() {
-      initShadersDone = false
       console.log("页面detached")
       if (wx.offThemeChange) {
         wx.offThemeChange()
@@ -242,72 +43,250 @@ Component({
     },
   },
   methods: {
+    // 对应案例的初始化逻辑，由统一的 behavior 触发
     init() {
-      this.initGL()
+      // 初始化 Three.js，用于模型相关的渲染
+      this.initTHREE()
+
+      // 初始化 GL，基于 Three.js 的 Context，用于相机YUV渲染
+      this.initYUV()
+
+      // 初始化VK
+      // start完毕后，进行更新渲染循环
+      this.initVK();
     },
-    switchCamera(event){
-      if(this.session.config){
-        const config = this.session.config
-        let pos = Number(event.currentTarget.dataset.value)
-        config.cameraPosition = pos
-        this.session.config = config
-        this.setData({
-          cameraPosition:event.currentTarget.dataset.value
+    initVK() {
+      // VKSession 配置
+      const session = this.session = wx.createVKSession({
+          track: {
+              shoe: {
+                  mode: 1
+              }
+          },
+          cameraPosition: 0,
+          version: 'v1',
+          gl: this.gl
+      })
+
+      try{
+
+      // VKSession start
+      session.start(err => {
+        if (err) return console.error('VK error: ', err)
+
+        console.log('@@@@@@@@ VKSession.version', session.version)
+
+        //  VKSession EVENT resize
+        session.on('resize', () => {
+            this.calcCanvasSize();
         })
+
+        // VKSession EVENT addAnchors
+        session.on('addAnchors', anchors => {
+            console.log("addAnchor", anchors)
+        })
+
+        // VKSession EVENT updateAnchors
+        session.on('updateAnchors', anchors => {
+            for (let i = 0; i < anchors.length; i++ ) {
+              const anchor = anchors[i];
+              // console.log('transform', anchor.transform);
+              // console.log('points3d', anchor.points3d);
+
+              this.shoeTransform = anchor.transform;
+              this.points3d = anchor.points3d;
+            }
+
+        })
+        
+        // VKSession removeAnchors
+        // 识别目标丢失时，会不断触发
+        session.on('removeAnchors', anchors => {
+          if (this.model) {
+            this.model.scale.set(0, 0, 0);
+          }
+        })
+
+        // Three 场景相关
+        const THREE = this.THREE;
+        const loader = this.loader = new THREE.GLTFLoader()
+        // 加载模型
+        loader.load( 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/shoe-1.glb', ( gltf ) =>{
+
+          this.modelWrap =new THREE.Object3D();
+
+          // 模型加载到场上
+          this.scene.add( gltf.scene );
+
+          console.log('gltf loaded', gltf.scene);
+          // 设置模型索引
+          this.model = gltf.scene;
+
+          this.model.position.set(0, -0.5, 0);
+          this.model.scale.set(120, 120, 120);
+
+          // const hintWidth = 4;
+          // // x
+          // const xMaterial = new THREE.MeshPhongMaterial( {
+          //   color: 0xFF0000,
+          //   shininess: 150,
+          //   specular: 0x222222
+          // } );
+          // const xGeometry = new THREE.BoxGeometry( 1, 1, 1 );
+          // const xCube = new THREE.Mesh( xGeometry, xMaterial );
+          // xCube.position.set( hintWidth / 2, 0, 0 );
+          // xCube.scale.set(hintWidth, 0.1, 0.1);
+          // this.modelWrap.add(xCube);
+          
+          // // y
+          // const yMaterial = new THREE.MeshPhongMaterial( {
+          //   color: 0x00FF00,
+          //   shininess: 150,
+          //   specular: 0x222222
+          // } );
+          // const yGeometry = new THREE.BoxGeometry( 1, 1, 1 );
+          // const yCube = new THREE.Mesh( yGeometry, yMaterial );
+          // yCube.position.set( 0, hintWidth/2, 0 );
+          // yCube.scale.set( 0.1, hintWidth,  0.1);
+          // this.modelWrap.add(yCube);
+          
+          // // z
+          // const zMaterial = new THREE.MeshPhongMaterial( {
+          //   color: 0x0000FF,
+          //   shininess: 150,
+          //   specular: 0x222222
+          // } );
+          // const zGeometry = new THREE.BoxGeometry( 1, 1, 1 );
+          // const zCube = new THREE.Mesh( zGeometry, zMaterial );
+          // zCube.position.set( 0, 0, hintWidth/2 );
+          // zCube.scale.set( 0.1, 0.1, hintWidth);
+          // this.modelWrap.add(zCube);
+
+          // 模型加载到场上
+          this.modelWrap.add(this.model);
+          this.scene.add( this.modelWrap );
+        });
+
+        // 调试用 Cube
+        // const material = new THREE.MeshPhongMaterial( {
+				// 	color: 0xACFADF,
+				// 	shininess: 150,
+				// 	specular: 0x222222
+				// } );
+        // const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        // const cube = new THREE.Mesh( geometry, material );
+				// cube.position.set( 0, 0, 0 );
+        // cube.rotation.set(Math.PI / 6, Math.PI / 6, 0 )
+        // cube.scale.set(0.5, 0.5, 0.5);
+				// scene.add( cube );
+        // this.model = cube;
+
+        console.log('ready to initloop')
+        // start 初始化完毕后，进行更新渲染循环
+        this.initLoop();
+      });
+
+      } catch(e) {
+        
       }
+
     },
-    render(frame) {
-      var gl = this.gl
+    loop() {
+      // console.log('loop')
+      const gl = this.gl
 
-      this.renderGL(frame)
+      // 获取 VKFrame
+      const frame = this.session.getVKFrame(this.canvas.width, this.canvas.height)
 
-      const camera = frame.camera
+      // 成功获取 VKFrame 才进行
+      if(!frame) { return; }
 
-      // 相机
-      if (camera) {
+      // 更新相机 YUV 数据
+      this.renderYUV(frame)
+
+      // 获取 VKCamera
+      const VKCamera = frame.camera
+
+      // 同步 VKCamera 矩阵信息到 Three Camera
+      if (VKCamera) {
+        // VK接管相机矩阵
         this.camera.matrixAutoUpdate = false
-        this.camera.matrixWorldInverse.fromArray(camera.viewMatrix)
-        this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse)
 
-        const projectionMatrix = camera.getProjectionMatrix(NEAR, FAR)
+        // 本案例 VK ViewMatrix 返回单位阵，可以不设
+        // this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix)
+        // this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse)
+
+        const projectionMatrix = VKCamera.getProjectionMatrix(NEAR, FAR)
+        // VK 返回列主序
+        // 设置 投影矩阵
         this.camera.projectionMatrix.fromArray(projectionMatrix)
-        this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
+        // this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
       }
 
+      // 存在model，更新矩阵
+      if (this.modelWrap && this.points3d && this.shoeTransform) {
+
+        const THREE = this.THREE;
+
+        // 顶点偏移矩阵
+        const positionMat = new THREE.Matrix4();
+        positionMat.setPosition(this.points3d[0].x, this.points3d[1].y, this.points3d[2].z);
+        // positionMat.setPosition(-0.278, -1.1958, -2.89);
+
+        // Anchor返回矩阵，实际上就是完整的 modelView matrix
+        const anchorMat = new THREE.Matrix4();
+        // 目前返回的是行主序矩阵
+        anchorMat.set(
+          this.shoeTransform[0], this.shoeTransform[1], this.shoeTransform[2], this.shoeTransform[3],
+          this.shoeTransform[4], this.shoeTransform[5], this.shoeTransform[6], this.shoeTransform[7],
+          this.shoeTransform[8], this.shoeTransform[9], this.shoeTransform[10], this.shoeTransform[11],
+          this.shoeTransform[12], this.shoeTransform[13], this.shoeTransform[14], this.shoeTransform[15],
+        )
+        // anchorMat.set(
+        //   -0.89, -0.04, 0.43, -0.06,
+        //   0.43,   -0.18, 0.87,  -2.38,
+        //   0.04,   0.98,  0.18,  -17.77,
+        //   0.0,    0.0,   0.0,    1.0
+        // );
+
+        // 两者叠加
+        const modelWorld = positionMat.multiply(anchorMat);
+        
+        const pos = new THREE.Vector3();
+        const quaternion = new THREE.Quaternion();
+        const scale = new THREE.Vector3();
+
+        // 解析出 实际的 信息
+        modelWorld.decompose(pos, quaternion, scale );
+          
+        // console.log(pos, quaternion, scale)
+
+        // 设置到渲染模型容器上
+        this.modelWrap.position.set(pos.x, pos.y, pos.z);
+        this.modelWrap.quaternion.set(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+        this.modelWrap.scale.set(scale.x, scale.y, scale.z);
+
+        // debug 用信息
+        // if (!loggerOnce) {
+        //   console.log('positionMat', positionMat);
+        //   console.log('anchorMat', anchorMat);
+        //   console.log('modelWorld', modelWorld);
+
+        //   console.log('projectionMatrix', this.camera.projectionMatrix);
+
+        //   console.log('this.modelWrap.position', this.modelWrap.position);
+        //   console.log('this.modelWrap.quaternion', this.modelWrap.quaternion);
+        //   console.log('this.modelWrap.scale', this.modelWrap.scale);
+        //   loggerOnce = true;
+        // }
+      }
+
+      // 渲染 Three 场景
       this.renderer.autoClearColor = false
-      this.renderer.render(this.scene, this.camera)
+      this.renderer.render(this.scene, this.camera);
+      // 为什么去掉这句话会画不出来，我感觉大概率是YUV的面朝向错了
       this.renderer.state.setCullFace(this.THREE.CullFaceNone)
 
-      const anchor2DList = this.data.anchor2DList
-
-      if (!anchor2DList || anchor2DList.length <= 0) {
-        return
-      } else {
-        if (!initShadersDone) {
-          this.vertexProgram = initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)
-          this.rectEdgeProgram = initShaders(gl, EDGE_VSHADER_SOURCE, EDGE_FSHADER_SOURCE)
-          if (!this.vertexProgram || !this.rectEdgeProgram) {
-            console.log('初始化着色器失败')
-            return
-          }
-          console.log('初始化着色器成功')
-        }
-
-        gl.useProgram(this.vertexProgram)
-        gl.program = this.vertexProgram
-        //初始化顶点坐标和顶点颜色
-        var n = initVertexBuffers(gl, anchor2DList)
-
-        //绘制点
-        gl.drawArrays(gl.POINTS, 0, n)
-
-        gl.useProgram(this.rectEdgeProgram)
-        gl.program = this.rectEdgeProgram
-
-        for (var i = 0; i < anchor2DList.length; i++) {
-          onDrawRectEdge(gl, anchor2DList[i].origin.x, anchor2DList[i].origin.y, anchor2DList[i].size.width, anchor2DList[i].size.height)
-        }
-      }
     },
   },
 })
