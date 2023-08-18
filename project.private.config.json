@@ -12,6 +12,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "2dmarker-ar",
+          "pathName": "packageAPI/pages/ar/2dmarker-ar/2dmarker-ar",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "page/API/pages/storage/storage",
           "pathName": "page/API/pages/storage/storage",
           "query": "",

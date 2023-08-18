@@ -6,8 +6,11 @@ const FAR = 1000
 
 Component({
   behaviors: [getBehavior(), yuvBehavior],
+  markerIndex: 0,
   data: {
     theme: 'light',
+    markerImgList: [],
+    chooseImgList: [],
   },
   lifetimes: {
       /**
@@ -35,38 +38,125 @@ Component({
 
   methods: {
     init() {
+      this.markerIndex = 0;
       this.initGL()
     },
 
     chooseMedia() {
       wx.chooseMedia({
-        count: 1,
+        count: 9,
         mediaType: ['image'],
+        sizeType: ['original'],
         success: res => {
           console.log('chooseMedia res', res)
-          const imgUrl = res.tempFiles[0].tempFilePath
-          wx.getImageInfo({
-            src: imgUrl,
-            success: res => {
-              const {
-                width,
-                height
-              } = res
-              console.log('getImageInfo res', res)
-              this.setData({
-                imgUrl: imgUrl,
-              })
-            },
-            fail: res => {
-              console.error(res)
-            }
-          })
 
+          const chooseImgListRes = [];
+          for (let i = 0; i < res.tempFiles.length; i++) {
+            const imgUrl = res.tempFiles[i].tempFilePath;
+            chooseImgListRes.push(imgUrl);
+          }
+
+          console.log('set chooseImgList', chooseImgListRes)
+
+          this.setData({
+            chooseImgList: chooseImgListRes,
+          })
         },
         fail: res => {
           console.error(res)
         }
       })
+    },
+    async addMarker() {
+      console.log('addMarker')
+      const fs = wx.getFileSystemManager()
+      
+      const markerImgListRes = this.data.markerImgList.concat([]);
+      
+      let handledCount = 0;
+      const chooseImgCount = this.data.chooseImgList.length;
+      const checkMarkerAdded = () => {
+        if (handledCount === chooseImgCount) {
+          console.log('markerImgList set', markerImgListRes);
+
+          this.setData({
+            chooseImgList: [],
+            markerImgList: markerImgListRes
+          });
+        }
+
+      }
+      
+      // 准备进行choose的图片保存到fs
+      for (let i = 0; i < chooseImgCount; i++) {
+        const chooseImgUrl = this.data.chooseImgList[i];
+        const fileEnd = chooseImgUrl.split('.').slice(-1)[0];
+        const fileIndex = this.markerIndex + i;
+        // 算法侧目前只认 map png jpg jpeg 后缀文件
+        const filePath = `${wx.env.USER_DATA_PATH}/marker-ar-${fileIndex}.${fileEnd}`;
+
+        const saveAndAddMarker = () => {
+          console.log('saveFileSync start', filePath, chooseImgUrl);
+          // 存入文件系统，并添加到marker
+          fs.saveFile({
+            filePath,
+            tempFilePath: chooseImgUrl,
+            success: ()=> {
+              console.log('[addMarker] --> ', filePath)
+              const markerId = this.session.addMarker(filePath)
+              markerImgListRes.push({
+                markerId: markerId,
+                filePath: filePath
+              })
+              handledCount++;
+              checkMarkerAdded();
+            },
+            fail: res => {
+              console.error(res)
+              console.log('文件保存失败', filePath);
+              handledCount++;
+              checkMarkerAdded();
+            }
+          })
+        }
+
+        console.log('uploadFile Path', filePath);
+        // 确定文件，存在即删除
+        fs.stat({
+          path: filePath,
+          success: (res) => {
+            if (res.stats.isFile()) {
+              fs.unlinkSync(filePath);
+              console.log('fs unlinkSync', filePath);
+            }
+            saveAndAddMarker();
+          },
+          fail: (res) => {
+            console.error(res)
+            console.log('fs中不存在，直接写入', filePath);
+
+            saveAndAddMarker();
+          }
+        })
+
+
+      }
+
+    },
+    removeMarker() {
+      if (this.data.markerImgList) {
+        for (let i = 0; i < this.data.markerImgList.length; i++) {
+          const markerImg = this.data.markerImgList[i];
+          this.session.removeMarker(markerImg.markerId);
+        }
+        this.markerIndex = 0;
+        this.setData({
+          markerImgList: [],
+        })
+      }
+    },
+    getAllMarker() {
+      console.log(this.session.getAllMarker())
     },
     render(frame) {
       this.renderGL(frame)
@@ -90,75 +180,6 @@ Component({
       this.renderer.autoClearColor = false
       this.renderer.render(this.scene, this.camera)
       this.renderer.state.setCullFace(this.THREE.CullFaceNone)
-    },
-    addMarker() {
-      if (this.markerId) return
-      const fs = wx.getFileSystemManager()
-      // 此处如果为jpeg,则后缀名也需要改成对应后缀
-      // const filePath = `${wx.env.USER_DATA_PATH}/marker-ar.map`
-      const filePath = `${wx.env.USER_DATA_PATH}/marker-ar.jpeg`
-      // const download = callback => wx.downloadFile({
-      //     // 此处设置为识别的3d对象的map地址
-      //     // url: 'http://dldir1.qq.com/weixin/checkresupdate/coco_bad_autov2_41add464411f40279704b6cffe660a1c.map',
-      //     // url: 'http://dldir1.qq.com/weixin/checkresupdate/marker1_7d97094792854249a860640e985a743c.jpeg',
-      //     url: this.data.imgUrl,
-      //     success(res) {
-      //         fs.saveFile({
-      //             filePath,
-      //             tempFilePath: res.tempFilePath,
-      //             success: callback,
-      //         })
-      //     }
-      // })
-
-      const download = callback => {
-        fs.saveFile({
-          filePath,
-          tempFilePath: this.data.imgUrl,
-          success: callback,
-          fail: res => {
-            console.error(res)
-          }
-        })
-      }
-      const add = () => {
-        console.log('[addMarker] --> ', filePath)
-        this.markerId = this.session.addMarker(filePath)
-        this.setData({
-          "filePathNow": filePath
-        })
-      }
-
-      const getFilePathNow = () => {
-        return this.data.filePathNow;
-      }
-      fs.stat({
-        path: filePath,
-        success(res) {
-          let path = getFilePathNow()
-          if (path != filePath) {
-            if (res.stats.isFile() && path) {
-              fs.unlinkSync(path)
-            }
-            download(add)
-          } else {
-            add()
-          }
-        },
-        fail: (res) => {
-          console.error(res)
-          download(add)
-        }
-      })
-    },
-    removeMarker() {
-      if (this.markerId) {
-        this.session.removeMarker(this.markerId)
-        this.markerId = null
-      }
-    },
-    getAllMarker() {
-      console.log(this.session.getAllMarker())
     },
   },
 })
