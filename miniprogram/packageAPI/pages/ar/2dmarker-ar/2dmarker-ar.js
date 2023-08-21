@@ -6,11 +6,11 @@ const FAR = 1000
 
 Component({
   behaviors: [getBehavior(), yuvBehavior],
-  markerIndex: 0,
+  markerIndex: 0,  // 使用的 marker 索引
   data: {
     theme: 'light',
-    markerImgList: [],
-    chooseImgList: [],
+    markerImgList: [],  // 使用的 marker 列表
+    chooseImgList: [], // 使用的 图片 列表
   },
   lifetimes: {
       /**
@@ -42,7 +42,8 @@ Component({
       this.initGL()
     },
 
-    chooseMedia() {
+    chooseMedia() { 
+      // marker图片上传逻辑
       wx.chooseMedia({
         count: 9,
         mediaType: ['image'],
@@ -72,26 +73,30 @@ Component({
       const fs = wx.getFileSystemManager()
       
       const markerImgListRes = this.data.markerImgList.concat([]);
+      const preMarkerIndex = this.markerIndex;
+
+      console.log('pre markerImgList', preMarkerIndex, markerImgListRes);
       
-      let handledCount = 0;
+      // 检查与添加 marker 函数
       const chooseImgCount = this.data.chooseImgList.length;
+      let handledCount = 0;
       const checkMarkerAdded = () => {
         if (handledCount === chooseImgCount) {
-          console.log('markerImgList set', markerImgListRes);
+          this.markerIndex = markerImgListRes.length;
 
+          console.log('markerImgList set', markerImgListRes, this.markerIndex);
           this.setData({
             chooseImgList: [],
             markerImgList: markerImgListRes
           });
         }
-
       }
       
       // 准备进行choose的图片保存到fs
       for (let i = 0; i < chooseImgCount; i++) {
         const chooseImgUrl = this.data.chooseImgList[i];
         const fileEnd = chooseImgUrl.split('.').slice(-1)[0];
-        const fileIndex = this.markerIndex + i;
+        const fileIndex = preMarkerIndex + i;
         // 算法侧目前只认 map png jpg jpeg 后缀文件
         const filePath = `${wx.env.USER_DATA_PATH}/marker-ar-${fileIndex}.${fileEnd}`;
 
@@ -138,8 +143,6 @@ Component({
             saveAndAddMarker();
           }
         })
-
-
       }
 
     },
