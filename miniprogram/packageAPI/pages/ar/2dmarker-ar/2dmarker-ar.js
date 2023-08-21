@@ -1,17 +1,22 @@
-import getBehavior from './behavior'
-import yuvBehavior from './yuvBehavior'
+import arBehavior from '../behavior/behavior-ar'
+import yuvBehavior from '../behavior/behavior-yuv'
 
+// VK 投影矩阵参数定义
 const NEAR = 0.001
 const FAR = 1000
 
 Component({
-  behaviors: [getBehavior(), yuvBehavior],
-  markerIndex: 0,  // 使用的 marker 索引
+  behaviors: [arBehavior, yuvBehavior],
   data: {
     theme: 'light',
+    widthScale: 1,      // canvas宽度缩放值
+    heightScale: 0.6,   // canvas高度缩放值
     markerImgList: [],  // 使用的 marker 列表
     chooseImgList: [], // 使用的 图片 列表
+    hintBoxList: [],  // 显示提示盒子列表
   },
+  markerIndex: 0,  // 使用的 marker 索引
+  hintInfo: undefined, // 提示框信息
   lifetimes: {
       /**
       * 生命周期函数--监听页面加载
@@ -37,11 +42,84 @@ Component({
   },
 
   methods: {
+    // 对应案例的初始化逻辑，由统一的 behavior 触发
     init() {
-      this.markerIndex = 0;
-      this.initGL()
-    },
+      // 初始化 Three.js，用于模型相关的渲染
+      this.initTHREE()
 
+      // 初始化 GL，基于 Three.js 的 Context，用于相机YUV渲染
+      this.initYUV()
+
+      // 初始化VK
+      // start完毕后，进行更新渲染循环
+      this.initVK();
+
+      this.markerIndex = 0;
+    },
+    initVK() {
+      // VKSession 配置
+      const session = this.session = wx.createVKSession({
+        track: {
+          plane: {
+            mode: 3
+          },
+          marker: true,
+        },
+        version: 'v1',
+        gl: this.gl
+      });
+
+      const THREE = this.THREE
+
+      session.start(err => {
+        if (err) return console.error('VK error: ', err)
+
+        console.log('@@@@@@@@ VKSession.version', session.version)
+
+        const canvas = this.canvas
+
+        //  VKSession EVENT resize
+        session.on('resize', () => {
+          this.calcCanvasSize();
+        })
+
+        // VKSession EVENT addAnchors
+        session.on('addAnchors', anchors => {
+          console.log("addAnchor", anchors);
+        })
+
+        // VKSession EVENT updateAnchors
+        session.on('updateAnchors', anchors => {
+          // marker 模式下，目前仅有一个识别目标，可以直接取
+          const anchor = anchors[0];
+          const markerId = anchor.id;
+          const size = anchor.size;
+          this.hintInfo = {
+            markerId: markerId,
+            size: size
+          }
+        })
+        
+        // VKSession removeAnchors
+        // 识别目标丢失时，会触发一次
+        session.on('removeAnchors', anchors => {
+          if (this.data.hintBoxList && this.data.hintBoxList.length > 0) {
+            // 清理信息
+            this.hintInfo = undefined;
+            // 存在列表的情况，去除remove
+            this.setData({
+              hintBoxList: []
+            });
+          }
+        });
+
+
+        console.log('ready to initloop')
+        // start 初始化完毕后，进行更新渲染循环
+        this.initLoop();
+      });
+
+    },
     chooseMedia() { 
       // marker图片上传逻辑
       wx.chooseMedia({
@@ -58,7 +136,6 @@ Component({
           }
 
           console.log('set chooseImgList', chooseImgListRes)
-
           this.setData({
             chooseImgList: chooseImgListRes,
           })
@@ -161,24 +238,74 @@ Component({
     getAllMarker() {
       console.log(this.session.getAllMarker())
     },
-    render(frame) {
-      this.renderGL(frame)
+    loop() {
+      // console.log('loop')
 
-      const camera = frame.camera
+      // 获取 VKFrame
+      const frame = this.session.getVKFrame(this.canvas.width, this.canvas.height)
+
+      // 成功获取 VKFrame 才进行
+      if(!frame) { return; }
+
+      // 更新相机 YUV 数据
+      this.renderYUV(frame)
+
+      // 获取 VKCamera
+      const VKCamera = frame.camera
 
       // 相机
-      if (camera) {
+      if (VKCamera) {
+        // 接管 ThreeJs 相机矩阵更新，Marker模式下，主要由视图和投影矩阵改变渲染效果
         this.camera.matrixAutoUpdate = false
-        this.camera.matrixWorldInverse.fromArray(camera.viewMatrix)
-        this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse)
 
-        const projectionMatrix = camera.getProjectionMatrix(NEAR, FAR)
+        // 视图矩阵
+        this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix)
+        // 逆矩阵没用上，可以选择不设置
+        // this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse)
+
+        // 投影矩阵
+        const projectionMatrix = VKCamera.getProjectionMatrix(NEAR, FAR)
         this.camera.projectionMatrix.fromArray(projectionMatrix)
-        this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
+        // 逆矩阵没用上，可以选择不设置
+        // this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
       }
 
-      // 更新动画
-      this.updateAnimation()
+      if (this.hintInfo) {
+        // 存在提示信息，则更新
+        const THREE = this.THREE;
+
+        // 原点偏移矩阵，VK情况下，marker 点对应就是 0 0 0，世界矩阵可以认为是一个单位矩阵
+        // marker 右侧点可以理解是 0.5 0 0
+        const center = new THREE.Vector3();
+        const right = new THREE.Vector3(0.5, 0, 0);
+
+        // 获取设备空间坐标
+        const devicePos = center.clone().project(this.camera);
+
+        // 转换坐标系，从 (-1, 1) 转到 (0, 100)，同时移到左上角 0 0，右下角 1 1
+        const screenPos = new THREE.Vector3(0, 0, 0);
+        screenPos.x = devicePos.x * 50 + 50;
+        screenPos.y = 50 - devicePos.y * 50;
+
+        // 获取右侧点信息
+        const deviceRightPos = right.clone().project(this.camera);
+        const screenRightPos = new THREE.Vector3(0, 0, 0);
+        screenRightPos.x = deviceRightPos.x * 50 + 50;
+
+        const markerHalfWidth = screenRightPos.x - screenPos.x;
+        
+        this.setData({
+          hintBoxList: [
+            {
+              markerId: this.hintInfo.markerId,
+              left: screenPos.x - markerHalfWidth,
+              top: screenPos.y - markerHalfWidth,
+              width: markerHalfWidth * this.data.domWidth * 2 / 100,
+              height: markerHalfWidth * this.data.domWidth * 2 / 100,
+            }
+          ]
+        });
+      }
 
       this.renderer.autoClearColor = false
       this.renderer.render(this.scene, this.camera)

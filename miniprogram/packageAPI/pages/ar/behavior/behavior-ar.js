@@ -11,6 +11,8 @@ module.exports = Behavior({
     camera: undefined,  // Three相机，主要相机
     // 全局 data
     data: {
+        domWidth: 0,
+        domHeight: 0,
         width: 1,       // canvas大小
         height: 1,      // canvas大小
         widthScale: 1,      // canvas宽度缩放值
@@ -42,9 +44,10 @@ module.exports = Behavior({
             this.setData({
                 width,
                 height,
+                domWidth: info.windowWidth * this.data.widthScale,
+                domHeight: info.windowHeight * this.data.heightScale,
             });
         },
-
         switchCamera(event){
             if(this.session.config){
                 const config = this.session.config

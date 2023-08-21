@@ -92,7 +92,6 @@ Component({
               const anchor = anchors[i];
               // console.log('transform', anchor.transform);
               // console.log('points3d', anchor.points3d);
-
               this.shoeTransform = anchor.transform;
               this.points3d = anchor.points3d;
             }

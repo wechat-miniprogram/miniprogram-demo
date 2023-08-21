@@ -1,7 +1,6 @@
 <view class="page" data-weui-theme="{{theme}}">
-  <view class="canvas-wrap" style="height: {{heightScale * 100}}%">
-    <canvas type="webgl" id="webgl" style="width: {{widthScale * 100}}%;" bindtouchend="onTouchEnd">
-    </canvas>
+  <view class="canvas-wrap" style="width: {{widthScale * 100}}%; height: {{heightScale * 100}}%">
+    <canvas type="webgl" id="webgl"></canvas>
   </view>
   <view class="bottom-wrap">
     <p class="page-body-text tc">提示：将摄像头对准鞋部, 检测到的鞋部将会被标记出识别框和鞋部标记点</p>

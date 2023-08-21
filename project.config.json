@@ -71,5 +71,7 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wxe5f52902cf4de896"
+  "appid": "wxe5f52902cf4de896",
+  "projectname": "miniprogram-demo-master",
+  "libVersion": "2.33.0"
 }
