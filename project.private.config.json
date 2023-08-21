@@ -12,15 +12,22 @@
     "miniprogram": {
       "list": [
         {
-          "name": "photo-shoe-detect",
+          "name": "ar-photo-shoe-detect",
           "pathName": "packageAPI/pages/ar/photo-shoe-detect/photo-shoe-detect",
           "query": "",
           "launchMode": "default",
           "scene": null
         },
         {
-          "name": "shoe-detect",
+          "name": "ar-shoe-detect",
           "pathName": "packageAPI/pages/ar/shoe-detect/shoe-detect",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "ar-2dmarker",
+          "pathName": "packageAPI/pages/ar/2dmarker-ar/2dmarker-ar",
           "query": "",
           "launchMode": "default",
           "scene": null
