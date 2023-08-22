@@ -15,6 +15,7 @@ Component({
     cameraPosition: 0,
     buttonDisable: true,
   },
+  hintBoxList: [], // 提示点集合
   lifetimes: {
     /**
      * 生命周期函数--监听页面加载
@@ -84,6 +85,9 @@ Component({
         // VKSession EVENT addAnchors
         session.on('addAnchors', anchors => {
             console.log("addAnchor", anchors)
+            // if (this.model) {
+            //   this.model.scale.set(120, 120, 120);
+            // }
         })
 
         // VKSession EVENT updateAnchors
@@ -101,84 +105,36 @@ Component({
         // VKSession removeAnchors
         // 识别目标丢失时，会不断触发
         session.on('removeAnchors', anchors => {
-          if (this.model) {
-            this.model.scale.set(0, 0, 0);
-          }
+          // if (this.model) {
+          //   this.model.scale.set(0, 0, 0);
+          // }
         })
 
         // Three 场景相关
         const THREE = this.THREE;
-        const loader = this.loader = new THREE.GLTFLoader()
+        
+        // 控制容器节点
+        this.modelWrap = new THREE.Object3D();
+        this.scene.add( this.modelWrap );
+
+        // 初始化提示点
+        this.addShoeHintBox();
+
         // 加载模型
-        loader.load( 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/shoe-1.glb', ( gltf ) =>{
+        // const loader = this.loader = new THREE.GLTFLoader()
+        // loader.load( 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/shoe-1.glb', ( gltf ) =>{
+        //   console.log('gltf loaded', gltf.scene);
 
-          this.modelWrap =new THREE.Object3D();
+        //   // 设置模型索引以及缩放比
+        //   this.model = gltf.scene;
+        //   this.model.position.set(0, 0, 0);
+        //   this.model.scale.set(120, 120, 120);
 
-          // 模型加载到场上
-          this.scene.add( gltf.scene );
+        //   console.log('gltf set', this.model, this.modelWrap);
 
-          console.log('gltf loaded', gltf.scene);
-          // 设置模型索引
-          this.model = gltf.scene;
-
-          this.model.position.set(0, -0.5, 0);
-          this.model.scale.set(120, 120, 120);
-
-          // const hintWidth = 4;
-          // // x
-          // const xMaterial = new THREE.MeshPhongMaterial( {
-          //   color: 0xFF0000,
-          //   shininess: 150,
-          //   specular: 0x222222
-          // } );
-          // const xGeometry = new THREE.BoxGeometry( 1, 1, 1 );
-          // const xCube = new THREE.Mesh( xGeometry, xMaterial );
-          // xCube.position.set( hintWidth / 2, 0, 0 );
-          // xCube.scale.set(hintWidth, 0.1, 0.1);
-          // this.modelWrap.add(xCube);
-          
-          // // y
-          // const yMaterial = new THREE.MeshPhongMaterial( {
-          //   color: 0x00FF00,
-          //   shininess: 150,
-          //   specular: 0x222222
-          // } );
-          // const yGeometry = new THREE.BoxGeometry( 1, 1, 1 );
-          // const yCube = new THREE.Mesh( yGeometry, yMaterial );
-          // yCube.position.set( 0, hintWidth/2, 0 );
-          // yCube.scale.set( 0.1, hintWidth,  0.1);
-          // this.modelWrap.add(yCube);
-          
-          // // z
-          // const zMaterial = new THREE.MeshPhongMaterial( {
-          //   color: 0x0000FF,
-          //   shininess: 150,
-          //   specular: 0x222222
-          // } );
-          // const zGeometry = new THREE.BoxGeometry( 1, 1, 1 );
-          // const zCube = new THREE.Mesh( zGeometry, zMaterial );
-          // zCube.position.set( 0, 0, hintWidth/2 );
-          // zCube.scale.set( 0.1, 0.1, hintWidth);
-          // this.modelWrap.add(zCube);
-
-          // 模型加载到场上
-          this.modelWrap.add(this.model);
-          this.scene.add( this.modelWrap );
-        });
-
-        // 调试用 Cube
-        // const material = new THREE.MeshPhongMaterial( {
-				// 	color: 0xACFADF,
-				// 	shininess: 150,
-				// 	specular: 0x222222
-				// } );
-        // const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        // const cube = new THREE.Mesh( geometry, material );
-				// cube.position.set( 0, 0, 0 );
-        // cube.rotation.set(Math.PI / 6, Math.PI / 6, 0 )
-        // cube.scale.set(0.5, 0.5, 0.5);
-				// scene.add( cube );
-        // this.model = cube;
+        //   // 模型加载到场上
+        //   this.modelWrap.add(this.model);
+        // });
 
         console.log('ready to initloop')
         // start 初始化完毕后，进行更新渲染循环
@@ -190,9 +146,33 @@ Component({
       }
 
     },
+    addShoeHintBox() {
+      const THREE = this.THREE;
+
+      const wrap = this.modelWrap;
+      
+      const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+      const boxScale = 0.3;
+
+      const hintBoxList = [];
+      for (let i = 0; i < 8; i++) {
+        const colorHex = (i * 2).toString(16);
+        const material = new THREE.MeshPhysicalMaterial( {
+          metalness: 0.0,
+          roughness: 0.5,
+          color: parseInt(`${colorHex}${colorHex}${colorHex}${colorHex}${colorHex}${colorHex}`, 16),
+        });
+        const mesh = new THREE.Mesh( geometry, material );
+        mesh.position.set(0, 0, 0);
+        mesh.scale.set(boxScale, boxScale, boxScale);
+        wrap.add( mesh );
+        hintBoxList.push(mesh);
+      }
+
+      this.hintBoxList = hintBoxList;
+    },
     loop() {
       // console.log('loop')
-      const gl = this.gl
 
       // 获取 VKFrame
       const frame = this.session.getVKFrame(this.canvas.width, this.canvas.height)
@@ -211,59 +191,69 @@ Component({
         // VK接管相机矩阵
         this.camera.matrixAutoUpdate = false
 
-        // 本案例 VK ViewMatrix 返回单位阵，可以不设
-        // this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix)
-        // this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse)
+        // VK ViewMatrix 返回列主序
+        this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix)
+        this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse)
 
         const projectionMatrix = VKCamera.getProjectionMatrix(NEAR, FAR)
         // VK 返回列主序
         // 设置 投影矩阵
         this.camera.projectionMatrix.fromArray(projectionMatrix)
-        // this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
+        this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
       }
 
       // 存在model，更新矩阵
       if (this.modelWrap && this.points3d && this.shoeTransform) {
-
+        // console.log('toUpdate')
         const THREE = this.THREE;
 
         // 顶点偏移矩阵
         const positionMat = new THREE.Matrix4();
-        positionMat.setPosition(this.points3d[0].x, this.points3d[1].y, this.points3d[2].z);
-        // positionMat.setPosition(-0.278, -1.1958, -2.89);
+        // 认为点 0 0 0
+        positionMat.setPosition(0, 0, 0);
 
         // Anchor返回矩阵，实际上就是完整的 modelView matrix
-        const anchorMat = new THREE.Matrix4();
+        const anchorMatrix = new THREE.Matrix4();
         // 目前返回的是行主序矩阵
-        anchorMat.set(
+        anchorMatrix.set(
           this.shoeTransform[0], this.shoeTransform[1], this.shoeTransform[2], this.shoeTransform[3],
           this.shoeTransform[4], this.shoeTransform[5], this.shoeTransform[6], this.shoeTransform[7],
           this.shoeTransform[8], this.shoeTransform[9], this.shoeTransform[10], this.shoeTransform[11],
           this.shoeTransform[12], this.shoeTransform[13], this.shoeTransform[14], this.shoeTransform[15],
-        )
-        // anchorMat.set(
-        //   -0.89, -0.04, 0.43, -0.06,
-        //   0.43,   -0.18, 0.87,  -2.38,
-        //   0.04,   0.98,  0.18,  -17.77,
-        //   0.0,    0.0,   0.0,    1.0
-        // );
-
+        );
         // 两者叠加
-        const modelWorld = positionMat.multiply(anchorMat);
+        // const modelWorld = positionMat.multiply(anchorMatrix);
         
+        const modelWorld = anchorMatrix;
+
         const pos = new THREE.Vector3();
         const quaternion = new THREE.Quaternion();
         const scale = new THREE.Vector3();
 
         // 解析出 实际的 信息
-        modelWorld.decompose(pos, quaternion, scale );
-          
-        // console.log(pos, quaternion, scale)
+        modelWorld.decompose(pos, quaternion, scale );          
+        // console.log(pos, quaternion, scale);
 
-        // 设置到渲染模型容器上
+        // 设置到容器节点上
         this.modelWrap.position.set(pos.x, pos.y, pos.z);
         this.modelWrap.quaternion.set(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
         this.modelWrap.scale.set(scale.x, scale.y, scale.z);
+
+        if (this.model) {
+          // 先把模型放置在脚踝
+          // this.model.position.set(this.points3d[0].x, this.points3d[0].y, this.points3d[0].z);
+        }
+
+        if (this.hintBoxList && this.hintBoxList.length > 0) {
+          // console.log('ready to set', this.hintBoxList);
+          // 存在提示列表，则更新点信息
+          for (let i = 0; i < this.hintBoxList.length; i++) {
+            const hintBox = this.hintBoxList[i];
+            hintBox.position.set(this.points3d[i].x, this.points3d[i].y, this.points3d[i].z);
+          }
+          // console.log('seted', this.hintBoxList);
+        }
+
 
         // debug 用信息
         // if (!loggerOnce) {
@@ -282,6 +272,7 @@ Component({
 
       // 渲染 Three 场景
       this.renderer.autoClearColor = false
+      this.renderer.state.setCullFace(this.THREE.CullFaceBack)
       this.renderer.render(this.scene, this.camera);
       // 为什么去掉这句话会画不出来，我感觉大概率是YUV的面朝向错了
       this.renderer.state.setCullFace(this.THREE.CullFaceNone)
