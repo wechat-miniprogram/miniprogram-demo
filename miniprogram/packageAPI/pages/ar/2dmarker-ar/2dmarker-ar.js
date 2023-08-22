@@ -55,6 +55,9 @@ Component({
       this.initVK();
 
       this.markerIndex = 0;
+
+      // 添加 识别包围盒子
+      this.add3DBox();
     },
     initVK() {
       // VKSession 配置
@@ -85,7 +88,12 @@ Component({
 
         // VKSession EVENT addAnchors
         session.on('addAnchors', anchors => {
-          console.log("addAnchor", anchors);
+          // console.log("addAnchor", anchors);
+
+          this.left.visible = true;
+          this.right.visible = true;
+          this.top.visible = true;
+          this.bottom.visible = true;
         })
 
         // VKSession EVENT updateAnchors
@@ -103,6 +111,11 @@ Component({
         // VKSession removeAnchors
         // 识别目标丢失时，会触发一次
         session.on('removeAnchors', anchors => {
+          this.left.visible = false;
+          this.right.visible = false;
+          this.top.visible = false;
+          this.bottom.visible = false;
+
           if (this.data.hintBoxList && this.data.hintBoxList.length > 0) {
             // 清理信息
             this.hintInfo = undefined;
@@ -119,6 +132,55 @@ Component({
         this.initLoop();
       });
 
+    },
+    add3DBox() {
+      // 添加marker需要的 三维包围框
+
+      const THREE = this.THREE;
+      const scene = this.scene;
+
+      const material = new THREE.MeshPhysicalMaterial( {
+        metalness: 0.0,
+        roughness: 0.1,
+        color: 0x64f573,
+      } );
+      const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+
+      const borderSize = 0.1;
+
+      const left = new THREE.Mesh( geometry, material );
+      left.position.set(-0.5, 0, 0 );
+      left.rotation.set(-Math.PI / 2, 0, 0 )
+      left.scale.set(borderSize, 1.1, borderSize);
+      scene.add( left );
+      left.visible = false;
+      this.left = left;
+
+      const right = new THREE.Mesh( geometry, material );
+      right.position.set(0.5, 0, 0 );
+      right.rotation.set(-Math.PI / 2, 0, 0 )
+      right.scale.set(borderSize, 1.1, borderSize);
+      scene.add( right );
+      right.visible = false;
+      this.right = right;
+
+      const top = new THREE.Mesh( geometry, material );
+      top.position.set(0, 0, 0.5 );
+      top.rotation.set(0, 0, 0 )
+      top.scale.set(1.1, borderSize, borderSize);
+      scene.add( top );
+      top.visible = false;
+      this.top = top;
+
+      const bottom = new THREE.Mesh( geometry, material );
+      bottom.position.set(0, 0, -0.5 );
+      bottom.rotation.set(0, 0, 0 )
+      bottom.scale.set(1.1, borderSize, borderSize);
+      scene.add( bottom );
+      bottom.visible = false;
+      this.bottom = bottom;
+
+      console.log('add3DBox is finish')
     },
     chooseMedia() { 
       // marker图片上传逻辑
@@ -252,6 +314,8 @@ Component({
 
       // 获取 VKCamera
       const VKCamera = frame.camera
+      // const VKCamera = undefined;
+
 
       // 相机
       if (VKCamera) {
@@ -259,17 +323,16 @@ Component({
         this.camera.matrixAutoUpdate = false
 
         // 视图矩阵
-        this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix)
-        // 逆矩阵没用上，可以选择不设置
-        // this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse)
+        this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix);
+        this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse);
 
         // 投影矩阵
         const projectionMatrix = VKCamera.getProjectionMatrix(NEAR, FAR)
         this.camera.projectionMatrix.fromArray(projectionMatrix)
-        // 逆矩阵没用上，可以选择不设置
-        // this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
+        this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
       }
 
+      // 绘制而为提示框的逻辑
       if (this.hintInfo) {
         // 存在提示信息，则更新
         const THREE = this.THREE;
@@ -308,6 +371,7 @@ Component({
       }
 
       this.renderer.autoClearColor = false
+      this.renderer.state.setCullFace(this.THREE.CullFaceBack)
       this.renderer.render(this.scene, this.camera)
       this.renderer.state.setCullFace(this.THREE.CullFaceNone)
     },
