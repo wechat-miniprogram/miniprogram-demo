@@ -196,6 +196,10 @@ Component({
         this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse)
 
         const projectionMatrix = VKCamera.getProjectionMatrix(NEAR, FAR)
+
+        // projectionMatrix[0] = projectionMatrix[0] / 2;
+        // projectionMatrix[5] = projectionMatrix[5] / 2;
+        
         // VK 返回列主序
         // 设置 投影矩阵
         this.camera.projectionMatrix.fromArray(projectionMatrix)
@@ -256,18 +260,26 @@ Component({
 
 
         // debug 用信息
-        // if (!loggerOnce) {
-        //   console.log('positionMat', positionMat);
-        //   console.log('anchorMat', anchorMat);
-        //   console.log('modelWorld', modelWorld);
+        if (!loggerOnce) {
+          // console.log('positionMat', positionMat);
+          // console.log('anchorMat', anchorMat);
+          // console.log('modelWorld', modelWorld);
 
-        //   console.log('projectionMatrix', this.camera.projectionMatrix);
+          // console.log('projectionMatrix', this.camera.projectionMatrix);
 
-        //   console.log('this.modelWrap.position', this.modelWrap.position);
-        //   console.log('this.modelWrap.quaternion', this.modelWrap.quaternion);
-        //   console.log('this.modelWrap.scale', this.modelWrap.scale);
-        //   loggerOnce = true;
-        // }
+          // console.log('this.modelWrap.position', this.modelWrap.position);
+          // console.log('this.modelWrap.quaternion', this.modelWrap.quaternion);
+          // console.log('this.modelWrap.scale', this.modelWrap.scale);
+          
+          console.log('domSize', this.data.domWidth, this.data.domHeight)
+          // VK 直接数值
+          console.log('joints',  Array.from(this.points3d))
+          console.log('viewMatrix',  Array.from(VKCamera.viewMatrix))
+          console.log('projectionMatrix',  Array.from(VKCamera.getProjectionMatrix(NEAR, FAR)))
+          console.log('anchorTransform',  Array.from(this.shoeTransform));
+          
+          loggerOnce = true;
+        }
       }
 
       // 渲染 Three 场景

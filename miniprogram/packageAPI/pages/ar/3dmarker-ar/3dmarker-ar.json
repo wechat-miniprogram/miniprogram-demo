@@ -3,5 +3,5 @@
     "ar-model-component": "./Components/arModelComponent"
   },
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "MarkerAR"
+  "navigationBarTitleText": "3D Marker"
 }
