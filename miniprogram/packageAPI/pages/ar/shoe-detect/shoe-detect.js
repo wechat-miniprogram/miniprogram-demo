@@ -206,6 +206,7 @@ Component({
         this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
       }
 
+
       // 存在model，更新矩阵
       if (this.modelWrap && this.points3d && this.shoeTransform) {
         // console.log('toUpdate')
@@ -236,7 +237,7 @@ Component({
 
         // 解析出 实际的 信息
         modelWorld.decompose(pos, quaternion, scale );          
-        // console.log(pos, quaternion, scale);
+        console.log(pos, quaternion, scale);
 
         // 设置到容器节点上
         this.modelWrap.position.set(pos.x, pos.y, pos.z);
@@ -271,7 +272,7 @@ Component({
           // console.log('this.modelWrap.quaternion', this.modelWrap.quaternion);
           // console.log('this.modelWrap.scale', this.modelWrap.scale);
           
-          console.log('domSize', this.data.domWidth, this.data.domHeight)
+          // console.log('domSize', this.data.domWidth, this.data.domHeight)
           // VK 直接数值
           console.log('joints',  Array.from(this.points3d))
           console.log('viewMatrix',  Array.from(VKCamera.viewMatrix))

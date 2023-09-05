@@ -1,19 +1,21 @@
-let protobuf = require("./protobuf/protobuf.js");
-let json = require("./proto/arModelProto.js");
-let root = protobuf.Root.fromJSON(json)
-let message = root.lookupType("ARModelData");
-
-
 Component({
   behaviors: ['wx://component-export'],
   export(){
-    return {getARModel:this.getARModel.bind(this)}
+    return {getARModelList: this.getARModelList.bind(this)}
   },
   data: {
     chooseMapFile: null,
     envId: 'test-f0b102',
     modelName: 'arDemo',
+    // 模型数据
+    // @ modelStatus 模型状态
+    // @ cosid
+    // @ uploadTime 上传时间
+    // @ errMsg 错误信息
+    models: [
+    ],
   },
+  modelRespMap: {},
   lifetimes: {
     ready: function () {
       if (!wx.cloud) {
@@ -25,29 +27,34 @@ Component({
         console.log("初始化云函数成功")
       }
 
-      this.getARModel()
+      // 缓存resp map
+      this.modelRespMap = {};
+
+      // 获取已有数据
+      this.getARModelList();
     }
   },
 
   methods: {
+    // 上传视频逻辑
     uploadARModel() {
-      var callback = this.generateARModel.bind(this)
-      var cloudUpload = this.cloudUploadARModel.bind(this)
-      var timeNow = Date.now() / 1000 | 0;
-      var value = wx.getStorageSync('modelsInfo');
-      console.log("value的值为：")
-      console.log(value)
-      if(value && value.length != 0){
-        if(timeNow - value[0].timeStamp < 7200){
-          wx.showToast({
-            title: "仅两小时允许上传一次视频",
-            icon: 'none',
-            duration: 2000
-          })
-          return;
-        }
-      }
-      console.log(value);
+      const callback = this.generateARModel.bind(this)
+      const cloudUpload = this.cloudUploadARModel.bind(this)
+      // const timeNow = Date.now() / 1000 | 0;
+      // const modelInfos = wx.getStorageSync('modelsInfo');
+      // console.log("modelInfos的值为：")
+      // console.log(modelInfos)
+      // if(modelInfos && modelInfos.length != 0){
+      //   if(timeNow - modelInfos[0].timeStamp < 7200){
+      //     wx.showToast({
+      //       title: "仅两小时允许上传一次视频",
+      //       icon: 'none',
+      //       duration: 2000
+      //     })
+      //     return;
+      //   }
+      // }
+      // 上传视频
       wx.chooseMedia({
         count: 9,
         mediaType: ['video'],
@@ -69,7 +76,6 @@ Component({
               min = tempFileInfo.height;
               max = tempFileInfo.width;
             }
-
             // 保证长边在 720 以上
             if (max > 720) {
               // 不接受比例在 3:1 以上的视频
@@ -110,6 +116,232 @@ Component({
           }
         }
       })
+    },
+    // 生成具体模型
+    generateARModel(url) {
+      console.log("当前地址为：", url)
+      wx.showLoading({
+        title: '生成模型中……',
+      });
+
+      const reqData =  {
+        type: 'GenerateARModel',
+        name: this.data.modelName,
+        url: url,
+        algoType: 2,
+        getMesh: true,
+        getTexture: true
+      }
+
+      console.log("调用参数为:",reqData)
+
+      wx.cloud.callFunction({
+        name: 'ARDemo',
+        config: {
+          env: this.data.envId
+        },
+        data: reqData
+      }).then((resp) => {
+        console.log("生成模型成功")
+        console.log(resp)
+        wx.showToast({
+          title: "生成模型成功",
+          icon: 'none',
+          duration: 2000
+        })
+
+        wx.hideLoading();
+
+        let modelInfos = wx.getStorageSync('modelsInfo')
+        if (modelInfos == undefined || modelInfos.length == 0 ) {
+          modelInfos = []
+        }
+        console.log('原有的缓存列表', modelInfos)
+
+        const returnCosid = resp.result.respBody.cosid;
+
+        // 5分钟内上传相同文件，会返回相同的cosid，需要过滤掉
+        let matched = false;
+        for( let j = modelInfos.length - 1; j >= 0; j-- ) {
+          if (modelInfos[j].cosid === returnCosid) {
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          console.log("缓存对cosid进行push")
+          console.log("当前生成模型的cosid为：", returnCosid)
+          modelInfos.push({
+            cosid: resp.result.respBody.cosid,
+            uploadTime: this.convertToTime(Date.parse(new Date()) / 1000),
+            timeStamp: Date.now() / 1000 | 0,
+            modelStatus: 0,
+            statusMsg: "准备中"
+          })
+        }
+        
+        modelInfos.sort(function (a, b) {
+          if(a.uploadTime > b.uploadTime){
+              return -1;
+          }else  if(a.uploadTime < b.uploadTime){
+              return 1;
+          }
+          return 0;
+      })
+
+        wx.setStorage({
+          key: "modelsInfo",
+          data: modelInfos,
+          success() {
+            console.log("存储cosID集合为:", modelInfos)
+          }
+        })
+
+        this.setData({
+          models: modelInfos
+        });
+
+      }).catch((e) => {
+        console.log(e)
+        wx.showToast({
+          title: e.errMsg,
+          icon: 'none',
+          duration: 2000
+      })
+        this.setData({
+          showUploadTip: true
+        });
+        wx.hideLoading();
+      });
+    },
+    // 获取现有模型列表
+    getARModelList() {
+      // 获取本地缓存
+      var modelInfos = wx.getStorageSync('modelsInfo')
+      if (modelInfos == undefined || modelInfos.length == 0 ) {
+        // 无缓存，跳过
+        return;
+      }
+
+      const countModelInfo = modelInfos.length;
+      let countLoaded = 0;
+
+      const modelInfosNew = [];
+
+      // 统一的获取处理回调
+      const handleLoadModelInfo = () => {
+        if (countLoaded === countModelInfo) {
+          // 加载完毕
+          console.log('基于本地缓存请求列表结束', modelInfosNew)
+          
+          // 新列表，基于创建时间排序
+          modelInfosNew.sort(function (a, b) {
+            if(a.uploadTime > b.uploadTime){
+                return -1;
+            }else  if(a.uploadTime < b.uploadTime){
+                return 1;
+            }
+            return 0;
+          })
+          
+          // 写入缓存
+          wx.setStorage({
+            key: "modelsInfo",
+            data: modelInfosNew,
+            success() {
+              console.log("存储cosID集合为:", modelInfosNew)
+              wx.hideLoading()
+            }
+          })
+          
+          // 更新显示列表
+          this.setData({
+            models: modelInfosNew,
+          });
+        }
+      }
+
+      // 基于缓存列表请求
+      for (let i = 0; i < countModelInfo; i++) {
+       const modelInfo = modelInfos[i];
+       const cosid = modelInfo.cosid
+        wx.cloud.callFunction({
+          name: 'ARDemo',
+          config: {
+            env: this.data.envId
+          },
+          data: {
+            type: 'GetARModel',
+            cosid: cosid,
+            modelType: 3,
+            needData: 0,
+            useIntranet: 0,
+            expireTime: 1200
+          }
+        }).then(resp => {
+          countLoaded++;
+
+          const modelStatus = resp.result.respBody.status;
+          const errCode = resp.result.result;
+
+          console.log("获取的模型的cosID为", cosid)
+          console.log(resp)
+          console.log('status', modelStatus);
+          console.log('errCode', errCode);
+
+          // 根据返回信息，更新模型信息
+          const modelInfoNew = {
+            cosid: cosid,
+            uploadTime: modelInfo.uploadTime,
+            timeStamp: modelInfo.timeStamp,
+            modelStatus: modelStatus, // 0 加载中 1 成功 2 失败
+            restTime: 0,
+            statusMsg: '准备中',
+          };
+          // 回调写入缓存map，方便读取
+          this.modelRespMap[cosid] = resp;
+
+          // 根据状态设置描述
+          if (modelStatus === 1) {
+            modelInfoNew.statusMsg = '已完成';
+            // 运算过期时间
+            const expireTime = resp.result.respBody.expireTime;
+            const nowTime = Date.now() / 1000 | 0;
+            const restTime = Math.floor((expireTime - nowTime) / 60 / 60 / 24);
+            modelInfoNew.restTime = restTime;
+          } else if (modelStatus === 2) {
+            modelInfoNew.statusMsg = '生成错误';
+            switch(errCode) {
+              case 10001: // ERR CODE INVALID PARAM
+                modelInfoNew.statusMsg = '参数错误';
+                break;
+              case 10002: // ERR CODE INVALID ENCRYPT ID
+                modelInfoNew.statusMsg = '非法加密信息';
+                break;
+              case 10003: // ERR_CODE_COS_EXPIRED
+                modelInfoNew.statusMsg = '资源过期';
+                break;
+              case 10004: // ERR_CODE_COS_NOT_EXIST
+                modelInfoNew.statusMsg = 'COSID不存在';
+                break;
+              case 10005: // ERR_CODE_COS_SYS_FAIL
+                modelInfoNew.statusMsg = '系统错误';
+                break;
+            }
+          }
+
+
+          modelInfosNew.push(modelInfoNew);
+          
+          handleLoadModelInfo();
+        }).catch((e) => {
+          countLoaded++;
+
+          console.log(e)
+          
+        });
+      }
+
     },
     cloudUploadARModel(res, callback){
       wx.showLoading({
@@ -158,104 +390,7 @@ Component({
         }
       })
     },
-    generateARModel(url) {
-      console.log("当前地址为：", url)
-      wx.showLoading({
-        title: '生成模型中……',
-      });
-
-      if (typeof url != "string") {
-        url = defaultURL
-        console.log("使用默认地址")
-      }
-
-      const reqData =  {
-        type: 'GenerateARModel',
-        name: this.data.modelName,
-        url: url,
-        algoType: 2,
-        getMesh: true,
-        getTexture: true
-      }
-
-      console.log("调用参数为:",reqData)
-
-      wx.cloud.callFunction({
-        name: 'ARDemo',
-        config: {
-          env: this.data.envId
-        },
-        data: reqData
-      }).then((resp) => {
-        console.log("生成模型成功")
-        console.log(resp)
-        wx.showToast({
-          title: "生成模型成功",
-          icon: 'none',
-          duration: 2000
-        })
-
-        wx.hideLoading();
-
-        var value = wx.getStorageSync('modelsInfo')
-        if (value == undefined || value.length == 0 ) {
-          value = []
-        }
-
-        var j = 0;
-        while (j < value.length) {
-          if (resp.result.respBody.cosid == value[j].cosid) {
-            break;
-          }
-          j++;
-        }
-        if (j == value.length) {
-          console.log("value对cosid进行push")
-          console.log("当前生成模型的cosid为：", resp.result.respBody.cosid)
-          value.push({
-            cosid: resp.result.respBody.cosid,
-            uploadTime: this.convertToTime(Date.parse(new Date()) / 1000),
-            timeStamp: Date.now() / 1000 | 0,
-            modelStatus: 0,
-            statusMsg: "准备中"
-          })
-        }
-
-        value.sort(function (a, b) {
-          if(a.uploadTime > b.uploadTime){
-              return -1;
-          }else  if(a.uploadTime < b.uploadTime){
-              return 1;
-          }
-          return 0;
-      })
-
-        wx.setStorage({
-          key: "modelsInfo",
-          data: value,
-          success() {
-            console.log("存储cosID集合为:", value)
-          }
-        })
-
-        this.setData({
-          models: value
-        });
-
-      }).catch((e) => {
-        console.log(e)
-        wx.showToast({
-          title: e.errMsg,
-          icon: 'none',
-          duration: 2000
-      })
-        this.setData({
-          showUploadTip: true
-        });
-        wx.hideLoading();
-      });
-    },
-
+    // 工具函数 转换时间戳
     convertToTime(timestamp) {
       var now = new Date(timestamp * 1000)
       var y = now.getFullYear()
@@ -264,263 +399,30 @@ Component({
       var x = y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d) + " \n" + now.toTimeString().substr(0, 8);
       return x
     },
-    getARModel() {
-      wx.cloud.callFunction({
-        name: 'ARDemo',
-        config: {
-          env: this.data.envId
-        },
-        data: {
-          type: 'GetARModelList',
-          modelStatus: 0,
-          algoType: 2
-        }
-      }).then((resp) => {
-        console.log("获取模型成功")
-        console.log(resp)
-        var value = wx.getStorageSync('modelsInfo')
-        if (value == undefined || value.length == 0 ) {
-          value = []
-        }
+    // 选择模型
+    chooseARModel(event) {
+      // 被选中cosid
+      const selectCosid = event.currentTarget.dataset.cosid;
+      // 已选中cosid
+      const targetCosId = this.data.targetCosId;
 
-        var modelList = resp.result.respBody.modelList
-        if (!modelList) {
-          console.log("当前无模型获得")
-        }else{
-          var j;
-          var modelOKString = "ARModel_Status_Marker_Finished"
-          var modelFailString = "ARModel_Status_Fail"
-          var modelReadyString = "ARModel_Status_Init"
-          for (var i = 0; i < modelList.length; i++) {
-              j = 0;
-              while (j < value.length) {
-                  if (modelList[i].cosid == value[j].cosid){
-                    switch(modelList[i].modelStatus){
-                      case modelOKString:
-                          value[j].modelStatus = 1
-                          value[j].uploadTime = this.convertToTime(modelList[i].uploadTime)
-                          value[j].timeStamp = modelList[i].uploadTime
-                          value[j].statusMsg = "已完成"
-                        break;
-                      case modelFailString:
-                          value[j].modelStatus = 0
-                          value[j].uploadTime = this.convertToTime(modelList[i].uploadTime)
-                          value[j].timeStamp = modelList[i].uploadTime
-                          value[j].statusMsg = "构建失败"
-                        break;
-                      case modelReadyString:
-                          value[j].modelStatus = 0
-                          value[j].uploadTime = this.convertToTime(modelList[i].uploadTime)
-                          value[j].timeStamp = modelList[i].uploadTime
-                          value[j].statusMsg = "准备中"
-                        break;
-                    }
-                    break;
-                  }
-                  j++;
-              }
-              // if (j == value.length) {
-              //     console.log("value对cosid进行push")
-              //     if(modelList[i].modelStatus == modelOKString){
-              //         value.push({
-              //           cosid: modelList[i].cosid,
-              //           uploadTime: this.convertToTime(modelList[i].uploadTime),
-              //           timeStamp: modelList[i].uploadTime,
-              //           modelStatus: 1,
-              //           statusMsg: "已完成"
-              //       })
-              //     }else if(modelList[i].modelStatus == modelFailString){
-              //         value.push({
-              //           cosid: modelList[i].cosid,
-              //           uploadTime: this.convertToTime(modelList[i].uploadTime),
-              //           timeStamp: modelList[i].uploadTime,
-              //           modelStatus: 0,
-              //           statusMsg: "构建失败",
-              //           errMsg: modelList[i].modelCos.modelList[0].errmsg
-              //         })
-              //     }else if(modelList[i].modelStatus == modelReadyString){
-              //         value.push({
-              //             cosid: modelList[i].cosid,
-              //             uploadTime: this.convertToTime(modelList[i].uploadTime),
-              //             timeStamp: modelList[i].uploadTime,
-              //             modelStatus: 0,
-              //             statusMsg: "准备中"
-              //           })
-              //     }    
-              // }
-          }
-        }
-
-        value.sort(function (a, b) {
-            if(a.uploadTime > b.uploadTime){
-                return -1;
-            }else  if(a.uploadTime < b.uploadTime){
-                return 1;
-            }
-            return 0;
-        })
-
+      // 不同的情况下，更新选中目标
+      if (selectCosid !== targetCosId) {
+        
         this.setData({
-          models: value,
+          targetCosId: selectCosid
         });
 
-        wx.setStorage({
-          key: "modelsInfo",
-          data: value,
-          success() {
-            console.log("存储cosID集合为:", value)
-            wx.hideLoading()
+        const modelResp = this.modelRespMap[selectCosid];
+
+        // 选择的时候，通知上层
+        this.triggerEvent('selectEvent', {
+            cosid: selectCosid,
+            modelResp: modelResp,
           }
-        })
-      }).catch((e) => {
-        console.log(e)
-        this.setData({
-          showUploadTip: true
-        });
-      });
-    },
-
-    saveLocalFile(bufferContent) {
-      var url = `${wx.env.USER_DATA_PATH}/model.map`
-
-      const fs = wx.getFileSystemManager()
-      fs.writeFile({
-        filePath: url,
-        data: bufferContent,
-        encoding: "binary",
-        success(res) {
-          console.log(res)
-        },
-        fail(res) {
-          console.error(res)
-        }
-      })
-
-      return url
-    },
-
-    showARModel(event) {
-      const setData = this.setData.bind(this)
-      const triggerEvent = this.triggerEvent.bind(this)
-      const getData = () =>{
-        return this.data;
+        );
       }
 
-      if(this.data.targetCosId == event.currentTarget.dataset.cosid) {
-        setData({
-          targetCosId:null
-        })
-        wx.showToast({
-          title: "取消当前已选",
-          icon: 'none',
-          duration: 2000
-        })
-        triggerEvent('chooseEvent', {"myChooseMapUrl": null}) 
-        return;
-      }
-
-      setData({
-        targetCosId:event.currentTarget.dataset.cosid
-      })
-
-      var saveLocalFile = this.saveLocalFile.bind(this)
-      wx.showLoading({
-        title: '加载中……',
-      })
-      wx.cloud.callFunction({
-        name: 'ARDemo',
-        config: {
-          env: this.data.envId
-        },
-        data: {
-          type: 'GetARModel',
-          cosid: event.currentTarget.dataset.cosid,
-          modelType: 3,
-          needData: 0,
-          useIntranet: 0,
-          expireTime: 1200
-        }
-      }).then(resp => {
-        console.log("获取的模型的cosID为", event.currentTarget.dataset.cosid)
-        console.log(resp)
-        var filePath = wx.env.USER_DATA_PATH + '/temp'
-        wx.downloadFile({
-          filePath: filePath,
-          url: resp.result.respBody.url,
-          success(res) {
-            console.log(res)
-            const fs = wx.getFileSystemManager()
-            fs.readFile({
-              filePath: res.filePath,
-              position: 0,
-              success(res) {
-                console.log("结果返回为")
-                console.log(res)
-                try{
-                  console.log('res start')
-                  console.log(res.data.byteLength);
-                  var data = message.decode(res.data);
-                  
-                  console.log("反序列化 >>", data);
-                } catch(e){
-                    wx.hideLoading();
-                    console.log("模型数据解析有误")
-                    console.log(e)
-                    if(e instanceof protobuf.util.ProtocolError){
-                        //missing required field
-                        console.log('missing required field')
-                    }else{
-                        //wire format is invalid
-                        console.log('wire format is invalid')
-
-                    }
-
-                    throw e;
-                }
-                var byteOffset = data.meshModel.byteOffset
-                var byteLength = data.meshModel.byteLength
-                var bufferContent = data.meshModel.buffer.slice(byteOffset, byteOffset + byteLength)
-                console.log("byteOffset:", byteOffset)
-                console.log("byteLength:", byteLength)
-                var resultUrl = saveLocalFile(bufferContent)
-                console.log("map文件生成成功")
-                console.log(resultUrl)
-                setData({
-                  chooseMapFile: resultUrl
-                })
-                triggerEvent('chooseEvent', {"myChooseMapUrl": getData().chooseMapFile}) 
-                wx.hideLoading();
-              },
-              fail(res) {
-                wx.hideLoading();
-                wx.showToast({
-                  title: res.errMsg,
-                  icon: 'none',
-                  duration: 2000
-                })
-                console.error(res)
-              }
-            })
-          },
-          fail(res) {
-            wx.hideLoading();
-            wx.showToast({
-              title: res.errMsg,
-              icon: 'none',
-              duration: 2000
-            })
-            console.error(res)
-          }
-        })
-      }).catch((e) => {
-        wx.hideLoading();
-        wx.showToast({
-          title: e,
-          icon: 'none',
-          duration: 2000
-        })
-        console.err(e)
-      })
     },
   }
 })

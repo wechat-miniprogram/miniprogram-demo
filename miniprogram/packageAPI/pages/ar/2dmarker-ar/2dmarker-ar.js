@@ -72,14 +72,10 @@ Component({
         gl: this.gl
       });
 
-      const THREE = this.THREE
-
       session.start(err => {
         if (err) return console.error('VK error: ', err)
 
         console.log('@@@@@@@@ VKSession.version', session.version)
-
-        const canvas = this.canvas
 
         //  VKSession EVENT resize
         session.on('resize', () => {
@@ -132,6 +128,79 @@ Component({
         this.initLoop();
       });
 
+    },
+    loop() {
+      // console.log('loop')
+
+      // 获取 VKFrame
+      const frame = this.session.getVKFrame(this.canvas.width, this.canvas.height)
+
+      // 成功获取 VKFrame 才进行
+      if(!frame) { return; }
+
+      // 更新相机 YUV 数据
+      this.renderYUV(frame)
+
+      // 获取 VKCamera
+      const VKCamera = frame.camera
+
+      // 相机
+      if (VKCamera) {
+        // 接管 ThreeJs 相机矩阵更新，Marker模式下，主要由视图和投影矩阵改变渲染效果
+        this.camera.matrixAutoUpdate = false
+
+        // 视图矩阵
+        this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix);
+        this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse);
+
+        // 投影矩阵
+        const projectionMatrix = VKCamera.getProjectionMatrix(NEAR, FAR)
+        this.camera.projectionMatrix.fromArray(projectionMatrix)
+        this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
+      }
+
+      // 绘制而为提示框的逻辑
+      if (this.hintInfo) {
+        // 存在提示信息，则更新
+        const THREE = this.THREE;
+
+        // 原点偏移矩阵，VK情况下，marker 点对应就是 0 0 0，世界矩阵可以认为是一个单位矩阵
+        // marker 右侧点可以理解是 0.5 0 0
+        const center = new THREE.Vector3();
+        const right = new THREE.Vector3(0.5, 0, 0);
+
+        // 获取设备空间坐标
+        const devicePos = center.clone().project(this.camera);
+
+        // 转换坐标系，从 (-1, 1) 转到 (0, 100)，同时移到左上角 0 0，右下角 1 1
+        const screenPos = new THREE.Vector3(0, 0, 0);
+        screenPos.x = devicePos.x * 50 + 50;
+        screenPos.y = 50 - devicePos.y * 50;
+
+        // 获取右侧点信息
+        const deviceRightPos = right.clone().project(this.camera);
+        const screenRightPos = new THREE.Vector3(0, 0, 0);
+        screenRightPos.x = deviceRightPos.x * 50 + 50;
+
+        const markerHalfWidth = screenRightPos.x - screenPos.x;
+        
+        this.setData({
+          hintBoxList: [
+            {
+              markerId: this.hintInfo.markerId,
+              left: screenPos.x - markerHalfWidth,
+              top: screenPos.y - markerHalfWidth,
+              width: markerHalfWidth * this.data.domWidth * 2 / 100,
+              height: markerHalfWidth * this.data.domWidth * 2 / 100,
+            }
+          ]
+        });
+      }
+
+      this.renderer.autoClearColor = false
+      this.renderer.state.setCullFace(this.THREE.CullFaceBack)
+      this.renderer.render(this.scene, this.camera)
+      this.renderer.state.setCullFace(this.THREE.CullFaceNone)
     },
     add3DBox() {
       // 添加marker需要的 三维包围框
@@ -299,81 +368,6 @@ Component({
     },
     getAllMarker() {
       console.log(this.session.getAllMarker())
-    },
-    loop() {
-      // console.log('loop')
-
-      // 获取 VKFrame
-      const frame = this.session.getVKFrame(this.canvas.width, this.canvas.height)
-
-      // 成功获取 VKFrame 才进行
-      if(!frame) { return; }
-
-      // 更新相机 YUV 数据
-      this.renderYUV(frame)
-
-      // 获取 VKCamera
-      const VKCamera = frame.camera
-      // const VKCamera = undefined;
-
-
-      // 相机
-      if (VKCamera) {
-        // 接管 ThreeJs 相机矩阵更新，Marker模式下，主要由视图和投影矩阵改变渲染效果
-        this.camera.matrixAutoUpdate = false
-
-        // 视图矩阵
-        this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix);
-        this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse);
-
-        // 投影矩阵
-        const projectionMatrix = VKCamera.getProjectionMatrix(NEAR, FAR)
-        this.camera.projectionMatrix.fromArray(projectionMatrix)
-        this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
-      }
-
-      // 绘制而为提示框的逻辑
-      if (this.hintInfo) {
-        // 存在提示信息，则更新
-        const THREE = this.THREE;
-
-        // 原点偏移矩阵，VK情况下，marker 点对应就是 0 0 0，世界矩阵可以认为是一个单位矩阵
-        // marker 右侧点可以理解是 0.5 0 0
-        const center = new THREE.Vector3();
-        const right = new THREE.Vector3(0.5, 0, 0);
-
-        // 获取设备空间坐标
-        const devicePos = center.clone().project(this.camera);
-
-        // 转换坐标系，从 (-1, 1) 转到 (0, 100)，同时移到左上角 0 0，右下角 1 1
-        const screenPos = new THREE.Vector3(0, 0, 0);
-        screenPos.x = devicePos.x * 50 + 50;
-        screenPos.y = 50 - devicePos.y * 50;
-
-        // 获取右侧点信息
-        const deviceRightPos = right.clone().project(this.camera);
-        const screenRightPos = new THREE.Vector3(0, 0, 0);
-        screenRightPos.x = deviceRightPos.x * 50 + 50;
-
-        const markerHalfWidth = screenRightPos.x - screenPos.x;
-        
-        this.setData({
-          hintBoxList: [
-            {
-              markerId: this.hintInfo.markerId,
-              left: screenPos.x - markerHalfWidth,
-              top: screenPos.y - markerHalfWidth,
-              width: markerHalfWidth * this.data.domWidth * 2 / 100,
-              height: markerHalfWidth * this.data.domWidth * 2 / 100,
-            }
-          ]
-        });
-      }
-
-      this.renderer.autoClearColor = false
-      this.renderer.state.setCullFace(this.THREE.CullFaceBack)
-      this.renderer.render(this.scene, this.camera)
-      this.renderer.state.setCullFace(this.THREE.CullFaceNone)
     },
   },
 })

@@ -1,17 +1,28 @@
-<view class="container page" data-weui-theme="{{theme}}">
-  <canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px">
-  </canvas>
-
-  <view class="btn-cnt">
-    <button type="primary"  bindtap="addMarker" style="height:10vh">添加 marker</button>
-    <button type="primary" disabled="{{!markerId}}" bindtap="removeMarker" style="height:10vh">删除 marker</button>
-    <button type="primary" disabled="{{!markerId}}" bindtap="getAllMarker" style="height:10vh">获取所有 marker</button>
-    <button type="primary" disabled="{{!mapUrl}}" bindtap="saveMap" style="height:10vh">保存map文件</button>
+<view class="page wrap-fix" data-weui-theme="{{theme}}">
+  <view class="canvas-wrap" style="width: {{widthScale * 100}}%; height: {{heightScale * 100}}%">
+    <canvas type="webgl" id="webgl"></canvas>
+    
+    <view class="hint-box"  wx:for="{{hintBoxList}}"  wx:for-item="hintBox" wx:key="hintBoxId"
+      style="left: {{hintBox.left}}%; top: {{hintBox.top}}%; width: {{hintBox.width}}px;  height: {{hintBox.height}}px;"
+    >
+      <p class="hint-id">识别id: {{hintBox.markerId}}</p>
+    </view>
   </view>
-  <view class="photo-cnt">
-    <view class="page-body-text tc">提示：点击加号添加模型视频, 选择已完成的模型, 选中将呈现蓝框, 手机摄像头对准该模型后添加marker, 页面下拉刷新模型状态, 向右滑动查看模型列表</view>
- </view>
-  <view>
-        <ar-model-component id="arModelComponent" bindchooseEvent="myChooseMap"></ar-model-component>
+
+  <view class="hint-words">提示：点击加号添加模型视频, 选择已完成的模型, 选中将呈现蓝框, 手机摄像头对准该模型后添加marker, 页面下拉刷新模型状态, 向右滑动查看模型列表</view>
+
+  <view class="wrap-option">
+    <button type="primary" disabled="{{usingMarkerId}}" bindtap="parseAddMarker">解析添加 Marker</button>
+    <button type="primary" disabled="{{!usingMarkerId}}" bindtap="removeMarker">清理使用 marker</button>
+    <button type="primary" disabled="{{!usingMarkerId}}" bindtap="saveMap">保存使用的 map 文件</button>
+    <button type="primary" disabled="{{!usingMarkerId}}" bindtap="saveGlTF">保存使用的 glTF 文件</button>
+  </view>
+
+  <view class="model-wrap">
+    <!-- 3D marker 模型上传 以及 现有列表相关逻辑 -->
+    <ar-model-component
+      id="arModelComponent"
+      bindselectEvent="changeSelect"
+    ></ar-model-component>
   </view>
 </view>

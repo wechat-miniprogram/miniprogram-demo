@@ -1,84 +1,145 @@
-.tip {
-  font-size: 23rpx;
-  color: rgba(0, 0, 0, 0.5);
-  width: 90%;
-  text-align: center;
-  margin: 30rpx auto 0 auto;
-}
-
-.top_tip {
-  font-size: 28rpx;
-  color: rgba(0, 0, 0, 0.5);
-  width: 90%;
-  text-align: left;
-  margin-top: 30rpx;
+.wrap-choose {
   margin-left: 20rpx;
 }
 
-.box_text {
-  background-color: white;
-  text-align: center;
-  padding: 10rpx 0;
-  margin-top: 10rpx;
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.modelList {
-  display: flex;
-  flex-flow: wrap;
-}
-
-.addButton {
-  margin: 0vw 0px 0px 3vw;
-  width: 30vw;
-  text-align: center;
-  height: 30vw;
-  line-height: 80rpx;
-  flex-shrink: 0;
-  position: relative;
-}
-
-.image {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 15px;
-}
-
-.choose {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+.wrap-left {
   position: absolute;
+  left: 40rpx;
+  top: 30rpx;
+  width: 200rpx;
+  height: 248rpx;
 }
 
-.addButton .timeStamp {
-  position: relative;
-  top: -100%;
-  line-height: 150%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(165, 165, 165);
-  font-size: 1em;
+button.btn-left {
+  position: absolute;
+  left: 0;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  padding: 12rpx;
+  border-radius: 20rpx;
+}
+button.btn-left .info-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20rpx;
+  text-align: center;
+}
+.info-wrap p {
+  display: block;
+  color: #fff;
+  font-size: 16rpx;
+  text-align: center;
+  line-height: 24rpx;
+  white-space: nowrap;
+}
+.info-wrap p:first-child {
+  font-size: 36rpx;
+  line-height: 46rpx;
 }
 
-.addButton .status {
-  position: relative;
-  top: -95%;
-  left: 15%;
-  background-color: white;
-  height: 25%;
-  width: 70%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(104, 104, 104);
-  font-size: 1em;
-  border-radius: 5px;
+button.btn-left .cross-v {
+  position: absolute;
+  left: 50%;
+  top: 26%;
+  width: 10rpx;
+  height: 80rpx;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 6rpx;
+}
 
+button.btn-left .cross-h {
+  position: absolute;
+  left: 50%;
+  top: 26%;
+  width: 80rpx;
+  height: 10rpx;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 6rpx;
+}
+.wrap-right {
+  text-align: left;
+  padding: 10rpx;
+  padding-right: 0;
+  margin-right: 20rpx;
+  min-height: 280rpx;
+  border-radius: 20rpx;
+  border: 4rpx dotted rgba(0, 0, 0, .3);
+}
+
+.model-item {
+  position: relative;
+  display: inline-block;
+  margin: 10rpx 10rpx 0 10rpx;
+  width: 206rpx;
+  height: 260rpx;
+  border-radius: 20rpx;
+}
+.model-item:first-child {
+  margin-left: 230rpx;
+}
+
+.model-info {
+  position: absolute;
+  left: 0rpx;
+  top: 0rpx;
+  width: 100%;
+  height: 100%;
+  border-radius: 20rpx;
+  box-sizing: border-box;
+}
+
+.model-info.loading {
+  background-color: #a0a0a0;
+  border: 8rpx #a0a0a0 solid;
+}
+.model-info.done {
+  background-color: #2B3467;
+  border: 8rpx #2B3467 solid;
+}
+.model-info.error {
+  background-color: #FF6969;
+  border: 8rpx #FF6969 solid;
+}
+.model-info.choosed {
+  border-color: #07c160;
+}
+
+.model-info .status {
+  position: absolute;
+  left: 20rpx;
+  right: 20rpx;
+  bottom: 20rpx;
+  height: 50rpx;
+  border-radius: 10rpx;
+  line-height: 50rpx;
+  font-size: 22rpx;
+  text-align: center;
+  background-color: #fff;
+}
+
+
+.model-info .timeStamp {
+  position: absolute;
+  left: 10rpx;
+  right: 10rpx;
+  top: 20rpx;
+  color: #fff;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 34rpx;
+}
+
+.model-info .restTime {
+  position: absolute;
+  left: 10rpx;
+  right: 10rpx;
+  bottom: 76rpx;
+  color: #fff;
+  font-size: 22rpx;
+  text-align: center;
+  line-height: 38rpx;
 }

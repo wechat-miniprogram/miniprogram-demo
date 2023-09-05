@@ -1,22 +1,29 @@
-<scroll-view class="scroll-view_H" scroll-x type="list" enable-flex style="width: 100%; height: 20vh; display:flex;">
-  <view class="addButton" bindtap="uploadARModel">
-    <image class="image" src="./add.png"></image>
-  </view>
-  <block wx:for="{{models}}" wx:key="cosid" wx:for-item="modelItem">
-    <view class="addButton" wx:if="{{modelItem.modelStatus == 0}}" bindtap="showARModel" data-cosid="{{modelItem.cosid}}">
-      <image class="image" src="./red.jpg"></image>
-      <image class="choose" wx:if="{{targetCosId != null && modelItem.cosid == targetCosId}}" src="./choose-blue.png"></image>
-      <text class="timeStamp">{{modelItem.uploadTime}}</text>
-      <text class="status" wx:if="{{modelItem.errMsg!=undefined}}">{{modelItem.errMsg}}</text>
-      <text class="status" wx:else>准备中</text>
+<view class="wrap-choose">
+  <view class="wrap-left">
+      <button type="primary" class="btn-left" bindtap="uploadARModel">
+        <view class="cross-v"/>
+        <view class="cross-h"/>
+        <view class="info-wrap">
+          <p>上传视频</p>
+          <p>（长边 720 以上）</p>
+          <p>（时长 10-30秒 之间）</p>
+          <p>（比例 3:1 以下的视频）</p>
+        </view>
+      </button>
     </view>
-    <view class="addButton" wx:else bindtap="showARModel" data-cosid="{{modelItem.cosid}}">
-      <image class="image" src="./green.jpg"></image>
-      <image class="choose" wx:if="{{targetCosId != null && modelItem.cosid == targetCosId}}" src="./choose-blue.png"></image>
-      <text class="timeStamp">{{modelItem.uploadTime}}</text>
-      <text class="status" wx:if="{{modelItem.errMsg!=undefined}}">{{modelItem.errMsg}}</text>
-      <text class="status" wx:else>已完成</text>
+  <view class="wrap-right">
+    <view class="model-item" wx:for="{{models}}" wx:key="modelIndex" wx:for-item="modelItem">
+      <view
+        class="model-info {{modelItem.modelStatus === 0 ? 'loading': ''}} {{modelItem.modelStatus === 1 ? 'done': '' }} {{modelItem.modelStatus === 2 ? 'error': '' }} {{targetCosId != null && modelItem.cosid == targetCosId ? 'choosed' : '' }}"
+        bindtap="chooseARModel"
+        data-cosid="{{modelItem.cosid}}"
+      >
+        <text class="status">{{modelItem.statusMsg}}</text>
+        <text class="timeStamp">{{modelItem.uploadTime}}</text>
+        <text wx:if="{{modelItem.restTime !== 0}}" class="restTime">剩余 {{modelItem.restTime}} 天过期</text>
+        <text class="errMsg" wx:if="{{modelItem.errMsg !== undefined}}">{{modelItem.errMsg}}</text>
+      </view>
     </view>
-  </block>
 
-</scroll-view>
+  </view>
+</view>
