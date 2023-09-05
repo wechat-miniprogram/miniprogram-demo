@@ -27,19 +27,6 @@ exports.main = async (event, context) => {
         }),
         timeout: 30000,
       });
-    case "GetARModelList":
-      return await cloud.callWXSvrkit({
-        pbInstance: svrkitUtils.generate({
-          serviceName: "Mmbizwxaintpar",
-          funcName: "GetARModelList",
-          data: {
-            bizuin: bizuin,
-            modelStatus: event.modelStatus,
-            algoType: event.algoType
-          },
-        }),
-        timeout: 30000,
-      });
     case "GetARModel":
       return await cloud.callWXSvrkit({
         pbInstance: svrkitUtils.generate({
@@ -56,6 +43,20 @@ exports.main = async (event, context) => {
         }),
         timeout: 30000,
       });
+    // GetARModelList 废弃，完全依赖本地缓存
+    // case "GetARModelList":
+    //   return await cloud.callWXSvrkit({
+    //     pbInstance: svrkitUtils.generate({
+    //       serviceName: "Mmbizwxaintpar",
+    //       funcName: "GetARModelList",
+    //       data: {
+    //         bizuin: bizuin,
+    //         modelStatus: event.modelStatus,
+    //         algoType: event.algoType
+    //       },
+    //     }),
+    //     timeout: 30000,
+    //   });
   }
 
 }

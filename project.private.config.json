@@ -12,6 +12,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "ar-v2-depth",
+          "pathName": "packageAPI/pages/ar/plane-ar-v2-depth/plane-ar-v2-depth",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "ar-depth-detect",
+          "pathName": "packageAPI/pages/ar/depth-detect/depth-detect",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "ar-3dmarker",
           "pathName": "packageAPI/pages/ar/3dmarker-ar/3dmarker-ar",
           "query": "",

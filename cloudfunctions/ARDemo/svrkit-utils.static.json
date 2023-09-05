@@ -86,62 +86,6 @@
         }
       }
     },
-    "GenerateARModelReq": {
-      "fields": {
-        "bizuin": {
-          "type": "uint32",
-          "id": 1
-        },
-        "name": {
-          "type": "string",
-          "id": 2
-        },
-        "buffer": {
-          "type": "bytes",
-          "id": 3
-        },
-        "url": {
-          "type": "string",
-          "id": 4
-        },
-        "algoType": {
-          "type": "enARAlgorithmType",
-          "id": 5
-        },
-        "lod": {
-          "type": "uint32",
-          "id": 6
-        },
-        "getmesh": {
-          "type": "bool",
-          "id": 7
-        },
-        "gettexture": {
-          "type": "bool",
-          "id": 8
-        }
-      }
-    },
-    "GenerateARModelResp": {
-      "fields": {
-        "url": {
-          "type": "string",
-          "id": 1
-        },
-        "host": {
-          "type": "string",
-          "id": 2
-        },
-        "cosid": {
-          "type": "string",
-          "id": 3
-        },
-        "errmsg": {
-          "type": "string",
-          "id": 4
-        }
-      }
-    },
     "GetARModelListReq": {
       "fields": {
         "bizuin": {
@@ -180,6 +124,88 @@
           "rule": "repeated",
           "type": "ARModel",
           "id": 1
+        }
+      }
+    },
+    "GenerateARModelReq": {
+      "fields": {
+        "bizuin": {
+          "type": "uint32",
+          "id": 1
+        },
+        "name": {
+          "type": "string",
+          "id": 2
+        },
+        "buffer": {
+          "type": "bytes",
+          "id": 3
+        },
+        "url": {
+          "type": "string",
+          "id": 4
+        },
+        "algoType": {
+          "type": "enARAlgorithmType",
+          "id": 5
+        },
+        "lod": {
+          "type": "uint32",
+          "id": 6,
+          "options": {
+            "default": 0
+          }
+        },
+        "getmesh": {
+          "type": "bool",
+          "id": 7,
+          "options": {
+            "default": false
+          }
+        },
+        "gettexture": {
+          "type": "bool",
+          "id": 8,
+          "options": {
+            "default": false
+          }
+        }
+      }
+    },
+    "GenerateARModelResp": {
+      "fields": {
+        "url": {
+          "type": "string",
+          "id": 1
+        },
+        "host": {
+          "type": "string",
+          "id": 2
+        },
+        "cosid": {
+          "type": "string",
+          "id": 3
+        },
+        "lod": {
+          "type": "uint32",
+          "id": 4,
+          "options": {
+            "default": 0
+          }
+        },
+        "getmesh": {
+          "type": "bool",
+          "id": 5,
+          "options": {
+            "default": false
+          }
+        },
+        "gettexture": {
+          "type": "bool",
+          "id": 6,
+          "options": {
+            "default": false
+          }
         }
       }
     },
@@ -258,6 +284,14 @@
         "errMsg": {
           "type": "string",
           "id": 4
+        },
+        "expireTime": {
+          "type": "uint32",
+          "id": 5
+        },
+        "status": {
+          "type": "uint32",
+          "id": 6
         }
       }
     }

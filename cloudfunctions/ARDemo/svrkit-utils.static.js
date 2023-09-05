@@ -898,624 +898,6 @@ $root.ARModel = (function() {
     return ARModel;
 })();
 
-$root.GenerateARModelReq = (function() {
-
-    /**
-     * Properties of a GenerateARModelReq.
-     * @exports IGenerateARModelReq
-     * @interface IGenerateARModelReq
-     * @property {number|null} [bizuin] GenerateARModelReq bizuin
-     * @property {string|null} [name] GenerateARModelReq name
-     * @property {Uint8Array|null} [buffer] GenerateARModelReq buffer
-     * @property {string|null} [url] GenerateARModelReq url
-     * @property {enARAlgorithmType|null} [algoType] GenerateARModelReq algoType
-     * @property {number|null} [lod] GenerateARModelReq lod
-     * @property {boolean|null} [getmesh] GenerateARModelReq getmesh
-     * @property {boolean|null} [gettexture] GenerateARModelReq gettexture
-     */
-
-    /**
-     * Constructs a new GenerateARModelReq.
-     * @exports GenerateARModelReq
-     * @classdesc Represents a GenerateARModelReq.
-     * @implements IGenerateARModelReq
-     * @constructor
-     * @param {IGenerateARModelReq=} [properties] Properties to set
-     */
-    function GenerateARModelReq(properties) {
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
-    }
-
-    /**
-     * GenerateARModelReq bizuin.
-     * @member {number} bizuin
-     * @memberof GenerateARModelReq
-     * @instance
-     */
-    GenerateARModelReq.prototype.bizuin = 0;
-
-    /**
-     * GenerateARModelReq name.
-     * @member {string} name
-     * @memberof GenerateARModelReq
-     * @instance
-     */
-    GenerateARModelReq.prototype.name = "";
-
-    /**
-     * GenerateARModelReq buffer.
-     * @member {Uint8Array} buffer
-     * @memberof GenerateARModelReq
-     * @instance
-     */
-    GenerateARModelReq.prototype.buffer = $util.newBuffer([]);
-
-    /**
-     * GenerateARModelReq url.
-     * @member {string} url
-     * @memberof GenerateARModelReq
-     * @instance
-     */
-    GenerateARModelReq.prototype.url = "";
-
-    /**
-     * GenerateARModelReq algoType.
-     * @member {enARAlgorithmType} algoType
-     * @memberof GenerateARModelReq
-     * @instance
-     */
-    GenerateARModelReq.prototype.algoType = 1;
-
-    /**
-     * GenerateARModelReq lod.
-     * @member {number} lod
-     * @memberof GenerateARModelReq
-     * @instance
-     */
-    GenerateARModelReq.prototype.lod = 0;
-
-    /**
-     * GenerateARModelReq getmesh.
-     * @member {boolean} getmesh
-     * @memberof GenerateARModelReq
-     * @instance
-     */
-    GenerateARModelReq.prototype.getmesh = false;
-
-    /**
-     * GenerateARModelReq gettexture.
-     * @member {boolean} gettexture
-     * @memberof GenerateARModelReq
-     * @instance
-     */
-    GenerateARModelReq.prototype.gettexture = false;
-
-    /**
-     * Creates a new GenerateARModelReq instance using the specified properties.
-     * @function create
-     * @memberof GenerateARModelReq
-     * @static
-     * @param {IGenerateARModelReq=} [properties] Properties to set
-     * @returns {GenerateARModelReq} GenerateARModelReq instance
-     */
-    GenerateARModelReq.create = function create(properties) {
-        return new GenerateARModelReq(properties);
-    };
-
-    /**
-     * Encodes the specified GenerateARModelReq message. Does not implicitly {@link GenerateARModelReq.verify|verify} messages.
-     * @function encode
-     * @memberof GenerateARModelReq
-     * @static
-     * @param {IGenerateARModelReq} message GenerateARModelReq message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    GenerateARModelReq.encode = function encode(message, writer) {
-        if (!writer)
-            writer = $Writer.create();
-        if (message.bizuin != null && Object.hasOwnProperty.call(message, "bizuin"))
-            writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.bizuin);
-        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-        if (message.buffer != null && Object.hasOwnProperty.call(message, "buffer"))
-            writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.buffer);
-        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
-            writer.uint32(/* id 4, wireType 2 =*/34).string(message.url);
-        if (message.algoType != null && Object.hasOwnProperty.call(message, "algoType"))
-            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.algoType);
-        if (message.lod != null && Object.hasOwnProperty.call(message, "lod"))
-            writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.lod);
-        if (message.getmesh != null && Object.hasOwnProperty.call(message, "getmesh"))
-            writer.uint32(/* id 7, wireType 0 =*/56).bool(message.getmesh);
-        if (message.gettexture != null && Object.hasOwnProperty.call(message, "gettexture"))
-            writer.uint32(/* id 8, wireType 0 =*/64).bool(message.gettexture);
-        return writer;
-    };
-
-    /**
-     * Encodes the specified GenerateARModelReq message, length delimited. Does not implicitly {@link GenerateARModelReq.verify|verify} messages.
-     * @function encodeDelimited
-     * @memberof GenerateARModelReq
-     * @static
-     * @param {IGenerateARModelReq} message GenerateARModelReq message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    GenerateARModelReq.encodeDelimited = function encodeDelimited(message, writer) {
-        return this.encode(message, writer).ldelim();
-    };
-
-    /**
-     * Decodes a GenerateARModelReq message from the specified reader or buffer.
-     * @function decode
-     * @memberof GenerateARModelReq
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @param {number} [length] Message length if known beforehand
-     * @returns {GenerateARModelReq} GenerateARModelReq
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    GenerateARModelReq.decode = function decode(reader, length) {
-        if (!(reader instanceof $Reader))
-            reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GenerateARModelReq();
-        while (reader.pos < end) {
-            var tag = reader.uint32();
-            switch (tag >>> 3) {
-            case 1:
-                message.bizuin = reader.uint32();
-                break;
-            case 2:
-                message.name = reader.string();
-                break;
-            case 3:
-                message.buffer = reader.bytes();
-                break;
-            case 4:
-                message.url = reader.string();
-                break;
-            case 5:
-                message.algoType = reader.int32();
-                break;
-            case 6:
-                message.lod = reader.uint32();
-                break;
-            case 7:
-                message.getmesh = reader.bool();
-                break;
-            case 8:
-                message.gettexture = reader.bool();
-                break;
-            default:
-                reader.skipType(tag & 7);
-                break;
-            }
-        }
-        return message;
-    };
-
-    /**
-     * Decodes a GenerateARModelReq message from the specified reader or buffer, length delimited.
-     * @function decodeDelimited
-     * @memberof GenerateARModelReq
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {GenerateARModelReq} GenerateARModelReq
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    GenerateARModelReq.decodeDelimited = function decodeDelimited(reader) {
-        if (!(reader instanceof $Reader))
-            reader = new $Reader(reader);
-        return this.decode(reader, reader.uint32());
-    };
-
-    /**
-     * Verifies a GenerateARModelReq message.
-     * @function verify
-     * @memberof GenerateARModelReq
-     * @static
-     * @param {Object.<string,*>} message Plain object to verify
-     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-     */
-    GenerateARModelReq.verify = function verify(message) {
-        if (typeof message !== "object" || message === null)
-            return "object expected";
-        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
-            if (!$util.isInteger(message.bizuin))
-                return "bizuin: integer expected";
-        if (message.name != null && message.hasOwnProperty("name"))
-            if (!$util.isString(message.name))
-                return "name: string expected";
-        if (message.buffer != null && message.hasOwnProperty("buffer"))
-            if (!(message.buffer && typeof message.buffer.length === "number" || $util.isString(message.buffer)))
-                return "buffer: buffer expected";
-        if (message.url != null && message.hasOwnProperty("url"))
-            if (!$util.isString(message.url))
-                return "url: string expected";
-        if (message.algoType != null && message.hasOwnProperty("algoType"))
-            switch (message.algoType) {
-            default:
-                return "algoType: enum value expected";
-            case 1:
-            case 2:
-                break;
-            }
-        if (message.lod != null && message.hasOwnProperty("lod"))
-            if (!$util.isInteger(message.lod))
-                return "lod: integer expected";
-        if (message.getmesh != null && message.hasOwnProperty("getmesh"))
-            if (typeof message.getmesh !== "boolean")
-                return "getmesh: boolean expected";
-        if (message.gettexture != null && message.hasOwnProperty("gettexture"))
-            if (typeof message.gettexture !== "boolean")
-                return "gettexture: boolean expected";
-        return null;
-    };
-
-    /**
-     * Creates a GenerateARModelReq message from a plain object. Also converts values to their respective internal types.
-     * @function fromObject
-     * @memberof GenerateARModelReq
-     * @static
-     * @param {Object.<string,*>} object Plain object
-     * @returns {GenerateARModelReq} GenerateARModelReq
-     */
-    GenerateARModelReq.fromObject = function fromObject(object) {
-        if (object instanceof $root.GenerateARModelReq)
-            return object;
-        var message = new $root.GenerateARModelReq();
-        if (object.bizuin != null)
-            message.bizuin = object.bizuin >>> 0;
-        if (object.name != null)
-            message.name = String(object.name);
-        if (object.buffer != null)
-            if (typeof object.buffer === "string")
-                $util.base64.decode(object.buffer, message.buffer = $util.newBuffer($util.base64.length(object.buffer)), 0);
-            else if (object.buffer.length)
-                message.buffer = object.buffer;
-        if (object.url != null)
-            message.url = String(object.url);
-        switch (object.algoType) {
-        case "Algorithm_Type_3D_Object":
-        case 1:
-            message.algoType = 1;
-            break;
-        case "Algorithm_Type_3D_Marker":
-        case 2:
-            message.algoType = 2;
-            break;
-        }
-        if (object.lod != null)
-            message.lod = object.lod >>> 0;
-        if (object.getmesh != null)
-            message.getmesh = Boolean(object.getmesh);
-        if (object.gettexture != null)
-            message.gettexture = Boolean(object.gettexture);
-        return message;
-    };
-
-    /**
-     * Creates a plain object from a GenerateARModelReq message. Also converts values to other types if specified.
-     * @function toObject
-     * @memberof GenerateARModelReq
-     * @static
-     * @param {GenerateARModelReq} message GenerateARModelReq
-     * @param {$protobuf.IConversionOptions} [options] Conversion options
-     * @returns {Object.<string,*>} Plain object
-     */
-    GenerateARModelReq.toObject = function toObject(message, options) {
-        if (!options)
-            options = {};
-        var object = {};
-        if (options.defaults) {
-            object.bizuin = 0;
-            object.name = "";
-            if (options.bytes === String)
-                object.buffer = "";
-            else {
-                object.buffer = [];
-                if (options.bytes !== Array)
-                    object.buffer = $util.newBuffer(object.buffer);
-            }
-            object.url = "";
-            object.algoType = options.enums === String ? "Algorithm_Type_3D_Object" : 1;
-            object.lod = 0;
-            object.getmesh = false;
-            object.gettexture = false;
-        }
-        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
-            object.bizuin = message.bizuin;
-        if (message.name != null && message.hasOwnProperty("name"))
-            object.name = message.name;
-        if (message.buffer != null && message.hasOwnProperty("buffer"))
-            object.buffer = options.bytes === String ? $util.base64.encode(message.buffer, 0, message.buffer.length) : options.bytes === Array ? Array.prototype.slice.call(message.buffer) : message.buffer;
-        if (message.url != null && message.hasOwnProperty("url"))
-            object.url = message.url;
-        if (message.algoType != null && message.hasOwnProperty("algoType"))
-            object.algoType = options.enums === String ? $root.enARAlgorithmType[message.algoType] : message.algoType;
-        if (message.lod != null && message.hasOwnProperty("lod"))
-            object.lod = message.lod;
-        if (message.getmesh != null && message.hasOwnProperty("getmesh"))
-            object.getmesh = message.getmesh;
-        if (message.gettexture != null && message.hasOwnProperty("gettexture"))
-            object.gettexture = message.gettexture;
-        return object;
-    };
-
-    /**
-     * Converts this GenerateARModelReq to JSON.
-     * @function toJSON
-     * @memberof GenerateARModelReq
-     * @instance
-     * @returns {Object.<string,*>} JSON object
-     */
-    GenerateARModelReq.prototype.toJSON = function toJSON() {
-        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-    };
-
-    return GenerateARModelReq;
-})();
-
-$root.GenerateARModelResp = (function() {
-
-    /**
-     * Properties of a GenerateARModelResp.
-     * @exports IGenerateARModelResp
-     * @interface IGenerateARModelResp
-     * @property {string|null} [url] GenerateARModelResp url
-     * @property {string|null} [host] GenerateARModelResp host
-     * @property {string|null} [cosid] GenerateARModelResp cosid
-     * @property {string|null} [errmsg] GenerateARModelResp errmsg
-     */
-
-    /**
-     * Constructs a new GenerateARModelResp.
-     * @exports GenerateARModelResp
-     * @classdesc Represents a GenerateARModelResp.
-     * @implements IGenerateARModelResp
-     * @constructor
-     * @param {IGenerateARModelResp=} [properties] Properties to set
-     */
-    function GenerateARModelResp(properties) {
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
-    }
-
-    /**
-     * GenerateARModelResp url.
-     * @member {string} url
-     * @memberof GenerateARModelResp
-     * @instance
-     */
-    GenerateARModelResp.prototype.url = "";
-
-    /**
-     * GenerateARModelResp host.
-     * @member {string} host
-     * @memberof GenerateARModelResp
-     * @instance
-     */
-    GenerateARModelResp.prototype.host = "";
-
-    /**
-     * GenerateARModelResp cosid.
-     * @member {string} cosid
-     * @memberof GenerateARModelResp
-     * @instance
-     */
-    GenerateARModelResp.prototype.cosid = "";
-
-    /**
-     * GenerateARModelResp errmsg.
-     * @member {string} errmsg
-     * @memberof GenerateARModelResp
-     * @instance
-     */
-    GenerateARModelResp.prototype.errmsg = "";
-
-    /**
-     * Creates a new GenerateARModelResp instance using the specified properties.
-     * @function create
-     * @memberof GenerateARModelResp
-     * @static
-     * @param {IGenerateARModelResp=} [properties] Properties to set
-     * @returns {GenerateARModelResp} GenerateARModelResp instance
-     */
-    GenerateARModelResp.create = function create(properties) {
-        return new GenerateARModelResp(properties);
-    };
-
-    /**
-     * Encodes the specified GenerateARModelResp message. Does not implicitly {@link GenerateARModelResp.verify|verify} messages.
-     * @function encode
-     * @memberof GenerateARModelResp
-     * @static
-     * @param {IGenerateARModelResp} message GenerateARModelResp message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    GenerateARModelResp.encode = function encode(message, writer) {
-        if (!writer)
-            writer = $Writer.create();
-        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
-        if (message.host != null && Object.hasOwnProperty.call(message, "host"))
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.host);
-        if (message.cosid != null && Object.hasOwnProperty.call(message, "cosid"))
-            writer.uint32(/* id 3, wireType 2 =*/26).string(message.cosid);
-        if (message.errmsg != null && Object.hasOwnProperty.call(message, "errmsg"))
-            writer.uint32(/* id 4, wireType 2 =*/34).string(message.errmsg);
-        return writer;
-    };
-
-    /**
-     * Encodes the specified GenerateARModelResp message, length delimited. Does not implicitly {@link GenerateARModelResp.verify|verify} messages.
-     * @function encodeDelimited
-     * @memberof GenerateARModelResp
-     * @static
-     * @param {IGenerateARModelResp} message GenerateARModelResp message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    GenerateARModelResp.encodeDelimited = function encodeDelimited(message, writer) {
-        return this.encode(message, writer).ldelim();
-    };
-
-    /**
-     * Decodes a GenerateARModelResp message from the specified reader or buffer.
-     * @function decode
-     * @memberof GenerateARModelResp
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @param {number} [length] Message length if known beforehand
-     * @returns {GenerateARModelResp} GenerateARModelResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    GenerateARModelResp.decode = function decode(reader, length) {
-        if (!(reader instanceof $Reader))
-            reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GenerateARModelResp();
-        while (reader.pos < end) {
-            var tag = reader.uint32();
-            switch (tag >>> 3) {
-            case 1:
-                message.url = reader.string();
-                break;
-            case 2:
-                message.host = reader.string();
-                break;
-            case 3:
-                message.cosid = reader.string();
-                break;
-            case 4:
-                message.errmsg = reader.string();
-                break;
-            default:
-                reader.skipType(tag & 7);
-                break;
-            }
-        }
-        return message;
-    };
-
-    /**
-     * Decodes a GenerateARModelResp message from the specified reader or buffer, length delimited.
-     * @function decodeDelimited
-     * @memberof GenerateARModelResp
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {GenerateARModelResp} GenerateARModelResp
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    GenerateARModelResp.decodeDelimited = function decodeDelimited(reader) {
-        if (!(reader instanceof $Reader))
-            reader = new $Reader(reader);
-        return this.decode(reader, reader.uint32());
-    };
-
-    /**
-     * Verifies a GenerateARModelResp message.
-     * @function verify
-     * @memberof GenerateARModelResp
-     * @static
-     * @param {Object.<string,*>} message Plain object to verify
-     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-     */
-    GenerateARModelResp.verify = function verify(message) {
-        if (typeof message !== "object" || message === null)
-            return "object expected";
-        if (message.url != null && message.hasOwnProperty("url"))
-            if (!$util.isString(message.url))
-                return "url: string expected";
-        if (message.host != null && message.hasOwnProperty("host"))
-            if (!$util.isString(message.host))
-                return "host: string expected";
-        if (message.cosid != null && message.hasOwnProperty("cosid"))
-            if (!$util.isString(message.cosid))
-                return "cosid: string expected";
-        if (message.errmsg != null && message.hasOwnProperty("errmsg"))
-            if (!$util.isString(message.errmsg))
-                return "errmsg: string expected";
-        return null;
-    };
-
-    /**
-     * Creates a GenerateARModelResp message from a plain object. Also converts values to their respective internal types.
-     * @function fromObject
-     * @memberof GenerateARModelResp
-     * @static
-     * @param {Object.<string,*>} object Plain object
-     * @returns {GenerateARModelResp} GenerateARModelResp
-     */
-    GenerateARModelResp.fromObject = function fromObject(object) {
-        if (object instanceof $root.GenerateARModelResp)
-            return object;
-        var message = new $root.GenerateARModelResp();
-        if (object.url != null)
-            message.url = String(object.url);
-        if (object.host != null)
-            message.host = String(object.host);
-        if (object.cosid != null)
-            message.cosid = String(object.cosid);
-        if (object.errmsg != null)
-            message.errmsg = String(object.errmsg);
-        return message;
-    };
-
-    /**
-     * Creates a plain object from a GenerateARModelResp message. Also converts values to other types if specified.
-     * @function toObject
-     * @memberof GenerateARModelResp
-     * @static
-     * @param {GenerateARModelResp} message GenerateARModelResp
-     * @param {$protobuf.IConversionOptions} [options] Conversion options
-     * @returns {Object.<string,*>} Plain object
-     */
-    GenerateARModelResp.toObject = function toObject(message, options) {
-        if (!options)
-            options = {};
-        var object = {};
-        if (options.defaults) {
-            object.url = "";
-            object.host = "";
-            object.cosid = "";
-            object.errmsg = "";
-        }
-        if (message.url != null && message.hasOwnProperty("url"))
-            object.url = message.url;
-        if (message.host != null && message.hasOwnProperty("host"))
-            object.host = message.host;
-        if (message.cosid != null && message.hasOwnProperty("cosid"))
-            object.cosid = message.cosid;
-        if (message.errmsg != null && message.hasOwnProperty("errmsg"))
-            object.errmsg = message.errmsg;
-        return object;
-    };
-
-    /**
-     * Converts this GenerateARModelResp to JSON.
-     * @function toJSON
-     * @memberof GenerateARModelResp
-     * @instance
-     * @returns {Object.<string,*>} JSON object
-     */
-    GenerateARModelResp.prototype.toJSON = function toJSON() {
-        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-    };
-
-    return GenerateARModelResp;
-})();
-
 $root.GetARModelListReq = (function() {
 
     /**
@@ -2042,6 +1424,668 @@ $root.GetARModelListResp = (function() {
     };
 
     return GetARModelListResp;
+})();
+
+$root.GenerateARModelReq = (function() {
+
+    /**
+     * Properties of a GenerateARModelReq.
+     * @exports IGenerateARModelReq
+     * @interface IGenerateARModelReq
+     * @property {number|null} [bizuin] GenerateARModelReq bizuin
+     * @property {string|null} [name] GenerateARModelReq name
+     * @property {Uint8Array|null} [buffer] GenerateARModelReq buffer
+     * @property {string|null} [url] GenerateARModelReq url
+     * @property {enARAlgorithmType|null} [algoType] GenerateARModelReq algoType
+     * @property {number|null} [lod] GenerateARModelReq lod
+     * @property {boolean|null} [getmesh] GenerateARModelReq getmesh
+     * @property {boolean|null} [gettexture] GenerateARModelReq gettexture
+     */
+
+    /**
+     * Constructs a new GenerateARModelReq.
+     * @exports GenerateARModelReq
+     * @classdesc Represents a GenerateARModelReq.
+     * @implements IGenerateARModelReq
+     * @constructor
+     * @param {IGenerateARModelReq=} [properties] Properties to set
+     */
+    function GenerateARModelReq(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * GenerateARModelReq bizuin.
+     * @member {number} bizuin
+     * @memberof GenerateARModelReq
+     * @instance
+     */
+    GenerateARModelReq.prototype.bizuin = 0;
+
+    /**
+     * GenerateARModelReq name.
+     * @member {string} name
+     * @memberof GenerateARModelReq
+     * @instance
+     */
+    GenerateARModelReq.prototype.name = "";
+
+    /**
+     * GenerateARModelReq buffer.
+     * @member {Uint8Array} buffer
+     * @memberof GenerateARModelReq
+     * @instance
+     */
+    GenerateARModelReq.prototype.buffer = $util.newBuffer([]);
+
+    /**
+     * GenerateARModelReq url.
+     * @member {string} url
+     * @memberof GenerateARModelReq
+     * @instance
+     */
+    GenerateARModelReq.prototype.url = "";
+
+    /**
+     * GenerateARModelReq algoType.
+     * @member {enARAlgorithmType} algoType
+     * @memberof GenerateARModelReq
+     * @instance
+     */
+    GenerateARModelReq.prototype.algoType = 1;
+
+    /**
+     * GenerateARModelReq lod.
+     * @member {number} lod
+     * @memberof GenerateARModelReq
+     * @instance
+     */
+    GenerateARModelReq.prototype.lod = 0;
+
+    /**
+     * GenerateARModelReq getmesh.
+     * @member {boolean} getmesh
+     * @memberof GenerateARModelReq
+     * @instance
+     */
+    GenerateARModelReq.prototype.getmesh = false;
+
+    /**
+     * GenerateARModelReq gettexture.
+     * @member {boolean} gettexture
+     * @memberof GenerateARModelReq
+     * @instance
+     */
+    GenerateARModelReq.prototype.gettexture = false;
+
+    /**
+     * Creates a new GenerateARModelReq instance using the specified properties.
+     * @function create
+     * @memberof GenerateARModelReq
+     * @static
+     * @param {IGenerateARModelReq=} [properties] Properties to set
+     * @returns {GenerateARModelReq} GenerateARModelReq instance
+     */
+    GenerateARModelReq.create = function create(properties) {
+        return new GenerateARModelReq(properties);
+    };
+
+    /**
+     * Encodes the specified GenerateARModelReq message. Does not implicitly {@link GenerateARModelReq.verify|verify} messages.
+     * @function encode
+     * @memberof GenerateARModelReq
+     * @static
+     * @param {IGenerateARModelReq} message GenerateARModelReq message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    GenerateARModelReq.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.bizuin != null && Object.hasOwnProperty.call(message, "bizuin"))
+            writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.bizuin);
+        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+        if (message.buffer != null && Object.hasOwnProperty.call(message, "buffer"))
+            writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.buffer);
+        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            writer.uint32(/* id 4, wireType 2 =*/34).string(message.url);
+        if (message.algoType != null && Object.hasOwnProperty.call(message, "algoType"))
+            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.algoType);
+        if (message.lod != null && Object.hasOwnProperty.call(message, "lod"))
+            writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.lod);
+        if (message.getmesh != null && Object.hasOwnProperty.call(message, "getmesh"))
+            writer.uint32(/* id 7, wireType 0 =*/56).bool(message.getmesh);
+        if (message.gettexture != null && Object.hasOwnProperty.call(message, "gettexture"))
+            writer.uint32(/* id 8, wireType 0 =*/64).bool(message.gettexture);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified GenerateARModelReq message, length delimited. Does not implicitly {@link GenerateARModelReq.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof GenerateARModelReq
+     * @static
+     * @param {IGenerateARModelReq} message GenerateARModelReq message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    GenerateARModelReq.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a GenerateARModelReq message from the specified reader or buffer.
+     * @function decode
+     * @memberof GenerateARModelReq
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {GenerateARModelReq} GenerateARModelReq
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    GenerateARModelReq.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GenerateARModelReq();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.bizuin = reader.uint32();
+                break;
+            case 2:
+                message.name = reader.string();
+                break;
+            case 3:
+                message.buffer = reader.bytes();
+                break;
+            case 4:
+                message.url = reader.string();
+                break;
+            case 5:
+                message.algoType = reader.int32();
+                break;
+            case 6:
+                message.lod = reader.uint32();
+                break;
+            case 7:
+                message.getmesh = reader.bool();
+                break;
+            case 8:
+                message.gettexture = reader.bool();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a GenerateARModelReq message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof GenerateARModelReq
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {GenerateARModelReq} GenerateARModelReq
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    GenerateARModelReq.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a GenerateARModelReq message.
+     * @function verify
+     * @memberof GenerateARModelReq
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    GenerateARModelReq.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
+            if (!$util.isInteger(message.bizuin))
+                return "bizuin: integer expected";
+        if (message.name != null && message.hasOwnProperty("name"))
+            if (!$util.isString(message.name))
+                return "name: string expected";
+        if (message.buffer != null && message.hasOwnProperty("buffer"))
+            if (!(message.buffer && typeof message.buffer.length === "number" || $util.isString(message.buffer)))
+                return "buffer: buffer expected";
+        if (message.url != null && message.hasOwnProperty("url"))
+            if (!$util.isString(message.url))
+                return "url: string expected";
+        if (message.algoType != null && message.hasOwnProperty("algoType"))
+            switch (message.algoType) {
+            default:
+                return "algoType: enum value expected";
+            case 1:
+            case 2:
+                break;
+            }
+        if (message.lod != null && message.hasOwnProperty("lod"))
+            if (!$util.isInteger(message.lod))
+                return "lod: integer expected";
+        if (message.getmesh != null && message.hasOwnProperty("getmesh"))
+            if (typeof message.getmesh !== "boolean")
+                return "getmesh: boolean expected";
+        if (message.gettexture != null && message.hasOwnProperty("gettexture"))
+            if (typeof message.gettexture !== "boolean")
+                return "gettexture: boolean expected";
+        return null;
+    };
+
+    /**
+     * Creates a GenerateARModelReq message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof GenerateARModelReq
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {GenerateARModelReq} GenerateARModelReq
+     */
+    GenerateARModelReq.fromObject = function fromObject(object) {
+        if (object instanceof $root.GenerateARModelReq)
+            return object;
+        var message = new $root.GenerateARModelReq();
+        if (object.bizuin != null)
+            message.bizuin = object.bizuin >>> 0;
+        if (object.name != null)
+            message.name = String(object.name);
+        if (object.buffer != null)
+            if (typeof object.buffer === "string")
+                $util.base64.decode(object.buffer, message.buffer = $util.newBuffer($util.base64.length(object.buffer)), 0);
+            else if (object.buffer.length)
+                message.buffer = object.buffer;
+        if (object.url != null)
+            message.url = String(object.url);
+        switch (object.algoType) {
+        case "Algorithm_Type_3D_Object":
+        case 1:
+            message.algoType = 1;
+            break;
+        case "Algorithm_Type_3D_Marker":
+        case 2:
+            message.algoType = 2;
+            break;
+        }
+        if (object.lod != null)
+            message.lod = object.lod >>> 0;
+        if (object.getmesh != null)
+            message.getmesh = Boolean(object.getmesh);
+        if (object.gettexture != null)
+            message.gettexture = Boolean(object.gettexture);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a GenerateARModelReq message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof GenerateARModelReq
+     * @static
+     * @param {GenerateARModelReq} message GenerateARModelReq
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    GenerateARModelReq.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults) {
+            object.bizuin = 0;
+            object.name = "";
+            if (options.bytes === String)
+                object.buffer = "";
+            else {
+                object.buffer = [];
+                if (options.bytes !== Array)
+                    object.buffer = $util.newBuffer(object.buffer);
+            }
+            object.url = "";
+            object.algoType = options.enums === String ? "Algorithm_Type_3D_Object" : 1;
+            object.lod = 0;
+            object.getmesh = false;
+            object.gettexture = false;
+        }
+        if (message.bizuin != null && message.hasOwnProperty("bizuin"))
+            object.bizuin = message.bizuin;
+        if (message.name != null && message.hasOwnProperty("name"))
+            object.name = message.name;
+        if (message.buffer != null && message.hasOwnProperty("buffer"))
+            object.buffer = options.bytes === String ? $util.base64.encode(message.buffer, 0, message.buffer.length) : options.bytes === Array ? Array.prototype.slice.call(message.buffer) : message.buffer;
+        if (message.url != null && message.hasOwnProperty("url"))
+            object.url = message.url;
+        if (message.algoType != null && message.hasOwnProperty("algoType"))
+            object.algoType = options.enums === String ? $root.enARAlgorithmType[message.algoType] : message.algoType;
+        if (message.lod != null && message.hasOwnProperty("lod"))
+            object.lod = message.lod;
+        if (message.getmesh != null && message.hasOwnProperty("getmesh"))
+            object.getmesh = message.getmesh;
+        if (message.gettexture != null && message.hasOwnProperty("gettexture"))
+            object.gettexture = message.gettexture;
+        return object;
+    };
+
+    /**
+     * Converts this GenerateARModelReq to JSON.
+     * @function toJSON
+     * @memberof GenerateARModelReq
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    GenerateARModelReq.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return GenerateARModelReq;
+})();
+
+$root.GenerateARModelResp = (function() {
+
+    /**
+     * Properties of a GenerateARModelResp.
+     * @exports IGenerateARModelResp
+     * @interface IGenerateARModelResp
+     * @property {string|null} [url] GenerateARModelResp url
+     * @property {string|null} [host] GenerateARModelResp host
+     * @property {string|null} [cosid] GenerateARModelResp cosid
+     * @property {number|null} [lod] GenerateARModelResp lod
+     * @property {boolean|null} [getmesh] GenerateARModelResp getmesh
+     * @property {boolean|null} [gettexture] GenerateARModelResp gettexture
+     */
+
+    /**
+     * Constructs a new GenerateARModelResp.
+     * @exports GenerateARModelResp
+     * @classdesc Represents a GenerateARModelResp.
+     * @implements IGenerateARModelResp
+     * @constructor
+     * @param {IGenerateARModelResp=} [properties] Properties to set
+     */
+    function GenerateARModelResp(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * GenerateARModelResp url.
+     * @member {string} url
+     * @memberof GenerateARModelResp
+     * @instance
+     */
+    GenerateARModelResp.prototype.url = "";
+
+    /**
+     * GenerateARModelResp host.
+     * @member {string} host
+     * @memberof GenerateARModelResp
+     * @instance
+     */
+    GenerateARModelResp.prototype.host = "";
+
+    /**
+     * GenerateARModelResp cosid.
+     * @member {string} cosid
+     * @memberof GenerateARModelResp
+     * @instance
+     */
+    GenerateARModelResp.prototype.cosid = "";
+
+    /**
+     * GenerateARModelResp lod.
+     * @member {number} lod
+     * @memberof GenerateARModelResp
+     * @instance
+     */
+    GenerateARModelResp.prototype.lod = 0;
+
+    /**
+     * GenerateARModelResp getmesh.
+     * @member {boolean} getmesh
+     * @memberof GenerateARModelResp
+     * @instance
+     */
+    GenerateARModelResp.prototype.getmesh = false;
+
+    /**
+     * GenerateARModelResp gettexture.
+     * @member {boolean} gettexture
+     * @memberof GenerateARModelResp
+     * @instance
+     */
+    GenerateARModelResp.prototype.gettexture = false;
+
+    /**
+     * Creates a new GenerateARModelResp instance using the specified properties.
+     * @function create
+     * @memberof GenerateARModelResp
+     * @static
+     * @param {IGenerateARModelResp=} [properties] Properties to set
+     * @returns {GenerateARModelResp} GenerateARModelResp instance
+     */
+    GenerateARModelResp.create = function create(properties) {
+        return new GenerateARModelResp(properties);
+    };
+
+    /**
+     * Encodes the specified GenerateARModelResp message. Does not implicitly {@link GenerateARModelResp.verify|verify} messages.
+     * @function encode
+     * @memberof GenerateARModelResp
+     * @static
+     * @param {IGenerateARModelResp} message GenerateARModelResp message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    GenerateARModelResp.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+        if (message.host != null && Object.hasOwnProperty.call(message, "host"))
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.host);
+        if (message.cosid != null && Object.hasOwnProperty.call(message, "cosid"))
+            writer.uint32(/* id 3, wireType 2 =*/26).string(message.cosid);
+        if (message.lod != null && Object.hasOwnProperty.call(message, "lod"))
+            writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.lod);
+        if (message.getmesh != null && Object.hasOwnProperty.call(message, "getmesh"))
+            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.getmesh);
+        if (message.gettexture != null && Object.hasOwnProperty.call(message, "gettexture"))
+            writer.uint32(/* id 6, wireType 0 =*/48).bool(message.gettexture);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified GenerateARModelResp message, length delimited. Does not implicitly {@link GenerateARModelResp.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof GenerateARModelResp
+     * @static
+     * @param {IGenerateARModelResp} message GenerateARModelResp message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    GenerateARModelResp.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a GenerateARModelResp message from the specified reader or buffer.
+     * @function decode
+     * @memberof GenerateARModelResp
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {GenerateARModelResp} GenerateARModelResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    GenerateARModelResp.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GenerateARModelResp();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.url = reader.string();
+                break;
+            case 2:
+                message.host = reader.string();
+                break;
+            case 3:
+                message.cosid = reader.string();
+                break;
+            case 4:
+                message.lod = reader.uint32();
+                break;
+            case 5:
+                message.getmesh = reader.bool();
+                break;
+            case 6:
+                message.gettexture = reader.bool();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a GenerateARModelResp message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof GenerateARModelResp
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {GenerateARModelResp} GenerateARModelResp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    GenerateARModelResp.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a GenerateARModelResp message.
+     * @function verify
+     * @memberof GenerateARModelResp
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    GenerateARModelResp.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.url != null && message.hasOwnProperty("url"))
+            if (!$util.isString(message.url))
+                return "url: string expected";
+        if (message.host != null && message.hasOwnProperty("host"))
+            if (!$util.isString(message.host))
+                return "host: string expected";
+        if (message.cosid != null && message.hasOwnProperty("cosid"))
+            if (!$util.isString(message.cosid))
+                return "cosid: string expected";
+        if (message.lod != null && message.hasOwnProperty("lod"))
+            if (!$util.isInteger(message.lod))
+                return "lod: integer expected";
+        if (message.getmesh != null && message.hasOwnProperty("getmesh"))
+            if (typeof message.getmesh !== "boolean")
+                return "getmesh: boolean expected";
+        if (message.gettexture != null && message.hasOwnProperty("gettexture"))
+            if (typeof message.gettexture !== "boolean")
+                return "gettexture: boolean expected";
+        return null;
+    };
+
+    /**
+     * Creates a GenerateARModelResp message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof GenerateARModelResp
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {GenerateARModelResp} GenerateARModelResp
+     */
+    GenerateARModelResp.fromObject = function fromObject(object) {
+        if (object instanceof $root.GenerateARModelResp)
+            return object;
+        var message = new $root.GenerateARModelResp();
+        if (object.url != null)
+            message.url = String(object.url);
+        if (object.host != null)
+            message.host = String(object.host);
+        if (object.cosid != null)
+            message.cosid = String(object.cosid);
+        if (object.lod != null)
+            message.lod = object.lod >>> 0;
+        if (object.getmesh != null)
+            message.getmesh = Boolean(object.getmesh);
+        if (object.gettexture != null)
+            message.gettexture = Boolean(object.gettexture);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a GenerateARModelResp message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof GenerateARModelResp
+     * @static
+     * @param {GenerateARModelResp} message GenerateARModelResp
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    GenerateARModelResp.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults) {
+            object.url = "";
+            object.host = "";
+            object.cosid = "";
+            object.lod = 0;
+            object.getmesh = false;
+            object.gettexture = false;
+        }
+        if (message.url != null && message.hasOwnProperty("url"))
+            object.url = message.url;
+        if (message.host != null && message.hasOwnProperty("host"))
+            object.host = message.host;
+        if (message.cosid != null && message.hasOwnProperty("cosid"))
+            object.cosid = message.cosid;
+        if (message.lod != null && message.hasOwnProperty("lod"))
+            object.lod = message.lod;
+        if (message.getmesh != null && message.hasOwnProperty("getmesh"))
+            object.getmesh = message.getmesh;
+        if (message.gettexture != null && message.hasOwnProperty("gettexture"))
+            object.gettexture = message.gettexture;
+        return object;
+    };
+
+    /**
+     * Converts this GenerateARModelResp to JSON.
+     * @function toJSON
+     * @memberof GenerateARModelResp
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    GenerateARModelResp.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return GenerateARModelResp;
 })();
 
 $root.ARModelData = (function() {
@@ -2673,6 +2717,8 @@ $root.GetARModelResp = (function() {
      * @property {string|null} [url] GetARModelResp url
      * @property {string|null} [host] GetARModelResp host
      * @property {string|null} [errMsg] GetARModelResp errMsg
+     * @property {number|null} [expireTime] GetARModelResp expireTime
+     * @property {number|null} [status] GetARModelResp status
      */
 
     /**
@@ -2723,6 +2769,22 @@ $root.GetARModelResp = (function() {
     GetARModelResp.prototype.errMsg = "";
 
     /**
+     * GetARModelResp expireTime.
+     * @member {number} expireTime
+     * @memberof GetARModelResp
+     * @instance
+     */
+    GetARModelResp.prototype.expireTime = 0;
+
+    /**
+     * GetARModelResp status.
+     * @member {number} status
+     * @memberof GetARModelResp
+     * @instance
+     */
+    GetARModelResp.prototype.status = 0;
+
+    /**
      * Creates a new GetARModelResp instance using the specified properties.
      * @function create
      * @memberof GetARModelResp
@@ -2754,6 +2816,10 @@ $root.GetARModelResp = (function() {
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.host);
         if (message.errMsg != null && Object.hasOwnProperty.call(message, "errMsg"))
             writer.uint32(/* id 4, wireType 2 =*/34).string(message.errMsg);
+        if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+            writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.expireTime);
+        if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+            writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.status);
         return writer;
     };
 
@@ -2799,6 +2865,12 @@ $root.GetARModelResp = (function() {
                 break;
             case 4:
                 message.errMsg = reader.string();
+                break;
+            case 5:
+                message.expireTime = reader.uint32();
+                break;
+            case 6:
+                message.status = reader.uint32();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -2849,6 +2921,12 @@ $root.GetARModelResp = (function() {
         if (message.errMsg != null && message.hasOwnProperty("errMsg"))
             if (!$util.isString(message.errMsg))
                 return "errMsg: string expected";
+        if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+            if (!$util.isInteger(message.expireTime))
+                return "expireTime: integer expected";
+        if (message.status != null && message.hasOwnProperty("status"))
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
         return null;
     };
 
@@ -2875,6 +2953,10 @@ $root.GetARModelResp = (function() {
             message.host = String(object.host);
         if (object.errMsg != null)
             message.errMsg = String(object.errMsg);
+        if (object.expireTime != null)
+            message.expireTime = object.expireTime >>> 0;
+        if (object.status != null)
+            message.status = object.status >>> 0;
         return message;
     };
 
@@ -2896,6 +2978,8 @@ $root.GetARModelResp = (function() {
             object.url = "";
             object.host = "";
             object.errMsg = "";
+            object.expireTime = 0;
+            object.status = 0;
         }
         if (message.modelData != null && message.hasOwnProperty("modelData"))
             object.modelData = $root.ARModelData.toObject(message.modelData, options);
@@ -2905,6 +2989,10 @@ $root.GetARModelResp = (function() {
             object.host = message.host;
         if (message.errMsg != null && message.hasOwnProperty("errMsg"))
             object.errMsg = message.errMsg;
+        if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+            object.expireTime = message.expireTime;
+        if (message.status != null && message.hasOwnProperty("status"))
+            object.status = message.status;
         return object;
     };
 
