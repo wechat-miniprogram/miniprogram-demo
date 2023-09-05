@@ -9,7 +9,7 @@
     </view>
   </view>
 
-  <view class="hint-words">提示：点击加号添加模型视频, 选择已完成的模型, 选中将呈现蓝框, 手机摄像头对准该模型后添加marker, 页面下拉刷新模型状态, 向右滑动查看模型列表</view>
+  <view class="hint-words">提示：点击 `添加按钮`，提交绕目标一圈的视频；点选列表中已完成的模型；点击 `解析添加marker` 进行实际文件解析；将手机对准识别目标进行marker识别；解析后，可下载marker识别用产物map、渲染用产物 glTF。</view>
 
   <view class="wrap-option">
     <button type="primary" disabled="{{usingMarkerId}}" bindtap="parseAddMarker">解析添加 Marker</button>

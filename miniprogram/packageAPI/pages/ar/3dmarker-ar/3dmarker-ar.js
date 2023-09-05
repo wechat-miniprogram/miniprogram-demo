@@ -26,8 +26,8 @@ Component({
   hintInfo: undefined, // 提示框信息
   selectCosid: 0, // 选中的cosid
   selectResp: undefined,  // 选中的回调信息
-  parsedProtoData: undefined, // 解析后的proto信息
   parsedMapUrl: undefined, // 使用中的mapUrl
+  parsedGlbUrl: undefined,// 使用中的glbUrl
   lifetimes: {
       /**
       * 生命周期函数--监听页面加载
@@ -66,8 +66,8 @@ Component({
 
       this.markerIndex = 0;
 
-      // 添加 识别包围盒子
-      this.add3DBox();
+      // 添加 识别坐标系
+      this.add3DAxis();
     },
     initVK() {
       // VKSession 配置
@@ -95,10 +95,12 @@ Component({
         // VKSession EVENT addAnchors
         session.on('addAnchors', anchors => {
           console.log("addAnchor", anchors);
-          this.left.visible = true;
-          this.right.visible = true;
-          this.top.visible = true;
-          this.bottom.visible = true;
+          this.xAxis.visible = true;
+          this.yAxis.visible = true;
+          this.zAxis.visible = true;
+          if (this.model) {
+            this.model.visible = true;
+          }
         })
 
         // VKSession EVENT updateAnchors
@@ -116,11 +118,12 @@ Component({
         // VKSession removeAnchors
         // 识别目标丢失时，会触发一次
         session.on('removeAnchors', anchors => {
-          this.left.visible = false;
-          this.right.visible = false;
-          this.top.visible = false;
-          this.bottom.visible = false;
-
+          this.xAxis.visible = false;
+          this.yAxis.visible = false;
+          this.zAxis.visible = false;
+          if (this.model) {
+            this.model.visible = false;
+          }
           if (this.data.hintBoxList && this.data.hintBoxList.length > 0) {
             // 清理信息
             this.hintInfo = undefined;
@@ -211,53 +214,50 @@ Component({
       this.renderer.render(this.scene, this.camera)
       this.renderer.state.setCullFace(this.THREE.CullFaceNone)
     },
-    add3DBox() {
+    add3DAxis() {
       // 添加marker需要的 三维包围框
       const THREE = this.THREE;
       const scene = this.scene;
 
-      const material = new THREE.MeshPhysicalMaterial( {
-        metalness: 0.0,
-        roughness: 0.1,
-        color: 0x64f573,
+      const red = new THREE.MeshPhysicalMaterial( {
+        metalness: 0.0, roughness: 0.1, color: 0xff0000,
+      } );
+      const green = new THREE.MeshPhysicalMaterial( {
+        metalness: 0.0, roughness: 0.1, color: 0x00ff00,
+      } );
+      const blue = new THREE.MeshPhysicalMaterial( {
+        metalness: 0.0, roughness: 0.1, color: 0x0000ff,
       } );
       const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 
-      const borderSize = 0.1;
+      const axisScale = 2.0;
+      const lineScale = 0.05;
 
-      const left = new THREE.Mesh( geometry, material );
-      left.position.set(-0.5, 0, 0 );
-      left.rotation.set(-Math.PI / 2, 0, 0 )
-      left.scale.set(borderSize, 1.1, borderSize);
-      scene.add( left );
-      left.visible = false;
-      this.left = left;
+      const xAxis = new THREE.Mesh( geometry, red );
+      xAxis.position.set(axisScale / 2, 0, 0 );
+      xAxis.rotation.set(0, 0, 0 )
+      xAxis.scale.set(axisScale, lineScale, lineScale);
+      scene.add( xAxis );
+      xAxis.visible = false;
+      this.xAxis = xAxis;
 
-      const right = new THREE.Mesh( geometry, material );
-      right.position.set(0.5, 0, 0 );
-      right.rotation.set(-Math.PI / 2, 0, 0 )
-      right.scale.set(borderSize, 1.1, borderSize);
-      scene.add( right );
-      right.visible = false;
-      this.right = right;
+      const yAxis = new THREE.Mesh( geometry, green );
+      yAxis.position.set(0.0, axisScale / 2, 0 );
+      yAxis.rotation.set(0, 0, 0 )
+      yAxis.scale.set(lineScale, axisScale, lineScale);
+      scene.add( yAxis );
+      yAxis.visible = false;
+      this.yAxis = yAxis;
 
-      const top = new THREE.Mesh( geometry, material );
-      top.position.set(0, 0, 0.5 );
-      top.rotation.set(0, 0, 0 )
-      top.scale.set(1.1, borderSize, borderSize);
-      scene.add( top );
-      top.visible = false;
-      this.top = top;
+      const zAxis = new THREE.Mesh( geometry, blue );
+      zAxis.position.set(0, 0, axisScale / 2 );
+      zAxis.rotation.set(0, 0, 0 )
+      zAxis.scale.set(lineScale, lineScale, axisScale);
+      scene.add( zAxis );
+      zAxis.visible = false;
+      this.zAxis = zAxis;
 
-      const bottom = new THREE.Mesh( geometry, material );
-      bottom.position.set(0, 0, -0.5 );
-      bottom.rotation.set(0, 0, 0 )
-      bottom.scale.set(1.1, borderSize, borderSize);
-      scene.add( bottom );
-      bottom.visible = false;
-      this.bottom = bottom;
-
-      console.log('add3DBox is finish')
+      console.log('add3DAxis is finish')
     },
     async parseAddMarker() {
       // 目前未选中cosid 跳过
@@ -321,18 +321,52 @@ Component({
               console.log("byteLength:", byteLength)
               // 写入文件后的地址
               const mapUrl = this.saveLocalFile(mapContent, 'model.map');
+              console.log("map文件的本地路径", mapUrl)
               this.parsedMapUrl = mapUrl;
 
-              // 写在本地，用于glb按钮点击时写入
-              this.parsedProtoData = data;
-
+              // 添加marker
               const markerId = this.session.addMarker(mapUrl);
-
               console.log('add Marker', markerId, mapUrl)
-
               this.setData({
                 usingMarkerId: markerId
               });
+
+              // glb文件
+              if (data.meshBlob && data.meshBlob.byteLength !== 0) {
+                // 简单过滤下无模型情况
+                const glbByteOffset = data.meshBlob.byteOffset
+                const glbByteLength = data.meshBlob.byteLength
+                const glbContent = data.meshBlob.buffer.slice(glbByteOffset, glbByteOffset + glbByteLength)
+                const glbUrl = this.saveLocalFile(glbContent, 'result.glb');
+                console.log("glb文件的本地路径", glbUrl)
+                this.parsedGlbUrl = glbUrl;
+
+                // @optional
+                // 后续为添加渲染产物模型的逻辑 
+                // Three 场景相关
+                const THREE = this.THREE;
+                // 控制容器节点
+                this.modelWrap = new THREE.Object3D();
+                this.scene.add( this.modelWrap );
+
+                // 加载模模型
+                const loader = this.loader = new THREE.GLTFLoader()
+                loader.parse( glbContent, './', ( gltf ) =>{
+                  console.log('gltf loaded', gltf.scene);
+
+                  // 设置模型索引以及缩放比
+                  this.model = gltf.scene;
+                  this.model.position.set(0, 0, 0);
+                  // 默认缩放设置到0.1
+                  this.model.scale.set(0.1, 0.1, 0.1);
+                  this.model.visible = false;
+
+                  console.log('gltf set', this.model);
+
+                  // 模型加载到场上
+                  this.modelWrap.add(this.model);
+                });
+              }
 
             },
             fail(res) {
@@ -375,6 +409,13 @@ Component({
       this.setData({
         usingMarkerId: null
       })
+      // 清理提示状态
+      this.xAxis.visible = false;
+      this.yAxis.visible = false;
+      this.zAxis.visible = false;
+      if (this.model) {
+        this.model.visible = false;
+      }
     },
     getAllMarker() {
       console.log(this.session.getAllMarker())
@@ -396,19 +437,13 @@ Component({
       });
     },
     saveGlTF() {
-      if (!this.parsedProtoData) {
-        console.log('不存在使用中的Marker数据')
+      if (!this.parsedGlbUrl) {
+        console.log('不存在使用中的glb地址')
         return;
       }
-      // glb文件
-      const byteOffset = this.parsedProtoData.meshBlob.byteOffset
-      const byteLength = this.parsedProtoData.meshBlob.byteLength
-      const glbContent = this.parsedProtoData.meshBlob.buffer.slice(byteOffset, byteOffset + byteLength)
-      const glbUrl = this.saveLocalFile(glbContent, 'result.glb');
-      console.log("glb文件的本地路径", glbUrl)
 
       wx.shareFileMessage({
-        filePath: glbUrl,
+        filePath: this.parsedGlbUrl,
       });
     },
   },

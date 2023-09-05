@@ -176,6 +176,7 @@ Component({
             uploadTime: this.convertToTime(Date.parse(new Date()) / 1000),
             timeStamp: Date.now() / 1000 | 0,
             modelStatus: 0,
+            restTime: 0,
             statusMsg: "准备中"
           })
         }
@@ -408,19 +409,24 @@ Component({
 
       // 不同的情况下，更新选中目标
       if (selectCosid !== targetCosId) {
-        
-        this.setData({
-          targetCosId: selectCosid
-        });
 
         const modelResp = this.modelRespMap[selectCosid];
 
-        // 选择的时候，通知上层
-        this.triggerEvent('selectEvent', {
-            cosid: selectCosid,
-            modelResp: modelResp,
-          }
-        );
+        const modelStatus = modelResp.result.respBody.status;
+        // 成功才允许点击
+        if (modelStatus === 1) {
+          this.setData({
+            targetCosId: selectCosid
+          });
+  
+          // 选择的时候，通知上层
+          this.triggerEvent('selectEvent', {
+              cosid: selectCosid,
+              modelResp: modelResp,
+            }
+          );
+        }
+        
       }
 
     },
