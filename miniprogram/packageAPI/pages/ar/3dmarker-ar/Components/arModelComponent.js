@@ -40,20 +40,20 @@ Component({
     uploadARModel() {
       const callback = this.generateARModel.bind(this)
       const cloudUpload = this.cloudUploadARModel.bind(this)
-      // const timeNow = Date.now() / 1000 | 0;
-      // const modelInfos = wx.getStorageSync('modelsInfo');
-      // console.log("modelInfos的值为：")
-      // console.log(modelInfos)
-      // if(modelInfos && modelInfos.length != 0){
-      //   if(timeNow - modelInfos[0].timeStamp < 7200){
-      //     wx.showToast({
-      //       title: "仅两小时允许上传一次视频",
-      //       icon: 'none',
-      //       duration: 2000
-      //     })
-      //     return;
-      //   }
-      // }
+      const timeNow = Date.now() / 1000 | 0;
+      const modelInfos = wx.getStorageSync('modelsInfo');
+      console.log("modelInfos的值为：")
+      console.log(modelInfos)
+      if(modelInfos && modelInfos.length != 0){
+        if(timeNow - modelInfos[0].timeStamp < 1800){
+          wx.showToast({
+            title: "每半小时允许上传一次视频",
+            icon: 'none',
+            duration: 2000
+          })
+          return;
+        }
+      }
       // 上传视频
       wx.chooseMedia({
         count: 9,
