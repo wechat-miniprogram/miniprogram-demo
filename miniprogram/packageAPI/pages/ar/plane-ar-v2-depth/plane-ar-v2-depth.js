@@ -3,7 +3,7 @@ import yuvBehavior from './yuvBehavior'
 import depthBehavior from './depthBehavior'
 
 const NEAR = 0.1
-const FAR = 20
+const FAR = 100
 let cubeVao = null
 let countNumber = 20
 let count = 0

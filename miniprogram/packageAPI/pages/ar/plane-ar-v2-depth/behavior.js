@@ -310,7 +310,7 @@ export default function getBehavior() {
           scene,
           animations
         } = cloneGltf(this.model, THREE)
-        scene.scale.set(0.05, 0.05, 0.05)
+        scene.scale.set(0.1, 0.1, 0.1)
 
         // 动画混合器
         const mixer = new THREE.AnimationMixer(scene)
