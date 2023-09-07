@@ -56,15 +56,36 @@
 .pullDownList .childBox .child {
   box-sizing: border-box;
   border-bottom: 1rpx solid #e5e5e5;
+  border-top-width: 2rpx;
   height: 112rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 32rpx;
-  margin-right: 32rpx;
+  padding-left: 32rpx;
+  padding-right: 32rpx;
   font-size: 28rpx;
   opacity: 0.9;
 }
 .pullDownList .childBox .child:last-of-type {
   border-bottom-color: transparent;
+}
+
+.message {
+  border: 20rpx solid #000;
+}
+
+.ar {
+  border: 20rpx solid #1D5B79;
+}
+
+.custom {
+  border: 20rpx solid #468B97;
+}
+
+.gltf {
+  border: 20rpx solid #EF6262;
+}
+
+.tool {
+  border: 20rpx solid #F3AA60;
 }

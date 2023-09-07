@@ -4,7 +4,7 @@
     <view class="tag type-{{tag}}">{{ tag === 'func' ? '能力' : ''}}{{ tag === 'template' ? '模版' : ''}}{{ tag === 'case' ? '案例' : ''}}</view>
   </view>
   <view class="childBox" style="height: {{ childBoxHeight }}rpx">
-    <view class="child" wx:for="{{childArr}}" wx:key="name" data-item="{{item}}" bindtap="tapChild">
+    <view class="child {{item.class}}" wx:for="{{childArr}}" wx:key="name" data-item="{{item}}" bindtap="tapChild">
       {{ item.name }} {{ item.label }}
     </view>
   </view>

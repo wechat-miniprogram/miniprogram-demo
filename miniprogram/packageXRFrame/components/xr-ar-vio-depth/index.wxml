@@ -1,0 +1,31 @@
+<xr-scene ar-system="modes:Plane; planeMode: 1; depthMask: true; depthNear: 0.1; depthFar: 100; depthDebug: true;" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <!-- depthMask: true; depthNear: 0.001; depthFar:1000; depthDebug: true; -->
+  <!-- Beta 版本 -->
+  <!-- vio + depth 模式下 planeMode 需设置为 1 (只允许水平面识别) -->
+  <!-- depthMask 在支持的情况下，是否开启实时深度遮挡。 -->
+  <!-- depthNear 开启实时深度遮挡时，遮挡的近处阈值。 -->
+  <!-- depthFar 开启实时深度遮挡时，遮挡的远处阈值。 -->
+  <!-- depthDebug 开启实时深度遮挡时，显示一个用于Debug的图层。 -->
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
+    <xr-asset-load type="gltf" asset-id="gltf-item" src="https://dldir1.qq.com/weixin/miniprogram/RobotExpressive_aa2603d917384b68bb4a086f32dabe83.glb" />
+  </xr-assets>
+  <xr-node>
+    <xr-ar-tracker mode="Plane">
+      <xr-gltf model="anchor"></xr-gltf>
+    </xr-ar-tracker>
+    <xr-node node-id="setitem" visible="false">
+      <xr-gltf model="gltf-item" scale="0.1 0.1 0.1" anim-autoplay="clip: Dance"></xr-gltf>
+    </xr-node>
+    <xr-camera
+      id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
+      near="0.1"
+      far="100"
+      background="ar" is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

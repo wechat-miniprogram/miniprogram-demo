@@ -1,6 +1,7 @@
 <xr-scene ar-system="modes:Plane" bind:ready="handleReady" bind:ar-ready="handleARReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
+    <xr-asset-load type="gltf" asset-id="door" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/door.glb" /> 
     <xr-asset-material asset-id="standard-mat" effect="standard" />
   </xr-assets>
   <xr-node>
@@ -10,8 +11,11 @@
     <xr-node id="f" position="0 0 3.0">
       <xr-mesh rotation="90 0 0" geometry="plane" uniforms="u_baseColorFactor:0.4 0.2 0.2 1, u_metallicRoughnessValues: 0 0.6" states="cullOn: false"></xr-mesh>
     </xr-node>
-    <xr-node id="b" position="0 0 -3.0">
+    <!-- <xr-node id="b" position="0 0 -3.0">
       <xr-mesh rotation="90 0 0" geometry="plane" uniforms="u_baseColorFactor:0.2 0.4 0.2 1, u_metallicRoughnessValues: 0 0.6" states="cullOn: false"></xr-mesh>
+    </xr-node> -->
+    <xr-node id="b" position="0 0 -3.0">
+      <xr-gltf rotation="0 -90 0" scale="0.01 0.01 0.01" model="door"></xr-gltf>
     </xr-node>
     <xr-node id="l" position="-3.0 0 0.0">
       <xr-mesh rotation="90 0 0" geometry="plane" uniforms="u_baseColorFactor:0.2 0.2 0.4 1, u_metallicRoughnessValues: 0 0.6" states="cullOn: false"></xr-mesh>

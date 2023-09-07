@@ -1,0 +1,23 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="gltf-mech_drone" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/mech_drone/scene.gltf" />
+    <xr-asset-material asset-id="plane-shadow-mat" effect="plane-shadow" />
+  </xr-assets>
+  <xr-env env-data="xr-frame-team-workspace-day2" />
+  <xr-node>
+    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
+
+    <xr-gltf node-id="gltf-mech_drone" position="0 -2 0" rotation="0 0 0" scale="7 7 7" model="gltf-mech_drone" anim-autoplay cast-shadow></xr-gltf>
+    <xr-mesh position="0 -2 0" scale="10 1 10" geometry="plane"  material="plane-shadow-mat" receive-shadow></xr-mesh>
+
+    <xr-camera
+      id="camera" node-id="camera" position="2 3 -5" clear-color="0.96 0.96 0.96 1"
+      target="camera-target" near="0.1" far="2000"
+      camera-orbit-control="" background="skybox"
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1.2" />
+    <xr-light type="directional" rotation="40 0 0" color="1 1 1" intensity="3" cast-shadow />
+  </xr-node>
+</xr-scene>

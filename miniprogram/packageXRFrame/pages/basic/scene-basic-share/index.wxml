@@ -1,0 +1,54 @@
+<xr-demo-viewer
+  title="录屏和截屏"
+  intro="展示了如何配置并截屏/录屏。"
+  code=""
+>
+  <xr-basic-share
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:sceneReady="handleReady"
+
+    captureState="{{captureState}}"
+    recordState="{{recordState}}"
+    captureType="{{captureType}}"
+    captureQuality="{{captureQuality}}"
+    recordFPS="{{recordFPS}}"
+    recordBPS="{{recordBPS}}"
+    recordWidth="{{recordWidth}}"
+    recordHeight="{{recordHeight}}"
+  />
+  <view class="button-wrap">
+    <button class="action-button" bindtap="changeCaptureState">截屏分享</button>
+    <button class="action-button" bindtap="changeRecordState">{{recordState == 1 ? '停止录屏' : '启动录屏'}}</button>
+  </view>
+
+  <view class="form-entry">
+    <view class="form-entry-title">截频格式</view>
+    <radio-group name="pp-type" bindchange="changeCaptureType">
+      <label class="radio-item"><radio value="jpg" checked />JPG</label>
+      <label class="radio-item"><radio value="png"/>PNG</label>
+    </radio-group>
+  </view>
+  <view class="form-entry">
+    <view class="form-entry-title">截频质量</view>
+    <slider show-value bindchange="changeCaptureQuality" value="{{captureQuality}}" min="{{0.5}}" max="{{1}}" step="{{0.1}}"></slider>
+  </view>
+
+  <view class="form-entry">
+    <view class="form-entry-title">录屏FPS</view>
+    <slider show-value bindchange="changeRecordFPS" value="{{recordFPS}}" min="{{10}}" max="{{60}}" step="{{10}}"></slider>
+  </view>
+
+  <view class="form-entry">
+    <view class="form-entry-title">录屏尺寸系数</view>
+    <slider show-value bindchange="changeRecordScale" value="{{recordScale}}" min="{{0.5}}" max="{{1}}" step="{{0.1}}"></slider>
+  </view>
+
+  <view class="form-entry">
+    <view class="form-entry-title">录屏BPS</view>
+    <slider show-value bindchange="changeRecordBPS" value="{{recordBPS}}" min="{{500}}" max="{{2000}}" step="{{100}}"></slider>
+  </view>
+</xr-demo-viewer>

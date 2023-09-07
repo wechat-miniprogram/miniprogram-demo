@@ -1,4 +1,5 @@
-<xr-scene ar-system="modes:Plane Marker" bind:ready="handleReady" bind:ar-ready="handleARReady">
+<xr-scene ar-system="modes:Plane Marker; planeMode: 1" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <!-- vio + marker 模式下 planeMode 需设置为 1 (只允许水平面识别) -->
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
     <xr-asset-load type="gltf" asset-id="gltf-item" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/just_a_girl/index.glb" />

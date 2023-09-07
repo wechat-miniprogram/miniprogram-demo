@@ -37,32 +37,38 @@
         data-index="1"
       >狐狸</view>
       <view class="res-name">图片</view>
-      <view class="res-btn"
+      <view class="res-btn {{onFlags[2] ? 'on': ''}}"
         bindtap="tapResBtn"
         data-type="image"
-        data-src="/assets/waifu.png"
+        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/Default_albedo.jpg"
         data-index="2"
-      >暂无</view>
+      >头盔基础色</view>
+      <view class="res-btn {{onFlags[3] ? 'on': ''}}"
+        bindtap="tapResBtn"
+        data-type="image"
+        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/Default_AO.jpg"
+        data-index="3"
+      >头盔AO</view>
     </view>
     <view class="res-row">
       <view class="res-name">视频纹理</view>
-      <view class="res-btn {{onFlags[3] ? 'on': ''}}"
-        bindtap="tapResBtn"
-        data-type="video"
-        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/paris.mp4"
-        data-index="3"
-      >巴黎路边</view>
       <view class="res-btn {{onFlags[4] ? 'on': ''}}"
         bindtap="tapResBtn"
         data-type="video"
-        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.mp4"
+        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/paris.mp4"
         data-index="4"
-      >猫咪视频</view>
+      >巴黎路边</view>
       <view class="res-btn {{onFlags[5] ? 'on': ''}}"
         bindtap="tapResBtn"
         data-type="video"
-        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/yulong.mp4"
+        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.mp4"
         data-index="5"
+      >猫咪视频</view>
+      <view class="res-btn {{onFlags[6] ? 'on': ''}}"
+        bindtap="tapResBtn"
+        data-type="video"
+        data-src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/yulong.mp4"
+        data-index="6"
       >玉龙山顶</view>
     </view>
   </view>

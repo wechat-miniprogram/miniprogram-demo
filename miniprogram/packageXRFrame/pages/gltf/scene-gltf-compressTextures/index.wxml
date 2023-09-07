@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="glTF压缩纹理案例"
+  intro="应用 WX_compress_textures 扩展的glTF案例，压缩纹理生成可用xr-frame-toolkit。"
+  code="{{xmlCode}}"
+>
+  <xr-gltf-compressTextures
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

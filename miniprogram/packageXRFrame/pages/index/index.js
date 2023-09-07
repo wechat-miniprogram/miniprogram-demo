@@ -1,8 +1,12 @@
+// 自定义组件
 import '../../xr-custom/components/AutoRotate';
 import '../../xr-custom/elements/xr-auto-rotate-touchable-gltf';
+// 自定义Geometry
 import '../../xr-custom/assets/geometry-star';
-import '../../xr-custom/assets/effect-shining';
+// 自定义材质
 import '../../xr-custom/elements/xr-shining-star';
+// 自定义effect
+import '../../xr-custom/assets/effect-shining';
 import '../../xr-custom/assets/effect-last-record-final';
 
 import list from './data/index';

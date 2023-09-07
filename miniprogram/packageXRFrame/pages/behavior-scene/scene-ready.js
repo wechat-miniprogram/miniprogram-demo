@@ -11,6 +11,7 @@ module.exports = Behavior({
     renderHeight: 0,
     windowHeight: 1000,
     heightScale: 0.75,
+    dpiScale: 1,
     showBackBtn: false,
     activeValues: [1],
     arTrackerShow: false,
@@ -27,8 +28,8 @@ module.exports = Behavior({
     this.setData({
       width,
       height,
-      renderWidth: width * dpi,
-      renderHeight: height * dpi,
+      renderWidth: width * dpi * this.data.dpiScale,
+      renderHeight: height * dpi * this.data.dpiScale,
       windowHeight
     });
   },

@@ -41,3 +41,21 @@
   margin-right: 10rpx;
   border: 1px solid #000;
 }
+
+.xr-block {
+  text-align: center;
+  margin: 20rpx;
+}
+
+.xr-block button {
+  display: inline-block;
+  font-size: 30rpx;
+  background-color: #fff;
+  border-radius: 10rpx; 
+  width: 90%;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0;
+  margin-right: 10rpx;
+  border: 1px solid #000;
+}

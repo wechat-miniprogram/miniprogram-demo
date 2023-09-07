@@ -1,0 +1,20 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="gltf" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/compress-textures-test/gltf/index.gltf" />
+    <xr-asset-load type="gltf" asset-id="glb" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/compress-textures-test/glb/index.glb" />
+  </xr-assets>
+  <xr-node>
+    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
+    <xr-gltf position="-5 0 0" model="gltf"></xr-gltf>
+    <xr-gltf position="5 0 0" model="glb"></xr-gltf>
+    <xr-camera
+      position="0 0 -20" clear-color="0.9 0.9 0.9 1"
+      target="camera-target"
+      camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.3" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="2" />
+  </xr-node>
+</xr-scene>
