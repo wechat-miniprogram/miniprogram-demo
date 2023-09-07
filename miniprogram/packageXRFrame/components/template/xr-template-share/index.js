@@ -11,7 +11,7 @@ Component({
     handleReady({detail}) {
       const xrScene = this.scene = detail.value;
       console.log('xr-scene', xrScene);
-      this.scene.event.addOnce('touchstart', this.handleShare.bind(this));
+      this.scene.event.add('touchstart', this.handleShare.bind(this));
     },
     handleShare(event) {
       const {clientX, clientY} = event.touches[0];

@@ -17,13 +17,14 @@
 
   <xr-node node-id="rt-camera-target" position="0 1 0"></xr-node>
   <xr-camera
-    position="0 1 4" clear-color="0.925 0.925 0.925 1"
-    target="rt-camera-target" render-target="rt" cull-mask="0b011"
-  />
-  <xr-camera
     position="0 4 6" clear-color="0.925 0.925 0.925 1"
     target="mesh-plane" cull-mask="0b111" camera-orbit-control=""
-  ></xr-camera>
+  >
+    <xr-camera
+      position="0 0 0" clear-color="0.925 0.925 0.925 1"
+      target="rt-camera-target" render-target="rt" cull-mask="0b011"
+    />
+  </xr-camera>
 
   <xr-node node-id="lights">
     <xr-light type="ambient" color="1 1 1" intensity="1" />

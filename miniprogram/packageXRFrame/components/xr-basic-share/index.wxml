@@ -1,0 +1,13 @@
+<xr-scene bind:ready="handleReady">
+  <xr-asset-load type="gltf" asset-id="clock" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/clock/scene.gltf" />
+
+  <xr-light type="ambient" color="1 1 1" intensity="1" />
+  <xr-light type="directional" rotation="40 70 0" color="1 1 1" intensity="3" cast-shadow />
+
+  <slot></slot>
+  
+  <xr-gltf model="clock" scale="0.1 0.1 0.1" rotation="90 0 0" anim-autoplay />
+
+  <xr-node node-id="target"></xr-node>
+  <xr-camera node-id="camera" clear-color="0.4 0.8 0.6 1" position="0 0 4" target="target" camera-orbit-control />
+</xr-scene>

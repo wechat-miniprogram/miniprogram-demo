@@ -1,0 +1,105 @@
+page {
+  --color: 222, 228, 222;
+  --shadowColor: 0px 0px 17px 2px rgba(var(--color), 0.6) inset;
+}
+
+.hexagon_container {
+  position: absolute;
+  animation: move 2s ease;
+  animation-iteration-count: 1; 
+  animation-fill-mode: forwards;
+  animation-delay: calc(var(--delay) * 1ms);
+  opacity: 0;
+  transition: all 1s ease-out;
+}
+
+.hexagon_container_selected {
+  --shadowColor: 0px 0px 17px 2px rgba(50, 241, 76, 0.6) inset;
+  position: absolute;
+  animation: move 1s ease;
+  animation-iteration-count: 1; 
+  animation-fill-mode: forwards;
+  animation-delay: calc(var(--delay) * 1ms);
+  opacity: 0;
+  transition: all 1s ease-out;
+}
+
+/* .hexagon_container_active {
+  --shadowColor: 0px 0px 17px 2px rgba(50, 241, 76, 0.6) inset;
+} */
+
+
+@keyframes move {
+  0% {
+    transform: translate(0px, 0px) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--biasX), var(--biasY)) scale(1);
+    opacity: 1;
+  }
+}
+
+.hexagon_container,
+.container,
+.middle,
+.item,
+.item_partone,
+.item_parttwo {
+  width: 50px;
+  height: 40px;
+}
+
+.container,
+.middle,
+.item {
+  overflow: hidden;
+}
+
+.middle {
+  transform: rotate(-60deg);
+}
+
+.item,
+.item_partone,
+.item_parttwo {
+  box-shadow: var(--shadowColor);
+  border: var(--borderColor);
+}
+
+.item {
+  position: relative;
+  background: no-repeat 50% center;
+  background-size: 125% auto;
+  transform: rotate(-60deg);
+}
+
+.item_partone {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotateZ(-60deg);
+}
+
+.item_parttwo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotateZ(-120deg);
+}
+
+.rect_text {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(43, 216, 247);
+  font-size: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: "";
+}
+
+

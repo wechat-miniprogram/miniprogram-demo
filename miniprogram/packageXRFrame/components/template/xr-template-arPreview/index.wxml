@@ -10,7 +10,7 @@
     </xr-ar-tracker>
     <xr-node node-id="setitem" visible="false">
       <xr-node id="preview-model">
-        <xr-node scale="0.005 0.005 0.005">
+        <xr-node id="preview-model-sub" scale="0.005 0.005 0.005">
           <xr-gltf id="setitem-gltf" model="gltf-item" never-cull/>
         </xr-node>
       </xr-node>

@@ -7,6 +7,24 @@
     id="main-frame"
     width="{{renderWidth}}"
     height="{{renderHeight}}"
-    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    itemIndex="{{itemIndex}}"
+    bindinfoListener = "handleInfoListener"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px; display:block;"
   />
+
+  <!-- <view style="position: absolute; top: 0%; left:0%; width:100%; height:100%;" bind:touchstart='touchStart'></view> -->
+
+  <view wx:for="{{menu}}">
+    <view class="hexagon_container{{itemIndex==item.index?'_selected':''}}" hover-class="hexagon_container_active" catchtouchstart='animateChoose' data-index="{{item.index}}" style="left:{{item.x}}px; top:{{item.y}}px; --biasX:{{item.biasX}}px; --biasY:{{item.biasY}}px; --delay:{{item.index * 200 }}">
+      <view class="rect_text">{{item.text}}</view>
+          <view class="container">
+              <view class="middle">
+                  <view class="item">
+                      <view class="item_partone"></view>
+                      <view class="item_parttwo"></view>
+                  </view>
+              </view>
+          </view>
+      </view>
+  </view>
 </xr-demo-viewer>

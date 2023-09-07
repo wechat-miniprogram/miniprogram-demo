@@ -1,0 +1,51 @@
+<xr-scene ar-system="modes:Plane" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
+    <xr-asset-load type="texture" asset-id="bg" src="https://holodata.s3.cn-northwest-1.amazonaws.com.cn/nameCardData/mingpiantu.png" />
+    <xr-asset-material asset-id="simple-mat" effect="simple" />
+    <xr-asset-material asset-id="text-mat" effect="simple" />
+  </xr-assets>
+  <xr-node>
+    <xr-node node-id="center" position="0 0 0"></xr-node>
+    <xr-ar-tracker mode="Plane">
+      <xr-gltf id="anchor" model="anchor"></xr-gltf>
+    </xr-ar-tracker>
+    
+    <xr-node node-id="setitem" visible="false">
+      <xr-node node-id="ui-block" scale="0.1 0.1 0.1">
+        <xr-mesh node-id="mesh-sphere" position="0 0 -2.1" scale="2 2 2" geometry="sphere" uniforms="u_baseColorFactor:0.937 0.176 0.368 1"></xr-mesh>
+        <xr-mesh
+          position="0 0 -0.01" scale="10 1 5" rotation="90 0 0" geometry="plane" material="simple-mat"
+          uniforms="u_baseColorMap: bg" states="cullOn: false, alphaMode: BLEND,renderQueue: 2500"
+        ></xr-mesh>
+        <xr-node node-id="text-wrap" position="-4 1.4 0">
+          <xr-text
+            material="text-mat" value="李逍遥"
+            position="0 0 0" never-cull
+            size="0.6" anchor="0 1" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+          ></xr-text>
+          <xr-text
+            material="text-mat" value="原是一乡下客栈店小二，天资聪颖，因一壶酒被酒剑仙传授了蜀山仙剑派剑术，在仙灵岛与赵灵儿相遇，自此经历重重磨难成长为一代旷世奇侠"
+            position="0 -0.8 0" never-cull
+            width="8"
+            size="0.4" anchor="0 1" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+          ></xr-text>
+          <xr-text
+            material="text-mat" value="仙剑奇侠传"
+            position="8 -2.7 0" never-cull
+            size="0.4" anchor="1 0" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+          ></xr-text>
+        </xr-node>
+      </xr-node>
+    </xr-node>
+    
+    <xr-camera
+      id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

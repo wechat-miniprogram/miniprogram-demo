@@ -33,6 +33,11 @@ const base = {
       path: '/pages/basic/scene-basic-touch/index',
     },
     {
+      name: 'Share',
+      label: '录屏和截频',
+      path: '/pages/basic/scene-basic-share/index',
+    },
+    {
       name: 'VisibleLayer',
       label: '显示和图层',
       path: '/pages/basic/scene-basic-visible-layer/index',
@@ -47,11 +52,6 @@ const base = {
       label: '渲染目标',
       path: '/pages/basic/scene-basic-render-texture/index',
     },
-    // {
-    //   name: 'Physic',
-    //   label: '物理',
-    //   path: '/pages/basic/scene-basic-physic/index',
-    // },
     {
       name: 'ParticleSystem',
       label: '粒子系统',
@@ -99,6 +99,11 @@ const gltf = {
     },
     {
       name: '扩展',
+      label: '压缩纹理',
+      path: '/pages/gltf/scene-gltf-compressTextures/index',
+    },
+    {
+      name: '扩展',
       label: 'KHR_texture_transform',
       path: '/pages/gltf/scene-gltf-textureTransform/index',
     },
@@ -111,6 +116,11 @@ const gltf = {
       name: '扩展',
       label: 'KHR_materials_sheen',
       path: '/pages/gltf/scene-gltf-sheen/index',
+    },
+    {
+      name: '扩展',
+      label: 'KHR_materials_transmission',
+      path: '/pages/gltf/scene-gltf-transmission/index',
     },
     {
       name: '扩展',
@@ -165,8 +175,13 @@ const ar = {
     },
     {
       name: 'Plane+Marker',
-      label: 'AR 平面Marker融合',
+      label: 'AR 平面 Marker融合',
       path: '/pages/ar/scene-ar-vio-marker/index',
+    },
+    {
+      name: 'Plane+Depth',
+      label: 'AR 平面深度剔除',
+      path: '/pages/ar/scene-ar-vio-depth/index',
     },
   ],
 };
@@ -212,66 +227,115 @@ const template = {
     {
       name: 'Message',
       label: '小程序混合通信',
+      class: 'message',
       path: '/pages/template/xr-template-message/index',
     },
     {
       name: 'Controller',
       label: '第一人称漫游',
+      class: 'message',
       path: '/pages/template/xr-template-control/index',
     },
     {
       name: 'Loading',
       label: '动态资源加载与使用',
+      class: 'message',
       path: '/pages/template/xr-template-loading/index',
     },
     {
-      name: 'Tracker',
+      name: 'AR',
       label: '动态多Tracker切换（图片识别）',
+      class: 'ar',
       path: '/pages/template/xr-template-tracker/index',
     },
     {
       name: 'AR',
       label: '模型摆放与手势控制',
+      class: 'ar',
       path: '/pages/template/xr-template-arPreview/index',
     },
     {
       name: 'AR',
-      label: '面向屏幕的面片',
+      label: '面向屏幕的面片与模型',
+      class: 'ar',
       path: '/pages/template/xr-template-lookat/index',
+    },
+    {
+      name: 'AR',
+      label: '平面模式下的 UI 面板',
+      class: 'ar',
+      path: '/pages/template/xr-template-arui/index',
+    },
+    {
+      name: 'Effect',
+      label: '模型切换为Toon渲染(自定义多pass)',
+      class: 'custom',
+      path: '/pages/template/xr-template-toon/index',
+    },
+    {
+      name: 'Effect',
+      label: '平面阴影',
+      class: 'custom',
+      path: '/pages/template/xr-template-planeShadow/index',
+    },
+    {
+      name: 'Geometry',
+      label: '定制每帧变化的Geometry',
+      class: 'custom',
+      path: '/pages/template/xr-template-geometry/index',
     },
     {
       name: 'glTF',
       label: '模型更换贴图',
+      class: 'gltf',
       path: '/pages/template/xr-template-gltfEdit/index',
     },
     {
       name: 'glTF',
       label: '模型动画（脚本、骨骼）',
+      class: 'gltf',
       path: '/pages/template/xr-template-gltfAnimation/index',
     },
     {
       name: 'glTF',
       label: '设置 glTF 为遮挡模型',
+      class: 'gltf',
       path: '/pages/template/xr-template-gltfOcclusion/index',
     },
     {
-      name: 'Animation',
-      label: '序列帧动画（雪碧图、GIF）',
-      path: '/pages/template/xr-template-frameEffect/index',
+      name: 'glTF',
+      label: '添加模型内UV动画',
+      class: 'gltf',
+      path: '/pages/template/xr-template-gltfUVAnimation/index',
+    },
+    {
+      name: 'glTF',
+      label: '双面半透明模型渲染',
+      class: 'gltf',
+      path: '/pages/template/xr-template-blendDouble/index',
     },
     {
       name: 'Touch',
       label: '点选物体与动画控制',
+      class: 'tool',
       path: '/pages/template/xr-template-select/index',
     },
     {
       name: 'Share',
       label: '截图与分享',
+      class: 'tool',
       path: '/pages/template/xr-template-share/index',
+    },
+    {
+      name: 'Effect',
+      label: '序列帧动画（雪碧图、GIF）',
+      class: 'tool',
+      path: '/pages/template/xr-template-frameEffect/index',
     },
     {
       name: 'Video',
       label: '过滤黑色背景视频',
+      class: 'tool',
       path: '/pages/template/xr-template-removeBlack/index',
     },
     // {

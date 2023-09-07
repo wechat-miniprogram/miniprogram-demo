@@ -1,0 +1,19 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="gltf-blend" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/blend.glb" /> 
+  </xr-assets>
+  <xr-env env-data="xr-frame-team-workspace-day2" />
+  <xr-node>
+    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
+    <xr-gltf id="blend" position="0 -0.6 0" rotation="0 0 0" scale="1.2 1.2 1.2" model="gltf-blend"></xr-gltf>
+    <xr-camera
+      id="camera" node-id="camera" position="2 2 4" clear-color="0.925 0.925 0.925 1"
+      target="camera-target" background="skybox"
+      camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.6" />
+    <xr-light type="directional" rotation="20 120 0" color="1 1 1" intensity="2"/>
+  </xr-node>
+</xr-scene>

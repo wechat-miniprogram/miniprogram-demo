@@ -29,6 +29,26 @@
         ></xr-gltf>
       </xr-node>
     </xr-node>
+    <!-- Image -->
+    <xr-node wx:if="{{imageLoaded}}">
+      <xr-node
+        wx:for="{{imageIdList}}" wx:for-item="imageId"
+        wx:key="imageId"
+      >
+        <xr-mesh
+          wx:if="{{imageId === 2}}"
+          position="1 1 0" scale="1 1 0.2"
+          geometry="cube"  material="texture-mat-{{imageId}}"
+          cast-shadow
+        />
+        <xr-mesh
+          wx:if="{{imageId === 3}}"
+          position="-1 1 0" scale="1 1 0.2"
+          geometry="cube" material="texture-mat-{{imageId}}"
+          cast-shadow
+        />
+      </xr-node>
+    </xr-node>
     <!-- Video -->
     <xr-node wx:if="{{videoLoaded}}">
       <xr-node
@@ -37,18 +57,18 @@
       >
       <xr-mesh
         wx:if="{{videoId === 4}}"
-        node-id="mesh-cube" position="-1.5 -0.6 1" scale="1.2 0.8 0.8"
-        geometry="cube" material="video-mat-{{videoId}}"
-        cast-shadow
-      />
-      <xr-mesh
-        wx:if="{{videoId === 3}}"
         node-id="mesh-cube" position="0 -0.5 1" scale="0.8 1.4 0.8"
         geometry="cube" material="video-mat-{{videoId}}"
         cast-shadow
       />
       <xr-mesh
         wx:if="{{videoId === 5}}"
+        node-id="mesh-cube" position="-1.5 -0.6 1" scale="1.2 0.8 0.8"
+        geometry="cube" material="video-mat-{{videoId}}"
+        cast-shadow
+      />
+      <xr-mesh
+        wx:if="{{videoId === 6}}"
         node-id="mesh-cube" position="1.5 -0.6 1" scale="1.2 0.8 0.8"
         geometry="cube" material="video-mat-{{videoId}}"
         cast-shadow

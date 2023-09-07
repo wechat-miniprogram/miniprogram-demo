@@ -102,7 +102,7 @@ Component({
           return
         }
         this.gltfItemTRS.rotation.x -= phi
-        this.gltfItemTRS.rotation.y -= theta
+        this.gltfItemSubTRS.rotation.y -= theta
         this.mouseInfo.startX = x
         this.mouseInfo.startY = y
       }
@@ -161,6 +161,9 @@ Component({
 
       // 获取改动元素
       this.gltfItemTRS = this.scene.getElementById('preview-model').getComponent(xrFrameSystem.Transform)
+      this.gltfItemSubTRS = this.scene.getElementById('preview-model-sub').getComponent(xrFrameSystem.Transform)
+
+
 
       // 开启旋转缩放逻辑
       this.scene.event.addOnce('touchstart', this.handleTouchStart)

@@ -11,6 +11,7 @@ Page({
     speedZ: '0.00',
     posX: '0.00',
     posZ: '0.00',
+    showXRFrame: true,
   },
   tapPlusX() {
     this.setData({
@@ -43,6 +44,11 @@ Page({
         moveZ: this.data.messageData.moveZ - 1,
       }
     });
+  },
+  tapClose() {
+    this.setData({
+      showXRFrame: !this.data.showXRFrame
+    })
   },
   handleInfoListener(cur) {
     const detail = cur.detail;

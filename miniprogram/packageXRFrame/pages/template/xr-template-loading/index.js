@@ -8,7 +8,7 @@ Page({
     },
     onFlags: [
       false, false, // gltf
-      false,        // image
+      false, false,    // image
       false, false, false // video
     ],
     gltfList: [],
@@ -55,7 +55,26 @@ Page({
         });
         break;
       case 'image':
+        let imageListNew;
+        if (onFlags[index]) {
+          imageListNew = this.data.imageList;
+          imageListNew.push({
+            id: index,
+            src: src
+          });
+        } else {
+          let matchIndex = -1;
+          for (let i = 0; i < this.data.imageList.length; i++) {
+            if (this.data.imageList[i] &&  src === this.data.imageList[i].src) {
+              matchIndex = i;
+              break;
+            }
+          }
+          this.data.imageList.splice(matchIndex, 1);
+          imageListNew = this.data.imageList;
+        }
         this.setData({
+          imageList: imageListNew,
           onFlags: onFlags
         });
         break

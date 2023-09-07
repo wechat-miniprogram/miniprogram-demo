@@ -33,7 +33,6 @@ xrFrameSystem.registerEffect('shining', scene => scene.createEffect({
       cullOn: false,
       blendOn: false,
       depthWrite: true,
-      cullFace: xrFrameSystem.ECullMode.BACK,
     },
     lightMode: "ForwardBase",
     useMaterialRenderStates: true,
