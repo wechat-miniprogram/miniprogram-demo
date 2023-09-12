@@ -1,7 +1,14 @@
 <view class="page wrap-fix" data-weui-theme="{{theme}}">
   <view class="canvas-wrap" style="width: {{widthScale * 100}}%; height: {{heightScale * 100}}%">
-    <canvas type="webgl" id="webgl"></canvas>
-    
+    <xr-frame-canvas
+      disable-scroll
+      id="canvas"
+      width="{{width}}"
+      height="{{height}}"
+      style="width:{{domWidth}}px;height:{{domHeight}}px;"
+      bind:sceneReady="handleXRSceneReady"
+    ></xr-frame-canvas>
+     
     <view class="hint-box"  wx:for="{{hintBoxList}}"  wx:for-item="hintBox" wx:key="hintBoxId"
       style="left: {{hintBox.left}}%; top: {{hintBox.top}}%; width: {{hintBox.width}}px;  height: {{hintBox.height}}px;"
     >

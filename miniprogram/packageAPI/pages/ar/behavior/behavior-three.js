@@ -1,5 +1,35 @@
-const yuvBehavior = Behavior({
+import { createScopedThreejs } from 'threejs-miniprogram'
+import { registerGLTFLoader } from '../loaders/gltf-loader'
+
+const threeBehavior = Behavior({
     methods: {
+        // 针对 threejs 的初始化逻辑
+        initTHREE() {
+            const THREE = this.THREE = createScopedThreejs(this.canvas)
+            registerGLTFLoader(THREE)
+
+            // 相机
+            this.camera = new THREE.PerspectiveCamera(50, 0.7, 0.1, 1000);
+
+            // 场景
+            const scene = this.scene = new THREE.Scene()
+
+            // 光源
+            const light1 = new THREE.HemisphereLight(0xffffff, 0x444444) // 半球光
+            light1.position.set(0, 0.2, 0)
+            scene.add(light1)
+            const light2 = new THREE.DirectionalLight(0xffffff) // 平行光
+            light2.position.set(0, 0.2, 0.1)
+            scene.add(light2)
+
+            // 渲染层
+            const renderer = this.renderer = new THREE.WebGLRenderer({
+                antialias: true,
+                alpha: true
+            })
+            renderer.gammaOutput = true
+            renderer.gammaFactor = 2.2
+        },
         initYUVShader() {
             const gl = this.gl = this.renderer.getContext()
             const currentProgram = gl.getParameter(gl.CURRENT_PROGRAM)
@@ -136,4 +166,4 @@ const yuvBehavior = Behavior({
     },
 })
 
-export default yuvBehavior;
+export default threeBehavior;

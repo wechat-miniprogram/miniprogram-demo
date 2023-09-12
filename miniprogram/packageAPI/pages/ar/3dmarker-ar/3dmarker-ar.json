@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "ar-model-component": "./Components/arModelComponent"
+    "ar-model-component": "./Components/arModelComponent",
+    "xr-frame-canvas": "../components/xr-frame/index"
   },
   "enablePullDownRefresh": true,
   "navigationBarTitleText": "3D Marker"

@@ -1,12 +1,12 @@
 import arBehavior from '../behavior/behavior-ar'
-import yuvBehavior from '../behavior/behavior-yuv'
+import threeBehavior from '../behavior/behavior-three'
 
 // VK 投影矩阵参数定义
-const NEAR = 0.001
+const NEAR = 0.01
 const FAR = 1000
 
 Component({
-  behaviors: [arBehavior, yuvBehavior],
+  behaviors: [arBehavior, threeBehavior],
   data: {
     theme: 'light',
     widthScale: 1,      // canvas宽度缩放值

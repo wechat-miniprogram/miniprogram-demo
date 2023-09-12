@@ -1,15 +1,14 @@
 import arBehavior from '../behavior/behavior-ar'
-import yuvBehavior from '../behavior/behavior-yuv'
-// import edgeBehavior from "../behavior/behavior-edge"
+import xrFrameBehavior from '../behavior/behavior-xrFrame'
 
 // VK 投影矩阵参数定义
-const NEAR = 0.001
+const NEAR = 0.01
 const FAR = 1000
 
 let loggerOnce = false;
 
 Component({
-  behaviors: [arBehavior, yuvBehavior],
+  behaviors: [arBehavior, xrFrameBehavior],
   data: {
     theme: 'light',
     cameraPosition: 0,
@@ -46,12 +45,6 @@ Component({
   methods: {
     // 对应案例的初始化逻辑，由统一的 behavior 触发
     init() {
-      // 初始化 Three.js，用于模型相关的渲染
-      this.initTHREE()
-
-      // 初始化 GL，基于 Three.js 的 Context，用于相机YUV渲染
-      this.initYUV()
-
       // 初始化VK
       // start完毕后，进行更新渲染循环
       this.initVK();
@@ -84,20 +77,34 @@ Component({
 
         // VKSession EVENT addAnchors
         session.on('addAnchors', anchors => {
-            console.log("addAnchor", anchors)
-            // if (this.model) {
-            //   this.model.scale.set(120, 120, 120);
-            // }
+            // console.log("addAnchor", anchors)
         })
 
         // VKSession EVENT updateAnchors
         session.on('updateAnchors', anchors => {
+          // console.log("updateAnchors")
             for (let i = 0; i < anchors.length; i++ ) {
               const anchor = anchors[i];
               // console.log('transform', anchor.transform);
               // console.log('points3d', anchor.points3d);
               this.shoeTransform = anchor.transform;
               this.points3d = anchor.points3d;
+
+              if (!this.modelShow) {
+                const modelScale = 240;
+                this.modelTrs.scale.x = modelScale;
+                this.modelTrs.scale.y = modelScale;
+                this.modelTrs.scale.z = modelScale;
+
+                if (this.hintBoxList && this.hintBoxList.length > 0) {
+                  // 存在提示列表，则更新点信息
+                  for (let i = 0; i < this.hintBoxList.length; i++) {
+                    const hintBox = this.hintBoxList[i];
+                    hintBox.visible = true;
+                  }
+                }
+                this.modelShow = true;
+              }
             }
 
         })
@@ -105,36 +112,23 @@ Component({
         // VKSession removeAnchors
         // 识别目标丢失时，会不断触发
         session.on('removeAnchors', anchors => {
-          // if (this.model) {
-          //   this.model.scale.set(0, 0, 0);
-          // }
+          // console.log("removeAnchors")
+          if (this.modelShow) {
+            const modelScale = 0;
+            this.modelTrs.scale.x = modelScale;
+            this.modelTrs.scale.y = modelScale;
+            this.modelTrs.scale.z = modelScale;
+
+            if (this.hintBoxList && this.hintBoxList.length > 0) {
+              // 存在提示列表，则更新点信息
+              for (let i = 0; i < this.hintBoxList.length; i++) {
+                const hintBox = this.hintBoxList[i];
+                hintBox.visible = false;
+              }
+            }
+            this.modelShow = false;
+          }
         })
-
-        // Three 场景相关
-        const THREE = this.THREE;
-        
-        // 控制容器节点
-        this.modelWrap = new THREE.Object3D();
-        this.scene.add( this.modelWrap );
-
-        // 初始化提示点
-        this.addShoeHintBox();
-
-        // 加载模型
-        // const loader = this.loader = new THREE.GLTFLoader()
-        // loader.load( 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/shoe-1.glb', ( gltf ) =>{
-        //   console.log('gltf loaded', gltf.scene);
-
-        //   // 设置模型索引以及缩放比
-        //   this.model = gltf.scene;
-        //   this.model.position.set(0, 0, 0);
-        //   this.model.scale.set(120, 120, 120);
-
-        //   console.log('gltf set', this.model, this.modelWrap);
-
-        //   // 模型加载到场上
-        //   this.modelWrap.add(this.model);
-        // });
 
         console.log('ready to initloop')
         // start 初始化完毕后，进行更新渲染循环
@@ -142,154 +136,142 @@ Component({
       });
 
       } catch(e) {
-        
       }
-
     },
-    addShoeHintBox() {
-      const THREE = this.THREE;
-
-      const wrap = this.modelWrap;
+    // 针对 xr-frame 的初始化逻辑
+    async initXRFrame() {
+      const xrFrameSystem = wx.getXrFrameSystem();
+      const scene = this.xrScene;
+      const {rootShadow} = scene;
       
-      const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-      const boxScale = 0.3;
+      // 初始化YUV相机配置
+      this.initXRYUVCamera();
 
+      // 初始化挂载点
+      this.modelWrap = scene.createElement(xrFrameSystem.XRNode);
+      this.modelWrapTrs = this.modelWrap.getComponent(xrFrameSystem.Transform);
+      rootShadow.addChild(this.modelWrap );
+
+      console.log('modelWrap ready');
+
+      // 加载鞋子模型
+      const shoeModel = await scene.assets.loadAsset({
+        type: 'gltf',
+        assetId: `gltf-shoe`,
+        src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/shoe-1.glb',
+      })
+      console.log('shoeModel', shoeModel.value);
+      const el = scene.createElement(xrFrameSystem.XRGLTF, {
+        model: "gltf-shoe",
+        position: "0 0 0",
+        scale: "0 0 0",
+      });
+      this.model = el;
+      this.modelTrs = el.getComponent(xrFrameSystem.Transform);
+      this.modelShow = false;
+
+      console.log('this.modelTrs', this.modelTrs);
+
+      this.modelWrap.addChild(el);
+
+      console.log('shoeModel ready');
+
+
+      // 初始化提示点
+      const wrap = this.modelWrap;
+      const geometryCube = scene.assets.getAsset('geometry', 'cube');
+      const effectCube = scene.assets.getAsset('effect', 'standard');
+      const boxScale = 0.2;
       const hintBoxList = [];
       for (let i = 0; i < 8; i++) {
-        const colorHex = (i * 2).toString(16);
-        const material = new THREE.MeshPhysicalMaterial( {
-          metalness: 0.0,
-          roughness: 0.5,
-          color: parseInt(`${colorHex}${colorHex}${colorHex}${colorHex}${colorHex}${colorHex}`, 16),
+        const colorFloat =  i / 16;
+        const el = scene.createElement(xrFrameSystem.XRNode, {
+          position: "0 0 0",
+          scale: `${boxScale} ${boxScale} ${boxScale}`,
         });
-        const mesh = new THREE.Mesh( geometry, material );
-        mesh.position.set(0, 0, 0);
-        mesh.scale.set(boxScale, boxScale, boxScale);
-        wrap.add( mesh );
-        hintBoxList.push(mesh);
+        const elTrs = el.getComponent(xrFrameSystem.Transform);
+        const mat = scene.createMaterial(effectCube);
+        mat.setVector('u_baseColorFactor', xrFrameSystem.Vector4.createFromNumber(colorFloat + 0.3, 0.2, 0.2, 1.0));
+        mat.renderQueue = 9990;
+        mat.setRenderState('depthTestOn', false);
+
+        const mesh = el.addComponent(xrFrameSystem.Mesh, {
+          geometry: geometryCube,
+          material: mat,
+        });
+
+        wrap.addChild( el );
+        hintBoxList.push( elTrs );
       }
 
       this.hintBoxList = hintBoxList;
+
+      console.log('hintBoxList ready');
+
     },
     loop() {
       // console.log('loop')
 
       // 获取 VKFrame
-      const frame = this.session.getVKFrame(this.canvas.width, this.canvas.height)
+      const frame = this.session.getVKFrame(this.data.domWidth, this.data.domHeight)
 
       // 成功获取 VKFrame 才进行
       if(!frame) { return; }
 
       // 更新相机 YUV 数据
-      this.renderYUV(frame)
+      this.updataXRYUV(frame);
 
       // 获取 VKCamera
       const VKCamera = frame.camera
 
-      // 同步 VKCamera 矩阵信息到 Three Camera
-      if (VKCamera) {
-        // VK接管相机矩阵
-        this.camera.matrixAutoUpdate = false
-
-        // VK ViewMatrix 返回列主序
-        this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix)
-        this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse)
-
-        const projectionMatrix = VKCamera.getProjectionMatrix(NEAR, FAR)
-
-        // projectionMatrix[0] = projectionMatrix[0] / 2;
-        // projectionMatrix[5] = projectionMatrix[5] / 2;
-        
-        // VK 返回列主序
-        // 设置 投影矩阵
-        this.camera.projectionMatrix.fromArray(projectionMatrix)
-        this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
-      }
-
+      // 更新 xrFrame 相机矩阵
+      this.updataXRCameraMatrix(VKCamera, NEAR, FAR);
 
       // 存在model，更新矩阵
       if (this.modelWrap && this.points3d && this.shoeTransform) {
-        // console.log('toUpdate')
-        const THREE = this.THREE;
+        const xrFrameSystem = wx.getXrFrameSystem();
+        const scene = this.xrScene;
 
-        // 顶点偏移矩阵
-        const positionMat = new THREE.Matrix4();
-        // 认为点 0 0 0
-        positionMat.setPosition(0, 0, 0);
+        if (!this.DT) { this.DT = new xrFrameSystem.Matrix4(); }
+        if (!this.DT2) { this.DT2= new xrFrameSystem.Matrix4(); }
 
-        // Anchor返回矩阵，实际上就是完整的 modelView matrix
-        const anchorMatrix = new THREE.Matrix4();
-        // 目前返回的是行主序矩阵
-        anchorMatrix.set(
-          this.shoeTransform[0], this.shoeTransform[1], this.shoeTransform[2], this.shoeTransform[3],
-          this.shoeTransform[4], this.shoeTransform[5], this.shoeTransform[6], this.shoeTransform[7],
-          this.shoeTransform[8], this.shoeTransform[9], this.shoeTransform[10], this.shoeTransform[11],
-          this.shoeTransform[12], this.shoeTransform[13], this.shoeTransform[14], this.shoeTransform[15],
-        );
-        // 两者叠加
-        // const modelWorld = positionMat.multiply(anchorMatrix);
-        
-        const modelWorld = anchorMatrix;
+        // 目前VK返回的是行主序矩阵
+        // xrframe 矩阵存储为列主序
+        this.DT.setArray(this.shoeTransform);
+        this.DT.transpose(this.DT2);
+        this.modelWrapTrs.setLocalMatrix(this.DT2);
 
-        const pos = new THREE.Vector3();
-        const quaternion = new THREE.Quaternion();
-        const scale = new THREE.Vector3();
-
-        // 解析出 实际的 信息
-        modelWorld.decompose(pos, quaternion, scale );          
-        console.log(pos, quaternion, scale);
-
-        // 设置到容器节点上
-        this.modelWrap.position.set(pos.x, pos.y, pos.z);
-        this.modelWrap.quaternion.set(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
-        this.modelWrap.scale.set(scale.x, scale.y, scale.z);
-
-        if (this.model) {
-          // 先把模型放置在脚踝
-          // this.model.position.set(this.points3d[0].x, this.points3d[0].y, this.points3d[0].z);
-        }
+        // 放置鞋子
+        this.modelTrs.position.x = (this.points3d[3].x + this.points3d[4].x ) / 2;
+        this.modelTrs.position.y = (this.points3d[3].y + this.points3d[4].y ) / 2;
+        this.modelTrs.position.y -= 0.2; // 额外下移0.2，适配鞋底
+        this.modelTrs.position.z = (this.points3d[0].z + this.points3d[1].z ) / 2;
 
         if (this.hintBoxList && this.hintBoxList.length > 0) {
           // console.log('ready to set', this.hintBoxList);
           // 存在提示列表，则更新点信息
           for (let i = 0; i < this.hintBoxList.length; i++) {
             const hintBox = this.hintBoxList[i];
-            hintBox.position.set(this.points3d[i].x, this.points3d[i].y, this.points3d[i].z);
+            hintBox.position.x = this.points3d[i].x;
+            hintBox.position.y = this.points3d[i].y;
+            hintBox.position.z = this.points3d[i].z;
           }
-          // console.log('seted', this.hintBoxList);
         }
-
 
         // debug 用信息
         if (!loggerOnce) {
-          // console.log('positionMat', positionMat);
-          // console.log('anchorMat', anchorMat);
-          // console.log('modelWorld', modelWorld);
-
-          // console.log('projectionMatrix', this.camera.projectionMatrix);
-
-          // console.log('this.modelWrap.position', this.modelWrap.position);
-          // console.log('this.modelWrap.quaternion', this.modelWrap.quaternion);
-          // console.log('this.modelWrap.scale', this.modelWrap.scale);
+          // console.log('xrCamera._viewMatrix', this.xrCamera._viewMatrix.toArray());
+          // console.log('xrCamera._projMatrix', this.xrCamera._projMatrix.toArray());
           
-          // console.log('domSize', this.data.domWidth, this.data.domHeight)
           // VK 直接数值
-          console.log('joints',  Array.from(this.points3d))
-          console.log('viewMatrix',  Array.from(VKCamera.viewMatrix))
-          console.log('projectionMatrix',  Array.from(VKCamera.getProjectionMatrix(NEAR, FAR)))
-          console.log('anchorTransform',  Array.from(this.shoeTransform));
-          
+          // console.log('joints',  Array.from(this.points3d))
+          // console.log('viewMatrix',  Array.from(VKCamera.viewMatrix))
+          // console.log('projectionMatrix',  Array.from(VKCamera.getProjectionMatrix(NEAR, FAR)))
+          // console.log('anchorTransform',  Array.from(this.shoeTransform));
           loggerOnce = true;
         }
+
       }
-
-      // 渲染 Three 场景
-      this.renderer.autoClearColor = false
-      this.renderer.state.setCullFace(this.THREE.CullFaceBack)
-      this.renderer.render(this.scene, this.camera);
-      // 为什么去掉这句话会画不出来，我感觉大概率是YUV的面朝向错了
-      this.renderer.state.setCullFace(this.THREE.CullFaceNone)
-
     },
   },
 })

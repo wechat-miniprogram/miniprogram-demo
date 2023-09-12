@@ -1,20 +1,21 @@
-import { createScopedThreejs } from 'threejs-miniprogram'
-import { registerGLTFLoader } from '../loaders/gltf-loader'
-
-
 module.exports = Behavior({
     // 全局变量
+    session: undefined, // 全局的VKsession对象
     canvas: undefined,  // canvas
+    // XRFrame相关变量
+    xrScene: undefined, // xr-frame 的场景
+    xrCamera: undefined, // xr-frame 的相机
+    xrFrameReady: undefined, // xr-frame初始化完毕
+    // ThreeJs 相关变量
     gl: undefined,      // 全局gl对象
     THREE: undefined,   // THREE 对象
-    session: undefined, // 全局的VKsession对象
     camera: undefined,  // Three相机，主要相机
     // 全局 data
     data: {
         domWidth: 0,
         domHeight: 0,
-        width: 1,       // canvas大小
-        height: 1,      // canvas大小
+        width: 0,       // canvas大小
+        height: 0,      // canvas大小
         widthScale: 1,      // canvas宽度缩放值
         heightScale: 0.8,   // canvas高度缩放值
         cameraPosition: 0,  // 相机朝向
@@ -23,10 +24,12 @@ module.exports = Behavior({
         onReady() {
             // 获取canvas
             wx.createSelectorQuery()
-                .select('#webgl')
+                .select('#canvas')
                 .node()
                 .exec(res => {
                     this.canvas = res[0].node
+
+                    // 运算画布大小
                     this.calcCanvasSize()
 
                     // 页面自定义初始化
@@ -38,16 +41,20 @@ module.exports = Behavior({
             const pixelRatio = info.pixelRatio;
             const width = info.windowWidth * this.data.widthScale * pixelRatio;
             const height = info.windowHeight * this.data.heightScale * pixelRatio;
-            this.canvas.width = width;
-            this.canvas.height = height;
+            // 存在 webgl Canvas的情况下，写入大小
+            if (this.canvas) {
+                this.canvas.width = width;
+                this.canvas.height = height;
+            }
             console.log(`canvas size: width = ${width} , height = ${height}`)
             this.setData({
-                width,
-                height,
+                width: width,
+                height: height,
                 domWidth: info.windowWidth * this.data.widthScale,
                 domHeight: info.windowHeight * this.data.heightScale,
             });
         },
+        // 前后摄像头
         switchCamera(event){
             if(this.session.config){
                 const config = this.session.config
@@ -59,52 +66,16 @@ module.exports = Behavior({
                 })
             }
         },
-        initTHREE() {
-            const THREE = this.THREE = createScopedThreejs(this.canvas)
-            registerGLTFLoader(THREE)
-
-            // 相机
-            this.camera = new THREE.PerspectiveCamera(50, 0.7, 0.1, 1000);
-
-            // 场景
-            const scene = this.scene = new THREE.Scene()
-
-            // 光源
-            const light1 = new THREE.HemisphereLight(0xffffff, 0x444444) // 半球光
-            light1.position.set(0, 0.2, 0)
-            scene.add(light1)
-            const light2 = new THREE.DirectionalLight(0xffffff) // 平行光
-            light2.position.set(0, 0.2, 0.1)
-            scene.add(light2)
-
-            // 渲染层
-            const renderer = this.renderer = new THREE.WebGLRenderer({
-                antialias: true,
-                alpha: true
-            })
-            renderer.gammaOutput = true
-            renderer.gammaFactor = 2.2
-        },
+        // 限帧逻辑
         initLoop() {
-            // 限制调用帧率
+            // 限制调用帧率,暂时去掉
             let fps = 30
-            let fpsInterval = 1000 / fps
-            let last = Date.now()
 
             const session = this.session;
 
             // 逐帧渲染
             const onFrame = timestamp => {
-                let now = Date.now()
-                const mill = now - last
-                // 经过了足够的时间
-                if (mill > fpsInterval) {
-                    last = now - (mill % fpsInterval); //校正当前时间
-                    if (this.loop) {
-                        // 执行循环
-                        this.loop()
-                    }
-                }
+                this.loop()
                 session.requestAnimationFrame(onFrame)
             }
             session.requestAnimationFrame(onFrame)

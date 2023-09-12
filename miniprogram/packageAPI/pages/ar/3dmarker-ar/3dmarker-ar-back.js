@@ -8,12 +8,10 @@ let json = require("./proto/arModelProto.js");
 let root = protobuf.Root.fromJSON(json)
 let message = root.lookupType("ARModelData");
 
+
 // VK 投影矩阵参数定义
 const NEAR = 0.01
 const FAR = 1000
-
-// 针对 vk 生成模型的矫正
-const modelScale = 0.16;
 
 Component({
   behaviors: [arBehavior, xrFrameBehavior],
@@ -56,11 +54,20 @@ Component({
   methods: {
     // 对应案例的初始化逻辑，由统一的 behavior 触发
     init() {
-      this.markerIndex = 0;
+      // 初始化 Three.js，用于模型相关的渲染
+      this.initTHREE()
+
+      // 初始化 GL，基于 Three.js 的 Context，用于相机YUV渲染
+      this.initYUV()
 
       // 初始化VK
       // start完毕后，进行更新渲染循环
       this.initVK();
+
+      this.markerIndex = 0;
+
+      // 添加 识别坐标系
+      this.add3DAxis();
     },
     initVK() {
       // VKSession 配置
@@ -88,12 +95,12 @@ Component({
         // VKSession EVENT addAnchors
         session.on('addAnchors', anchors => {
           console.log("addAnchor", anchors);
-          // this.xAxis.visible = true;
-          // this.yAxis.visible = true;
-          // this.zAxis.visible = true;
-          // if (this.model) {
-          //   this.model.visible = true;
-          // }
+          this.xAxis.visible = true;
+          this.yAxis.visible = true;
+          this.zAxis.visible = true;
+          if (this.model) {
+            this.model.visible = true;
+          }
         })
 
         // VKSession EVENT updateAnchors
@@ -106,34 +113,24 @@ Component({
             markerId: markerId,
             size: size
           }
-
-          if (!this.modelShow) {
-            this.modelTrs.scale.x = modelScale;
-            this.modelTrs.scale.y = modelScale;
-            this.modelTrs.scale.z = modelScale;
-
-            this.xAxis.visible = true;
-            this.yAxis.visible = true;
-            this.zAxis.visible = true;
-
-            this.modelShow = true;
-          }
         })
         
         // VKSession removeAnchors
         // 识别目标丢失时，会触发一次
         session.on('removeAnchors', anchors => {
-          
-          if (this.modelShow) {
-            this.modelTrs.scale.x = 0;
-            this.modelTrs.scale.y = 0;
-            this.modelTrs.scale.z = 0;
-
-            this.xAxis.visible = false;
-            this.yAxis.visible = false;
-            this.zAxis.visible = false;
-
-            this.modelShow = false;
+          this.xAxis.visible = false;
+          this.yAxis.visible = false;
+          this.zAxis.visible = false;
+          if (this.model) {
+            this.model.visible = false;
+          }
+          if (this.data.hintBoxList && this.data.hintBoxList.length > 0) {
+            // 清理信息
+            this.hintInfo = undefined;
+            // 存在列表的情况，去除remove
+            this.setData({
+              hintBoxList: []
+            });
           }
         });
 
@@ -144,80 +141,123 @@ Component({
       });
 
     },
-    // 针对 xr-frame 的初始化逻辑
-    async initXRFrame() {
-      const xrFrameSystem = wx.getXrFrameSystem();
-      const scene = this.xrScene;
-      const {rootShadow} = scene;
-      
-      // 初始化YUV相机配置
-      this.initXRYUVCamera();
-
-      // 添加marker 提示用的 三个轴
-      const geometryCube = scene.assets.getAsset('geometry', 'cube');
-      const effectCube = scene.assets.getAsset('effect', 'standard');
-      const axisScale = 1.0;
-      const lineScale = 0.05;
-
-      const elX = scene.createElement(xrFrameSystem.XRNode, {
-        position: `${axisScale / 2} 0 0`,
-        scale: `${axisScale} ${lineScale} ${lineScale}`,
-      });
-      const elXTrs = elX.getComponent(xrFrameSystem.Transform);
-      const matX = scene.createMaterial(effectCube);
-      matX.setVector('u_baseColorFactor', xrFrameSystem.Vector4.createFromNumber(1, 0.2, 0.2, 1.0));
-      const meshX = elX.addComponent(xrFrameSystem.Mesh, {
-        geometry: geometryCube,
-        material: matX,
-      });
-      this.xAxis = elXTrs;
-      rootShadow.addChild(elX);
-
-      const elY = scene.createElement(xrFrameSystem.XRNode, {
-        position: `0 ${axisScale / 2} 0`,
-        scale: `${lineScale} ${axisScale} ${lineScale}`,
-      });
-      const elYTrs = elY.getComponent(xrFrameSystem.Transform);
-      const matY = scene.createMaterial(effectCube);
-      matY.setVector('u_baseColorFactor', xrFrameSystem.Vector4.createFromNumber(0.2, 1, 0.2, 1.0));
-      const meshY = elY.addComponent(xrFrameSystem.Mesh, {
-        geometry: geometryCube,
-        material: matY,
-      });
-      this.yAxis = elYTrs;
-      rootShadow.addChild(elY);
-
-      const elZ = scene.createElement(xrFrameSystem.XRNode, {
-        position: `0 0 ${axisScale / 2}`,
-        scale: `${lineScale} ${lineScale} ${axisScale}`,
-      });
-      const elZTrs = elZ.getComponent(xrFrameSystem.Transform);
-      const matZ = scene.createMaterial(effectCube);
-      matZ.setVector('u_baseColorFactor', xrFrameSystem.Vector4.createFromNumber(0.2, 0.2, 1, 1.0));
-      const meshZ = elZ.addComponent(xrFrameSystem.Mesh, {
-        geometry: geometryCube,
-        material: matZ,
-      });
-      this.zAxis = elZTrs;
-      rootShadow.addChild(elZ);
-      console.log('add3DAxis is finish')
-
-    },
     loop() {
+      // console.log('loop')
+
       // 获取 VKFrame
-      const frame = this.session.getVKFrame(this.data.domWidth, this.data.domHeight)
+      const frame = this.session.getVKFrame(this.canvas.width, this.canvas.height)
 
       // 成功获取 VKFrame 才进行
       if(!frame) { return; }
 
       // 更新相机 YUV 数据
-      this.updataXRYUV(frame);
+      this.renderYUV(frame)
 
       // 获取 VKCamera
       const VKCamera = frame.camera
 
-      // 更新 xrFrame 相机矩阵
-      this.updataXRCameraMatrix(VKCamera, NEAR, FAR);
+      // 相机
+      if (VKCamera) {
+        // 接管 ThreeJs 相机矩阵更新，Marker模式下，主要由视图和投影矩阵改变渲染效果
+        this.camera.matrixAutoUpdate = false
+
+        // 视图矩阵
+        this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix);
+        this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse);
+
+        // 投影矩阵
+        const projectionMatrix = VKCamera.getProjectionMatrix(NEAR, FAR)
+        this.camera.projectionMatrix.fromArray(projectionMatrix)
+        this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
+      }
+
+      // 绘制而为提示框的逻辑
+      if (this.hintInfo) {
+        // 存在提示信息，则更新
+        const THREE = this.THREE;
+
+        // 原点偏移矩阵，VK情况下，marker 点对应就是 0 0 0，世界矩阵可以认为是一个单位矩阵
+        // marker 右侧点可以理解是 0.5 0 0
+        const center = new THREE.Vector3();
+        const right = new THREE.Vector3(0.5, 0, 0);
+
+        // 获取设备空间坐标
+        const devicePos = center.clone().project(this.camera);
+
+        // 转换坐标系，从 (-1, 1) 转到 (0, 100)，同时移到左上角 0 0，右下角 1 1
+        const screenPos = new THREE.Vector3(0, 0, 0);
+        screenPos.x = devicePos.x * 50 + 50;
+        screenPos.y = 50 - devicePos.y * 50;
+
+        // 获取右侧点信息
+        const deviceRightPos = right.clone().project(this.camera);
+        const screenRightPos = new THREE.Vector3(0, 0, 0);
+        screenRightPos.x = deviceRightPos.x * 50 + 50;
+
+        const markerHalfWidth = screenRightPos.x - screenPos.x;
+        
+        this.setData({
+          hintBoxList: [
+            {
+              markerId: this.hintInfo.markerId,
+              left: screenPos.x - markerHalfWidth,
+              top: screenPos.y - markerHalfWidth,
+              width: markerHalfWidth * this.data.domWidth * 2 / 100,
+              height: markerHalfWidth * this.data.domWidth * 2 / 100,
+            }
+          ]
+        });
+      }
+
+      this.renderer.autoClearColor = false
+      this.renderer.state.setCullFace(this.THREE.CullFaceBack)
+      this.renderer.render(this.scene, this.camera)
+      this.renderer.state.setCullFace(this.THREE.CullFaceNone)
+    },
+    add3DAxis() {
+      // 添加marker需要的 三维包围框
+      const THREE = this.THREE;
+      const scene = this.scene;
+
+      const red = new THREE.MeshPhysicalMaterial( {
+        metalness: 0.0, roughness: 0.1, color: 0xff0000,
+      } );
+      const green = new THREE.MeshPhysicalMaterial( {
+        metalness: 0.0, roughness: 0.1, color: 0x00ff00,
+      } );
+      const blue = new THREE.MeshPhysicalMaterial( {
+        metalness: 0.0, roughness: 0.1, color: 0x0000ff,
+      } );
+      const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+
+      const axisScale = 2.0;
+      const lineScale = 0.05;
+
+      const xAxis = new THREE.Mesh( geometry, red );
+      xAxis.position.set(axisScale / 2, 0, 0 );
+      xAxis.rotation.set(0, 0, 0 )
+      xAxis.scale.set(axisScale, lineScale, lineScale);
+      scene.add( xAxis );
+      xAxis.visible = false;
+      this.xAxis = xAxis;
+
+      const yAxis = new THREE.Mesh( geometry, green );
+      yAxis.position.set(0.0, axisScale / 2, 0 );
+      yAxis.rotation.set(0, 0, 0 )
+      yAxis.scale.set(lineScale, axisScale, lineScale);
+      scene.add( yAxis );
+      yAxis.visible = false;
+      this.yAxis = yAxis;
+
+      const zAxis = new THREE.Mesh( geometry, blue );
+      zAxis.position.set(0, 0, axisScale / 2 );
+      zAxis.rotation.set(0, 0, 0 )
+      zAxis.scale.set(lineScale, lineScale, axisScale);
+      scene.add( zAxis );
+      zAxis.visible = false;
+      this.zAxis = zAxis;
+
+      console.log('add3DAxis is finish')
     },
     async parseAddMarker() {
       // 目前未选中cosid 跳过
@@ -249,7 +289,7 @@ Component({
           fs.readFile({
             filePath: res.filePath,
             position: 0,
-            success: async (res) => {
+            success: (res) => {
               console.log("读文件回调，结果返回为", res)
               wx.hideLoading();
 
@@ -303,53 +343,29 @@ Component({
 
                 // @optional
                 // 后续为添加渲染产物模型的逻辑 
-                // xrFrame 加载模型相关
-
-
-                // 加载生成模型
-                const xrFrameSystem = wx.getXrFrameSystem();
-                const scene = this.xrScene;
-
-                const resultModel = await scene.assets.loadAsset({
-                  type: 'gltf',
-                  assetId: `gltf-result`,
-                  src: `${wx.env.USER_DATA_PATH}/result.glb`,
-                })
-                console.log('resultModel', resultModel.value);
-                const el = scene.createElement(xrFrameSystem.XRGLTF, {
-                  model: "gltf-result",
-                  position: `0 -${modelScale} -${modelScale}`,
-                  rotation: '90 0 0',
-                  scale: `${modelScale} ${modelScale} ${modelScale}`,
-                });
-                this.model = el;
-                this.modelTrs = el.getComponent(xrFrameSystem.Transform);
-                this.modelShow = false;
-                this.xrScene.rootShadow.addChild(el);
-
                 // Three 场景相关
-                // const THREE = this.THREE;
-                // // 控制容器节点
-                // this.modelWrap = new THREE.Object3D();
-                // this.scene.add( this.modelWrap );
+                const THREE = this.THREE;
+                // 控制容器节点
+                this.modelWrap = new THREE.Object3D();
+                this.scene.add( this.modelWrap );
 
-                // // 加载模模型
-                // const loader = this.loader = new THREE.GLTFLoader()
-                // loader.parse( glbContent, './', ( gltf ) =>{
-                //   console.log('gltf loaded', gltf.scene);
+                // 加载模模型
+                const loader = this.loader = new THREE.GLTFLoader()
+                loader.parse( glbContent, './', ( gltf ) =>{
+                  console.log('gltf loaded', gltf.scene);
 
-                //   // 设置模型索引以及缩放比
-                //   this.model = gltf.scene;
-                //   this.model.position.set(0, 0, 0);
-                //   // 默认缩放设置到0.1
-                //   this.model.scale.set(0.1, 0.1, 0.1);
-                //   this.model.visible = false;
+                  // 设置模型索引以及缩放比
+                  this.model = gltf.scene;
+                  this.model.position.set(0, 0, 0);
+                  // 默认缩放设置到0.1
+                  this.model.scale.set(0.1, 0.1, 0.1);
+                  this.model.visible = false;
 
-                //   console.log('gltf set', this.model);
+                  console.log('gltf set', this.model);
 
-                //   // 模型加载到场上
-                //   this.modelWrap.add(this.model);
-                // });
+                  // 模型加载到场上
+                  this.modelWrap.add(this.model);
+                });
               }
 
             },
@@ -394,12 +410,12 @@ Component({
         usingMarkerId: null
       })
       // 清理提示状态
-      // this.xAxis.visible = false;
-      // this.yAxis.visible = false;
-      // this.zAxis.visible = false;
-      // if (this.model) {
-      //   this.model.visible = false;
-      // }
+      this.xAxis.visible = false;
+      this.yAxis.visible = false;
+      this.zAxis.visible = false;
+      if (this.model) {
+        this.model.visible = false;
+      }
     },
     getAllMarker() {
       console.log(this.session.getAllMarker())

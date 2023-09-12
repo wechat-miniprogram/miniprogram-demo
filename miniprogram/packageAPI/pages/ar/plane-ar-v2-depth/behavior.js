@@ -355,8 +355,7 @@ export default function getBehavior() {
           //0.05 -0.47 -0.14
           this.hitPosition = this.reticle.position.clone()
           console.log(this.hitPosition)
-
-
+          
           const model = this.getRobot()
           model.position.copy(this.hitPosition)
           model.rotation.copy(this.reticle.rotation)

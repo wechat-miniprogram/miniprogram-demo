@@ -4,7 +4,7 @@
   background-color: #000;
 }
 
-.canvas-wrap canvas {
+.canvas-wrap #canvas {
   position: absolute;
   left: 0;
   top: 0;

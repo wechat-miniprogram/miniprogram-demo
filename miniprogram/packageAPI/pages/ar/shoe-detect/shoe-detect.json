@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "xr-frame-canvas": "../components/xr-frame/index"
+  },
   "disableScroll": true,
   "navigationBarTitleText": "实时鞋部检测"
 }
