@@ -12,8 +12,7 @@ Component({
     // @ cosid
     // @ uploadTime 上传时间
     // @ errMsg 错误信息
-    models: [
-    ],
+    models: [],
   },
   modelRespMap: {},
   lifetimes: {

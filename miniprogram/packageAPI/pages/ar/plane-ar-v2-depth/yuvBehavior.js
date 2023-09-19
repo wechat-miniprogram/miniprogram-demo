@@ -245,17 +245,19 @@ const yuvBehavior = Behavior({
       const width = depthBufferRes.width;
       const height = depthBufferRes.height;
 
-      const ext = gl.getExtension("OES_texture_float");
-      if (ext) {
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.FLOAT, depthBuffer);
-      } else {
-        const data = new Uint8Array(width * height * 4);
-        for (let i = 0; i < depthBuffer.length; i++) {
-          let num = parseInt(depthBuffer[i] * 255);
-          data[i] = num;
-        }
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
+      // const ext = gl.getExtension("OES_texture_float");
+      // if (ext) {
+      //   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.FLOAT, depthBuffer);
+      // } else {
+      // }
+
+      // 先直接采用 uint8 写入深度纹理，使用浮点写入的方法会存在锯齿
+      const data = new Uint8Array(width * height * 4);
+      for (let i = 0; i < depthBuffer.length; i++) {
+        let num = parseInt(depthBuffer[i] * 255);
+        data[i] = num;
       }
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
 
       const currentProgram = gl.getParameter(gl.CURRENT_PROGRAM)
       const currentActiveTexture = gl.getParameter(gl.ACTIVE_TEXTURE)

@@ -90,6 +90,7 @@ button.btn-left .cross-h {
   height: 100%;
   border-radius: 20rpx;
   box-sizing: border-box;
+  background-color: #a0a0a0;
 }
 
 .model-info.loading {
@@ -121,6 +122,18 @@ button.btn-left .cross-h {
   background-color: #fff;
 }
 
+.model-info .cosid {
+  position: absolute;
+  left: 20rpx;
+  right: 20rpx;
+  bottom: 110rpx;
+  height: 40rpx;
+  line-height: 20rpx;
+  font-size: 16rpx;
+  text-align: center;
+  color: #fff;
+  word-break: break-all;
+}
 
 .model-info .timeStamp {
   position: absolute;

@@ -88,12 +88,6 @@ Component({
         // VKSession EVENT addAnchors
         session.on('addAnchors', anchors => {
           console.log("addAnchor", anchors);
-          // this.xAxis.visible = true;
-          // this.yAxis.visible = true;
-          // this.zAxis.visible = true;
-          // if (this.model) {
-          //   this.model.visible = true;
-          // }
         })
 
         // VKSession EVENT updateAnchors
@@ -230,6 +224,10 @@ Component({
         console.log("已添加 marker，请删除后重试");
         return;
       }
+      if (!!this.parseAddMarkerLoading) {
+        console.log("加载中，请稍后重试");
+        return;
+      }
 
       const resp = this.selectResp;
       console.log("开始添加 marker");
@@ -238,7 +236,9 @@ Component({
       var filePath = wx.env.USER_DATA_PATH + '/temp'
       console.log('请求地址');
       console.log(resp.result.respBody.url)
-      
+
+      // 简单的加载锁
+      this.parseAddMarkerLoading = true;
       // 开始下载文件
       wx.downloadFile({
         filePath: filePath,
@@ -305,7 +305,6 @@ Component({
                 // 后续为添加渲染产物模型的逻辑 
                 // xrFrame 加载模型相关
 
-
                 // 加载生成模型
                 const xrFrameSystem = wx.getXrFrameSystem();
                 const scene = this.xrScene;
@@ -320,7 +319,7 @@ Component({
                   model: "gltf-result",
                   position: `0 -${modelScale} -${modelScale}`,
                   rotation: '90 0 0',
-                  scale: `${modelScale} ${modelScale} ${modelScale}`,
+                  scale: `0 0 0`, // 默认先不显示
                 });
                 this.model = el;
                 this.modelTrs = el.getComponent(xrFrameSystem.Transform);
@@ -352,6 +351,7 @@ Component({
                 // });
               }
 
+              this.parseAddMarkerLoading = false;
             },
             fail(res) {
               wx.hideLoading();
@@ -360,6 +360,8 @@ Component({
                 icon: 'none',
                 duration: 2000
               })
+
+              this.parseAddMarkerLoading = false;
             }
           })
         },
@@ -371,6 +373,7 @@ Component({
             duration: 2000
           })
           console.error(res)
+          this.parseAddMarkerLoading = false;
         }
       })
 
