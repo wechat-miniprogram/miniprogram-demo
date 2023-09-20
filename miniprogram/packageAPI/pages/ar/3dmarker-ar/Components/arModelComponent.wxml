@@ -20,9 +20,12 @@
       >
         <text class="status">{{modelItem.statusMsg}}</text>
         <text class="timeStamp">{{modelItem.uploadTime}}</text>
-        <view class="cosid">{{modelItem.cosid != undefined ? modelItem.cosid : '不存在cosid'}}</view>
+        <text class="cosid">{{modelItem.cosid !== undefined ? modelItem.cosid : '不存在cosid'}}</text>
         <text wx:if="{{modelItem.restTime !== 0}}" class="restTime">剩余 {{modelItem.restTime}} 天过期</text>
         <text class="errMsg" wx:if="{{modelItem.errMsg !== undefined}}">{{modelItem.errMsg}}</text>
+        <view class="buttonDelete" bindtap="deleteARModel" data-cosid="{{modelItem.cosid}}">
+          <view class="linel"></view><view class="liner"></view>
+        </view>
       </view>
     </view>
 

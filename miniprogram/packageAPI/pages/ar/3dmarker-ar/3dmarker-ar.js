@@ -8,6 +8,8 @@ let json = require("./proto/arModelProto.js");
 let root = protobuf.Root.fromJSON(json)
 let message = root.lookupType("ARModelData");
 
+let gltfIndex = 0;
+
 // VK 投影矩阵参数定义
 const NEAR = 0.01
 const FAR = 1000
@@ -309,14 +311,17 @@ Component({
                 const xrFrameSystem = wx.getXrFrameSystem();
                 const scene = this.xrScene;
 
+                // gltf索引更新
+                gltfIndex++;
+
                 const resultModel = await scene.assets.loadAsset({
                   type: 'gltf',
-                  assetId: `gltf-result`,
+                  assetId: `gltf-result-${gltfIndex}`,
                   src: `${wx.env.USER_DATA_PATH}/result.glb`,
                 })
                 console.log('resultModel', resultModel.value);
                 const el = scene.createElement(xrFrameSystem.XRGLTF, {
-                  model: "gltf-result",
+                  model: `gltf-result-${gltfIndex}`,
                   position: `0 -${modelScale} -${modelScale}`,
                   rotation: '90 0 0',
                   scale: `0 0 0`, // 默认先不显示
@@ -396,13 +401,10 @@ Component({
       this.setData({
         usingMarkerId: null
       })
-      // 清理提示状态
-      // this.xAxis.visible = false;
-      // this.yAxis.visible = false;
-      // this.zAxis.visible = false;
-      // if (this.model) {
-      //   this.model.visible = false;
-      // }
+      // 释放xrframe资源
+      const scene = this.xrScene;
+      scene.assets.releaseAsset('gltf',`gltf-result-${gltfIndex}`);
+      scene.rootShadow.removeChild(this.model);
     },
     getAllMarker() {
       console.log(this.session.getAllMarker())

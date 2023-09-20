@@ -425,8 +425,51 @@ Component({
             }
           );
         }
-        
       }
+    },
+    // 删除模型本地缓存
+    deleteARModel(event) {
+      // 被选中cosid
+      const selectCosid = event.currentTarget.dataset.cosid;
+
+      wx.showModal({
+        content: `是否删除当前缓存模型（删除后不可恢复），模型id ${selectCosid}`,
+        confirmText: '确定删除',
+        cancelText: '取消',
+        success: (res) => {
+          if (res.confirm) {
+            console.log('确定删除');
+            // 获取本地缓存
+            var modelInfos = wx.getStorageSync('modelsInfo')
+            if (modelInfos == undefined || modelInfos.length == 0 ) {
+              // 无缓存，跳过
+              return;
+            }
+
+            // 新列表，过滤掉删除的cosid
+            const modelInfosNew  = modelInfos.filter(
+              (modelInfo) => modelInfo.cosid !== selectCosid
+            );
+            
+            // 写入缓存
+            wx.setStorage({
+              key: "modelsInfo",
+              data: modelInfosNew,
+              success() {
+                console.log("存储cosID集合为:", modelInfosNew)
+                wx.hideLoading()
+              }
+            })
+            
+            // 更新显示列表
+            this.setData({
+              models: modelInfosNew,
+            });
+          } else if (res.cancel) {
+            console.log('取消')
+          }
+        }
+      })
 
     },
   }

@@ -126,12 +126,12 @@ button.btn-left .cross-h {
   position: absolute;
   left: 20rpx;
   right: 20rpx;
-  bottom: 110rpx;
+  bottom: 120rpx;
   height: 40rpx;
   line-height: 20rpx;
   font-size: 16rpx;
   text-align: center;
-  color: #fff;
+  color: #d0d0d0;
   word-break: break-all;
 }
 
@@ -139,7 +139,7 @@ button.btn-left .cross-h {
   position: absolute;
   left: 10rpx;
   right: 10rpx;
-  top: 20rpx;
+  top: 15rpx;
   color: #fff;
   font-size: 26rpx;
   text-align: center;
@@ -155,4 +155,37 @@ button.btn-left .cross-h {
   font-size: 22rpx;
   text-align: center;
   line-height: 38rpx;
+}
+
+.model-info .buttonDelete {
+  position: absolute;
+  right: -20rpx;
+  top: -16rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #FF6969;
+  border: 2rpx solid #fff;
+  border-radius: 12rpx;
+}
+
+.buttonDelete .linel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8%;
+  height: 70%;
+  background-color: #fff;
+  border-radius: 2rpx;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.buttonDelete .liner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8%;
+  height: 70%;
+  background-color: #fff;
+  border-radius: 2rpx;
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
