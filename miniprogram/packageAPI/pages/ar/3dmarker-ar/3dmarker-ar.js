@@ -25,6 +25,8 @@ Component({
     heightScale: 0.6,   // canvas高度缩放值
     hintBoxList: [],  // 显示提示盒子列表
     usingMarkerId: false, // 使用中的markerId
+    haveMap: false, // 存在map
+    haveGLTF: false, // 存在gltf
   },
   markerIndex: 0,  // 使用的 marker 索引
   hintInfo: undefined, // 提示框信息
@@ -274,24 +276,40 @@ Component({
                 }
                 throw e;
               }
-              // 解析完毕，进行 buffer 具体处理
-              // map文件
-              const byteOffset = data.meshModel.byteOffset
-              const byteLength = data.meshModel.byteLength
-              const mapContent = data.meshModel.buffer.slice(byteOffset, byteOffset + byteLength)
-              console.log("byteOffset:", byteOffset)
-              console.log("byteLength:", byteLength)
-              // 写入文件后的地址
-              const mapUrl = this.saveLocalFile(mapContent, 'model.map');
-              console.log("map文件的本地路径", mapUrl)
-              this.parsedMapUrl = mapUrl;
 
-              // 添加marker
-              const markerId = this.session.addMarker(mapUrl);
-              console.log('add Marker', markerId, mapUrl)
-              this.setData({
-                usingMarkerId: markerId
-              });
+              let mapSuccess = true;
+              let gltfSuccess = true;
+              
+              // map文件
+              if (data.meshModel &&  data.meshModel.byteLength !== 0) {
+                // map文件成功
+                this.setData({
+                  haveMap: true,
+                })
+
+                // 解析完毕，进行 buffer 具体处理
+                // map文件
+                const byteOffset = data.meshModel.byteOffset
+                const byteLength = data.meshModel.byteLength
+                const mapContent = data.meshModel.buffer.slice(byteOffset, byteOffset + byteLength)
+                console.log("byteOffset:", byteOffset)
+                console.log("byteLength:", byteLength)
+
+
+                // 写入文件后的地址
+                const mapUrl = this.saveLocalFile(mapContent, 'model.map');
+                console.log("map文件的本地路径", mapUrl)
+                this.parsedMapUrl = mapUrl;
+
+                // 添加marker
+                const markerId = this.session.addMarker(mapUrl);
+                console.log('add Marker', markerId, mapUrl)
+                this.setData({
+                  usingMarkerId: markerId
+                });
+              } else {
+                mapSuccess = false;
+              }
 
               // glb文件
               if (data.meshBlob && data.meshBlob.byteLength !== 0) {
@@ -354,6 +372,26 @@ Component({
                 //   // 模型加载到场上
                 //   this.modelWrap.add(this.model);
                 // });
+              } else {
+                gltfSuccess = false;
+              }
+              
+              // 更新产物状态
+              this.setData({
+                haveMap: mapSuccess,
+                haveGLTF: gltfSuccess
+              })
+
+              if (!mapSuccess || !gltfSuccess) {
+                // 文件生成失败提示
+                let mapWord = !mapSuccess ? 'map文件' : '';
+                let gltfWord = !gltfSuccess ? 'glTF文件' : '';
+
+                wx.showToast({
+                  title: `${mapWord} ${gltfWord} 生成失败`,
+                  icon: 'none',
+                  duration: 2000
+                })
               }
 
               this.parseAddMarkerLoading = false;
