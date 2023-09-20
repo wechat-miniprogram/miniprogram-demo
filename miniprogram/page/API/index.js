@@ -302,7 +302,7 @@ Page({
           url: '2dmarker-ar/2dmarker-ar'
         },
         {
-          zh: '3DMarkerAR',
+          zh: '3DMarkerAR - 三维识别与重建',
           url: '3dmarker-ar/3dmarker-ar'
         },
         {
