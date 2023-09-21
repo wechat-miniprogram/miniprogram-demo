@@ -130,7 +130,9 @@ void main()
             const scene = this.xrScene;
             const {assets, rootShadow} = scene;
 
-            const el = scene.createElement(xrFrameSystem.XRNode);
+            const el = scene.createElement(xrFrameSystem.XRNode, {
+                layer: 1
+            });
 
             this.registerYUVEffect();
 

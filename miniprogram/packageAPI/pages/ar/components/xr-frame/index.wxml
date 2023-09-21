@@ -1,9 +1,22 @@
 <xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets wx:if="{{pixelRatioReady}}">
+    <xr-asset-render-texture asset-id="rt" width="1024" height="2048" />
+  </xr-assets>
+
   <xr-node>
     <xr-node node-id="center" position="0 0 0"></xr-node>
+    <!-- rt相机 cull-mask="0b101" 只绘制 layer 为 0 (默认值) 以及 layer为 2 的元素，用于后处理逻辑，比如shoeMasks -->
+    <xr-camera wx:if="{{pixelRatioReady}}"
+      id="rtCamera" node-id="rtCamera" position="0 0 0" clear-color="0.0 0.0 0.0 0.0"
+      near="0.01" far="1000"
+      render-target="rt"
+      target="center" cull-mask="0b101"
+    ></xr-camera>
+    <!-- 主相机 cull-mask="0b11" 只绘制 layer 为 0 (默认值) 以及 layer为 1 的元素 -->
     <xr-camera
-      id="camera" node-id="camera" position="0 0 0" clear-color="0.5 0.5 0.5 1"
+      id="camera" node-id="camera" position="0 0 2" clear-color="0.5 0.5 0.5 1"
       target="center"
+      cull-mask="0b11"
     ></xr-camera>
   </xr-node>
   <xr-node node-id="lights">
