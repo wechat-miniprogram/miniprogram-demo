@@ -246,9 +246,18 @@ export default function getBehavior() {
               temp[item.id] = item
               return temp
             }, {})
+            const deletePlaneBoxs = [];
             this.planeBox.children.forEach(object => {
-              if (object._id && map[object._id]) this.planeBox.remove(object)
+              if (object._id && map[object._id]) {
+                // this.planeBox.remove(object)
+                // 塞入删除队列
+                deletePlaneBoxs.push(object);
+              }
             })
+            // 延后删除
+            for(let i = 0; i < deletePlaneBoxs.length; i++) {
+              this.planeBox.remove(deletePlaneBoxs[i])
+            }
           })
 
           // 平面集合
