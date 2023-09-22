@@ -207,21 +207,39 @@ export default function getBehavior() {
               temp[item.id] = item
               return temp
             }, {})
+            const deletePlaneBoxs = [];
+            const newPlaneBoxs = [];
             this.planeBox.children.forEach(object => {
               if (object._id && map[object._id]) {
                 const anchor = map[object._id]
                 const size = anchor.size
                 if (size && object._size && (size.width !== object._size.width || size.height !== object._size.height)) {
-                  this.planeBox.remove(object)
-                  object = createPlane(size)
-                  this.planeBox.add(object)
+                  // this.planeBox.remove(object)
+                  // object = createPlane(size)
+                  // this.planeBox.add(object)
+                  // 塞入删除队列
+                  deletePlaneBoxs.push(object);
+                  const newPlane = createPlane(size);
+                  newPlane._id = anchor.id
+                  newPlane._size = size
+                  updateMatrix(newPlane, anchor.transform)
+                  // 塞入添加队列
+                  newPlaneBoxs.push(newPlane);
+                } else {
+                  object._id = anchor.id
+                  object._size = size
+                  updateMatrix(object, anchor.transform)
                 }
-
-                object._id = anchor.id
-                object._size = size
-                updateMatrix(object, anchor.transform)
               }
             })
+            // 延后删除
+            for(let i = 0; i < deletePlaneBoxs.length; i++) {
+              this.planeBox.remove(deletePlaneBoxs[i])
+            }
+            // 延后添加
+            for(let i = 0; i < newPlaneBoxs.length; i++) {
+              this.planeBox.add(newPlaneBoxs[i]);
+            }
           })
           session.on('removeAnchors', anchors => {
             const map = anchors.reduce((temp, item) => {
