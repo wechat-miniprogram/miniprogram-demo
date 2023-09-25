@@ -1,5 +1,7 @@
 <view class="page" data-weui-theme="{{theme}}">
-  <view class="canvas-wrap" style="width: {{widthScale * 100}}%; height: {{heightScale * 100}}%">
+  <view
+    class="canvas-wrap" style="width: {{widthScale * 100}}%; height: {{heightScale * 100}}%"
+  >
     <xr-frame-canvas
       disable-scroll
       id="canvas"

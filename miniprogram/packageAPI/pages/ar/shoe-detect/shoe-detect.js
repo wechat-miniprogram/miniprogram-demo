@@ -28,7 +28,7 @@ Component({
     ready() {
       console.log("页面准备完全")
       this.setData({
-        theme: wx.getSystemInfoSync().theme || 'light'
+        theme: wx.getSystemInfoSync().theme || 'light',
       })
 
       if (wx.onThemeChange) {
@@ -111,86 +111,91 @@ Component({
       const {rootShadow} = scene;
 
       const xrFrameSystem = wx.getXrFrameSystem();
-      xrFrameSystem.registerEffect('ar-shoe-mask', scene => scene.createEffect({
-        properties: [
-          { key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1] },
-        ],
-        images: [
-            {
-                key: 'u_shoeMask',
-                default: 'black',
-                macro: 'WX_AR_SHOEMASk'
-            },
-            {
-              key: 'u_renderTexture',
-              default: 'black',
-              macro: 'WX_AR_RENDERTEXTURE'
-          },
-        ],
-            defaultRenderQueue: 2,
-            passes: [{
-            renderStates: {
-              blendOn: true,
-              depthWrite: false,
-              // Default FrontFace is CW
-              cullOn: true,
-              cullFace: xrFrameSystem.ECullMode.BACK,
-            },
-            lightMode: 'ForwardBase',
-            useMaterialRenderStates: true,
-            shaders: [0, 1]
-            }],
-            shaders: 
-        [
-          `#version 100
-          attribute vec3 a_position;
-          attribute vec2 a_texCoord;
-
-          precision highp float;
-
-          varying highp vec2 v_texCoord;
-
-          void main() {
-              v_texCoord = a_texCoord;
-              vec4 pos = vec4(a_position.xy, 1., 1.);
-              gl_Position =  pos;
-          }
-          `,
-          `#version 100
-          precision mediump float;
-          precision highp int;
-
-          uniform sampler2D u_shoeMask;
-          uniform sampler2D u_renderTexture;
-
-          varying highp vec2 v_texCoord;
-
-          void main()
-          {
-            vec2 uv = vec2(v_texCoord.x, v_texCoord.y);
-            vec2 uvFlip = vec2(v_texCoord.x, 1.0 - v_texCoord.y);
-
-            vec4 renderTexture = texture2D(u_renderTexture, uv);
-            vec4 shoeMask = texture2D(u_shoeMask, uvFlip);
-
-            if (shoeMask.r > 0.0) {
-              float alpha = renderTexture.w * (1.0 - shoeMask.r);
-              gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, alpha);
-            } else {
-              gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, renderTexture.w);
-            }
-
-          }
-          `
-        ]
-      }))
+      
 
       const el = scene.createElement(xrFrameSystem.XRNode, {
         layer: 1
       });
 
       const shoeMaskGeometry = scene.assets.getAsset('geometry', `ar-camera-plane`);
-      const shoeMaskEffect = scene.assets.getAsset('effect', 'ar-shoe-mask');
+      let shoeMaskEffect = scene.assets.getAsset('effect', 'ar-shoe-mask');
+
+      if (!shoeMaskEffect) {
+        xrFrameSystem.registerEffect('ar-shoe-mask', scene => scene.createEffect({
+          properties: [
+            { key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1] },
+          ],
+          images: [
+              {
+                  key: 'u_shoeMask',
+                  default: 'black',
+                  macro: 'WX_AR_SHOEMASk'
+              },
+              {
+                key: 'u_renderTexture',
+                default: 'black',
+                macro: 'WX_AR_RENDERTEXTURE'
+            },
+          ],
+              defaultRenderQueue: 2,
+              passes: [{
+              renderStates: {
+                blendOn: true,
+                depthWrite: false,
+                // Default FrontFace is CW
+                cullOn: true,
+                cullFace: xrFrameSystem.ECullMode.BACK,
+              },
+              lightMode: 'ForwardBase',
+              useMaterialRenderStates: true,
+              shaders: [0, 1]
+              }],
+              shaders: 
+          [
+            `#version 100
+            attribute vec3 a_position;
+            attribute vec2 a_texCoord;
+  
+            precision highp float;
+  
+            varying highp vec2 v_texCoord;
+  
+            void main() {
+                v_texCoord = a_texCoord;
+                vec4 pos = vec4(a_position.xy, 1., 1.);
+                gl_Position =  pos;
+            }
+            `,
+            `#version 100
+            precision mediump float;
+            precision highp int;
+  
+            uniform sampler2D u_shoeMask;
+            uniform sampler2D u_renderTexture;
+  
+            varying highp vec2 v_texCoord;
+  
+            void main()
+            {
+              vec2 uv = vec2(v_texCoord.x, v_texCoord.y);
+              vec2 uvFlip = vec2(v_texCoord.x, 1.0 - v_texCoord.y);
+  
+              vec4 renderTexture = texture2D(u_renderTexture, uv);
+              vec4 shoeMask = texture2D(u_shoeMask, uvFlip);
+  
+              if (shoeMask.r > 0.0) {
+                float alpha = renderTexture.w * (1.0 - shoeMask.r);
+                gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, alpha);
+              } else {
+                gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, renderTexture.w);
+              }
+  
+            }
+            `
+          ]
+        }))
+        shoeMaskEffect = scene.assets.getAsset('effect', 'ar-shoe-mask');
+      }
 
       const shoeMaskMat = scene.createMaterial(shoeMaskEffect);
 
@@ -361,6 +366,7 @@ Component({
       });
 
       } catch(e) {
+        console.error(e);
       }
     },
     // 针对 xr-frame 的初始化逻辑
@@ -457,7 +463,7 @@ Component({
       if(!frame) { return; }
 
       // 更新腿部分割纹理
-      this.updateShoeMask(frame);
+      // this.updateShoeMask(frame) 
 
       // console.log(getLegSegmentBuffer);
 
@@ -473,7 +479,7 @@ Component({
       
       // 存在model，更新矩阵
       // 左边鞋子流程
-      if (this.modelWrapLeft && this.points3dLeft && this.shoeTransformLeft) {
+      if (this.modelWrapLeft && this.modelTrsLeft && this.points3dLeft && this.shoeTransformLeft) {
         const xrFrameSystem = wx.getXrFrameSystem();
 
         if (!this.DT) { this.DT = new xrFrameSystem.Matrix4(); }
@@ -508,7 +514,7 @@ Component({
         }
       }
       // 右边鞋子流程
-      if (this.modelWrapRight && this.points3dRight && this.shoeTransformRight) {
+      if (this.modelWrapRight && this.modelTrsRight && this.points3dRight && this.shoeTransformRight) {
         const xrFrameSystem = wx.getXrFrameSystem();
 
         if (!this.DT) { this.DT = new xrFrameSystem.Matrix4(); }

@@ -134,10 +134,13 @@ void main()
                 layer: 1
             });
 
-            this.registerYUVEffect();
+            let yuvGeometry = assets.getAsset('geometry', `ar-camera-plane`);
+            let yuvEffect = assets.getAsset('effect', 'ar-yuv-self');
 
-            const yuvGeometry = assets.getAsset('geometry', `ar-camera-plane`);
-            const yuvEffect = assets.getAsset('effect', 'ar-yuv-self');
+            if (!yuvEffect) {
+                this.registerYUVEffect();
+                yuvEffect = assets.getAsset('effect', 'ar-yuv-self');
+            }
 
             const yuvMat = scene.createMaterial(yuvEffect);
             yuvMat.renderQueue = 1; // 第一个绘制

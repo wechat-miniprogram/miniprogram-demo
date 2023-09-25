@@ -69,15 +69,15 @@ module.exports = Behavior({
         // 限帧逻辑
         initLoop() {
             // 限制调用帧率,暂时去掉
-            let fps = 30
+            // let fps = 30
 
             const session = this.session;
 
             // 逐帧渲染
             const onFrame = timestamp => {
                 try {
-                    this.loop()
-                }catch(e) {
+                    this.loop();
+                } catch(e) {
                     console.error(e);
                 }
                 session.requestAnimationFrame(onFrame)
