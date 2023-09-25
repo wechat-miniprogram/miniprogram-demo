@@ -12,6 +12,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "ar-plane-v2",
+          "pathName": "packageAPI/pages/ar/plane-ar-v2/plane-ar-v2",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "ar-v2-depth",
           "pathName": "packageAPI/pages/ar/plane-ar-v2-depth/plane-ar-v2-depth",
           "query": "",

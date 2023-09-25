@@ -75,7 +75,11 @@ module.exports = Behavior({
 
             // 逐帧渲染
             const onFrame = timestamp => {
-                this.loop()
+                try {
+                    this.loop()
+                }catch(e) {
+                    console.error(e);
+                }
                 session.requestAnimationFrame(onFrame)
             }
             session.requestAnimationFrame(onFrame)
