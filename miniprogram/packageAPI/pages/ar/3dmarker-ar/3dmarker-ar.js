@@ -106,9 +106,11 @@ Component({
           }
 
           if (!this.modelShow) {
-            this.modelTrs.scale.x = modelScale;
-            this.modelTrs.scale.y = modelScale;
-            this.modelTrs.scale.z = modelScale;
+            if (this.modelTrs) {
+              this.modelTrs.scale.x = modelScale;
+              this.modelTrs.scale.y = modelScale;
+              this.modelTrs.scale.z = modelScale;
+            }
 
             this.xAxis.visible = true;
             this.yAxis.visible = true;
@@ -123,9 +125,12 @@ Component({
         session.on('removeAnchors', anchors => {
           
           if (this.modelShow) {
-            this.modelTrs.scale.x = 0;
-            this.modelTrs.scale.y = 0;
-            this.modelTrs.scale.z = 0;
+
+            if (this.modelTrs) {
+              this.modelTrs.scale.x = 0;
+              this.modelTrs.scale.y = 0;
+              this.modelTrs.scale.z = 0;
+            }
 
             this.xAxis.visible = false;
             this.yAxis.visible = false;
@@ -170,6 +175,7 @@ Component({
       });
       this.xAxis = elXTrs;
       rootShadow.addChild(elX);
+      this.xAxis.visible = false;
 
       const elY = scene.createElement(xrFrameSystem.XRNode, {
         position: `0 ${axisScale / 2} 0`,
@@ -184,6 +190,7 @@ Component({
       });
       this.yAxis = elYTrs;
       rootShadow.addChild(elY);
+      this.yAxis.visible = false;
 
       const elZ = scene.createElement(xrFrameSystem.XRNode, {
         position: `0 0 ${axisScale / 2}`,
@@ -198,6 +205,7 @@ Component({
       });
       this.zAxis = elZTrs;
       rootShadow.addChild(elZ);
+      this.zAxis.visible = false;
       console.log('add3DAxis is finish')
 
     },
@@ -317,6 +325,7 @@ Component({
                 const glbByteOffset = data.meshBlob.byteOffset
                 const glbByteLength = data.meshBlob.byteLength
                 const glbContent = data.meshBlob.buffer.slice(glbByteOffset, glbByteOffset + glbByteLength)
+                console.log('glbContent', glbContent);
                 const glbUrl = this.saveLocalFile(glbContent, 'result.glb');
                 console.log("glb文件的本地路径", glbUrl)
                 this.parsedGlbUrl = glbUrl;
@@ -425,11 +434,16 @@ Component({
       var url = `${wx.env.USER_DATA_PATH}/${name}`
 
       const fs = wx.getFileSystemManager()
-      fs.writeFileSync(
-        url,
-        bufferContent,
-        'utf8'
-      )
+      try {
+        const res = fs.writeFileSync(
+          url,
+          bufferContent,
+          'utf8'
+        )
+        console.log(res)
+      } catch(e) {
+        console.error(e);
+      }
 
       return url
     },
