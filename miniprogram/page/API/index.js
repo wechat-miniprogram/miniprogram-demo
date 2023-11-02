@@ -329,6 +329,10 @@ Page({
           zh: '照片OCR检测',
           url: 'photo-ocr-detect/photo-ocr-detect'
         },
+        // {
+        //   zh: '照片身份证检测',
+        //   url: 'photo-idcard-detect/photo-idcard-detect'
+        // },
         {
           zh: '实时人脸检测',
           url: 'face-detect/face-detect'

@@ -96,7 +96,7 @@ export default function getBehavior() {
         this.session = wx.createVKSession({
           track: {
             plane: {
-              mode: 1
+              mode: 3
             },
           },
           version: 'v2',

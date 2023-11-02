@@ -96,6 +96,7 @@
         "pages/ar/shoe-detect/shoe-detect",
         "pages/ar/photo-shoe-detect/photo-shoe-detect",
         "pages/ar/photo-ocr-detect/photo-ocr-detect",
+        "pages/ar/photo-idcard-detect/photo-idcard-detect",
         "pages/ar/photo-hand-detect/photo-hand-detect",
         "pages/ar/photo-body-detect/photo-body-detect",
         "pages/ar/photo-face-detect/photo-face-detect",

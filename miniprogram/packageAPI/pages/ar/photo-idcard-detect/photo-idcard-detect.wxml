@@ -1,0 +1,33 @@
+<view class="page" data-weui-theme="{{theme}}">
+    <view class="img-wrap">
+        <p class="preview-title">识别图片：</p>
+        <image class="preview-img" src="{{imgUrl}}" mode="aspectFit" />
+    </view>
+
+    <view class="btn-cnt">
+        <view class="flex-row">
+            <button type="primary" bindtap="chooseMedia">使用小程序相机拍摄</button>
+            <button type="primary" bindtap="chooseMedia">使用本地图片</button>
+        </view>
+        <button class="btn-sub" type="primary" disabled="{{!imgUrl}}" bindtap="detectIDCard">开始识别身份证</button>
+    </view>
+    <view class="info-wrap">
+        <view class="info-list" wx:if="{{detected}}">
+            <view wx:if="{{detectSuccess}}">
+                <view class="info-title">识别身份证信息</view>
+                <p>{{isComplete === 0 ? '不完整' : '完整'}}</p>
+                <p>{{label === 0 ? '照片面' : '国徽面'}}</p>
+                <p>{{orientation === 0 ? '朝上' : ''}}{{orientation === 1 ? '朝右' : ''}}{{orientation === 2 ? '朝下' : ''}}{{orientation === 3 ? '朝左' : ''}}</p>
+                <p>坐标框: 左上({{box[0].x}}, {{box[0].y}}) 右上({{box[1].x}}, {{box[1].y}}) 右下({{box[2].x}}, {{box[2].y}}) 左下({{box[3].x}}, {{box[3].y}})</p>
+                <image class="crop-img" wx:if="{{cropImg}}" src="{{cropImg}}" mode="aspectFit" />
+            </view>
+            <view wx:if="{{!detectSuccess}}">
+                <view class="info-title">未识别到身份证</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="hint-bottom page-body-text tc">
+        <text>提示：点击选择图片，上传本地照片或使用小程序相机拍摄，然后开始身份证检测，将会显示检测到的身份证信息</text>
+    </view>
+</view>

@@ -1,5 +1,5 @@
 import arBehavior from '../behavior/behavior-ar'
-import xrFrameBehavior from '../behavior/behavior-xrFrame'
+import xrFrameBehavior from '../behavior/behavior-xrframe'
 
 // VK 投影矩阵参数定义
 const NEAR = 0.01
@@ -463,7 +463,7 @@ Component({
       if(!frame) { return; }
 
       // 更新腿部分割纹理
-      // this.updateShoeMask(frame) 
+      this.updateShoeMask(frame) 
 
       // console.log(getLegSegmentBuffer);
 

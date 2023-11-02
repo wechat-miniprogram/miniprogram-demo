@@ -12,6 +12,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "photo-idcard-detect",
+          "pathName": "packageAPI/pages/ar/photo-idcard-detect/photo-idcard-detect",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "ar-plane-v2",
           "pathName": "packageAPI/pages/ar/plane-ar-v2/plane-ar-v2",
           "query": "",
