@@ -12,7 +12,10 @@ Component({
   data: {
     theme: 'light',
     cameraPosition: 0,
+    heightScale: 0.86,
     buttonDisable: true,
+    isIOS: false,
+    showHintBox: true,
   },
   hintBoxList: [], // 提示点集合
   lifetimes: {
@@ -27,8 +30,10 @@ Component({
     },
     ready() {
       console.log("页面准备完全")
+      const systemInfo = wx.getSystemInfoSync();
       this.setData({
-        theme: wx.getSystemInfoSync().theme || 'light',
+        theme: systemInfo.theme || 'light',
+        isIOS: systemInfo.platform === 'ios',
       })
 
       if (wx.onThemeChange) {
@@ -50,10 +55,10 @@ Component({
       this.initVK();
     },
     // 缩放 xr-frame TRS
-    scaleTrs(trs, scale) {
-      trs.scale.x = scale;
-      trs.scale.y = scale;
-      trs.scale.z = scale;
+    scaleTrs(trs, scaleX, scaleY, scaleZ) {
+      trs.scale.x = scaleX;
+      trs.scale.y = scaleY;
+      trs.scale.z = scaleZ;
     },
     getHintBox(xrFrameSystem, scene, wrap) {
       // 初始化提示点
@@ -80,6 +85,8 @@ Component({
         });
 
         wrap.addChild( el );
+        elTrs.visible = false;
+        
         hintBoxList.push( elTrs );
       }
 
@@ -182,14 +189,14 @@ Component({
   
               vec4 renderTexture = texture2D(u_renderTexture, uv);
               vec4 shoeMask = texture2D(u_shoeMask, uvFlip);
-  
+              
+              // 透明度混合
               if (shoeMask.r > 0.0) {
                 float alpha = renderTexture.w * (1.0 - shoeMask.r);
                 gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, alpha);
               } else {
                 gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, renderTexture.w);
               }
-  
             }
             `
           ]
@@ -292,7 +299,7 @@ Component({
               // 只有左脚，此时尝试隐藏右脚
               if (this.modelShowRight && this.modelTrsRight) {
                 // 右脚
-                this.scaleTrs(this.modelTrsRight, 0);
+                this.scaleTrs(this.modelTrsRight, 0, 0, 0);
                 this.updateHintBoxVisible(this.hintBoxListRight, false);
                 this.modelShowRight = false;
               }
@@ -300,7 +307,7 @@ Component({
               // 只有右脚，此时尝试隐藏左脚
               if (this.modelShowLeft && this.modelTrsLeft) {
                 // 左脚
-                this.scaleTrs(this.modelTrsLeft, 0);
+                this.scaleTrs(this.modelTrsLeft, 0, 0, 0);
                 this.updateHintBoxVisible(this.hintBoxListLeft, false);
                 this.modelShowLeft = false;
               }
@@ -312,7 +319,14 @@ Component({
             const anchor = anchors[i];
             // console.log('transform', anchor.transform);
             // console.log('points3d', anchor.points3d);
-            const modelScale = 260;
+            let modelScale = 300;
+
+            // const shoeScaleFactorX = 1.1;
+
+            // 针对 3.2.1 版本基础库，iOS 试鞋，返回的投影矩阵，进行的兼容修复
+            if (this.data.isIOS) {
+              modelScale *= 0.85;
+            }
             
             if (anchor.shoedirec === 0) {
               // 左脚
@@ -320,8 +334,8 @@ Component({
               this.points3dLeft = anchor.points3d;
 
               if (!this.modelShowLeft && this.modelTrsLeft) {
-                this.scaleTrs(this.modelTrsLeft, modelScale);
-                this.updateHintBoxVisible(this.hintBoxListLeft, true);
+                this.scaleTrs(this.modelTrsLeft, modelScale, modelScale, modelScale);
+                // this.updateHintBoxVisible(this.hintBoxListLeft, true);
                 this.modelShowLeft = true;
               }
             } else if (anchor.shoedirec === 1) {
@@ -330,8 +344,8 @@ Component({
               this.points3dRight = anchor.points3d;
 
               if (!this.modelShowRight && this.modelTrsRight) {
-                this.scaleTrs(this.modelTrsRight, modelScale);
-                this.updateHintBoxVisible(this.hintBoxListRight, true);
+                this.scaleTrs(this.modelTrsRight, modelScale, modelScale, modelScale);
+                // this.updateHintBoxVisible(this.hintBoxListRight, true);
                 this.modelShowRight = true;
               }
             }
@@ -475,7 +489,9 @@ Component({
 
       // 更新 xrFrame 相机矩阵
       this.updataXRCameraMatrix(VKCamera, NEAR, FAR);
-
+      
+      const shoeFrontFix = 0.4; // 额外前移，适配鞋后
+      const shoeBottomFix = -0.6; // 额外下移，适配鞋底
       
       // 存在model，更新矩阵
       // 左边鞋子流程
@@ -495,7 +511,8 @@ Component({
         this.modelTrsLeft.position.x = (this.points3dLeft[3].x + this.points3dLeft[4].x ) / 2;
         this.modelTrsLeft.position.y = (this.points3dLeft[3].y + this.points3dLeft[4].y ) / 2;
         this.modelTrsLeft.position.z = (this.points3dLeft[0].z + this.points3dLeft[1].z ) / 2;
-        this.modelTrsLeft.position.y -= 0.6; // 额外下移，适配鞋底
+        this.modelTrsLeft.position.z += shoeFrontFix;
+        this.modelTrsLeft.position.y += shoeBottomFix;
 
 
         this.updateHintBoxPosition(this.hintBoxListLeft, this.points3dLeft);
@@ -530,7 +547,8 @@ Component({
         this.modelTrsRight.position.x = (this.points3dRight[3].x + this.points3dRight[4].x ) / 2;
         this.modelTrsRight.position.y = (this.points3dRight[3].y + this.points3dRight[4].y ) / 2;
         this.modelTrsRight.position.z = (this.points3dRight[0].z + this.points3dRight[1].z ) / 2;
-        this.modelTrsRight.position.y -= 0.6; // 额外下移，适配鞋底
+        this.modelTrsRight.position.z += shoeFrontFix;
+        this.modelTrsRight.position.y += shoeBottomFix;
 
         this.updateHintBoxPosition(this.hintBoxListRight, this.points3dRight);
 

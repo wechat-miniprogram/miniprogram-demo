@@ -207,8 +207,6 @@ void main()
             // console.log('update yuv end')
         },
         updataXRCameraMatrix(VKCamera, near, far) {
-
-            // console.log('updataXRCameraMatrix')
             // 同步 VKCamera 矩阵信息到 xrFrame Camera
             if (VKCamera) {
                 const viewMat = VKCamera.viewMatrix;

@@ -10,14 +10,11 @@
       style="width:{{domWidth}}px;height:{{domHeight}}px;"
       bind:sceneReady="handleXRSceneReady"
     ></xr-frame-canvas>
+
   </view>
-  <view class="bottom-wrap">
-    <p class="page-body-text tc">提示：将摄像头对准鞋部, 检测到的鞋部将会被标记出识别框和鞋部标记点</p>
-    <!-- <view wx:if="{{cameraPosition == 0}}">
-        <button type="primary" bindtap="switchCamera" data-value="1" disabled="{{buttonDisable}}">切换为前置摄像头</button>
-    </view>
-    <view wx:else>
-        <button type="primary" bindtap="switchCamera" data-value="0" disabled="{{buttonDisable}}">切换为后置摄像头</button>
-    </view> -->
+
+  <view class="hint-bottom page-body-text tc">
+      <text>提示：将摄像头对准鞋部, 检测到的鞋部将会被标记出识别框和鞋部标记点（基础库 3.2.1 起支持）</text>
   </view>
+
 </view>
