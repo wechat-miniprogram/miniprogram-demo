@@ -21,8 +21,8 @@
   <view class="wrap-option">
     <button type="primary" disabled="{{usingMarkerId}}" bindtap="parseAddMarker">解析添加 Marker</button>
     <button type="primary" disabled="{{!usingMarkerId}}" bindtap="removeMarker">清理使用 marker</button>
-    <button type="primary" disabled="{{!usingMarkerId || !haveMap}}" bindtap="saveMap">保存使用的 map 文件</button>
-    <button type="primary" disabled="{{!usingMarkerId || !haveGLTF}}" bindtap="saveGlTF">保存使用的 glTF 文件</button>
+    <button type="primary" disabled="{{!haveMap}}" bindtap="saveMap">保存使用的 map 文件</button>
+    <button type="primary" disabled="{{!haveGLTF}}" bindtap="saveGlTF">保存使用的 glTF 文件</button>
   </view>
 
   <view class="model-wrap">

@@ -362,7 +362,7 @@ Page({
           url: 'photo-hand-detect/photo-hand-detect'
         },
         {
-          zh: '实时鞋部检测',
+          zh: '实时鞋部检测 - AR试鞋',
           url: 'shoe-detect/shoe-detect'
         },
         // {

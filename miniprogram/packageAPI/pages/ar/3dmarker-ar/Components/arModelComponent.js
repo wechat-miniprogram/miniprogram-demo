@@ -44,9 +44,9 @@ Component({
       console.log("modelInfos的值为：")
       console.log(modelInfos)
       if(modelInfos && modelInfos.length != 0){
-        if(timeNow - modelInfos[0].timeStamp < 1800){
+        if(timeNow - modelInfos[0].timeStamp < 900){
           wx.showToast({
-            title: "每半小时允许上传一次视频",
+            title: "每15分钟允许上传一次视频",
             icon: 'none',
             duration: 2000
           })
