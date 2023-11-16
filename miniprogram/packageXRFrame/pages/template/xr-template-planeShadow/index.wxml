@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="平面阴影"
-  intro=""
+  intro="自定义透明阴影材质（模型较大，请耐心等待）"
 >
   <xr-template-planeShadow
     disable-scroll

@@ -220,124 +220,148 @@ const custom = {
   ]
 };
 
-const template = {
-  name: '通用功能模版',
+const messageTemplate = {
+  name: '混合通信、资源加载、互动',
   tag: 'template',
   childArr: [
     {
       name: 'Message',
       label: '小程序混合通信',
-      class: 'message',
       path: '/pages/template/xr-template-message/index',
-    },
-    {
-      name: 'Controller',
-      label: '第一人称漫游',
-      class: 'message',
-      path: '/pages/template/xr-template-control/index',
     },
     {
       name: 'Loading',
       label: '动态资源加载与使用',
-      class: 'message',
       path: '/pages/template/xr-template-loading/index',
     },
     {
-      name: 'AR',
+      name: 'Controller',
+      label: '第一人称漫游',
+      path: '/pages/template/xr-template-control/index',
+    },
+    {
+      name: 'Touch',
+      label: '点选物体与动画控制',
+      path: '/pages/template/xr-template-select/index',
+    },
+  ],
+};
+
+const arTemplate = {
+  name: '常用AR定制能力',
+  tag: 'template',
+  childArr: [
+    {
+      name: 'Marker',
       label: '动态多Tracker切换（图片识别）',
-      class: 'ar',
       path: '/pages/template/xr-template-tracker/index',
     },
     {
-      name: 'AR',
+      name: 'Marker',
+      label: '识别后固定模型，在屏幕中间',
+      path: '/pages/template/xr-template-markerCenter/index',
+    },
+    {
+      name: 'Plane+Marker',
+      label: '识别后固定模型，在世界空间',
+      path: '/pages/template/xr-template-markerLock/index',
+    },
+    {
+      name: 'Plane',
+      label: '世界空间，动态创建连线',
+      path: '/pages/template/xr-template-arLine/index',
+    },
+    {
+      name: 'Plane',
       label: '模型摆放与手势控制',
-      class: 'ar',
       path: '/pages/template/xr-template-arPreview/index',
     },
     {
       name: 'AR',
-      label: '面向屏幕的面片与模型',
-      class: 'ar',
+      label: '模型控制朝向(面向屏幕的面片与模型)',
       path: '/pages/template/xr-template-lookat/index',
     },
     {
       name: 'AR',
       label: '平面模式下的 UI 面板',
-      class: 'ar',
       path: '/pages/template/xr-template-arui/index',
+    },
+  ],
+};
+
+const customTemplate = {
+  name: '常用定制（材质、几何体、流程）',
+  tag: 'template',
+  childArr: [
+    {
+      name: 'Geometry',
+      label: '定制每帧变化的Geometry',
+      path: '/pages/template/xr-template-geometry/index',
     },
     {
       name: 'Effect',
-      label: '模型切换为Toon渲染(自定义多pass)',
-      class: 'custom',
+      label: '模型切换为卡通渲染(自定义多pass)',
       path: '/pages/template/xr-template-toon/index',
     },
     {
       name: 'Effect',
-      label: '平面阴影',
-      class: 'custom',
+      label: '透明平面阴影',
       path: '/pages/template/xr-template-planeShadow/index',
-    },
-    {
-      name: 'Geometry',
-      label: '定制每帧变化的Geometry',
-      class: 'custom',
-      path: '/pages/template/xr-template-geometry/index',
-    },
-    {
-      name: 'glTF',
-      label: '模型更换贴图',
-      class: 'gltf',
-      path: '/pages/template/xr-template-gltfEdit/index',
-    },
-    {
-      name: 'glTF',
-      label: '模型动画（脚本、骨骼）',
-      class: 'gltf',
-      path: '/pages/template/xr-template-gltfAnimation/index',
-    },
-    {
-      name: 'glTF',
-      label: '设置 glTF 为遮挡模型',
-      class: 'gltf',
-      path: '/pages/template/xr-template-gltfOcclusion/index',
-    },
-    {
-      name: 'glTF',
-      label: '添加模型内UV动画',
-      class: 'gltf',
-      path: '/pages/template/xr-template-gltfUVAnimation/index',
-    },
-    {
-      name: 'glTF',
-      label: '双面半透明模型渲染',
-      class: 'gltf',
-      path: '/pages/template/xr-template-blendDouble/index',
-    },
-    {
-      name: 'Touch',
-      label: '点选物体与动画控制',
-      class: 'tool',
-      path: '/pages/template/xr-template-select/index',
-    },
-    {
-      name: 'Share',
-      label: '截图与分享',
-      class: 'tool',
-      path: '/pages/template/xr-template-share/index',
     },
     {
       name: 'Effect',
       label: '序列帧动画（雪碧图、GIF）',
-      class: 'tool',
       path: '/pages/template/xr-template-frameEffect/index',
     },
     {
       name: 'Video',
       label: '过滤黑色背景视频',
-      class: 'tool',
       path: '/pages/template/xr-template-removeBlack/index',
     },
+  ],
+};
+
+const gltfEditTemplate = {
+  name: 'glTF动态修改',
+  tag: 'template',
+  childArr: [
+    {
+      name: 'glTF',
+      label: '模型更换贴图',
+      path: '/pages/template/xr-template-gltfEdit/index',
+    },
+    {
+      name: 'glTF',
+      label: '模型动画（脚本、骨骼）',
+      path: '/pages/template/xr-template-gltfAnimation/index',
+    },
+    {
+      name: 'glTF',
+      label: '设置 glTF 为遮挡模型',
+      path: '/pages/template/xr-template-gltfOcclusion/index',
+    },
+    {
+      name: 'glTF',
+      label: '添加模型内UV动画',
+      path: '/pages/template/xr-template-gltfUVAnimation/index',
+    },
+    {
+      name: 'glTF',
+      label: '双面半透明模型渲染',
+      path: '/pages/template/xr-template-blendDouble/index',
+    },
+  ],
+};
+
+const toolTemplate = {
+  name: '通用基础能力',
+  tag: 'template',
+  childArr: [
+    {
+      name: 'Share',
+      label: '截图与分享',
+      path: '/pages/template/xr-template-share/index',
+    }
     // {
     //   name: 'Video',
     //   label: '滤色视频（定制化渲染流程）',
@@ -423,4 +447,4 @@ const production = {
   ]
 };
 
-export default [base, ar, gltf, physics, custom, template, classic, scan, production];
+export default [base, ar, gltf, physics, custom, messageTemplate, arTemplate, customTemplate, gltfEditTemplate, toolTemplate, classic, scan, production];

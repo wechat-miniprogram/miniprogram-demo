@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+    "xr-template-arLine": "../../../components/template/xr-template-arLine/index"
+  },
+  "disableScroll": true,
+  "navigationStyle": "custom"
+}

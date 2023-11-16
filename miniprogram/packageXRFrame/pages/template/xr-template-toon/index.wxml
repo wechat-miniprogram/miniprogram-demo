@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="Toon 模型渲染"
-  intro=""
+  intro="卡通渲染案例，动态将 glTF 模型的材质切换为 基于基础卡通渲染规范编写的，自定义多 Pass 材质。"
 >
   <xr-template-toon
     disable-scroll

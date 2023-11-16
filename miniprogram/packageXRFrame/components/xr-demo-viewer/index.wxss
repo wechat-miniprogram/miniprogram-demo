@@ -22,13 +22,15 @@
 }
 
 .hint-words {
-  display: inline-block;
+  display: block;
+  font-size: 14px;
   color: #000;
-  text-align:center;
-  font-weight:bold;
-  max-width: 300px;
-  padding: 10px 20px;
-  border: 2px dashed #000;
+  text-align: center;
+  font-weight: normal;
+  margin: 10px 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px dashed #000;
   background-color: #fff;
 }
 

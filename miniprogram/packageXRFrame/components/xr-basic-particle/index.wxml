@@ -46,6 +46,9 @@
 
     <xr-particle id="human-face" position="-2 0 -2" capacity="3000"  emit-rate="2000" size="0.1" start-color="1 1 1 0" start-color2="1 1 1 0" texture="particle-texture"></xr-particle>
 
+    <xr-particle id="firework" position="0 0 0" start-color="1 1 1 1" end-color="1 0 0 1" capacity="1" speed="1" size="0.5" emit-rate="1" life-time="3" angle="0"  texture="particle-texture">
+    </xr-particle>
+
     <!-- <xr-particle  position="-3 0 -2" rotation="0 0 180" capacity="20" speed="0" size="1" emit-rate="5" angle="0 90" life-time="20" render-mode="mesh" mesh="specialCylinder" start-color="0.5 0.5 0 0.5" texture="glow_circle">
     </xr-particle> -->
 

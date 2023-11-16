@@ -1,0 +1,28 @@
+<xr-scene ar-system="modes:Plane" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <xr-assets>
+  </xr-assets>
+  <xr-env env-data="xr-frame-team-workspace-day" />
+
+  <xr-node>
+    <xr-node node-id="center" position="0 0 0"></xr-node>
+    <xr-ar-tracker mode="Plane">
+    </xr-ar-tracker>
+    
+    <!-- root 用于动态放置节点 -->
+    <xr-shadow id="root"></xr-shadow>
+
+    <xr-camera
+      id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    >
+      <xr-mesh id="cursor" position="0 0 0.3" rotation="0 0 0" scale="0.03 0.03 0.03" geometry="cube"
+        uniforms="u_baseColorFactor:0.298 0.764 0.85 0.8"
+        states="renderQueue: 3000, alphaMode: BLEND, cullFace: 2"
+      ></xr-mesh>
+    </xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="0 0 0" color="1 1 1" intensity="0.5" />
+  </xr-node>
+</xr-scene>

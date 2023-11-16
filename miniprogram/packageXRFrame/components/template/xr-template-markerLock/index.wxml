@@ -1,0 +1,35 @@
+<xr-scene ar-system="modes:Plane Marker; planeMode: 1" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <!-- vio + marker 模式下 planeMode 需设置为 1 (只允许水平面识别) -->
+  <xr-assets>
+    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
+  </xr-assets>
+  <xr-node>
+
+    <!-- plane -->
+    <xr-ar-tracker mode="Plane">
+      <xr-gltf model="anchor"></xr-gltf>
+    </xr-ar-tracker>
+
+    <!-- marker -->
+    <!-- <xr-ar-tracker id="lockTracker" mode="Marker" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/2dmarker-test.jpg">
+      <xr-node id="lockItem">
+        <xr-gltf model="butterfly" anim-autoplay position="0.2 0 -0.2" scale="0.6 0.6 0.6" rotation="0 -50 0" />
+        <xr-gltf model="butterfly" anim-autoplay position="0.4 0 0.3" scale="0.5 0.5 0.5" rotation="0 -50 0" />
+        <xr-gltf model="butterfly" anim-autoplay position="-0.3 0 0.3" scale="0.4 0.4 0.4" rotation="0 -50 0" />
+      </xr-node>
+    </xr-ar-tracker> -->
+
+    <!-- 识别成功后放置的世界位置 -->
+    <!-- marker 会动态创建并放在root下 -->
+    <xr-shadow id="root"></xr-shadow>
+
+    <xr-camera
+      id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>
