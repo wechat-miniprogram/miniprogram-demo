@@ -12,6 +12,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "body-detect-3d",
+          "pathName": "packageAPI/pages/ar/body-detect-3d/body-detect-3d",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "photo-idcard-detect",
           "pathName": "packageAPI/pages/ar/photo-idcard-detect/photo-idcard-detect",
           "query": "",
