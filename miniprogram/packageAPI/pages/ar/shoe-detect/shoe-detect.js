@@ -55,218 +55,6 @@ Component({
       // start完毕后，进行更新渲染循环
       this.initVK();
     },
-    // 缩放 xr-frame TRS
-    scaleTrs(trs, scaleX, scaleY, scaleZ) {
-      trs.scale.x = scaleX;
-      trs.scale.y = scaleY;
-      trs.scale.z = scaleZ;
-    },
-    getHintBox(xrFrameSystem, scene, wrap) {
-      // 初始化提示点
-      const geometryCube = scene.assets.getAsset('geometry', 'cube');
-      const effectCube = scene.assets.getAsset('effect', 'standard');
-      const boxScale = 0.2;
-      const hintBoxList = [];
-      for (let i = 0; i < 8; i++) {
-        const colorFloat =  i / 16;
-        const el = scene.createElement(xrFrameSystem.XRNode, {
-          position: "0 0 0",
-          scale: `${boxScale} ${boxScale} ${boxScale}`,
-          layer: 2
-        });
-        const elTrs = el.getComponent(xrFrameSystem.Transform);
-        const mat = scene.createMaterial(effectCube);
-        mat.setVector('u_baseColorFactor', xrFrameSystem.Vector4.createFromNumber(colorFloat + 0.3, 0.2, 0.2, 1.0));
-        mat.renderQueue = 9990;
-        mat.setRenderState('depthTestOn', false);
-
-        const mesh = el.addComponent(xrFrameSystem.Mesh, {
-          geometry: geometryCube,
-          material: mat,
-        });
-
-        wrap.addChild( el );
-        elTrs.visible = false;
-        
-        hintBoxList.push( elTrs );
-      }
-
-      return hintBoxList;
-    },
-    updateHintBoxVisible(hintBoxList, visible) {
-      if (hintBoxList && hintBoxList.length > 0) {
-        // 存在提示列表，则更新点信息
-        for (let i = 0; i < hintBoxList.length; i++) {
-          const hintBox = hintBoxList[i];
-          const visibleFlag = this.data.showHintBox && visible;
-          if (hintBox.visible !== visibleFlag) {
-            hintBox.visible = visibleFlag;
-          }
-        }
-      }
-    },
-    updateHintBoxPosition(hintBoxList, points3d) {
-      if (hintBoxList && hintBoxList.length > 0) {
-        // console.log('ready to set', hintBoxList);
-        // 存在提示列表，则更新点信息
-        for (let i = 0; i < hintBoxList.length; i++) {
-          const hintBox = hintBoxList[i];
-          hintBox.position.x = points3d[i].x;
-          hintBox.position.y = points3d[i].y;
-          hintBox.position.z = points3d[i].z;
-        }
-      }
-    },
-    addShoeMaskPlane() {
-      const scene = this.xrScene;
-      const {rootShadow} = scene;
-
-      const xrFrameSystem = wx.getXrFrameSystem();
-      
-
-      const el = scene.createElement(xrFrameSystem.XRNode, {
-        layer: 1
-      });
-
-      const shoeMaskGeometry = scene.assets.getAsset('geometry', `ar-camera-plane`);
-      let shoeMaskEffect = scene.assets.getAsset('effect', 'ar-shoe-mask');
-
-      if (!shoeMaskEffect) {
-        xrFrameSystem.registerEffect('ar-shoe-mask', scene => scene.createEffect({
-          properties: [
-            { key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1] },
-          ],
-          images: [
-              {
-                  key: 'u_shoeMask',
-                  default: 'black',
-                  macro: 'WX_AR_SHOEMASk'
-              },
-              {
-                key: 'u_renderTexture',
-                default: 'black',
-                macro: 'WX_AR_RENDERTEXTURE'
-            },
-          ],
-              defaultRenderQueue: 2,
-              passes: [{
-              renderStates: {
-                blendOn: true,
-                depthWrite: false,
-                // Default FrontFace is CW
-                cullOn: true,
-                cullFace: xrFrameSystem.ECullMode.BACK,
-              },
-              lightMode: 'ForwardBase',
-              useMaterialRenderStates: true,
-              shaders: [0, 1]
-              }],
-              shaders: 
-          [
-            `#version 100
-            attribute vec3 a_position;
-            attribute vec2 a_texCoord;
-  
-            precision highp float;
-  
-            varying highp vec2 v_texCoord;
-  
-            void main() {
-                v_texCoord = a_texCoord;
-                vec4 pos = vec4(a_position.xy, 1., 1.);
-                gl_Position =  pos;
-            }
-            `,
-            `#version 100
-            precision mediump float;
-            precision highp int;
-  
-            uniform sampler2D u_shoeMask;
-            uniform sampler2D u_renderTexture;
-  
-            varying highp vec2 v_texCoord;
-  
-            void main()
-            {
-              vec2 uv = vec2(v_texCoord.x, v_texCoord.y);  
-              vec4 renderTexture = texture2D(u_renderTexture, uv);
-
-              #ifdef WX_USE_SHOEMASK
-                // 透明度混合
-                vec2 uvFlip = vec2(v_texCoord.x, 1.0 - v_texCoord.y);
-                vec4 shoeMask = texture2D(u_shoeMask, uvFlip);
-
-                if (shoeMask.r > 0.0) {
-                  float alpha = renderTexture.w * (1.0 - shoeMask.r);
-                  gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, alpha);
-                } else {
-                  gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, renderTexture.w);
-                }
-              #else
-                gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, renderTexture.w);
-
-              #endif
-            }
-            `
-          ]
-        }))
-        shoeMaskEffect = scene.assets.getAsset('effect', 'ar-shoe-mask');
-      }
-
-      const shoeMaskMat = scene.createMaterial(shoeMaskEffect);
-
-      // 获取屏幕renderTexture
-      this.renderTexture = scene.assets.getAsset('render-texture', 'rt');
-      shoeMaskMat.setTexture('u_renderTexture', this.renderTexture.texture);
-
-      shoeMaskMat.renderQueue = 2; // 第二个绘制
-      const mesh = el.addComponent(xrFrameSystem.Mesh, {
-        geometry: shoeMaskGeometry,
-        material: shoeMaskMat
-      });
-
-      // ShoeMask纹理
-      this.shoeMaskMat = shoeMaskMat;
-      this.shoeMaskMatInit = false;
-
-      // 不进入正常的剔除
-      rootShadow.addChild(el);
-
-    },
-    updateShoeMask(frame) {
-      const scene = this.xrScene;
-      const xrFrameSystem = wx.getXrFrameSystem();
-
-      // 腿部分割
-      const legSegmentBuffer = frame.getLegSegmentBuffer();
-      // 存在数据才进行rt初始化
-      if (legSegmentBuffer && legSegmentBuffer.width > 0 && legSegmentBuffer.height > 0) {
-        // 存在数据，开启宏
-        this.shoeMaskMat.setMacro("WX_USE_SHOEMASK", true);
-
-         // 未创建贴图缓存，先创建
-        if (!this.shoeMaskTexure) {
-          this.shoeMaskTexure = scene.createTexture({
-            width: legSegmentBuffer.width, height: legSegmentBuffer.height,
-            source: [legSegmentBuffer.MaskAddress],
-            magFilter: xrFrameSystem.EFilterMode.LINEAR,
-            minFilter: xrFrameSystem.EFilterMode.LINEAR,
-            pixelFormat: xrFrameSystem.ETextureFormat.R8
-          })
-        }
-
-        const shoeMaskMat = this.shoeMaskMat;
-        // 未绑定贴图的情况下，绑定贴图
-        if (!this.shoeMaskMatInit) {
-          shoeMaskMat.setTexture('u_shoeMask', this.shoeMaskTexure);
-          this.shoeMaskMatInit = true;
-        }
-
-        this.shoeMaskTexure.update({buffer: legSegmentBuffer.MaskAddress});
-      } else {
-        console.error('getLegSegmentBuffer is empty', legSegmentBuffer, legSegmentBuffer.width, legSegmentBuffer.height)
-      }
-    },
     initVK() {
       // VKSession 配置
       const session = this.session = wx.createVKSession({
@@ -489,7 +277,6 @@ Component({
       // left done
       console.log('this.modelTrsLeft', this.modelTrsLeft);
       console.log('shoeModelLeft ready');
-      
 
       // 加载提示点
       this.hintBoxListLeft = this.getHintBox(xrFrameSystem, scene, this.modelWrapLeft);
@@ -558,7 +345,6 @@ Component({
     },
     loop() {
       // console.log('loop')
-
       // 获取 VKFrame
       const frame = this.session.getVKFrame(this.data.domWidth, this.data.domHeight)
 
@@ -602,18 +388,6 @@ Component({
 
         this.updateHintBoxPosition(this.hintBoxListLeft, this.points3dLeft);
 
-        // debug 用信息
-        if (!loggerOnce) {
-          // console.log('xrCamera._viewMatrix', this.xrCamera._viewMatrix.toArray());
-          // console.log('xrCamera._projMatrix', this.xrCamera._projMatrix.toArray());
-          
-          // VK 直接数值
-          // console.log('joints',  Array.from(this.points3d))
-          // console.log('viewMatrix',  Array.from(VKCamera.viewMatrix))
-          // console.log('projectionMatrix',  Array.from(VKCamera.getProjectionMatrix(NEAR, FAR)))
-          // console.log('anchorTransform',  Array.from(this.shoeTransform));
-          loggerOnce = true;
-        }
       }
       // 右边鞋子流程
       if (this.modelWrapRight && this.modelTrsRight && this.points3dRight && this.shoeTransformRight) {
@@ -634,19 +408,218 @@ Component({
         this.modelTrsRight.position.z = (this.points3dRight[0].z + this.points3dRight[1].z ) / 2;
 
         this.updateHintBoxPosition(this.hintBoxListRight, this.points3dRight);
+      }
+    },
+    // 缩放 xr-frame TRS
+    scaleTrs(trs, scaleX, scaleY, scaleZ) {
+      trs.scale.x = scaleX;
+      trs.scale.y = scaleY;
+      trs.scale.z = scaleZ;
+    },
+    getHintBox(xrFrameSystem, scene, wrap) {
+      // 初始化提示点
+      const geometryCube = scene.assets.getAsset('geometry', 'cube');
+      const effectCube = scene.assets.getAsset('effect', 'standard');
+      const boxScale = 0.2;
+      const hintBoxList = [];
+      for (let i = 0; i < 8; i++) {
+        const colorFloat =  i / 16;
+        const el = scene.createElement(xrFrameSystem.XRNode, {
+          position: "0 0 0",
+          scale: `${boxScale} ${boxScale} ${boxScale}`,
+          layer: 2
+        });
+        const elTrs = el.getComponent(xrFrameSystem.Transform);
+        const mat = scene.createMaterial(effectCube);
+        mat.setVector('u_baseColorFactor', xrFrameSystem.Vector4.createFromNumber(colorFloat + 0.3, 0.2, 0.2, 1.0));
+        mat.renderQueue = 9990;
+        mat.setRenderState('depthTestOn', false);
 
-        // debug 用信息
-        if (!loggerOnce) {
-          // console.log('xrCamera._viewMatrix', this.xrCamera._viewMatrix.toArray());
-          // console.log('xrCamera._projMatrix', this.xrCamera._projMatrix.toArray());
-          
-          // VK 直接数值
-          // console.log('joints',  Array.from(this.points3d))
-          // console.log('viewMatrix',  Array.from(VKCamera.viewMatrix))
-          // console.log('projectionMatrix',  Array.from(VKCamera.getProjectionMatrix(NEAR, FAR)))
-          // console.log('anchorTransform',  Array.from(this.shoeTransform));
-          loggerOnce = true;
+        const mesh = el.addComponent(xrFrameSystem.Mesh, {
+          geometry: geometryCube,
+          material: mat,
+        });
+
+        wrap.addChild( el );
+        elTrs.visible = false;
+        
+        hintBoxList.push( elTrs );
+      }
+
+      return hintBoxList;
+    },
+    updateHintBoxVisible(hintBoxList, visible) {
+      if (hintBoxList && hintBoxList.length > 0) {
+        // 存在提示列表，则更新点信息
+        for (let i = 0; i < hintBoxList.length; i++) {
+          const hintBox = hintBoxList[i];
+          const visibleFlag = this.data.showHintBox && visible;
+          if (hintBox.visible !== visibleFlag) {
+            hintBox.visible = visibleFlag;
+          }
         }
+      }
+    },
+    updateHintBoxPosition(hintBoxList, points3d) {
+      if (hintBoxList && hintBoxList.length > 0) {
+        // console.log('ready to set', hintBoxList);
+        // 存在提示列表，则更新点信息
+        for (let i = 0; i < hintBoxList.length; i++) {
+          const hintBox = hintBoxList[i];
+          hintBox.position.x = points3d[i].x;
+          hintBox.position.y = points3d[i].y;
+          hintBox.position.z = points3d[i].z;
+        }
+      }
+    },
+    addShoeMaskPlane() {
+      const scene = this.xrScene;
+      const {rootShadow} = scene;
+
+      const xrFrameSystem = wx.getXrFrameSystem();
+      
+
+      const el = scene.createElement(xrFrameSystem.XRNode, {
+        layer: 1
+      });
+
+      const shoeMaskGeometry = scene.assets.getAsset('geometry', `ar-camera-plane`);
+      let shoeMaskEffect = scene.assets.getAsset('effect', 'ar-shoe-mask');
+
+      if (!shoeMaskEffect) {
+        xrFrameSystem.registerEffect('ar-shoe-mask', scene => scene.createEffect({
+          properties: [
+            { key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1] },
+          ],
+          images: [
+              {
+                  key: 'u_shoeMask',
+                  default: 'black',
+                  macro: 'WX_AR_SHOEMASk'
+              },
+              {
+                key: 'u_renderTexture',
+                default: 'black',
+                macro: 'WX_AR_RENDERTEXTURE'
+            },
+          ],
+              defaultRenderQueue: 2,
+              passes: [{
+              renderStates: {
+                blendOn: true,
+                depthWrite: false,
+                // Default FrontFace is CW
+                cullOn: true,
+                cullFace: xrFrameSystem.ECullMode.BACK,
+              },
+              lightMode: 'ForwardBase',
+              useMaterialRenderStates: true,
+              shaders: [0, 1]
+              }],
+              shaders: 
+          [
+            `#version 100
+            attribute vec3 a_position;
+            attribute vec2 a_texCoord;
+  
+            precision highp float;
+  
+            varying highp vec2 v_texCoord;
+  
+            void main() {
+                v_texCoord = a_texCoord;
+                vec4 pos = vec4(a_position.xy, 1., 1.);
+                gl_Position =  pos;
+            }
+            `,
+            `#version 100
+            precision mediump float;
+            precision highp int;
+  
+            uniform sampler2D u_shoeMask;
+            uniform sampler2D u_renderTexture;
+  
+            varying highp vec2 v_texCoord;
+  
+            void main()
+            {
+              vec2 uv = vec2(v_texCoord.x, v_texCoord.y);  
+              vec4 renderTexture = texture2D(u_renderTexture, uv);
+
+              #ifdef WX_USE_SHOEMASK
+                // 透明度混合
+                vec2 uvFlip = vec2(v_texCoord.x, 1.0 - v_texCoord.y);
+                vec4 shoeMask = texture2D(u_shoeMask, uvFlip);
+
+                if (shoeMask.r > 0.0) {
+                  float alpha = renderTexture.w * (1.0 - shoeMask.r);
+                  gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, alpha);
+                } else {
+                  gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, renderTexture.w);
+                }
+              #else
+                gl_FragData[0] = vec4(renderTexture.x, renderTexture.y, renderTexture.z, renderTexture.w);
+
+              #endif
+            }
+            `
+          ]
+        }))
+        shoeMaskEffect = scene.assets.getAsset('effect', 'ar-shoe-mask');
+      }
+
+      const shoeMaskMat = scene.createMaterial(shoeMaskEffect);
+
+      // 获取屏幕renderTexture
+      this.renderTexture = scene.assets.getAsset('render-texture', 'rt');
+      shoeMaskMat.setTexture('u_renderTexture', this.renderTexture.texture);
+
+      shoeMaskMat.renderQueue = 2; // 第二个绘制
+      const mesh = el.addComponent(xrFrameSystem.Mesh, {
+        geometry: shoeMaskGeometry,
+        material: shoeMaskMat
+      });
+
+      // ShoeMask纹理
+      this.shoeMaskMat = shoeMaskMat;
+      this.shoeMaskMatInit = false;
+
+      // 不进入正常的剔除
+      rootShadow.addChild(el);
+
+    },
+    updateShoeMask(frame) {
+      const scene = this.xrScene;
+      const xrFrameSystem = wx.getXrFrameSystem();
+
+      // 腿部分割
+      const legSegmentBuffer = frame.getLegSegmentBuffer();
+      // 存在数据才进行rt初始化
+      if (legSegmentBuffer && legSegmentBuffer.width > 0 && legSegmentBuffer.height > 0) {
+        // 存在数据，开启宏
+        this.shoeMaskMat.setMacro("WX_USE_SHOEMASK", true);
+
+         // 未创建贴图缓存，先创建
+        if (!this.shoeMaskTexure) {
+          this.shoeMaskTexure = scene.createTexture({
+            width: legSegmentBuffer.width, height: legSegmentBuffer.height,
+            source: [legSegmentBuffer.MaskAddress],
+            magFilter: xrFrameSystem.EFilterMode.LINEAR,
+            minFilter: xrFrameSystem.EFilterMode.LINEAR,
+            pixelFormat: xrFrameSystem.ETextureFormat.R8
+          })
+        }
+
+        const shoeMaskMat = this.shoeMaskMat;
+        // 未绑定贴图的情况下，绑定贴图
+        if (!this.shoeMaskMatInit) {
+          shoeMaskMat.setTexture('u_shoeMask', this.shoeMaskTexure);
+          this.shoeMaskMatInit = true;
+        }
+
+        this.shoeMaskTexure.update({buffer: legSegmentBuffer.MaskAddress});
+      } else {
+        console.error('getLegSegmentBuffer is empty', legSegmentBuffer, legSegmentBuffer.width, legSegmentBuffer.height)
       }
     },
     // 点击腿Mask切换

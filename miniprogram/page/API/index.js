@@ -350,6 +350,10 @@ Page({
           url: 'body-detect/body-detect'
         },
         {
+          zh: '实时人体检测3D',
+          url: 'body-detect-3d/body-detect-3d'
+        },
+        {
           zh: '照片人体检测',
           url: 'photo-body-detect/photo-body-detect'
         },
