@@ -14,10 +14,8 @@
 
   </view>
 
-  <view class="hint-words">提示：摄像头对准人体</view>
-
-  <!-- <view class="wrap-option">
-    <button type="primary" bindtap="switchCamera">切换前后置摄像头</button>
-  </view> -->
+  <view class="hint-bottom page-body-text tc">
+    <text>提示：摄像头对准人体，然后会显示24个关键点的三维坐标提示小球</text>
+  </view>
 </view>
 

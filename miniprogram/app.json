@@ -91,6 +91,7 @@
         "pages/ar/body-detect/body-detect",
         "pages/ar/body-detect-3d/body-detect-3d",
         "pages/ar/hand-detect/hand-detect",
+        "pages/ar/hand-detect-3d/hand-detect-3d",
         "pages/ar/depth-detect/depth-detect",
         "pages/ar/cameraBuffer-detect/cameraBuffer-detect",
         "pages/ar/ocr-detect/ocr-detect",

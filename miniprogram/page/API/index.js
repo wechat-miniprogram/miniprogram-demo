@@ -337,10 +337,10 @@ Page({
           zh: '实时人脸检测',
           url: 'face-detect/face-detect'
         },
-        // {
-        //   zh: '实时人脸检测3D',
-        //   url: 'face-detect-3d/face-detect-3d'
-        // },
+        {
+          zh: '实时人脸检测3D',
+          url: 'face-detect-3d/face-detect-3d'
+        },
         {
           zh: '照片人脸检测',
           url: 'photo-face-detect/photo-face-detect'
@@ -362,6 +362,10 @@ Page({
           url: 'hand-detect/hand-detect'
         },
         {
+          zh: '实时手势检测3D',
+          url: 'hand-detect-3d/hand-detect-3d'
+        },
+        {
           zh: '照片手势检测',
           url: 'photo-hand-detect/photo-hand-detect'
         },
@@ -369,10 +373,6 @@ Page({
           zh: '实时鞋部检测 - AR试鞋',
           url: 'shoe-detect/shoe-detect'
         },
-        // {
-        //   zh: '照片鞋部检测',
-        //   url: 'photo-shoe-detect/photo-shoe-detect'
-        // },
       ],
     }],
     isSetTabBarPage: false,

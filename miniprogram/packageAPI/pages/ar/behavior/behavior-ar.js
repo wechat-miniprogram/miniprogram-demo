@@ -18,7 +18,7 @@ module.exports = Behavior({
         height: 0,      // canvas大小
         widthScale: 1,      // canvas宽度缩放值
         heightScale: 0.8,   // canvas高度缩放值
-        cameraPosition: 0,  // 相机朝向
+        cameraPosition: 0,  // 相机朝向，默认后置摄像头
     },
     methods: {
         onReady() {
@@ -55,14 +55,19 @@ module.exports = Behavior({
             });
         },
         // 前后摄像头
-        switchCamera(event){
+        switchCamera(){
             if(this.session.config){
                 const config = this.session.config
-                let pos = Number(event.currentTarget.dataset.value)
-                config.cameraPosition = pos
+                let cameraPosNext;
+                if (this.data.cameraPosition === 0) {
+                    cameraPosNext = 1;
+                } else {
+                    cameraPosNext = 0;
+                }
+                config.cameraPosition = cameraPosNext
                 this.session.config = config
                 this.setData({
-                    cameraPosition:event.currentTarget.dataset.value
+                    cameraPosition: cameraPosNext
                 })
             }
         },

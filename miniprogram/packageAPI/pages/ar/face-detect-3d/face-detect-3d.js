@@ -1,311 +1,222 @@
-import getBehavior from './behavior'
-import yuvBehavior from './yuvBehavior'
+import arBehavior from '../behavior/behavior-ar'
+import xrFrameBehavior from '../behavior/behavior-xrframe'
 
-const NEAR = 0.001
+// VK 投影矩阵参数定义
+const NEAR = 0.01
 const FAR = 1000
 
-//顶点着色器
-var VSHADER_SOURCE = '' +
-  'attribute vec4 a_Position;\n' + //声明attribute变量a_Position，用来存放顶点位置信息
-  'void main(){\n' +
-  '  gl_Position = a_Position;\n' + //将顶点坐标赋值给顶点着色器内置变量gl_Position
-  '  gl_PointSize = 4.0;\n' + //设置顶点大小
-  '}\n'
-
-//片元着色器
-var FSHADER_SOURCE = '' +
-  '#ifdef GL_ES\n' +
-  ' precision mediump float;\n' + // 设置精度
-  '#endif\n' +
-  'varying vec4 v_Color;\n' + //声明varying变量v_Color，用来接收顶点着色器传送的片元颜色信息
-  'void main(){\n' +
-  '  float d = distance(gl_PointCoord, vec2(0.5, 0.5));\n' + //计算像素距离中心点的距离
-  '  if(d < 0.5) {\n' + //距离大于0.5放弃片元，小于0.5保留片元
-  '    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);\n' +
-  '  } else { discard; }\n' +
-  '}\n'
-
-
-//初始化着色器函数
-let initShadersDone = false
-
-function initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE) {
-  //创建顶点着色器对象
-  var vertexShader = loadShader(gl, gl.VERTEX_SHADER, VSHADER_SOURCE)
-  //创建片元着色器对象
-  var fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, FSHADER_SOURCE)
-
-  if (!vertexShader || !fragmentShader) {
-    return null
-  }
-
-  //创建程序对象program
-  var program = gl.createProgram()
-  if (!gl.createProgram()) {
-    return null
-  }
-  //分配顶点着色器和片元着色器到program
-  gl.attachShader(program, vertexShader)
-  gl.attachShader(program, fragmentShader)
-  //链接program
-  gl.linkProgram(program)
-
-  //检查程序对象是否连接成功
-  var linked = gl.getProgramParameter(program, gl.LINK_STATUS)
-  if (!linked) {
-    var error = gl.getProgramInfoLog(program)
-    console.log('程序对象连接失败: ' + error)
-    gl.deleteProgram(program)
-    gl.deleteShader(fragmentShader)
-    gl.deleteShader(vertexShader)
-    return null
-  }
-  //返回程序program对象
-  initShadersDone = true
-  return program
-}
-
-function loadShader(gl, type, source) {
-  // 创建顶点着色器对象
-  var shader = gl.createShader(type)
-  if (shader == null) {
-    console.log('创建着色器失败')
-    return null
-  }
-
-  // 引入着色器源代码
-  gl.shaderSource(shader, source)
-
-  // 编译着色器
-  gl.compileShader(shader)
-
-  // 检查顶是否编译成功
-  var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS)
-  if (!compiled) {
-    var error = gl.getShaderInfoLog(shader)
-    console.log('编译着色器失败: ' + error)
-    gl.deleteShader(shader)
-    return null
-  }
-
-  return shader
-}
-
-//初始化顶点坐标和顶点颜色
-function initVertexBuffers(gl, anchor2DList) {
-
-  const flattenPoints = []
-  anchor2DList.forEach(anchor => {
-    anchor.points.forEach(point => {
-      const {
-        x,
-        y
-      } = point
-      flattenPoints.push(x * 2 - 1, 1 - y * 2)
-    })
-  })
-
-  var vertices = new Float32Array(flattenPoints)
-  var n = flattenPoints.length / 2
-
-  //创建缓冲区对象
-  var buffer = gl.createBuffer()
-  //将顶点坐标和顶点颜色信息写入缓冲区对象
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
-  gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW)
-
-  //获取顶点着色器attribute变量a_Position存储地址, 分配缓存并开启
-  var a_Position = gl.getAttribLocation(gl.program, 'a_Position')
-  gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0)
-  gl.enableVertexAttribArray(a_Position)
-  return n
-}
-
-var EDGE_VSHADER_SOURCE =
-  `
-  attribute vec2 aPosition; 
-  varying vec2 posJudge;
-
-  void main(void) {
-    gl_Position = vec4(aPosition.x, aPosition.y, 1.0, 1.0);
-    posJudge = aPosition;
-  }
-`
-
-var EDGE_FSHADER_SOURCE =
-  `
-  precision highp float;
-  uniform vec2 rightTopPoint;
-  uniform vec2 centerPoint;
-  varying vec2 posJudge;
-
-  float box(float x, float y){
-    float xc = x - centerPoint.x;
-    float yc = y - centerPoint.y;
-    vec2 point = vec2(xc, yc);
-    float right = rightTopPoint.x;
-    float top =  rightTopPoint.y;
-    float line_width = 0.01;
-    vec2 b1 = 1.0 - step(vec2(right,top), abs(point));
-    float outer = b1.x * b1.y;
-    vec2 b2 = 1.0 - step(vec2(right-line_width,top-line_width), abs(point));
-    float inner = b2.x * b2.y;
-    return outer - inner;
-  }
-
-  void main(void) {
-      if(box(posJudge.x, posJudge.y) == 0.0 ) discard;
-
-      gl_FragColor = vec4(box(posJudge.x, posJudge.y), 0.0, 0.0, 1.0);
-
-  }
-`
-
-function initRectEdgeBuffer(gl, x, y, width, height) {
-  let shaderProgram = gl.program;
-  let centerX = x * 2 - 1 + width;
-  let centerY = -1 * (y * 2 - 1) - height;
-  let right = width;
-  let top = height;
-  var vertices = [
-    -1.0, 1.0,
-    -1.0, -1.0,
-    1.0, 1.0,
-    1.0, -1.0
-  ];
-
-  var vertexBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-  var aPosition = gl.getAttribLocation(shaderProgram, 'aPosition');
-  gl.enableVertexAttribArray(aPosition);
-  gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
-
-
-  var rightTop = [
-    right, top
-  ];
-  var rightTopLoc = gl.getUniformLocation(shaderProgram, 'rightTopPoint');
-  gl.uniform2fv(rightTopLoc, rightTop);
-
-  var centerPoint = [
-    centerX, centerY
-  ];
-  var centerPointLoc = gl.getUniformLocation(shaderProgram, 'centerPoint');
-  gl.uniform2fv(centerPointLoc, centerPoint);
-
-  var length = vertices.length / 2;
-
-  return length;
-}
-
-function onDrawRectEdge(gl, x, y, width, height) {
-  width = Math.round(width * 100) / 100
-  height = Math.round(height * 100) / 100
-  var n = initRectEdgeBuffer(gl, x, y, width, height);
-  gl.drawArrays(gl.TRIANGLE_STRIP, 0, n);
-}
+let loggerOnce = false;
 
 Component({
-  behaviors: [getBehavior(), yuvBehavior],
+  behaviors: [arBehavior, xrFrameBehavior],
   data: {
     theme: 'light',
-    cameraPosition: 0,
-    buttonDisable: true,
+    widthScale: 1,      // canvas宽度缩放值
+    heightScale: 0.8,   // canvas高度缩放值
+    hintBoxList: [],  // 显示提示盒子列表,
   },
+  markerIndex: 0,  // 使用的 marker 索引
+  hintInfo: undefined, // 提示框信息
   lifetimes: {
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    detached() {
-      initShadersDone = false
+      /**
+      * 生命周期函数--监听页面加载
+      */
+      detached() {
       console.log("页面detached")
       if (wx.offThemeChange) {
         wx.offThemeChange()
       }
-    },
-    ready() {
+      },
+      ready() {
       console.log("页面准备完全")
-      this.setData({
-        theme: wx.getSystemInfoSync().theme || 'light'
-      })
-
-      if (wx.onThemeChange) {
-        wx.onThemeChange(({
-          theme
-        }) => {
-          this.setData({
-            theme
-          })
-        })
-      }
-    },
-  },
-  methods: {
-    init() {
-      this.initGL()
-    },
-    switchCamera(event){
-      if(this.session.config){
-        const config = this.session.config
-        let pos = Number(event.currentTarget.dataset.value)
-        config.cameraPosition = pos
-        this.session.config = config
         this.setData({
-          cameraPosition:event.currentTarget.dataset.value
+          theme: wx.getSystemInfoSync().theme || 'light'
         })
+
+        if (wx.onThemeChange) {
+          wx.onThemeChange(({theme}) => {
+            this.setData({theme})
+          })
+        }
+      },
+  },
+
+  methods: {
+    // 对应案例的初始化逻辑，由统一的 behavior 触发
+    init() {
+      // 初始化VK
+      // start完毕后，进行更新渲染循环
+      this.initVK();
+    },
+    initVK() {
+      // VKSession 配置
+      const session = this.session = wx.createVKSession({
+        track: {
+          face: {
+            mode: 1
+          }
+        },
+        version: 'v1',
+        gl: this.gl
+      });
+
+      try {
+        session.start(err => {
+          if (err) return console.error('VK error: ', err)
+
+          console.log('@@@@@@@@ VKSession.version', session.version)
+
+          //  VKSession EVENT resize
+          session.on('resize', () => {
+            this.calcCanvasSize();
+          })
+
+          // 开启三维识别
+          session.update3DMode({open3d: true})
+
+          // VKSession EVENT addAnchors
+          session.on('addAnchors', anchors => {
+            console.log("addAnchor", anchors)
+          })
+
+          // VKSession EVENT updateAnchors
+          session.on('updateAnchors', anchors => {
+            // console.log("updateAnchors", anchors);
+
+            const anchor = anchors[0];
+            // 目前只处理一个返回的结果
+            if (anchor) {
+              // console.log('id', anchor.id);
+              // console.log('type', anchor.type);
+              // console.log('transform', anchor.transform);
+              // console.log('mesh', anchor.mesh);
+              // console.log('origin', anchor.origin);
+              // console.log('size', anchor.size);
+              // console.log('detectId', anchor.detectId);
+              // console.log('confidence', anchor.confidence);
+              // console.log('points3d', anchor.points3d);  
+
+              this.wrapTransform = anchor.transform;
+              this.position3D = anchor.points3d;
+
+            }
+          })
+          
+          // VKSession removeAnchors
+          // 识别目标丢失时不断触发
+          session.on('removeAnchors', anchors => {
+            // console.log("removeAnchors");
+          });
+
+
+          console.log('ready to initloop')
+          // start 初始化完毕后，进行更新渲染循环
+          this.initLoop();
+        });
+
+      } catch(e) {
+        console.error(e);
+      }
+
+    },
+    // 针对 xr-frame 的初始化逻辑
+    async initXRFrame() {
+      const xrFrameSystem = wx.getXrFrameSystem();
+      const scene = this.xrScene;
+      const {rootShadow} = scene;
+
+      // 缓存主相机
+      this.xrCameraMain = this.xrCamera
+      this.xrCameraMainTrs = this.xrCameraTrs;
+      
+      // 初始化YUV相机配置
+      this.initXRYUVCamera();
+
+      // === 初始挂载点 ===
+      this.faceWrap = scene.createElement(xrFrameSystem.XRNode);
+      this.faceWrapTrs = this.faceWrap.getComponent(xrFrameSystem.Transform);
+      rootShadow.addChild( this.faceWrap );
+
+      // 加载提示点
+      this.hintBoxListt = this.getHintBox(xrFrameSystem, scene, this.faceWrap);
+
+    },
+    loop() {
+      // console.log('loop')
+
+      // 获取 VKFrame
+      const frame = this.session.getVKFrame(this.data.width, this.data.height)
+
+      // 成功获取 VKFrame 才进行
+      if(!frame) { return; }
+
+      // 更新相机 YUV 数据
+      this.updataXRYUV(frame);
+
+      // 获取 VKCamera
+      const VKCamera = frame.camera
+
+      // 更新 xrFrame 相机矩阵
+      this.updataXRCameraMatrix(VKCamera, NEAR, FAR);
+
+      // 存在faceWrap，执行信息同步逻辑
+      if (this.faceWrap && this.wrapTransform) {
+        const xrFrameSystem = wx.getXrFrameSystem();
+        
+        if (!this.DT) { this.DT = new xrFrameSystem.Matrix4(); }
+        if (!this.DT2) { this.DT2 = new xrFrameSystem.Matrix4(); }
+
+        // 目前VK返回的是行主序矩阵
+        // xrframe 矩阵存储为列主序
+        this.DT.setArray(this.wrapTransform);
+        this.DT.transpose(this.DT2);
+        this.faceWrapTrs.setLocalMatrix(this.DT2);
+
+        // 更新提示点位置
+        this.updateHintBoxPosition(this.hintBoxListt, this.position3D);
+
       }
     },
-    render(frame) {
-      var gl = this.gl
+    getHintBox(xrFrameSystem, scene, wrap) {
+      // 初始化提示点
+      const geometryHint = scene.assets.getAsset('geometry', 'sphere');
+      const effectCube = scene.assets.getAsset('effect', 'standard');
+      const boxScale = 0.03;
+      const hintBoxList = [];
+      for (let i = 0; i < 106; i++) {
+        const colorFloat = i / 106;
+        const el = scene.createElement(xrFrameSystem.XRNode, {
+          position: "0 0 0",
+          scale: `${boxScale} ${boxScale} ${boxScale}`,
+        });
+        const elTrs = el.getComponent(xrFrameSystem.Transform);
+        const mat = scene.createMaterial(effectCube);
+        
+        const colorR = 1.0 - colorFloat;
+        mat.setVector('u_baseColorFactor', xrFrameSystem.Vector4.createFromNumber(1.0, colorR, colorR, 1.0));
 
-      this.renderGL(frame)
+        const mesh = el.addComponent(xrFrameSystem.Mesh, {
+          geometry: geometryHint,
+          material: mat,
+        });
 
-      const camera = frame.camera
-
-      // 相机
-      if (camera) {
-        this.camera.matrixAutoUpdate = false
-        this.camera.matrixWorldInverse.fromArray(camera.viewMatrix)
-        this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse)
-
-        const projectionMatrix = camera.getProjectionMatrix(NEAR, FAR)
-        this.camera.projectionMatrix.fromArray(projectionMatrix)
-        this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
+        wrap.addChild( el );
+        // elTrs.visible = false;
+        
+        hintBoxList.push( elTrs );
       }
 
-      this.renderer.autoClearColor = false
-      this.renderer.render(this.scene, this.camera)
-      this.renderer.state.setCullFace(this.THREE.CullFaceNone)
-
-      const anchor2DList = this.data.anchor2DList
-
-      if (!anchor2DList || anchor2DList.length <= 0) {
-        return
-      } else {
-        if (!initShadersDone) {
-          this.vertexProgram = initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)
-          this.rectEdgeProgram = initShaders(gl, EDGE_VSHADER_SOURCE, EDGE_FSHADER_SOURCE)
-          if (!this.vertexProgram || !this.rectEdgeProgram) {
-            console.log('初始化着色器失败')
-            return
-          }
-          console.log('初始化着色器成功')
-        }
-
-        gl.useProgram(this.vertexProgram)
-        gl.program = this.vertexProgram
-        //初始化顶点坐标和顶点颜色
-        var n = initVertexBuffers(gl, anchor2DList)
-
-        //绘制点
-        gl.drawArrays(gl.POINTS, 0, n)
-
-        gl.useProgram(this.rectEdgeProgram)
-        gl.program = this.rectEdgeProgram
-
-        for (var i = 0; i < anchor2DList.length; i++) {
-          onDrawRectEdge(gl, anchor2DList[i].origin.x, anchor2DList[i].origin.y, anchor2DList[i].size.width, anchor2DList[i].size.height)
+      return hintBoxList;
+    },
+    updateHintBoxPosition(hintBoxList, points3d) {
+      if (hintBoxList && hintBoxList.length > 0) {
+        // console.log('ready to set', hintBoxList);
+        // 存在提示列表，则更新点信息
+        for (let i = 0; i < hintBoxList.length; i++) {
+          const hintBox = hintBoxList[i];
+          hintBox.position.x = points3d[i].x;
+          hintBox.position.y = points3d[i].y;
+          hintBox.position.z = points3d[i].z;
         }
       }
     },

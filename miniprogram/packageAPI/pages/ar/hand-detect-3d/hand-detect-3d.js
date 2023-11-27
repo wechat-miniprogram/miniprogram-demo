@@ -52,7 +52,7 @@ Component({
       // VKSession 配置
       const session = this.session = wx.createVKSession({
         track: {
-          body: {
+          hand: {
             mode: 1
           }
         },
@@ -71,7 +71,7 @@ Component({
             this.calcCanvasSize();
           })
 
-          // 开启躯体三维识别
+          // 开启三维识别
           session.update3DMode({open3d: true})
 
           // VKSession EVENT addAnchors
@@ -84,7 +84,7 @@ Component({
             // console.log("updateAnchors", anchors);
 
             const anchor = anchors[0];
-            // 目前只处理一个返回的躯体
+            // 目前只处理一个返回的手
             if (anchor) {
               // console.log('id', anchor.id);
               // console.log('type', anchor.type);
@@ -96,8 +96,8 @@ Component({
               // console.log('confidence', anchor.confidence);
               // console.log('points3d', anchor.points3d);  
 
-              this.bodyTransform = anchor.transform;
-              this.bodyPosition3D = anchor.points3d;
+              this.wrapTransform = anchor.transform;
+              this.position3D = anchor.points3d;
 
             }
           })
@@ -132,14 +132,13 @@ Component({
       // 初始化YUV相机配置
       this.initXRYUVCamera();
 
-      // === 初始躯体挂载点 ===
-      this.bodyWrap = scene.createElement(xrFrameSystem.XRNode);
-      this.bodyWrapTrs = this.bodyWrap.getComponent(xrFrameSystem.Transform);
-      rootShadow.addChild( this.bodyWrap );
+      // === 初始s手挂载点 ===
+      this.handWrap = scene.createElement(xrFrameSystem.XRNode);
+      this.handWrapTrs = this.handWrap.getComponent(xrFrameSystem.Transform);
+      rootShadow.addChild( this.handWrap );
 
       // 加载提示点
-      this.hintBoxListt = this.getHintBox(xrFrameSystem, scene, this.bodyWrap);
-
+      this.hintBoxListt = this.getHintBox(xrFrameSystem, scene, this.handWrap);
 
     },
     loop() {
@@ -160,8 +159,8 @@ Component({
       // 更新 xrFrame 相机矩阵
       this.updataXRCameraMatrix(VKCamera, NEAR, FAR);
 
-      // 存在bodyWrao，执行信息同步逻辑
-      if (this.bodyWrap && this.bodyTransform) {
+      // 存在handWrap，执行信息同步逻辑
+      if (this.handWrap && this.wrapTransform) {
         const xrFrameSystem = wx.getXrFrameSystem();
         
         if (!this.DT) { this.DT = new xrFrameSystem.Matrix4(); }
@@ -169,12 +168,12 @@ Component({
 
         // 目前VK返回的是行主序矩阵
         // xrframe 矩阵存储为列主序
-        this.DT.setArray(this.bodyTransform);
+        this.DT.setArray(this.wrapTransform);
         this.DT.transpose(this.DT2);
-        this.bodyWrapTrs.setLocalMatrix(this.DT2);
+        this.handWrapTrs.setLocalMatrix(this.DT2);
 
         // 更新提示点位置
-        this.updateHintBoxPosition(this.hintBoxListt, this.bodyPosition3D);
+        this.updateHintBoxPosition(this.hintBoxListt, this.position3D);
 
       }
     },
@@ -182,10 +181,10 @@ Component({
       // 初始化提示点
       const geometryHint = scene.assets.getAsset('geometry', 'sphere');
       const effectCube = scene.assets.getAsset('effect', 'standard');
-      const boxScale = 0.03;
+      const boxScale = 0.004;
       const hintBoxList = [];
-      for (let i = 0; i < 24; i++) {
-        const colorFloat = i / 24;
+      for (let i = 0; i < 16; i++) {
+        const colorFloat = i / 16;
         const el = scene.createElement(xrFrameSystem.XRNode, {
           position: "0 0 0",
           scale: `${boxScale} ${boxScale} ${boxScale}`,

@@ -12,6 +12,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "face-detect-3d",
+          "pathName": "packageAPI/pages/ar/face-detect-3d/face-detect-3d",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "hand-detect-3d",
+          "pathName": "packageAPI/pages/ar/hand-detect-3d/hand-detect-3d",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "body-detect-3d",
           "pathName": "packageAPI/pages/ar/body-detect-3d/body-detect-3d",
           "query": "",

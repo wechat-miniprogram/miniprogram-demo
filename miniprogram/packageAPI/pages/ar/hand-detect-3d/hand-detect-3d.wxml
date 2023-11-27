@@ -14,11 +14,9 @@
 
   </view>
 
+
   <view class="hint-bottom page-body-text tc">
-    <view class="btn-wrap">
-      <button class="btn" type="primary" bindtap="switchCamera">切换前后置摄像头</button>
-    </view>
-    <text>提示：摄像头对准人脸，然后会显示106个关键点的三维坐标提示小球</text>
+    <text>提示：摄像头对准手，然后会显示16个关键点的三维坐标提示小球</text>
   </view>
 </view>
 
