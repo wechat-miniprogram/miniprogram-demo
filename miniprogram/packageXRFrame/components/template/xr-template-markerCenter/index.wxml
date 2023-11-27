@@ -25,15 +25,15 @@
       background="ar" is-ar-camera
     >
       <!-- 将模型放在相机内部，相当于是放在视图空间里面，只需要z轴正方向移动，就是远离相机 -->
-      <!-- 放ar相机内部，这个流程有bug，估计渲染状态被改了，准备排查 -->
+      <!-- 放ar相机内部，这个流程有bug，感觉是vk返回的矩阵里面有负数，准备排查 -->
       <xr-gltf
         wx:if="{{markerMatch}}"
-        node-id="gltf-damageHelmet" position="0 0 6" rotation="0 0 0" scale="1 1 1" model="gltf-damageHelmet"
+        node-id="gltf-damageHelmet" position="0 0 6" rotation="0 0 0" scale="1 1 -1" model="gltf-damageHelmet"
       ></xr-gltf>
     </xr-camera>
   </xr-node>
   <xr-node node-id="lights">
     <xr-light type="ambient" color="1 1 1" intensity="0.5" />
-    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="2" />
+    <xr-light type="directional" rotation="20 120 0" color="1 1 1" intensity="2" />
   </xr-node>
 </xr-scene>
