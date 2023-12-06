@@ -12,6 +12,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "plane-ar-v2-options",
+          "pathName": "packageAPI/pages/ar/plane-ar-v2-options/plane-ar-v2-options",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "face-detect-3d",
           "pathName": "packageAPI/pages/ar/face-detect-3d/face-detect-3d",
           "query": "",

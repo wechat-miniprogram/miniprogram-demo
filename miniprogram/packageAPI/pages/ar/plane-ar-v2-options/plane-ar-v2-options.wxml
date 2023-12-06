@@ -1,0 +1,46 @@
+
+<view class="page wrap-fix" data-weui-theme="{{theme}}">
+  <view class="canvas-wrap" style="width: {{widthScale * 100}}%; height: {{heightScale * 100}}%">
+    <canvas type="webgl" id="canvas"></canvas>
+    
+    <view class="hint-box"  wx:for="{{hintBoxList}}"  wx:for-item="hintBox" wx:key="hintBoxId"
+      style="left: {{hintBox.left}}%; top: {{hintBox.top}}%; width: {{hintBox.width}}px;  height: {{hintBox.height}}px;"
+    >
+      <p class="hint-id">识别id: {{hintBox.markerId}}</p>
+    </view>
+  </view>
+
+  <view class="hint-words">提示：选择用于识别的图片, 点击添加为marker, 然后手机摄像头对准下方所选图片</view>
+
+  <view class="wrap-option">
+    <button type="primary" disabled="{{markerImgList.length === 0}}" bindtap="removeMarker">删除已有 marker</button>
+    <button type="primary" disabled="{{markerImgList.length === 0}}" bindtap="getAllMarker">获取所有 marker</button>
+  </view>
+  <view class="wrap-marker">
+    <view class="wrap-left">
+      <button type="primary" class="btn-left" disabled="{{chooseImgList.length === 0}}" bindtap="addMarker">添加 marker</button>
+    </view>
+    <view class="wrap-right img-list">
+      <view class="img-list">
+        <image wx:for="{{markerImgList}}"  wx:for-item="markerImg" wx:key="markerIndex" src="{{markerImg.filePath}}" mode="aspectFit" />
+      </view>
+      <view class="hint-empty" wx:if="{{markerImgList.length === 0}}">
+        <p>上传图片后点击左侧按钮<br/>将图片添加到 Marker 识别列表</p>
+      </view>
+    </view>
+  </view>
+  <view class="wrap-choose">
+    <view class="wrap-left">
+      <button type="primary" class="btn-left" bindtap="chooseMedia">选择识别图片</button>
+    </view>
+    <view class="wrap-right">
+      <view class="img-list">
+        <image wx:for="{{chooseImgList}}"  wx:for-item="chooseImg" wx:key="chooseIndex" src="{{chooseImg}}" mode="aspectFit" />
+      </view>
+      <view class="hint-empty" wx:if="{{chooseImgList.length === 0}}">
+        <p>点击左侧按钮上传图片（允许上传1-9张）</p>
+      </view>
+    </view>
+  </view>
+</view>
+

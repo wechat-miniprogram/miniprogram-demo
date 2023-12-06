@@ -286,6 +286,10 @@ Page({
           url: 'plane-ar-v2/plane-ar-v2'
         },
         {
+          zh: '水平面AR-v2-附加能力',
+          url: 'plane-ar-v2-options/plane-ar-v2-options'
+        },
+        {
           zh: '水平面AR-v2-marker识别',
           url: 'plane-ar-v2-marker/plane-ar-v2-marker'
         },
@@ -329,10 +333,10 @@ Page({
           zh: '照片OCR检测',
           url: 'photo-ocr-detect/photo-ocr-detect'
         },
-        // {
-        //   zh: '照片身份证检测',
-        //   url: 'photo-idcard-detect/photo-idcard-detect'
-        // },
+        {
+          zh: '照片身份证检测',
+          url: 'photo-idcard-detect/photo-idcard-detect'
+        },
         {
           zh: '实时人脸检测',
           url: 'face-detect/face-detect'

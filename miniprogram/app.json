@@ -80,6 +80,7 @@
         "pages/ar/visionkit-basic-v2/visionkit-basic-v2",
         "pages/ar/plane-ar/plane-ar",
         "pages/ar/plane-ar-v2/plane-ar-v2",
+        "pages/ar/plane-ar-v2-options/plane-ar-v2-options",
         "pages/ar/plane-ar-v2-marker/plane-ar-v2-marker",
         "pages/ar/plane-ar-v2-depth/plane-ar-v2-depth",
         "pages/ar/plane-ar-3dof/plane-ar-3dof",

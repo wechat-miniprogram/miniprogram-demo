@@ -1,0 +1,144 @@
+.canvas-wrap {
+  position: relative;
+  width: 100%;
+  background-color: #000;
+}
+
+.canvas-wrap #canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hint-box {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width: 0;
+  height: 0;
+}
+.hint-id {
+  position: absolute;
+  left: -6rpx;
+  right: -6rpx;
+  bottom: 100%;
+  color: #fff;
+  font-size: 20rpx;
+  line-height: 40rpx;
+  text-align: center;
+  text-overflow: ellipsis;
+  background-color: #07c160;
+  border-radius: 8rpx;
+
+}
+
+.wrap-fix {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hint-words {
+  position: absolute;
+  left: 20rpx;
+  top: 20rpx;
+  right: 20rpx;
+  padding: 10rpx 20rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border-radius: 6rpx;
+  background-color: rgba(0, 0, 0, .3);
+  font-size: 26rpx;
+  color: #fff;
+}
+
+.wrap-left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 30rpx;
+  width: 160rpx;
+}
+
+button.btn-left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 12rpx;
+  font-size: 30rpx;
+  line-height: 1.2;
+}
+
+.wrap-right {
+  position: absolute;
+  left: 180rpx;
+  right: 20rpx;
+  top: 0;
+  bottom: 30rpx;
+  display: flex;
+}
+
+.img-list {
+  display: flex;
+  overflow: auto;
+}
+
+.img-list image {
+  height: 100%;
+}
+
+.hint-empty {
+  position: relative;
+  flex: 1;
+  border: 4rpx dotted rgba(0, 0, 0, .3);
+  border-radius: 6rpx;
+}
+
+.hint-empty p {
+  position: absolute;
+  left: 20rpx;
+  right: 20rpx;
+  top: 50%;
+  transform: translate(0, -50%);
+  text-align: center;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, .3);
+}
+
+.wrap-choose {
+  position: absolute;
+  left: 20rpx;
+  right: 20rpx;
+  bottom: 0;
+  height: 15%;
+}
+
+.wrap-marker {
+  position: absolute;
+  left: 20rpx;
+  right: 20rpx;
+  bottom: 15%;
+  height: 15%;
+}
+
+.wrap-option {
+  position: absolute;
+  left: 20rpx;
+  right: 0;
+  bottom: 30%;
+  height: 10%;
+  display: flex;
+}
+
+.wrap-option button {
+  flex: 1;
+  margin: 20rpx 20rpx 20rpx 0;
+  font-size: 30rpx;
+  line-height: 1.2;
+}
