@@ -14,13 +14,13 @@ const threeBehavior = Behavior({
             // 场景
             const scene = this.scene = new THREE.Scene()
 
+
             // 光源
-            const light1 = new THREE.HemisphereLight(0xffffff, 0x444444) // 半球光
-            light1.position.set(0, 0.2, 0)
-            scene.add(light1)
-            const light2 = new THREE.DirectionalLight(0xffffff) // 平行光
-            light2.position.set(0, 0.2, 0.1)
-            scene.add(light2)
+            const ambientLight = new THREE.AmbientLight( 0x555555 ); // 氛围光
+            scene.add( ambientLight );
+            const dirLight = new THREE.DirectionalLight(0xffffff, 1) // 平行光
+            dirLight.position.set(1, 1, 1);
+            scene.add(dirLight)
 
             // 渲染层
             const renderer = this.renderer = new THREE.WebGLRenderer({

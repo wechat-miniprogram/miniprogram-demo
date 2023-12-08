@@ -13,8 +13,14 @@
   <view class="hint-words">提示：选择用于识别的图片, 点击添加为marker, 然后手机摄像头对准下方所选图片</view>
 
   <view class="wrap-option">
-    <button type="primary" disabled="{{markerImgList.length === 0}}" bindtap="removeMarker">删除已有 marker</button>
-    <button type="primary" disabled="{{markerImgList.length === 0}}" bindtap="getAllMarker">获取所有 marker</button>
+    <view class="row">
+      <button type="primary" disabled="{{markerImgList.length === 0}}" bindtap="placePlane">识别点放置方块</button>
+      <button type="primary" disabled="{{markerImgList.length === 0}}" bindtap="changeDepthFlag">开启关闭深度遮挡</button>
+    </view>
+    <view class="row">
+      <button type="primary" disabled="{{markerImgList.length === 0}}" bindtap="removeMarker">删除已有 marker</button>
+    </view>
+
   </view>
   <view class="wrap-marker">
     <view class="wrap-left">

@@ -116,29 +116,36 @@ button.btn-left {
   left: 20rpx;
   right: 20rpx;
   bottom: 0;
-  height: 15%;
+  height: 12%;
 }
 
 .wrap-marker {
   position: absolute;
   left: 20rpx;
   right: 20rpx;
-  bottom: 15%;
-  height: 15%;
+  bottom: 12%;
+  height: 12%;
 }
 
 .wrap-option {
   position: absolute;
   left: 20rpx;
   right: 0;
-  bottom: 30%;
-  height: 10%;
+  bottom: 24%;
+  height: 14%;
+  flex-direction: column;
   display: flex;
 }
 
+.wrap-option .row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
 .wrap-option button {
   flex: 1;
-  margin: 20rpx 20rpx 20rpx 0;
+  margin: 5rpx 20rpx 20rpx 0;
   font-size: 30rpx;
   line-height: 1.2;
 }

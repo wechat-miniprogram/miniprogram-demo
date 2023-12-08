@@ -13,10 +13,9 @@ Component({
     heightScale: 0.6,   // canvas高度缩放值
     markerImgList: [],  // 使用的 marker 列表
     chooseImgList: [], // 使用的 图片 列表
-    hintBoxList: [],  // 显示提示盒子列表
   },
   markerIndex: 0,  // 使用的 marker 索引
-  hintInfo: undefined, // 提示框信息
+  showBoxList: [], // 提示盒子列表
   lifetimes: {
       /**
       * 生命周期函数--监听页面加载
@@ -56,8 +55,8 @@ Component({
 
       this.markerIndex = 0;
 
-      // 添加 识别包围盒子
-      this.add3DBox();
+      this.showBoxList = [];
+
     },
     initVK() {
       // VKSession 配置
@@ -86,39 +85,90 @@ Component({
         session.on('addAnchors', anchors => {
           // console.log("addAnchor", anchors);
 
-          this.left.visible = true;
-          this.right.visible = true;
-          this.top.visible = true;
-          this.bottom.visible = true;
+          anchors.forEach(anchor => {
+            const showBox = {
+              id: anchor.id,
+              size: anchor.size,
+              transform: anchor.transform
+            };
+            
+            switch(anchor.type) {
+              case 0:
+                // plane Anchor
+                const boxPlane = this.createBox(0xffffff, anchor.type);
+                boxPlane.box.scale.set(showBox.size.width, 0.02, showBox.height);
+                console.log('boxPlane.size', showBox.size);
+
+                showBox.type = 'Plane';
+                showBox.wrap = boxPlane.wrap;
+                showBox.box = boxPlane.box;
+                break;
+              case 1:
+                // marker Anchor
+                const boxMarker = this.createBox(0x55cc55, anchor.type);
+                boxMarker.box.scale.set(1, 0.15, 1);
+                console.log('boxMarker.size', showBox.size);
+
+
+                showBox.type = 'Marker';
+                showBox.wrap = boxMarker.wrap;
+                showBox.box = boxMarker.box;
+                break;
+            }
+            
+            this.showBoxList.push(showBox);
+          });
+
+          console.log('this.showBoxList', this.showBoxList)
         })
 
         // VKSession EVENT updateAnchors
         session.on('updateAnchors', anchors => {
-          // marker 模式下，目前仅有一个识别目标，可以直接取
-          const anchor = anchors[0];
-          const markerId = anchor.id;
-          const size = anchor.size;
-          this.hintInfo = {
-            markerId: markerId,
-            size: size
-          }
+          // plane + marker 模式下，可以有多个识别目标
+          // console.log('this.showBoxList', this.showBoxList)
+
+          // 仅更新已经添加的Anchor
+          this.showBoxList.forEach(showBox => {
+            for(let i = 0; i < anchors.length; i++) {
+              if (showBox.id === anchors[i].id) {
+                // 匹配
+                if (showBox.size !== anchors[i].size) {
+                  switch(showBox.type) {
+                    case 'Plane':
+                      showBox.box.scale.set(anchors[i].size.width, 0.02, anchors[i].size.height);
+                      break;
+                    case 'Marker':
+                      break;
+                  }
+                }
+                showBox.size =  anchors[i].size;
+                showBox.transform = anchors[i].transform;
+                break;
+              }
+            }
+          });
         })
         
         // VKSession removeAnchors
         // 识别目标丢失时，会触发一次
         session.on('removeAnchors', anchors => {
-          this.left.visible = false;
-          this.right.visible = false;
-          this.top.visible = false;
-          this.bottom.visible = false;
 
-          if (this.data.hintBoxList && this.data.hintBoxList.length > 0) {
-            // 清理信息
-            this.hintInfo = undefined;
-            // 存在列表的情况，去除remove
-            this.setData({
-              hintBoxList: []
-            });
+          // 存在要删除的 Anchor
+          if (anchors.length > 0) {
+            this.showBoxList = this.showBoxList.filter((showBox) => {
+              let flag = true;
+              for(let i = 0; i < anchors.length; i++) {
+                if (showBox.id === anchors[i].id) {
+                  // 从three里面去掉
+                  this.scene.remove(showBox.wrap);
+                  // 标记删除
+                  flag = false;
+                  break;
+                }
+              }
+              return flag;
+
+            })
           }
         });
 
@@ -159,41 +209,10 @@ Component({
         this.camera.projectionMatrixInverse.getInverse(this.camera.projectionMatrix)
       }
 
-      // 绘制而为提示框的逻辑
-      if (this.hintInfo) {
-        // 存在提示信息，则更新
-        const THREE = this.THREE;
-
-        // 原点偏移矩阵，VK情况下，marker 点对应就是 0 0 0，世界矩阵可以认为是一个单位矩阵
-        // marker 右侧点可以理解是 0.5 0 0
-        const center = new THREE.Vector3();
-        const right = new THREE.Vector3(0.5, 0, 0);
-
-        // 获取设备空间坐标
-        const devicePos = center.clone().project(this.camera);
-
-        // 转换坐标系，从 (-1, 1) 转到 (0, 100)，同时移到左上角 0 0，右下角 1 1
-        const screenPos = new THREE.Vector3(0, 0, 0);
-        screenPos.x = devicePos.x * 50 + 50;
-        screenPos.y = 50 - devicePos.y * 50;
-
-        // 获取右侧点信息
-        const deviceRightPos = right.clone().project(this.camera);
-        const screenRightPos = new THREE.Vector3(0, 0, 0);
-        screenRightPos.x = deviceRightPos.x * 50 + 50;
-
-        const markerHalfWidth = screenRightPos.x - screenPos.x;
-        
-        this.setData({
-          hintBoxList: [
-            {
-              markerId: this.hintInfo.markerId,
-              left: screenPos.x - markerHalfWidth,
-              top: screenPos.y - markerHalfWidth,
-              width: markerHalfWidth * this.data.domWidth * 2 / 100,
-              height: markerHalfWidth * this.data.domWidth * 2 / 100,
-            }
-          ]
+      // 更新提示盒子 位置
+      if (this.showBoxList) {
+        this.showBoxList.forEach(showBox => {
+          showBox.wrap.matrix.fromArray(showBox.transform);
         });
       }
 
@@ -202,54 +221,57 @@ Component({
       this.renderer.render(this.scene, this.camera)
       this.renderer.state.setCullFace(this.THREE.CullFaceNone)
     },
-    add3DBox() {
-      // 添加marker需要的 三维包围框
-
+    createBox(color, type) {
       const THREE = this.THREE;
       const scene = this.scene;
 
       const material = new THREE.MeshPhysicalMaterial( {
         metalness: 0.0,
         roughness: 0.1,
-        color: 0x64f573,
+        color: color,
+        transparent: true,
+        opacity: 0.6
       } );
       const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 
-      const borderSize = 0.1;
+      const wrap = new THREE.Object3D();
+      // 禁止矩阵自动更新，只能手动写入信息
+      wrap.matrixAutoUpdate = false;
 
-      const left = new THREE.Mesh( geometry, material );
-      left.position.set(-0.5, 0, 0 );
-      left.rotation.set(-Math.PI / 2, 0, 0 )
-      left.scale.set(borderSize, 1.1, borderSize);
-      scene.add( left );
-      left.visible = false;
-      this.left = left;
+      // 绘制区域的box
+      const box = new THREE.Mesh( geometry, material );
+      wrap.add(box);
 
-      const right = new THREE.Mesh( geometry, material );
-      right.position.set(0.5, 0, 0 );
-      right.rotation.set(-Math.PI / 2, 0, 0 )
-      right.scale.set(borderSize, 1.1, borderSize);
-      scene.add( right );
-      right.visible = false;
-      this.right = right;
+      // 根据类型添加不一样的行为
+      switch(type) {
+        case 0:
+          // plane Anchor
 
-      const top = new THREE.Mesh( geometry, material );
-      top.position.set(0, 0, 0.5 );
-      top.rotation.set(0, 0, 0 )
-      top.scale.set(1.1, borderSize, borderSize);
-      scene.add( top );
-      top.visible = false;
-      this.top = top;
+          // 平面添加中心提示点
+          const materialHint = new THREE.MeshPhysicalMaterial( {
+            metalness: 0.0,
+            roughness: 0.1,
+            color: 0xaa3333,
+            transparent: true,
+            opacity: 0.99
+          } );
+          const geometryHint =  new THREE.SphereGeometry( 0.03, 32, 32 );
+          const hint = new THREE.Mesh( geometryHint, materialHint );
+          hint.position.set(0, 0.04, 0);
+          wrap.add(hint);
+          break;
+        case 1:
+          // marker Anchor
+          break;
+      }
+      scene.add( wrap );
 
-      const bottom = new THREE.Mesh( geometry, material );
-      bottom.position.set(0, 0, -0.5 );
-      bottom.rotation.set(0, 0, 0 )
-      bottom.scale.set(1.1, borderSize, borderSize);
-      scene.add( bottom );
-      bottom.visible = false;
-      this.bottom = bottom;
+      box.visible = true;
 
-      console.log('add3DBox is finish')
+      return {
+        wrap: wrap,
+        box: box,
+      };
     },
     chooseMedia() { 
       // marker图片上传逻辑
@@ -366,8 +388,10 @@ Component({
         })
       }
     },
-    getAllMarker() {
-      console.log(this.session.getAllMarker())
+    placePlane() {
+
+    },
+    changeDepthFlag() {
     },
   },
 })
