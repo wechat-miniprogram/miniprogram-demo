@@ -15,7 +15,9 @@ Component({
     chooseImgList: [], // 使用的 图片 列表
   },
   markerIndex: 0,  // 使用的 marker 索引
-  showBoxList: [], // 提示盒子列表
+  showBoxList: [], // 提示盒子列表,
+  hintCenter: null, // 红色提示点
+  useDepthBuffer: false, // 开启深度buffer
   lifetimes: {
       /**
       * 生命周期函数--监听页面加载
@@ -45,6 +47,14 @@ Component({
     init() {
       // 初始化 Three.js，用于模型相关的渲染
       this.initTHREE()
+      this.initDepthGL();
+
+      this.loader.load('https://dldir1.qq.com/weixin/miniprogram/reticle_4b6cc19698ca4a08b31fd3c95ce412ec.glb', gltf => {
+        const reticle = this.hintCenter = gltf.scene
+
+        reticle.visible = false
+        this.scene.add(reticle)
+      })
 
       // 初始化 GL，基于 Three.js 的 Context，用于相机YUV渲染
       this.initYUV()
@@ -54,8 +64,10 @@ Component({
       this.initVK();
 
       this.markerIndex = 0;
-
       this.showBoxList = [];
+      this.useDepthBuffer = false;
+
+
 
     },
     initVK() {
@@ -216,9 +228,34 @@ Component({
         });
       }
 
+      const reticle = this.hintCenter;
+      if (reticle) {
+        const hitTestRes = this.session.hitTest(0.5, 0.5)
+        if (hitTestRes.length) {
+          reticle.matrixAutoUpdate = false
+          reticle.matrix.fromArray(hitTestRes[0].transform)
+          reticle.matrix.decompose(reticle.position, reticle.quaternion, reticle.scale)
+          reticle.visible = true
+        } else {
+          reticle.visible = false
+        }
+      }
+
       this.renderer.autoClearColor = false
+      this.renderer.autoClearDepth = false
+
+      // 绘制提示的物体
       this.renderer.state.setCullFace(this.THREE.CullFaceBack)
       this.renderer.render(this.scene, this.camera)
+      this.renderer.state.setCullFace(this.THREE.CullFaceNone)
+
+      if (this.useDepthBuffer) {
+        // 1. 在左下角绘制深度提示
+        // 2. 写入深度遮挡纹理到深度值
+        this.renderDepthGL(frame);
+      }
+      // 绘制进行深度遮挡的物体
+      this.renderer.render(this.sceneCull, this.camera)
       this.renderer.state.setCullFace(this.THREE.CullFaceNone)
     },
     createBox(color, type) {
@@ -247,18 +284,7 @@ Component({
         case 0:
           // plane Anchor
 
-          // 平面添加中心提示点
-          const materialHint = new THREE.MeshPhysicalMaterial( {
-            metalness: 0.0,
-            roughness: 0.1,
-            color: 0xaa3333,
-            transparent: true,
-            opacity: 0.99
-          } );
-          const geometryHint =  new THREE.SphereGeometry( 0.03, 32, 32 );
-          const hint = new THREE.Mesh( geometryHint, materialHint );
-          hint.position.set(0, 0.04, 0);
-          wrap.add(hint);
+
           break;
         case 1:
           // marker Anchor
@@ -388,10 +414,45 @@ Component({
         })
       }
     },
-    placePlane() {
+    placeItem() {
+      if (this.hintCenter && this.hintCenter.visible) {
+        const THREE = this.THREE;
+        const scene = this.sceneCull;
 
+        // 加载模型
+        this.loader.load('https://dldir1.qq.com/weixin/miniprogram/RobotExpressive_aa2603d917384b68bb4a086f32dabe83.glb', gltf => {
+          const wrap = new THREE.Object3D();
+
+          wrap.add(gltf.scene);
+          
+          scene.add( wrap );
+
+          const position = new THREE.Vector3();
+          const rotation = new THREE.Quaternion();
+          const scale = new THREE.Vector3();
+          this.hintCenter.matrix.decompose(position, rotation, scale);
+          wrap.position.set(position.x, position.y, position.z);
+          wrap.rotation.set(rotation.x, rotation.y, rotation.z, rotation.w);
+          wrap.scale.set(0.1, 0.1, 0.1);
+
+          console.log("model加载完成")
+
+          console.log('position', position.x, position.y, position.z);
+          // console.log('rotation', rotation.x, rotation.y, rotation.z, rotation.w);
+          // boxPlace.box.matrix.FromMatrix4(this.hintCenter.matrix);
+        })
+
+      
+
+      }
     },
     changeDepthFlag() {
+      const depthNear = 0.1;
+      const depthFar = 20;
+      this.session.setDepthOccRange(depthNear, depthFar)
+
+      this.useDepthBuffer = !this.useDepthBuffer;
+      this.session.setDepthSwitch(this.useDepthBuffer);
     },
   },
 })
