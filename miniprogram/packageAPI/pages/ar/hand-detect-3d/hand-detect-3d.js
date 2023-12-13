@@ -12,7 +12,7 @@ Component({
   data: {
     theme: 'light',
     widthScale: 1,      // canvas宽度缩放值
-    heightScale: 0.85,   // canvas高度缩放值
+    heightScale: 0.8,   // canvas高度缩放值
     hintBoxList: [],  // 显示提示盒子列表
   },
   markerIndex: 0,  // 使用的 marker 索引
@@ -99,6 +99,8 @@ Component({
               this.wrapTransform = anchor.transform;
               this.position3D = anchor.points3d;
 
+              this.updateHintBoxVisble(this.hintBoxList, true);
+
             }
           })
           
@@ -106,6 +108,8 @@ Component({
           // 识别目标丢失时不断触发
           session.on('removeAnchors', anchors => {
             // console.log("removeAnchors");
+
+            this.updateHintBoxVisble(this.hintBoxList, false);
           });
 
 
@@ -138,7 +142,7 @@ Component({
       rootShadow.addChild( this.handWrap );
 
       // 加载提示点
-      this.hintBoxListt = this.getHintBox(xrFrameSystem, scene, this.handWrap);
+      this.hintBoxList = this.getHintBox(xrFrameSystem, scene, this.handWrap);
 
     },
     loop() {
@@ -173,7 +177,7 @@ Component({
         this.handWrapTrs.setLocalMatrix(this.DT2);
 
         // 更新提示点位置
-        this.updateHintBoxPosition(this.hintBoxListt, this.position3D);
+        this.updateHintBoxPosition(this.hintBoxList, this.position3D);
 
       }
     },
@@ -181,7 +185,7 @@ Component({
       // 初始化提示点
       const geometryHint = scene.assets.getAsset('geometry', 'sphere');
       const effectCube = scene.assets.getAsset('effect', 'standard');
-      const boxScale = 0.004;
+      const boxScale = 0.006;
       const hintBoxList = [];
       for (let i = 0; i < 16; i++) {
         const colorFloat = i / 16;
@@ -201,7 +205,7 @@ Component({
         });
 
         wrap.addChild( el );
-        // elTrs.visible = false;
+        elTrs.visible = false;
         
         hintBoxList.push( elTrs );
       }
@@ -220,6 +224,18 @@ Component({
         }
       }
     },
+    updateHintBoxVisble(hintBoxList, visible) {
+      if (hintBoxList && hintBoxList.length > 0) {
+        // console.log('ready to set', hintBoxList);
+        // 存在提示列表，则更新点信息
+        for (let i = 0; i < hintBoxList.length; i++) {
+          const hintBox = hintBoxList[i];
+          if (hintBox.visible !== visible) {
+            hintBox.visible = visible;
+          }
+        }
+      }
+    }
 
   },
 })

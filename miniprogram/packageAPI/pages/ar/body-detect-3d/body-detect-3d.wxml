@@ -15,7 +15,10 @@
   </view>
 
   <view class="hint-bottom page-body-text tc">
-    <text>提示：摄像头对准人体，然后会显示24个关键点的三维坐标提示小球</text>
+    <view class="btn-wrap">
+      <button class="btn" type="primary" bindtap="switchCamera">切换前后置摄像头</button>
+    </view>
+    <text>提示：摄像头对准人体，然后会显示24个关键点的三维坐标提示小球；横屏情况，会自动切换横屏小程序（需保证设备没有开启竖屏锁定）</text>
   </view>
 </view>
 

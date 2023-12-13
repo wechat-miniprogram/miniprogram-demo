@@ -99,6 +99,8 @@ Component({
               this.bodyTransform = anchor.transform;
               this.bodyPosition3D = anchor.points3d;
 
+              this.updateHintBoxVisble(this.hintBoxList, true);
+
             }
           })
           
@@ -106,6 +108,9 @@ Component({
           // 识别目标丢失时不断触发
           session.on('removeAnchors', anchors => {
             // console.log("removeAnchors");
+
+            this.updateHintBoxVisble(this.hintBoxList, false);
+
           });
 
 
@@ -138,7 +143,7 @@ Component({
       rootShadow.addChild( this.bodyWrap );
 
       // 加载提示点
-      this.hintBoxListt = this.getHintBox(xrFrameSystem, scene, this.bodyWrap);
+      this.hintBoxList = this.getHintBox(xrFrameSystem, scene, this.bodyWrap);
 
 
     },
@@ -174,7 +179,7 @@ Component({
         this.bodyWrapTrs.setLocalMatrix(this.DT2);
 
         // 更新提示点位置
-        this.updateHintBoxPosition(this.hintBoxListt, this.bodyPosition3D);
+        this.updateHintBoxPosition(this.hintBoxList, this.bodyPosition3D);
 
       }
     },
@@ -221,6 +226,17 @@ Component({
         }
       }
     },
-
+    updateHintBoxVisble(hintBoxList, visible) {
+      if (hintBoxList && hintBoxList.length > 0) {
+        // console.log('ready to set', hintBoxList);
+        // 存在提示列表，则更新点信息
+        for (let i = 0; i < hintBoxList.length; i++) {
+          const hintBox = hintBoxList[i];
+          if (hintBox.visible !== visible) {
+            hintBox.visible = visible;
+          }
+        }
+      }
+    }
   },
 })

@@ -3,5 +3,5 @@
     "xr-frame-canvas": "../components/xr-frame/index"
   },
   "disableScroll": true,
-  "navigationBarTitleText": "人手三维识别"
+  "navigationBarTitleText": "人脸三维识别"
 }

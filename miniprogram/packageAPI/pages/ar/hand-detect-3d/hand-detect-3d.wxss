@@ -57,3 +57,14 @@
   font-size: 30rpx;
   line-height: 1.2;
 }
+
+.hint-bottom .btn-wrap {
+  display: flex;
+}
+
+.hint-bottom .btn{
+  flex: 1;
+  margin: 10px 5px;
+  font-size: 18px;
+  line-height: 24px;
+}

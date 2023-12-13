@@ -260,14 +260,14 @@ Component({
     },
     createBox(color, type) {
       const THREE = this.THREE;
-      const scene = this.scene;
+      let scene = this.scene;
 
       const material = new THREE.MeshPhysicalMaterial( {
         metalness: 0.0,
         roughness: 0.1,
         color: color,
         transparent: true,
-        opacity: 0.6
+        opacity: 0.8
       } );
       const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 
@@ -283,11 +283,10 @@ Component({
       switch(type) {
         case 0:
           // plane Anchor
-
-
           break;
         case 1:
           // marker Anchor
+          scene = this.sceneCull;
           break;
       }
       scene.add( wrap );
