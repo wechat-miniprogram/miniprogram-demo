@@ -74,14 +74,22 @@ module.exports = Behavior({
         // 限帧逻辑
         initLoop() {
             // 限制调用帧率,暂时去掉
-            // let fps = 30
+            let fps = 30
+            let fpsInterval = 1000 / fps
+            let last = Date.now()
 
             const session = this.session;
 
             // 逐帧渲染
             const onFrame = timestamp => {
                 try {
-                    this.loop();
+                    let now = Date.now()
+                    const mill = now - last
+                    // 经过了足够的时间
+                    if (mill > fpsInterval) {
+                        last = now - (mill % fpsInterval); //校正当前时间
+                        this.loop();
+                    }
                 } catch(e) {
                     console.error(e);
                 }

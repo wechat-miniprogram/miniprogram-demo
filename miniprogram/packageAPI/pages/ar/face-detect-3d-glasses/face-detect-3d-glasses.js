@@ -88,14 +88,14 @@ Component({
             const anchor = anchors[0];
             // 目前只处理一个返回的结果
             if (anchor) {
-              
+
               this.wrapTransform = anchor.transform;
               this.position3D = anchor.points3d;
 
-              if (this.faceGLTFTrs.visible !== true) {
+              if (this.faceGLTFTrs && this.faceGLTFTrs.visible !== true) {
                 this.faceGLTFTrs.visible = true;
               }
-              if (this.glassesGLTFTrs.visible !== true) {
+              if (this.glassesGLTFTrs && this.glassesGLTFTrs.visible !== true) {
                 this.glassesGLTFTrs.visible = true;
               }
             }
@@ -106,11 +106,11 @@ Component({
           session.on('removeAnchors', anchors => {
             // console.log("removeAnchors");
 
-            if (this.faceGLTFTrs.visible !== false) {
+            if (this.faceGLTFTrs && this.faceGLTFTrs.visible !== false) {
               this.faceGLTFTrs.visible = false;
             }
 
-            if (this.glassesGLTFTrs.visible !== false) {
+            if (this.glassesGLTFTrs && this.glassesGLTFTrs.visible !== false) {
               this.glassesGLTFTrs.visible = false;
             }
 
