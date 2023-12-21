@@ -14,6 +14,7 @@ Component({
     widthScale: 1,      // canvas宽度缩放值
     heightScale: 0.8,   // canvas高度缩放值
     hintBoxList: [],  // 显示提示盒子列表,
+    cameraPosition: 1 // 默认前置
   },
   markerIndex: 0,  // 使用的 marker 索引
   hintInfo: undefined, // 提示框信息
@@ -56,6 +57,7 @@ Component({
             mode: 1
           }
         },
+        cameraPosition: 1,
         version: 'v1',
         gl: this.gl
       });
@@ -86,22 +88,15 @@ Component({
             const anchor = anchors[0];
             // 目前只处理一个返回的结果
             if (anchor) {
-              // console.log('id', anchor.id);
-              // console.log('type', anchor.type);
-              // console.log('transform', anchor.transform);
-              // console.log('mesh', anchor.mesh);
-              // console.log('origin', anchor.origin);
-              // console.log('size', anchor.size);
-              // console.log('detectId', anchor.detectId);
-              // console.log('confidence', anchor.confidence);
-              // console.log('points3d', anchor.points3d);  
-
+              
               this.wrapTransform = anchor.transform;
               this.position3D = anchor.points3d;
 
-              this.updateHintBoxVisble(this.hintBoxList, true);
               if (this.faceGLTFTrs.visible !== true) {
                 this.faceGLTFTrs.visible = true;
+              }
+              if (this.glassesGLTFTrs.visible !== true) {
+                this.glassesGLTFTrs.visible = true;
               }
             }
           })
@@ -111,9 +106,12 @@ Component({
           session.on('removeAnchors', anchors => {
             // console.log("removeAnchors");
 
-            this.updateHintBoxVisble(this.hintBoxList, false);
             if (this.faceGLTFTrs.visible !== false) {
               this.faceGLTFTrs.visible = false;
+            }
+
+            if (this.glassesGLTFTrs.visible !== false) {
+              this.glassesGLTFTrs.visible = false;
             }
 
           });
@@ -166,11 +164,24 @@ Component({
       for(const mesh of faceGLTF.meshes) {  
         // 通过alphaMode 的 Setter 设置，或者写入renderState，但需要手动控制宏
         mesh.material.alphaMode = "BLEND";
-        mesh.material.setVector('u_baseColorFactor', xrFrameSystem.Vector4.createFromNumber(1, 1, 1, 0.4));
+        mesh.material.setVector('u_baseColorFactor', xrFrameSystem.Vector4.createFromNumber(1, 1, 1, 0.0));
       }
 
-      // 加载提示点
-      this.hintBoxList = this.getHintBox(xrFrameSystem, scene, this.faceWrap);
+      // 加载眼镜
+      const glasses = await scene.assets.loadAsset({
+        type: 'gltf',
+        assetId: `gltf-glasses`,
+        src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/glasses.glb',
+      })
+      const glassesElem = scene.createElement(xrFrameSystem.XRGLTF, {
+        model: "gltf-glasses",
+        position: `0 0 0`,
+        scale: `1 1 1`,
+      });
+      const glassesGLTF = glassesElem.getComponent(xrFrameSystem.GLTF);
+      this.glassesElem = glassesElem;
+      this.glassesGLTFTrs = glassesElem.getComponent(xrFrameSystem.Transform);
+      this.faceWrap.addChild(glassesElem);
 
     },
     loop() {
@@ -204,64 +215,6 @@ Component({
         this.DT.transpose(this.DT2);
         this.faceWrapTrs.setLocalMatrix(this.DT2);
 
-        // 更新提示点位置
-        this.updateHintBoxPosition(this.hintBoxList, this.position3D);
-
-      }
-    },
-    getHintBox(xrFrameSystem, scene, wrap) {
-      // 初始化提示点
-      const geometryHint = scene.assets.getAsset('geometry', 'sphere');
-      const effectCube = scene.assets.getAsset('effect', 'standard');
-      const boxScale = 0.03;
-      const hintBoxList = [];
-      for (let i = 0; i < 106; i++) {
-        const colorFloat = i / 106;
-        const el = scene.createElement(xrFrameSystem.XRNode, {
-          position: "0 0 0",
-          scale: `${boxScale} ${boxScale} ${boxScale}`,
-        });
-        const elTrs = el.getComponent(xrFrameSystem.Transform);
-        const mat = scene.createMaterial(effectCube);
-        
-        const colorR = 1.0 - colorFloat;
-        mat.setVector('u_baseColorFactor', xrFrameSystem.Vector4.createFromNumber(1.0, colorR, colorR, 1.0));
-
-        const mesh = el.addComponent(xrFrameSystem.Mesh, {
-          geometry: geometryHint,
-          material: mat,
-        });
-
-        wrap.addChild( el );
-        // elTrs.visible = false;
-        
-        hintBoxList.push( elTrs );
-      }
-
-      return hintBoxList;
-    },
-    updateHintBoxPosition(hintBoxList, points3d) {
-      if (hintBoxList && hintBoxList.length > 0) {
-        // console.log('ready to set', hintBoxList);
-        // 存在提示列表，则更新点信息
-        for (let i = 0; i < hintBoxList.length; i++) {
-          const hintBox = hintBoxList[i];
-          hintBox.position.x = points3d[i].x;
-          hintBox.position.y = points3d[i].y;
-          hintBox.position.z = points3d[i].z;
-        }
-      }
-    },
-    updateHintBoxVisble(hintBoxList, visible) {
-      if (hintBoxList && hintBoxList.length > 0) {
-        // console.log('ready to set', hintBoxList);
-        // 存在提示列表，则更新点信息
-        for (let i = 0; i < hintBoxList.length; i++) {
-          const hintBox = hintBoxList[i];
-          if (hintBox.visible !== visible) {
-            hintBox.visible = visible;
-          }
-        }
       }
     }
   },

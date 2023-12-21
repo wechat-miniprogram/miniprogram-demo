@@ -2,7 +2,7 @@
   <xr-assets wx:if="{{pixelRatioReady}}">
     <xr-asset-render-texture asset-id="rt" width="1024" height="2048" />
   </xr-assets>
-
+  <xr-env env-data="xr-frame-team-workspace-day" />
   <xr-node>
     <xr-node node-id="center" position="0 0 0"></xr-node>
     <!-- rt相机 cull-mask="0b101" 只绘制 layer 为 0 (默认值) 以及 layer为 2 的元素，用于后处理逻辑，比如shoeMasks -->

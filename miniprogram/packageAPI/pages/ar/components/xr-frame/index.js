@@ -22,7 +22,6 @@ Component({
         renderTargetHeight: info.windowHeight * pixelRatio,
       });
 
-
       const camera = this.scene.getElementById("camera").getComponent("camera");
 
       // 暴露scene对象到外部进行定制

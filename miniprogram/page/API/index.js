@@ -346,6 +346,10 @@ Page({
           url: 'face-detect-3d/face-detect-3d'
         },
         {
+          zh: '实时人脸检测3D-眼镜试戴',
+          url: 'face-detect-3d-glasses/face-detect-3d-glasses'
+        },
+        {
           zh: '照片人脸检测',
           url: 'photo-face-detect/photo-face-detect'
         },
@@ -374,7 +378,7 @@ Page({
           url: 'photo-hand-detect/photo-hand-detect'
         },
         {
-          zh: '实时鞋部检测 - AR试鞋',
+          zh: '实时鞋部检测-AR试鞋',
           url: 'shoe-detect/shoe-detect'
         },
       ],

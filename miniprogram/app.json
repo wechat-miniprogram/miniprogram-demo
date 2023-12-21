@@ -89,6 +89,7 @@
         "pages/ar/osd-ar/osd-ar",
         "pages/ar/face-detect/face-detect",
         "pages/ar/face-detect-3d/face-detect-3d",
+        "pages/ar/face-detect-3d-glasses/face-detect-3d-glasses",
         "pages/ar/body-detect/body-detect",
         "pages/ar/body-detect-3d/body-detect-3d",
         "pages/ar/hand-detect/hand-detect",

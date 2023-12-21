@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-frame-canvas": "../components/xr-frame/index"
+  },
+  "disableScroll": true,
+  "navigationBarTitleText": "人脸三维识别-眼镜试戴"
+}

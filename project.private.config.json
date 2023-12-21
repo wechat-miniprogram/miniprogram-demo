@@ -12,6 +12,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "ace-detect-3d-glasses",
+          "pathName": "packageAPI/pages/ar/face-detect-3d-glasses/face-detect-3d-glasses",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "plane-ar-v2-options",
           "pathName": "packageAPI/pages/ar/plane-ar-v2-options/plane-ar-v2-options",
           "query": "",

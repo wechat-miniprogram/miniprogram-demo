@@ -18,7 +18,7 @@
     <view class="btn-wrap">
       <button class="btn" type="primary" bindtap="switchCamera">切换前后置摄像头</button>
     </view>
-    <text>提示：摄像头对准人脸，然后会显示106个关键点的三维坐标提示小球，以及通用的半透明脸模模型</text>
+    <text>提示：摄像头对准人脸，会显示眼镜以及用于深度遮挡的透明的头模</text>
   </view>
 </view>
 
