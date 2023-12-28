@@ -164,6 +164,7 @@ Component({
         // VKSession removeAnchors
         // 识别目标丢失时，会触发一次
         session.on('removeAnchors', anchors => {
+          console.log('removeAnchors', anchors)
 
           // 存在要删除的 Anchor
           if (anchors.length > 0) {
@@ -171,8 +172,13 @@ Component({
               let flag = true;
               for(let i = 0; i < anchors.length; i++) {
                 if (showBox.id === anchors[i].id) {
+                  console.log('remove', showBox.id)
+                  let scene = this.scene;
+                  if (showBox.type === "Marker") {
+                    scene = this.sceneCull;
+                  }
                   // 从three里面去掉
-                  this.scene.remove(showBox.wrap);
+                  scene.remove(showBox.wrap);
                   // 标记删除
                   flag = false;
                   break;
