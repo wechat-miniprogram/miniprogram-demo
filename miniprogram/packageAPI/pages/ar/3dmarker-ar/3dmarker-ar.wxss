@@ -58,8 +58,16 @@
 
 .wrap-option {
   margin-left: 20rpx;
-  height: 200rpx;
+  height: 160rpx;
   display: flex;
+}
+
+.wrap-option.small {
+  height: 100rpx;
+}
+
+.wrap-option.small button {
+  margin: 20rpx 20rpx 0rpx 0;
 }
 
 .wrap-option button {

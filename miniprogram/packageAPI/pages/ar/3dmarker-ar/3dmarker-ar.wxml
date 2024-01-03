@@ -18,6 +18,9 @@
 
   <view class="hint-words">提示：点击 `添加按钮`，提交绕目标一圈的视频；点选列表中已完成的模型；点击 `解析添加marker` 进行实际文件解析；将手机对准识别目标进行marker识别；解析后，可下载marker识别用产物map、渲染用产物 glTF。</view>
 
+  <view class="wrap-option small">
+     <button type="primary" disabled="{{usingMarkerId}}" bindtap="useDefaultMarker">使用默认 Marker（维他柠檬茶）</button>
+  </view>
   <view class="wrap-option">
     <button type="primary" disabled="{{usingMarkerId}}" bindtap="parseAddMarker">解析添加 Marker</button>
     <button type="primary" disabled="{{!usingMarkerId}}" bindtap="removeMarker">清理使用 marker</button>
