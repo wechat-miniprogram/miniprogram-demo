@@ -79,42 +79,80 @@ Component({
             console.log("addAnchor", anchors)
           })
 
+          let preAnchorNumber = 0;
           // VKSession EVENT updateAnchors
           session.on('updateAnchors', anchors => {
             // console.log("updateAnchors", anchors);
 
-            const anchor = anchors[0];
-            // 目前只处理一个返回的结果
-            if (anchor) {
-              // console.log('id', anchor.id);
-              // console.log('type', anchor.type);
-              // console.log('transform', anchor.transform);
-              // console.log('mesh', anchor.mesh);
-              // console.log('origin', anchor.origin);
-              // console.log('size', anchor.size);
-              // console.log('detectId', anchor.detectId);
-              // console.log('confidence', anchor.confidence);
-              // console.log('points3d', anchor.points3d);  
+            // 遍历不同的识别目标
+            for (let i = 0; i < anchors.length; i++ ) {
+              const anchor = anchors[i];
 
-              this.wrapTransform = anchor.transform;
-              this.position3D = anchor.points3d;
+              let faceWrap = this.faceWrapMap[i];
+              if (!faceWrap) {
+                this.initBindingNode(i);
 
-              this.updateHintBoxVisble(this.hintBoxList, true);
-              if (this.faceGLTFTrs.visible !== true) {
-                this.faceGLTFTrs.visible = true;
+                faceWrap = this.faceWrapMap[i];
+              }
+
+              const xrFrameSystem = wx.getXrFrameSystem();
+
+              // 更新显示状态
+              this.updateHintBoxVisble(faceWrap.hintBoxList, true);
+              if (faceWrap.faceGLTFTrs.visible !== true) {
+                faceWrap.faceGLTFTrs.visible = true;
+              }
+
+              // 执行信息同步逻辑
+
+              if (!this.DT) { this.DT = new xrFrameSystem.Matrix4(); }
+              if (!this.DT2) { this.DT2 = new xrFrameSystem.Matrix4(); }
+
+              // 目前VK返回的是行主序矩阵
+              // xrframe 矩阵存储为列主序
+              this.DT.setArray(anchor.transform);
+              this.DT.transpose(this.DT2);
+              faceWrap.wrapTrs.setLocalMatrix(this.DT2);
+
+              // 更新提示点位置
+              this.updateHintBoxPosition(faceWrap.hintBoxList, anchor.points3d);
+            }
+
+            // 由于目前，减少识别目标不会触发remove事件，所以先通过数量判断处理隐藏
+            if (preAnchorNumber > anchors.length) {
+              // 遍历被隐藏的目标
+              for (let i = preAnchorNumber - 1; i >= anchors.length; i-- ) {
+                let faceWrap = this.faceWrapMap[i];
+                if (faceWrap) {
+                  this.updateHintBoxVisble(faceWrap.hintBoxList, false);
+                  if (faceWrap.faceGLTFTrs.visible !== false) {
+                    faceWrap.faceGLTFTrs.visible = false;
+                  }
+                }
               }
             }
+
+            preAnchorNumber = anchors.length;
           })
-          
+
+              
           // VKSession removeAnchors
           // 识别目标丢失时不断触发
           session.on('removeAnchors', anchors => {
             // console.log("removeAnchors");
-
-            this.updateHintBoxVisble(this.hintBoxList, false);
-            if (this.faceGLTFTrs.visible !== false) {
-              this.faceGLTFTrs.visible = false;
+          
+            if (preAnchorNumber !== 0) {
+              for (let i = 0; i < preAnchorNumber; i++ ) {
+                  let faceWrap = this.faceWrapMap[i];
+                  if (faceWrap) {
+                    this.updateHintBoxVisble(faceWrap.hintBoxList, false);
+                    if (faceWrap.faceGLTFTrs.visible !== false) {
+                      faceWrap.faceGLTFTrs.visible = false;
+                    }
+                  }
+              }
             }
+            preAnchorNumber = 0;
 
           });
 
@@ -131,9 +169,7 @@ Component({
     },
     // 针对 xr-frame 的初始化逻辑
     async initXRFrame() {
-      const xrFrameSystem = wx.getXrFrameSystem();
       const scene = this.xrScene;
-      const {rootShadow} = scene;
 
       // 缓存主相机
       this.xrCameraMain = this.xrCamera
@@ -142,26 +178,43 @@ Component({
       // 初始化YUV相机配置
       this.initXRYUVCamera();
 
-      // === 初始挂载点 ===
-      this.faceWrap = scene.createElement(xrFrameSystem.XRNode);
-      this.faceWrapTrs = this.faceWrap.getComponent(xrFrameSystem.Transform);
-      rootShadow.addChild( this.faceWrap );
-
       // 加载脸模
-      const face = await scene.assets.loadAsset({
+      this.faceGLTF = await scene.assets.loadAsset({
         type: 'gltf',
         assetId: `gltf-face`,
         src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/face.glb',
       })
+
+      // 初始化识别挂载点容器
+      this.faceWrapMap = {};
+
+    },
+    initBindingNode(index) {
+      const xrFrameSystem = wx.getXrFrameSystem();
+      const scene = this.xrScene;
+      const {rootShadow} = scene;
+
+      // 用于管理每一个挂载元素
+      const wrapInfo = {};
+
+      // === 初始挂载点 ===
+      const faceWrap = scene.createElement(xrFrameSystem.XRNode);
+      const faceWrapTrs = faceWrap.getComponent(xrFrameSystem.Transform);
+      rootShadow.addChild( faceWrap );
+
+      wrapInfo.wrapElem = faceWrap;
+      wrapInfo.wrapTrs = faceWrapTrs;
+
       const faceElem = scene.createElement(xrFrameSystem.XRGLTF, {
         model: "gltf-face",
         position: `0 0 0`,
         scale: `1 1 1`,
       });
       const faceGLTF = faceElem.getComponent(xrFrameSystem.GLTF);
-      this.faceElem = faceElem;
-      this.faceGLTFTrs = faceElem.getComponent(xrFrameSystem.Transform);
-      this.faceWrap.addChild(faceElem);
+      const faceGLTFTrs = faceElem.getComponent(xrFrameSystem.Transform);
+      faceWrap.addChild(faceElem);
+
+      wrapInfo.faceGLTFTrs = faceGLTFTrs;
 
       for(const mesh of faceGLTF.meshes) {  
         // 通过alphaMode 的 Setter 设置，或者写入renderState，但需要手动控制宏
@@ -170,8 +223,9 @@ Component({
       }
 
       // 加载提示点
-      this.hintBoxList = this.getHintBox(xrFrameSystem, scene, this.faceWrap);
+      wrapInfo.hintBoxList = this.getHintBox(xrFrameSystem, scene, faceWrap);
 
+      this.faceWrapMap[index] = wrapInfo;
     },
     loop() {
       // console.log('loop')
@@ -191,23 +245,6 @@ Component({
       // 更新 xrFrame 相机矩阵
       this.updataXRCameraMatrix(VKCamera, NEAR, FAR);
 
-      // 存在faceWrap，执行信息同步逻辑
-      if (this.faceWrap && this.wrapTransform) {
-        const xrFrameSystem = wx.getXrFrameSystem();
-        
-        if (!this.DT) { this.DT = new xrFrameSystem.Matrix4(); }
-        if (!this.DT2) { this.DT2 = new xrFrameSystem.Matrix4(); }
-
-        // 目前VK返回的是行主序矩阵
-        // xrframe 矩阵存储为列主序
-        this.DT.setArray(this.wrapTransform);
-        this.DT.transpose(this.DT2);
-        this.faceWrapTrs.setLocalMatrix(this.DT2);
-
-        // 更新提示点位置
-        this.updateHintBoxPosition(this.hintBoxList, this.position3D);
-
-      }
     },
     getHintBox(xrFrameSystem, scene, wrap) {
       // 初始化提示点

@@ -286,16 +286,16 @@ Page({
           url: 'plane-ar-v2/plane-ar-v2'
         },
         {
-          zh: '水平面AR-v2-附加能力',
-          url: 'plane-ar-v2-options/plane-ar-v2-options'
-        },
-        {
           zh: '水平面AR-v2-marker识别',
           url: 'plane-ar-v2-marker/plane-ar-v2-marker'
         },
         {
           zh: '水平面AR-v2-虚实遮挡',
           url: 'plane-ar-v2-depth/plane-ar-v2-depth'
+        },
+        {
+          zh: '水平面AR-v2-多种附加能力',
+          url: 'plane-ar-v2-options/plane-ar-v2-options'
         },
         {
           zh: '水平面旋转AR',
@@ -306,7 +306,7 @@ Page({
           url: '2dmarker-ar/2dmarker-ar'
         },
         {
-          zh: '3DMarkerAR - 三维识别与重建',
+          zh: '3DMarkerAR-三维识别与重建',
           url: '3dmarker-ar/3dmarker-ar'
         },
         {
