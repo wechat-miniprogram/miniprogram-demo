@@ -293,10 +293,10 @@ Page({
           zh: '水平面AR-v2-虚实遮挡',
           url: 'plane-ar-v2-depth/plane-ar-v2-depth'
         },
-        {
-          zh: '水平面AR-v2-多种附加能力',
-          url: 'plane-ar-v2-options/plane-ar-v2-options'
-        },
+        // {
+        //   zh: '水平面AR-v2-多种附加能力',
+        //   url: 'plane-ar-v2-options/plane-ar-v2-options'
+        // },
         {
           zh: '水平面旋转AR',
           url: 'plane-ar-3dof/plane-ar-3dof'
