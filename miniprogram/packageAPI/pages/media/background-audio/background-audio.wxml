@@ -7,7 +7,7 @@
   <view class="page-section">
     <view class="page-body-info">
       <text class="time-big">{{formatedPlayTime}}</text>
-      <slider class="slider" min="0" max="269" step="1" value="{{playTime}}" bindchange="seek"></slider>
+      <slider class="slider" min="0" max="269" step="1" value="{{playTime}}" bindchange="seek" bindchanging="drag"></slider>
       <view class="play-time">
         <text>00:00</text>
         <text>04:29</text>

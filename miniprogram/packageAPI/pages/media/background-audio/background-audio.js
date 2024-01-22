@@ -53,6 +53,10 @@ Page({
     }
   },
 
+  drag(e) {
+    clearInterval(updateInterval)
+  },
+
   seek(e) {
     backgroundAudioManager.seek(e.detail.value)
   },
@@ -60,7 +64,6 @@ Page({
   pause() {
     clearInterval(updateInterval)
     backgroundAudioManager.pause()
-
   },
 
   stop() {
@@ -115,6 +118,11 @@ Page({
         playing: false,
         pause: true,
       })
+    })
+
+    // 拖动到指定位置结束，恢复slider滚动
+    backgroundAudioManager.onSeeked((res) => {
+        that._enableInterval();
     })
 
     backgroundAudioManager.onEnded(() => {
