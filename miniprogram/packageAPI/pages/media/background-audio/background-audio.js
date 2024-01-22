@@ -4,6 +4,7 @@ const util = require('../../../../util/util.js')
 
 const backgroundAudioManager = wx.getBackgroundAudioManager()
 let updateInterval
+let draging
 
 Page({
   onShareAppMessage() {
@@ -54,7 +55,7 @@ Page({
   },
 
   drag(e) {
-    clearInterval(updateInterval)
+    draging = true
   },
 
   seek(e) {
@@ -74,10 +75,12 @@ Page({
   _enableInterval() {
     const that = this
     function update() {
-      that.setData({
-        playTime: backgroundAudioManager.currentTime + 1,
-        formatedPlayTime: util.formatTime(backgroundAudioManager.currentTime + 1)
-      })
+      if(!draging){
+        that.setData({
+            playTime: backgroundAudioManager.currentTime + 1,
+            formatedPlayTime: util.formatTime(backgroundAudioManager.currentTime + 1)
+        })
+      }
     }
     updateInterval = setInterval(update, 1000)
   },
@@ -122,7 +125,7 @@ Page({
 
     // 拖动到指定位置结束，恢复slider滚动
     backgroundAudioManager.onSeeked((res) => {
-        that._enableInterval();
+        draging = false
     })
 
     backgroundAudioManager.onEnded(() => {
