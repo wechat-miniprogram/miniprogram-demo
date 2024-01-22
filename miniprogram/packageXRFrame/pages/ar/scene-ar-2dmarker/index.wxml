@@ -1,7 +1,7 @@
 <xr-demo-viewer
   title="AR 2DMarker案例"
   intro="Marker识别案例，点击可以上传2DMarker。识别成功后，会于屏幕绘制一个纯色立方体展示位置。"
-  hint="默认扫描图片见官网开发文档\n组件->xr-frame->示例"
+  hint="默认扫描图片见官网开发文档\n组件 -> xr-frame -> 示例"
 >
   <xr-ar-2dmarker
     disable-scroll

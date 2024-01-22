@@ -80,6 +80,7 @@
         "pages/ar/visionkit-basic-v2/visionkit-basic-v2",
         "pages/ar/plane-ar/plane-ar",
         "pages/ar/plane-ar-v2/plane-ar-v2",
+        "pages/ar/plane-ar-v2-options/plane-ar-v2-options",
         "pages/ar/plane-ar-v2-marker/plane-ar-v2-marker",
         "pages/ar/plane-ar-v2-depth/plane-ar-v2-depth",
         "pages/ar/plane-ar-3dof/plane-ar-3dof",
@@ -88,8 +89,11 @@
         "pages/ar/osd-ar/osd-ar",
         "pages/ar/face-detect/face-detect",
         "pages/ar/face-detect-3d/face-detect-3d",
+        "pages/ar/face-detect-3d-glasses/face-detect-3d-glasses",
         "pages/ar/body-detect/body-detect",
+        "pages/ar/body-detect-3d/body-detect-3d",
         "pages/ar/hand-detect/hand-detect",
+        "pages/ar/hand-detect-3d/hand-detect-3d",
         "pages/ar/depth-detect/depth-detect",
         "pages/ar/cameraBuffer-detect/cameraBuffer-detect",
         "pages/ar/ocr-detect/ocr-detect",
@@ -228,7 +232,8 @@
         "pages/adapt/pagination/pagination",
         "pages/adapt/freelayout/freelayout",
         "pages/adapt/layeredpresentation/layeredpresentation",
-        "pages/adapt/horizontalexpansion/horizontalexpansion"
+        "pages/adapt/horizontalexpansion/horizontalexpansion",
+        "pages/adapt/customscreenvalidation/customscreenvalidation"
       ]
     },
     {
@@ -321,6 +326,9 @@
         "pages/template/xr-template-blendDouble/index",
         "pages/template/xr-template-frameEffect/index",
         "pages/template/xr-template-tracker/index",
+        "pages/template/xr-template-markerCenter/index",
+        "pages/template/xr-template-markerLock/index",
+        "pages/template/xr-template-arLine/index",
         "pages/template/xr-template-select/index",
         "pages/template/xr-template-share/index",
         "pages/template/xr-template-removeBlack/index",

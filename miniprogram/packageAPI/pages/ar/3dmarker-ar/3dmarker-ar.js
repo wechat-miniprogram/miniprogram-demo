@@ -105,6 +105,7 @@ Component({
             size: size
           }
 
+          console.log('update a')
           if (!this.modelShow) {
             if (this.modelTrs) {
               this.modelTrs.scale.x = modelScale;
@@ -123,7 +124,8 @@ Component({
         // VKSession removeAnchors
         // 识别目标丢失时，会触发一次
         session.on('removeAnchors', anchors => {
-          
+          console.log('remove a')
+
           if (this.modelShow) {
 
             if (this.modelTrs) {
@@ -454,9 +456,12 @@ Component({
         usingMarkerId: null
       })
       // 释放xrframe资源
-      const scene = this.xrScene;
-      scene.assets.releaseAsset('gltf',`gltf-result-${gltfIndex}`);
-      scene.rootShadow.removeChild(this.model);
+      if (this.model) {
+        const scene = this.xrScene;
+        scene.assets.releaseAsset('gltf',`gltf-result-${gltfIndex}`);
+        scene.rootShadow.removeChild(this.model);
+        this.model = undefined;
+      }
     },
     getAllMarker() {
       console.log(this.session.getAllMarker())
@@ -487,5 +492,43 @@ Component({
         filePath: this.parsedGlbUrl,
       });
     },
+    useDefaultMarker() {
+      // 简单的加载锁
+      if (!!this.parseAddMarkerLoading) {
+        console.log("加载中，请稍后重试");
+        return;
+      }
+      this.parseAddMarkerLoading = true;
+      
+
+      // 开始下载文件
+      const filePath = wx.env.USER_DATA_PATH + '/default.map';
+      wx.downloadFile({
+        filePath: filePath,
+        url: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/default.map',
+        success: (res) => {
+          console.log("下载回调", res);
+          // 添加marker
+          const markerId = this.session.addMarker(res.filePath);
+          console.log('add Default Marker', markerId)
+          this.modelShow = false;
+          this.setData({
+            usingMarkerId: markerId
+          });
+
+          this.parseAddMarkerLoading = false;
+        },
+        fail(res) {
+          wx.hideLoading();
+          wx.showToast({
+            title: res.errMsg,
+            icon: 'none',
+            duration: 2000
+          })
+          console.error(res)
+          this.parseAddMarkerLoading = false;
+        }
+      })
+    }
   },
 })

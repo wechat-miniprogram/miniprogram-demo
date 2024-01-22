@@ -18,7 +18,7 @@ module.exports = Behavior({
         height: 0,      // canvas大小
         widthScale: 1,      // canvas宽度缩放值
         heightScale: 0.8,   // canvas高度缩放值
-        cameraPosition: 0,  // 相机朝向
+        cameraPosition: 0,  // 相机朝向，默认后置摄像头
     },
     methods: {
         onReady() {
@@ -55,28 +55,41 @@ module.exports = Behavior({
             });
         },
         // 前后摄像头
-        switchCamera(event){
+        switchCamera(){
             if(this.session.config){
                 const config = this.session.config
-                let pos = Number(event.currentTarget.dataset.value)
-                config.cameraPosition = pos
+                let cameraPosNext;
+                if (this.data.cameraPosition === 0) {
+                    cameraPosNext = 1;
+                } else {
+                    cameraPosNext = 0;
+                }
+                config.cameraPosition = cameraPosNext
                 this.session.config = config
                 this.setData({
-                    cameraPosition:event.currentTarget.dataset.value
+                    cameraPosition: cameraPosNext
                 })
             }
         },
         // 限帧逻辑
         initLoop() {
             // 限制调用帧率,暂时去掉
-            // let fps = 30
+            let fps = 30
+            let fpsInterval = 1000 / fps
+            let last = Date.now()
 
             const session = this.session;
 
             // 逐帧渲染
             const onFrame = timestamp => {
                 try {
-                    this.loop();
+                    let now = Date.now()
+                    const mill = now - last
+                    // 经过了足够的时间
+                    if (mill > fpsInterval) {
+                        last = now - (mill % fpsInterval); //校正当前时间
+                        this.loop();
+                    }
                 } catch(e) {
                     console.error(e);
                 }

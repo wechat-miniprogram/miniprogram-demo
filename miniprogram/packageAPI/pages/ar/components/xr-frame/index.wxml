@@ -2,7 +2,7 @@
   <xr-assets wx:if="{{pixelRatioReady}}">
     <xr-asset-render-texture asset-id="rt" width="1024" height="2048" />
   </xr-assets>
-
+  <xr-env env-data="xr-frame-team-workspace-day" />
   <xr-node>
     <xr-node node-id="center" position="0 0 0"></xr-node>
     <!-- rt相机 cull-mask="0b101" 只绘制 layer 为 0 (默认值) 以及 layer为 2 的元素，用于后处理逻辑，比如shoeMasks -->
@@ -14,13 +14,14 @@
     ></xr-camera>
     <!-- 主相机 cull-mask="0b11" 只绘制 layer 为 0 (默认值) 以及 layer为 1 的元素 -->
     <xr-camera
-      id="camera" node-id="camera" position="0 0 2" clear-color="0.5 0.5 0.5 1"
+      id="camera" node-id="camera" position="0 0 2" clear-color="1 1 1 1"
       target="center"
+      near="0.01" far="1000"
       cull-mask="0b11"
     ></xr-camera>
   </xr-node>
   <xr-node node-id="lights">
-    <xr-light type="ambient" color="1 1 1" intensity="1.2" />
-    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="2"/>
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="80 20 0" color="1 1 1" intensity="2"/>
   </xr-node>
 </xr-scene>

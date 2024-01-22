@@ -1,0 +1,39 @@
+<xr-scene ar-system="modes:Marker;" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <xr-assets>
+      <xr-asset-load
+        type="env-data" asset-id="env1" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin"
+      />
+      <xr-asset-load type="gltf" asset-id="gltf-damageHelmet" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.gltf" />
+  </xr-assets>
+  <xr-node>
+  <xr-env env-data="env1" />
+
+    <!-- marker -->
+    <!-- <xr-ar-tracker id="lockTracker" mode="Marker" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/2dmarker-test.jpg">
+      <xr-node id="lockItem">
+        <xr-gltf model="butterfly" anim-autoplay position="0.2 0 -0.2" scale="0.6 0.6 0.6" rotation="0 -50 0" />
+        <xr-gltf model="butterfly" anim-autoplay position="0.4 0 0.3" scale="0.5 0.5 0.5" rotation="0 -50 0" />
+        <xr-gltf model="butterfly" anim-autoplay position="-0.3 0 0.3" scale="0.4 0.4 0.4" rotation="0 -50 0" />
+      </xr-node>
+    </xr-ar-tracker> -->
+
+    <!-- marker 会动态创建并放在root下 -->
+    <xr-shadow id="root"></xr-shadow>
+
+    <xr-camera
+      id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    >
+      <!-- 将模型放在相机内部，相当于是放在视图空间里面，只需要z轴正方向移动，就是远离相机 -->
+      <!-- 放ar相机内部，这个流程有bug，感觉是vk返回的矩阵里面有负数，准备排查 -->
+      <xr-gltf
+        wx:if="{{markerMatch}}"
+        node-id="gltf-damageHelmet" position="0 0 6" rotation="0 0 0" scale="1 1 -1" model="gltf-damageHelmet"
+      ></xr-gltf>
+    </xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.5" />
+    <xr-light type="directional" rotation="20 120 0" color="1 1 1" intensity="2" />
+  </xr-node>
+</xr-scene>

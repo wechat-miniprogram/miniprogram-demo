@@ -12,6 +12,41 @@
     "miniprogram": {
       "list": [
         {
+          "name": "ace-detect-3d-glasses",
+          "pathName": "packageAPI/pages/ar/face-detect-3d-glasses/face-detect-3d-glasses",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "plane-ar-v2-options",
+          "pathName": "packageAPI/pages/ar/plane-ar-v2-options/plane-ar-v2-options",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "face-detect-3d",
+          "pathName": "packageAPI/pages/ar/face-detect-3d/face-detect-3d",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "hand-detect-3d",
+          "pathName": "packageAPI/pages/ar/hand-detect-3d/hand-detect-3d",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "body-detect-3d",
+          "pathName": "packageAPI/pages/ar/body-detect-3d/body-detect-3d",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "photo-idcard-detect",
           "pathName": "packageAPI/pages/ar/photo-idcard-detect/photo-idcard-detect",
           "query": "",

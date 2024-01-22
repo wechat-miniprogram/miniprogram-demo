@@ -1,0 +1,16 @@
+<xr-demo-viewer
+  title="识别后模型固定于屏幕中间"
+  intro="扫描识别图片成功后，模型会固定于屏幕中央"
+  hint="扫描图片见官网开发文档\n组件 -> xr-frame -> 示例 \n( AR案例 -> 2DMarker )"
+  code="{{xmlCode}}"
+>
+  <xr-template-markerCenter
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+</xr-demo-viewer>

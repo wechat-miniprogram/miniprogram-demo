@@ -294,6 +294,10 @@ Page({
           url: 'plane-ar-v2-depth/plane-ar-v2-depth'
         },
         {
+          zh: '水平面AR-v2-多种附加能力',
+          url: 'plane-ar-v2-options/plane-ar-v2-options'
+        },
+        {
           zh: '水平面旋转AR',
           url: 'plane-ar-3dof/plane-ar-3dof'
         },
@@ -302,7 +306,7 @@ Page({
           url: '2dmarker-ar/2dmarker-ar'
         },
         {
-          zh: '3DMarkerAR - 三维识别与重建',
+          zh: '3DMarkerAR-三维识别与重建',
           url: '3dmarker-ar/3dmarker-ar'
         },
         {
@@ -329,18 +333,22 @@ Page({
           zh: '照片OCR检测',
           url: 'photo-ocr-detect/photo-ocr-detect'
         },
-        // {
-        //   zh: '照片身份证检测',
-        //   url: 'photo-idcard-detect/photo-idcard-detect'
-        // },
+        {
+          zh: '照片身份证检测',
+          url: 'photo-idcard-detect/photo-idcard-detect'
+        },
         {
           zh: '实时人脸检测',
           url: 'face-detect/face-detect'
         },
-        // {
-        //   zh: '实时人脸检测3D',
-        //   url: 'face-detect-3d/face-detect-3d'
-        // },
+        {
+          zh: '实时人脸检测3D',
+          url: 'face-detect-3d/face-detect-3d'
+        },
+        {
+          zh: '实时人脸检测3D-眼镜试戴',
+          url: 'face-detect-3d-glasses/face-detect-3d-glasses'
+        },
         {
           zh: '照片人脸检测',
           url: 'photo-face-detect/photo-face-detect'
@@ -348,6 +356,10 @@ Page({
         {
           zh: '实时人体检测',
           url: 'body-detect/body-detect'
+        },
+        {
+          zh: '实时人体检测3D',
+          url: 'body-detect-3d/body-detect-3d'
         },
         {
           zh: '照片人体检测',
@@ -358,17 +370,17 @@ Page({
           url: 'hand-detect/hand-detect'
         },
         {
+          zh: '实时手势检测3D',
+          url: 'hand-detect-3d/hand-detect-3d'
+        },
+        {
           zh: '照片手势检测',
           url: 'photo-hand-detect/photo-hand-detect'
         },
         {
-          zh: '实时鞋部检测',
+          zh: '实时鞋部检测-AR试鞋',
           url: 'shoe-detect/shoe-detect'
         },
-        // {
-        //   zh: '照片鞋部检测',
-        //   url: 'photo-shoe-detect/photo-shoe-detect'
-        // },
       ],
     }],
     isSetTabBarPage: false,

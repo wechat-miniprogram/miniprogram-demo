@@ -98,10 +98,10 @@ message GetARModelReq
 {
     optional uint32 bizuin = 1;
     optional string cosid = 2;
-    optional uint32 model_type = 3; // 1:稀疏点云  2:3d模型
+    optional uint32 model_type = 3; // 1:稀疏点云  2:3d模型 3:Marker模型
     optional uint32 need_data = 4[default=1]; // 0:不需要数据 1:需要数据
     optional uint32 use_intranet = 5[default=0]; // 当need_data为0时生效 0:生成外网链接 1:内网链接
-    optional uint32 expire_time = 6; // url过期时间,默认5分钟,单位为秒
+    optional uint32 expire_time = 6; // url过期时间,默认5分钟,单位为秒,最长1800
 }
 
 message GetARModelResp
@@ -111,5 +111,5 @@ message GetARModelResp
     optional string host = 3;
     optional string errMsg = 4;
     optional uint32 expire_time = 5;
-    optional uint32 status = 6; // 0 创建中 1 成功 2 失败
+    optional uint32 status = 6; // 0 生成中 1 生成成功 2 过期 3 生成失败
 }

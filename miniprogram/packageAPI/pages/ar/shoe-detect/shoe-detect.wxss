@@ -28,5 +28,16 @@
     padding: 5px 10px;
     font-size: 14px;
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+}
+
+.hint-bottom .btn-wrap {
+    display: flex;
+}
+
+.hint-bottom .btn{
+    margin: 10px 5px;
+    font-size: 14px;
+    line-height: 18px;
 }

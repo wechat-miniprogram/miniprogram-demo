@@ -1,0 +1,25 @@
+
+<view class="page" data-weui-theme="{{theme}}">
+  <view
+    class="canvas-wrap" style="width: {{widthScale * 100}}%; height: {{heightScale * 100}}%"
+  >
+    <xr-frame-canvas
+      disable-scroll
+      id="canvas"
+      width="{{width}}"
+      height="{{height}}"
+      style="width:{{domWidth}}px;height:{{domHeight}}px;"
+      bind:sceneReady="handleXRSceneReady"
+    ></xr-frame-canvas>
+
+  </view>
+
+
+  <view class="hint-bottom page-body-text tc">
+    <view class="btn-wrap">
+      <button class="btn" type="primary" bindtap="switchCamera">切换前后置摄像头</button>
+    </view>
+    <text>提示：摄像头对准手，然后会显示16个关键点的三维坐标提示小球</text>
+  </view>
+</view>
+

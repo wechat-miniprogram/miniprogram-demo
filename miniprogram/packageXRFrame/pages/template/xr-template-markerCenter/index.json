@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../..//components/xr-demo-viewer/index",
+    "xr-template-markerCenter": "../../../components/template/xr-template-markerCenter/index"
+  },
+  "disableScroll": true
+}

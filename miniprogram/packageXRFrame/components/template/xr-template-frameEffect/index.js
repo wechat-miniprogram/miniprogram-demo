@@ -41,9 +41,8 @@ Component({
               renderStates: {
                 blendOn: false,
                 depthWrite: true,
-                cullOn: true,
+                cullOn: false,
                 // 基础库 v3.0.1 开始 默认的 plane 切为适配 cw 的顶点绕序
-                cullFace: xrFrameSystem.ECullMode.FRONT,
               },
               lightMode: 'ForwardBase',
               useMaterialRenderStates: true,

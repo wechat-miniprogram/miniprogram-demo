@@ -3,5 +3,5 @@
     "xr-frame-canvas": "../components/xr-frame/index"
   },
   "disableScroll": true,
-  "navigationBarTitleText": "实时鞋部检测"
+  "navigationBarTitleText": "实时鞋部检测-试鞋案例"
 }

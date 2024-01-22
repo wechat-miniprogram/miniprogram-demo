@@ -1,0 +1,70 @@
+.canvas-wrap {
+  position: relative;
+  width: 100%;
+  background-color: #000;
+}
+
+.canvas-wrap canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas-wrap #canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.hint-bottom {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+}
+
+.hint-bottom .btn-wrap {
+  display: flex;
+}
+
+.hint-bottom .btn{
+  margin: 10px 5px;
+  font-size: 14px;
+  line-height: 18px;
+}
+.wrap-option {
+  position: absolute;
+  left: 20rpx;
+  right: 0;
+  bottom: 20rpx;
+  height: 10%;
+  display: flex;
+}
+
+.wrap-option button {
+  flex: 1;
+  margin: 20rpx 20rpx 20rpx 0;
+  font-size: 30rpx;
+  line-height: 1.2;
+}
+
+.hint-bottom .btn-wrap {
+  display: flex;
+}
+
+.hint-bottom .btn{
+  flex: 1;
+  margin: 10px 5px;
+  font-size: 18px;
+  line-height: 24px;
+}

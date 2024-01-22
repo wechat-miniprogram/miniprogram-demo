@@ -1,0 +1,24 @@
+<!--packageExtend/pages/adapt/customscreenvalidation/customscreenvalidation.wxml-->
+<view class="v"><text class="t">01ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">02ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">03ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">04ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">05ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">06ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">07ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">08ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">09ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">10ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">11ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">12ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">13ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">14ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">15ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">16ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">17ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">18ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">19ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">20ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">21ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">22ABCDEFGabcdefg1234567890一二三四五</text></view>
+<view class="v"><text class="t">23ABCDEFGabcdefg1234567890一二三四五</text></view>

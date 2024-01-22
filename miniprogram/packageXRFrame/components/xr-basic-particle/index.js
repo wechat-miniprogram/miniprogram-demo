@@ -28,7 +28,6 @@ Component({
 
       let tempSystem
 
-
       // const el = this.scene.getElementById('lightray');
       // el.event.add('stop', handleTest);
 
@@ -56,6 +55,34 @@ Component({
       tempSystem.addSizeGradient(0.9,0.2,0.2);
       tempSystem.addSizeGradient(1,0,0);
 
+
+      const fireworkField = xrScene.getElementById("firework");
+      tempSystem = fireworkField.getComponent(xrFrameSystem.Particle)
+      tempSystem.addSizeGradient(0,0.2);
+      tempSystem.addSizeGradient(3,0.8);
+
+      var myData ={}
+      myData = {
+        "capacity": 200,
+        "emitRate": 0,  //子发射器不进行每秒发射
+        "burstCount": 200, // 一次爆发200粒子
+        "burstTime": 0, // 爆发延时为0
+        "burstCycle": 1, // 发射一次
+        "size":[0.05],
+        "startColor":[1,1,0,1],
+        "endColor":[1,0,0,0],
+        "emitterType":"SphereShape",
+        "emitterProps": [["radius","0.8"]],
+        "lifeTime":[3], // 粒子生命周期为3秒
+        "stopDuration":[3], // 子发射器生命周期为3秒
+        "speed":[1],
+      }
+
+      var subEmitter = tempSystem.createSubEmitter(myData)
+
+      subEmitter.state = 1 // 设置为1为当粒子消失后出现作用子发射器
+      //可以规定多个子发射器的阵列
+      tempSystem.subEmitters = [subEmitter]
 
       //orb vfx
       const orb = xrScene.getElementById("orb");
@@ -103,7 +130,6 @@ Component({
           instance.position.x += ( 1 - speed * 0.97 ) * 0.03 + Math.random() * 0.007;
           instance.color.w = speed * 0.3;
       };
-
 
       //case subEmitter
       // particle.getComponent(xrFrameSystem.Particle).createSphereEmitter(1, 0, 360, 0)

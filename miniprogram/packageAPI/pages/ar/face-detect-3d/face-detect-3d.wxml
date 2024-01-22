@@ -1,12 +1,24 @@
-<view class="container page" data-weui-theme="{{theme}}">
-  <view><canvas type="webgl" id="webgl" style="width: {{width}}px; height: {{height}}px" bindtouchend="onTouchEnd">
-    </canvas></view>
-  <view class="page-body-text tc" style="height:20%">提示：将摄像头对准人脸, 检测到的人脸将会被标记出识别框和面部标记点
-    <view wx:if="{{cameraPosition == 0}}">
-        <button type="primary" bindtap="switchCamera" data-value="1" disabled="{{buttonDisable}}">切换为前置摄像头</button>
+
+<view class="page" data-weui-theme="{{theme}}">
+  <view
+    class="canvas-wrap" style="width: {{widthScale * 100}}%; height: {{heightScale * 100}}%"
+  >
+    <xr-frame-canvas
+      disable-scroll
+      id="canvas"
+      width="{{width}}"
+      height="{{height}}"
+      style="width:{{domWidth}}px;height:{{domHeight}}px;"
+      bind:sceneReady="handleXRSceneReady"
+    ></xr-frame-canvas>
+
+  </view>
+
+  <view class="hint-bottom page-body-text tc">
+    <view class="btn-wrap">
+      <button class="btn" type="primary" bindtap="switchCamera">切换前后置摄像头</button>
     </view>
-    <view wx:else>
-        <button type="primary" bindtap="switchCamera" data-value="0" disabled="{{buttonDisable}}">切换为后置摄像头</button>
-    </view>
+    <text>提示：摄像头对准人脸，然后会显示106个关键点的三维坐标提示小球，以及通用的半透明脸模模型（支持多个人脸识别）</text>
   </view>
 </view>
+
