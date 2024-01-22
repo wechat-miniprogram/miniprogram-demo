@@ -29,6 +29,13 @@ Component({
       // 缓存resp map
       this.modelRespMap = {};
 
+      const keyNumber = (new Date()).getTime() * 10 + Math.floor(Math.random() * 10);
+      this.setData({
+        modelName: 'arDemo' + keyNumber
+      })
+
+      console.log('当前上传模型名称为 ' + 'arDemo' + keyNumber);
+
       // 获取已有数据
       this.getARModelList();
     }
@@ -44,7 +51,7 @@ Component({
       console.log("modelInfos的值为：")
       console.log(modelInfos)
       if(modelInfos && modelInfos.length != 0){
-        if(timeNow - modelInfos[0].timeStamp < 900){
+        if(timeNow - modelInfos[0].timeStamp < 100){
           wx.showToast({
             title: "每15分钟允许上传一次视频",
             icon: 'none',
@@ -55,7 +62,7 @@ Component({
       }
       // 上传视频
       wx.chooseMedia({
-        count: 9,
+        count: 1,
         mediaType: ['video'],
         sourceType: ['camera', 'album'],
         sizeType: ['original'], // 关闭压缩
@@ -282,19 +289,17 @@ Component({
           countLoaded++;
 
           const modelStatus = resp.result.respBody.status;
-          const errCode = resp.result.result;
 
           console.log("获取的模型的cosID为", cosid)
           console.log(resp)
           console.log('status', modelStatus);
-          console.log('errCode', errCode);
 
           // 根据返回信息，更新模型信息
           const modelInfoNew = {
             cosid: cosid,
             uploadTime: modelInfo.uploadTime,
             timeStamp: modelInfo.timeStamp,
-            modelStatus: modelStatus, // 0 加载中 1 成功 2 失败
+            modelStatus: modelStatus, // 0 生成中 1 生成成功 2 过期 3 生成失败
             restTime: 0,
             statusMsg: '准备中',
           };
@@ -303,6 +308,7 @@ Component({
 
           // 根据状态设置描述
           if (modelStatus === 1) {
+            // 生成成功
             modelInfoNew.statusMsg = '已完成';
             // 运算过期时间
             const expireTime = resp.result.respBody.expireTime;
@@ -310,24 +316,20 @@ Component({
             const restTime = Math.floor((expireTime - nowTime) / 60 / 60 / 24);
             modelInfoNew.restTime = restTime;
           } else if (modelStatus === 2) {
-            modelInfoNew.statusMsg = '生成错误';
-            switch(errCode) {
-              case 10001: // ERR CODE INVALID PARAM
-                modelInfoNew.statusMsg = '参数错误';
-                break;
-              case 10002: // ERR CODE INVALID ENCRYPT ID
-                modelInfoNew.statusMsg = '非法加密信息';
-                break;
-              case 10003: // ERR_CODE_COS_EXPIRED
-                modelInfoNew.statusMsg = '资源过期';
-                break;
-              case 10004: // ERR_CODE_COS_NOT_EXIST
-                modelInfoNew.statusMsg = 'COSID不存在';
-                break;
-              case 10005: // ERR_CODE_COS_SYS_FAIL
-                modelInfoNew.statusMsg = '系统错误';
-                break;
+            // 资源过期
+            modelInfoNew.statusMsg = '资源过期';
+
+          } else if (modelStatus === 3) {
+            // 生成失败
+            const errMsg = resp.result.respBody.errMsg;
+            console.log('errMsg', errMsg);
+
+            modelInfoNew.statusMsg = '生成失败';
+            if (errMsg) {
+              modelInfoNew.statusMsg = errMsg;
+
             }
+            modelInfoNew.statusMsg = errMsg;
           }
 
 
@@ -347,8 +349,14 @@ Component({
       wx.showLoading({
         title: '文件上传中……',
       });
+
+      const second = (new Date()).getSeconds();
+      
+      // 组成规则 第一位随机数（1 / 2）第二位是秒的个位
+      const id = Math.ceil(Math.random() * 2) * 10 + second % 10;
+
       wx.cloud.uploadFile({
-        cloudPath: 'arVideo.mp4',
+        cloudPath: `3dmarker/arVideo${id}.mp4`,
         filePath: res.tempFiles[0].tempFilePath, // 文件路径
         config: {
           env: this.data.envId

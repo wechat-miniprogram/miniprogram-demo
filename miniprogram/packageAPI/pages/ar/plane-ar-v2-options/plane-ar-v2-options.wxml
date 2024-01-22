@@ -10,7 +10,7 @@
     </view>
   </view>
 
-  <view class="hint-words">提示：选择用于识别的图片, 点击添加为marker, 然后手机摄像头对准下方所选图片</view>
+  <view class="hint-words">提示：选择用于识别的图片, 点击添加为marker, 然后手机摄像头对准下方所选图片（需要基础库3.3.3）</view>
 
   <view class="wrap-option">
     <view class="row">

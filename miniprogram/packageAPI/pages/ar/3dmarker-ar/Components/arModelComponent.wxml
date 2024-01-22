@@ -14,7 +14,7 @@
   <view class="wrap-right">
     <view class="model-item" wx:for="{{models}}" wx:key="modelIndex" wx:for-item="modelItem">
       <view
-        class="model-info {{modelItem.modelStatus === 0 ? 'loading': ''}} {{modelItem.modelStatus === 1 ? 'done': '' }} {{modelItem.modelStatus === 2 ? 'error': '' }} {{targetCosId != null && modelItem.cosid == targetCosId ? 'choosed' : '' }}"
+        class="model-info {{modelItem.modelStatus === 0 ? 'loading': ''}} {{modelItem.modelStatus === 1 ? 'done': '' }} {{modelItem.modelStatus === 2 || modelItem.modelStatus === 3 ? 'error': '' }} {{targetCosId != null && modelItem.cosid == targetCosId ? 'choosed' : '' }}"
         bindtap="chooseARModel"
         data-cosid="{{modelItem.cosid}}"
       >
