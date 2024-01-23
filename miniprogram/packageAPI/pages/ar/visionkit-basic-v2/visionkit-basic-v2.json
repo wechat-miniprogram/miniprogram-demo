@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "disableScroll": true,
-  "navigationBarTitleText": "VisionKit基础-v2"
+  "renderer": "webview",
+"navigationBarTitleText": "VisionKit基础-v2"
 }

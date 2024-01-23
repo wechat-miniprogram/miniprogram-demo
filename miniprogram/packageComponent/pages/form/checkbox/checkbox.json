@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "checkbox"
+    "navigationBarTitleText": "checkbox",
+    "renderer": "webview"
 }

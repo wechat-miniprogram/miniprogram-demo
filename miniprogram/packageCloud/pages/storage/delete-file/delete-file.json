@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "删除文件"
+  "renderer": "webview",
+"navigationBarTitleText": "删除文件"
 }

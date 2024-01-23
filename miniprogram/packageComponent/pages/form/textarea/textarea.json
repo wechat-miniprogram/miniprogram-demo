@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "textarea"
+    "navigationBarTitleText": "textarea",
+    "renderer": "webview"
 }

@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "msg"
+  "renderer": "webview",
+"navigationBarTitleText": "msg"
 
 }

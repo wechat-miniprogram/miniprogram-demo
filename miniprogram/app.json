@@ -262,7 +262,9 @@
         "examples/product-list/pages/index/index",
         "examples/expanded-scroll-view/pages/index/index",
         "examples/refresher-two-level/index/index",
-        "examples/refresher-two-level/goods/index"
+        "examples/refresher-two-level/goods/index",
+        "examples/app-bar/pages/index/index",
+        "examples/app-bar/pages/detail/index"
       ]
     },
     {
@@ -446,7 +448,14 @@
   "__lazyCodeLoadingChunk": true,
   "rendererOptions": {
     "skyline": {
-      "defaultDisplayBlock": true
+      "defaultDisplayBlock": true,
+      "defaultContentBox": true,
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255"
     }
-  }
+  },
+  "renderer": "skyline",
+  "componentFramework": "glass-easel",
+  "appBar": {}
 }

@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "progress"
+    "navigationBarTitleText": "progress",
+    "navigationStyle": "custom"
 }

@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "云函数操作存储"
+  "renderer": "webview",
+"navigationBarTitleText": "云函数操作存储"
 }

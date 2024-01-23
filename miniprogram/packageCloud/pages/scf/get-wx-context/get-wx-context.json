@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "WXContext"
+  "renderer": "webview",
+"navigationBarTitleText": "WXContext"
 }

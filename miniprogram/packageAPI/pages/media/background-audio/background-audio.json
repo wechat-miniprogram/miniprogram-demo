@@ -1,3 +1,4 @@
 {
-   "navigationBarTitleText": "背景音频"
+   "renderer": "webview",
+"navigationBarTitleText": "背景音频"
 }

@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "动态加载字体"
+    "renderer": "webview",
+"navigationBarTitleText": "动态加载字体"
 }

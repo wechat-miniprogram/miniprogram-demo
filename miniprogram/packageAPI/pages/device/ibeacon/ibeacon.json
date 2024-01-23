@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "iBeacon"
+  "renderer": "webview",
+"navigationBarTitleText": "iBeacon"
 }

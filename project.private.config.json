@@ -1,5 +1,5 @@
 {
-  "libVersion": "2.33.0",
+  "libVersion": "3.3.3",
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
   "setting": {
     "urlCheck": false,
@@ -11,41 +11,6 @@
   "condition": {
     "miniprogram": {
       "list": [
-        {
-          "name": "ace-detect-3d-glasses",
-          "pathName": "packageAPI/pages/ar/face-detect-3d-glasses/face-detect-3d-glasses",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "plane-ar-v2-options",
-          "pathName": "packageAPI/pages/ar/plane-ar-v2-options/plane-ar-v2-options",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "face-detect-3d",
-          "pathName": "packageAPI/pages/ar/face-detect-3d/face-detect-3d",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "hand-detect-3d",
-          "pathName": "packageAPI/pages/ar/hand-detect-3d/hand-detect-3d",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "body-detect-3d",
-          "pathName": "packageAPI/pages/ar/body-detect-3d/body-detect-3d",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
         {
           "name": "photo-idcard-detect",
           "pathName": "packageAPI/pages/ar/photo-idcard-detect/photo-idcard-detect",

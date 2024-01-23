@@ -3,5 +3,6 @@
     "mp-col": "../../../components/col/index",
     "mp-row": "../../../components/row/index"
   },
-  "navigationBarTitleText": "换行排列"
+  "renderer": "webview",
+"navigationBarTitleText": "换行排列"
 }

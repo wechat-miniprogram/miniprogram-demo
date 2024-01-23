@@ -3,5 +3,6 @@
     "mp-col": "../../../components/col/index",
     "mp-row": "../../../components/row/index"
   },
-  "navigationBarTitleText": "自由布局"
+  "renderer": "webview",
+"navigationBarTitleText": "自由布局"
 }

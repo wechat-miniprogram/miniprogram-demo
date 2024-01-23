@@ -2,6 +2,7 @@
   "usingComponents": {
     "mp-indexList": "../../../components/index-list/index-list"
   },
-  "navigationBarTitleText": "index-list"
+  "renderer": "webview",
+"navigationBarTitleText": "index-list"
 
 }

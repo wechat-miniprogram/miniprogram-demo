@@ -1,6 +1,7 @@
 {
   "component": true,
-  "navigationBarTitleText": "form",
+  "renderer": "webview",
+"navigationBarTitleText": "form",
 
   "usingComponents": {
     "mp-form-page": "weui-miniprogram/form-page/form-page",

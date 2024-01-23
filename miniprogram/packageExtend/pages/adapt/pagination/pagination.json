@@ -3,5 +3,6 @@
     "mp-col": "../../../components/col/index",
     "mp-row": "../../../components/row/index"
   },
-  "navigationBarTitleText": "分页展现"
+  "renderer": "webview",
+"navigationBarTitleText": "分页展现"
 }

@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "音频"
+  "renderer": "webview",
+"navigationBarTitleText": "音频"
 
 }

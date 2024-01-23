@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "disableScroll": true,
-  "navigationBarTitleText": "水平面AR-v2-marker识别"
+  "renderer": "webview",
+"navigationBarTitleText": "水平面AR-v2-marker识别"
 }

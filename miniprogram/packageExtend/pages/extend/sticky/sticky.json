@@ -1,5 +1,6 @@
 {
-  "navigationBarTitleText": "sticky",
+  "renderer": "webview",
+"navigationBarTitleText": "sticky",
   "usingComponents": {
     "mp-sticky": "../../../components/sticky/sticky"
   }

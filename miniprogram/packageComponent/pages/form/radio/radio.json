@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "radio"
+    "navigationBarTitleText": "radio",
+    "renderer": "webview"
 }

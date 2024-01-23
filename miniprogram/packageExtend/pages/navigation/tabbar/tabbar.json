@@ -2,6 +2,7 @@
   "usingComponents": {
     "mp-tabbar": "weui-miniprogram/tabbar/tabbar"
   },
-  "navigationBarTitleText": "tabbar"
+  "renderer": "webview",
+"navigationBarTitleText": "tabbar"
 
 }

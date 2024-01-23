@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "open-data"
+  "navigationBarTitleText": "open-data",
+  "renderer": "webview"
 }

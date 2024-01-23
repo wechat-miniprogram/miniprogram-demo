@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "sidebar"
+  "renderer": "webview",
+"navigationBarTitleText": "sidebar"
 }

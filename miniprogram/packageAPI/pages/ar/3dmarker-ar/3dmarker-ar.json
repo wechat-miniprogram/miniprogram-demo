@@ -4,5 +4,6 @@
     "xr-frame-canvas": "../components/xr-frame/index"
   },
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "3D Marker"
+  "renderer": "webview",
+"navigationBarTitleText": "3D Marker"
 }

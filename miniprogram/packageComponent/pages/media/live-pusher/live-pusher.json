@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "live-pusher"
+  "navigationBarTitleText": "live-pusher",
+  "renderer": "webview"
 }

@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "数据预拉取"
+  "renderer": "webview",
+"navigationBarTitleText": "数据预拉取"
 
 }

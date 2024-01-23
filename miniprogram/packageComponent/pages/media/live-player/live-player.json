@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "live-player"
+  "navigationBarTitleText": "live-player",
+  "renderer": "webview"
 }

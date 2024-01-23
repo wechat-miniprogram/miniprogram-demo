@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "设置页面标题"
+    "renderer": "webview",
+"navigationBarTitleText": "设置页面标题"
 }

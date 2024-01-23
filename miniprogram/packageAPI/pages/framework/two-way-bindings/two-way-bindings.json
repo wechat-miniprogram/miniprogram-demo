@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "two-way-bindings"
+  "renderer": "webview",
+"navigationBarTitleText": "two-way-bindings"
 }

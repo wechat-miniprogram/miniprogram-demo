@@ -2,6 +2,7 @@
   "usingComponents": {
     "mp-halfScreenDialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog"
   },
-  "navigationBarTitleText": "half-screen-dialog"
+  "renderer": "webview",
+"navigationBarTitleText": "half-screen-dialog"
 
 }

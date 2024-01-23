@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "云函数操作数据库"
+  "renderer": "webview",
+"navigationBarTitleText": "云函数操作数据库"
 }

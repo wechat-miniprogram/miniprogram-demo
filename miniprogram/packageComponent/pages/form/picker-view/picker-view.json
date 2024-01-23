@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "picker-view"
+  "navigationBarTitleText": "picker-view",
+  "renderer": "webview"
 }

@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "拍摄/选择视频"
+    "renderer": "webview",
+"navigationBarTitleText": "拍摄/选择视频"
 }

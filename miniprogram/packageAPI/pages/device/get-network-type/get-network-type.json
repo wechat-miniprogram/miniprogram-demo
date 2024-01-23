@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "获取手机网络状态"
+    "renderer": "webview",
+"navigationBarTitleText": "获取手机网络状态"
 }

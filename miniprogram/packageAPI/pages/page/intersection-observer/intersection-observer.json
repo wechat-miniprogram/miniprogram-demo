@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "WXML节点布局相交状态"
+  "renderer": "webview",
+"navigationBarTitleText": "WXML节点布局相交状态"
 }

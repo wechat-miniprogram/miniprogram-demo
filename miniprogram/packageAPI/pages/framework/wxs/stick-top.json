@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "stick-top"
+  "renderer": "webview",
+"navigationBarTitleText": "stick-top"
 }

@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "打电话"
+    "renderer": "webview",
+"navigationBarTitleText": "打电话"
 }

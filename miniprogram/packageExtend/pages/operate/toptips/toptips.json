@@ -2,7 +2,8 @@
   "usingComponents": {
     "mp-toptips": "weui-miniprogram/toptips/toptips"
   },
-  "navigationBarTitleText": "toptips"
+  "renderer": "webview",
+"navigationBarTitleText": "toptips"
 
 
 }

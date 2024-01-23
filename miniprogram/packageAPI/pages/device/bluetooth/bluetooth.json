@@ -1,3 +1,4 @@
 {
-   "navigationBarTitleText": "蓝牙"
+   "renderer": "webview",
+"navigationBarTitleText": "蓝牙"
 }

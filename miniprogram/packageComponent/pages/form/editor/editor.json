@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "editor",
-  "disableScroll": true
+  "disableScroll": true,
+  "renderer": "webview"
 }

@@ -1,7 +1,8 @@
 {
   "disableScroll": true,
 
-  "navigationBarTitleText": "tabs",
+  "renderer": "webview",
+"navigationBarTitleText": "tabs",
   "usingComponents": {
     "mp-tabs": "../../../components/tabs/tabs"
   }

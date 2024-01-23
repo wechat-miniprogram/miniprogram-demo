@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "disableScroll": true,
-  "navigationBarTitleText": "2DMarkerAR"
+  "renderer": "webview",
+"navigationBarTitleText": "2DMarkerAR"
 }

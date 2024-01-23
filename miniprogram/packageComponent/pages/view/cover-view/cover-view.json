@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "cover-view"
+  "navigationBarTitleText": "cover-view",
+  "renderer": "webview"
 }

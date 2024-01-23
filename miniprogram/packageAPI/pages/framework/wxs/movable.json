@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "movable"
+  "renderer": "webview",
+"navigationBarTitleText": "movable"
 }

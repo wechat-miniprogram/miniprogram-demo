@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "服务端时间"
+  "renderer": "webview",
+"navigationBarTitleText": "服务端时间"
 }

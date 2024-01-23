@@ -3,5 +3,6 @@
     "xr-frame-canvas": "../components/xr-frame/index"
   },
   "disableScroll": true,
-  "navigationBarTitleText": "人手三维识别"
+  "renderer": "webview",
+"navigationBarTitleText": "人手三维识别"
 }

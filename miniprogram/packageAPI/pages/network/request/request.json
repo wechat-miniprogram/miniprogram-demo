@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "网络请求"
+    "renderer": "webview",
+"navigationBarTitleText": "网络请求"
 }

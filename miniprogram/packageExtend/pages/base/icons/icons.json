@@ -2,6 +2,7 @@
   "usingComponents": {
     "mp-icon": "weui-miniprogram/icon/icon"
   },
-  "navigationBarTitleText": "icons"
+  "renderer": "webview",
+"navigationBarTitleText": "icons"
 
 }

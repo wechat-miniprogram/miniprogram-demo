@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "preview"
+  "renderer": "webview",
+"navigationBarTitleText": "preview"
 
 }

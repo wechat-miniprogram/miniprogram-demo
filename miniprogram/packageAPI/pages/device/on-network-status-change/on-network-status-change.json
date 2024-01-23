@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "监听手机网络变化"
+    "renderer": "webview",
+"navigationBarTitleText": "监听手机网络变化"
 }

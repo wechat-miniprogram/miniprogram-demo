@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "基本操作"
+  "renderer": "webview",
+"navigationBarTitleText": "基本操作"
 }

@@ -2,6 +2,7 @@
   "usingComponents": {
     "wxml-to-canvas": "../../../../miniprogram_npm/wxml-to-canvas"
   },
-  "navigationBarTitleText": "wxml-to-canvas"
+  "renderer": "webview",
+"navigationBarTitleText": "wxml-to-canvas"
 
 }

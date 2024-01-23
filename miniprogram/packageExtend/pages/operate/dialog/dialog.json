@@ -2,6 +2,7 @@
   "usingComponents": {
     "mp-dialog": "weui-miniprogram/dialog/dialog"
   },
-  "navigationBarTitleText": "dialog"
+  "renderer": "webview",
+"navigationBarTitleText": "dialog"
 
 }

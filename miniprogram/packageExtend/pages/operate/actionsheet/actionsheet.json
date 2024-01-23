@@ -3,6 +3,7 @@
     "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
     "mp-icon": "weui-miniprogram/icon/icon"
   },
-  "navigationBarTitleText": "actionsheet"
+  "renderer": "webview",
+"navigationBarTitleText": "actionsheet"
 
 }

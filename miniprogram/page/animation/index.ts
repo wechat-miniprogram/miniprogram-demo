@@ -53,7 +53,8 @@ Page({
           { url: '/packageSkylineExamples/examples/tab-indicator/pages/index/index', name: 'Tab 指示条'},
           { url: '/packageSkylineExamples/examples/product-list/pages/index/index', name: '搜索栏吸附'},
           { url: '/packageSkylineExamples/examples/expanded-scroll-view/pages/index/index', name: '沉浸式商品浏览'},
-          { url: '/packageSkylineExamples/examples/refresher-two-level/index/index', name: '下拉二楼'}  
+          { url: '/packageSkylineExamples/examples/refresher-two-level/index/index', name: '下拉二楼'},
+          { url: '/packageSkylineExamples/examples/app-bar/pages/index/index', name: '全局工具栏'}  
         ]
       }, {
         id: 'XRFrame',

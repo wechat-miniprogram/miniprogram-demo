@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "disableScroll": true,
-  "navigationBarTitleText": "相机帧测试"
+  "renderer": "webview",
+"navigationBarTitleText": "相机帧测试"
 }

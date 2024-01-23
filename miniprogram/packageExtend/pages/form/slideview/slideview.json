@@ -4,6 +4,7 @@
     "mp-cell": "weui-miniprogram/cell/cell",
     "mp-slideview": "weui-miniprogram/slideview/slideview"
   },
-  "navigationBarTitleText": "slider-view"
+  "renderer": "webview",
+"navigationBarTitleText": "slider-view"
 
 }

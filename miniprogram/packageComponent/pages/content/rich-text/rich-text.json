@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "rich-text"
+  "navigationBarTitleText": "rich-text",
+  "renderer": "webview"
 }

@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "disableScroll": true,
-  "navigationBarTitleText": "平面AR附加能力"
+  "renderer": "webview",
+"navigationBarTitleText": "平面AR附加能力"
 }

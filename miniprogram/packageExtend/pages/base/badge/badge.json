@@ -4,6 +4,7 @@
     "mp-cell": "weui-miniprogram/cell/cell",
     "mp-badge": "weui-miniprogram/badge/badge"
   },
-  "navigationBarTitleText": "badge"
+  "renderer": "webview",
+"navigationBarTitleText": "badge"
 
 }

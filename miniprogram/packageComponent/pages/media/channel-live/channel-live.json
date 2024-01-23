@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "channel-live"
+  "navigationBarTitleText": "channel-live",
+  "renderer": "webview"
 }

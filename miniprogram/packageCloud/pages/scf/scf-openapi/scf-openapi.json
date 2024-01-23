@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "云调用"
+  "renderer": "webview",
+"navigationBarTitleText": "云调用"
 }

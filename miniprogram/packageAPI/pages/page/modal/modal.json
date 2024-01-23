@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "模态弹窗"
+    "renderer": "webview",
+"navigationBarTitleText": "模态弹窗"
 }

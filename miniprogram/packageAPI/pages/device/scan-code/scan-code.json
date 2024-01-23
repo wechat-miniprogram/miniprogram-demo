@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "扫码"
+    "renderer": "webview",
+"navigationBarTitleText": "扫码"
 }

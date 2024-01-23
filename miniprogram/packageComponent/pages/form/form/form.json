@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "form"
+    "navigationBarTitleText": "form",
+    "renderer": "webview"
 }

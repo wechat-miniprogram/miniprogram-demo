@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "aria-component"
+  "navigationBarTitleText": "aria-component",
+  "renderer": "webview"
 }

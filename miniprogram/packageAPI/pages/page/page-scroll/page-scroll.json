@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "页面滚动"
+  "renderer": "webview",
+"navigationBarTitleText": "页面滚动"
 }

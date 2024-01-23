@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "创建画布"
+    "renderer": "webview",
+"navigationBarTitleText": "创建画布"
 }

@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "WXS"
+  "renderer": "webview",
+"navigationBarTitleText": "WXS"
 }

@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "周期性更新数据"
+  "renderer": "webview",
+"navigationBarTitleText": "周期性更新数据"
 }

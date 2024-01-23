@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "性能数据"
+  "renderer": "webview",
+"navigationBarTitleText": "性能数据"
 
 }

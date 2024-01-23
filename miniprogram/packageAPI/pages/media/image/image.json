@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "图片"
+    "renderer": "webview",
+"navigationBarTitleText": "图片"
 }

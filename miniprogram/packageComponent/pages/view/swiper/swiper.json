@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "swiper"
+    "navigationBarTitleText": "swiper",
+    "renderer": "webview"
   }

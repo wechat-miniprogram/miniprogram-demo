@@ -2,6 +2,7 @@
   "usingComponents": {
     "mp-searchbar": "weui-miniprogram/searchbar/searchbar"
   },
-  "navigationBarTitleText": "searchbar"
+  "renderer": "webview",
+"navigationBarTitleText": "searchbar"
 
 }

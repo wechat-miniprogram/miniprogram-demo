@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "switch"
+    "navigationBarTitleText": "switch",
+    "renderer": "webview"
 }

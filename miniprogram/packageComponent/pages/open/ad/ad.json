@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "ad"
+  "navigationBarTitleText": "ad",
+  "renderer": "webview"
 }

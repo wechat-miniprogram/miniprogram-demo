@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "屏幕旋转",
+  "renderer": "webview",
+"navigationBarTitleText": "屏幕旋转",
   "pageOrientation": "auto"
 }

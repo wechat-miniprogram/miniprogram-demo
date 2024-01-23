@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "webgl"
+  "navigationBarTitleText": "webgl",
+  "renderer": "webview"
 }

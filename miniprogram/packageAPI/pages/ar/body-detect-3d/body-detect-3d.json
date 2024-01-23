@@ -3,6 +3,7 @@
     "xr-frame-canvas": "../components/xr-frame/index"
   },
   "disableScroll": true,
-  "navigationBarTitleText": "躯体三维识别",
+  "renderer": "webview",
+"navigationBarTitleText": "躯体三维识别",
   "pageOrientation": "auto"
 }

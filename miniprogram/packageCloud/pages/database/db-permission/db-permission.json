@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "权限管理"
+  "renderer": "webview",
+"navigationBarTitleText": "权限管理"
 }

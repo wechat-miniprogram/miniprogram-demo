@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "特殊屏幕验证"
+  "renderer": "webview",
+"navigationBarTitleText": "特殊屏幕验证"
 }

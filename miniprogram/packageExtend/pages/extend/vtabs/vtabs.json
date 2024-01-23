@@ -3,6 +3,7 @@
     "mp-vtabs": "../../../components/vtabs/vtabs",
     "mp-vtabs-content": "../../../components/vtabs-content/vtabs-content"
   },
-  "navigationBarTitleText": "vtabs"
+  "renderer": "webview",
+"navigationBarTitleText": "vtabs"
 
 }

@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "录音"
+    "renderer": "webview",
+"navigationBarTitleText": "录音"
 }

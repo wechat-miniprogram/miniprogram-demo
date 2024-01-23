@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "disableScroll": true,
-  "navigationBarTitleText": "照片身份证检测"
+  "renderer": "webview",
+"navigationBarTitleText": "照片身份证检测"
 }

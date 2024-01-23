@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "页面跳转"
+    "renderer": "webview",
+"navigationBarTitleText": "页面跳转"
 }

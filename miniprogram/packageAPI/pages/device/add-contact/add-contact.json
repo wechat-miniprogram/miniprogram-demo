@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "新增联系人"
+    "renderer": "webview",
+"navigationBarTitleText": "新增联系人"
 }

@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "disableScroll": true,
-  "navigationBarTitleText": "水平面AR"
+  "renderer": "webview",
+"navigationBarTitleText": "水平面AR"
 }

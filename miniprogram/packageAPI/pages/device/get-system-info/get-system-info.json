@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "获取手机系统信息"
+    "renderer": "webview",
+"navigationBarTitleText": "获取手机系统信息"
 }

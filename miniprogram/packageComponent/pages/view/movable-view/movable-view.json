@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "movable-view"
+  "navigationBarTitleText": "movable-view",
+  "renderer": "webview"
 }

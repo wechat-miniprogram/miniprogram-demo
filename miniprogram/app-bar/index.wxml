@@ -1,0 +1,54 @@
+<!-- components/app-bar/index.wxml -->
+<vertical-drag-gesture-handler worklet:ongesture="handleVerticalDrag">
+	<view class="expand-container">
+		<!-- 放大模式：nav-bar -->
+		<view class="nav-bar column">
+			<view style="height: {{statusBarHeight}}px;" />
+			<view style="flex: 1;" class="column-main-center">
+				<image
+				 class="icon--back"
+				 mode="aspectFill"
+				 src="/assets/arrow-down.png"
+				 bind:tap="close"
+				/>
+			</view>
+		</view>
+
+		<!-- 跟着手势变化 -->
+		<view class="cover-area" style="height: {{maxCoverSize}}px;">
+			<view class="row " bind:tap="expand">
+				<image class="cover" mode="aspectFill" src="{{musicCover}}" />
+				<view class="title-wrap row-between">
+					<view class="title column">
+						<text overflow="ellipsis" max-lines="1">Skyline 渲染框架入门与实践</text>
+						<text class="name" overflow="ellipsis" max-lines="1">小程序技术专员 - binnie</text>
+					</view>
+					<view class="row">
+						<image class="icon" style="margin-right: 24px;" src="/assets/play.png" />
+						<image class="icon" src="/assets/next.png" />
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<!-- 放大模式：小字 -->
+		<view class="row-between">
+			<text>微信学堂</text>
+			<text>88 人在学</text>
+		</view>
+
+		<!-- 放大模式：标题 -->
+		<view class="music-title column" style="margin-top: 50px;">
+			<text>Skyline 渲染框架入门与实践</text>
+			<text class="name">小程序技术专员 - binnie</text>
+		</view>
+
+		<!-- 底部操作栏 -->
+		<view class="footer row-between" style="margin-top: 50px;">
+			<image class="icon" src="/assets/next.png" style="transform: rotate(180deg);" />
+			<image class="icon" src="/assets/play.png" />
+			<image class="icon" src="/assets/next.png" />
+		</view>
+	</view>
+</vertical-drag-gesture-handler>
+
