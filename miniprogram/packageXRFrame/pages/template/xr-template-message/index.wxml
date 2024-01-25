@@ -1,7 +1,6 @@
 <xr-demo-viewer
   title="小程序通信模版"
   intro="通过小程序按钮事件，传递速度变量到 xr-Frame 控制小球移动，并将小球状态同步到小程序侧显示。（工具存在同层渲染问题，请于真机体验）"
-  code="{{}}"
 >
   <view class="xr-holder" style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;">
     <xr-template-message
