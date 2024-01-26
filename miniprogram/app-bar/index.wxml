@@ -1,6 +1,6 @@
 <!-- components/app-bar/index.wxml -->
 <vertical-drag-gesture-handler worklet:ongesture="handleVerticalDrag">
-	<view class="expand-container">
+	<view class="expand-container" wx:if="{{showAppbar}}">
 		<!-- 放大模式：nav-bar -->
 		<view class="nav-bar column">
 			<view style="height: {{statusBarHeight}}px;" />

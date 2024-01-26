@@ -1,5 +1,5 @@
 <view class="weui-navigation-bar {{extClass}}" data-weui-theme="{{theme}}">
-  <view class="weui-navigation-bar__inner" style="padding-top: {{statusBarHeight}}px; height: {{44 + statusBarHeight}}px; color: {{color}}; background: {{background}}; {{displayStyle}}; {{innerPaddingRight}};">
+  <view class="weui-navigation-bar__inner" style="padding-top: {{statusBarHeight}}px; height: {{navBarHeight}}px; color: {{color}}; background: {{background}}; {{displayStyle}}; {{innerPaddingRight}};">
     <view class='weui-navigation-bar__left' style="{{leftWidth}}">
       <block wx:if="{{back}}">
         <view class="weui-navigation-bar__buttons">

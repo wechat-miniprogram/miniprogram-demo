@@ -1,4 +1,5 @@
 .weui-navigation-bar {
+  display: flex;
   overflow: hidden;
   color: rgba(0, 0, 0, .9);
   width: 100vw;

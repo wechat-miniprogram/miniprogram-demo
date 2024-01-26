@@ -31,9 +31,17 @@ Component({
   },
 
   data: {
+    showAppbar: false,
     maxCoverSize: 0,
     statusBarHeight: 0,
     musicCover: 'https://res.wx.qq.com/op_res/Nu9XXzXcXnD1j5EgWQ2ElxNcl1yMvnKypRo4MTbjOv7FC3saigGoOBTZibyESC7EXaClnPYhB6pvfb-IRmso6g'
+  },
+
+  pageLifetimes: {
+    show: function() {
+      // 页面被展示
+      console.log('xxx', this.router)
+    },
   },
 
   lifetimes: {

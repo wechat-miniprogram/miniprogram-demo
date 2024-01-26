@@ -474,6 +474,5 @@
     }
   },
   "renderer": "skyline",
-  "componentFramework": "glass-easel",
-  "appBar": {}
+  "componentFramework": "glass-easel"
 }

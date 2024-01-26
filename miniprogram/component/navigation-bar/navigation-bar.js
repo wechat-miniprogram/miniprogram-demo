@@ -64,6 +64,7 @@ Component({
             this.setData({
                 ios,
                 statusBarHeight: res.statusBarHeight,
+                navBarHeight: rect.bottom - rect.top + 10,
                 innerWidth: isSupport ? `width:${rect.left}px` : '',
                 innerPaddingRight: isSupport
                     ? `padding-right:${res.windowWidth - rect.left}px`
