@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "xr-frame-render-canvas": "../components/xr-frame-render/index"
+  },
+  "disableScroll": true,
+  "renderer": "webview",
+  "navigationBarTitleText": "高斯溅射预览"
+}
