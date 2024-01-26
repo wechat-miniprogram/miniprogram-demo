@@ -111,5 +111,5 @@ message GetARModelResp
     optional string host = 3;
     optional string errMsg = 4;
     optional uint32 expire_time = 5;
-    optional uint32 status = 6; // 0 生成中 1 生成成功 2 过期 3 生成失败
+    optional uint32 status = 6; // 0 生成中 1 生成成功 2 生成失败 3 过期
 }

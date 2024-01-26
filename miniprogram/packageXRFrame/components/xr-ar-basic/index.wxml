@@ -11,6 +11,12 @@
     <xr-node node-id="setitem" visible="false">
       <xr-gltf model="gltf-item" scale="0.006 0.006 0.006"></xr-gltf>
     </xr-node>
+
+    <!-- 坐标系提示，单位1 的坐标轴 -->
+    <xr-mesh node-id="mesh-x" position="1 0 0"  scale="2 0.02 0.02" geometry="cube" uniforms="u_baseColorFactor:0.7 0.3 0.3 1" ></xr-mesh>
+    <xr-mesh node-id="mesh-y" position="0 1 0"  scale="0.02 2 0.02" geometry="cube" uniforms="u_baseColorFactor:0.3 0.7 0.3 1"></xr-mesh>
+    <xr-mesh node-id="mesh-z" position="0 0 1"  scale="0.02 0.02 2" geometry="cube" uniforms="u_baseColorFactor:0.3 0.3 0.7 1"></xr-mesh>
+
     <xr-camera
       id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
       background="ar" is-ar-camera

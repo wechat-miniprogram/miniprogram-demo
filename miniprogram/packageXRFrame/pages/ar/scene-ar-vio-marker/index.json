@@ -3,5 +3,5 @@
     "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
     "xr-ar-vio-marker": "../../../components/xr-ar-vio-marker/index"
   },
-  "disableScroll": true
+  "disableScroll": true, "renderer": "webview"
 }

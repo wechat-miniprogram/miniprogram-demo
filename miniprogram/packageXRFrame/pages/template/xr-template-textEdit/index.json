@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+    "xr-template-textEdit": "../../../components/template/xr-template-textEdit/index"
+  },
+  "disableScroll": true, "renderer": "webview"
+}

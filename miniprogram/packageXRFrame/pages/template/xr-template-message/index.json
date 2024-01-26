@@ -3,5 +3,5 @@
     "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
     "xr-template-message": "../../../components/template/xr-template-message/index"
   },
-  "disableScroll": true
+  "disableScroll": true, "renderer": "webview"
 }

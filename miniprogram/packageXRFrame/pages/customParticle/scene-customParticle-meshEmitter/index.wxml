@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="网格发射器用例"
+  intro="展示网格发射器的用法"
+  code="{{xmlCode}}"
+>
+  <xr-customParticle-meshEmitter
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

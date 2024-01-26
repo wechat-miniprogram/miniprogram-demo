@@ -6,6 +6,10 @@
     <xr-node node-id="id2" scale="2 2 2" position="0 0 0"></xr-node>
     <xr-ar-tracker mode="OSD" src="{{markerImg}}">
       <xr-mesh geometry="plane" rotation="-90 0 0" scale="1 1 1" uniforms="u_baseColorFactor:0 1 0 0.5" states="alphaMode:BLEND" />
+      <!-- 坐标系提示，单位1 的坐标轴 -->
+      <xr-mesh node-id="mesh-x" position="1 0 0"  scale="2 0.02 0.02" geometry="cube" uniforms="u_baseColorFactor:0.7 0.3 0.3 1" ></xr-mesh>
+      <xr-mesh node-id="mesh-y" position="0 1 0"  scale="0.02 2 0.02" geometry="cube" uniforms="u_baseColorFactor:0.3 0.7 0.3 1"></xr-mesh>
+      <xr-mesh node-id="mesh-z" position="0 0 1"  scale="0.02 0.02 2" geometry="cube" uniforms="u_baseColorFactor:0.3 0.3 0.7 1"></xr-mesh>
     </xr-ar-tracker>
     <xr-camera
       id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"

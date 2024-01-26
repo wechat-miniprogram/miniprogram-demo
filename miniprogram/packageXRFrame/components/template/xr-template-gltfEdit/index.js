@@ -31,11 +31,10 @@ Component({
       const textureAsset = await scene.assets.loadAsset({
         type: 'texture',
         assetId: `texture-1`,
-        src: 'https://webar.hereto.cn/asset/fe/ast-show/BalloonTEXc1.png',
+        src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/waifu.png',
       });
       for(const mesh of ballonGLTF.meshes) {
         console.log('textureAsset', textureAsset.value);
-        mesh.material.setVector('u_specularFactor', xrSystem.Vector3.createFromNumber(0, 0, 0));
         mesh.material.setTexture('u_baseColorMap', textureAsset.value);
       }
 

@@ -3,5 +3,5 @@
     "xr-demo-viewer": "../../..//components/xr-demo-viewer/index",
     "xr-template-markerLock": "../../../components/template/xr-template-markerLock/index"
   },
-  "disableScroll": true
+  "disableScroll": true, "renderer": "webview"
 }

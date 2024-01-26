@@ -53,11 +53,6 @@ const base = {
       path: '/pages/basic/scene-basic-render-texture/index',
     },
     {
-      name: 'ParticleSystem',
-      label: '粒子系统',
-      path: '/pages/basic/scene-basic-particle/index',
-    },
-    {
       name: 'PostProcessing',
       label: '后处理效果',
       path: '/pages/basic/scene-basic-postprocessing/index'
@@ -164,14 +159,34 @@ const ar = {
       path: '/pages/ar/scene-ar-face/index',
     },
     {
+      name: 'Face',
+      label: 'AR 三维人脸',
+      path: '/pages/ar/scene-ar-face-3d/index',
+    },
+    {
       name: 'Hand',
       label: 'AR 人手',
       path: '/pages/ar/scene-ar-hand/index',
     },
     {
+      name: 'Hand',
+      label: 'AR 三维人手',
+      path: '/pages/ar/scene-ar-hand-3d/index',
+    },
+    {
       name: 'Body',
       label: 'AR 人体',
       path: '/pages/ar/scene-ar-body/index',
+    },
+    {
+      name: 'Body',
+      label: 'AR 三维人体',
+      path: '/pages/ar/scene-ar-body-3d/index',
+    },
+    {
+      name: 'Shoe',
+      label: 'AR 试鞋',
+      path: '/pages/ar/scene-ar-shoe/index',
     },
     {
       name: 'Plane+Marker',
@@ -202,6 +217,75 @@ const physics = {
     }
   ]
 };
+
+const particle = {
+    name: '粒子能力',
+    tag: 'func',
+    childArr: [
+      {
+        name: 'Firework',
+        label: '喷射烟火',
+        path: '/pages/particle/scene-particle-firework/index'
+      },
+      {
+        name: 'Portal',
+        label: '传送门',
+        path: '/pages/particle/scene-particle-portal/index'
+      },
+      {
+        name: 'Orb',
+        label: '闪电光球',
+        path: '/pages/particle/scene-particle-orb/index'
+      },
+      {
+        name: 'ShapeEmitter',
+        label: '球形发射器',
+        path: '/pages/particle/scene-particle-shapeEmitter/index'
+      },
+      {
+        name: 'MeshEmitter',
+        label: '网格发射器',
+        path: '/pages/particle/scene-particle-meshEmitter/index'
+      },
+      {
+        name: 'HumanFace',
+        label: '自定义粒子系统',
+        path: '/pages/particle/scene-particle-custom/index'
+      },
+    ]
+  };
+
+const customParticle = {
+    name: '粒子定制能力',
+    tag: 'func',
+    childArr: [
+        {
+            name: 'Firework',
+            label: '喷射烟火',
+            path: '/pages/customParticle/scene-customParticle-firework/index'
+        },
+        {
+            name: 'Portal',
+            label: '传送门',
+            path: '/pages/customParticle/scene-customParticle-portal/index'
+          },
+          {
+            name: 'Orb',
+            label: '闪电光球',
+            path: '/pages/customParticle/scene-customParticle-orb/index'
+          },
+          {
+            name: 'ShapeEmitter',
+            label: '球形发射器',
+            path: '/pages/customParticle/scene-customParticle-shapeEmitter/index'
+          },
+          {
+            name: 'MeshEmitter',
+            label: '网格发射器',
+            path: '/pages/customParticle/scene-customParticle-meshEmitter/index'
+          }
+    ]
+  };
 
 const custom = {
   name: '高级定制',
@@ -275,6 +359,11 @@ const arTemplate = {
       name: 'Plane',
       label: '模型摆放与手势控制',
       path: '/pages/template/xr-template-arPreview/index',
+    },
+    {
+      name: 'AR',
+      label: '人脸试戴眼镜（带遮挡）',
+      path: '/pages/template/xr-template-arGlasses/index',
     },
     {
       name: 'AR',
@@ -361,6 +450,16 @@ const toolTemplate = {
       name: 'Share',
       label: '截图与分享',
       path: '/pages/template/xr-template-share/index',
+    },
+    {
+      name: 'Text',
+      label: '自定义文本',
+      path: '/pages/template/xr-template-textEdit/index',
+    },
+    {
+        name: 'volumeVideo',
+        label: '体积视频渲染',
+        path: '/pages/template/xr-template-volumeVideo/index',
     }
     // {
     //   name: 'Video',
@@ -447,4 +546,4 @@ const production = {
   ]
 };
 
-export default [base, ar, gltf, physics, custom, messageTemplate, arTemplate, customTemplate, gltfEditTemplate, toolTemplate, classic, scan, production];
+export default [base, ar, gltf, physics, particle, customParticle, custom, messageTemplate, arTemplate, customTemplate, gltfEditTemplate, toolTemplate, classic, scan, production];

@@ -3,5 +3,5 @@
     "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
     "xr-gltf-postprocessing": "../../../components/xr-basic-postprocessing/index"
   },
-  "disableScroll": true
+  "disableScroll": true, "renderer": "webview"
 }

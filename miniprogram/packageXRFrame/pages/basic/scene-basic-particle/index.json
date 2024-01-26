@@ -3,5 +3,5 @@
     "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
     "xr-basic-particle": "../../../components/xr-basic-particle/index"
   },
-  "disableScroll": true
+  "disableScroll": true, "renderer": "webview"
 }

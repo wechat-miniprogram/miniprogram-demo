@@ -34,7 +34,18 @@ xrFrameSystem.registerEffect('toon-user', scene => scene.createEffect(
             lightMode: "ForwardBase",
             useMaterialRenderStates: true,
             shaders: [2, 3]
-        }
+        },
+        {
+            renderStates: {
+                cullOn: true,
+                blendOn: false,
+                depthWrite: true,
+                cullFace: xrFrameSystem.ECullMode.FRONT,
+            },
+            lightMode: 'ShadowCaster',
+            useMaterialRenderStates: false,
+            shaders: [4, 5]
+        },
     ],
     properties: [
         { key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1] },
@@ -59,7 +70,57 @@ xrFrameSystem.registerEffect('toon-user', scene => scene.createEffect(
         // Vertex Shader Toon
         toonVert,
         // Fragment Shader Toon
-        toonFrag
+        toonFrag,
+        `#version 100
+  uniform highp mat4 u_world;
+  uniform highp mat4 u_lightSpaceMatrix;
+
+  
+  attribute vec3 a_position;
+  attribute highp vec2 a_texCoord;
+  varying highp vec2 v_uv;
+  varying highp float v_z;
+  
+  void main()
+  {
+      v_uv = a_texCoord;
+
+      vec4 worldPosition = u_world * vec4(a_position, 1.0);
+      vec4 lightPos = u_lightSpaceMatrix * worldPosition;
+      v_z = lightPos.z / lightPos.w;
+      v_z = lightPos.z / lightPos.w;
+
+      gl_Position = lightPos;
+  }`,
+    `#version 100
+  precision mediump float;
+  precision highp int;
+  varying highp vec2 v_uv;
+  varying highp float v_z;
+  
+  uniform highp vec4 u_baseColorFactor;
+  uniform sampler2D u_baseColorMap;
+
+  vec4 packDepth(float depth)
+  {
+    vec4 bitShift = vec4(256.0 * 256.0 * 256.0, 256.0 * 256.0, 256.0, 1.0);
+    vec4 bitMask = vec4(0.0, 1.0 / 256.0, 1.0 / 256.0, 1.0 / 256.0);
+    vec4 res = mod(
+      depth * bitShift * vec4(255.0, 255.0, 255.0, 255.0),
+      vec4(256.0, 256.0, 256.0, 256.0)) / vec4(255.0, 255.0, 255.0, 255.0);
+    res -= res.xxyz * bitMask;
+    return res;
+  }
+
+  void main()
+  {
+
+    gl_FragData[0] = packDepth(v_z * 0.5 + 0.5);
+
+    // gl_FragData[0] = vec4(v_z * 0.5 + 0.5, 0.0, 0.0, 1.0);
+
+  }  
+    `
     ]
 }
 ));

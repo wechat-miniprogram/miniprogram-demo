@@ -1,0 +1,19 @@
+<xr-demo-viewer
+  title="AR 人脸三维识别案例"
+  intro="人脸识别案例。识别成功后，会在五官典型位置展示几何体。"
+  hint="要求基础库 v3.3.3 及以上，前置相机需要客户端 8.0.31 及以上"
+>
+  <xr-ar-face-3d
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+</xr-demo-viewer>

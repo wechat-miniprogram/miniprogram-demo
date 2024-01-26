@@ -3,5 +3,5 @@
     "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
     "xr-scan-render": "../../../components/xr-scan-render/index"
   },
-  "disableScroll": true
+  "disableScroll": true, "renderer": "webview"
 }

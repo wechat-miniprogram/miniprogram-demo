@@ -1,0 +1,14 @@
+<xr-demo-viewer
+  title="球形发射器用例"
+  intro="球形发射器的自定义粒子系统实现"
+  code="{{xmlCode}}"
+>
+  <xr-customParticle-shapeEmitter
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+
+</xr-demo-viewer>

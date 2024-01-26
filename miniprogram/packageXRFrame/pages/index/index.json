@@ -2,6 +2,6 @@
   "usingComponents": {
     "pull-down-list": "../../components/pull-down-list/index"
   },
-  "disableScroll": true,
+  "disableScroll": true, "renderer": "webview",
   "navigationStyle": "custom"
 }

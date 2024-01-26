@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="传送门案例"
+  intro="传送门的自定义粒子实现"
+  code="{{xmlCode}}"
+>
+  <xr-customParticle-portal
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

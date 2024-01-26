@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="带耳环的少女案例"
+  intro="这里展示自定义粒子流程的特性"
+  code="{{xmlCode}}"
+>
+  <xr-particle-custom
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

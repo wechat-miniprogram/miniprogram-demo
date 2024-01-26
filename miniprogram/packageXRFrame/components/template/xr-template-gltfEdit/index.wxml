@@ -1,16 +1,16 @@
 <xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
-    <xr-asset-load type="gltf" asset-id="gltf-ballon-origin" src="https://webar.hereto.cn/asset/fe/ast-show/ballon-anim.glb" />
-    <xr-asset-load type="gltf" asset-id="gltf-ballon" src="https://webar.hereto.cn/asset/fe/ast-show/ballon-anim.glb" /> 
-    <xr-asset-load type="gltf" asset-id="gltf-ballon-blend" src="https://webar.hereto.cn/asset/fe/ast-show/ballon-anim.glb" /> 
+    <xr-asset-load type="gltf" asset-id="gltf-ballon-origin" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.gltf" />
+    <xr-asset-load type="gltf" asset-id="gltf-ballon" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.gltf" /> 
+    <xr-asset-load type="gltf" asset-id="gltf-ballon-blend" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.gltf" /> 
   </xr-assets>
   <xr-env env-data="xr-frame-team-workspace-day2" />
   <xr-node>
     <xr-node node-id="camera-target" position="0 0 0"></xr-node>
 
-    <xr-gltf position="-0.8 0 0" rotation="0 0 0" scale="1.2 1.2 1.2" model="gltf-ballon-origin"></xr-gltf>
-    <xr-gltf id="ballon" node-id="gltf-ballon" position="0.8 0 0" rotation="0 0 0" scale="1.2 1.2 1.2" model="gltf-ballon"></xr-gltf>
-    <xr-gltf id="ballonBlend" node-id="gltf-ballon-blend" position="0 0 -0.8" rotation="0 0 0" scale="1.2 1.2 1.2" model="gltf-ballon-blend"></xr-gltf>
+    <xr-gltf position="-0.8 0 0" rotation="0 0 0" scale="0.6 0.6 0.6" model="gltf-ballon-origin"></xr-gltf>
+    <xr-gltf id="ballon" node-id="gltf-ballon" position="0.8 0 0" rotation="0 0 0" scale="0.6 0.6 0.6" model="gltf-ballon"></xr-gltf>
+    <xr-gltf id="ballonBlend" node-id="gltf-ballon-blend" position="0 0 -0.8" rotation="0 0 0" scale="0.6 0.6 0.6" model="gltf-ballon-blend"></xr-gltf>
 
     <xr-camera
       id="camera" node-id="camera" position="2 2 4" clear-color="0.925 0.925 0.925 1"

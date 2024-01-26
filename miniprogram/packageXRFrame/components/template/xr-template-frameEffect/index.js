@@ -101,7 +101,7 @@ Component({
     async loadAsset(){
         const xrFrameSystem = wx.getXrFrameSystem();
         const xrScene = this.scene;
-        const shadowRoot = xrScene.getElementById("shadow-root");
+        // const shadowRoot = xrScene.getElementById("shadow-root");
 
         await xrScene.assets.loadAsset({type: 'texture', assetId: 'frame', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/sprite-frames.png'})
 
@@ -120,7 +120,23 @@ Component({
         frameMaterial.setFloat('rowCount', 32);
         frameMaterial.setFloat('during', 2);
         frameMaterial.alphaMode = "BLEND";
-        meshElement.material = frameMaterial
+        meshElement.material = frameMaterial;
+
+        // 不同的序列帧需要使用不同的材质
+        const frameMaterial2 = xrScene.createMaterial(
+          // 使用定制的效果
+          xrScene.assets.getAsset('effect', 'frame-effect'),
+          {u_baseColorMap: xrScene.assets.getAsset('texture', 'frame')}
+      );
+
+        const meshElement2 = xrScene.getElementById("animation-mesh2").getComponent(xrFrameSystem.Mesh);
+        frameMaterial2.setFloat('columCount', 4);
+        frameMaterial2.setFloat('rowCount', 32);
+        frameMaterial2.setFloat('during', 2);
+        frameMaterial2.alphaMode = "BLEND";
+        meshElement2.material = frameMaterial2;
+
+
     },
   }
 })

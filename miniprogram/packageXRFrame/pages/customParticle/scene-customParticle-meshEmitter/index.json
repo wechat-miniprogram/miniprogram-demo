@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+    "xr-customParticle-meshEmitter": "../../../components/xr-customParticle-meshEmitter/index"
+  },
+  "disableScroll": true, "renderer": "webview"
+}

@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="闪电光球"
+  intro="自定义粒子系统实现光球特效"
+  code="{{xmlCode}}"
+>
+  <xr-customParticle-orb
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

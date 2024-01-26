@@ -3,5 +3,5 @@
     "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
     "xr-ar-camera": "../../../components/xr-ar-camera/index"
   },
-  "disableScroll": true
+  "disableScroll": true, "renderer": "webview"
 }

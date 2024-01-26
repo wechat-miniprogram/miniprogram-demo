@@ -1,0 +1,26 @@
+<xr-scene id="xr-scene" bind:ready="handleReady"   bind:assetsLoaded="handleLoaded">
+  <xr-assets>
+    <xr-asset-load type="texture" asset-id="glow_circle" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/glow_circle.png" />
+  </xr-assets>
+
+  <xr-node>
+    <xr-mesh node-id="mesh-plane" position="0 -1 0" rotation="0 0 0" scale="5 0.2 5"
+      geometry="cube" material="blue-mat" uniforms="u_baseColorFactor:0.48 0.78 0.64 1"
+    ></xr-mesh>
+    <xr-env sky-map="sky" is-sky2d/>
+
+    <xr-particle  id="magicField" position="0 0 0" rotation="0 0 180" capacity="10" speed="0.1" size="2" emit-rate="6" life-time="0.5" angle="0"  render-mode="mesh" mesh="specialCylinder" texture="glow_circle" angular-speed="0"></xr-particle>
+
+    <xr-camera
+      id="camera" node-id="camera" position="0 6 -6" clear-color="0.1 0.1 0.1 1"
+      target="mesh-plane" background="skybox"
+      camera-orbit-control=""
+    ></xr-camera>
+    
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.3" />
+    <xr-light type="directional" rotation="90 0 0" color="1 1 1" intensity="2.5"  />
+  </xr-node>
+
+</xr-scene>

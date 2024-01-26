@@ -1,0 +1,21 @@
+<xr-demo-viewer
+  title="AR 人体三维识别案例"
+  intro="人体识别案例。识别成功后，会在典型位置展示几何体。"
+  hint="要求基础库 v3.3.3 及以上"
+>
+  <xr-ar-body-3d
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:info="handleInfo"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+    <view wx:if="{{score !== undefined}}">置信度：{{score}}</view>
+  </view>
+</xr-demo-viewer>

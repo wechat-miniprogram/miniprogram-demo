@@ -1,0 +1,19 @@
+<xr-demo-viewer
+  title="AR 试鞋案例"
+  intro=""
+  hint="要求基础库 v3.3.3 及以上"
+>
+  <xr-ar-shoe
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+</xr-demo-viewer>

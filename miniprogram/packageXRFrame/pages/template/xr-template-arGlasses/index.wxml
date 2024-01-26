@@ -1,0 +1,19 @@
+<xr-demo-viewer
+  title="AR 眼镜试戴案例"
+  intro="眼镜试戴案例。人脸识别成功后，会摆放眼镜到对应的位置，眼镜脚会通过透明的标准头模进行深度遮挡。眼镜模型可以根据标准头模模型进行大小的适配制作。"
+  hint="3d Face 目前在xr-frame的处理存在问题，预计基础库 3.3.2 修复"
+>
+  <xr-template-arGlasses
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:arTrackerState="handleARTrackerState"
+  />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
+</xr-demo-viewer>

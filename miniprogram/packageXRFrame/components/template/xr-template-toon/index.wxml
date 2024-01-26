@@ -4,8 +4,10 @@
   </xr-assets>
   <xr-node>
     <xr-node node-id="camera-target" position="0 0 0"></xr-node>
-
-    <xr-gltf id="gltf" position="0 0 0" scale="2 2 2" model="gltf-toon"></xr-gltf>
+    <xr-mesh node-id="floor-plane" position="0 -2 0" rotation="0 0 0" scale="10 1 10" geometry="plane"
+      uniforms="u_baseColorFactor:1 1 1 1" receive-shadow
+    ></xr-mesh>
+    <xr-gltf id="gltf" position="0 0 0" scale="2 2 2" model="gltf-toon" cast-shadow></xr-gltf>
 
     <xr-camera
       id="camera" node-id="camera" position="2 2 4" clear-color="0.96 0.96 0.96 1"
@@ -15,6 +17,6 @@
   </xr-node>
   <xr-node node-id="lights">
     <xr-light type="ambient" color="1 1 1" intensity="1.2" />
-    <xr-light type="directional" rotation="120 20 0" color="1 1 1" intensity="2" />
+    <xr-light type="directional" rotation="120 20 0" color="1 1 1" intensity="2" cast-shadow />
   </xr-node>
 </xr-scene>

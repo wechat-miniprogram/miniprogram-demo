@@ -1,0 +1,12 @@
+<xr-demo-viewer
+  title="体积视频渲染"
+  intro="根据体积视频进行三维模型渲染"
+>
+  <xr-template-volumeVideo
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

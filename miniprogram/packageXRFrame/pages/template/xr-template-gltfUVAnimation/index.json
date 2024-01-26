@@ -3,5 +3,5 @@
     "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
     "xr-template-gltfUVAnimation": "../../../components/template/xr-template-gltfUVAnimation/index"
   },
-  "disableScroll": true
+  "disableScroll": true, "renderer": "webview"
 }

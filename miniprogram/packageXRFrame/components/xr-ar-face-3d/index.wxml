@@ -1,0 +1,38 @@
+<xr-scene ar-system="modes:Face;camera:Front;pose3d: true;" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <!-- 标准头模，外部可以直接使用，并且可以根据该模型大小，制作挂载模型 -->
+    <xr-asset-load type="gltf" asset-id="gltf-face" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/face.glb" />
+    <xr-asset-material asset-id="simple-mat" effect="simple" />
+  </xr-assets>
+  <xr-node wx:if="{{arReady}}">
+    <xr-ar-tracker wx:if="{{trackerReady}}" id='tracker' mode="Face" auto-sync="{{syncStr}}">
+      <!-- 同步的点放前面-->
+      <xr-node wx:for="{{syncList}}" wx:for-item="syncColor">
+        <xr-mesh
+          geometry="sphere" scale="{{syncBoxSize}} {{syncBoxSize}} {{syncBoxSize}}"
+          material="simple-mat"
+          uniforms="u_baseColorFactor: {{syncColor}} 1"
+          />
+      </xr-node>
+      <!-- 不需要同步的绘制在后面 -->
+      <xr-node>
+        <xr-gltf wx:if="{{loaded}}"
+          id="face"
+          position="0 0 0" rotation="0 0 0" scale="1 1 1" model="gltf-face"
+        ></xr-gltf>
+      </xr-node>
+      <!-- 坐标系提示，单位1 的坐标轴 -->
+      <xr-mesh node-id="mesh-x" position="1 0 0"  scale="2 0.02 0.02" geometry="cube" uniforms="u_baseColorFactor:0.7 0.3 0.3 1" ></xr-mesh>
+      <xr-mesh node-id="mesh-y" position="0 1 0"  scale="0.02 2 0.02" geometry="cube" uniforms="u_baseColorFactor:0.3 0.7 0.3 1"></xr-mesh>
+      <xr-mesh node-id="mesh-z" position="0 0 1"  scale="0.02 0.02 2" geometry="cube" uniforms="u_baseColorFactor:0.3 0.3 0.7 1"></xr-mesh>
+    </xr-ar-tracker>
+    <xr-camera
+      id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera near="0.01"
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

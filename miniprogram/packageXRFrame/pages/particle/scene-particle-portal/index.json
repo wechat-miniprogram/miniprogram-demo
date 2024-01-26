@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+    "xr-particle-portal": "../../../components/xr-particle-portal/index"
+  },
+  "disableScroll": true, "renderer": "webview"
+}
