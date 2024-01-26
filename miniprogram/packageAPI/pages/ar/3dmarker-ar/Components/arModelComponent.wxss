@@ -7,7 +7,7 @@
   left: 40rpx;
   top: 30rpx;
   width: 200rpx;
-  height: 248rpx;
+  height: 268rpx;
 }
 
 button.btn-left {
@@ -36,7 +36,7 @@ button.btn-left .info-wrap {
 }
 .info-wrap p:first-child {
   font-size: 36rpx;
-  line-height: 46rpx;
+  line-height: 60rpx;
 }
 
 button.btn-left .cross-v {
@@ -75,7 +75,7 @@ button.btn-left .cross-h {
   display: inline-block;
   margin: 10rpx 10rpx 0 10rpx;
   width: 206rpx;
-  height: 260rpx;
+  height: 280rpx;
   border-radius: 20rpx;
 }
 .model-item:first-child {
@@ -101,9 +101,13 @@ button.btn-left .cross-h {
   background-color: #2B3467;
   border: 8rpx #2B3467 solid;
 }
+.model-info.expired {
+  background-color: #ed6c10;
+  border: 8rpx #ed6c10 solid;
+}
 .model-info.error {
-  background-color: #FF6969;
-  border: 8rpx #FF6969 solid;
+  background-color: #f73a3a;
+  border: 8rpx #f73a3a solid;
 }
 .model-info.choosed {
   border-color: #07c160;
@@ -126,13 +130,17 @@ button.btn-left .cross-h {
   position: absolute;
   left: 20rpx;
   right: 20rpx;
-  bottom: 120rpx;
+  bottom: 140rpx;
   height: 40rpx;
   line-height: 20rpx;
   font-size: 16rpx;
   text-align: center;
-  color: #d0d0d0;
+  color: #fff;
   word-break: break-all;
+}
+
+.model-info.done .cosid {
+  color: #d0d0d0;
 }
 
 .model-info .timeStamp {
@@ -155,6 +163,20 @@ button.btn-left .cross-h {
   font-size: 22rpx;
   text-align: center;
   line-height: 38rpx;
+}
+
+.model-info .errMsg {
+  position: absolute;
+  left: 10rpx;
+  right: 10rpx;
+  bottom: 76rpx;
+  color: #fff;
+  font-size: 16rpx;
+  text-align: center;
+  line-height: 26rpx;
+  background-color: #000;
+  padding: 6rpx;
+  border-radius: 6rpx;
 }
 
 .model-info .buttonDelete {

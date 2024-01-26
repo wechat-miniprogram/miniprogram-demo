@@ -177,6 +177,8 @@ Component({
         if (!matched) {
           console.log("缓存对cosid进行push")
           console.log("当前生成模型的cosid为：", returnCosid)
+
+          console.log()
           modelInfos.push({
             cosid: resp.result.respBody.cosid,
             uploadTime: this.convertToTime(Date.parse(new Date()) / 1000),
@@ -326,10 +328,8 @@ Component({
 
             modelInfoNew.statusMsg = '生成失败';
             if (errMsg) {
-              modelInfoNew.statusMsg = errMsg;
-
+              modelInfoNew.errMsg = errMsg;
             }
-            modelInfoNew.statusMsg = errMsg;
           }
 
 
