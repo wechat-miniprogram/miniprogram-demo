@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "app-bar-course": "../components/app-bar-course"
+  }
 }
