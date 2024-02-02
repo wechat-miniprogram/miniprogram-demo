@@ -1,5 +1,5 @@
-<import src="../../../common/head.wxml" />
-<import src="../../../common/foot.wxml" />
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
 
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" data="{{title: 'Wi-Fi'}}"/>
