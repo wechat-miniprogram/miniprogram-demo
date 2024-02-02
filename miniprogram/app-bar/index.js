@@ -37,13 +37,6 @@ Component({
     musicCover: 'https://res.wx.qq.com/op_res/Nu9XXzXcXnD1j5EgWQ2ElxNcl1yMvnKypRo4MTbjOv7FC3saigGoOBTZibyESC7EXaClnPYhB6pvfb-IRmso6g'
   },
 
-  pageLifetimes: {
-    show: function() {
-      // 页面被展示
-      console.log('xxx', this.router)
-    },
-  },
-
   lifetimes: {
     attached() {
       const progress = shared(0)
@@ -53,10 +46,12 @@ Component({
       const safeAreaInsetBottom = screenHeight - safeArea.bottom
       const isIOS = systemInfo.system.indexOf('iOS') >= 0
       this.setData({ statusBarHeight, maxCoverSize })
+      console.log('attached: ', statusBarHeight, maxCoverSize)
 
       this.applyAnimatedStyle('.cover', () => {
         'worklet'
         const height = initCoverSize + (maxCoverSize - initCoverSize) * progress.value
+        console.log('height: ', maxCoverSize, initCoverSize, progress.value)
         return {
           width: `${height}px`,
           height:`${height}px`,
@@ -65,6 +60,7 @@ Component({
 
       this.applyAnimatedStyle('.expand-container', () => {
         'worklet'
+        console.log('expand-container: ', maxCoverSize, initCoverSize, progress.value)
         const t = progress.value
         const maxRadius = 30
         const radius = isIOS ? maxRadius * t : 0
@@ -77,6 +73,7 @@ Component({
 
       this.applyAnimatedStyle('.title-wrap', () => {
         'worklet'
+        console.log('title-wrap: ', maxCoverSize, initCoverSize, progress.value)
         return {
           opacity: 1 - progress.value
         }
@@ -85,6 +82,7 @@ Component({
       const navBarHeight = statusBarHeight + (isIOS ? 40 : 44)
       this.applyAnimatedStyle('.nav-bar', () => {
         'worklet'
+        console.log('nav-bar: ', maxCoverSize, initCoverSize, progress.value)
         const t = progress.value
         const threshold = 0.8
         const opacity = t < threshold ? 0 : (t - threshold) / (1 - threshold)

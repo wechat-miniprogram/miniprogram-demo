@@ -44,7 +44,8 @@
     "useStaticServer": true,
     "localPlugins": false,
     "condition": false,
-    "skylineRenderEnable": true
+    "skylineRenderEnable": true,
+    "compileWorklet": true
   },
   "compileType": "miniprogram",
   "simulatorType": "wechat",
