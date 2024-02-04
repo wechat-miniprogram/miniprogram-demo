@@ -3,5 +3,8 @@
   "componentFramework": "glass-easel",
   "renderer": "skyline",
   "disableScroll": true,
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "app-bar-course": "../../components/app-bar-course"
+  }
 }

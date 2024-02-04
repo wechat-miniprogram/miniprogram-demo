@@ -1,4 +1,5 @@
 <!-- components/app-bar/index.wxml -->
+<root-portal style="width: 100vw;height: 100vh;">
 <vertical-drag-gesture-handler worklet:ongesture="handleVerticalDrag">
 	<view class="expand-container">
 		<!-- 放大模式：nav-bar -->
@@ -51,3 +52,4 @@
 		</view>
 	</view>
 </vertical-drag-gesture-handler>
+</root-portal>

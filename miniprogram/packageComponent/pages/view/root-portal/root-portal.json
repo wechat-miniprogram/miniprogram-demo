@@ -1,6 +1,5 @@
 {
     "usingComponents": {
-      "navigation-bar": "../../../../components/navigation-bar/index",
       "popup": "../../../../components/popup/index"
     },
     "navigationBarTitleText": "root-portal",

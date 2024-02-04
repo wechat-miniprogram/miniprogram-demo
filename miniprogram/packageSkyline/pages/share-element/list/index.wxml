@@ -1,5 +1,4 @@
 <!-- index.wxml -->
-<!-- <navigation-bar title="共享元素动画"/> -->
 <mp-navigation-bar title="共享元素动画" back="{{true}}"></mp-navigation-bar>
 <view class="card-list">
 	<view class="card-item" wx:for="{{ cardList }}" wx:key="{{ id }}">
