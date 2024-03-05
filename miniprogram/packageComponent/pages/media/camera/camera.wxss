@@ -14,9 +14,9 @@ camera {
   width: 100%;
 }
 
-.btn-area {
+/* .btn-area {
   margin-top: 0;
-}
+} */
 
 .first-btn {
   margin-top: 15px;

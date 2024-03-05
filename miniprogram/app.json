@@ -47,6 +47,7 @@
         "pages/media/image/image",
         "pages/media/video/video",
         "pages/media/camera/camera",
+        "pages/media/camera-scan-code/camera-scan-code",
         "pages/media/live-pusher/live-pusher",
         "pages/media/live-player/live-player",
         "pages/media/channel-video/channel-video",

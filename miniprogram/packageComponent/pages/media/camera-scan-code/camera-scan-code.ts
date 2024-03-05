@@ -7,7 +7,6 @@ Page({
   },
 
   data: {
-    theme: 'light',
     result: {}
   },
   onReady() {
