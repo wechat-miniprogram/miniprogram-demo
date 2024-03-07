@@ -12,6 +12,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packageSkylineExamples/examples/app-bar/pages/index/index",
+          "pathName": "packageSkylineExamples/examples/app-bar/pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "photo-idcard-detect",
           "pathName": "packageAPI/pages/ar/photo-idcard-detect/photo-idcard-detect",
           "query": "",
@@ -125,13 +132,6 @@
         {
           "name": "",
           "pathName": "page/component/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "packageSkylineExamples/examples/refresher-two-level/index/index",
           "query": "",
           "launchMode": "default",
           "scene": null

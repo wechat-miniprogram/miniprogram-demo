@@ -1,5 +1,13 @@
 Page({
   onShow() {
+    // 仅在 app-bar demo 页面展示
+    if (typeof this.getAppBar === 'function' ) {
+      const appBarComp = this.getAppBar()
+      appBarComp.setData({
+        showAppbar: false
+      })
+    }
+      
     wx.reportAnalytics('enter_home_programmatically', {})
 
     // http://tapd.oa.com/miniprogram_experiment/prong/stories/view/1020425689866413543
