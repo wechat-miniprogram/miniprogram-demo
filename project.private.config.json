@@ -12,6 +12,27 @@
     "miniprogram": {
       "list": [
         {
+          "name": "gaussian-splatting",
+          "pathName": "packageAPI/pages/ar/gaussian-splatting/gaussian-splatting",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "ar-cameraBuffer-jpg",
+          "pathName": "packageAPI/pages/ar/cameraBuffer-jpg/cameraBuffer-jpg",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "plane-ar-v2-options",
+          "pathName": "packageAPI/pages/ar/plane-ar-v2-options/plane-ar-v2-options",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "packageSkylineExamples/examples/app-bar/pages/index/index",
           "pathName": "packageSkylineExamples/examples/app-bar/pages/index/index",
           "query": "",

@@ -6,10 +6,11 @@ module.exports = Behavior({
     xrScene: undefined, // xr-frame 的场景
     xrCamera: undefined, // xr-frame 的相机
     xrFrameReady: undefined, // xr-frame初始化完毕
+    // WebGL相关
+    camera: undefined,  // 主要相机
     // ThreeJs 相关变量
     gl: undefined,      // 全局gl对象
     THREE: undefined,   // THREE 对象
-    camera: undefined,  // Three相机，主要相机
     // 全局 data
     data: {
         domWidth: 0,

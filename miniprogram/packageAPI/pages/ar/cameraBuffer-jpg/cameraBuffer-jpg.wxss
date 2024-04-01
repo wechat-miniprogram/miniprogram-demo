@@ -1,0 +1,107 @@
+.canvas-wrap {
+  position: relative;
+  width: 100%;
+  background-color: #000;
+}
+
+.canvas-wrap #canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hint-box {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width: 0;
+  height: 0;
+}
+.hint-id {
+  position: absolute;
+  left: -6rpx;
+  right: -6rpx;
+  bottom: 100%;
+  color: #fff;
+  font-size: 20rpx;
+  line-height: 40rpx;
+  text-align: center;
+  text-overflow: ellipsis;
+  background-color: #07c160;
+  border-radius: 8rpx;
+
+}
+
+.wrap-fix {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hint-words {
+  position: absolute;
+  left: 20rpx;
+  top: 20rpx;
+  right: 20rpx;
+  padding: 10rpx 20rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border-radius: 6rpx;
+  background-color: rgba(0, 0, 0, .3);
+  font-size: 26rpx;
+  color: #fff;
+}
+
+
+.hint-img-wrap {
+  position: absolute;
+  left: 25%;
+  bottom: 0%;
+  width: 50%;
+  height: 30%;
+}
+
+.hint-img-box {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  right: 5%;
+  bottom: 5%;
+  background-color: #fafafa;
+  border: 4rpx solid;
+}
+
+.hint-img {
+  position: absolute;
+  left: 4%;
+  top: 4%;
+  width: 92%;
+  height: 92%;
+}
+
+.wrap-option {
+  position: absolute;
+  left: 20rpx;
+  right: 0;
+  bottom: 30%;
+  height: 10%;
+  flex-direction: column;
+  display: flex;
+}
+
+.wrap-option .row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+.wrap-option button {
+  flex: 1;
+  margin: 5rpx 20rpx 20rpx 0;
+  font-size: 30rpx;
+  line-height: 1.2;
+}

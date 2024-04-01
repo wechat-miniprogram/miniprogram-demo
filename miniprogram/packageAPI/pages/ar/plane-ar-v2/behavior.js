@@ -311,6 +311,38 @@ export default function getBehavior() {
         })
         renderer.gammaOutput = true
         renderer.gammaFactor = 2.2
+
+        const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+
+        const m1 = new THREE.MeshPhysicalMaterial( {
+          metalness: 0.0,
+          roughness: 0.1,
+          color: 0xff0000,
+        } );
+        const x = new THREE.Mesh( geometry, m1 );
+        x.position.set(1, 0, 0 );
+        x.scale.set(2, 0.1, 0.1);
+        scene.add( x );
+
+        const m2 = new THREE.MeshPhysicalMaterial( {
+          metalness: 0.0,
+          roughness: 0.1,
+          color: 0x00ff00,
+        } );
+        const y = new THREE.Mesh( geometry, m2 );
+        y.position.set(0, 1, 0 );
+        y.scale.set(0.1, 2, 0.1);
+        scene.add( y );
+
+        const m3 = new THREE.MeshPhysicalMaterial( {
+          metalness: 0.0,
+          roughness: 0.1,
+          color: 0x0000ff,
+        } );
+        const z = new THREE.Mesh( geometry, m3 );
+        z.position.set(0, 0, 1 );
+        z.scale.set(0.1, 0.1, 2);
+        scene.add( z );
       },
       updateAnimation() {
         const dt = this.clock.getDelta()

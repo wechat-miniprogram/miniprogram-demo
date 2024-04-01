@@ -93,9 +93,6 @@ export default function getBehavior() {
 
                 const session = this.session = wx.createVKSession({
                     track: {
-                        plane: {
-                            mode: 3
-                        },
                         OCR: {
                           mode: 2
                         }

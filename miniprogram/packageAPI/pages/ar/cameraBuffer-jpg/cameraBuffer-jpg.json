@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "disableScroll": true,
+  "renderer": "webview",
+"navigationBarTitleText": "相机帧获取jpg图片"
+}

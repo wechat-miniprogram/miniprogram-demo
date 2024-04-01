@@ -1,12 +1,13 @@
 <xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets>
   </xr-assets>
-  <xr-env env-data="xr-frame-team-workspace-day" />
+  <!-- <xr-env env-data="xr-frame-team-workspace-day" /> -->
   <xr-node>
     <xr-node node-id="center" position="0 0 0"></xr-node>
-    <xr-mesh node-id="mesh-plane" position="0 -1 0" rotation="0 0 0" scale="2 0.2 2" geometry="cube" uniforms="u_baseColorFactor:0.5 0.4 0.3 1" ></xr-mesh>
+    <xr-shadow id="geometryRoot" node-id="geometryRoot"></xr-shadow>
+    <xr-mesh node-id="mesh-plane" position="0 -1 0" rotation="0 0 0" scale="2 0.1 2" geometry="cube" uniforms="u_baseColorFactor:1 1 1 1" ></xr-mesh>
     <xr-camera
-      id="camera" node-id="camera" position="0 2 2" clear-color="0.8 0.8 0.8 1"
+      id="camera" node-id="camera" position="-0.242 1.442 0.079" clear-color="0.8 0.8 0.8 1"
       target="center"
       near="0.01" far="1000"
       camera-orbit-control=""

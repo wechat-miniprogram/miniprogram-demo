@@ -317,6 +317,10 @@ Page({
           zh: '相机帧测试',
           url: 'cameraBuffer-detect/cameraBuffer-detect'
         },
+        // {
+        //   zh: '相机帧获取jpg图片',
+        //   url: 'cameraBuffer-jpg/cameraBuffer-jpg'
+        // },
         {
           zh: '实时深度图检测',
           url: 'depth-detect/depth-detect'
@@ -325,10 +329,6 @@ Page({
           zh: '照片深度图检测',
           url: 'photo-depth-detect/photo-depth-detect'
         },
-        // {
-        //   zh: '实时OCR检测',
-        //   url: 'ocr-detect/ocr-detect'
-        // },
         {
           zh: '照片OCR检测',
           url: 'photo-ocr-detect/photo-ocr-detect'

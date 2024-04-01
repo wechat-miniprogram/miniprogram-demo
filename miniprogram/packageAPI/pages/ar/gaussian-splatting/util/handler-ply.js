@@ -1,91 +1,10 @@
+import * as glMatrix from './gl-matrix-min'
+
 // global
 let gaussianCount;
 let sceneMin, sceneMax;
 
-// Converts scale and rotation properties of each
-// Gaussian to a 3D covariance matrix in world space.
-// Original CUDA implementation: https://github.com/graphdeco-inria/diff-gaussian-rasterization/blob/main/cuda_rasterizer/forward.cu#L118
-const Mat3 = function() {}
-Mat3.prototype.create = function(){
-    let out = new Float32Array(9);
-    out[0] = 1;
-    out[4] = 1;
-    out[8] = 1;
-    return out;
-}
-Mat3.prototype.set = function(out, m00, m01, m02, m10, m11, m12, m20, m21, m22) {
-    out[0] = m00;
-    out[1] = m01;
-    out[2] = m02;
-    out[3] = m10;
-    out[4] = m11;
-    out[5] = m12;
-    out[6] = m20;
-    out[7] = m21;
-    out[8] = m22;
-    return out;
-}
-Mat3.prototype.multiply = function(out, a, b) {
-    let a00 = a[0],
-      a01 = a[1],
-      a02 = a[2];
-    let a10 = a[3],
-      a11 = a[4],
-      a12 = a[5];
-    let a20 = a[6],
-      a21 = a[7],
-      a22 = a[8];
-  
-    let b00 = b[0],
-      b01 = b[1],
-      b02 = b[2];
-    let b10 = b[3],
-      b11 = b[4],
-      b12 = b[5];
-    let b20 = b[6],
-      b21 = b[7],
-      b22 = b[8];
-  
-    out[0] = b00 * a00 + b01 * a10 + b02 * a20;
-    out[1] = b00 * a01 + b01 * a11 + b02 * a21;
-    out[2] = b00 * a02 + b01 * a12 + b02 * a22;
-  
-    out[3] = b10 * a00 + b11 * a10 + b12 * a20;
-    out[4] = b10 * a01 + b11 * a11 + b12 * a21;
-    out[5] = b10 * a02 + b11 * a12 + b12 * a22;
-  
-    out[6] = b20 * a00 + b21 * a10 + b22 * a20;
-    out[7] = b20 * a01 + b21 * a11 + b22 * a21;
-    out[8] = b20 * a02 + b21 * a12 + b22 * a22;
-    return out;
-}
-Mat3.prototype.transpose = function(out, a) {
-    // If we are transposing ourselves we can skip a few steps but have to cache some values
-    if (out === a) {
-      let a01 = a[1],
-        a02 = a[2],
-        a12 = a[5];
-      out[1] = a[3];
-      out[2] = a[6];
-      out[3] = a01;
-      out[5] = a[7];
-      out[6] = a02;
-      out[7] = a12;
-    } else {
-      out[0] = a[0];
-      out[1] = a[3];
-      out[2] = a[6];
-      out[3] = a[1];
-      out[4] = a[4];
-      out[5] = a[7];
-      out[6] = a[2];
-      out[7] = a[5];
-      out[8] = a[8];
-    }
-  
-    return out;
-}
-const mat3 = new Mat3();
+const { mat3 } = glMatrix
 const tmp = mat3.create()
 const S = mat3.create()
 const R = mat3.create()
@@ -121,15 +40,32 @@ function computeCov3D(scale, mod, rot) {
         Sigma[0], Sigma[1], Sigma[2],
         Sigma[4], Sigma[5], Sigma[8]
     ]
-
     return cov3D
+}
+
+function wxDecodeAdapter(buffer, isUTF8) {
+  const array = new Uint8Array(buffer);
+  let str = '';
+
+  for (let i = 0; i < array.length; i++) {
+    str += String.fromCharCode(array[i]);
+  }
+
+  if (isUTF8) {
+    // utf8 str fix
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/WindowBase64/btoa
+    str = decodeURIComponent(encodeURIComponent(str));
+  }
+
+  return str;
 }
 
 // implementation from https://github.com/kishimisu/Gaussian-Splatting-WebGL
 export function loadPly(content) {
     // Read header
-    const start = performance.now()
-    const contentStart = new TextDecoder('utf-8').decode(content.slice(0, 2000))
+    console.log('loadPly', content)
+    const contentStart = wxDecodeAdapter(content.slice(0, 2000), true);
+    // const contentStart = new TextDecoder('utf-8').decode(content.slice(0, 2000))
     const headerEnd = contentStart.indexOf('end_header') + 'end_header'.length + 1
     const [ header ] = contentStart.split('end_header')
 
@@ -184,7 +120,6 @@ export function loadPly(content) {
         return { position, harmonic, opacity, scale, rotation }
     }
 
-
     for (let i = 0; i < gaussianCount; i++) {
         // Extract data for current gaussian
         let { position, harmonic, opacity, scale, rotation } = extractSplatData(i)
@@ -201,7 +136,7 @@ export function loadPly(content) {
 
         const length = Math.sqrt(length2)
 
-        rotation = rotation.map(v => v / length)  
+        rotation = rotation.map(v => v / length) 
 
         // Exponentiate scale
         scale = scale.map(v => Math.exp(v))
@@ -239,7 +174,6 @@ export function loadPly(content) {
         positions.push(...position)
     }
 
-    console.log(`Loaded ${gaussianCount} gaussians in ${((performance.now() - start)/1000).toFixed(3)}s`)
     
-    return { positions, opacities, colors, cov3Ds }
+    return { positions, opacities, colors, cov3Ds, count: gaussianCount }
 }
