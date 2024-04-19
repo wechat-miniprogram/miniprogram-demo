@@ -31,23 +31,11 @@ Component({
     },
     detached() {
       console.log("页面detached")
-      if (wx.offThemeChange) {
-        wx.offThemeChange()
-      }
-      if (this.worker) this.worker.terminate()
 
+      if (this.worker) this.worker.terminate()
     },
     ready() {
-    console.log("页面准备完全")
-      this.setData({
-        theme: wx.getSystemInfoSync().theme || 'light'
-      })
-
-      if (wx.onThemeChange) {
-        wx.onThemeChange(({theme}) => {
-          this.setData({theme})
-        })
-      }
+      console.log("页面准备完全")
     },
   },
   methods: {
@@ -96,7 +84,7 @@ Component({
 
       const host = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo';
       // const host = 'http://10.9.169.120:8030'
-      
+
       let type;
 
       // 加载 ply
