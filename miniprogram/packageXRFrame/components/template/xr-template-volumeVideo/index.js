@@ -2,7 +2,7 @@ import {
   mesh4DPlayer
 } from './mesh4DPlayer'
 
-const ROOTURL = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com'
+// const ROOTURL = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com'
 const DIRROOT = '/xr-frame/demo/'
 
 Component({

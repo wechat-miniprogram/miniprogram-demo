@@ -1,0 +1,27 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="gltf-toon" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.gltf" />
+    <xr-asset-load
+        type="env-data" asset-id="env1" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin"
+      />
+      <xr-asset-material asset-id="pbr" effect="custom-pbr" />  
+  </xr-assets>
+  <xr-node>
+    <xr-env env-data="env1" />
+    <xr-node node-id="camera-target" position="0 0 0"></xr-node>
+    <xr-mesh node-id="floor-plane" position="0 -2 0" rotation="0 0 0" scale="10 1 10" geometry="plane"
+      uniforms="u_baseColorFactor:1 1 1 1" receive-shadow
+    ></xr-mesh>
+    <xr-gltf id="gltf" position="0 0 0" scale="2 2 2" model="gltf-toon" material="pbr" cast-shadow></xr-gltf>
+
+    <xr-camera
+      id="camera" node-id="camera" position="2 2 4" clear-color="0.96 0.96 0.96 1"
+      target="camera-target" near="0.1" far="2000"
+      camera-orbit-control="" background="skybox"
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1.2" />
+    <xr-light type="directional" rotation="120 20 0" color="1 1 1" intensity="2" cast-shadow />
+  </xr-node>
+</xr-scene>

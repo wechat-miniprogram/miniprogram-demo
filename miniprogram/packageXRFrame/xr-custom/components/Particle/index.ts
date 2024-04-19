@@ -252,6 +252,9 @@ export default class CustomParticle extends BasicParticle {
             return;
         }
 
+        let startState = this._start;
+        this._start = false;
+
         // 如果顶点布局发生变化，则需要重置粒子系统
         if (this._vertexLayoutDirty) {
             this.resetParticle();
@@ -264,6 +267,8 @@ export default class CustomParticle extends BasicParticle {
             this.resetParticle();
             this.initParticle(data);
         }
+
+        this._start = startState;
     }
 
     // 每一帧进行粒子生成和粒子位置与轨迹运算的核心逻辑

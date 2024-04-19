@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="定制化PBR模型渲染"
+  intro="PBR材质的复现，可高度定制。"
+>
+
+<xr-template-pbr
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

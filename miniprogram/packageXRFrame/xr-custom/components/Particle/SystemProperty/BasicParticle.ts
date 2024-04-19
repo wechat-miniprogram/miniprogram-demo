@@ -876,6 +876,7 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
     // 创建材质与mesh网络
     protected _createMesh() {
         this._material = this.createMaterial()
+        
         this._mesh = this.particleEl.getComponent(xrFrameSystem.Mesh);
         if (this._mesh == undefined) {
             this._mesh = this.particleEl.addComponent(xrFrameSystem.Mesh, {
@@ -884,6 +885,16 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
                 meshCount: this._renderMesh ? this._renderMesh.getSubMeshCount() : 1,
             });
         }
+
+        // 基础库内存在_geometry的bug, 此处先加这么一句
+        this._mesh._geometry = this._geometry
+
+        // 更改geometry
+        this._mesh.setData({
+            geometry: this._geometry,
+            material: this._material,
+            meshCount: this._renderMesh ? this._renderMesh.getSubMeshCount() : 1,
+        });
     }
 
     //往顶点数据数组里设置值，分别为四个点设置偏移与uv值

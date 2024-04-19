@@ -135,25 +135,21 @@ Component({
               name: "a_position",
               format: xrFrameSystem.EVertexFormat.FLOAT3,
               offset: 0,
-              usage: xrFrameSystem.EVertexLayoutUsage.POSITION
             },
             {
               name: "a_normal",
               format: xrFrameSystem.EVertexFormat.FLOAT3,
               offset: 12,
-              usage: xrFrameSystem.EVertexLayoutUsage.NORMAL,
             },
             {
               name: "a_texCoord",
               format: xrFrameSystem.EVertexFormat.FLOAT2,
               offset: 24,
-              usage: xrFrameSystem.EVertexLayoutUsage.UV0
             },
             {
               name: "a_color",
               format: xrFrameSystem.EVertexFormat.FLOAT4,
               offset: 32,
-              usage: xrFrameSystem.EVertexLayoutUsage.COLOR
             }
           ],
           stride: 48
