@@ -52,9 +52,22 @@ class CameraWebGL {
         // 是否在排序
         this.isWorkerSorting = false;
 
+        // 是否开启 worker 更新
+        this.workerOn = true;
 
         // 初始化
         this.update();
+    }
+
+    setWorkerOn(flag) {
+        this.workerOn = flag
+    }
+
+    updateCameraInfo(target, theta, phi, radius) {
+        this.target = [...target]
+        this.theta = theta
+        this.phi = phi
+        this.radius = radius
     }
 
     getPos(radius = this.radius) {
@@ -95,8 +108,11 @@ class CameraWebGL {
         
         // console.log('viewMatrix', this.viewMatrix);
 
-        if (this.isWorkerInit)
-            this.updateWorker();
+        if (this.isWorkerInit){
+            if (this.workerOn) {
+                this.updateWorker();
+            }
+        }
     }
 
     updateWorker() {

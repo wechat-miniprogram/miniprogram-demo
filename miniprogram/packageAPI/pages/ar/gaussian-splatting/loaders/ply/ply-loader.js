@@ -1,67 +1,7 @@
-import * as glMatrix from './gl-matrix-min'
-
-// global
-let gaussianCount;
-let sceneMin, sceneMax;
-
-const { mat3 } = glMatrix
-const tmp = mat3.create()
-const S = mat3.create()
-const R = mat3.create()
-const M = mat3.create()
-const Sigma = mat3.create()
-function computeCov3D(scale, mod, rot) {
-    // Create scaling matrix
-    mat3.set(S,
-        mod * scale[0], 0, 0,
-        0, mod * scale[1], 0,
-        0, 0, mod * scale[2]
-    )
-
-    const r = rot[0]
-    const x = rot[1]
-    const y = rot[2]
-    const z = rot[3]
-
-    // Compute rotation matrix from quaternion
-    mat3.set(R,
-        1. - 2. * (y * y + z * z), 2. * (x * y - r * z), 2. * (x * z + r * y),
-        2. * (x * y + r * z), 1. - 2. * (x * x + z * z), 2. * (y * z - r * x),
-        2. * (x * z - r * y), 2. * (y * z + r * x), 1. - 2. * (x * x + y * y)
-    )
-
-    mat3.multiply(M, S, R)  // M = S * R
-
-    // Compute 3D world covariance matrix Sigma
-    mat3.multiply(Sigma, mat3.transpose(tmp, M), M)  // Sigma = transpose(M) * M
-
-    // Covariance is symmetric, only store upper right
-    const cov3D = [
-        Sigma[0], Sigma[1], Sigma[2],
-        Sigma[4], Sigma[5], Sigma[8]
-    ]
-    return cov3D
-}
-
-function wxDecodeAdapter(buffer, isUTF8) {
-  const array = new Uint8Array(buffer);
-  let str = '';
-
-  for (let i = 0; i < array.length; i++) {
-    str += String.fromCharCode(array[i]);
-  }
-
-  if (isUTF8) {
-    // utf8 str fix
-    // https://developer.mozilla.org/zh-CN/docs/Web/API/WindowBase64/btoa
-    str = decodeURIComponent(encodeURIComponent(str));
-  }
-
-  return str;
-}
+import { wxDecodeAdapter, computeCov3D } from '../util-loader.js'
 
 // implementation from https://github.com/kishimisu/Gaussian-Splatting-WebGL
-export function loadPly(content) {
+export function loadPly(content, maxGaussians) {
     // Read header
     console.log('loadPly', content)
     const contentStart = wxDecodeAdapter(content.slice(0, 2000), true);
@@ -69,25 +9,22 @@ export function loadPly(content) {
     const headerEnd = contentStart.indexOf('end_header') + 'end_header'.length + 1
     const [ header ] = contentStart.split('end_header')
 
+    console.log('header', header)
+
     // Get number of gaussians
     const regex = /element vertex (\d+)/
     const match = header.match(regex)
-    gaussianCount = parseInt(match[1])
+    let gaussianCount = parseInt(match[1])
 
-    console.log('gaussianCount', gaussianCount)
+    console.log(`load splatCount: ${gaussianCount}`)
+
+    gaussianCount = Math.min(gaussianCount, maxGaussians);
 
     // Create arrays for gaussian properties
     const positions = []
     const opacities = []
-    const rotations = []
-    const scales = []
-    const harmonics = []
     const colors = []
     const cov3Ds = []
-
-    // Scene bouding box
-    sceneMin = new Array(3).fill(Infinity)
-    sceneMax = new Array(3).fill(-Infinity)
 
     // Helpers
     const sigmoid = (m1) => 1 / (1 + Math.exp(-m1))
@@ -120,13 +57,11 @@ export function loadPly(content) {
         return { position, harmonic, opacity, scale, rotation }
     }
 
+    // gaussianCount = 10;
+
     for (let i = 0; i < gaussianCount; i++) {
         // Extract data for current gaussian
         let { position, harmonic, opacity, scale, rotation } = extractSplatData(i)
-        
-        // Update scene bounding box
-        sceneMin = sceneMin.map((v, j) => Math.min(v, position[j]))
-        sceneMax = sceneMax.map((v, j) => Math.max(v, position[j]))
 
         // Normalize quaternion
         let length2 = 0
@@ -136,10 +71,16 @@ export function loadPly(content) {
 
         const length = Math.sqrt(length2)
 
+        // console.log('scale', scale[0], scale[1], scale[2]);
+        // console.log('rotation', rotation[0], rotation[1], rotation[2], rotation[3]);
+
         rotation = rotation.map(v => v / length) 
 
         // Exponentiate scale
         scale = scale.map(v => Math.exp(v))
+        
+        // console.log('scalee', scale[0], scale[1], scale[2]);
+        // console.log('rotatione', rotation[0], rotation[1], rotation[2], rotation[3]);
 
         // Activate alpha
         opacity = sigmoid(opacity)

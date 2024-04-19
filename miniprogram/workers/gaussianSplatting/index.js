@@ -67,14 +67,6 @@ function sort(params) {
         data.cov3Db[j*3] = gaussians.cov3Ds[i*6+3]
         data.cov3Db[j*3+1] = gaussians.cov3Ds[i*6+4]
         data.cov3Db[j*3+2] = gaussians.cov3Ds[i*6+5]
-
-        // if (j < 10) {
-        //     console.log(j,'pos', gaussians.positions[i * 3], gaussians.positions[i * 3 + 1], gaussians.positions[i * 3 + 2])
-        //     console.log(j,'colors', gaussians.colors[i * 3], gaussians.colors[i * 3 + 1], gaussians.colors[i * 3 + 2])
-        //     console.log(j,'opacity', gaussians.opacities[i])
-        //     console.log(j,'cov3Da', gaussians.cov3Ds[i * 6],  gaussians.cov3Ds[i * 6 + 1],  gaussians.cov3Ds[i * 6 + 2])
-        //     console.log(j,'cov3Db', gaussians.cov3Ds[i * 6 + 3],  gaussians.cov3Ds[i * 6 + 4],  gaussians.cov3Ds[i * 6 + 5])
-        // }
     }
 
     const end = new Date().getTime();

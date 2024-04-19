@@ -148,8 +148,6 @@ const splatFragmentShader =
 `#version 300 es
 precision mediump float;
 
-uniform bool show_depth_map;
-
 in vec3 col;
 in float scale_modif;
 in float depth;
@@ -159,10 +157,6 @@ in vec2 pixf;
 
 out vec4 fragColor;
 
-vec3 depth_palette(float x) { 
-    x = min(1., x);
-    return vec3( sin(x*6.28/4.), x*x, mix(sin(x*6.28),x,.6) );
-}
 
 // Original CUDA implementation: https://github.com/graphdeco-inria/diff-gaussian-rasterization/blob/main/cuda_rasterizer/forward.cu#L263
 void main() {
@@ -185,9 +179,6 @@ void main() {
     
     // (Custom) Colorize with depth value instead of color (z-buffer visualization)
     vec3 color = col;
-    // if (show_depth_map) {
-    //     color = depth_palette(depth * .08);
-    // }
 
     if (alpha < 1./255.) {
         discard;
@@ -230,8 +221,6 @@ class SplatWebGL {
             color: setupAttributeBuffer('a_col', 3),
             center: setupAttributeBuffer('a_center', 3),
             opacity: setupAttributeBuffer('a_opacity', 1),
-            // scale: setupAttributeBuffer('a_scale', 3),
-            // rot: setupAttributeBuffer('a_rot', 4),
             covA: setupAttributeBuffer('a_covA', 3),
             covB: setupAttributeBuffer('a_covB', 3),
         }

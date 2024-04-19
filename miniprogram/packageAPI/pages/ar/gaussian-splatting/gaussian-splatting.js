@@ -1,10 +1,9 @@
-import { loadPly } from './util/handler-ply'
+import { loadPly } from './loaders/ply/ply-loader'
+import { loadSplat } from './loaders/splat/splat-loader'
 import CameraWebGL from './webgl2/camera-webGL'
 import CubeInstanceWebGL from './webgl2/cubeInstance-webGL'
 import SplatWebGL from './webgl2/splat-webGL'
 
-const maxGaussians = 200000;
-// const renderScale = 0.474;
 const renderScale = 1;
 
 Component({
@@ -15,6 +14,8 @@ Component({
     heightScale: 1,   // canvas高度缩放值
     renderByXRFrame: false, // 是否使用 xr-frame渲染
     renderByWebGL2: true, // 是否使用WebGL2渲染
+    workerOn: true,
+    maxGaussians: 600000,
   },
   lifetimes: {
     /**
@@ -25,7 +26,7 @@ Component({
 
       console.log('[worker] 排序 worker 的创建')
       this.worker = wx.createWorker('workers/gaussianSplatting/index.js');
-      console.log('[worker] 具体 worker', this._worker);
+      console.log('[worker] 具体 worker', this.worker);
 
     },
     detached() {
@@ -89,30 +90,110 @@ Component({
       } else if (this.data.renderByXRFrame) {
         this.initXRFrame();
       }
-
-      // 开始处理 ply 资源
-      this.initPLY();
-
-      // 渲染循环
-      // this.loopTimer = setInterval(this.requestRender.bind(this), 20);
-      
-      // 仅渲染一次，通过触摸驱动
-      // this.requestRender();
     },
-    initPLY(){
+    initPLY(id){
       console.log('== PLY Init start ==')
 
-      // const plySrc = 'http://10.9.169.132:8030/ply/point_cloud.ply';
-      const plySrc = 'http://10.9.169.132:8030/ply/room.ply';
-      // const plySrc = 'http://10.9.169.132:8030/ply/oneflower.ply';
+      const host = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo';
+      // const host = 'http://10.9.169.120:8030'
+      
+      let type;
 
+      // 加载 ply
+      // type = 'ply';
+      // const pcSrc = `${host}/ply/oneflower.cleaned.ply`;
+      // const pcSrc = `${host}/ply/point_cloud.ply`;
+      // const pcSrc = `${host}/ply/room.ply`;
+      // const pcSrc = `${host}/ply/gs_USJ_Mario_enter.cleaned.ply`;
+      // const pcSrc = `${host}/ply/oneflower.ply`;
+      // const pcSrc = `${host}/ply/sakura.ply`;
+      // const pcSrc = `${host}/ply/sakura.cleaned.ply`;
+      // const pcSrc = `${host}/ply/sakura.compressed.ply`;
 
-      // const filePath = wx.env.USER_DATA_PATH + '/point.ply';
+      // 加载 splat
+      type = 'splat';
+      const pcSrc = `${host}/splat/${id}.splat`;
 
+      // Setup Camera
+      switch(id) {
+        case 'room':
+          this.camera.updateCameraInfo(
+            // target
+            [0, 2, -1],
+            // theta
+            -Math.PI/2,
+            // phi
+            Math.PI/2,
+            // raidus
+            1
+          )
+          break;
+        case 'garden':
+          this.camera.updateCameraInfo(
+            // target
+            [0, 1, -1],
+            // theta
+            -Math.PI/2,
+            // phi
+            Math.PI/2,
+            // raidus
+            8
+          )
+          break;
+        case 'stump':
+          this.camera.updateCameraInfo(
+            // target
+            [0, -0.5, 0],
+            // theta
+            -Math.PI * 2 /3,
+            // phi
+            Math.PI * 2 /3,
+            // raidus
+            4
+          )
+          break;
+        case 'oneflower':
+          this.camera.updateCameraInfo(
+            // target
+            [0, 1.5, 3],
+            // theta
+            -Math.PI/2,
+            // phi
+            Math.PI/2,
+            // raidus
+            8
+          )
+          break;
+        case 'usj':
+          this.camera.updateCameraInfo(
+            // target
+            [0, -1, 0],
+            // theta
+            -Math.PI * 7 / 6,
+            // phi
+            Math.PI / 2,
+            // raidus
+            4
+          )
+          break;
+        case 'sakura':
+          this.camera.updateCameraInfo(
+            // target
+            [1.6, 0.5, 1],
+            // theta
+            Math.PI / 4,
+            // phi
+            Math.PI * 3 / 5,
+            // raidus
+            0.5
+          )
+          break;
+      }
 
+      console.log('splat src', pcSrc)
 
       wx.downloadFile({
-        url: plySrc,
+        url: pcSrc,
         timeout: 200000,
         success: (res) => {
           console.log("downloadFile 下载回调", res);
@@ -158,12 +239,23 @@ Component({
 
             // console.log('buffer', buffer)
 
-            const plyInfo = loadPly(buffer);
+            let info;
 
-            console.log("plyLoader return", plyInfo);
+            const maxGaussians = this.data.maxGaussians;
+
+            switch (type) {
+              case 'ply':
+                info = loadPly(buffer, maxGaussians);
+                console.log("plyLoader return", info);
+                break;
+              case 'splat':
+                info = loadSplat(buffer, maxGaussians);
+                console.log("splatLoader return", info);
+                break;
+            }
 
             // 初始化 worker 相关
-            this.initWorker(plyInfo, {
+            this.initWorker(info, {
               maxGaussians
             });
   
@@ -176,33 +268,6 @@ Component({
             })
             console.error('file size is 0')
           }
-
-          // fs.readFile({
-          //   filePath: filePath,
-          //   position: 0,
-          //   success: async (res) => {
-          //     console.log("readFile 读文件回调，结果返回为", res)
-
-          //     const plyInfo = loadPly(res.data);
-
-          //     console.log("plyLoader return", plyInfo);
-
-          //     // 初始化 worker 相关
-          //     this.initWorker(plyInfo, {
-          //       maxGaussians
-          //     });
-
-          //   },
-          //   fail(res) {
-          //     wx.hideLoading();
-          //     wx.showToast({
-          //       title: res.errMsg,
-          //       icon: 'none',
-          //       duration: 2000
-          //     })
-          //     console.error(res)
-          //   }
-          // });
         },
         fail(res) {
           wx.hideLoading();
@@ -235,6 +300,8 @@ Component({
 
           this.camera.isWorkerSorting = false;
 
+          const start = new Date().getTime()
+
           const data = res.result.data
 
           const gl = this.gl
@@ -265,7 +332,17 @@ Component({
 
           this.gaussiansCount = data.gaussiansCount;
 
-          this.requestRender();
+          console.log('gaussiansCount', this.gaussiansCount)
+
+
+          const end = new Date().getTime()
+
+          const sortTime = `${((end - start)/1000).toFixed(3)}s`
+          console.log(`updateBuffer ${sortTime}`)
+
+          // this.requestRender();
+          this.canvas.requestAnimationFrame(this.requestRender.bind(this));
+
           // console.log('execFunc_sort end')
         }
       })
@@ -284,17 +361,8 @@ Component({
       console.log('webgl2 context', gl);
 
       // Setup Camera
-      // Normal
-      // const cameraParameters = {
-      //   up: [0, 1.0, 0.0],
-      //   // target: [0, 2.5, 2.5],
-      //   target: [0, 0, 0],
-      //   camera: [-Math.PI/2, Math.PI/2, 10], // theta phi radius
-      // }
-      // Room
       const cameraParameters = {
         up: [0, 1.0, 0.0],
-        // target: [0, 2.5, 2.5],
         target: [0, 1, 0],
         camera: [-Math.PI/2, Math.PI/2, 4], // theta phi radius
       }
@@ -313,7 +381,19 @@ Component({
     },
     requestRender() {
       // console.log('requestRender')
+
+      // 限帧
+      let now = Date.now()
+      const last =  this.lastRenderTime || 0;
+      const mill = now - last
+      if (mill < 30) {
+        return
+      }
+      this.lastRenderTime = now
+      
       const gl = this.gl;
+
+      const start = new Date().getTime()
 
       // Clear State
       gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)
@@ -323,6 +403,8 @@ Component({
       gl.disable(gl.DEPTH_TEST)
       gl.enable(gl.BLEND)
       gl.blendFunc(gl.ONE_MINUS_DST_ALPHA, gl.ONE)
+      // gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA)
+
  
        // clear
        gl.clear(gl.COLOR_BUFFER_BIT);
@@ -333,7 +415,12 @@ Component({
 
       // this.drawCubeMesh(gl, projMatrix, viewMatrix)
 
+
       this.drawSplat(gl);
+
+      // const end = new Date().getTime()
+      // const sortTime = `${((end - start)/1000).toFixed(4)}s`
+      // console.log(`requestRender ${sortTime}`)
     },
     drawCubeMesh(gl, projMatrix, viewMatrix) {
       // mesh
@@ -413,8 +500,7 @@ Component({
       gl.uniformMatrix4fv(gl.getUniformLocation(program, 'projmatrix'), false, cam.vpm)
       gl.uniformMatrix4fv(gl.getUniformLocation(program, 'viewmatrix'), false, cam.vm)
       
-
-       // Draw
+      // Draw
       gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, this.gaussiansCount);
       
     },
@@ -438,8 +524,33 @@ Component({
       
       this.camera.update();
 
-      this.requestRender();
+      // this.requestRender();
+      this.canvas.requestAnimationFrame(this.requestRender.bind(this));
     },
+    onTapControl(e) {
+      const dataSet = e.target.dataset;
+    
+      const id = dataSet.id;
+  
+      // 开始处理 ply 资源
+      this.initPLY(id);
+    },
+    changeMaxGaussianCount(e) {
+      this.setData({
+        maxGaussians: e.detail.value
+      })
+
+      console.log('slider maxGaussians:', this.data.maxGaussians);
+    },
+    switchWorker(e) {
+      this.setData({
+        workerOn: e.detail.value
+      })
+
+      this.camera.setWorkerOn(this.data.workerOn);
+
+      console.log('switch WorkerOn:', this.data.workerOn);
+    }
   },
 })
 

@@ -381,10 +381,10 @@ Page({
           zh: '实时鞋部检测-AR试鞋',
           url: 'shoe-detect/shoe-detect'
         },
-        // {
-        //   zh: '高斯溅射预览',
-        //   url: 'gaussian-splatting/gaussian-splatting'
-        // },
+        {
+          zh: '高斯溅射预览',
+          url: 'gaussian-splatting/gaussian-splatting'
+        },
       ],
     }],
     isSetTabBarPage: false,
