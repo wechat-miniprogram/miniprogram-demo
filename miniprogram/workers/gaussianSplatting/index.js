@@ -12,17 +12,29 @@ function init(plyInfo, config) {
     // console.log('plyInfo', plyInfo);
     gaussians = plyInfo;
     gaussians.totalCount = plyInfo.count;
-    gaussians.count = Math.min(gaussians.totalCount, config.maxGaussians)
+    gaussians.count = gaussians.totalCount;
 
     depthIndex = new Uint32Array(gaussians.count);
 
     console.log(`[Worker] Received ${gaussians.count} gaussians`)
     
-    data.positions = new Float32Array(gaussians.count * 3)
-    data.opacities = new Float32Array(gaussians.count)
-    data.cov3Da = new Float32Array(gaussians.count * 3)
-    data.cov3Db = new Float32Array(gaussians.count * 3)
-    data.colors = new Float32Array(gaussians.count * 3)
+    // data.positions = new Float32Array(gaussians.count * 3)
+    // data.opacities = new Float32Array(gaussians.count)
+    // data.cov3Da = new Float32Array(gaussians.count * 3)
+    // data.cov3Db = new Float32Array(gaussians.count * 3)
+    // data.colors = new Float32Array(gaussians.count * 3)
+
+    data.positions = new Float32Array(config.sabPositions.buffer);
+    data.opacities = new Float32Array(config.sabOpacities.buffer);
+    data.cov3Da = new Float32Array(config.sabCov3Da.buffer);
+    data.cov3Db = new Float32Array(config.sabCov3Db.buffer);
+    data.colors = new Float32Array(config.sabcolors.buffer);
+
+    // console.log(`[Worker] init data positions`, data.positions)
+    // console.log(`[Worker] init data opacities`, data.opacities)
+    // console.log(`[Worker] init data cov3Da`,data.cov3Da)
+    // console.log(`[Worker] init data cov3Db`, data.cov3Db)
+    // console.log(`[Worker] init data colors`, data.colors)
 
 }
 
@@ -43,6 +55,10 @@ function sort(params) {
     // Sort the gaussians!
     sortGaussiansByDepth(depthIndex, gaussians, viewMatrix)
 
+    const sortEnd = new Date().getTime();
+
+    const sortTime = `${((sortEnd - start)/1000).toFixed(3)}s`
+
     // Update arrays containing the data
     for (let j = 0; j < gaussians.count; j++) {
         const i = depthIndex[j]
@@ -54,7 +70,6 @@ function sort(params) {
         data.positions[j*3] = gaussians.positions[i*3]
         data.positions[j*3+1] = gaussians.positions[i*3+1]
         data.positions[j*3+2] = gaussians.positions[i*3+2]
-
 
         data.opacities[j] = gaussians.opacities[i]
 
@@ -71,16 +86,17 @@ function sort(params) {
 
     const end = new Date().getTime();
 
-    const sortTime = `${((end - start)/1000).toFixed(3)}s`
-    console.log(`[Worker] Sorted ${gaussians.count} gaussians in ${sortTime}. Algorithm: ${sortingAlgorithm}`)
+    const writeTime = `${((end - sortEnd)/1000).toFixed(3)}s`
+    console.log(`[Worker] Sorted ${gaussians.count} gaussians in ${sortTime}.`)
+    console.log(`[Worker] Writed ${gaussians.count} gaussians in ${writeTime}.`)
 
     return {
         data: {
-            colors: data.colors.buffer,
-            positions: data.positions.buffer,
-            opacities: data.opacities.buffer,
-            cov3Da: data.cov3Da.buffer,
-            cov3Db: data.cov3Db.buffer,
+            // colors: data.colors.buffer,
+            // positions: data.positions.buffer,
+            // opacities: data.opacities.buffer,
+            // cov3Da: data.cov3Da.buffer,
+            // cov3Db: data.cov3Db.buffer,
             gaussiansCount: gaussians.count,
         }
     };

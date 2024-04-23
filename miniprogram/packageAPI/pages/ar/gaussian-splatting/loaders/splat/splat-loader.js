@@ -11,6 +11,8 @@ const perPI = Math.PI / 180;
 export function loadSplat(content, maxGaussians) {
   console.log('loadSplat', content);
 
+  const start = new Date().getTime()
+
   // Create arrays for gaussian properties
   const positions = []
   const opacities = []
@@ -65,6 +67,10 @@ export function loadSplat(content, maxGaussians) {
     positions.push(...inCenter)
   }
 
+  const end = new Date().getTime();
+
+  const sortTime = `${((end - start)/1000).toFixed(3)}s`
+  console.log(`parse ${splatCount} gaussians in ${sortTime}.`)
 
   return { positions, opacities, colors, cov3Ds, count: splatCount };
 

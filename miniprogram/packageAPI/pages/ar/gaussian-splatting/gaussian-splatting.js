@@ -15,7 +15,7 @@ Component({
     renderByXRFrame: false, // 是否使用 xr-frame渲染
     renderByWebGL2: true, // 是否使用WebGL2渲染
     workerOn: true,
-    maxGaussians: 600000,
+    maxGaussians: 800000,
   },
   lifetimes: {
     /**
@@ -83,7 +83,7 @@ Component({
       console.log('== PLY Init start ==')
 
       const host = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo';
-      // const host = 'http://10.9.169.120:8030'
+      // const host = 'http://10.9.169.125:8030'
 
       let type;
 
@@ -167,9 +167,9 @@ Component({
         case 'sakura':
           this.camera.updateCameraInfo(
             // target
-            [1.6, 0.5, 1],
+            [1.6, 0, 1],
             // theta
-            Math.PI / 4,
+            Math.PI * 3 / 11,
             // phi
             Math.PI * 3 / 5,
             // raidus
@@ -242,9 +242,25 @@ Component({
                 break;
             }
 
+            // 提供渲染的高斯球数
+            const renderCount = this.renderCount = info.count;
+
+            // 全部用 f32 存储
+            this.sabPositions = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+            this.sabOpacities= wx.createSharedArrayBuffer(renderCount * 4)
+            this.sabCov3Da = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+            this.sabCov3Db = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+            this.sabcolors = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+
+            console.log('创建 worker 共享内存', this.sabPositions, this.sabOpacities, this.sabCov3Da, this.sabCov3Db, this.sabcolors)
+
             // 初始化 worker 相关
             this.initWorker(info, {
-              maxGaussians
+              sabPositions: this.sabPositions,
+              sabOpacities: this.sabOpacities,
+              sabCov3Da: this.sabCov3Da,
+              sabCov3Db: this.sabCov3Db,
+              sabcolors: this.sabcolors,
             });
   
           } else {
@@ -288,9 +304,9 @@ Component({
 
           this.camera.isWorkerSorting = false;
 
-          const start = new Date().getTime()
-
           const data = res.result.data
+
+          const start = new Date().getTime()
 
           const gl = this.gl
 
@@ -298,37 +314,45 @@ Component({
             gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
             gl.bufferData(gl.ARRAY_BUFFER, data, gl.DYNAMIC_DRAW)
           }
+          // const colors = new Float32Array(data.colors);
+          // const positions = new Float32Array(data.positions);
+          // const opacities = new Float32Array(data.opacities);
+          // const cov3Da = new Float32Array(data.cov3Da);
+          // const cov3Db = new Float32Array(data.cov3Db);
 
-          const colors = new Float32Array(data.colors);
-          const positions = new Float32Array(data.positions);
-          const opacities = new Float32Array(data.opacities);
-          const cov3Da = new Float32Array(data.cov3Da);
-          const cov3Db = new Float32Array(data.cov3Db);
+          const positions = new Float32Array(this.sabPositions.buffer);
+          const opacities = new Float32Array(this.sabOpacities.buffer);
+          const cov3Da = new Float32Array(this.sabCov3Da.buffer);
+          const cov3Db = new Float32Array(this.sabCov3Db.buffer);
+          const colors = new Float32Array(this.sabcolors.buffer);
+
+          // console.log('positions', positions);
+          // console.log('opacities', opacities);
+          // console.log('cov3Da', cov3Da);
+          // console.log('cov3Db', cov3Db);
+          // console.log('colors', colors);
 
 
-          updateBuffer(this.splat.buffers.color, colors)
           updateBuffer(this.splat.buffers.center, positions)
           updateBuffer(this.splat.buffers.opacity, opacities)
           updateBuffer(this.splat.buffers.covA, cov3Da)
           updateBuffer(this.splat.buffers.covB, cov3Db)
+          updateBuffer(this.splat.buffers.color, colors)
 
-          // console.log(this.splat.buffers.color, colors)
           // console.log(this.splat.buffers.center, positions)
           // console.log(this.splat.buffers.opacity, opacities)
           // console.log(this.splat.buffers.covA, cov3Da)
           // console.log(this.splat.buffers.covB, cov3Db)
+          // console.log(this.splat.buffers.color, colors)
 
+          // 设定绘制的高斯球数量
           this.gaussiansCount = data.gaussiansCount;
-
-          console.log('gaussiansCount', this.gaussiansCount)
-
 
           const end = new Date().getTime()
 
           const sortTime = `${((end - start)/1000).toFixed(3)}s`
           console.log(`updateBuffer ${sortTime}`)
 
-          // this.requestRender();
           this.canvas.requestAnimationFrame(this.requestRender.bind(this));
 
           // console.log('execFunc_sort end')
@@ -392,17 +416,14 @@ Component({
       gl.enable(gl.BLEND)
       gl.blendFunc(gl.ONE_MINUS_DST_ALPHA, gl.ONE)
       // gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA)
-
  
        // clear
        gl.clear(gl.COLOR_BUFFER_BIT);
 
-      // camera
+      // drawCubeMesh
       // const projMatrix = this.camera.projMatrix;
       // const viewMatrix = this.camera.viewMatrix;
-
       // this.drawCubeMesh(gl, projMatrix, viewMatrix)
-
 
       this.drawSplat(gl);
 
@@ -495,24 +516,82 @@ Component({
     // webGL触摸相关逻辑
     onTouchStartWebGL(e) {
       // console.log(e);
-      this.camera.lastTouch.clientX = e.touches[0].clientX
-      this.camera.lastTouch.clientY = e.touches[0].clientY
+
+      if (e.touches.length === 1) {
+        this.camera.lastTouch.x1 = e.touches[0].clientX
+        this.camera.lastTouch.y1 = e.touches[0].clientY
+        this.camera.lastTouch.x2 = null;
+        this.camera.lastTouch.y2 = null;
+        this.camera.lastTouch.distance = 0;
+      } else if (e.touches.length === 2) {
+        const touch1 = e.touches[0];
+        const touch2 = e.touches[1];
+
+        this.camera.lastTouch.x1 = touch1.clientX
+        this.camera.lastTouch.y1 = touch1.clientY
+        this.camera.lastTouch.x2 = touch2.clientX
+        this.camera.lastTouch.y2 = touch2.clientY
+
+        const distanceX = touch1.clientX - touch2.clientX;
+        const distanceY = touch1.clientY - touch2.clientY;
+        this.camera.lastTouch.distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+      }
+
     },
     onTouchMoveWebGL(e) {
       // console.log(e);
 
-      const touch = e.touches[0]
-      const movementX = touch.clientX - this.camera.lastTouch.clientX
-      const movementY = touch.clientY - this.camera.lastTouch.clientY
-      this.camera.lastTouch.clientX = touch.clientX
-      this.camera.lastTouch.clientY = touch.clientY
+      const moveScale = 1;
 
-      this.camera.theta -= movementX * 0.01 * .5 * .3
-      this.camera.phi = Math.max(1e-6, Math.min(Math.PI - 1e-6, this.camera.phi + movementY * 0.01 * .5))
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        // 单指移动镜头
+        const movementX = touch.clientX - this.camera.lastTouch.x1
+        const movementY = touch.clientY - this.camera.lastTouch.y1
+        this.camera.lastTouch.x1 = touch.clientX
+        this.camera.lastTouch.y1 = touch.clientY
+
+        if (Math.abs(movementX) < 100 && Math.abs(movementY) < 100) {
+          // 只处理小移动
+          this.camera.theta -= movementX * 0.01 * .3 * moveScale
+          this.camera.phi = Math.max(1e-6, Math.min(Math.PI - 1e-6, this.camera.phi + movementY * 0.01 * moveScale))          
+        }
+
+      } else if (e.touches.length === 2) {
+        // 支持单指变双指，兼容双指操作但是两根手指触屏时间不一致的情况
+        const touch1 = e.touches[0];
+        const touch2 = e.touches[1];
+
+        const distanceX = touch1.clientX - touch2.clientX;
+        const distanceY = touch1.clientY - touch2.clientY;
+        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+        if (this.camera.lastTouch.x2 === null && this.camera.lastTouch.y2 === null) {
+          this.camera.lastTouch.x1 = touch1.clientX
+          this.camera.lastTouch.y1 = touch1.clientY
+          this.camera.lastTouch.x2 = touch2.clientX
+          this.camera.lastTouch.y2 = touch2.clientY
+
+          this.camera.lastTouch.distance = distance;
+        } else {
+          // 双指开始滑动
+          let deltaScale = distance - this.camera.lastTouch.distance;
+          this.camera.lastTouch.distance = distance;
+
+          if (deltaScale < -2) {
+            deltaScale = -2;
+          } else if (deltaScale > 2) {
+            deltaScale = 2;
+          }
+
+          const newRaidus = this.camera.radius - deltaScale * 0.2;
+          this.camera.radius = newRaidus > 0 ? newRaidus: this.camera.radius;
+        }
+        
+      }
       
       this.camera.update();
 
-      // this.requestRender();
       this.canvas.requestAnimationFrame(this.requestRender.bind(this));
     },
     onTapControl(e) {
