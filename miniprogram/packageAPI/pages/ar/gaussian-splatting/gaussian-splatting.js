@@ -15,7 +15,7 @@ Component({
     renderByXRFrame: false, // 是否使用 xr-frame渲染
     renderByWebGL2: true, // 是否使用WebGL2渲染
     workerOn: true,
-    maxGaussians: 800000,
+    maxGaussians: 300000,
   },
   lifetimes: {
     /**
@@ -83,7 +83,7 @@ Component({
       console.log('== PLY Init start ==')
 
       const host = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo';
-      // const host = 'http://10.9.169.125:8030'
+      // const host = 'http://10.9.169.127:8030'
 
       let type;
 
@@ -551,7 +551,7 @@ Component({
         this.camera.lastTouch.x1 = touch.clientX
         this.camera.lastTouch.y1 = touch.clientY
 
-        if (Math.abs(movementX) < 100 && Math.abs(movementY) < 100) {
+        if (Math.abs(movementX) < 50 && Math.abs(movementY) < 50) {
           // 只处理小移动
           this.camera.theta -= movementX * 0.01 * .3 * moveScale
           this.camera.phi = Math.max(1e-6, Math.min(Math.PI - 1e-6, this.camera.phi + movementY * 0.01 * moveScale))          

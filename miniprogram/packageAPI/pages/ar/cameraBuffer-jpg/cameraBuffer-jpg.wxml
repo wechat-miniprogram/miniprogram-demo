@@ -4,12 +4,12 @@
     <canvas type="webgl" id="canvas"></canvas>
   </view>
 
-  <view class="hint-words">提示：点击获取，会将摄像头资源转成贴图</view>
+  <view class="hint-words">提示：点击获取，会将摄像头资源转成贴图(需基础库3.4.4)</view>
 
   <view class="wrap-option">
     <view class="row">
       <button type="primary" bindtap="getJpgImg">获取jpg图像</button>
-      <button type="primary" bindtap="getLog">开关调试log</button>
+      <button type="primary" bindtap="getLog">开关调试log(时间戳)</button>
     </view>
 
   </view>

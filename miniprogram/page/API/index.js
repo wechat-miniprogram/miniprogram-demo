@@ -317,10 +317,10 @@ Page({
           zh: '相机帧测试',
           url: 'cameraBuffer-detect/cameraBuffer-detect'
         },
-        // {
-        //   zh: '相机帧获取jpg图片',
-        //   url: 'cameraBuffer-jpg/cameraBuffer-jpg'
-        // },
+        {
+          zh: '相机帧获取jpg图片',
+          url: 'cameraBuffer-jpg/cameraBuffer-jpg'
+        },
         {
           zh: '实时深度图检测',
           url: 'depth-detect/depth-detect'
