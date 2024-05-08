@@ -314,14 +314,15 @@ export default function getBehavior() {
 
         const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 
+        const scale = 0.1;
         const m1 = new THREE.MeshPhysicalMaterial( {
           metalness: 0.0,
           roughness: 0.1,
           color: 0xff0000,
         } );
         const x = new THREE.Mesh( geometry, m1 );
-        x.position.set(1, 0, 0 );
-        x.scale.set(2, 0.1, 0.1);
+        x.position.set(1.5 * scale, 0, 0 );
+        x.scale.set(3 * scale, 0.1 * scale, 0.1 * scale);
         scene.add( x );
 
         const m2 = new THREE.MeshPhysicalMaterial( {
@@ -330,8 +331,8 @@ export default function getBehavior() {
           color: 0x00ff00,
         } );
         const y = new THREE.Mesh( geometry, m2 );
-        y.position.set(0, 1, 0 );
-        y.scale.set(0.1, 2, 0.1);
+        y.position.set(0, 1.5 * scale, 0 );
+        y.scale.set(0.1 * scale, 3 * scale, 0.1 * scale);
         scene.add( y );
 
         const m3 = new THREE.MeshPhysicalMaterial( {
@@ -340,8 +341,8 @@ export default function getBehavior() {
           color: 0x0000ff,
         } );
         const z = new THREE.Mesh( geometry, m3 );
-        z.position.set(0, 0, 1 );
-        z.scale.set(0.1, 0.1, 2);
+        z.position.set(0, 0, 1.5 * scale );
+        z.scale.set(0.1 * scale, 0.1 * scale, 3 * scale);
         scene.add( z );
       },
       updateAnimation() {

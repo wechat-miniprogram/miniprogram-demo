@@ -97,7 +97,7 @@ export default function getBehavior() {
                             mode: 1
                         }
                     },
-                    cameraPosition: 0,
+                    cameraPosition: 1,
                     version: 'v1',
                     gl: this.gl
                 })

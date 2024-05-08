@@ -289,12 +289,12 @@ Page({
           zh: '水平面AR-v2-marker识别',
           url: 'plane-ar-v2-marker/plane-ar-v2-marker'
         },
+        // {
+        //   zh: '水平面AR-v2-虚实遮挡',
+        //   url: 'plane-ar-v2-depth/plane-ar-v2-depth'
+        // },
         {
-          zh: '水平面AR-v2-虚实遮挡',
-          url: 'plane-ar-v2-depth/plane-ar-v2-depth'
-        },
-        {
-          zh: '水平面AR-v2-多种附加能力',
+          zh: '水平面AR-v2-附加能力',
           url: 'plane-ar-v2-options/plane-ar-v2-options'
         },
         {

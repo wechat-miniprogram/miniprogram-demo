@@ -15,7 +15,7 @@
   <view class="wrap-option">
     <view class="row">
       <button type="primary" bindtap="placeItem">识别点放置模型</button>
-      <button type="primary" bindtap="changeDepthFlag">开启关闭深度遮挡</button>
+      <!-- <button type="primary" bindtap="changeDepthFlag">开启关闭深度遮挡</button> -->
     </view>
     <view class="row">
       <button type="primary" disabled="{{markerImgList.length === 0}}" bindtap="removeMarker">删除已有 marker</button>

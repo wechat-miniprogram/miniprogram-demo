@@ -210,7 +210,7 @@ Component({
   behaviors: [getBehavior(), yuvBehavior],
   data: {
     theme: 'light',
-    cameraPosition: 0,
+    cameraPosition: 1,
     buttonDisable: true,
   },
   lifetimes: {
