@@ -12,6 +12,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "gaussian-splatting-ar",
+          "pathName": "packageAPI/pages/ar/gaussian-splatting/gaussian-splatting-ar",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "gaussian-splatting",
           "pathName": "packageAPI/pages/ar/gaussian-splatting/gaussian-splatting",
           "query": "",

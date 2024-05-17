@@ -1,0 +1,42 @@
+
+<view class="page" data-weui-theme="{{theme}}">
+  <view
+    class="canvas-wrap" style="width: {{widthScale * 100}}%; height: {{heightScale * 100}}%"
+  > 
+    <view wx:if="{{renderByXRFrame}}">
+      <xr-frame-render-canvas
+        disable-scroll
+        id="canvas"
+        width="{{width}}"
+        height="{{height}}"
+        style="width:{{domWidth}}px;height:{{domHeight}}px;"
+        bind:sceneReady="handleXRSceneReady"
+      ></xr-frame-render-canvas>
+    </view>
+    <view wx:if="{{renderByWebGL2}}">
+      <canvas type="webgl2" id="canvas"></canvas>
+    </view>
+  </view>
+  <view class="control-wrap">
+    <view class="title">经典 Splat</view>
+    <view class="block">
+      <button class="btn" type="primary" data-id="room" bindtap="onTapControl">房间</button>
+      <button class="btn" type="primary" data-id="garden"  bindtap="onTapControl">花园</button>
+      <button class="btn" type="primary" data-id="stump"  bindtap="onTapControl">树桩</button>
+    </view>
+    <view class="title">自制 Splat</view>
+    <view class="block">
+      <button class="btn" type="primary" data-id="oneflower"  bindtap="onTapControl">盆栽</button>
+      <button class="btn" type="primary" data-id="usj"  bindtap="onTapControl">USJ马里奥</button>
+      <button class="btn" type="primary" data-id="sakura"  bindtap="onTapControl">樱花小道</button>
+    </view>
+  </view>
+  <view class="input-wrap">
+    <view class="title">最大高斯球数</view>
+    <slider class="slider" bindchange="changeMaxGaussianCount" min="0" max="1200000" value="{{maxGaussians}}" show-value/>
+    <view class="checkbox-wrap"><p class="words">是否开启 worker 排序</p><switch class="checkbox" type="checkbox" checked="{{workerOn}}" bindchange="switchWorker"/></view>
+    
+
+  </view>
+</view>
+

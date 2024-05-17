@@ -1,0 +1,86 @@
+.canvas-wrap {
+  position: relative;
+  width: 100%;
+  background-color: #000;
+}
+
+.canvas-wrap canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas-wrap #canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.control-wrap {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  padding: 10rpx 20rpx;
+  width: 180rpx;
+  height: 510rpx;
+  background-color: rgba(50, 50, 50, 0.6);
+  border-radius: 10rpx;
+}
+
+.control-wrap .block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.control-wrap .btn {
+  width: 100%;
+  flex: 1;
+  font-size: 20rpx;
+  margin-bottom: 14rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+
+.input-wrap {
+  position: absolute;
+  left: 20rpx;
+  right: 260rpx;
+  top: 20rpx;
+  padding: 10rpx 20rpx;
+  height: 200rpx;
+  background-color: rgba(50, 50, 50, 0.6);
+  border-radius: 10rpx;
+}
+.input-wrap .slider {
+  margin-bottom: 30rpx;
+}
+
+.input-wrap .checkbox-wrap {
+  width: 100%;
+  text-align: center;
+}
+
+.checkbox-wrap .words {
+  vertical-align: middle;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.checkbox-wrap .checkbox {
+  vertical-align: middle;
+  margin-left: 20rpx;
+}
+
+.control-wrap .title, .input-wrap .title {
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}

@@ -4,13 +4,14 @@ const cubeVertexShader =
 attribute vec4 aVertexPosition;
 attribute vec4 aVertexColor;
 
-uniform mat4 uModelViewMatrix;
+uniform mat4 uModelMatrix;
+uniform mat4 uViewMatrix;
 uniform mat4 uProjectionMatrix;
 
 varying lowp vec4 vColor;
 
 void main(void) {
-    gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
+    gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * aVertexPosition;
 
     vColor = aVertexColor;
 }
@@ -46,11 +47,9 @@ class CubeInstanceWebGL {
             vertexColor: gl.getAttribLocation(shaderProgram, "aVertexColor"),
           },
           uniformLocations: {
-            projectionMatrix: gl.getUniformLocation(
-              shaderProgram,
-              "uProjectionMatrix"
-            ),
-            modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),
+            projectionMatrix: gl.getUniformLocation( shaderProgram, "uProjectionMatrix"),
+            viewMatrix: gl.getUniformLocation(shaderProgram, "uViewMatrix"),
+            modelMatrix: gl.getUniformLocation(shaderProgram, "uModelMatrix"),
           },
         };
 

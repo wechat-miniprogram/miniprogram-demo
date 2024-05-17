@@ -43,17 +43,17 @@ function sort(params) {
 
     loopTime++;
 
-    const { viewMatrix } = params
+    const { viewProjectionMatrix } = params
 
     const start = new Date().getTime()
 
 
-    // console.log('viewMatrix', viewMatrix)
-    // console.log('viewMatrix 2 6 10', viewMatrix[2], viewMatrix[6], viewMatrix[10])
-    // console.log('viewMatrix 8 9 10', viewMatrix[8], viewMatrix[9], viewMatrix[10])
+    // console.log('viewProjectionMatrix', viewProjectionMatrix)
+    // console.log('viewProjectionMatrix 2 6 10', viewProjectionMatrix[2], viewProjectionMatrix[6], viewProjectionMatrix[10])
+    // console.log('viewProjectionMatrix 8 9 10', viewProjectionMatrix[8], viewProjectionMatrix[9], viewProjectionMatrix[10])
 
     // Sort the gaussians!
-    sortGaussiansByDepth(depthIndex, gaussians, viewMatrix)
+    sortGaussiansByDepth(depthIndex, gaussians, viewProjectionMatrix)
 
     const sortEnd = new Date().getTime();
 
@@ -87,8 +87,8 @@ function sort(params) {
     const end = new Date().getTime();
 
     const writeTime = `${((end - sortEnd)/1000).toFixed(3)}s`
-    console.log(`[Worker] Sorted ${gaussians.count} gaussians in ${sortTime}.`)
-    console.log(`[Worker] Writed ${gaussians.count} gaussians in ${writeTime}.`)
+    // console.log(`[Worker] Sorted ${gaussians.count} gaussians in ${sortTime}.`)
+    // console.log(`[Worker] Writed ${gaussians.count} gaussians in ${writeTime}.`)
 
     return {
         data: {
@@ -102,10 +102,11 @@ function sort(params) {
     };
 }
 
-function sortGaussiansByDepth(depthIndex, gaussians, viewMatrix) {
-    const calcDepth = (i) => gaussians.positions[i*3] * viewMatrix[2] +
-                             gaussians.positions[i*3+1] * viewMatrix[6] +
-                             gaussians.positions[i*3+2] * viewMatrix[10]
+// count排序， 这里本质就是从近到远排序
+function sortGaussiansByDepth(depthIndex, gaussians, viewProjectionMatrix) {
+    const calcDepth = (i) => gaussians.positions[i*3] * viewProjectionMatrix[2] +
+                             gaussians.positions[i*3+1] * viewProjectionMatrix[6] +
+                             gaussians.positions[i*3+2] * viewProjectionMatrix[10]
 
     let maxDepth = -Infinity;
     let minDepth = Infinity;

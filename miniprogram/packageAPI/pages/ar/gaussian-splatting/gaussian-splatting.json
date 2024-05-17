@@ -4,5 +4,5 @@
   },
   "disableScroll": true,
   "renderer": "webview",
-  "navigationBarTitleText": "高斯溅射预览"
+  "navigationBarTitleText": "Gaussian Splatting 预览"
 }

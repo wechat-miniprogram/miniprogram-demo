@@ -1,7 +1,7 @@
-#version 300 es
+export const splatFragmentShader = 
+/* glsl */
+`#version 300 es
 precision mediump float;
-
-uniform bool show_depth_map;
 
 in vec3 col;
 in float scale_modif;
@@ -12,10 +12,6 @@ in vec2 pixf;
 
 out vec4 fragColor;
 
-vec3 depth_palette(float x) { 
-    x = min(1., x);
-    return vec3( sin(x*6.28/4.), x*x, mix(sin(x*6.28),x,.6) );
-}
 
 // Original CUDA implementation: https://github.com/graphdeco-inria/diff-gaussian-rasterization/blob/main/cuda_rasterizer/forward.cu#L263
 void main() {
@@ -38,9 +34,6 @@ void main() {
     
     // (Custom) Colorize with depth value instead of color (z-buffer visualization)
     vec3 color = col;
-    if (show_depth_map) {
-        color = depth_palette(depth * .08);
-    }
 
     if (alpha < 1./255.) {
         discard;
@@ -51,4 +44,6 @@ void main() {
 
     // fragColor = vec4(color , con_o.w);
 
+    // fragColor = vec4(0.0, 0.0, 1.0, 1.0);
 }
+`;

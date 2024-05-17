@@ -3,13 +3,16 @@ import { loadSplat } from './loaders/splat/splat-loader'
 import CameraWebGL from './webgl2/camera-webGL'
 import CubeInstanceWebGL from './webgl2/cubeInstance-webGL'
 import SplatWebGL, { SplatRenderTexture} from './webgl2/splat-webGL'
+import YUVRenderWebGL from './webgl2/yuv-webGL'
 
 import * as glMatrix from './util/gl-matrix-min'
 const { mat4 } = glMatrix
 
-const renderScale = 1;
+// VK 投影矩阵参数定义
+const NEAR = 0.01
+const FAR = 1000
 
-const baseMatrix = mat4.create();
+const renderScale = 1;
 
 Component({
   behaviors: [],
@@ -84,138 +87,83 @@ Component({
         this.initXRFrame();
       }
       
+      this.initVK();
+    },
+    initVK() {
+      // VKSession 配置
+      const session = this.session = wx.createVKSession({
+        track: {
+          plane: {
+            mode: 1
+          },
+        },
+        version: 'v2',
+        gl: this.gl
+      });
+
+      session.start(err => {
+        if (err) return console.error('VK error: ', err)
+
+        //  VKSession EVENT resize
+        session.on('resize', () => {
+        })
+
+        // VKSession EVENT addAnchors
+        session.on('addAnchors', anchors => {
+          // console.log("addAnchor", anchors);
+        })
+
+        // VKSession EVENT updateAnchors
+        session.on('updateAnchors', anchors => {
+        })
+        
+        // VKSession removeAnchors
+        session.on('removeAnchors', anchors => {
+          // console.log('removeAnchors', anchors)
+        });
+
+        console.log('ready to initloop')
+        // start 初始化完毕后，进行更新渲染循环
+        this.initLoop();
+      });
+    },
+    initLoop() {
+      // 限制调用帧率,暂时去掉
+      let fps = 30
+      let fpsInterval = 1000 / fps
+      let last = Date.now()
+
+      const session = this.session;
+
+      // 逐帧渲染
+      const onFrame = timestamp => {
+          try {
+              let now = Date.now()
+              const mill = now - last
+              // 经过了足够的时间
+              if (mill > fpsInterval) {
+                  last = now - (mill % fpsInterval); //校正当前时间
+                  this.requestRender();
+              }
+          } catch(e) {
+              console.error(e);
+          }
+          session.requestAnimationFrame(onFrame)
+      }
+      session.requestAnimationFrame(onFrame)
     },
     initPLY(id){
       console.log('== PLY Init start ==')
 
       const host = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo';
       // const host = 'http://127.0.0.1:8030'
-      // const host = 'http://10.9.169.149:8030'
+      // const host = 'http://10.9.169.133:8030'
 
       let type;
-
-      // 加载 ply
-      // type = 'ply';
-      // const pcSrc = `${host}/ply/oneflower.cleaned.ply`;
-      // const pcSrc = `${host}/ply/point_cloud.ply`;
-      // const pcSrc = `${host}/ply/room.ply`;
-      // const pcSrc = `${host}/ply/gs_USJ_Mario_enter.cleaned.ply`;
-      // const pcSrc = `${host}/ply/oneflower.ply`;
-      // const pcSrc = `${host}/ply/sakura.ply`;
-      // const pcSrc = `${host}/ply/sakura.cleaned.ply`;
-      // const pcSrc = `${host}/ply/sakura.compressed.ply`;
 
       // 加载 splat
       type = 'splat';
       const pcSrc = `${host}/splat/${id}.splat`;
-
-      let splatModelMatrix = mat4.create();
-      let modelMatrixLocal = mat4.create();
-      let modelMatrixT = mat4.create();
-      let modelMatrixR = mat4.create();
-      let modelMatrixS = mat4.create();
-      const splatScale = 1;
-      mat4.scale(modelMatrixS, mat4.create(), [splatScale, splatScale, splatScale])
-      mat4.rotate(modelMatrixR, modelMatrixS, 0, [0, 1, 0])
-
-      // 针对不同场景设置不同的 本地矩阵
-      // Setup Camera
-      switch(id) {
-        case 'room':
-          mat4.translate(modelMatrixT, modelMatrixR, [0, -2, 1])
-          this.camera.updateCameraInfo(
-            // target
-            [0, 0, 0],
-            // theta
-            -Math.PI/2,
-            // phi
-            Math.PI/2,
-            // raidus
-            1
-          )
-          break;
-        case 'garden':
-          mat4.translate(modelMatrixT, modelMatrixR, [0, -1, 1])
-          this.camera.updateCameraInfo(
-            // target
-            [0, 0, 0],
-            // theta
-            -Math.PI/2,
-            // phi
-            Math.PI/2,
-            // raidus
-            8
-          )
-          break;
-        case 'stump':
-          mat4.translate(modelMatrixT, modelMatrixR, [0, 1, 0])
-          this.camera.updateCameraInfo(
-            // target
-            [0, 0, 0],
-            // theta
-            -Math.PI * 2 / 3,
-            // phi
-            Math.PI / 4,
-            // raidus
-            4
-          )
-          break;
-        case 'oneflower':
-          mat4.translate(modelMatrixT, modelMatrixR, [0, -1.5, -3])
-          this.camera.updateCameraInfo(
-            // target
-            [0, 0, 0],
-            // theta
-            0,
-            // phi
-            Math.PI/2,
-            // raidus
-            12
-          )
-          break;
-        case 'usj':
-          mat4.translate(modelMatrixT, modelMatrixR, [0, 1, 0])
-          this.camera.updateCameraInfo(
-            // target
-            [0, 0, 0],
-            // theta
-            -Math.PI * 7 / 6,
-            // phi
-            Math.PI / 2,
-            // raidus
-            4
-          )
-          break;
-        case 'sakura':
-          mat4.translate(modelMatrixT, modelMatrixR, [-1.6, 0, -1])
-          this.camera.updateCameraInfo(
-            // target
-            [0, 0, 0],
-            // theta
-            Math.PI * 3 / 11,
-            // phi
-            Math.PI * 3 / 5,
-            // raidus
-            0.5
-          )
-          break;
-      }
-
-      mat4.copy(modelMatrixLocal, modelMatrixT);
-
-      // Y轴反转矩阵
-      const fixMatrix = mat4.create();
-      mat4.rotate(fixMatrix, mat4.create(), Math.PI, [0, 0, 1])
-
-      // 本地矩阵
-      const modelMatrixLocalFix = mat4.create();
-      mat4.multiply(modelMatrixLocalFix, fixMatrix, modelMatrixLocal);
-
-      // 世界矩阵
-      const modelWorld = mat4.create();
-      // mat4.translate(modelWorld, mat4.create(), [0, 10, 0])
-      mat4.multiply(splatModelMatrix, modelWorld, modelMatrixLocalFix);
-      this.camera.modelMatrix = splatModelMatrix;
 
       console.log('splat src', pcSrc)
 
@@ -242,7 +190,7 @@ Component({
             let offset = 0;
             let uindex = 0;
             while (size > 0) {
-              const chunkSize = Math.min(size, 100 * 1024 * 1024 /* 100MB */);
+              const chunkSize = Math.min(size, 100 * 1024 * 1024/* 100MB */);
 
               const res = fs.readFileSync( 
                 filePath,
@@ -323,7 +271,6 @@ Component({
         }
       });
     },
-
     initWorker(plyInfo, config) {
       console.log('== Worker Init start ==')
 
@@ -334,7 +281,7 @@ Component({
           console.log('[Worker callback] gaussianSplatting init callBack', res)
 
           this.camera.isWorkerInit = true;
-          this.camera.update();
+          this.camera.updateByVK();
 
 
         } else if (res.type === 'execFunc_sort') {
@@ -373,7 +320,7 @@ Component({
           // const sortTime = `${((end - start)/1000).toFixed(3)}s`
           // console.log(`updateBuffer ${sortTime}`)
 
-          this.canvas.requestAnimationFrame(this.requestRender.bind(this));
+          // this.canvas.requestAnimationFrame(this.requestRender.bind(this));
 
           // console.log('execFunc_sort end')
         }
@@ -395,7 +342,7 @@ Component({
       const cameraParameters = {
         up: [0, 1.0, 0.0],
         target: [0, 0, 0],
-        camera: [Math.PI/2, Math.PI/2, 4], // theta phi radius
+        camera: [Math.PI/2, Math.PI/2, 10], // theta phi radius
       }
       this.camera = new CameraWebGL(gl, this.worker, cameraParameters)
 
@@ -405,8 +352,11 @@ Component({
       // Setup Splat
       this.initSplat(gl);
 
+      // Setup YUV
+      this.initYUV(gl);
 
     },
+    // Gaussian Splat数据
     initSplat(gl) {
       // 初始化 splat 绘制到的 renderTexture
       this.splatRT = new SplatRenderTexture(gl);
@@ -414,9 +364,12 @@ Component({
       // 初始化 splat 渲染器
       this.splat = new SplatWebGL(gl);
     },
+    // VK 摄像机数据渲染
+    initYUV(gl){
+      this.YUVRender = new YUVRenderWebGL(gl);
+    },
     requestRender() {
-      // console.log('requestRender')
-
+      // console.log('request render')
       // 限帧
       let now = Date.now()
       const last =  this.lastRenderTime || 0;
@@ -433,16 +386,44 @@ Component({
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
       gl.clearColor(0.8, 0.8, 0.8, 1.0); 
 
-      // clear
+      // Clear
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
       // 先关掉深度测试
       gl.disable(gl.DEPTH_TEST)
 
+      // 获取 VKFrame
+      const frame = this.session.getVKFrame(this.canvas.width, this.canvas.height)
+
+      // 成功获取 VKFrame 才进行
+      if(!frame) { return; }
+
+      // 获取 VKCamera
+      const VKCamera = frame.camera
+
+      // 相机
+      if (VKCamera) {
+        const viewMatrix = VKCamera.viewMatrix;
+        const projectionMatrix = VKCamera.getProjectionMatrix(NEAR, FAR);
+        // 视图矩阵
+        this.camera.viewMatrix = viewMatrix;
+        // 投影矩阵
+        this.camera.projMatrix = projectionMatrix;
+        this.camera.updateByVK();
+      }
+
+      // Draw YUV
+      this.drawYUV(gl, frame);
+
+      // Draw Splat
       this.drawSplat(gl);
 
-      // resetState
+      // 恢复渲染状态
+      // cullFace
+      // gl.enable(gl.CULL_FACE);
+      // gl.cullFace(gl.BACK);
       gl.disable(gl.CULL_FACE);
+      // gl.cullFace(gl.BACK);
       // 深度测试
       gl.enable(gl.DEPTH_TEST)
 
@@ -450,9 +431,86 @@ Component({
       const projMatrix = this.camera.projMatrix;
       const viewMatrix = this.camera.viewMatrix;
       let modelMatrix = mat4.create();
-      const cubeScale = 0.1;
-      mat4.scale(modelMatrix, mat4.create(), [cubeScale, cubeScale, cubeScale])
+      // hintTest Info
+      if (!this.isPlaced) {
+        const hitTestRes = this.session.hitTest(0.5, 0.5)
+        if (hitTestRes.length) {
+          // hitTestRes 返回 transform 为列主序矩阵
+          const hintScale = 0.01;
+          mat4.scale(modelMatrix, hitTestRes[0].transform, [hintScale * 3, hintScale, hintScale * 3])
+        } else {
+          // 放在很远，相当于移除屏幕
+          modelMatrix = [
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 1000, 1
+          ]
+        }
+      } else {
+        modelMatrix = this.hintModelMatrix;
+      }
+
       this.drawCubeMesh(gl, projMatrix, viewMatrix, modelMatrix)
+
+    },
+    drawYUV(gl, frame) {
+      // 获取 VKFrame 信息
+      const {
+        yTexture,
+        uvTexture
+      } = frame.getCameraTexture(gl, 'yuv')
+      const displayTransform = frame.getDisplayTransform()
+
+      if (!yTexture || !uvTexture) {
+        return;
+      }
+
+      // 进行 YUV 准备
+      const yuvRender = this.YUVRender
+      
+      // YUV 需要绘制背面
+      gl.disable(gl.CULL_FACE);
+
+      // 先将YUV绘制到主屏
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+      gl.useProgram(yuvRender.programInfo.program);
+      // VAO
+      gl.bindVertexArray(yuvRender.vao);
+      // position
+      gl.bindBuffer(gl.ARRAY_BUFFER, yuvRender.buffers.position);
+      gl.vertexAttribPointer(yuvRender.programInfo.attribLocations.vertexPosition, 3, gl.FLOAT, false, 0, 0);
+      gl.enableVertexAttribArray(yuvRender.programInfo.attribLocations.vertexPosition);
+      // texCoord
+      gl.bindBuffer(gl.ARRAY_BUFFER, yuvRender.buffers.texCoord);
+      gl.vertexAttribPointer(yuvRender.programInfo.attribLocations.vertexTexcoord, 2, gl.FLOAT, false, 0, 0);
+      gl.enableVertexAttribArray(yuvRender.programInfo.attribLocations.vertexTexcoord);
+      // indices
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, yuvRender.buffers.indices);
+
+      // displayTransform
+      gl.uniformMatrix3fv(yuvRender.programInfo.uniformLocations.displayTransform, false, displayTransform)
+      
+      // 设置使用的纹理单元
+      gl.uniform1i(yuvRender.programInfo.uniformLocations.yTexture, 1);  // 纹理单元 1
+      gl.uniform1i(yuvRender.programInfo.uniformLocations.uvTexture, 2);  // 纹理单元 2
+
+
+      // UNPACK_FLIP_Y_WEBGL
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+
+      // 设定 Y、UV 纹理到纹理单元
+      gl.activeTexture(gl.TEXTURE1)
+      gl.bindTexture(gl.TEXTURE_2D, yTexture)
+      gl.activeTexture(gl.TEXTURE2)
+      gl.bindTexture(gl.TEXTURE_2D, uvTexture)
+
+      // draw RenderTexture
+      gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+
+      // 恢复 Cull_face
+      gl.enable(gl.CULL_FACE);
 
     },
     drawCubeMesh(gl, projMatrix, viewMatrix, modelMatrix) {
@@ -507,7 +565,6 @@ Component({
 
       const splatRTFrameBuffer = this.splatRT.frameBuffer
 
-      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)
       gl.bindFramebuffer(gl.FRAMEBUFFER, splatRTFrameBuffer);
 
       gl.clearColor(0, 0, 0, 0.0);
@@ -517,7 +574,6 @@ Component({
       gl.disable(gl.DEPTH_TEST)
       gl.enable(gl.BLEND)
       gl.blendFunc(gl.ONE_MINUS_DST_ALPHA, gl.ONE)
-      // gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
 
       // console.log('drawSplat')
 
@@ -546,15 +602,9 @@ Component({
       gl.uniform1f(gl.getUniformLocation(program, 'scale_modifier'), 1.0)
       gl.uniformMatrix4fv(gl.getUniformLocation(program, 'modelViewMatrix'), false, cam.mvm)
       gl.uniformMatrix4fv(gl.getUniformLocation(program, 'modelViewProjectMatrix'), false, cam.mvpm)
-      // gl.uniformMatrix4fv(gl.getUniformLocation(program, 'modelmatrix'), false, baseMatrix)
-      // gl.uniformMatrix4fv(gl.getUniformLocation(program, 'viewmatrix'), false, cam.vm)
 
       // Draw Splat
       gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, this.gaussiansCount);
-
-      // resetState
-      gl.enable(gl.BLEND)
-      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
 
       // 最后将RT绘制 到 主屏
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -573,98 +623,89 @@ Component({
       // indices
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, splatRT.buffers.indices);
 
+      gl.uniform1i(splatRT.programInfo.attribLocations.uSplat, 0) // 纹理单元0
+
+      // 设定 RT 纹理到纹理单元
+      gl.activeTexture(gl.TEXTURE0)
+      gl.bindTexture(gl.TEXTURE_2D, splatRT.rt)
+
+      // set Blend
+      gl.enable(gl.BLEND)
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+
       // draw RenderTexture
       gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
       
-    },
-    // webGL触摸相关逻辑
-    onTouchStartWebGL(e) {
-      // console.log(e);
-
-      if (e.touches.length === 1) {
-        this.camera.lastTouch.x1 = e.touches[0].clientX
-        this.camera.lastTouch.y1 = e.touches[0].clientY
-        this.camera.lastTouch.x2 = null;
-        this.camera.lastTouch.y2 = null;
-        this.camera.lastTouch.distance = 0;
-      } else if (e.touches.length === 2) {
-        const touch1 = e.touches[0];
-        const touch2 = e.touches[1];
-
-        this.camera.lastTouch.x1 = touch1.clientX
-        this.camera.lastTouch.y1 = touch1.clientY
-        this.camera.lastTouch.x2 = touch2.clientX
-        this.camera.lastTouch.y2 = touch2.clientY
-
-        const distanceX = touch1.clientX - touch2.clientX;
-        const distanceY = touch1.clientY - touch2.clientY;
-        this.camera.lastTouch.distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-      }
-
-    },
-    onTouchMoveWebGL(e) {
-      // console.log(e);
-
-      const moveScale = 1;
-
-      if (e.touches.length === 1) {
-        const touch = e.touches[0];
-        // 单指移动镜头
-        const movementX = touch.clientX - this.camera.lastTouch.x1
-        const movementY = touch.clientY - this.camera.lastTouch.y1
-        this.camera.lastTouch.x1 = touch.clientX
-        this.camera.lastTouch.y1 = touch.clientY
-
-        if (Math.abs(movementX) < 50 && Math.abs(movementY) < 50) {
-          // 只处理小移动
-          this.camera.theta += movementX * 0.01 * .3 * moveScale
-          this.camera.phi = Math.max(1e-6, Math.min(Math.PI - 1e-6, this.camera.phi - movementY * 0.01 * moveScale))          
-        }
-
-      } else if (e.touches.length === 2) {
-        // 支持单指变双指，兼容双指操作但是两根手指触屏时间不一致的情况
-        const touch1 = e.touches[0];
-        const touch2 = e.touches[1];
-
-        const distanceX = touch1.clientX - touch2.clientX;
-        const distanceY = touch1.clientY - touch2.clientY;
-        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-        if (this.camera.lastTouch.x2 === null && this.camera.lastTouch.y2 === null) {
-          this.camera.lastTouch.x1 = touch1.clientX
-          this.camera.lastTouch.y1 = touch1.clientY
-          this.camera.lastTouch.x2 = touch2.clientX
-          this.camera.lastTouch.y2 = touch2.clientY
-
-          this.camera.lastTouch.distance = distance;
-        } else {
-          // 双指开始滑动
-          let deltaScale = distance - this.camera.lastTouch.distance;
-          this.camera.lastTouch.distance = distance;
-
-          if (deltaScale < -2) {
-            deltaScale = -2;
-          } else if (deltaScale > 2) {
-            deltaScale = 2;
-          }
-
-          const newRaidus = this.camera.radius - deltaScale * 0.2;
-          this.camera.radius = newRaidus > 0 ? newRaidus: this.camera.radius;
-        }
-        
-      }
-      
-      this.camera.update();
-
-      this.canvas.requestAnimationFrame(this.requestRender.bind(this));
     },
     onTapControl(e) {
       const dataSet = e.target.dataset;
     
       const id = dataSet.id;
-  
-      // 开始处理 ply 资源
-      this.initPLY(id);
+
+      // hintTest Info
+      const hitTestRes = this.session.hitTest(0.5, 0.5)
+      if (hitTestRes.length) {
+        // 命中才进行后续的具体加载
+        // hitTestRes 返回 transform 为列主序矩阵
+
+        let splatModelMatrix = mat4.create();
+        let modelMatrixLocal = mat4.create();
+        let modelMatrixT = mat4.create();
+        let modelMatrixR = mat4.create();
+        let modelMatrixS = mat4.create();
+        const splatScale = 0.2;
+        mat4.scale(modelMatrixS, mat4.create(), [splatScale, splatScale, splatScale])
+        mat4.rotate(modelMatrixR, modelMatrixS, 0, [0, 1, 0])
+
+        // 针对不同场景设置不同的 世界矩阵
+        switch(id) {
+          case 'room':
+            mat4.translate(modelMatrixT, modelMatrixR, [0, -2, 1])
+            break;
+          case 'garden':
+            mat4.translate(modelMatrixT, modelMatrixR, [0, -1, 1])
+            break;
+          case 'stump':
+            mat4.translate(modelMatrixT, modelMatrixR, [0, 0.5, 0])
+            break;
+          case 'oneflower':
+            mat4.translate(modelMatrixT, modelMatrixR, [0, -1.5, -3])
+            break;
+          case 'usj':
+            mat4.translate(modelMatrixT, modelMatrixR, [0, 1, 0])
+            break;
+          case 'sakura':
+            mat4.translate(modelMatrixT, modelMatrixR, [-1.6, 0, -1])
+            break;
+          default:
+            mat4.copy(modelMatrixT, modelMatrixR);
+            break;
+        }
+        mat4.copy(modelMatrixLocal, modelMatrixT);
+
+        // Y轴反转矩阵
+        const fixMatrix = mat4.create();
+        mat4.rotate(fixMatrix, mat4.create(), Math.PI, [0, 0, 1])
+
+        // 本地矩阵
+        const modelMatrixLocalFix = mat4.create();
+        mat4.multiply(modelMatrixLocalFix, fixMatrix, modelMatrixLocal);
+
+        // 世界矩阵
+        mat4.multiply(splatModelMatrix, hitTestRes[0].transform, modelMatrixLocalFix);
+
+        this.camera.modelMatrix = splatModelMatrix;
+
+        // locak Hint
+        const hintModelMatrix = mat4.create();
+        const hintScale = 0.01;
+        mat4.scale(hintModelMatrix, hitTestRes[0].transform, [hintScale * 3, hintScale, hintScale * 3])
+        this.hintModelMatrix = hintModelMatrix;
+        this.isPlaced = true;
+
+        // 开始处理 ply 资源
+        this.initPLY(id);
+      }
     },
     changeMaxGaussianCount(e) {
       this.setData({
@@ -684,4 +725,5 @@ Component({
     }
   },
 })
+
 

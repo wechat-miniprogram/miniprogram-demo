@@ -15,7 +15,8 @@ class CameraWebGL {
         this.radius = camera[2] ?? 3
 
         // Y Field of view
-        this.fov_y = 0.820176
+        // this.fov_y = 0.820176
+        this.fov_y = Math.PI / 180 * 70;
 
         // False: orbit around object (mouse + wheel)
         // True: free-fly (mouse + AWSD)
@@ -33,6 +34,7 @@ class CameraWebGL {
         this.right = vec3.create()        
 
         // Helper matrices
+        this.modelMatrix = mat4.create()
         this.viewMatrix = mat4.create()
         this.projMatrix = mat4.create()
         this.viewProjMatrix = mat4.create()
@@ -40,8 +42,10 @@ class CameraWebGL {
         this.sceneRotationMatrix = rotateAlign(this.up, [0, 1, 0])
 
         // Matrices sent to the GPU
+        this.mm = mat4.create()
         this.vm = mat4.create()
-        this.vpm = mat4.create()
+        this.mvm = mat4.create()
+        this.mvpm = mat4.create()
 
         // past Touch
         this.lastTouch = {}
@@ -80,7 +84,7 @@ class CameraWebGL {
         return vec3.transformMat3(pos, pos, this.sceneRotationMatrix)
     }
 
-    update(isInit = false) {
+    update() {
         // console.log(this.pos)
         const gl = this.gl;
         // Update current position
@@ -91,22 +95,53 @@ class CameraWebGL {
 
         // Create a perspective projection matrix
         const aspect = gl.canvas.width / gl.canvas.height
-        mat4.perspective(this.projMatrix, this.fov_y, aspect, 0.1, 100)
+        mat4.perspective(this.projMatrix, this.fov_y, aspect, 0.01, 1000)
 
 		// Convert view and projection to target coordinate system
         // Original C++ reference: https://gitlab.inria.fr/sibr/sibr_core/-/blob/gaussian_code_release_union/src/projects/gaussianviewer/renderer/GaussianView.cpp#L464
-        mat4.copy(this.vm, this.viewMatrix)
-        mat4.multiply(this.vpm, this.projMatrix, this.viewMatrix)
+        mat4.copy(this.mm, this.modelMatrix);
+        // modelMatrix 进行反转Y轴
+        // invertRow(this.mm, 1);
+        mat4.multiply(this.mvm, this.viewMatrix, this.mm)
+        mat4.multiply(this.mvpm, this.projMatrix, this.mvm)
 
-        invertRow(this.vm, 1)
-        invertRow(this.vm, 2)
-        invertRow(this.vpm, 1)
+        invertRow(this.mvm, 2)
 
+        // invertRow(this.mvm, 1)
+        // invertRow(this.mvpm, 1)
         // (Webgl-specific) Invert x-axis
-        invertRow(this.vm, 0)
-        invertRow(this.vpm, 0)
+        // invertRow(this.mvm, 0)
+        // invertRow(this.mvpm, 0)
         
-        // console.log('viewMatrix', this.viewMatrix);
+        // console.log('vm', this.vm);
+        // console.log('pm', this.projMatrix);
+
+        if (this.isWorkerInit){
+            if (this.workerOn) {
+                this.updateWorker();
+            }
+        }
+    }
+
+    updateByVK() {
+		// Convert view and projection to target coordinate system
+        // Original C++ reference: https://gitlab.inria.fr/sibr/sibr_core/-/blob/gaussian_code_release_union/src/projects/gaussianviewer/renderer/GaussianView.cpp#L464
+        mat4.copy(this.mm, this.modelMatrix);
+        // modelMatrix 进行反转Y轴
+        // invertRow(this.mm, 1);
+        mat4.multiply(this.mvm, this.viewMatrix, this.mm)
+        mat4.multiply(this.mvpm, this.projMatrix, this.mvm)
+
+        invertRow(this.mvm, 2)
+
+        // invertRow(this.mvm, 1)
+        // invertRow(this.mvpm, 1)
+        // (Webgl-specific) Invert x-axis
+        // invertRow(this.mvm, 0)
+        // invertRow(this.mvpm, 0)
+        
+        // console.log('vm', this.vm);
+        // console.log('pm', this.projMatrix);
 
         if (this.isWorkerInit){
             if (this.workerOn) {
@@ -120,12 +155,12 @@ class CameraWebGL {
 
         // Calculate the dot product between last and current view-projection matrices
         // If they differ too much, the splats need to be sorted
-        const dot = this.lastViewProjMatrix[2]  * this.vpm[2] 
-                  + this.lastViewProjMatrix[6]  * this.vpm[6]
-                  + this.lastViewProjMatrix[10] * this.vpm[10]
+        const dot = this.lastViewProjMatrix[2]  * this.mvpm[2] 
+                  + this.lastViewProjMatrix[6]  * this.mvpm[6]
+                  + this.lastViewProjMatrix[10] * this.mvpm[10]
         if (Math.abs(dot - 1) > 0.01) {
             this.needsWorkerUpdate = true
-            mat4.copy(this.lastViewProjMatrix, this.vpm)
+            mat4.copy(this.lastViewProjMatrix, this.mvpm)
         }
 
         // Sort the splats as soon as the worker is available
@@ -136,7 +171,7 @@ class CameraWebGL {
                 type: 'execFunc_sort',
                 params: [
                   {
-                    viewMatrix: this.vpm
+                    viewProjectionMatrix: this.mvpm
                   }
                 ]
               })

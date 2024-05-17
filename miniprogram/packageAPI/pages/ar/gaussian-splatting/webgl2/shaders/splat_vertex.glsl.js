@@ -1,19 +1,25 @@
-#version 300 es
+
+export const splatVertexShader = 
+/* glsl */
+`#version 300 es
 in vec3 a_center;
 in vec3 a_col;
 in float a_opacity;
 in vec3 a_covA;
 in vec3 a_covB;
 
-uniform float W;
-uniform float H;
+uniform float canvas_width;
+uniform float canvas_height;
 uniform float focal_x;
 uniform float focal_y;
 uniform float tan_fovx;
 uniform float tan_fovy;
 uniform float scale_modifier;
-uniform mat4 projmatrix;
 uniform mat4 viewmatrix;
+uniform mat4 modelmatrix;
+uniform mat4 modelViewMatrix;
+uniform mat4 modelViewProjectMatrix;
+
 uniform vec3 boxmin;
 uniform vec3 boxmax;
 
@@ -71,31 +77,25 @@ float ndc2Pix(float v, float S) {
 void main() {
     vec3 p_orig = a_center;
 
-    // Discard splats outside of the scene bounding box (should not happen)
-    // if (p_orig.x < boxmin.x || p_orig.y < boxmin.y || p_orig.z < boxmin.z ||
-    //     p_orig.x > boxmax.x || p_orig.y > boxmax.y || p_orig.z > boxmax.z) {
-    //         gl_Position = vec4(0, 0, 0, 1);
-    //         return;
-    //     }
-
     // Transform point by projecting
-    vec4 p_hom = projmatrix * vec4(p_orig, 1);
+    vec4 p_hom = modelViewProjectMatrix * vec4(p_orig, 1);
     float p_w = 1. / (p_hom.w + 1e-7);
     vec3 p_proj = p_hom.xyz * p_w;
 
     // Perform near culling, quit if outside.
-    vec4 p_view = viewmatrix * vec4(p_orig, 1);
+    vec4 p_view = modelViewMatrix * vec4(p_orig, 1);
     if (p_view.z <= .4) {
         gl_Position = vec4(0, 0, 0, 1);
         return;
     }
+
 
     // (Webgl-specific) The covariance matrix is pre-computed on the CPU for faster performance
     float cov3D[6] = float[6](a_covA.x, a_covA.y, a_covA.z, a_covB.x, a_covB.y, a_covB.z);
     // computeCov3D(a_scale, scale_modifier, a_rot, cov3D);
 
     // Compute 2D screen-space covariance matrix
-    vec3 cov = computeCov2D(p_orig, focal_x, focal_y, tan_fovx, tan_fovy, cov3D, viewmatrix);
+    vec3 cov = computeCov2D(p_orig, focal_x, focal_y, tan_fovx, tan_fovy, cov3D, modelViewMatrix);
 
     // Invert covariance (EWA algorithm)
     float det = (cov.x * cov.z - cov.y * cov.y);
@@ -114,7 +114,7 @@ void main() {
     float lambda1 = mid + sqrt(max(0.1, mid * mid - det));
     float lambda2 = mid - sqrt(max(0.1, mid * mid - det));
     float my_radius = ceil(3. * sqrt(max(lambda1, lambda2)));
-    vec2 point_image = vec2(ndc2Pix(p_proj.x, W), ndc2Pix(p_proj.y, H));
+    vec2 point_image = vec2(ndc2Pix(p_proj.x, canvas_width), ndc2Pix(p_proj.y, canvas_height));
 
     // (Webgl-specific) As the covariance matrix is calculated as a one-time operation on CPU in this implementation,
     // we need to apply the scale modifier differently to still allow for real-time scaling of the splats.
@@ -134,9 +134,10 @@ void main() {
     depth = p_view.z;
 
     // (Webgl-specific) Convert from screen-space to clip-space
-    vec2 clip_pos = screen_pos / vec2(W, H) * 2. - 1.;
+    vec2 clip_pos = screen_pos / vec2(canvas_width, canvas_height) * 2. - 1.;
 
     gl_Position = vec4(clip_pos, 0, 1);
 
 
 }
+`;

@@ -108,6 +108,7 @@
         "pages/ar/photo-face-detect/photo-face-detect",
         "pages/ar/photo-depth-detect/photo-depth-detect",
         "pages/ar/gaussian-splatting/gaussian-splatting",
+        "pages/ar/gaussian-splatting/gaussian-splatting-ar",
         "pages/page/set-navigation-bar-title/set-navigation-bar-title",
         "pages/page/navigation-bar-loading/navigation-bar-loading",
         "pages/page/navigator/navigator",

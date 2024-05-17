@@ -382,8 +382,12 @@ Page({
           url: 'shoe-detect/shoe-detect'
         },
         {
-          zh: '高斯溅射预览',
+          zh: 'GassianSplatting 预览',
           url: 'gaussian-splatting/gaussian-splatting'
+        },
+        {
+          zh: 'GassianSplatting AR预览',
+          url: 'gaussian-splatting/gaussian-splatting-ar'
         },
       ],
     }],
