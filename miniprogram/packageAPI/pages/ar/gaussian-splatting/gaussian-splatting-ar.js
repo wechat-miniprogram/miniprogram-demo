@@ -23,7 +23,7 @@ Component({
     renderByXRFrame: false, // 是否使用 xr-frame渲染
     renderByWebGL2: true, // 是否使用WebGL2渲染
     workerOn: true,
-    maxGaussians: 50000,
+    maxGaussians: 100000,
   },
   lifetimes: {
     /**
@@ -653,34 +653,52 @@ Component({
         let modelMatrixT = mat4.create();
         let modelMatrixR = mat4.create();
         let modelMatrixS = mat4.create();
-        const splatScale = 0.2;
-        mat4.scale(modelMatrixS, mat4.create(), [splatScale, splatScale, splatScale])
-        mat4.rotate(modelMatrixR, modelMatrixS, 0, [0, 1, 0])
+        let splatScale = 0.2;
+        let splatRotationAngle = 0;
+        let splatRotationFlag = [0, 1, 0];
+        let splatTranslate = [0, 0, 0];
 
         // 针对不同场景设置不同的 世界矩阵
         switch(id) {
           case 'room':
-            mat4.translate(modelMatrixT, modelMatrixR, [0, -2, 1])
+            splatScale = 0.6;
+            splatTranslate = [0, -1, 0];
+            splatRotationAngle = - Math.PI / 180 * 26;
+            splatRotationFlag = [1, 0, 0];
             break;
           case 'garden':
-            mat4.translate(modelMatrixT, modelMatrixR, [0, -1, 1])
+            splatScale = 0.6;
+            splatTranslate = [0, -2, 0];
+            splatRotationAngle = - Math.PI / 180 * 20;
+            splatRotationFlag = [1, 0, 0];
             break;
           case 'stump':
-            mat4.translate(modelMatrixT, modelMatrixR, [0, 0.5, 0])
+            splatScale = 0.6;
+            splatTranslate = [0, 0, 0];
             break;
           case 'oneflower':
-            mat4.translate(modelMatrixT, modelMatrixR, [0, -1.5, -3])
+            splatScale = 0.2;
+            splatTranslate = [-0.5, -2, -4];
+            splatRotationAngle = - Math.PI / 180 * 40;
+            splatRotationFlag = [1, 0, 0];
             break;
           case 'usj':
-            mat4.translate(modelMatrixT, modelMatrixR, [0, 1, 0])
+            splatTranslate = [0, 1, 0];
             break;
           case 'sakura':
-            mat4.translate(modelMatrixT, modelMatrixR, [-1.6, 0, -1])
+            splatTranslate = [-1.6, 0, -1];
+            break;
+          case '0517cruch':
+            splatScale = 0.5;
+            splatTranslate = [0, 0, 0];
             break;
           default:
-            mat4.copy(modelMatrixT, modelMatrixR);
             break;
         }
+
+        mat4.scale(modelMatrixS, mat4.create(), [splatScale, splatScale, splatScale])
+        mat4.rotate(modelMatrixR, modelMatrixS, splatRotationAngle, splatRotationFlag)
+        mat4.translate(modelMatrixT, modelMatrixR, splatTranslate)
         mat4.copy(modelMatrixLocal, modelMatrixT);
 
         // Y轴反转矩阵

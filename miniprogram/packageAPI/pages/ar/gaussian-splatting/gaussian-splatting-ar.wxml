@@ -29,6 +29,7 @@
       <button class="btn" type="primary" data-id="oneflower"  bindtap="onTapControl">盆栽</button>
       <button class="btn" type="primary" data-id="usj"  bindtap="onTapControl">USJ马里奥</button>
       <button class="btn" type="primary" data-id="sakura"  bindtap="onTapControl">樱花小道</button>
+      <!-- <button class="btn" type="primary" data-id="0517cruch"  bindtap="onTapControl">教堂花园</button> -->
     </view>
   </view>
   <view class="input-wrap">
