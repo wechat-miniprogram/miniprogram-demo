@@ -23,7 +23,7 @@ Component({
     renderByXRFrame: false, // 是否使用 xr-frame渲染
     renderByWebGL2: true, // 是否使用WebGL2渲染
     workerOn: true,
-    maxGaussians: 100000,
+    maxGaussians: 50000,
   },
   lifetimes: {
     /**
