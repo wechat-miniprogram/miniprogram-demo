@@ -18,17 +18,17 @@ function init(plyInfo, config) {
 
     console.log(`[Worker] Received ${gaussians.count} gaussians`)
     
-    // data.positions = new Float32Array(gaussians.count * 3)
-    // data.opacities = new Float32Array(gaussians.count)
-    // data.cov3Da = new Float32Array(gaussians.count * 3)
-    // data.cov3Db = new Float32Array(gaussians.count * 3)
-    // data.colors = new Float32Array(gaussians.count * 3)
+    data.positions = new Float32Array(gaussians.count * 3)
+    data.opacities = new Float32Array(gaussians.count)
+    data.cov3Da = new Float32Array(gaussians.count * 3)
+    data.cov3Db = new Float32Array(gaussians.count * 3)
+    data.colors = new Float32Array(gaussians.count * 3)
 
-    data.positions = new Float32Array(config.sabPositions.buffer);
-    data.opacities = new Float32Array(config.sabOpacities.buffer);
-    data.cov3Da = new Float32Array(config.sabCov3Da.buffer);
-    data.cov3Db = new Float32Array(config.sabCov3Db.buffer);
-    data.colors = new Float32Array(config.sabcolors.buffer);
+    // data.positions = new Float32Array(config.sabPositions.buffer);
+    // data.opacities = new Float32Array(config.sabOpacities.buffer);
+    // data.cov3Da = new Float32Array(config.sabCov3Da.buffer);
+    // data.cov3Db = new Float32Array(config.sabCov3Db.buffer);
+    // data.colors = new Float32Array(config.sabcolors.buffer);
 
     // console.log(`[Worker] init data positions`, data.positions)
     // console.log(`[Worker] init data opacities`, data.opacities)
@@ -92,11 +92,11 @@ function sort(params) {
 
     return {
         data: {
-            // colors: data.colors.buffer,
-            // positions: data.positions.buffer,
-            // opacities: data.opacities.buffer,
-            // cov3Da: data.cov3Da.buffer,
-            // cov3Db: data.cov3Db.buffer,
+            colors: data.colors.buffer,
+            positions: data.positions.buffer,
+            opacities: data.opacities.buffer,
+            cov3Da: data.cov3Da.buffer,
+            cov3Db: data.cov3Db.buffer,
             gaussiansCount: gaussians.count,
         }
     };

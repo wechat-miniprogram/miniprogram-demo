@@ -84,7 +84,7 @@ void main() {
 
     // Perform near culling, quit if outside.
     vec4 p_view = modelViewMatrix * vec4(p_orig, 1);
-    if (p_view.z <= .4) {
+    if (p_view.z <= .1) {
         gl_Position = vec4(0, 0, 0, 1);
         return;
     }

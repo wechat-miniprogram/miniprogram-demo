@@ -233,21 +233,21 @@ Component({
             const renderCount = this.renderCount = info.count;
 
             // 全部用 f32 存储
-            this.sabPositions = wx.createSharedArrayBuffer(renderCount * 4 * 3)
-            this.sabOpacities= wx.createSharedArrayBuffer(renderCount * 4)
-            this.sabCov3Da = wx.createSharedArrayBuffer(renderCount * 4 * 3)
-            this.sabCov3Db = wx.createSharedArrayBuffer(renderCount * 4 * 3)
-            this.sabcolors = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+            // this.sabPositions = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+            // this.sabOpacities= wx.createSharedArrayBuffer(renderCount * 4)
+            // this.sabCov3Da = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+            // this.sabCov3Db = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+            // this.sabcolors = wx.createSharedArrayBuffer(renderCount * 4 * 3)
 
-            console.log('创建 worker 共享内存', this.sabPositions, this.sabOpacities, this.sabCov3Da, this.sabCov3Db, this.sabcolors)
+            // console.log('创建 worker 共享内存', this.sabPositions, this.sabOpacities, this.sabCov3Da, this.sabCov3Db, this.sabcolors)
 
             // 初始化 worker 相关
             this.initWorker(info, {
-              sabPositions: this.sabPositions,
-              sabOpacities: this.sabOpacities,
-              sabCov3Da: this.sabCov3Da,
-              sabCov3Db: this.sabCov3Db,
-              sabcolors: this.sabcolors,
+              // sabPositions: this.sabPositions,
+              // sabOpacities: this.sabOpacities,
+              // sabCov3Da: this.sabCov3Da,
+              // sabCov3Db: this.sabCov3Db,
+              // sabcolors: this.sabcolors,
             });
   
           } else {
@@ -301,11 +301,18 @@ Component({
             gl.bufferData(gl.ARRAY_BUFFER, data, gl.DYNAMIC_DRAW)
           }
 
-          const positions = new Float32Array(this.sabPositions.buffer);
-          const opacities = new Float32Array(this.sabOpacities.buffer);
-          const cov3Da = new Float32Array(this.sabCov3Da.buffer);
-          const cov3Db = new Float32Array(this.sabCov3Db.buffer);
-          const colors = new Float32Array(this.sabcolors.buffer);
+          // const positions = new Float32Array(this.sabPositions.buffer);
+          // const opacities = new Float32Array(this.sabOpacities.buffer);
+          // const cov3Da = new Float32Array(this.sabCov3Da.buffer);
+          // const cov3Db = new Float32Array(this.sabCov3Db.buffer);
+          // const colors = new Float32Array(this.sabcolors.buffer);
+          
+          const positions = new Float32Array(data.positions);
+          const opacities = new Float32Array(data.opacities);
+          const cov3Da = new Float32Array(data.cov3Da);
+          const cov3Db = new Float32Array(data.cov3Db);
+          const colors = new Float32Array(data.colors);
+
 
           updateBuffer(this.splat.buffers.center, positions)
           updateBuffer(this.splat.buffers.opacity, opacities)
