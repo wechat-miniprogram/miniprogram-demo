@@ -3,9 +3,12 @@ Page({
     // 仅在 app-bar demo 页面展示
     if (typeof this.getAppBar === 'function' ) {
       const appBarComp = this.getAppBar()
-      appBarComp.setData({
-        showAppbar: false
-      })
+      // component.getAppBar 在 Skyline 中返回 appBar 组件示例，在 webview 中返回 null
+      if (appBarComp !== null) {
+        appBarComp.setData({
+          showAppbar: false
+        })
+      }
     }
       
     wx.reportAnalytics('enter_home_programmatically', {})
