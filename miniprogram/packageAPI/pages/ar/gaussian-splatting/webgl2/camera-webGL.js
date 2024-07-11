@@ -3,9 +3,8 @@ import * as glMatrix from '../util/gl-matrix-min'
 const { mat4, vec3, vec4 } = glMatrix
 
 class CameraWebGL {
-    constructor(gl, worker, {target = [0, 0, 0], up = [0, 1, 0], camera = []} = {}) {
+    constructor(gl, {target = [0, 0, 0], up = [0, 1, 0], camera = [], workerOn = true, wasmOn = false } = {}) {
         this.gl = gl;
-        this.worker = worker;
         this.target = [...target] // Position of look-at target
         this.up = [...up]         // Up vector
 
@@ -23,7 +22,7 @@ class CameraWebGL {
         this.freeFly = false
 
         // Indicate that the camera moved and the splats need to be sorted
-        this.needsWorkerUpdate = true
+        this.needsUpdate = true
 
         // Is the user dragging the mouse?
         this.isDragging = false
@@ -31,7 +30,7 @@ class CameraWebGL {
         // Helper vectors
         this.pos = vec3.create()
         this.front = vec3.create()
-        this.right = vec3.create()        
+        this.right = vec3.create()
 
         // Helper matrices
         this.modelMatrix = mat4.create()
@@ -50,14 +49,22 @@ class CameraWebGL {
         // past Touch
         this.lastTouch = {}
 
-        // 是否已经初始化
-        this.isWorkerInit = false;
-
-        // 是否在排序
-        this.isWorkerSorting = false;
+        this.worker = undefined;
+        this.wasm = undefined;
+        this.gaussian = undefined;
+        this.vpmWASM = undefined;
 
         // 是否开启 worker 更新
-        this.workerOn = true;
+        this.workerOn = workerOn;
+
+        // 是否开启 wasm 更新
+        this.wasmOn = wasmOn;
+
+        // wasm 更新回调
+        this.wasmUpdateCallback = undefined
+
+        // 更新状态位
+        this.isSorting = false;
 
         // 初始化
         this.update();
@@ -65,6 +72,10 @@ class CameraWebGL {
 
     setWorkerOn(flag) {
         this.workerOn = flag
+    }
+
+    setWasmOn(flag) {
+        this.wasmOn = flag
     }
 
     updateCameraInfo(target, theta, phi, radius) {
@@ -116,11 +127,14 @@ class CameraWebGL {
         // console.log('vm', this.vm);
         // console.log('pm', this.projMatrix);
 
-        if (this.isWorkerInit){
-            if (this.workerOn) {
-                this.updateWorker();
-            }
+        if (this.worker && this.workerOn) {
+            this.updateWorker();
         }
+
+        if (this.wasm && this.wasmOn) {
+            this.updateWASM();
+        }
+        
     }
 
     updateByVK() {
@@ -143,10 +157,12 @@ class CameraWebGL {
         // console.log('vm', this.vm);
         // console.log('pm', this.projMatrix);
 
-        if (this.isWorkerInit){
-            if (this.workerOn) {
-                this.updateWorker();
-            }
+        if (this.worker && this.workerOn) {
+            this.updateWorker();
+        }
+
+        if (this.wasm && this.wasmOn) {
+            this.updateWASM();
         }
     }
 
@@ -159,14 +175,14 @@ class CameraWebGL {
                   + this.lastViewProjMatrix[6]  * this.mvpm[6]
                   + this.lastViewProjMatrix[10] * this.mvpm[10]
         if (Math.abs(dot - 1) > 0.01) {
-            this.needsWorkerUpdate = true
+            this.needsUpdate = true
             mat4.copy(this.lastViewProjMatrix, this.mvpm)
         }
 
         // Sort the splats as soon as the worker is available
-        if (this.needsWorkerUpdate && !this.isWorkerSorting) {
-            this.needsWorkerUpdate = false
-            this.isWorkerSorting = true
+        if (this.needsUpdate && !this.isSorting) {
+            this.needsUpdate = false
+            this.isSorting = true
             worker.postMessage({
                 type: 'execFunc_sort',
                 params: [
@@ -174,7 +190,45 @@ class CameraWebGL {
                     viewProjectionMatrix: this.mvpm
                   }
                 ]
-              })
+            })
+        }
+    }
+
+    updateWASM() {
+        // 限频
+        let now = Date.now()
+        const last =  this.lastWASMTime || 0;
+        const mill = now - last
+        if (mill < 1000) {
+            return
+        }
+        this.lastWASMTime = now
+        
+
+        // 算差值
+        const dot = this.lastViewProjMatrix[2]  * this.mvpm[2] 
+                  + this.lastViewProjMatrix[6]  * this.mvpm[6]
+                  + this.lastViewProjMatrix[10] * this.mvpm[10]
+        if (Math.abs(dot - 1) > 0.01) {
+            this.needsUpdate = true
+            mat4.copy(this.lastViewProjMatrix, this.mvpm)
+        }
+
+
+        if (this.needsUpdate) {
+            this.needsUpdate = false
+            const start = new Date().getTime()
+
+            this.vpmWASM.set(this.mvpm);
+
+            this.gaussian.sort()
+            const end = new Date().getTime()
+            const sortTime = `${((end - start)/1000).toFixed(3)}s`
+            console.log(`WASM sort time: ${sortTime}`)
+
+            if (this.wasmUpdateCallback) {
+                this.wasmUpdateCallback();
+            }
         }
     }
 }

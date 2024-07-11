@@ -20,22 +20,22 @@
   <view class="control-wrap">
     <view class="title">经典 Splat</view>
     <view class="block">
-      <button class="btn" type="primary" data-id="room" bindtap="onTapControl">房间</button>
-      <button class="btn" type="primary" data-id="garden"  bindtap="onTapControl">花园</button>
-      <button class="btn" type="primary" data-id="stump"  bindtap="onTapControl">树桩</button>
+      <button class="btn" type="primary" disabled="{{splatInited}}" data-id="room" bindtap="onTapControl">房间</button>
+      <button class="btn" type="primary" disabled="{{splatInited}}" data-id="garden"  bindtap="onTapControl">花园</button>
+      <button class="btn" type="primary" disabled="{{splatInited}}" data-id="stump"  bindtap="onTapControl">树桩</button>
     </view>
     <view class="title">自制 Splat</view>
     <view class="block">
-      <button class="btn" type="primary" data-id="oneflower"  bindtap="onTapControl">盆栽</button>
-      <button class="btn" type="primary" data-id="usj"  bindtap="onTapControl">USJ马里奥</button>
-      <button class="btn" type="primary" data-id="sakura"  bindtap="onTapControl">樱花小道</button>
+      <button class="btn" type="primary" disabled="{{splatInited}}" data-id="oneflower"  bindtap="onTapControl">盆栽</button>
+      <button class="btn" type="primary" disabled="{{splatInited}}" data-id="usj"  bindtap="onTapControl">USJ马里奥</button>
+      <button class="btn" type="primary" disabled="{{splatInited}}" data-id="sakura"  bindtap="onTapControl">樱花小道</button>
       <!-- <button class="btn" type="primary" data-id="0517cruch"  bindtap="onTapControl">教堂花园</button> -->
     </view>
   </view>
   <view class="input-wrap">
     <view class="title">最大高斯球数</view>
-    <slider class="slider" bindchange="changeMaxGaussianCount" min="0" max="1200000" value="{{maxGaussians}}" show-value/>
-    <view class="checkbox-wrap"><p class="words">是否开启 worker 排序</p><switch class="checkbox" type="checkbox" checked="{{workerOn}}" bindchange="switchWorker"/></view>
+    <slider class="slider" disabled="{{splatInited}}" bindchange="changeMaxGaussianCount" min="0" max="1200000" value="{{maxGaussians}}" show-value/>
+    <view class="checkbox-wrap"><p class="words">是否开启 worker 排序</p><switch disabled="{{splatInited}}" class="checkbox" type="checkbox" checked="{{workerOn}}" bindchange="switchWorker"/></view>
     
 
   </view>

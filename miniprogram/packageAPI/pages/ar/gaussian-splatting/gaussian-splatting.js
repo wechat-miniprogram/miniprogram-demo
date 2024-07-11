@@ -4,6 +4,10 @@ import CameraWebGL from './webgl2/camera-webGL'
 import CubeInstanceWebGL from './webgl2/cubeInstance-webGL'
 import SplatWebGL, { SplatRenderTexture} from './webgl2/splat-webGL'
 
+// import init, { Gaussian } from "./wasm/gs-sort/pkg/gs_sort";
+
+import init, { Gaussian } from "./wasm/out/gs_sort";
+
 import * as glMatrix from './util/gl-matrix-min'
 const { mat4 } = glMatrix
 
@@ -19,8 +23,10 @@ Component({
     heightScale: 1,   // canvas高度缩放值
     renderByXRFrame: false, // 是否使用 xr-frame渲染
     renderByWebGL2: true, // 是否使用WebGL2渲染
-    workerOn: true,
-    maxGaussians: 50000,
+    workerOn: false,
+    wasmOn: true,
+    splatInited: false,
+    maxGaussians: 500000,
   },
   lifetimes: {
     /**
@@ -40,7 +46,10 @@ Component({
       if (this.worker) this.worker.terminate()
     },
     ready() {
+
+
       console.log("页面准备完全")
+
     },
   },
   methods: {
@@ -88,9 +97,9 @@ Component({
     initPLY(id){
       console.log('== PLY Init start ==')
 
-      const host = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo';
+      // const host = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo';
       // const host = 'http://127.0.0.1:8030'
-      // const host = 'http://10.9.169.149:8030'
+      const host = 'http://10.9.169.114:8030'
 
       let type;
 
@@ -308,26 +317,33 @@ Component({
                 break;
             }
 
+
             // 提供渲染的高斯球数
             const renderCount = this.renderCount = info.count;
 
-            // 全部用 f32 存储
-            // this.sabPositions = wx.createSharedArrayBuffer(renderCount * 4 * 3)
-            // this.sabOpacities= wx.createSharedArrayBuffer(renderCount * 4)
-            // this.sabCov3Da = wx.createSharedArrayBuffer(renderCount * 4 * 3)
-            // this.sabCov3Db = wx.createSharedArrayBuffer(renderCount * 4 * 3)
-            // this.sabcolors = wx.createSharedArrayBuffer(renderCount * 4 * 3)
-
-            // console.log('创建 worker 共享内存', this.sabPositions, this.sabOpacities, this.sabCov3Da, this.sabCov3Db, this.sabcolors)
-
             // 初始化 worker 相关
-            this.initWorker(info, {
-              // sabPositions: this.sabPositions,
-              // sabOpacities: this.sabOpacities,
-              // sabCov3Da: this.sabCov3Da,
-              // sabCov3Db: this.sabCov3Db,
-              // sabcolors: this.sabcolors,
-            });
+            if (this.data.workerOn) {
+              // 全部用 f32 存储
+              // this.sabPositions = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+              // this.sabOpacities= wx.createSharedArrayBuffer(renderCount * 4)
+              // this.sabCov3Da = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+              // this.sabCov3Db = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+              // this.sabcolors = wx.createSharedArrayBuffer(renderCount * 4 * 3)
+
+              // console.log('创建 worker 共享内存', this.sabPositions, this.sabOpacities, this.sabCov3Da, this.sabCov3Db, this.sabcolors)
+              this.initWorker(info, {
+                // sabPositions: this.sabPositions,
+                // sabOpacities: this.sabOpacities,
+                // sabCov3Da: this.sabCov3Da,
+                // sabCov3Db: this.sabCov3Db,
+                // sabcolors: this.sabcolors,
+              });
+
+
+            }
+            if (this.data.wasmOn) {
+              this.initWASM(info);
+            }
   
           } else {
             wx.hideLoading();
@@ -360,19 +376,16 @@ Component({
           // worker 初始化 回调
           console.log('[Worker callback] gaussianSplatting init callBack', res)
 
-          this.camera.isWorkerInit = true;
-          this.camera.update();
+          this.camera.worker = this.worker;
 
+          this.camera.update();
 
         } else if (res.type === 'execFunc_sort') {
           // worker 排序 回调
-          // console.log(res)
 
-          this.camera.isWorkerSorting = false;
+          this.camera.isSorting = false;
 
           const data = res.result.data
-
-          const start = new Date().getTime()
 
           const gl = this.gl
 
@@ -393,22 +406,20 @@ Component({
           // const cov3Db = new Float32Array(this.sabCov3Db.buffer);
           // const colors = new Float32Array(this.sabcolors.buffer);
 
+
+          // console.log('worker positionF32', positions )
+          // console.log('worker opacitiesF32', opacities )
+          // console.log('worker colorF32', colors )
+          // console.log('worker cov3DaF32', cov3Da )
+          // console.log('worker cov3DbF32', cov3Db )
+
           updateBuffer(this.splat.buffers.center, positions)
           updateBuffer(this.splat.buffers.opacity, opacities)
           updateBuffer(this.splat.buffers.covA, cov3Da)
           updateBuffer(this.splat.buffers.covB, cov3Db)
           updateBuffer(this.splat.buffers.color, colors)
 
-          // 设定绘制的高斯球数量
-          this.gaussiansCount = data.gaussiansCount;
-
-          const end = new Date().getTime()
-          // const sortTime = `${((end - start)/1000).toFixed(3)}s`
-          // console.log(`updateBuffer ${sortTime}`)
-
           this.canvas.requestAnimationFrame(this.requestRender.bind(this));
-
-          // console.log('execFunc_sort end')
         }
       })
 
@@ -418,10 +429,73 @@ Component({
         params: [plyInfo, config]
       })
     },
+    async initWASM(plyInfo){
+      // 初始化 WASM
+      this.wasm = await init("packageAPI/pages/ar/gaussian-splatting/wasm/out/gs_sort_bg.wasm");
+      // 共享内存
+      const memory = this.wasm.memory;
+
+      console.log('wasm', this.wasm)
+
+      const gaussianCount = plyInfo.count
+
+      console.log('gaussianCount', gaussianCount)
+
+      const position_src = plyInfo.positions
+      const color_src = plyInfo.colors
+      const opacity_src = plyInfo.opacities
+      const cov_src = plyInfo.cov3Ds
+    
+      const gaussian = Gaussian.new(gaussianCount, position_src, color_src, opacity_src, cov_src)
+      this.gaussianWASM = gaussian;
+
+      console.log('gaussian', gaussian)
+
+      this.vpmWASM = new Float32Array(memory.buffer, gaussian.vpm_ptr, 16)
+      this.positionWASM = new Float32Array(memory.buffer, gaussian.positions_ptr, gaussianCount * 3)
+      this.colorWASM = new Float32Array(memory.buffer, gaussian.colors_ptr, gaussianCount * 3)
+      this.opacitiesWASM = new Float32Array(memory.buffer, gaussian.opacities_ptr, gaussianCount)
+      this.cov3DaWASM = new Float32Array(memory.buffer, gaussian.cov_a_ptr, gaussianCount * 3)
+      this.cov3DbWASM = new Float32Array(memory.buffer, gaussian.cov_b_ptr, gaussianCount * 3)
+
+      this.camera.wasm = this.wasm
+      this.camera.gaussian = this.gaussianWASM
+      this.camera.vpmWASM = this.vpmWASM
+
+      // 绑定更新回调
+      this.camera.wasmUpdateCallback = () => {
+        
+        // console.log('wasm vpm', this.vpmWASM);
+        // console.log('wasm positionF32', this.positionWASM )
+        // console.log('wasm opacitiesF32', this.opacitiesWASM )
+        // console.log('wasm colorF32', this.colorWASM )
+        // console.log('wasm cov3DaF32', this.cov3DaWASM )
+        // console.log('wasm cov3DbF32', this.cov3DbWASM )
+
+        const gl = this.gl
+
+        const updateBuffer = (buffer, data) => {
+          gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+          gl.bufferData(gl.ARRAY_BUFFER, data, gl.DYNAMIC_DRAW)
+        }
+
+        updateBuffer(this.splat.buffers.center, this.positionWASM)
+        updateBuffer(this.splat.buffers.color, this.colorWASM)
+        updateBuffer(this.splat.buffers.opacity, this.opacitiesWASM)
+        updateBuffer(this.splat.buffers.covA, this.cov3DaWASM)
+        updateBuffer(this.splat.buffers.covB, this.cov3DbWASM)
+        
+        this.canvas.requestAnimationFrame(this.requestRender.bind(this));
+      }
+
+      this.camera.update();
+      
+    },
+
     // 后续为 webGL2 相关，为了方便开发，先放在一起
     initWebGL2() {
       console.log('== InitWebGL2 start ==')
-      const gl = this.gl = this.canvas.getContext('webgl2');
+      const gl = this.gl = this.canvas.getContext('webgl2', { 'alpha': true });
       console.log('webgl2 context', gl);
 
       // Setup Camera
@@ -429,9 +503,11 @@ Component({
         up: [0, 1.0, 0.0],
         target: [0, 0, 0],
         camera: [Math.PI/2, Math.PI/2, 1], // theta phi radius
+        workerOn: this.data.workerOn,
+        wasmOn: this.data.wasmOn,
       }
-      this.camera = new CameraWebGL(gl, this.worker, cameraParameters)
-
+      this.camera = new CameraWebGL(gl, cameraParameters)
+      
       // Setup Instance Mesh
       this.cubeInstance = new CubeInstanceWebGL(gl)
 
@@ -448,8 +524,6 @@ Component({
       this.splat = new SplatWebGL(gl);
     },
     requestRender() {
-      // console.log('requestRender')
-
       // 限帧
       let now = Date.now()
       const last =  this.lastRenderTime || 0;
@@ -461,10 +535,12 @@ Component({
       
       const gl = this.gl;
 
+      // console.log('requestRender')
+
       // Clear State
       gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-      gl.clearColor(0.8, 0.8, 0.8, 1.0); 
+      gl.clearColor(0, 0, 0, 0); 
 
       // clear
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -583,7 +659,7 @@ Component({
       // gl.uniformMatrix4fv(gl.getUniformLocation(program, 'viewmatrix'), false, cam.vm)
 
       // Draw Splat
-      gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, this.gaussiansCount);
+      gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, this.renderCount);
 
       // resetState
       gl.enable(gl.BLEND)
@@ -698,6 +774,10 @@ Component({
   
       // 开始处理 ply 资源
       this.initPLY(id);
+
+      this.setData({
+        splatInited: true
+      })
     },
     changeMaxGaussianCount(e) {
       this.setData({
@@ -708,10 +788,12 @@ Component({
     },
     switchWorker(e) {
       this.setData({
-        workerOn: e.detail.value
+        workerOn: e.detail.value,
+        wasmOn: !e.detail.value
       })
 
       this.camera.setWorkerOn(this.data.workerOn);
+      this.camera.setWasmOn(this.data.wasmOn)
 
       console.log('switch WorkerOn:', this.data.workerOn);
     }

@@ -87,8 +87,8 @@ function sort(params) {
     const end = new Date().getTime();
 
     const writeTime = `${((end - sortEnd)/1000).toFixed(3)}s`
-    // console.log(`[Worker] Sorted ${gaussians.count} gaussians in ${sortTime}.`)
-    // console.log(`[Worker] Writed ${gaussians.count} gaussians in ${writeTime}.`)
+    console.log(`[Worker] Sorted ${gaussians.count} gaussians in ${sortTime}.`)
+    console.log(`[Worker] Writed ${gaussians.count} gaussians in ${writeTime}.`)
 
     return {
         data: {
@@ -104,6 +104,7 @@ function sort(params) {
 
 // count排序， 这里本质就是从近到远排序
 function sortGaussiansByDepth(depthIndex, gaussians, viewProjectionMatrix) {
+
     const calcDepth = (i) => gaussians.positions[i*3] * viewProjectionMatrix[2] +
                              gaussians.positions[i*3+1] * viewProjectionMatrix[6] +
                              gaussians.positions[i*3+2] * viewProjectionMatrix[10]
@@ -113,12 +114,14 @@ function sortGaussiansByDepth(depthIndex, gaussians, viewProjectionMatrix) {
     let sizeList = new Int32Array(gaussians.count);
 
     for (let i = 0; i < gaussians.count; i++) {
-        const depth = (calcDepth(i) * 4096) | 0
+        const depth = (calcDepth(i) * 256 * 16) | 0
 
         sizeList[i] = depth
         maxDepth = Math.max(maxDepth, depth)
         minDepth = Math.min(minDepth, depth)
     }
+
+    // console.log('sizeList', sizeList.slice())
     
     let depthInv = (256 * 256) / (maxDepth - minDepth);
     let counts0 = new Uint32Array(256*256);
@@ -126,9 +129,18 @@ function sortGaussiansByDepth(depthIndex, gaussians, viewProjectionMatrix) {
         sizeList[i] = ((sizeList[i] - minDepth) * depthInv) | 0;
         counts0[sizeList[i]]++;
     }
+
+    // console.log('maxDepth', maxDepth)
+    // console.log('minDepth', minDepth)
+    // console.log('sizeList', sizeList)
+    // console.log('counts0', counts0)
     let starts0 = new Uint32Array(256*256);
     for (let i = 1; i < 256*256; i++) starts0[i] = starts0[i - 1] + counts0[i - 1];
     for (let i = 0; i < gaussians.count; i++) depthIndex[starts0[sizeList[i]]++] = i;
+
+    // console.log('starts0', starts0)
+    // console.log('depthIndex', depthIndex)
+
 }
 
 worker.onMessage(function (msg) {
