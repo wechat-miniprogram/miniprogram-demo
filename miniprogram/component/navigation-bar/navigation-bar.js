@@ -58,13 +58,15 @@ Component({
     const rect = wx.getMenuButtonBoundingClientRect
         ? wx.getMenuButtonBoundingClientRect()
         : null
+    const isSkyline = this.renderer ==='skyline'
     wx.getSystemInfo({
         success: (res) => {
             const ios = !!(res.system.toLowerCase().search('ios') + 1)
             this.setData({
                 ios,
                 statusBarHeight: res.statusBarHeight,
-                navBarHeight: rect.bottom - rect.top + 10,
+                // skyline defaultContentBox:true ; webview border-box
+                navBarHeight: rect.bottom - rect.top + 10 + ( isSkyline ? 0 : res.statusBarHeight),
                 innerWidth: isSupport ? `width:${rect.left}px` : '',
                 innerPaddingRight: isSupport
                     ? `padding-right:${res.windowWidth - rect.left}px`
