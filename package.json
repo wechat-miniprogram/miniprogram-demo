@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/wechat-miniprogram/miniprogram-demo#readme",
   "devDependencies": {
-    "@tencent/eslint-config-wxapp": "^0.5.2",
+    "eslint-config-wxapp": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
     "babel-eslint": "^10.1.0",
