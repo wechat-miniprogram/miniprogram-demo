@@ -1,6 +1,6 @@
 import {
     createScopedThreejs
-} from './threejs-miniprogram'
+} from 'threejs-miniprogram'
 import {
     registerGLTFLoader
 } from '../loaders/gltf-loader'
