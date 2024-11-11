@@ -89,21 +89,11 @@ Component({
       console.log('== PLY Init start ==')
 
       const host = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo';
-      // const host = 'http://127.0.0.1:8030'
-      // const host = 'http://10.9.169.149:8030'
-
+      
       let type;
 
       // 加载 ply
       // type = 'ply';
-      // const pcSrc = `${host}/ply/oneflower.cleaned.ply`;
-      // const pcSrc = `${host}/ply/point_cloud.ply`;
-      // const pcSrc = `${host}/ply/room.ply`;
-      // const pcSrc = `${host}/ply/gs_USJ_Mario_enter.cleaned.ply`;
-      // const pcSrc = `${host}/ply/oneflower.ply`;
-      // const pcSrc = `${host}/ply/sakura.ply`;
-      // const pcSrc = `${host}/ply/sakura.cleaned.ply`;
-      // const pcSrc = `${host}/ply/sakura.compressed.ply`;
 
       // 加载 splat
       type = 'splat';

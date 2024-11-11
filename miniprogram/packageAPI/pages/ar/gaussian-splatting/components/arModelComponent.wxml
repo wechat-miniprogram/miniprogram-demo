@@ -1,0 +1,33 @@
+<view class="wrap-choose">
+  <view class="wrap-left">
+      <button type="primary" class="btn-left" bindtap="uploadARModel">
+        <view class="cross-v"/>
+        <view class="cross-h"/>
+        <view class="info-wrap">
+          <p>上传视频</p>
+          <p>（长边 720 以上）</p>
+          <p>（时长 10-30秒 之间）</p>
+          <p>（比例 3:1 以下的视频）</p>
+        </view>
+      </button>
+    </view>
+  <view class="wrap-right">
+    <view class="model-item" wx:for="{{models}}" wx:key="modelIndex" wx:for-item="modelItem">
+      <view
+        class="model-info {{modelItem.modelStatus === 0 ? 'loading': ''}} {{modelItem.modelStatus === 1 ? 'done': '' }} {{modelItem.modelStatus === 2 ? 'expired': '' }} {{modelItem.modelStatus === 3 ? 'error': '' }} {{targetCosId != null && modelItem.cosid == targetCosId ? 'choosed' : '' }}"
+        bindtap="chooseARModel"
+        data-cosid="{{modelItem.cosid}}"
+      >
+        <text class="status">{{modelItem.statusMsg}}</text>
+        <text class="timeStamp">{{modelItem.uploadTime}}</text>
+        <text class="cosid">{{modelItem.cosid !== undefined ? modelItem.cosid : '不存在cosid'}}</text>
+        <text wx:if="{{modelItem.restTime !== 0}}" class="restTime">剩余 {{modelItem.restTime}} 天过期</text>
+        <text class="errMsg" wx:if="{{modelItem.errMsg !== undefined}}">{{modelItem.errMsg}}</text>
+        <view class="buttonDelete" bindtap="deleteARModel" data-cosid="{{modelItem.cosid}}">
+          <view class="linel"></view><view class="liner"></view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

@@ -389,6 +389,10 @@ Page({
           zh: 'GassianSplatting AR预览',
           url: 'gaussian-splatting/gaussian-splatting-ar'
         },
+        {
+          zh: 'GassianSplatting 生成服务',
+          url: 'gaussian-splatting/gaussian-splatting-generate'
+        },
       ],
     }],
     isSetTabBarPage: false,

@@ -14,7 +14,8 @@
     "enARAlgorithmType": {
       "values": {
         "Algorithm_Type_3D_Object": 1,
-        "Algorithm_Type_3D_Marker": 2
+        "Algorithm_Type_3D_Marker": 2,
+        "Algorithm_Type_Gen_3DGS": 3
       }
     },
     "enARModelType": {
@@ -230,6 +231,14 @@
         "textureBlob": {
           "type": "bytes",
           "id": 5
+        },
+        "model_3dgsPly": {
+          "type": "bytes",
+          "id": 6
+        },
+        "model_3dgsSplat": {
+          "type": "bytes",
+          "id": 7
         }
       }
     },

@@ -25,7 +25,7 @@ exports.main = async (event, context) => {
             gettexture: event.getTexture
           },
         }),
-        timeout: 30000,
+        timeout: 300000,
       });
     case "GetARModel":
       return await cloud.callWXSvrkit({

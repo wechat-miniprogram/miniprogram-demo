@@ -22,9 +22,13 @@ module.exports = {
             "type": "bytes",
             "id": 5
           },
-          "model3dgs": {
+          "model3dgsPly": {
             "type": "bytes",
             "id": 6
+          },
+          "model3dgsSplat": {
+            "type": "bytes",
+            "id": 7
           }
         }
       }

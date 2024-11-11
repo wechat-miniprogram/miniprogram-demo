@@ -40,11 +40,13 @@ $root.enARModelStatus = (function() {
  * @enum {number}
  * @property {number} Algorithm_Type_3D_Object=1 Algorithm_Type_3D_Object value
  * @property {number} Algorithm_Type_3D_Marker=2 Algorithm_Type_3D_Marker value
+ * @property {number} Algorithm_Type_Gen_3DGS=3 Algorithm_Type_Gen_3DGS value
  */
 $root.enARAlgorithmType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[1] = "Algorithm_Type_3D_Object"] = 1;
     values[valuesById[2] = "Algorithm_Type_3D_Marker"] = 2;
+    values[valuesById[3] = "Algorithm_Type_Gen_3DGS"] = 3;
     return values;
 })();
 
@@ -767,6 +769,7 @@ $root.ARModel = (function() {
                 return "algoType: enum value expected";
             case 1:
             case 2:
+            case 3:
                 break;
             }
         if (message.modelCos != null && message.hasOwnProperty("modelCos")) {
@@ -835,6 +838,10 @@ $root.ARModel = (function() {
         case "Algorithm_Type_3D_Marker":
         case 2:
             message.algoType = 2;
+            break;
+        case "Algorithm_Type_Gen_3DGS":
+        case 3:
+            message.algoType = 3;
             break;
         }
         if (object.modelCos != null) {
@@ -1672,6 +1679,7 @@ $root.GenerateARModelReq = (function() {
                 return "algoType: enum value expected";
             case 1:
             case 2:
+            case 3:
                 break;
             }
         if (message.lod != null && message.hasOwnProperty("lod"))
@@ -1717,6 +1725,10 @@ $root.GenerateARModelReq = (function() {
         case "Algorithm_Type_3D_Marker":
         case 2:
             message.algoType = 2;
+            break;
+        case "Algorithm_Type_Gen_3DGS":
+        case 3:
+            message.algoType = 3;
             break;
         }
         if (object.lod != null)
@@ -2099,6 +2111,8 @@ $root.ARModelData = (function() {
      * @property {Uint8Array|null} [preview] ARModelData preview
      * @property {Uint8Array|null} [meshBlob] ARModelData meshBlob
      * @property {Uint8Array|null} [textureBlob] ARModelData textureBlob
+     * @property {Uint8Array|null} [model_3dgsPly] ARModelData model_3dgsPly
+     * @property {Uint8Array|null} [model_3dgsSplat] ARModelData model_3dgsSplat
      */
 
     /**
@@ -2157,6 +2171,22 @@ $root.ARModelData = (function() {
     ARModelData.prototype.textureBlob = $util.newBuffer([]);
 
     /**
+     * ARModelData model_3dgsPly.
+     * @member {Uint8Array} model_3dgsPly
+     * @memberof ARModelData
+     * @instance
+     */
+    ARModelData.prototype.model_3dgsPly = $util.newBuffer([]);
+
+    /**
+     * ARModelData model_3dgsSplat.
+     * @member {Uint8Array} model_3dgsSplat
+     * @memberof ARModelData
+     * @instance
+     */
+    ARModelData.prototype.model_3dgsSplat = $util.newBuffer([]);
+
+    /**
      * Creates a new ARModelData instance using the specified properties.
      * @function create
      * @memberof ARModelData
@@ -2190,6 +2220,10 @@ $root.ARModelData = (function() {
             writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.meshBlob);
         if (message.textureBlob != null && Object.hasOwnProperty.call(message, "textureBlob"))
             writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.textureBlob);
+        if (message.model_3dgsPly != null && Object.hasOwnProperty.call(message, "model_3dgsPly"))
+            writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.model_3dgsPly);
+        if (message.model_3dgsSplat != null && Object.hasOwnProperty.call(message, "model_3dgsSplat"))
+            writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.model_3dgsSplat);
         return writer;
     };
 
@@ -2238,6 +2272,12 @@ $root.ARModelData = (function() {
                 break;
             case 5:
                 message.textureBlob = reader.bytes();
+                break;
+            case 6:
+                message.model_3dgsPly = reader.bytes();
+                break;
+            case 7:
+                message.model_3dgsSplat = reader.bytes();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -2289,6 +2329,12 @@ $root.ARModelData = (function() {
         if (message.textureBlob != null && message.hasOwnProperty("textureBlob"))
             if (!(message.textureBlob && typeof message.textureBlob.length === "number" || $util.isString(message.textureBlob)))
                 return "textureBlob: buffer expected";
+        if (message.model_3dgsPly != null && message.hasOwnProperty("model_3dgsPly"))
+            if (!(message.model_3dgsPly && typeof message.model_3dgsPly.length === "number" || $util.isString(message.model_3dgsPly)))
+                return "model_3dgsPly: buffer expected";
+        if (message.model_3dgsSplat != null && message.hasOwnProperty("model_3dgsSplat"))
+            if (!(message.model_3dgsSplat && typeof message.model_3dgsSplat.length === "number" || $util.isString(message.model_3dgsSplat)))
+                return "model_3dgsSplat: buffer expected";
         return null;
     };
 
@@ -2329,6 +2375,16 @@ $root.ARModelData = (function() {
                 $util.base64.decode(object.textureBlob, message.textureBlob = $util.newBuffer($util.base64.length(object.textureBlob)), 0);
             else if (object.textureBlob.length)
                 message.textureBlob = object.textureBlob;
+        if (object.model_3dgsPly != null)
+            if (typeof object.model_3dgsPly === "string")
+                $util.base64.decode(object.model_3dgsPly, message.model_3dgsPly = $util.newBuffer($util.base64.length(object.model_3dgsPly)), 0);
+            else if (object.model_3dgsPly.length)
+                message.model_3dgsPly = object.model_3dgsPly;
+        if (object.model_3dgsSplat != null)
+            if (typeof object.model_3dgsSplat === "string")
+                $util.base64.decode(object.model_3dgsSplat, message.model_3dgsSplat = $util.newBuffer($util.base64.length(object.model_3dgsSplat)), 0);
+            else if (object.model_3dgsSplat.length)
+                message.model_3dgsSplat = object.model_3dgsSplat;
         return message;
     };
 
@@ -2381,6 +2437,20 @@ $root.ARModelData = (function() {
                 if (options.bytes !== Array)
                     object.textureBlob = $util.newBuffer(object.textureBlob);
             }
+            if (options.bytes === String)
+                object.model_3dgsPly = "";
+            else {
+                object.model_3dgsPly = [];
+                if (options.bytes !== Array)
+                    object.model_3dgsPly = $util.newBuffer(object.model_3dgsPly);
+            }
+            if (options.bytes === String)
+                object.model_3dgsSplat = "";
+            else {
+                object.model_3dgsSplat = [];
+                if (options.bytes !== Array)
+                    object.model_3dgsSplat = $util.newBuffer(object.model_3dgsSplat);
+            }
         }
         if (message.meshModel != null && message.hasOwnProperty("meshModel"))
             object.meshModel = options.bytes === String ? $util.base64.encode(message.meshModel, 0, message.meshModel.length) : options.bytes === Array ? Array.prototype.slice.call(message.meshModel) : message.meshModel;
@@ -2392,6 +2462,10 @@ $root.ARModelData = (function() {
             object.meshBlob = options.bytes === String ? $util.base64.encode(message.meshBlob, 0, message.meshBlob.length) : options.bytes === Array ? Array.prototype.slice.call(message.meshBlob) : message.meshBlob;
         if (message.textureBlob != null && message.hasOwnProperty("textureBlob"))
             object.textureBlob = options.bytes === String ? $util.base64.encode(message.textureBlob, 0, message.textureBlob.length) : options.bytes === Array ? Array.prototype.slice.call(message.textureBlob) : message.textureBlob;
+        if (message.model_3dgsPly != null && message.hasOwnProperty("model_3dgsPly"))
+            object.model_3dgsPly = options.bytes === String ? $util.base64.encode(message.model_3dgsPly, 0, message.model_3dgsPly.length) : options.bytes === Array ? Array.prototype.slice.call(message.model_3dgsPly) : message.model_3dgsPly;
+        if (message.model_3dgsSplat != null && message.hasOwnProperty("model_3dgsSplat"))
+            object.model_3dgsSplat = options.bytes === String ? $util.base64.encode(message.model_3dgsSplat, 0, message.model_3dgsSplat.length) : options.bytes === Array ? Array.prototype.slice.call(message.model_3dgsSplat) : message.model_3dgsSplat;
         return object;
     };
 

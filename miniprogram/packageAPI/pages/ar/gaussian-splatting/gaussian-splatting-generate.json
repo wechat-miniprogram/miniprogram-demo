@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "ar-model-component": "./components/arModelComponent"
+  },
+  "disableScroll": true,
+  "renderer": "webview",
+  "navigationBarTitleText": "Gaussian Splatting 生成服务"
+}

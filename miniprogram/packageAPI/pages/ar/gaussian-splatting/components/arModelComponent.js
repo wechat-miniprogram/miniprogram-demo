@@ -47,7 +47,7 @@ Component({
       const callback = this.generateARModel.bind(this)
       const cloudUpload = this.cloudUploadARModel.bind(this)
       const timeNow = Date.now() / 1000 | 0;
-      const modelInfos = wx.getStorageSync('modelsInfo');
+      const modelInfos = wx.getStorageSync('gsmodelsInfo');
       console.log("modelInfos的值为：")
       console.log(modelInfos)
       if(modelInfos && modelInfos.length != 0){
@@ -65,7 +65,6 @@ Component({
         count: 1,
         mediaType: ['video'],
         sourceType: ['camera', 'album'],
-        sizeType: ['original'], // 关闭压缩
         maxDuration: 60,
         camera: 'back',
         success: (res) => {
@@ -134,7 +133,7 @@ Component({
         type: 'GenerateARModel',
         name: this.data.modelName,
         url: url,
-        algoType: 2,
+        algoType: 3,
         getMesh: true,
         getTexture: true
       }
@@ -158,7 +157,7 @@ Component({
 
         wx.hideLoading();
 
-        let modelInfos = wx.getStorageSync('modelsInfo')
+        let modelInfos = wx.getStorageSync('gsmodelsInfo')
         if (modelInfos == undefined || modelInfos.length == 0 ) {
           modelInfos = []
         }
@@ -199,7 +198,7 @@ Component({
       })
 
         wx.setStorage({
-          key: "modelsInfo",
+          key: "gsmodelsInfo",
           data: modelInfos,
           success() {
             console.log("存储cosID集合为:", modelInfos)
@@ -226,7 +225,7 @@ Component({
     // 获取现有模型列表
     getARModelList() {
       // 获取本地缓存
-      var modelInfos = wx.getStorageSync('modelsInfo')
+      var modelInfos = wx.getStorageSync('gsmodelsInfo')
       if (modelInfos == undefined || modelInfos.length == 0 ) {
         // 无缓存，跳过
         return;
@@ -255,7 +254,7 @@ Component({
           
           // 写入缓存
           wx.setStorage({
-            key: "modelsInfo",
+            key: "gsmodelsInfo",
             data: modelInfosNew,
             success() {
               console.log("存储cosID集合为:", modelInfosNew)
@@ -282,7 +281,7 @@ Component({
           data: {
             type: 'GetARModel',
             cosid: cosid,
-            modelType: 0,
+            modelType: 1,
             needData: 0,
             useIntranet: 0,
             expireTime: 1200
@@ -448,7 +447,7 @@ Component({
           if (res.confirm) {
             console.log('确定删除');
             // 获取本地缓存
-            var modelInfos = wx.getStorageSync('modelsInfo')
+            var modelInfos = wx.getStorageSync('gsmodelsInfo')
             if (modelInfos == undefined || modelInfos.length == 0 ) {
               // 无缓存，跳过
               return;
@@ -461,7 +460,7 @@ Component({
             
             // 写入缓存
             wx.setStorage({
-              key: "modelsInfo",
+              key: "gsmodelsInfo",
               data: modelInfosNew,
               success() {
                 console.log("存储cosID集合为:", modelInfosNew)

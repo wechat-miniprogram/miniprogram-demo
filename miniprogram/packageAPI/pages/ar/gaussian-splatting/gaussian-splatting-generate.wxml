@@ -1,0 +1,33 @@
+
+<view class="page wrap-fix" data-weui-theme="{{theme}}">
+  <view
+    class="canvas-wrap" style="width: {{widthScale * 100}}%; height: {{heightScale * 100}}%"
+  > 
+    <canvas type="webgl2" id="canvas" bindtouchstart="onTouchStartWebGL" bindtouchmove="onTouchMoveWebGL"></canvas>
+  </view>
+  <view class="input-wrap">
+    <view class="title">最大高斯球数</view>
+    <slider class="slider" bindchange="changeMaxGaussianCount" min="0" max="1200000" value="{{maxGaussians}}" show-value/>
+    <view class="checkbox-wrap"><p class="words">是否开启 AR 预览</p><switch class="checkbox" type="checkbox" checked="{{AROn}}" bindchange="switchAR"/></view>
+  </view>
+
+  <view class="wrap-option small">
+    <view class="hint">点击 `上传视频`，提交目标远近多角度的视频进行生成。产物可以点击解析进行预览。默认预览产物为 splat 格式</view>
+  </view>
+  <view class="wrap-option">
+    <button type="primary" disabled="{{usingCosID}}" bindtap="parseDefault">解析内置默认产物</button>
+    <button type="primary" disabled="{{usingCosID}}" bindtap="parseGS">解析选中产物</button>
+    <button type="primary" disabled="{{!usingCosID}}" bindtap="previewGS">预览选中产物</button>
+    <button type="primary" disabled="{{!havePLY}}" bindtap="savePLY">保存使用的 PLY 文件</button>
+    <button type="primary" disabled="{{!haveSplat}}" bindtap="saveSPLAT">保存使用的 SPLAT 文件</button>
+  </view>
+
+  <view class="model-wrap">
+    <!-- 3D marker 模型上传 以及 现有列表相关逻辑 -->
+    <ar-model-component
+      id="arModelComponent"
+      bindselectEvent="changeSelect"
+    ></ar-model-component>
+  </view>
+</view>
+

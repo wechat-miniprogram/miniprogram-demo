@@ -120,9 +120,6 @@ const cameraBufferBehavior = Behavior({
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
       }
 
-
-
-
       const currentProgram = gl.getParameter(gl.CURRENT_PROGRAM)
       const currentActiveTexture = gl.getParameter(gl.ACTIVE_TEXTURE)
       const currentVAO = gl.getParameter(gl.VERTEX_ARRAY_BINDING)
