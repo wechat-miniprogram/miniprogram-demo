@@ -1,4 +1,4 @@
-@import '../../common.wxss';
+@import '../common.wxss';
 
 page{
     height: 100%;

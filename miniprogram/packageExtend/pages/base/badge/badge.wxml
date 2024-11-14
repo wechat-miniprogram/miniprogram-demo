@@ -19,7 +19,7 @@
             <mp-cells title="未读数红点跟在主题信息后，统一在列表左侧">
                 <mp-cell>
                     <view slot="title" style="position: relative;margin-right: 10px;">
-                        <image src="../images/pic_160.png" style="width: 50px; height: 50px; display: block"/>
+                        <image src="../../images/pic_160.png" style="width: 50px; height: 50px; display: block"/>
                         <mp-badge aria-label="未读" content="99+" style="position: absolute;top: -0.4rem;right: -0.4rem;"/>
                     </view>
                     <view>联系人名称</view>
