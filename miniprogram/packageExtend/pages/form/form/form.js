@@ -1,12 +1,6 @@
 import CustomPage from '../../../base/CustomPage'
 
 CustomPage({
-  onShareAppMessage() {
-    return {
-      title: 'form',
-      path: 'page/weui/example/form/form'
-    }
-  },
   data: {
     showTopTips: false,
 

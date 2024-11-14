@@ -3,3 +3,25 @@
 .page {
     background-color: var(--weui-BG-2)
 }
+
+.weui-loadmore {
+  display: flex; /* skyline 不支持 inline */
+  justify-content: center;
+  align-items: center;
+}
+
+.weui-loadmore_line .weui-loadmore__tips {
+  top: -11.859px; /* skyline 不支持 em */
+  line-height: 21.0824px;
+  height: 21.0824px;
+}
+
+.weui-loadmore_dot .weui-loadmore__tips {
+  display: flex; /* skyline 不支持 inline */
+  justify-content: center;
+  align-items: center;
+}
+
+.weui-loadmore_dot .weui-loadmore__tips::before {
+  top: -2.108px; /* skyline 不支持 em */
+}

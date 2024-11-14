@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-    "mp-msg": "weui-miniprogram/msg/msg"
-  }
+		"mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+		"mp-msg": "weui-miniprogram/msg/msg"
+	},
+	"navigationStyle": "custom",
+  "renderer": "skyline"
 }

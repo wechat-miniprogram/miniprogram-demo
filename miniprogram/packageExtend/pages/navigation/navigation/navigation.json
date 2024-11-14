@@ -3,7 +3,5 @@
         "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar"
     },
     "navigationStyle": "custom",
-    "renderer": "webview",
-"navigationBarTitleText": "navigation"
-
+		"renderer": "skyline"
 }

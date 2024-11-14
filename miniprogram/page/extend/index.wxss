@@ -1,94 +1,30 @@
-@import "../../common/reset.wxss";
-@import "../common/index-skyline.wxss";
+/* @import "../../common/reset.wxss"; */
 
-.weui-agree__link {
-  display: inline;
-  color: #576b95;
-}
+page{height:100%}.page{min-height:100%;background-color:var(--weui-BG-0);color:var(--weui-FG-0);font-size:0.9411764705882353rem;font-family:system-ui,-apple-system,Helvetica Neue,sans-serif}image{max-width:100%;max-height:100%}.link{display:inline;color:var(--weui-LINK)}.fadeIn{-webkit-animation:fadeIn .3s forwards;animation:fadeIn .3s forwards}.fadeOut{-webkit-animation:fadeOut .3s forwards;animation:fadeOut .3s forwards}@-webkit-keyframes fadeIn{0%{opacity:0}100%{opacity:1}}@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}@-webkit-keyframes fadeOut{0%{opacity:1}100%{opacity:0}}@keyframes fadeOut{0%{opacity:1}100%{opacity:0}}.weui-msg__extra-area{position:static}.page__hd{padding:40px}.page__bd{padding-bottom:40px}.page__bd_spacing{padding-left:15px;padding-right:15px}.page__ft{padding-top:20px;padding-bottom:10px;padding-bottom:calc(10px + constant(safe-area-inset-bottom));padding-bottom:calc(10px + env(safe-area-inset-bottom));text-align:center}[data-weui-theme="dark"] .page__ft image{-webkit-filter:invert(100) hue-rotate(180deg);filter:invert(100) hue-rotate(180deg)}.page__title{text-align:left;font-size:1.1764705882352942rem;font-weight:400}.page__desc{margin-top:5px;color:var(--weui-FG-1);text-align:left;font-size:0.8235294117647058rem}.weui-cell_example::before{left:52px}.page_bottom_tips{color:var(--weui-FG-4);font-size:0.7058823529411765rem;line-height:1.4;margin-top:4px}
 
-.weui-flex {
-  align-items: center;
-  flex-direction: row;
-}
+.weui-flex{-webkit-box-align:center;-webkit-align-items:center;align-items:center}.weui-cells{margin-top:0;opacity:0;-webkit-transform:translateY(-50%);transform:translateY(-50%);-webkit-transition:.3s;transition:.3s}.weui-cells::after,.weui-cells::before{display:none}.weui-cells_show{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)}.weui-cell::before{right:15px}.kind-list__item{margin:10px 0;background-color:var(--weui-BG-2);border-radius:2px;overflow:hidden}.kind-list__item:first-child{margin-top:0}.kind-list__img{width:30px;height:30px}[data-weui-theme="dark"] .kind-list__img{-webkit-filter:invert(100) hue-rotate(180deg);filter:invert(100) hue-rotate(180deg)}.kind-list__item-hd{padding:20px;-webkit-transition:opacity .3s;transition:opacity .3s}.kind-list__item-hd_show{opacity:.4}.kind-list__item-bd{height:0;overflow:hidden}.kind-list__item-bd_show{height:auto}
 
-.weui-cells {
-  margin-top: 0;
-  opacity: 0;
-  transform: translateY(-50%);
-  transition: .3s;
-  border-top: .5px solid rgba(0,0,0,0.1);
+.page {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
 }
-.weui-cells::before {
-  display: none;
-}
-
-.weui-cells_show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.kind-list__item {
-  margin: 10px 0;
-  background-color: #fff;
-  border-radius: 2px;
+.page-height {
+  height: 100%;
+  flex: 1 1 0;
   overflow: hidden;
 }
-
-.kind-list__img {
-  width: 30px;
-  height: 30px
+navigator text,
+text text,
+text navigator {
+  display: inline;
+}
+.wx-scroll-view-flex:is(div):not(.wx-scroll-view-flex) {
+  width: auto !important;
 }
 
-[data-weui-theme=dark] .kind-list__img {
-  filter: invert(100) hue-rotate(180deg)
-}
-
-.kind-list__item-hd {
-  padding: 20px;
-  transition: opacity .3s
-}
-
-.kind-list__item-hd_show {
-  opacity: .4
-}
-
-.kind-list__item-bd {
-  height: 0;
-  overflow: hidden
-}
-
-.kind-list__item-bd_show {
-  height: auto
-}
-
-.index-hd {
-  padding: 40px 40px 20px;
-  text-align: center;
-}
-
-.index-bd {
-  padding: 0 15px 20px;
-}
-
-.index-ft {
-  padding-bottom: 10px;
-  text-align: center;
-}
-
-.index-logo {
-  width: 43px;
-  height: 43px;
-}
-
-.index-desc {
-  margin-top: 10px;
-  color: #888888;
-  font-size: 14px;
-}
-
-[data-weui-theme=dark] .weui-agree__link {
-  color: #7d90a9;
-}
-[data-weui-theme=dark] .kind-list__item {
-  background-color: #232323;
+.ft-img-cnt {
+	display: inline-block;
+	height: 20px;
 }

@@ -1,6 +1,7 @@
 {
-  "usingComponents": {},
-  "renderer": "webview",
-"navigationBarTitleText": "flex"
-
+  "usingComponents": {
+		"mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar"
+  },
+	"navigationStyle": "custom",
+  "renderer": "skyline"
 }

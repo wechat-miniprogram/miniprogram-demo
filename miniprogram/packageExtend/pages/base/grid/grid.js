@@ -4,12 +4,6 @@ const {GRID_DEMO_URL} = getApp().globalData
 const app = getApp()
 
 CustomPage({
-  onShareAppMessage() {
-    return {
-      title: 'grid',
-      path: 'page/weui/example/grid/grid'
-    }
-  },
   data: {
     grids: [
       {

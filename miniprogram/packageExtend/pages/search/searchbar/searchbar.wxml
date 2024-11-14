@@ -1,9 +1,12 @@
 <view class="page" data-weui-theme="{{theme}}">
-    <view class="page__hd">
-        <view class="page__title">SearchBar</view>
-        <view class="page__desc">搜索栏</view>
-    </view>
-    <view class="page__bd">
-        <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
-    </view>
+    <mp-navigation-bar title="SearchBar"></mp-navigation-bar>
+    <scroll-view type="list" scroll-y class="page-height">
+        <view class="page__hd">
+            <view class="page__title">SearchBar</view>
+            <view class="page__desc">搜索栏</view>
+        </view>
+        <view class="page__bd">
+            <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
+        </view>
+    </scroll-view>
 </view>

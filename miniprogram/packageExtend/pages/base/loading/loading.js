@@ -1,12 +1,6 @@
 import CustomPage from '../../../base/CustomPage'
 
 CustomPage({
-  onShareAppMessage() {
-    return {
-      title: 'loading',
-      path: 'packageExtend/pages/base/loading/loading'
-    }
-  },
   data: {
     tips: '请稍后',
     show: true,

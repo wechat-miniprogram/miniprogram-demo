@@ -130,5 +130,12 @@ CustomPage({
         App.themeChanged('light')
       }
     }
-  }
+	},
+	openPage(e) {
+		const { url, father, page } = e.currentTarget.dataset
+		const nextUrl = url ? `../../packageExtend/pages/${url}` : `../../packageExtend/pages/${father}/${page}/${page}`
+		wx.navigateTo({
+				url: nextUrl
+		})
+	}
 })

@@ -1,7 +1,8 @@
 {
   "usingComponents": {
+		"mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
     "mp-loading": "weui-miniprogram/loading/loading"
   },
-  "renderer": "webview",
-"navigationBarTitleText": "loadmore"
+	"navigationStyle": "custom",
+  "renderer": "skyline"
 }

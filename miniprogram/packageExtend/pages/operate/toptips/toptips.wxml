@@ -1,12 +1,15 @@
-<mp-toptips msg="{{message}}" type="{{type}}" show="{{showTopTips}}" delay="{{3000}}"></mp-toptips>
-<view class="toptips-container">
-  <view class="toptips-content">
-    <input 
-      class="weui-input" 
-      focus 
-      placeholder="输入文本" 
-      bindinput="bindInputValue"
-      value="{{value}}"/>
-    <button bind:tap="bindConfirmTap" class="container-button" type="primary">确认</button>
-  </view>
+<view class="page" data-weui-theme="{{theme}}">
+    <mp-navigation-bar title="Toptips"></mp-navigation-bar>
+    <view class="page__hd">
+        <view class="page__title">Toptips</view>
+    </view>
+    <view class="page__bd">
+        <button class="weui-btn" type="primary" bindtap="showToptips1">显示1</button>
+        <button class="weui-btn mrt16" type="primary" bindtap="showToptips2">显示2</button>
+        <button class="weui-btn mrt16" type="primary" bindtap="showToptips3">显示3</button>
+
+        <mp-toptips ext-class="top100" msg="距离顶部100px" type="error" show="{{show1}}"></mp-toptips>
+        <mp-toptips ext-class="top200" msg="距离顶部200px" type="info" show="{{show2}}"></mp-toptips>
+        <mp-toptips ext-class="top300" msg="距离顶部300px" type="success" show="{{show3}}"></mp-toptips>
+    </view>
 </view>

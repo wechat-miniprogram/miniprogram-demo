@@ -1,8 +1,8 @@
 {
   "usingComponents": {
-    "mp-searchbar": "weui-miniprogram/searchbar/searchbar"
-  },
-  "renderer": "webview",
-"navigationBarTitleText": "searchbar"
-
+		"mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+		"mp-searchbar": "weui-miniprogram/searchbar/searchbar"
+	},
+	"navigationStyle": "custom",
+  "renderer": "skyline"
 }

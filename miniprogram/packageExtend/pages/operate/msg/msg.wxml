@@ -1,4 +1,5 @@
 <view class="page" data-weui-theme="{{theme}}">
+    <mp-navigation-bar title="Msg"></mp-navigation-bar>
     <view class="page__hd">
         <view class="page__title">Msg</view>
         <view class="page__desc">提示页</view>
@@ -6,9 +7,9 @@
     <view class="page__bd">
         <view class="weui-btn-area">
             <button class="weui-btn" type="default" bindtap="openSuccess">成功提示页</button>
-            <button class="weui-btn" type="default" bindtap="openFail">失败提示页</button>
-            <button class="weui-btn" type="default" bindtap="openText">无图标提示页</button>
-            <button class="weui-btn" type="default" bindtap="openTextPrimary">无图标提示页</button>
+            <button class="weui-btn mrt16" type="default" bindtap="openFail">失败提示页</button>
+            <button class="weui-btn mrt16" type="default" bindtap="openText">无图标提示页</button>
+            <button class="weui-btn mrt16" type="default" bindtap="openTextPrimary">无图标提示页</button>
         </view>
     </view>
 </view>

@@ -1,9 +1,9 @@
 {
   "usingComponents": {
-    "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
-    "mp-icon": "weui-miniprogram/icon/icon"
-  },
-  "renderer": "webview",
-"navigationBarTitleText": "actionsheet"
-
+		"mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+		"mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
+		"mp-icon": "weui-miniprogram/icon/icon"
+	},
+	"navigationStyle": "custom",
+  "renderer": "skyline"
 }

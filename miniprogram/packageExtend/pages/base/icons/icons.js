@@ -4,12 +4,6 @@ const colorLight = 'rgba(0, 0, 0, .9)'
 const colorDark = 'rgba(255, 255, 255, .8)'
 
 CustomPage({
-  onShareAppMessage() {
-    return {
-      title: 'icons',
-      path: 'page/weui/example/icons/icons'
-    }
-  },
   data: {
     iconList: [
       {

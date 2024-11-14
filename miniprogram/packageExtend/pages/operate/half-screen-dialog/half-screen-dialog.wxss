@@ -19,6 +19,3 @@
 .fontSize {
   font-size: 13px;
 } */
-.weui-half-screen-dialog__bd  {
-  -webkit-overflow-scrolling: touch;
-}

@@ -1,14 +1,15 @@
 <view class="page" data-weui-theme="{{theme}}">
-    <mp-navigation-bar loading="{{loading}}" show="{{show}}" animated="{{animated}}" color="{{color}}" background="{{background}}" title="自定义Navigation" back="{{true}}"></mp-navigation-bar>
+    <mp-navigation-bar loading="{{loading}}" show="{{show}}" animated="{{animated}}" color="{{color}}" background="{{background}}" title="{{title}}" back="{{true}}"></mp-navigation-bar>
     <view class="page__hd">
         <view class="page__title">Navigation</view>
         <view class="page__desc">小程序自定义导航栏</view>
     </view>
     <view class="page__bd page__bd_spacing">
         <button class="weui-btn" type="primary" bindtap="toggleLoading">触发loading</button>
-        <button class="weui-btn" type="primary" bindtap="changeColor">修改文字颜色</button>
-        <button class="weui-btn" type="primary" bindtap="changeBgColor">修改背景颜色</button>
-        <button class="weui-btn" type="primary" bindtap="toggleShow">显示 / 隐藏</button>
-        <button class="weui-btn" type="primary" bindtap="toggleAnimated">设置显示 / 隐藏opacity动画</button>
+        <button class="weui-btn mrt16" type="primary" bindtap="changeTitle">修改标题内容</button>
+        <button class="weui-btn mrt16" type="primary" bindtap="changeColor">修改文字颜色</button>
+        <button class="weui-btn mrt16" type="primary" bindtap="changeBgColor">修改背景颜色</button>
+        <button class="weui-btn mrt16" type="primary" bindtap="toggleShow">显示 / 隐藏</button>
+        <button class="weui-btn mrt16" type="primary" bindtap="toggleAnimated">设置显示 / 隐藏opacity动画</button>
     </view>
 </view>

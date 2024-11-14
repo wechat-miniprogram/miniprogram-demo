@@ -1,9 +1,8 @@
 {
   "usingComponents": {
-    "mp-toptips": "weui-miniprogram/toptips/toptips"
-  },
-  "renderer": "webview",
-"navigationBarTitleText": "toptips"
-
-
+		"mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+		"mp-toptips": "weui-miniprogram/toptips/toptips"
+	},
+	"navigationStyle": "custom",
+  "renderer": "skyline"
 }

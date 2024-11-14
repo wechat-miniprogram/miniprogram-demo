@@ -1,2 +1,16 @@
 /* example/panel/panel.wxss */
 @import '../../common.wxss';
+
+.weui-media-box__info {
+  display: flex;
+  flex-direction: row;
+}
+
+.weui-media-box__info__meta {
+  float: none; /* skyline 不支持 float */
+  padding-right: 12.235px; /* skyline 不支持 em */
+}
+
+.weui-media-box__info__meta_extra {
+  padding-left: 12.235px; /* skyline 不支持 em */
+}

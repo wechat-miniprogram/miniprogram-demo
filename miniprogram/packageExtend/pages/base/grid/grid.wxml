@@ -1,9 +1,12 @@
 <view class="page" data-weui-theme="{{theme}}">
-    <view class="page__hd">
-        <view class="page__title">Grid</view>
-        <view class="page__desc">九宫格</view>
-    </view>
-    <view class="page__bd">
-        <mp-grids grids="{{grids}}"></mp-grids>
-    </view>
+    <mp-navigation-bar title="Grid"></mp-navigation-bar>
+    <scroll-view type="list" scroll-y class="page-height">
+        <view class="page__hd">
+            <view class="page__title">Grid</view>
+            <view class="page__desc">九宫格</view>
+        </view>
+        <view class="page__bd">
+            <mp-grids grids="{{grids}}"></mp-grids>
+        </view>
+    </scroll-view>
 </view>

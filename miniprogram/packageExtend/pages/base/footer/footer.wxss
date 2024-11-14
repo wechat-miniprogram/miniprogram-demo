@@ -7,3 +7,9 @@
 .weui-footer_fixed-bottom{
     margin-bottom: 0;
 }
+
+.weui-footer__links {
+	display: flex; /* skyline 不支持 inline */
+	flex-direction: row;
+	justify-content: center;
+}

@@ -1,4 +1,5 @@
 <view class="page" data-weui-theme="{{theme}}">
+    <mp-navigation-bar title="Msg"></mp-navigation-bar>
     <mp-msg type="success" title="操作成功">
         <view slot="desc">内容详情，可根据实际需要安排，如果换行则不超过规定长度，居中展现<navigator url="" class="weui-msg__link">文字链接</navigator></view>
         <view slot="extend">
@@ -7,7 +8,7 @@
         </view>
         <view slot="handle">
             <button class="weui-btn" type="primary">主要操作</button>
-            <button class="weui-btn" type="default">辅助操作</button>
+            <button class="weui-btn mrt16" type="default">辅助操作</button>
         </view>
         <view slot="footer">
             <view class="weui-footer__links">

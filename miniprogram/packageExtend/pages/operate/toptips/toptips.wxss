@@ -1,18 +1,12 @@
 @import "../../../../common/lib/weui.wxss";
 
-.toptips-container {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.weui-input {
-  border-bottom: 1px gray solid;
+.weui-toptips.top100 {
+	top: 100px;
 }
-
-.toptips-content {
-  display: flex;
-  flex-direction: column;
+.weui-toptips.top200 {
+	top: 200px;
+}
+.weui-toptips.top300 {
+	top: 300px;
 }

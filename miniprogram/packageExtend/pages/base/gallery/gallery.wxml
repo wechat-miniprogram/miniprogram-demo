@@ -1,7 +1,9 @@
 <view class="page" data-weui-theme="{{theme}}">
+    <mp-navigation-bar title="Gallery"></mp-navigation-bar>
     <view class="page__hd">
         <view class="page__title">Gallery</view>
         <view class="page__desc">画廊，类似原生的wx.previewImage的展示。</view>
     </view>
+    <button class="weui-btn weui-btn_default" bindtap="openGallery">open</button>
     <mp-gallery show="{{show}}" bindchange="change" binddelete="delete" bindhide="hide" img-urls="{{imgUrls}}" delete hide-on-click="{{true}}" current="1"></mp-gallery>
 </view>

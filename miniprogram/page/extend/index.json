@@ -1,8 +1,9 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "小程序扩展能力展示",
+  "usingComponents": {
+		"mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+		"mp-cell": "weui-miniprogram/cell/cell"
+	},
   "componentFramework": "glass-easel",
   "renderer": "skyline",
-  "disableScroll": true,
   "navigationStyle": "custom"
 }

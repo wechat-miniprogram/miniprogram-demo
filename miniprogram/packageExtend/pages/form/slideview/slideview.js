@@ -3,12 +3,6 @@ import CustomPage from '../../../base/CustomPage'
 const base64 = require('../../images/base64')
 
 CustomPage({
-  onShareAppMessage() {
-    return {
-      title: 'sliderview',
-      path: 'packageExtend/pages/form/sliderview/sliderview'
-    }
-  },
   onLoad() {
     this.setData({
       icon: base64.icon20,

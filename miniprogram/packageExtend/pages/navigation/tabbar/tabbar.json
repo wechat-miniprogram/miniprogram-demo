@@ -1,8 +1,7 @@
 {
   "usingComponents": {
+		"mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
     "mp-tabbar": "weui-miniprogram/tabbar/tabbar"
   },
-  "renderer": "webview",
-"navigationBarTitleText": "tabbar"
-
+  "renderer": "skyline"
 }

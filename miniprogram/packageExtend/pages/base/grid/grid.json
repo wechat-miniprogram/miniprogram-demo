@@ -1,8 +1,8 @@
 {
   "usingComponents": {
-    "mp-grids": "../../../components/grids/grids"
+		"mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+		"mp-grids": "weui-miniprogram/grids/grids"
   },
-  "renderer": "webview",
-"navigationBarTitleText": "grid"
-
+	"navigationStyle": "custom",
+  "renderer": "skyline"
 }

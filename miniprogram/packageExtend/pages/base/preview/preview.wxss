@@ -1,5 +1,22 @@
 @import '../../common.wxss';
 
 .weui-form-preview{
-    margin-bottom: 25px;
+	margin-bottom: 25px;
+}
+
+.weui-form-preview__bd {
+	font-size: 13.5529px; /* skyline 不支持 em */
+}
+
+.weui-form-preview__item {
+	display: flex; /* skyline 不支持 float */
+}
+
+.weui-form-preview__item .weui-form-preview__value {
+	flex: 1 1 0;
+}
+
+.weui-form-preview__bd .weui-form-preview__label {
+	margin-right: 15px;
+	width: 56.922px;
 }
