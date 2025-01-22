@@ -1,0 +1,98 @@
+.t-float-left {
+  float: left;
+}
+.t-float-right {
+  float: right;
+}
+@keyframes tdesign-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.hotspot-expanded.relative {
+  position: relative;
+}
+.hotspot-expanded::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: scale(1.5);
+}
+.t-toast {
+  position: fixed;
+  right: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12001;
+  opacity: 1;
+  transition: opacity 300ms ease;
+  background-color: var(--td-toast-bg-color, var(--td-font-gray-2, rgba(0, 0, 0, 0.6)));
+  border-radius: var(--td-toast-radius, 8rpx);
+  font-size: 28rpx;
+  color: var(--td-toast-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
+  max-width: var(--td-toast-max-width, 374rpx);
+  width: fit-content;
+  box-sizing: border-box;
+}
+.t-toast--column {
+  padding: 48rpx;
+  min-width: 160rpx;
+  min-height: 160rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.t-toast--loading.t-toast--with-text {
+  min-width: 204rpx;
+  min-height: 204rpx;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.t-toast__content {
+  align-items: center;
+  line-height: 44rpx;
+}
+.t-toast__content--row {
+  display: flex;
+  text-align: left;
+  padding: 28rpx 44rpx;
+}
+.t-toast__content--column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.t-toast__icon--row {
+  display: flex;
+  font-size: var(--td-toast-row-icon-size, 48rpx);
+}
+.t-toast__icon--column {
+  font-size: var(--td-toast-column-icon-size, 64rpx);
+}
+.t-toast__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: pre-line;
+}
+.t-toast__text--column:not(:empty):not(:only-child) {
+  margin-top: 16rpx;
+}
+.t-toast__text--row:not(:empty):not(:only-child) {
+  margin-left: 16rpx;
+}
+.t-toast.t-fade-enter,
+.t-toast.t-fade-leave-to {
+  opacity: 0;
+}

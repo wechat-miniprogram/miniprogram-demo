@@ -1,0 +1,9 @@
+<wxs src="../common/utils.wxs" module="_" />
+<wxs src="./col.wxs" module="utils" />
+
+<view
+  class="class {{prefix}}-class {{ _.cls(classPrefix, [span]) }} {{ offset ? classPrefix + '--offset-' + offset : '' }}"
+  style="{{ utils.getColStyles(gutter, style, customStyle) }}"
+>
+  <slot />
+</view>

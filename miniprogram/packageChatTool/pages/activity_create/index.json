@@ -1,0 +1,14 @@
+{
+  "usingComponents": {
+    "t-switch": "../../miniprogram_npm/tdesign-miniprogram/switch/switch",
+    "t-slider": "../../miniprogram_npm/tdesign-miniprogram/slider/slider",
+    "t-navbar": "../../miniprogram_npm/tdesign-miniprogram/navbar/navbar",
+    "t-cell": "../../miniprogram_npm/tdesign-miniprogram/cell/cell",
+    "t-cell-group": "../../miniprogram_npm/tdesign-miniprogram/cell-group/cell-group",
+    "t-button": "../../miniprogram_npm/tdesign-miniprogram/button/button",
+    "t-image": "../../miniprogram_npm/tdesign-miniprogram/image/image",
+    "t-icon": "../../miniprogram_npm/tdesign-miniprogram/icon/icon",
+    "api-category": "../../components/apiCategory/index"
+  },
+  "navigationStyle": "custom"
+}

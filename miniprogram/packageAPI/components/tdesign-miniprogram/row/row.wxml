@@ -1,0 +1,5 @@
+<wxs src="./row.wxs" module="utils" />
+
+<view class="class {{prefix}}-row" style="{{ utils.getRowStyles(gutter, style, customStyle) }}">
+  <slot />
+</view>

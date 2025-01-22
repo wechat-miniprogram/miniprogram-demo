@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "styleIsolation": "apply-shared",
+  "usingComponents": {
+    "t-loading": "../loading/loading",
+    "t-icon": "../icon/icon"
+  }
+}

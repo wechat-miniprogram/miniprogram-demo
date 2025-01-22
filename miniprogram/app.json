@@ -9,7 +9,27 @@
   "usingComponents": {
     "mp-navigation-bar": "/component/navigation-bar/navigation-bar"
   },
+  "chatTools": [
+    {
+      "root": "packageChatTool",
+      "entryPagePath": "pages/activity_create/index",
+      "desc": "群签到工具",
+      "scopes": [
+        "scope.userLocation"
+      ]
+    }
+  ],
   "subpackages": [
+    {
+      "root": "packageChatTool",
+      "pages": [
+        "pages/activity_detail/index",
+        "pages/activity_create/index"
+      ],
+      "entry": "entry.js",
+      "independent": true,
+      "renderer": "skyline"
+    },
     {
       "root": "packageComponent",
       "pages": [
@@ -169,7 +189,8 @@
         "pages/framework/wxs/nearby",
         "pages/ai/mobilenet/index",
         "pages/ai/style-trans/index",
-        "pages/ai/mobilenet_int8/index"
+        "pages/ai/mobilenet_int8/index",
+        "pages/chattool/open-chattool/open-chattool"
       ]
     },
     {

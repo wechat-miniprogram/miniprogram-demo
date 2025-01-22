@@ -1,0 +1,36 @@
+/* pages/activity_create/index.wxss */
+
+page {
+  background: rgb(237, 237, 237);
+  height: 100vh;
+  --td-navbar-bg-color: rgb(237, 237, 237);
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-container {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.card {
+  margin: 0 32rpx;
+  margin-bottom: 32rpx;
+}
+.card-title {
+  padding: 32rpx 0;
+  color: rgb(112, 107, 107);
+}
+
+.cell {
+  background-color: #fff;
+  height: 48rpx;
+  line-height: 48rpx;
+  padding: 32rpx;
+}

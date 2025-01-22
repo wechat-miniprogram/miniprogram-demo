@@ -1,0 +1,4 @@
+<!--components/apiCategory/index.wxml-->
+<view class="ribbon">
+  <view>{{apiCategory === 'chatTool' ? '聊天工具模式' : '普通模式'}}</view>
+</view>

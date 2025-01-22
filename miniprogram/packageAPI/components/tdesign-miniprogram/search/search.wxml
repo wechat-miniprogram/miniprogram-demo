@@ -1,0 +1,77 @@
+<wxs src="../common/utils.wxs" module="_" />
+<wxs src="./search.wxs" module="this"></wxs>
+
+<view style="{{_._style([style, customStyle])}}" class="class {{classPrefix}} {{prefix}}-class">
+  <view
+    class="{{classPrefix}}__input-box {{prefix}}-{{focus ? 'is-focused' : 'not-focused'}} {{classPrefix}}__input-box--{{center ? 'center' : ''}} {{classPrefix}}__input-box--{{shape}} {{prefix}}-class-input-container"
+  >
+    <!-- <view wx:if="{{label}}" class="{{classPrefix}}__label {{prefix}}-class-label">{{label}}</view>
+    <slot name="label" /> -->
+    <t-icon
+      wx:if="{{leftIcon}}"
+      name="{{leftIcon}}"
+      size="48rpx"
+      class="{{prefix}}-icon {{prefix}}-class-left"
+      aria-hidden="{{true}}"
+    />
+    <slot wx:else name="left-icon" />
+
+    <input
+      type="{{type}}"
+      name="input"
+      maxlength="{{maxlength}}"
+      disabled="{{disabled}}"
+      class="{{prefix}}-input__keyword {{prefix}}-class-input"
+      focus="{{focus}}"
+      value="{{value}}"
+      confirm-type="{{confirmType}}"
+      confirm-hold="{{confirmHold}}"
+      cursor="{{cursor}}"
+      adjust-position="{{adjustPosition}}"
+      always-embed="{{alwaysEmbed}}"
+      selection-start="{{selectionStart}}"
+      selection-end="{{selectionEnd}}"
+      hold-keyboard="{{holdKeyboard}}"
+      cursor-spacing="{{cursorSpacing}}"
+      placeholder="{{placeholder}}"
+      placeholder-style="{{placeholderStyle}}"
+      placeholder-class="{{placeholderClass}} {{classPrefix}}__placeholder {{classPrefix}}__placeholder--{{center ? 'center': 'normal'}}"
+      bind:input="onInput"
+      bind:focus="onFocus"
+      bind:blur="onBlur"
+      bind:confirm="onConfirm"
+    />
+    <view
+      wx:if="{{value !=='' && clearable}}"
+      class="{{classPrefix}}__clear {{prefix}}-class-clear"
+      catch:tap="handleClear"
+      aria-role="button"
+      aria-label="清除"
+    >
+      <t-icon name="close-circle-filled" size="48rpx" />
+    </view>
+  </view>
+  <view
+    wx:if="{{action}}"
+    class="{{classPrefix}}__search-action {{prefix}}-class-action"
+    catch:tap="onActionClick"
+    aria-role="button"
+  >
+    {{action}}
+  </view>
+  <slot wx:else name="action" />
+</view>
+
+<view wx:if="{{isShowResultList && !isSelected}}" class="{{classPrefix}}__result-list" aria-role="listbox">
+  <t-cell
+    wx:for="{{resultList}}"
+    wx:key="index"
+    data-index="{{index}}"
+    class="{{classPrefix}}__result-item"
+    hover
+    bind:tap="onSelectResultItem"
+    aria-role="option"
+  >
+    <rich-text slot="title" nodes="{{this.highLight(item, value)}}"></rich-text>
+  </t-cell>
+</view>

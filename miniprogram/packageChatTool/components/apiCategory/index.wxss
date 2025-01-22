@@ -1,0 +1,28 @@
+/* components/apiCategory/index.wxss */
+
+.ribbon {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+  transform-origin: center;
+  overflow: visible;
+}
+
+.ribbon view {
+  display: block;
+  width: 200px;
+  padding: 7px 0;
+  background-color: rgb(90, 171, 110);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  transform: translate(-50%, -50%) rotate(45deg);
+  position: relative;
+  top: 50%;
+  left: 50%;
+}

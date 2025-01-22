@@ -1,0 +1,41 @@
+<wxs src="../common/utils.wxs" module="_" />
+
+<view
+  style="{{_._style([style, customStyle])}}"
+  class="class {{classPrefix}} {{classPrefix}}--{{placement}} {{prefix}}-class"
+>
+  <view
+    class="{{classPrefix}}__title"
+    aria-role="button"
+    aria-expanded="{{expanded}}"
+    aria-disabled="{{ultimateDisabled}}"
+    bind:tap="onClick"
+  >
+    <t-cell
+      title="{{header}}"
+      note="{{headerRightContent}}"
+      bordered
+      left-icon="{{headerLeftIcon}}"
+      right-icon="{{ ultimateExpandIcon ? (expanded ? 'chevron-up' : 'chevron-down') : '' }}"
+      t-class="{{_.cls(classPrefix + '__header', [placement, ['expanded', expanded]])}} {{prefix}}-class-header"
+      t-class-title="class-title {{ultimateDisabled ? 'class-title--disabled' : ''}}"
+      t-class-note="class-note {{ultimateDisabled ? 'class-note--disabled' : ''}}"
+      t-class-right-icon="class-right-icon {{classPrefix}}__arrow--{{placement}} {{ultimateDisabled ? 'class-right-icon--disabled' : ''}}"
+      t-class-hover="class-header-hover"
+    >
+      <slot name="header-left-icon" slot="left-icon" />
+      <slot name="header" slot="title" />
+      <slot name="header-right-content" slot="note" />
+      <slot name="expand-icon" slot="right-icon" />
+    </t-cell>
+  </view>
+  <view class="{{classPrefix}}__wrapper" animation="{{animation}}" aria-hidden="{{expanded ? '' : true}}">
+    <view
+      class="{{_.cls(classPrefix + '__content', [['disabled', ultimateDisabled],  ['expanded', expanded], placement])}} {{prefix}}-class-content"
+    >
+      {{content}}
+      <slot />
+      <slot name="content" />
+    </view>
+  </view>
+</view>

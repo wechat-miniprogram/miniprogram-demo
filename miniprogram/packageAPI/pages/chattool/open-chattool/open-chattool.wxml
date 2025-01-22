@@ -1,0 +1,41 @@
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
+
+<scroll-view type="list" class="page-container" scroll-y>
+	<view class="container page" data-weui-theme="{{theme}}">
+		<template is="head" data="{{title: '群签到助手'}}" />
+		<view class="page-body">
+			<view class="card">
+				<view class="card-title" />
+				<t-cell
+				 title="创建新活动"
+				 hover
+				 arrow
+				 bind:click="create"
+				/>
+			</view>
+
+			<view class="card">
+				<t-cell
+				 title="已发布活动"
+				 hover
+				 right-icon="refresh"
+				 bind:tap="refresh"
+				/>
+				<block wx:for="{{activityList}}" wx:key="_id">
+					<t-cell
+					 title="{{item.title}}"
+					 hover
+					 arrow
+					 data-roomid="{{item.roomid}}"
+					 data-singlechat="{{item.isSingleChat}}"
+					 data-id="{{item.activityId}}"
+					 bind:click="goDetail"
+					/>
+				</block>
+			</view>
+		</view>
+		<template is="foot" />
+	</view>
+</scroll-view>
+

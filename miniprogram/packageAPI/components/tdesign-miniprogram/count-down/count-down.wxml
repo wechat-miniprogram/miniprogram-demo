@@ -1,0 +1,22 @@
+<wxs src="../common/utils.wxs" module="_" />
+<wxs module="this"> module.exports.format = function(num) { return num < 10 ? '0' + num : num; } </wxs>
+
+<view
+  style="{{_._style([style, customStyle])}}"
+  class="{{classPrefix}} {{classPrefix}}--{{theme}} {{classPrefix}}--{{size}} class {{prefix}}-class "
+  aria-role="option"
+>
+  <slot wx:if="{{content !== 'default'}}" name="content" />
+  <slot wx:if="{{content !== 'default'}}" />
+  <block wx:elif="{{theme == 'default' && !splitWithUnit}}">{{formattedTime}}</block>
+  <block wx:else>
+    <block wx:for="{{timeRange}}" wx:key="index">
+      <text class="{{classPrefix}}__item {{prefix}}-class-count">{{this.format(timeData[timeRange[index]])}}</text>
+      <text
+        wx:if="{{ splitWithUnit || timeRange.length - 1 !== index}}"
+        class="{{classPrefix}}__split {{classPrefix}}__split--{{splitWithUnit ? 'text' : 'dot'}} {{prefix}}-class-split"
+        >{{splitWithUnit ? timeDataUnit[timeRange[index]] : ':'}}</text
+      >
+    </block>
+  </block>
+</view>

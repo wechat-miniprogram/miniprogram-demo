@@ -8,6 +8,14 @@ Page({
 
   data: {
     list: [{
+      id: 'chattool',
+      name: '聊天工具',
+      open: false,
+      pages: [{
+        zh: '活动签到',
+        url: 'open-chattool/open-chattool'
+      }]
+    }, {
       id: 'api',
       name: '开放接口',
       open: false,

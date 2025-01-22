@@ -1,5 +1,5 @@
 {
-  "libVersion": "3.3.4",
+  "libVersion": "3.7.6",
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
   "setting": {
     "urlCheck": false,
@@ -11,6 +11,27 @@
   "condition": {
     "miniprogram": {
       "list": [
+        {
+          "name": "聊天工具-活动详情",
+          "pathName": "packageChatTool/pages/activity_detail/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "聊天工具-创建活动",
+          "pathName": "packageChatTool/pages/activity_create/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "聊天工具-签到助手",
+          "pathName": "packageAPI/pages/chattool/open-chattool/open-chattool",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
         {
           "name": "gaussian-splatting-ar",
           "pathName": "packageAPI/pages/ar/gaussian-splatting/gaussian-splatting-ar",
