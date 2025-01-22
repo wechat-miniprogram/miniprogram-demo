@@ -34,3 +34,7 @@ page {
   line-height: 48rpx;
   padding: 32rpx;
 }
+
+.btn {
+  width: 100% !important;
+}

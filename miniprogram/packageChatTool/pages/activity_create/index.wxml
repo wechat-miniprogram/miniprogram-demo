@@ -54,6 +54,7 @@
   
       <t-button
        style="margin-top: 20px;"
+       class="btn"
        bind:tap="chooseParticipant"
        theme="primary"
        size="large"
@@ -81,7 +82,8 @@
 	</view>
 
 	<view class="card" style="margin-bottom: 30px;">
-		<t-button
+    <t-button
+     class="btn"
 		 bind:tap="publish"
 		 theme="primary"
 		 size="large"

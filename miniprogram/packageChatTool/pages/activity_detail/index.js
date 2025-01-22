@@ -157,6 +157,9 @@ Page({
       type: 'participate',
       members: notSignIn,
       entrancePath: `chatTool-2/activity_detail/index?activityId=${activityId}`,
+      complete(res) {
+        console.info('notifyGroupMembers: ', res)
+      }
     })
   },
 
@@ -276,11 +279,14 @@ Page({
 
   sendProgress() {
     const { progressImage, activityId } = this.data
-    const entrancePath = `chatTool-2/activity_detail/index?activityId=${activityId}`
+    const entrancePath = `packageChatTool/pages/activity_detail/index?activityId=${activityId}`
     wx.shareImageToGroup({
       imagePath: progressImage,
       needShowEntrance: true,
       entrancePath,
+      complete(res) {
+        console.info('shareImageToGroup: ', res)
+      }
     })
   },
 
@@ -294,7 +300,7 @@ Page({
         wx.shareAppMessageToGroup({
           title: activityInfo.title,
           imageUrl: res.tempFilePath,
-          path: `chatTool-2/activity_detail/index?activityId=${activityId}`,
+          path: `packageChatTool/pages/activity_detail/index?activityId=${activityId}`,
         })
       },
       fail: console.error

@@ -81,3 +81,7 @@ page {
   width: 56px;
   height: 56px;
 }
+
+.btn {
+  width: 100% !important;
+}

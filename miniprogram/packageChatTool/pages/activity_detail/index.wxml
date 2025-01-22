@@ -83,7 +83,8 @@
 			</view>
 
 			<view class="card" wx:if="{{notSignIn.length}}">
-				<t-button
+        <t-button
+         class="btn"
 				 bind:tap="notifyNotSignIn"
 				 theme="primary"
 				 size="large"
@@ -93,7 +94,8 @@
 			</view>
 
 			<view class="card">
-				<t-button
+        <t-button
+         class="btn"
 				 bind:tap="sendProgress"
 				 theme="primary"
 				 size="large"
@@ -106,7 +108,8 @@
 		<block wx:if="{{role === 'participant' && !signInStatus}}">
 			<view class="card">
 				<view class="card-title">活动签到</view>
-				<t-button
+        <t-button
+         class="btn"
 				 bind:tap="signIn"
 				 theme="primary"
 				 size="large"
@@ -119,7 +122,8 @@
 		<block wx:if="{{role === 'nonParticipant'}}">
 			<view class="card">
 				<view class="card-title">活动签到</view>
-				<t-button
+        <t-button
+         class="btn"
 				 theme="light"
 				 disabled
 				 size="large"
@@ -132,7 +136,8 @@
 		<block wx:if="{{role === 'unkown'}}">
 			<view class="card">
 				<view class="card-title">活动签到</view>
-				<t-button
+        <t-button
+         class="btn"
 				 theme="light"
 				 disabled
 				 size="large"
@@ -148,6 +153,7 @@
     <view class="card">
       <view class="card-title">系统消息指令</view>
       <t-button
+       class="btn"
        bind:tap="remindExpiration"
        theme="primary"
        size="large"
@@ -156,6 +162,7 @@
       </t-button>
 
       <t-button
+       class="btn"
        style="margin-top: 24rpx;"
        bind:tap="earlyTerminate"
        theme="primary"
