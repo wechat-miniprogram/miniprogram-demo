@@ -1,0 +1,56 @@
+<wxs src="../common/utils.wxs" module="_" />
+
+<view style="{{_._style([style, customStyle])}}" class="class {{prefix}}-class {{classPrefix}}">
+  <!-- 加载中占位 -->
+  <view
+    wx:if="{{isLoading}}"
+    style="{{_._style([innerStyle])}}"
+    class="{{classPrefix}}__mask {{classPrefix}}--loading {{classPrefix}}--shape-{{shape}}"
+    aria-hidden="{{ariaHidden}}"
+  >
+    <t-loading
+      wx:if="{{loading === 'default'}}"
+      theme="dots"
+      size="44rpx"
+      loading
+      inherit-color
+      t-class="t-class-load"
+      t-class-text="{{classPrefix}}--loading-text"
+    ></t-loading>
+    <view wx:elif="{{loading !== '' && loading !== 'slot'}}" class="{{classPrefix}}__common {{prefix}}-class-load">
+      {{loading}}
+    </view>
+    <slot wx:else name="loading" />
+  </view>
+  <!-- 加载失败占位 -->
+  <view
+    wx:elif="{{isFailed}}"
+    style="{{_._style([innerStyle])}}"
+    class="{{classPrefix}}__mask {{classPrefix}}--failed {{classPrefix}}--shape-{{shape}} {{prefix}}-class-error"
+    aria-hidden="{{ariaHidden}}"
+  >
+    <view wx:if="{{error === 'default'}}" style="font-size: 44rpx" class="{{prefix}}-class-load">
+      <t-icon name="close" aria-role="img" aria-label="加载失败" />
+    </view>
+    <view wx:elif="{{error && error !== 'slot'}}" class="{{classPrefix}}__common {{prefix}}-class-load">
+      {{error}}
+    </view>
+    <slot wx:else name="error" />
+  </view>
+  <!-- 图片 -->
+  <image
+    id="{{tId||'image'}}"
+    wx:if="{{ !isFailed }}"
+    style="{{_._style([innerStyle])}}"
+    class="{{classPrefix}}__img {{classPrefix}}--shape-{{shape}} {{isLoading ? classPrefix + '--lazy' : ''}} {{prefix}}-class-image"
+    src="{{src}}"
+    mode="{{mode}}"
+    webp="{{webp}}"
+    lazy-load="{{lazy}}"
+    bind:load="onLoaded"
+    bind:error="onLoadError"
+    show-menu-by-longpress="{{showMenuByLongpress}}"
+    aria-hidden="{{ariaHidden || isLoading || isFailed}}"
+    aria-label="{{ariaLabel}}"
+  />
+</view>

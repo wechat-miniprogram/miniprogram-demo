@@ -1,0 +1,34 @@
+<wxs src="./badge.wxs" module="this" />
+<wxs src="../common/utils.wxs" module="_" />
+
+<!--
+  1. labelID 用于描述当前元素的文本
+  2. descriptionID 用于描述badge消息的文本
+  3. role=option一般用于多个内容合并焦点连续朗读
+-->
+
+<view
+  style="{{_._style([style, customStyle])}}"
+  class="{{this.getBadgeOuterClass({shape})}} class {{prefix}}-class"
+  aria-labelledby="{{labelID}}"
+  aria-describedby="{{descriptionID}}"
+  aria-role="{{ ariaRole || 'option'}}"
+>
+  <view id="{{labelID}}" class="{{classPrefix}}__content {{prefix}}-class-content" aria-hidden="true">
+    <slot wx:if="{{!content}}" class="{{classPrefix}}__content-slot" />
+    <text wx:else class="{{classPrefix}}__content-text">{{content}}</text>
+  </view>
+  <view
+    aria-hidden="true"
+    aria-label="{{ ariaLabel || _.getBadgeAriaLabel({dot, count, maxCount}) }}"
+    wx:if="{{this.isShowBadge({dot,count,showZero})}}"
+    id="{{descriptionID}}"
+    class="{{this.getBadgeInnerClass({dot, size, shape, count})}} {{prefix}}-has-count {{prefix}}-class-count"
+    style="{{_._style([this.getBadgeStyles({color, offset})])}}"
+    aria-hidden="true"
+    aria-label="{{ ariaLabel || _.getBadgeAriaLabel({dot, count, maxCount}) }}"
+  >
+    {{ this.getBadgeValue({dot, count, maxCount}) }}
+  </view>
+  <slot name="count" />
+</view>

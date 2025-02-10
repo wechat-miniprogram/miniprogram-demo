@@ -1,13 +1,13 @@
 {
   "usingComponents": {
-    "t-switch": "../../miniprogram_npm/tdesign-miniprogram/switch/switch",
-    "t-slider": "../../miniprogram_npm/tdesign-miniprogram/slider/slider",
-    "t-navbar": "../../miniprogram_npm/tdesign-miniprogram/navbar/navbar",
-    "t-cell": "../../miniprogram_npm/tdesign-miniprogram/cell/cell",
-    "t-cell-group": "../../miniprogram_npm/tdesign-miniprogram/cell-group/cell-group",
-    "t-button": "../../miniprogram_npm/tdesign-miniprogram/button/button",
-    "t-image": "../../miniprogram_npm/tdesign-miniprogram/image/image",
-    "t-icon": "../../miniprogram_npm/tdesign-miniprogram/icon/icon",
+    "t-switch": "../../components/tdesign-miniprogram/switch/switch",
+    "t-slider": "../../components/tdesign-miniprogram/slider/slider",
+    "t-navbar": "../../components/tdesign-miniprogram/navbar/navbar",
+    "t-cell": "../../components/tdesign-miniprogram/cell/cell",
+    "t-cell-group": "../../components/tdesign-miniprogram/cell-group/cell-group",
+    "t-button": "../../components/tdesign-miniprogram/button/button",
+    "t-image": "../../components/tdesign-miniprogram/image/image",
+    "t-icon": "../../components/tdesign-miniprogram/icon/icon",
     "api-category": "../../components/apiCategory/index"
   },
   "navigationStyle": "custom"

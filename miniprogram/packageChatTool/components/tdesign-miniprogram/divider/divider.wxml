@@ -1,0 +1,13 @@
+<wxs src="../common/utils.wxs" module="_" />
+
+<view class="{{layout==='vertical'? classPrefix + '--vertical-center' : ''}}">
+  <view
+    class="{{classPrefix}} class {{prefix}}-class {{classPrefix}}--{{layout}} {{classPrefix}}--{{align}} {{dashed? classPrefix + '--dashed' : ''}} "
+    style="{{_._style([dividerStyle, style, customStyle])}}"
+  >
+    <view class="{{prefix}}-class-content {{classPrefix}}__content">
+      <view wx:if="{{content}}"> {{content}} </view>
+      <slot wx:else name="content" />
+    </view>
+  </view>
+</view>

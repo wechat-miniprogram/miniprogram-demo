@@ -1,0 +1,61 @@
+<import src="../common/template/icon.wxml" />
+<wxs src="../common/utils.wxs" module="_" />
+
+<button
+  id="{{tId}}"
+  style="{{_._style([style, customStyle])}}"
+  data-custom="{{ customDataset }}"
+  class="class {{className}}"
+  form-type="{{disabled || loading ? '' : type}}"
+  open-type="{{disabled || loading ? '' : openType}}"
+  hover-stop-propagation="{{hoverStopPropagation}}"
+  hover-start-time="{{hoverStartTime}}"
+  hover-stay-time="{{hoverStayTime}}"
+  lang="{{lang}}"
+  session-from="{{sessionFrom}}"
+  hover-class="{{disabled || loading ? '' : (hoverClass || classPrefix + '--hover')}}"
+  send-message-title="{{sendMessageTitle}}"
+  send-message-path="{{sendMessagePath}}"
+  send-message-img="{{sendMessageImg}}"
+  app-parameter="{{appParameter}}"
+  show-message-card="{{showMessageCard}}"
+  catch:tap="handleTap"
+  bind:getuserinfo="getuserinfo"
+  bind:contact="contact"
+  bind:getphonenumber="getphonenumber"
+  bind:error="error"
+  bind:opensetting="opensetting"
+  bind:launchapp="launchapp"
+  bind:chooseavatar="chooseavatar"
+  bind:agreeprivacyauthorization="agreeprivacyauthorization"
+  aria-label="{{ariaLabel}}"
+>
+  <template
+    wx:if="{{_icon}}"
+    is="icon"
+    data="{{tClass: classPrefix + '__icon ' + prefix + '-class-icon', ariaHidden: true, name: iconName, ..._icon}}"
+  />
+  <t-loading
+    wx:if="{{loading}}"
+    delay="{{loadingProps.delay || 0}}"
+    duration="{{loadingProps.duration || 800}}"
+    indicator="{{loadingProps.indicator || true}}"
+    inheritColor="{{loadingProps.inheritColor || true}}"
+    layout="{{loadingProps.layout || 'horizontal'}}"
+    pause="{{loadingProps.pause || false}}"
+    progress="{{loadingProps.progress || 0}}"
+    reverse="{{loadingProps.reverse || false}}"
+    size="{{loadingProps.size || '40rpx'}}"
+    text="{{loadingProps.text || '' }}"
+    theme="{{loadingProps.theme || 'circular'}}"
+    loading
+    t-class="{{classPrefix}}__loading {{classPrefix}}__loading--wrapper"
+    t-class-indicator="{{classPrefix}}__loading--indicator {{prefix}}-class-loading"
+  />
+  <view class="{{classPrefix}}__content">
+    <slot name="content" />
+    <block wx:if="{{content}}">{{content}}</block>
+    <slot />
+  </view>
+  <slot name="suffix" />
+</button>

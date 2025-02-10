@@ -1,0 +1,9 @@
+<wxs src="../common/utils.wxs" module="_" />
+
+<view wx:if="{{ title }}" class="class {{ classPrefix }}__title {{prefix}}-class-title"> {{ title }} </view>
+<view
+  style="{{_._style([style, customStyle])}}"
+  class="{{_.cls(classPrefix, [['bordered', bordered], theme])}} class {{prefix}}-class"
+>
+  <slot />
+</view>

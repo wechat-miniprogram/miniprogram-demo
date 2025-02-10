@@ -1,0 +1,206 @@
+.t-float-left {
+  float: left;
+}
+.t-float-right {
+  float: right;
+}
+@keyframes tdesign-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.hotspot-expanded.relative {
+  position: relative;
+}
+.hotspot-expanded::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: scale(1.5);
+}
+.limit-title-row {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.t-radio {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  font-size: var(--td-radio-font-size, 32rpx);
+  background: var(--td-radio-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff)));
+}
+.t-radio:focus {
+  outline: 0;
+}
+.t-radio--block {
+  display: flex;
+  padding: var(--td-radio-vertical-padding, 32rpx);
+}
+.t-radio--right {
+  flex-direction: row-reverse;
+}
+.t-radio__icon {
+  position: relative;
+  margin-top: calc((var(--td-radio-label-line-height, 48rpx) - var(--td-radio-icon-size, 48rpx)) / 2);
+  width: var(--td-radio-icon-size, 48rpx);
+  height: var(--td-radio-icon-size, 48rpx);
+  font-size: var(--td-radio-icon-size, 48rpx);
+  color: var(--td-radio-icon-color, var(--td-component-border, var(--td-gray-color-4, #dcdcdc)));
+  overflow: hidden;
+}
+.t-radio__icon:empty {
+  display: none;
+}
+.t-radio__icon--left {
+  margin-right: 16rpx;
+}
+.t-radio__icon--checked {
+  color: var(--td-radio-icon-checked-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
+}
+.t-radio__icon--disabled {
+  cursor: not-allowed;
+  color: var(--td-radio-icon-disabled-color, var(--td-brand-color-disabled, var(--td-primary-color-3, #b5c7ff)));
+}
+.t-radio__icon-circle {
+  width: var(--td-radio-icon-size, 48rpx);
+  height: var(--td-radio-icon-size, 48rpx);
+  box-sizing: border-box;
+}
+.t-radio__icon-circle::after {
+  content: '';
+  width: calc(200% - 6rpx);
+  height: calc(200% - 6rpx);
+  border-radius: 50%;
+  border: 3px solid var(--td-radio-icon-color, var(--td-component-border, var(--td-gray-color-4, #dcdcdc)));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  box-sizing: border-box;
+}
+.t-radio__icon-circle--disabled::after {
+  background: var(--td-radio-icon-disabled-bg-color, var(--td-bg-color-component-disabled, var(--td-gray-color-2, #eeeeee)));
+}
+.t-radio__icon-line::before,
+.t-radio__icon-line::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 5rpx;
+  border-radius: 2rpx;
+  background: var(--td-radio-icon-checked-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
+  transform-origin: top center;
+}
+.t-radio__icon-line::before {
+  height: 16rpx;
+  left: 8rpx;
+  top: 22rpx;
+  transform: rotate(-45deg);
+}
+.t-radio__icon-line::after {
+  height: 26rpx;
+  right: 8rpx;
+  top: 14rpx;
+  transform: rotate(45deg);
+}
+.t-radio__icon-line--disabled::before,
+.t-radio__icon-line--disabled::after {
+  background: var(--td-radio-icon-disabled-color, var(--td-brand-color-disabled, var(--td-primary-color-3, #b5c7ff)));
+}
+.t-radio__icon-dot {
+  width: calc((var(--td-radio-icon-size, 48rpx) - 6rpx) * 2);
+  height: calc((var(--td-radio-icon-size, 48rpx) - 6rpx) * 2);
+  border: 6rpx solid var(--td-radio-icon-checked-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.t-radio__icon-dot::after {
+  content: '';
+  display: block;
+  width: var(--td-radio-icon-size, 48rpx);
+  height: var(--td-radio-icon-size, 48rpx);
+  background: var(--td-radio-icon-checked-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
+  border-radius: 50%;
+}
+.t-radio__icon-dot--disabled {
+  border-color: var(--td-radio-icon-disabled-color, var(--td-brand-color-disabled, var(--td-primary-color-3, #b5c7ff)));
+}
+.t-radio__icon-dot--disabled::after {
+  background: var(--td-radio-icon-disabled-color, var(--td-brand-color-disabled, var(--td-primary-color-3, #b5c7ff)));
+}
+.t-radio__image {
+  line-height: var(--td-radio-icon-size, 48rpx);
+}
+.t-radio-icon__image {
+  height: var(--td-radio-icon-size, 48rpx);
+  width: var(--td-radio-icon-size, 48rpx);
+  vertical-align: sub;
+}
+.t-radio__content {
+  flex: 1;
+}
+.t-radio__content:empty {
+  display: none;
+}
+.t-radio__title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--td-radio-label-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
+  line-height: var(--td-radio-label-line-height, 48rpx);
+}
+.t-radio__title--checked {
+  color: var(--td-radio-label-checked-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
+}
+.t-radio__title--disabled {
+  cursor: not-allowed;
+  color: var(--td-radio-label-disabled-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
+}
+.t-radio__description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--td-radio-content-color, var(--td-text-color-secondary, var(--td-font-gray-2, rgba(0, 0, 0, 0.6))));
+  font-size: var(--td-radio-content-font-size, 28rpx);
+  line-height: var(--td-radio-content-line-height, 44rpx);
+}
+.t-radio__description--checked {
+  color: var(--td-radio-content-checked-color, var(--td-text-color-secondary, var(--td-font-gray-2, rgba(0, 0, 0, 0.6))));
+}
+.t-radio__description--disabled {
+  cursor: not-allowed;
+  color: var(--td-radio-content-disabled-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
+}
+.t-radio__description:empty {
+  display: none;
+}
+.t-radio__title + .t-radio__description {
+  margin-top: 8rpx;
+}
+.t-radio__border {
+  position: absolute;
+  bottom: 0;
+  height: 1px;
+  background: var(--td-radio-border-color, var(--td-component-stroke, var(--td-gray-color-3, #e7e7e7)));
+  left: 96rpx;
+  right: 0;
+  transform: scaleY(0.5);
+}
+.t-radio__border--right {
+  left: 32rpx;
+}

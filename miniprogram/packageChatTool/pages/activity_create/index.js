@@ -242,8 +242,11 @@ Page({
             success(res) {
               wx.shareAppMessageToGroup({
                 title,
-                path: `chatTool-2/activity_detail/index?activityId=${activityId}`,
+                path: `packageChatTool/pages/activity_detail/index?activityId=${activityId}`,
                 imageUrl: shareImage,
+                complete(res) {
+                  console.info('shareAppMessageToGroup: ', res)
+                }
               })
             },
             fail(res) {

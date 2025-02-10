@@ -1,0 +1,21 @@
+<template name="image">
+  <t-image
+    t-class="{{tClass}}"
+    t-class-load="{{tClassLoad}}"
+    style="{{style || ''}}"
+    customStyle="{{customStyle || ''}}"
+    height="{{height || ''}}"
+    width="{{width || ''}}"
+    error="{{error || 'default'}}"
+    lazy="{{lazy || false}}"
+    loading="{{count || 'default'}}"
+    shape="{{shape || 'square'}}"
+    src="{{src || ''}}"
+    mode="{{mode || 'scaleToFill'}}"
+    webp="{{webp || false}}"
+    showMenuByLongpress="{{showMenuByLongpress || false}}"
+    data-custom="{{dataset || null}}"
+    bind:error="{{binderror}}"
+    bind:load="{{bindload}}"
+  />
+</template>

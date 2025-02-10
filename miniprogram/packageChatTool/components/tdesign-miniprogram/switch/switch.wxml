@@ -1,0 +1,32 @@
+<wxs src="../common/utils.wxs" module="_" />
+
+<view
+  style="{{_._style([style, customStyle])}}"
+  class="class {{ prefix }}-class {{classPrefix}}"
+  bind:tap="handleSwitch"
+  aria-checked="{{checked}}"
+  aria-disabled="{{disabled}}"
+  aria-role="switch"
+>
+  <view
+    class="{{_.cls(classPrefix + '__body', [['checked', checked], ['disabled', disabled || loading], size])}} {{prefix}}-class-body"
+  >
+    <view
+      class="{{_.cls(classPrefix + '__dot', [['checked', checked], ['plain', label.length != 2 && icon.length != 2 && !loading], size])}} {{prefix}}-class-dot"
+      aria-hidden="{{true}}"
+    >
+      <view
+        wx:if="{{label}}"
+        class="{{_.cls(classPrefix + '__label', [['checked', checked], ['disabled', disabled], size])}} {{prefix}}-class-label"
+      >
+        <t-loading wx:if="{{loading}}" inherit-color size="32rpx" />
+        <text wx:elif="{{label.length == 2}}">{{checked ? label[0] : label[1]}}</text>
+        <t-icon
+          wx:elif="{{icon.length == 2}}"
+          name="{{checked ? icon[0] : icon[1]}}"
+          t-class="{{_.cls(classPrefix + '__icon', [['checked', checked], size])}}"
+        />
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,28 @@
+<wxs src="../common/utils.wxs" module="_" />
+<wxs src="./indexes.wxs" module="this" />
+
+<view style="{{_._style([style, customStyle])}}" class="{{classPrefix}} class {{prefix}}-class">
+  <view
+    class="{{classPrefix}}__sidebar {{prefix}}-class-sidebar"
+    id="id-{{classPrefix}}__bar"
+    catch:touchmove="onTouchMove"
+    catch:touchcancel="onTouchCancel"
+    catch:touchend="onTouchEnd"
+  >
+    <view
+      class="{{_.cls(classPrefix + '__sidebar-item', [['active', activeAnchor === item]])}} {{prefix}}-class-sidebar-item"
+      wx:for="{{ _indexList }}"
+      wx:key="*this"
+      bind:tap="onClick"
+      data-index="{{index}}"
+    >
+      <view aria-role="button" aria-label="{{ activeAnchor === item ? '已选中' + item : ''}}">
+        {{ this.getFirstCharacter(item) }}
+      </view>
+      <view class="{{classPrefix}}__sidebar-tips" wx:if="{{ showTips && activeAnchor === item }}">
+        {{ activeAnchor }}
+      </view>
+    </view>
+  </view>
+  <slot />
+</view>

@@ -8,4 +8,3 @@ wx.cloud.init({
 });
 
 const enterOptions = wx.getEnterOptionsSync()
-console.info('@@@ chatTool-2 entry: ', enterOptions)
