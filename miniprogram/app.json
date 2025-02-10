@@ -190,7 +190,7 @@
         "pages/ai/mobilenet/index",
         "pages/ai/style-trans/index",
         "pages/ai/mobilenet_int8/index",
-        "pages/chattool/open-chattool/open-chattool"
+        "pages/chattool/activity_assist/activity_assist"
       ]
     },
     {
@@ -400,6 +400,12 @@
       "network": "all",
       "packages": [
         "packageAPI"
+      ]
+    },
+    "packageAPI/pages/chattool/activity_assist/activity_assist": {
+      "network": "all",
+      "packages": [
+        "packageChatTool"
       ]
     },
     "page/cloud/index": {

@@ -6,7 +6,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '群签到助手',
-      path: 'packageAPI/pages/chattool/open-chattool/open-chattool'
+      path: 'packageAPI/pages/chattool/activity_assist/activity_assist'
     }
   },
 

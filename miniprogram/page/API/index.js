@@ -13,7 +13,7 @@ Page({
       open: false,
       pages: [{
         zh: '活动签到',
-        url: 'open-chattool/open-chattool'
+        url: 'activity_assist/activity_assist'
       }]
     }, {
       id: 'api',
