@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "聊天工具",
+  "renderer": "webview",
+  "componentFramework": "glass-easel",
+  "usingComponents": {
+    "t-collapse": "../../../components/tdesign-miniprogram/collapse/collapse",
+    "t-collapse-panel": "../../../components/tdesign-miniprogram/collapse-panel/collapse-panel",
+    "t-cell": "../../../components/tdesign-miniprogram/cell/cell",
+    "t-cell-group": "../../../components/tdesign-miniprogram/cell-group/cell-group",
+    "t-icon": "../../../components/tdesign-miniprogram/icon/icon"
+  }
+}

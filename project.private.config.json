@@ -12,6 +12,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packageAPI/pages/chattool/material_view/material_view",
+          "pathName": "packageAPI/pages/chattool/material_view/material_view",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "packageAPI/pages/chattool/material_open/material_open",
+          "pathName": "packageAPI/pages/chattool/material_open/material_open",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "聊天工具-活动详情",
           "pathName": "packageChatTool/pages/activity_detail/index",
           "query": "",

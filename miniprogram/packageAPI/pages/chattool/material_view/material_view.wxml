@@ -1,0 +1,31 @@
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
+
+<scroll-view type="list" class="page-container" scroll-y>
+	<view class="container page" data-weui-theme="{{theme}}">
+		<template is="head" data="{{title: '聊天内容展示'}}" />
+		<view class="page-body">
+			<block wx:if="{{materials.length}}">
+        <view class="chat-list">
+          <block wx:for="{{materials}}" wx:key="messageId">
+            <view class="chat-item">
+              <view>消息 id: {{item.messageId}}</view>
+              <view>消息类型: {{item.type}} </view>
+              <block wx:if="{{item.recordType === 'text'}}">
+                <view>消息内容: {{item.content}}</view>
+              </block>
+              <block wx:elif="{{item.recordType === 'image'}}">
+                <image class="chat-img" src="{{item.path}}" mode="aspectFill"/>
+              </block>
+              <block wx:else>
+                <view>文件路径: {{item.path}}</view>
+              </block>
+            </view>
+          </block>
+        </view>
+      </block>
+		</view>
+		<template is="foot" />
+	</view>
+</scroll-view>
+

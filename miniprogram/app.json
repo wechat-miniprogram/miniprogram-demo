@@ -190,7 +190,9 @@
         "pages/ai/mobilenet/index",
         "pages/ai/style-trans/index",
         "pages/ai/mobilenet_int8/index",
-        "pages/chattool/activity_assist/activity_assist"
+        "pages/chattool/activity_assist/activity_assist",
+        "pages/chattool/material_open/material_open",
+        "pages/chattool/material_view/material_view"
       ]
     },
     {
@@ -507,5 +509,21 @@
   },
   "renderer": "skyline",
   "componentFramework": "glass-easel",
-  "appBar": {}
+  "appBar": {},
+  "supportedMaterials": [
+    {
+      "materialType": "image/*",
+      "name": "用${nickname}打开",
+      "desc": "聊天内容长按打开",
+      "path": "pages/chattool/material_open/material_open"
+    }
+  ],
+  "multiSelectSupportedMaterials": [
+    {
+      "materialType": ["image/*", "text/message"],
+      "desc": "聊天内容长按多选打开",
+      "path": "pages/chattool/material_open/material_open",
+      "scopes": []
+    }
+  ]
 }
