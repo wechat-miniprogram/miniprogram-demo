@@ -24,7 +24,6 @@ export function getGroupEnterInfo() {
               roomid: opengid || openSingleRoomID,
               chatType: groupInfo.data.chat_type
             }
-            console.info('@@@ groupInfo: ', data)
             resolve(data)
           } else {
             reject()
@@ -37,7 +36,7 @@ export function getGroupEnterInfo() {
         reject(res)
       },
       complete(res) {
-        console.info('@@@ getGroupEnterInfo complete: ',res)
+        console.info('getGroupEnterInfo complete: ',res)
       }
     })
   })

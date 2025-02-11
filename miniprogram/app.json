@@ -515,14 +515,14 @@
       "materialType": "image/*",
       "name": "用${nickname}打开",
       "desc": "聊天内容长按打开",
-      "path": "pages/chattool/material_open/material_open"
+      "path": "packageAPI/pages/chattool/material_open/material_open"
     }
   ],
   "multiSelectSupportedMaterials": [
     {
       "materialType": ["image/*", "text/message"],
       "desc": "聊天内容长按多选打开",
-      "path": "pages/chattool/material_open/material_open",
+      "path": "packageAPI/pages/chattool/material_open/material_open",
       "scopes": []
     }
   ]

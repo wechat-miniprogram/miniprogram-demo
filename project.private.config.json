@@ -12,6 +12,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "聊天工具-签到助手",
+          "pathName": "packageAPI/pages/chattool/activity_assist/activity_assist",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "packageAPI/pages/chattool/material_view/material_view",
           "pathName": "packageAPI/pages/chattool/material_view/material_view",
           "query": "",
@@ -35,13 +42,6 @@
         {
           "name": "聊天工具-创建活动",
           "pathName": "packageChatTool/pages/activity_create/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "聊天工具-签到助手",
-          "pathName": "packageAPI/pages/chattool/open-chattool/open-chattool",
           "query": "",
           "launchMode": "default",
           "scene": null

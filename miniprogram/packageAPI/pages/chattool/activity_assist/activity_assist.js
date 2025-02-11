@@ -1,3 +1,5 @@
+const util = require('../../../../util/util')
+const systemInfo = wx.getSystemInfoSync()
 Page({
   data: {
     activityList: [],
@@ -17,6 +19,15 @@ Page({
   },
 
   onLoad() {
+    if (util.compareVersion(systemInfo.SDKVersion, '3.7.8') < 0) {
+      wx.showModal({
+        title: '需升级微信到新版本体验',
+        showCancel: false,
+        content: '',
+      })
+      return
+    }
+
     wx.cloud.init({
       // env 参数说明：
       //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
