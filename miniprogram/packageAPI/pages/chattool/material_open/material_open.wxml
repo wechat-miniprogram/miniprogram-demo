@@ -8,7 +8,6 @@
 			<button bind:tap="viewChatMaterials" class="btn" type="primary">查看聊天内容</button>
       <button bind:tap="shareUpdatableMessage" class="btn" type="primary">发送动态消息卡片</button>
 			<button bind:tap="signIn" class="btn" type="primary">签到动态消息卡片</button>
-			<button bind:tap="remindExpiration" class="btn" type="primary">设置动态消息即将结束</button>
       <button bind:tap="earlyTerminate" class="btn" type="primary">设置动态消息结束</button>
       <button bind:tap="changeNeedShowEntrance" class="btn" type="primary">{{needShowEntrance ? '显示' : '隐藏'}}发送消息小尾巴</button>
 			<form bind:submitToGroup="onSubmitToGroup">

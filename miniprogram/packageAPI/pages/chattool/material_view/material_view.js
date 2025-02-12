@@ -128,7 +128,6 @@ Page({
     wx.getChatForwardMaterials({
       needGroupOpenID: true,
       success(res) {
-        res.materials = mockData.materials
         if (res.materials) {
           that.formatMaterials(res.materials)
         }
@@ -137,7 +136,6 @@ Page({
   },
 
   formatMaterials(forwardMaterials = []) {
-    let id = 0
     const materials = []
     for (let item of forwardMaterials) {
       let recordType = ''

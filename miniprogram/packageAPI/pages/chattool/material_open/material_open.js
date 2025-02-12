@@ -1,7 +1,8 @@
 import { getGroupEnterInfo } from '../util'
+const config = require('../../../../config')
 
 let needShowEntrance = true
-let entrancePath = 'pages/chattool/material_open/material_open'
+let entrancePath = 'packageAPI/pages/chattool/material_open/material_open'
 let templateId = '4A68CBB88A92B0A9311848DBA1E94A199B166463' // 完成
 // let templateId = '2A84254B945674A2F88CE4970782C402795EB607' // 参与
 
@@ -30,8 +31,9 @@ Page({
     this._activityId = options.activityId
 
     wx.cloud.init({
+      env: config.envId,
       traceUser: true,
-    });
+    })
     
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'
@@ -142,6 +144,7 @@ Page({
   },
 
   shareUpdatableMessage() {
+    const that = this
     wx.cloud.callFunction({
       name: 'openapi',
       data: {
@@ -163,6 +166,7 @@ Page({
             title: '动态消息卡片',
             path: `${entrancePath}?activityId=${activityId}`,
             complete(res) {
+              that._activityId = activityId
               console.info('shareAppMessageToGroup: ', res)
             }
           })
@@ -176,7 +180,7 @@ Page({
 
   shareImage() {
     wx.downloadFile({
-      url: 'https://res.wx.qq.com/wxdoc/dist/assets/img/demo.ef5c5bef.jpg',
+      url: 'https://cdc-opendesign-1258344706.cos.ap-guangzhou.myqcloud.com/image/emywrxo77wrzaj3kn3exgk81c1e5x6767l/k689zkwkdmj9ngm/2024/11/06/vlnycdv60lakegvyup38kfh2wbhuzgha2ua6xfdfxxcdoaf6/xj812q7y2n3obyq/abe09549-8469-4e6d-a4f2-7c7e20cdad54.png?imageMogr2/thumbnail/600x340%3E',
       success: (res) => {
         wx.shareImageToGroup({
           imagePath: res.tempFilePath, // 本地路径或临时路径
