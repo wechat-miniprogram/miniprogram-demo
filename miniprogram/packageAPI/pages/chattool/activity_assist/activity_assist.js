@@ -43,8 +43,10 @@ Page({
         this.setData({ theme })
       })
     }
+  },
 
-    this.fetchActivityList()
+  onShow() {
+    this.refresh()
   },
 
   refresh() {

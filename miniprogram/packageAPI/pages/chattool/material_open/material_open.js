@@ -9,6 +9,20 @@ let templateId = '4A68CBB88A92B0A9311848DBA1E94A199B166463' // 完成
 const fileUrl = 'https://res.wx.qq.com/open/js/jweixin-1.6.0.js'
 const videoUrl = 'https://res.wx.qq.com/op_res/o3RWIC_o--wNf_qA3B4ghHbL_qKRRwsUM39dGTzltCR2__61DnEANInj5AJJmVXsHvx9FyHlDftU3KhcGCukDA'
 
+const {envVersion} = wx.getAccountInfoSync().miniProgram
+
+const getVersionType = () => {
+  if (envVersion === 'release') {
+    return 0
+  } else if (envVersion === 'develop') {
+    return 1
+  } else if (envVersion === 'trial') {
+    return 2
+  }
+
+  return 0
+}
+
 Page({
   data: {
     members: [],
@@ -121,7 +135,7 @@ Page({
         templateId,
         targetState: targetState || 1,
         parameterList: parameterList || [],
-        versionType: 1
+        versionType: getVersionType()
       }
     }).then(resp => {
       console.info('updateChatToolMsg: ', resp)

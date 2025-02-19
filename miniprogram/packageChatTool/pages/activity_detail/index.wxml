@@ -93,7 +93,7 @@
 				</t-button>
 			</view>
 
-			<view class="card">
+			<view class="card" wx:if="{{participant.length}}">
         <t-button
          class="btn"
 				 bind:tap="sendProgress"

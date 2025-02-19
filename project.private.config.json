@@ -12,6 +12,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "packageChatTool/pages/activity_create/index",
+          "pathName": "packageChatTool/pages/activity_create/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "聊天工具-签到助手",
           "pathName": "packageAPI/pages/chattool/activity_assist/activity_assist",
           "query": "",

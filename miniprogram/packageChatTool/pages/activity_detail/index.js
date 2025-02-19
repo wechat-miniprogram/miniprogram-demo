@@ -5,6 +5,20 @@ const roleType = ['unkown', 'owner', 'participant', 'nonParticipant']
 
 const activityStatus = ['未开始', '进行中', '已结束']
 
+const {envVersion} = wx.getAccountInfoSync().miniProgram
+
+const getVersionType = () => {
+  if (envVersion === 'release') {
+    return 0
+  } else if (envVersion === 'develop') {
+    return 1
+  } else if (envVersion === 'trial') {
+    return 2
+  }
+
+  return 0
+}
+
 Page({
 
   data: {
@@ -240,7 +254,7 @@ Page({
         targetState: targetState || 1,
         templateId: templateId,
         parameterList: parameterList || [],
-        versionType: 1
+        versionType: getVersionType()
       }
     }).then(resp => {
       console.info('updateChatToolMsg: ', resp)
@@ -278,7 +292,7 @@ Page({
   },
 
   sendProgress() {
-    const { progressImage, activityId } = this.data
+    const { progressImage, activityId} = this.data
     const entrancePath = `packageChatTool/pages/activity_detail/index?activityId=${activityId}`
     wx.shareImageToGroup({
       imagePath: progressImage,
