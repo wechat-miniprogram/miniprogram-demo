@@ -80,7 +80,10 @@ Page({
 
   onGoHome() {
     wx.reLaunch({
-      url: '/packageAPI/pages/chattool/open-chattool/open-chattool',
+      url: '/packageAPI/pages/chattool/activity_assist/activity_assist',
+      complete(res) {
+        console.info("relaunch", res)
+      }
     })
   },
 
@@ -170,7 +173,7 @@ Page({
       title: activityInfo.title,
       type: 'participate',
       members: notSignIn,
-      entrancePath: `chatTool-2/activity_detail/index?activityId=${activityId}`,
+      entrancePath: `packageChatTool/pages/activity_detail/index?activityId=${activityId}`,
       complete(res) {
         console.info('notifyGroupMembers: ', res)
       }

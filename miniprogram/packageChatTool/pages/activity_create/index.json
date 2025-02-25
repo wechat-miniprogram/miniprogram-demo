@@ -7,8 +7,7 @@
     "t-cell-group": "../../components/tdesign-miniprogram/cell-group/cell-group",
     "t-button": "../../components/tdesign-miniprogram/button/button",
     "t-image": "../../components/tdesign-miniprogram/image/image",
-    "t-icon": "../../components/tdesign-miniprogram/icon/icon",
-    "api-category": "../../components/apiCategory/index"
+    "t-icon": "../../components/tdesign-miniprogram/icon/icon"
   },
   "navigationStyle": "custom"
 }

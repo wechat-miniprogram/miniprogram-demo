@@ -3,6 +3,18 @@ import { getChatToolInfo } from '../../util'
 
 // const defaultShareImage = 'https://p9.itc.cn/q_70/images03/20211124/d7dce66b866c4ccd805190a4925ff707.png'
 
+function checkTitle(str) {
+  const regex = /^[\u4e00-\u9fa5a-zA-Z0-9]+$/
+  let actualLength = 0
+  for (let i = 0; i < str.length; i++) {
+    actualLength += /[\u4e00-\u9fa5]/.test(str[i]) ? 2 : 1
+  }
+  if (actualLength === 0 || actualLength > 20) {
+    return false
+  }
+  return regex.test(str)
+}
+
 Page({
 
   data: {
@@ -181,10 +193,18 @@ Page({
       useAssigner,
     } = this.data
 
+    if (!checkTitle(title)) {
+      wx.showToast({
+        title: '标题只能为中英文数字，长度小于20',
+        icon: 'none'
+      })
+      return
+    }
+
     if (!title || !dateTextStart || !dateTextEnd || !shareImage) {
       wx.showToast({
         icon: 'none',
-        title: '表单未填写',
+        title: '表单未填写完',
       })
       return
     }

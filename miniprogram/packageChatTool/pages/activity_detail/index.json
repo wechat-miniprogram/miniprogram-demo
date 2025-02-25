@@ -11,8 +11,7 @@
     "t-tabs": "../../components/tdesign-miniprogram/tabs/tabs",
     "t-tab-panel": "../../components/tdesign-miniprogram/tab-panel/tab-panel",
     "t-progress": "../../components/tdesign-miniprogram/progress/progress",
-    "t-loading": "../../components/tdesign-miniprogram/loading/loading",
-    "api-category": "../../components/apiCategory/index"
+    "t-loading": "../../components/tdesign-miniprogram/loading/loading"
   },
   "navigationStyle": "custom"
 }
