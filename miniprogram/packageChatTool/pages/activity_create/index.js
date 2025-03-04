@@ -9,7 +9,7 @@ function checkTitle(str) {
   for (let i = 0; i < str.length; i++) {
     actualLength += /[\u4e00-\u9fa5]/.test(str[i]) ? 2 : 1
   }
-  if (actualLength === 0 || actualLength > 20) {
+  if (actualLength === 0 || actualLength > 30) {
     return false
   }
   return regex.test(str)
@@ -195,7 +195,7 @@ Page({
 
     if (!checkTitle(title)) {
       wx.showToast({
-        title: '标题只能为中英文数字，长度小于20',
+        title: '标题只能为中英文数字，长度小于30',
         icon: 'none'
       })
       return
