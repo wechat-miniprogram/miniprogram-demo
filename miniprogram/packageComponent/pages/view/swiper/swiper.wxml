@@ -1,8 +1,8 @@
 <import src="../../../../common/head.wxml" />
 <import src="../../../../common/foot.wxml" />
 
-<!-- <mp-navigation-bar title="swiper" back="{{true}}"></mp-navigation-bar> -->
-<!-- <template is="head" data="{{title: 'swiper'}}"/> -->
+<mp-navigation-bar title="swiper" back="{{true}}"></mp-navigation-bar>
+<template is="head" data="{{title: 'swiper'}}"/>
 <scroll-view class="page-scroll-view" scroll-y type="list">
 <view class="container page" data-weui-theme="{{theme}}">
  <view class="page-body">
@@ -33,8 +33,8 @@
         </view>
        </view>
     </view>
-    <!-- slider在skyline模式下暂时不支持 
-    <view class="page-section page-section-spacing">
+    <!-- slider在skyline模式下暂时不支持  -->
+    <!-- <view class="page-section page-section-spacing">
        <view class="page-section-title">
         <text>幻灯片切换时长(ms)</text>
         <text class="swiper-info">{{duration}}</text>
