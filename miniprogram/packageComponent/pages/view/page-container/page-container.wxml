@@ -1,0 +1,40 @@
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
+<mp-navigation-bar title="page-container" back="{{true}}"></mp-navigation-bar>
+<scroll-view class="page-scroll-view" scroll-y type="list">
+    <view class="container page" data-weui-theme="{{theme}}">
+        <template is="head" data="{{title: 'page-container'}}" />
+        <view class="page-body">
+            <view class="page-section page-section-gap">
+                <view class="title">弹出位置</view>
+                <view class="box">
+                    <button class="btn" bindtap="popup" data-position="right">右侧弹出</button>
+                    <button class="btn" bindtap="popup" data-position="top">顶部弹出</button>
+                    <button class="btn" bindtap="popup" data-position="bottom">底部弹出</button>
+                    <button class="btn" bindtap="popup" data-position="center">中央弹出</button>
+                </view>
+                <view class="title">弹窗圆角</view>
+                <view class="box">
+                    <button class="btn" bindtap="changeRound">设置{{round ? '直角' : '圆角'}}</button>
+                </view>
+                <view class="title">遮罩层</view>
+                <view class="box">
+                    <button class="btn" bindtap="changeOverlay">设置{{overlay ? '无' : '有'}}遮罩</button>
+                    <button class="btn" bindtap="changeOverlayStyle" data-type="black">
+                        黑色半透明遮罩
+                    </button>
+                    <button class="btn" bindtap="changeOverlayStyle" data-type="white">
+                        白色半透明遮罩
+                    </button>
+                    <button class="btn" bindtap="changeOverlayStyle" data-type="blur">模糊遮罩</button>
+                </view>
+            </view>
+        </view>
+        <template is="foot" />
+    </view>
+</scroll-view>
+<page-container show="{{show}}" round="{{round}}" overlay="{{overlay}}" duration="{{duration}}" position="{{position}}" close-on-slide-down="{{false}}" bindbeforeenter="onBeforeEnter" bindenter="onEnter" bindafterenter="onAfterEnter" bindbeforeleave="onBeforeLeave" bindleave="onLeave" bindafterleave="onAfterLeave" bindclickoverlay="onClickOverlay" custom-style="{{customStyle}}" overlay-style="{{overlayStyle}}">
+    <view class="detail-page">
+        <button type="primary" bindtap="exit">推出</button>
+    </view>
+</page-container>

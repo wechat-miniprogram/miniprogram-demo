@@ -1,8 +1,7 @@
 <import src="../../../../common/head.wxml" />
 <import src="../../../../common/foot.wxml" />
-
 <view class="container page" data-weui-theme="{{theme}}">
-  <template is="head" data="{{title: 'cover-view'}}"/>
+  <template is="head" data="{{title: 'cover-view',desc:'目前原生组件均已支持同层渲染，建议使用 view 替代'}}"/>
 
   <view class="page-body">
     <view class="page-section page-section-gap">

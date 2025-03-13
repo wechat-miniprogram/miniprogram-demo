@@ -1,0 +1,15 @@
+.text{
+    margin-bottom: 20px;
+}
+
+.content1 {
+    margin: 30px 0;
+    background-color: aqua;
+    height: 200px;
+}
+
+.content2 {
+    margin: 30px 0;
+    background-color: aquamarine;
+    height: 200px;
+}

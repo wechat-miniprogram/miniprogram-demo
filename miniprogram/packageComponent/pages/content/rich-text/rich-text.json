@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "rich-text",
-  "renderer": "webview"
+  "componentFramework": "glass-easel",
+  "renderer": "skyline",
+  "navigationStyle": "custom"
 }

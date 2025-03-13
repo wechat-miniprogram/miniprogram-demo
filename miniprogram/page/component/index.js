@@ -1,4 +1,17 @@
 Page({
+  onLoad() {
+    console.log('renderer',this.renderer);
+
+    this.setData({
+      theme: wx.getSystemInfoSync().theme || 'light'
+    })
+
+    if (wx.onThemeChange) {
+      wx.onThemeChange(({theme}) => {
+        this.setData({theme})
+      })
+    }
+  },
   onShow() {
     // 仅在 app-bar demo 页面展示
     if (typeof this.getAppBar === 'function' ) {
@@ -10,7 +23,7 @@ Page({
         })
       }
     }
-      
+
     wx.reportAnalytics('enter_home_programmatically', {})
 
     // http://tapd.oa.com/miniprogram_experiment/prong/stories/view/1020425689866413543
@@ -29,6 +42,11 @@ Page({
       wx.reportEvent('weexpt_event_key_1', {option_1: 'abc', option_2: '1000', option_str_1: '1'})
     }
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onShareAppMessage() {
     return {
       title: '小程序官方组件展示',
@@ -45,12 +63,12 @@ Page({
         id: 'view',
         name: '视图容器',
         open: false,
-        pages: ['view', 'scroll-view', 'swiper', 'movable-view', 'cover-view','root-portal','grid-view','sticky',]
+        pages: ['view','swiper','scroll-view','root-portal','page-container','match-media','movable-view', 'cover-view','cover-image','grid-view','sticky',]
       }, {
         id: 'content',
         name: '基础内容',
         open: false,
-        pages: ['text', 'icon', 'progress', 'rich-text']
+        pages: ['text', 'icon', 'progress', 'rich-text', 'selection']
       }, {
         id: 'form',
         name: '表单组件',
@@ -89,23 +107,6 @@ Page({
       }
     ],
     theme: 'light'
-  },
-
-  onUnload() {
-    if (wx.offThemeChange) {
-      wx.offThemeChange()
-    }
-  },
-  onLoad() {
-    this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
-    })
-
-    if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
-      })
-    }
   },
 
   kindToggle(e) {

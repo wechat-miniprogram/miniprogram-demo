@@ -1,3 +1,4 @@
+@import "../../../../common/reset.wxss";
 .page-content {
   width: auto;
   margin: 15px 0;
@@ -25,7 +26,7 @@
   width: 5px;
 }
 
-scroll-view {
+.page-scroll {
   height: 325px;
   border: 1px solid #1AAD19;
   white-space: pre;

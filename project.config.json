@@ -45,7 +45,9 @@
     "localPlugins": false,
     "condition": false,
     "skylineRenderEnable": true,
-    "compileWorklet": true
+    "compileWorklet": true,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "simulatorType": "wechat",
@@ -72,7 +74,7 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wxe5f52902cf4de896",
+  "appid": "wx622bee4f78fa4f5a",
   "projectname": "miniprogram-demo-master",
-  "libVersion": "2.33.0"
+  "libVersion": "3.7.6"
 }

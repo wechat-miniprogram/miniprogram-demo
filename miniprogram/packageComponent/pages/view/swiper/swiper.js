@@ -20,7 +20,6 @@ Page({
     this.setData({
       indicatorDots: !this.data.indicatorDots,
     })
-    console.log(indicatorDots)
   },
 
   changeAutoplay() {

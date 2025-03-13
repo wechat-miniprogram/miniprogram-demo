@@ -3,7 +3,6 @@
 
 <view class="container page" data-weui-theme="{{theme}}">
   <template is="head" data="{{title: 'progress'}}"/>
-
   <view class="page-body">
     <view class="page-section page-section-gap">
 

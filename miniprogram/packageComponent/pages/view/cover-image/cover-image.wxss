@@ -1,0 +1,14 @@
+@import "../../../../common/reset.wxss";
+
+.video{
+    width: 100%;
+}
+.cover-view {
+    position: absolute;
+    top: calc(50% - 75px);
+    left: calc(50% - 150px);
+}
+.cover-image {
+    width: 150px;
+    height: 150px;
+}

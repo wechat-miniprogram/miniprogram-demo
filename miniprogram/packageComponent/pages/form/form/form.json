@@ -1,4 +1,6 @@
 {
     "navigationBarTitleText": "form",
-    "renderer": "webview"
+    "componentFramework": "glass-easel",
+    "renderer": "skyline",
+    "navigationStyle": "custom"
 }

@@ -59,6 +59,12 @@ const pageObject = {
       }
     })
   },
+  handleChooseavatar(e) {
+    console.log('handleChooseavatar', e);
+  },
+  launchAppError(e) {
+    console.log('launchAppError', e.detail.errMsg)
+  },
   onUnload() {
     if (wx.offThemeChange) {
       wx.offThemeChange()
@@ -70,8 +76,8 @@ const pageObject = {
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     if (wx.getUserProfile) {

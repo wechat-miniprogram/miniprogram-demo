@@ -1,7 +1,10 @@
 {
-    "usingComponents": {
-      "popup": "../../../../components/popup/index"
-    },
-    "navigationBarTitleText": "root-portal",
-    "renderer": "webview"
-  }
+  "usingComponents": {
+    "popup": "../../../../components/popup/index"
+  },
+  "navigationBarTitleText": "root-portal",
+  "componentFramework": "glass-easel",
+  "renderer": "skyline",
+  "disableScroll": true,
+  "navigationStyle": "custom"
+}

@@ -1,8 +1,10 @@
 <import src="../../../../common/head.wxml" />
 <import src="../../../../common/foot.wxml" />
-<!-- <mp-navigation-bar title="root-portal" back="{{true}}"></mp-navigation-bar> -->
-<scroll-view type="list" scroll-y style="width: 100%; overflow: auto; height: 500px">
-  <view style="background-color:#6bbc7a; height: 200px;">
+<mp-navigation-bar title="root-portal" back="{{true}}"></mp-navigation-bar>
+<template is="head" data="{{title: 'root-portal'}}"/>
+<view style="padding: 20px;text-align: center;">点击下面方块打开全局弹窗</view> 
+<scroll-view type="list" scroll-y style="width: 100%; overflow: auto; height: 500px;">
+  <view style="background-color: #6bbc7a; height: 200px; position: relative;" bindtap="tap">
     <popup show="{{show}}" style="display: flex; width: 100%; height: 100%;">
       <view class="dialog">我是全局弹窗</view>
     </popup>
@@ -10,5 +12,4 @@
   <view wx:for="{{items}}" wx:key="index" style="height: 50px; {{item.bg}}" bindtap="tap"></view>
   <view class="item-title">abc</view>
 </scroll-view>
-<view class="page-body"></view> 
-
+<template is="foot"/>

@@ -12,7 +12,6 @@
         <block wx:for="{{extraLine}}">
           <text>{{item}}</text>
         </block>
-        <!-- <text>{{text}}</text> -->
       </view>
       <button disabled="{{!canAdd}}" bindtap="add">add line</button>
       <button disabled="{{!canRemove}}" bindtap="remove">remove line</button>
