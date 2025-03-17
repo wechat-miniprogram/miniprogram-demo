@@ -1,6 +1,6 @@
 Page({
   onLoad() {
-    console.log('renderer',this.renderer);
+    console.log('renderer', this.renderer)
 
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'
@@ -14,7 +14,7 @@ Page({
   },
   onShow() {
     // 仅在 app-bar demo 页面展示
-    if (typeof this.getAppBar === 'function' ) {
+    if (typeof this.getAppBar === 'function') {
       const appBarComp = this.getAppBar()
       // component.getAppBar 在 Skyline 中返回 appBar 组件实例，在 webview 中返回 null
       if (appBarComp !== null) {
@@ -63,7 +63,7 @@ Page({
         id: 'view',
         name: '视图容器',
         open: false,
-        pages: ['view','swiper','scroll-view','root-portal','page-container','match-media','movable-view', 'cover-view','cover-image','grid-view','sticky',]
+        pages: ['view', 'swiper', 'scroll-view', 'root-portal', 'page-container', 'match-media', 'movable-view', 'cover-view', 'grid-view', 'sticky']
       }, {
         id: 'content',
         name: '基础内容',
@@ -83,12 +83,12 @@ Page({
         id: 'media',
         name: '媒体组件',
         open: false,
-        pages: ['image', 'video', 'camera', 'live-pusher', 'live-player','channel-live','channel-video']
+        pages: ['image', 'video', 'camera', 'live-pusher', 'live-player', 'channel-live', 'channel-video']
       }, {
         id: 'map',
         name: '地图',
         open: false,
-        pages: ['map', { appid: 'wxe3f314db2e921db0', name: '腾讯位置服务示例中心'}]
+        pages: ['map', {appid: 'wxe3f314db2e921db0', name: '腾讯位置服务示例中心'}]
       }, {
         id: 'canvas',
         name: '画布',
@@ -132,10 +132,10 @@ Page({
   },
   // 打开自定义路由页面
   goToCustomRoute: function goToCustomRoute(evt) {
-    const { url } = evt.currentTarget.dataset
+    const {url} = evt.currentTarget.dataset
     wx.navigateTo({
       routeType: 'ScaleTransition',
       url: `/packageSkyline/pages/${url}`
-    });
+    })
   },
 })

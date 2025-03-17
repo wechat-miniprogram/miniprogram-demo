@@ -44,7 +44,6 @@
         "pages/view/sticky/sticky-section/sticky-section",
         "pages/view/movable-view/movable-view",
         "pages/view/cover-view/cover-view",
-        "pages/view/cover-image/cover-image",
         "pages/view/match-media/match-media",
         "pages/view/page-container/page-container",
         "pages/view/sticky/sticky",
