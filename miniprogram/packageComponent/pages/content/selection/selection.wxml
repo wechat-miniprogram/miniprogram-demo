@@ -24,7 +24,7 @@
                 <rich-text id="rich-text-1" user-select="{{true}}">rich-text</rich-text>
                 <rich-text id="rich-text-2" user-select="{{true}}" nodes="{{htmlSnip}}"></rich-text>
             </selection>
-            <text id="before-text" user-select="{{true}}">在 wx-selection 之后的 text</text>
+            <text id="before-text" user-select="{{true}}">在 selection 之后的 text</text>
         </scroll-view>
     </view>
     <view class="button" wx:if="{{showBtn}}" bind:tap="copySelectedString" style="top:{{btnY - 50}}px;left:{{btnX}}px">

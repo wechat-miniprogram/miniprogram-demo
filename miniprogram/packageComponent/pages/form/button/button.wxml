@@ -38,7 +38,6 @@
       <button wx:if="{{canIUseGetUserProfile}}" type="primary" lang="zh_CN" bindtap="handleGetUserProfile"> 获取用户信息 </button>
       <button wx:else type="primary" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleGetUserInfo">获取用户信息</button>
       <button type="primary" open-type="chooseAvatar" bindchooseavatar="handleChooseavatar">获取用户头像</button>
-      <button type="primary" open-type="launchApp" app-parameter="wechat" binderror="launchAppError">打开APP</button>
       <button type="primary" open-type="openSetting" bindopensetting="handleOpenSetting">打开设置授权页</button>
       <button type="primary" open-type="feedback">打开意见反馈</button>
     </view>
