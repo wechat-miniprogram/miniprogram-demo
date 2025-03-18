@@ -60,10 +60,14 @@ const pageObject = {
     })
   },
   handleChooseavatar(e) {
-    console.log('handleChooseavatar', e);
-  },
-  launchAppError(e) {
-    console.log('launchAppError', e.detail.errMsg)
+    console.log('handleChooseavatar', e)
+    const avatarUrl = e.detail.avatarUrl
+    // 把 url 提示出来
+    wx.showToast({
+      title: avatarUrl,
+      icon: 'none',
+      duration: 3000
+    })
   },
   onUnload() {
     if (wx.offThemeChange) {
@@ -76,8 +80,8 @@ const pageObject = {
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({ theme }) => {
-        this.setData({ theme })
+      wx.onThemeChange(({theme}) => {
+        this.setData({theme})
       })
     }
     if (wx.getUserProfile) {
