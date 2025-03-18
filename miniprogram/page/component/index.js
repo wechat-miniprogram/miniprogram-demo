@@ -1,7 +1,20 @@
 Page({
+  onLoad() {
+    console.log('renderer', this.renderer)
+
+    this.setData({
+      theme: wx.getSystemInfoSync().theme || 'light'
+    })
+
+    if (wx.onThemeChange) {
+      wx.onThemeChange(({theme}) => {
+        this.setData({theme})
+      })
+    }
+  },
   onShow() {
     // 仅在 app-bar demo 页面展示
-    if (typeof this.getAppBar === 'function' ) {
+    if (typeof this.getAppBar === 'function') {
       const appBarComp = this.getAppBar()
       // component.getAppBar 在 Skyline 中返回 appBar 组件实例，在 webview 中返回 null
       if (appBarComp !== null) {
@@ -10,7 +23,7 @@ Page({
         })
       }
     }
-      
+
     wx.reportAnalytics('enter_home_programmatically', {})
 
     // http://tapd.oa.com/miniprogram_experiment/prong/stories/view/1020425689866413543
@@ -29,6 +42,11 @@ Page({
       wx.reportEvent('weexpt_event_key_1', {option_1: 'abc', option_2: '1000', option_str_1: '1'})
     }
   },
+  onUnload() {
+    if (wx.offThemeChange) {
+      wx.offThemeChange()
+    }
+  },
   onShareAppMessage() {
     return {
       title: '小程序官方组件展示',
@@ -45,12 +63,12 @@ Page({
         id: 'view',
         name: '视图容器',
         open: false,
-        pages: ['view', 'scroll-view', 'swiper', 'movable-view', 'cover-view','root-portal','grid-view','sticky',]
+        pages: ['view', 'swiper', 'scroll-view', 'root-portal', 'page-container', 'match-media', 'movable-view', 'cover-view', 'grid-view', 'sticky']
       }, {
         id: 'content',
         name: '基础内容',
         open: false,
-        pages: ['text', 'icon', 'progress', 'rich-text']
+        pages: ['text', 'icon', 'progress', 'rich-text', 'selection']
       }, {
         id: 'form',
         name: '表单组件',
@@ -65,12 +83,12 @@ Page({
         id: 'media',
         name: '媒体组件',
         open: false,
-        pages: ['image', 'video', 'camera', 'live-pusher', 'live-player','channel-live','channel-video']
+        pages: ['image', 'video', 'camera', 'live-pusher', 'live-player', 'channel-live', 'channel-video']
       }, {
         id: 'map',
         name: '地图',
         open: false,
-        pages: ['map', { appid: 'wxe3f314db2e921db0', name: '腾讯位置服务示例中心'}]
+        pages: ['map', {appid: 'wxe3f314db2e921db0', name: '腾讯位置服务示例中心'}]
       }, {
         id: 'canvas',
         name: '画布',
@@ -89,23 +107,6 @@ Page({
       }
     ],
     theme: 'light'
-  },
-
-  onUnload() {
-    if (wx.offThemeChange) {
-      wx.offThemeChange()
-    }
-  },
-  onLoad() {
-    this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
-    })
-
-    if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
-      })
-    }
   },
 
   kindToggle(e) {
@@ -131,10 +132,10 @@ Page({
   },
   // 打开自定义路由页面
   goToCustomRoute: function goToCustomRoute(evt) {
-    const { url } = evt.currentTarget.dataset
+    const {url} = evt.currentTarget.dataset
     wx.navigateTo({
       routeType: 'ScaleTransition',
       url: `/packageSkyline/pages/${url}`
-    });
+    })
   },
 })

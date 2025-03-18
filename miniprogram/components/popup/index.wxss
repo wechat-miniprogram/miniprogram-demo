@@ -7,13 +7,14 @@ root-portal {
 .popup {
   position: absolute;
   bottom: 0;
+  top: 0;
   z-index: 5000;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 200px;
+  /* height: 200px; */
   background: rgba(51, 51, 51, 0.65);
   opacity: 1;
   transform: scale3d(1, 1, 1);

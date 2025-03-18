@@ -1,0 +1,34 @@
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
+<view class="container page" data-weui-theme="{{theme}}">
+    <template is="head" data="{{title: 'selection'}}" />
+    <view class="content">
+        <scroll-view class="scroll-area" type="list">
+            <text id="before-text" user-select="{{true}}">在 wx-selection 之前的 text</text>
+            <selection bind:selectionchange="selectionChangeHandler" disable-context-menu="{{false}}">
+                <text id="text-wrap" user-select="{{true}}">
+                    <text id="text-1">2011年1月，微信1.0发布。同年5月，微信2.0语音对讲发布</text>
+                    <text id="text-2">
+                        10月，微信3.0新增摇一摇功能
+                        <text id="text-3">2012年3月，微信用户突破1亿。4月份，微信4.0朋友圈发布</text>
+                    </text>
+                    <text id="text-4">同年7月，微信4.2发布公众平台。2013年8月，微信5.0发布微信支付。</text>
+                </text>
+                <text id="text-wrap2" user-select="{{true}}">2014年9月，企业号发布。同月，发布微信卡包</text>
+                <text id="text-wrap3" user-select="{{false}}">
+                    <text id="text-31" user-select="{{true}}">2015年1月，微信第一条朋友圈广告</text>
+                </text>
+                <view>
+                    <text id="view-text" user-select="{{true}}">2016年1月，企业微信发布，2017年1月，小程序发布</text>
+                </view>
+                <rich-text id="rich-text-1" user-select="{{true}}">rich-text</rich-text>
+                <rich-text id="rich-text-2" user-select="{{true}}" nodes="{{htmlSnip}}"></rich-text>
+            </selection>
+            <text id="before-text" user-select="{{true}}">在 selection 之后的 text</text>
+        </scroll-view>
+    </view>
+    <view class="button" wx:if="{{showBtn}}" bind:tap="copySelectedString" style="top:{{btnY - 50}}px;left:{{btnX}}px">
+        点我复制到系统
+    </view>
+    <template is="foot" />
+</view>

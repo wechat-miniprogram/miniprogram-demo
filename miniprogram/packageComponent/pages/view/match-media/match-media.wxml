@@ -1,0 +1,18 @@
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
+<view class="container page" data-weui-theme="{{theme}}">
+    <template is="head" data="{{title: 'movable-view'}}" />
+    <view class="page-body">
+        <view class="page-section page-section-gap">
+            <view class="text">当页面宽度在 200 ~ 600 px 之间时展示下面方块</view>
+            <match-media min-width="200" max-width="600">
+                <view class="content1"></view>
+            </match-media>
+            <view>当页面高度不小于 150 px 且屏幕方向为纵向时展示下面方块</view>
+            <match-media min-height="150" orientation="landscape">
+                <view class="content2"></view>
+            </match-media>
+        </view>
+    </view>
+    <template is="foot" />
+</view>

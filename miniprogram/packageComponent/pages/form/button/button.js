@@ -59,6 +59,16 @@ const pageObject = {
       }
     })
   },
+  handleChooseavatar(e) {
+    console.log('handleChooseavatar', e)
+    const avatarUrl = e.detail.avatarUrl
+    // 把 url 提示出来
+    wx.showToast({
+      title: avatarUrl,
+      icon: 'none',
+      duration: 3000
+    })
+  },
   onUnload() {
     if (wx.offThemeChange) {
       wx.offThemeChange()

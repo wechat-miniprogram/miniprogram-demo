@@ -6,6 +6,7 @@
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
     "skylineRenderEnable": true
+    "coverView": true,
   },
   "projectname": "miniprogram-demo-master",
   "condition": {

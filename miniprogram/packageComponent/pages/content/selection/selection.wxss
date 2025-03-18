@@ -1,0 +1,28 @@
+.scroll-area {
+  flex: 1;
+  overflow-y: hidden;
+}
+.content{
+  flex: 1;
+  padding:0 20px
+}
+.intro {
+  padding: 30px;
+  text-align: center;
+}
+
+.button {
+  position: absolute;
+  background-color: #1aad19;
+  color: white;
+  width: 120px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #159e14;
+}
