@@ -36,7 +36,7 @@
       </block>
     </view>
 
-    <view class='weui-navigation-bar__right'>
+    <view class='weui-navigation-bar__right__slot'>
       <slot name="right"></slot>
     </view>
   </view>
