@@ -2,6 +2,5 @@
   "component": true,
   "usingComponents": {},
   "componentFramework": "glass-easel",
-  "renderer": "skyline",
-  "styleIsolation": "apply-shared"
+  "renderer": "skyline"
 }
