@@ -1,9 +1,7 @@
-
 const uuid3 = '0C76801A-62EB-45E5-96A8-37C8882ABB2B'
 const serviceId = 'D0611E78-BBB4-4591-A5F8-487910AE4366'
 const characteristicId = '8667556C-9A37-4C91-84ED-54EE27D90049'
 // 上面需要配置主机的 serviceId 和 characteristicId
-
 
 // ArrayBuffer转16进制字符串示例
 // function ab2hex(buffer) {
@@ -141,7 +139,7 @@ Page({
     }).catch(() => {})
   },
   closeServer() {
-    if (this.server) { 
+    if (this.server) {
       this.server.close()
       wx.showToast({
         title: '关闭 server',

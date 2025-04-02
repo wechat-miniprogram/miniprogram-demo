@@ -20,7 +20,7 @@ Page({
     wx.request({
       url: requestUrl,
       data: {
-    theme: 'light',
+        theme: 'light',
         noncestr: Date.now()
       },
       success(result) {
