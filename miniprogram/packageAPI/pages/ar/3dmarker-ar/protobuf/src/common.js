@@ -1,6 +1,6 @@
-module.exports = common;
+module.exports = common
 
-var commonRe = /\/|\./;
+const commonRe = /\/|\./
 
 /**
  * Provides common type definitions.
@@ -23,11 +23,11 @@ var commonRe = /\/|\./;
  * protobuf.common("my/foo/bar.proto", myFooBarJson);
  */
 function common(name, json) {
-    if (!commonRe.test(name)) {
-        name = "google/protobuf/" + name + ".proto";
-        json = { nested: { google: { nested: { protobuf: { nested: json } } } } };
-    }
-    common[name] = json;
+  if (!commonRe.test(name)) {
+    name = 'google/protobuf/' + name + '.proto'
+    json = {nested: {google: {nested: {protobuf: {nested: json}}}}}
+  }
+  common[name] = json
 }
 
 // Not provided because of limited use (feel free to discuss or to provide yourself):
@@ -39,9 +39,9 @@ function common(name, json) {
 // Stripped and pre-parsed versions of these non-bundled files are instead available as part of
 // the repository or package within the google/protobuf directory.
 
-common("any", {
+common('any', {
 
-    /**
+  /**
      * Properties of a google.protobuf.Any message.
      * @interface IAny
      * @type {Object}
@@ -49,25 +49,25 @@ common("any", {
      * @property {Uint8Array} [bytes]
      * @memberof common
      */
-    Any: {
-        fields: {
-            type_url: {
-                type: "string",
-                id: 1
-            },
-            value: {
-                type: "bytes",
-                id: 2
-            }
-        }
+  Any: {
+    fields: {
+      type_url: {
+        type: 'string',
+        id: 1
+      },
+      value: {
+        type: 'bytes',
+        id: 2
+      }
     }
-});
+  }
+})
 
-var timeType;
+let timeType
 
-common("duration", {
+common('duration', {
 
-    /**
+  /**
      * Properties of a google.protobuf.Duration message.
      * @interface IDuration
      * @type {Object}
@@ -75,23 +75,23 @@ common("duration", {
      * @property {number} [nanos]
      * @memberof common
      */
-    Duration: timeType = {
-        fields: {
-            seconds: {
-                type: "int64",
-                id: 1
-            },
-            nanos: {
-                type: "int32",
-                id: 2
-            }
-        }
+  Duration: timeType = {
+    fields: {
+      seconds: {
+        type: 'int64',
+        id: 1
+      },
+      nanos: {
+        type: 'int32',
+        id: 2
+      }
     }
-});
+  }
+})
 
-common("timestamp", {
+common('timestamp', {
 
-    /**
+  /**
      * Properties of a google.protobuf.Timestamp message.
      * @interface ITimestamp
      * @type {Object}
@@ -99,41 +99,41 @@ common("timestamp", {
      * @property {number} [nanos]
      * @memberof common
      */
-    Timestamp: timeType
-});
+  Timestamp: timeType
+})
 
-common("empty", {
+common('empty', {
 
-    /**
+  /**
      * Properties of a google.protobuf.Empty message.
      * @interface IEmpty
      * @memberof common
      */
-    Empty: {
-        fields: {}
-    }
-});
+  Empty: {
+    fields: {}
+  }
+})
 
-common("struct", {
+common('struct', {
 
-    /**
+  /**
      * Properties of a google.protobuf.Struct message.
      * @interface IStruct
      * @type {Object}
      * @property {Object.<string,IValue>} [fields]
      * @memberof common
      */
-    Struct: {
-        fields: {
-            fields: {
-                keyType: "string",
-                type: "Value",
-                id: 1
-            }
-        }
-    },
+  Struct: {
+    fields: {
+      fields: {
+        keyType: 'string',
+        type: 'Value',
+        id: 1
+      }
+    }
+  },
 
-    /**
+  /**
      * Properties of a google.protobuf.Value message.
      * @interface IValue
      * @type {Object}
@@ -146,237 +146,237 @@ common("struct", {
      * @property {IListValue} [listValue]
      * @memberof common
      */
-    Value: {
-        oneofs: {
-            kind: {
-                oneof: [
-                    "nullValue",
-                    "numberValue",
-                    "stringValue",
-                    "boolValue",
-                    "structValue",
-                    "listValue"
-                ]
-            }
-        },
-        fields: {
-            nullValue: {
-                type: "NullValue",
-                id: 1
-            },
-            numberValue: {
-                type: "double",
-                id: 2
-            },
-            stringValue: {
-                type: "string",
-                id: 3
-            },
-            boolValue: {
-                type: "bool",
-                id: 4
-            },
-            structValue: {
-                type: "Struct",
-                id: 5
-            },
-            listValue: {
-                type: "ListValue",
-                id: 6
-            }
-        }
+  Value: {
+    oneofs: {
+      kind: {
+        oneof: [
+          'nullValue',
+          'numberValue',
+          'stringValue',
+          'boolValue',
+          'structValue',
+          'listValue'
+        ]
+      }
     },
+    fields: {
+      nullValue: {
+        type: 'NullValue',
+        id: 1
+      },
+      numberValue: {
+        type: 'double',
+        id: 2
+      },
+      stringValue: {
+        type: 'string',
+        id: 3
+      },
+      boolValue: {
+        type: 'bool',
+        id: 4
+      },
+      structValue: {
+        type: 'Struct',
+        id: 5
+      },
+      listValue: {
+        type: 'ListValue',
+        id: 6
+      }
+    }
+  },
 
-    NullValue: {
-        values: {
-            NULL_VALUE: 0
-        }
-    },
+  NullValue: {
+    values: {
+      NULL_VALUE: 0
+    }
+  },
 
-    /**
+  /**
      * Properties of a google.protobuf.ListValue message.
      * @interface IListValue
      * @type {Object}
      * @property {Array.<IValue>} [values]
      * @memberof common
      */
-    ListValue: {
-        fields: {
-            values: {
-                rule: "repeated",
-                type: "Value",
-                id: 1
-            }
-        }
+  ListValue: {
+    fields: {
+      values: {
+        rule: 'repeated',
+        type: 'Value',
+        id: 1
+      }
     }
-});
+  }
+})
 
-common("wrappers", {
+common('wrappers', {
 
-    /**
+  /**
      * Properties of a google.protobuf.DoubleValue message.
      * @interface IDoubleValue
      * @type {Object}
      * @property {number} [value]
      * @memberof common
      */
-    DoubleValue: {
-        fields: {
-            value: {
-                type: "double",
-                id: 1
-            }
-        }
-    },
+  DoubleValue: {
+    fields: {
+      value: {
+        type: 'double',
+        id: 1
+      }
+    }
+  },
 
-    /**
+  /**
      * Properties of a google.protobuf.FloatValue message.
      * @interface IFloatValue
      * @type {Object}
      * @property {number} [value]
      * @memberof common
      */
-    FloatValue: {
-        fields: {
-            value: {
-                type: "float",
-                id: 1
-            }
-        }
-    },
+  FloatValue: {
+    fields: {
+      value: {
+        type: 'float',
+        id: 1
+      }
+    }
+  },
 
-    /**
+  /**
      * Properties of a google.protobuf.Int64Value message.
      * @interface IInt64Value
      * @type {Object}
      * @property {number|Long} [value]
      * @memberof common
      */
-    Int64Value: {
-        fields: {
-            value: {
-                type: "int64",
-                id: 1
-            }
-        }
-    },
+  Int64Value: {
+    fields: {
+      value: {
+        type: 'int64',
+        id: 1
+      }
+    }
+  },
 
-    /**
+  /**
      * Properties of a google.protobuf.UInt64Value message.
      * @interface IUInt64Value
      * @type {Object}
      * @property {number|Long} [value]
      * @memberof common
      */
-    UInt64Value: {
-        fields: {
-            value: {
-                type: "uint64",
-                id: 1
-            }
-        }
-    },
+  UInt64Value: {
+    fields: {
+      value: {
+        type: 'uint64',
+        id: 1
+      }
+    }
+  },
 
-    /**
+  /**
      * Properties of a google.protobuf.Int32Value message.
      * @interface IInt32Value
      * @type {Object}
      * @property {number} [value]
      * @memberof common
      */
-    Int32Value: {
-        fields: {
-            value: {
-                type: "int32",
-                id: 1
-            }
-        }
-    },
+  Int32Value: {
+    fields: {
+      value: {
+        type: 'int32',
+        id: 1
+      }
+    }
+  },
 
-    /**
+  /**
      * Properties of a google.protobuf.UInt32Value message.
      * @interface IUInt32Value
      * @type {Object}
      * @property {number} [value]
      * @memberof common
      */
-    UInt32Value: {
-        fields: {
-            value: {
-                type: "uint32",
-                id: 1
-            }
-        }
-    },
+  UInt32Value: {
+    fields: {
+      value: {
+        type: 'uint32',
+        id: 1
+      }
+    }
+  },
 
-    /**
+  /**
      * Properties of a google.protobuf.BoolValue message.
      * @interface IBoolValue
      * @type {Object}
      * @property {boolean} [value]
      * @memberof common
      */
-    BoolValue: {
-        fields: {
-            value: {
-                type: "bool",
-                id: 1
-            }
-        }
-    },
+  BoolValue: {
+    fields: {
+      value: {
+        type: 'bool',
+        id: 1
+      }
+    }
+  },
 
-    /**
+  /**
      * Properties of a google.protobuf.StringValue message.
      * @interface IStringValue
      * @type {Object}
      * @property {string} [value]
      * @memberof common
      */
-    StringValue: {
-        fields: {
-            value: {
-                type: "string",
-                id: 1
-            }
-        }
-    },
+  StringValue: {
+    fields: {
+      value: {
+        type: 'string',
+        id: 1
+      }
+    }
+  },
 
-    /**
+  /**
      * Properties of a google.protobuf.BytesValue message.
      * @interface IBytesValue
      * @type {Object}
      * @property {Uint8Array} [value]
      * @memberof common
      */
-    BytesValue: {
-        fields: {
-            value: {
-                type: "bytes",
-                id: 1
-            }
-        }
+  BytesValue: {
+    fields: {
+      value: {
+        type: 'bytes',
+        id: 1
+      }
     }
-});
+  }
+})
 
-common("field_mask", {
+common('field_mask', {
 
-    /**
+  /**
      * Properties of a google.protobuf.FieldMask message.
      * @interface IDoubleValue
      * @type {Object}
      * @property {number} [value]
      * @memberof common
      */
-    FieldMask: {
-        fields: {
-            paths: {
-                rule: "repeated",
-                type: "string",
-                id: 1
-            }
-        }
+  FieldMask: {
+    fields: {
+      paths: {
+        rule: 'repeated',
+        type: 'string',
+        id: 1
+      }
     }
-});
+  }
+})
 
 /**
  * Gets the root definition of the specified common proto file.
@@ -394,5 +394,5 @@ common("field_mask", {
  * @returns {INamespace|null} Root definition or `null` if not defined
  */
 common.get = function get(file) {
-    return common[file] || null;
-};
+  return common[file] || null
+}
