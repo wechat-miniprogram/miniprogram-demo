@@ -5,7 +5,7 @@ import cameraBufferBehavior from './cameraBufferBehavior'
 const NEAR = 0.001
 const FAR = 1000
 
-//初始化着色器函数
+// 初始化着色器函数
 let initShadersDone = false
 
 Component({
@@ -21,13 +21,13 @@ Component({
      */
     detached() {
       initShadersDone = false
-      console.log("页面detached")
+      console.log('页面detached')
       if (wx.offThemeChange) {
         wx.offThemeChange()
       }
     },
     ready() {
-      console.log("页面准备完全")
+      console.log('页面准备完全')
       this.setData({
         theme: wx.getSystemInfoSync().theme || 'light'
       })
@@ -51,13 +51,11 @@ Component({
       initShadersDone = true
     },
     render(frame) {
-      if(!initShadersDone)
-        return;
-      var gl = this.gl
+      if (!initShadersDone) return
+      const gl = this.gl
 
       this.renderGL(frame)
       this.renderCameraBufferGL(frame)
-
 
       const camera = frame.camera
 
