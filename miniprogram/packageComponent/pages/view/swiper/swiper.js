@@ -6,7 +6,7 @@ Page({
     }
   },
 
- data: {
+  data: {
     theme: 'light',
     background: ['A', 'B', 'C'],
     indicatorDots: true,
