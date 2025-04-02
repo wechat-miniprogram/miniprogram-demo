@@ -14,7 +14,6 @@ function showSuccess(title) {
   })
 }
 
-
 Page({
   onShareAppMessage() {
     return {
