@@ -58,7 +58,6 @@ App({
     })
   },
 
-
   onShow(opts) {
     console.log('App Show', opts)
     console.log('USER_DATA_PATH', wx.env.USER_DATA_PATH)
