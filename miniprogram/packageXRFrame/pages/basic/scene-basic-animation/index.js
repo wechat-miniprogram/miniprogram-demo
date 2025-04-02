@@ -1,6 +1,7 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
-var xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
+
+const xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
 &lt;xr-assets bind:progress=&quot;handleAssetsProgress&quot; bind:loaded=&quot;handleAssetsLoaded&quot;&gt;
   &lt;xr-asset-load asset-id=&quot;basic-anim&quot; type=&quot;keyframe&quot; src=&quot;/assets/animation/basic-animation.json&quot;/&gt;
   &lt;xr-asset-material asset-id=&quot;standard-mat&quot; effect=&quot;standard&quot; /&gt;
@@ -39,7 +40,7 @@ var xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
   /&gt;
 &lt;/xr-node&gt;
 &lt;/xr-scene&gt;
-`;
+`
 
 const json = `
 {
@@ -88,13 +89,12 @@ const json = `
   }
   </div>
 
-}`;
+}`
 
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
-    json: json
+    json
   }
-});
-
+})

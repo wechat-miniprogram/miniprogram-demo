@@ -27,29 +27,28 @@ Component({
   lifetimes: {
     detached() {
       // 关闭时候去除计时器
-      clearInterval(this.innerInterval);
+      clearInterval(this.innerInterval)
     }
   },
   methods: {
     handleReady({detail}) {
-      const xrScene = this.scene = detail.value;
-      console.log('xr-scene', xrScene);
-
+      const xrScene = this.scene = detail.value
+      console.log('xr-scene', xrScene)
 
       // 加载场景资源
-      const gltfResList = [];
-      const videoResList = [];
+      const gltfResList = []
+      const videoResList = []
 
-      const markerList = this.data.markerList;
-      for(let i = 0; i < markerList.length; i++) {
-        const marker = markerList[i];
+      const markerList = this.data.markerList
+      for (let i = 0; i < markerList.length; i++) {
+        const marker = markerList[i]
         switch (marker.renderType) {
           case 'gltf':
-            gltfResList.push(marker);
-            break;
+            gltfResList.push(marker)
+            break
           case 'video':
-            videoResList.push(marker);
-            break;
+            videoResList.push(marker)
+            break
         }
       }
 
@@ -59,9 +58,9 @@ Component({
         console.log('[gltf load] error: ', err)
       }
     },
-    handleARReady: function() {
+    handleARReady() {
       console.log('arReady')
-      this.setData({ arReady: true })
+      this.setData({arReady: true})
     },
     async loadGLTF(gltfList) {
       const scene = this.scene
@@ -71,20 +70,20 @@ Component({
         src: gltfItem.src,
       })))
       console.log('glTF asset loaded')
-      this.setData({ gltfLoaded: true })
+      this.setData({gltfLoaded: true})
     },
     async loadVideoSingle(videoItem) {
       const scene = this.scene
       const videoTexture = await scene.assets.loadAsset({
         type: 'video-texture',
-        assetId: `video-` + videoItem.id,
+        assetId: 'video-' + videoItem.id,
         src: videoItem.src,
-        options: { loop: true, autoPlay: true },
-      });
+        options: {loop: true, autoPlay: true},
+      })
       // console.log('videoTexture', videoTexture);
       const videoMat = scene.createMaterial(
         scene.assets.getAsset('effect', 'simple'),
-        { u_baseColorMap: videoTexture.value.texture }
+        {u_baseColorMap: videoTexture.value.texture}
       )
       scene.assets.addAsset('material', `video-mat-${videoItem.id}`, videoMat)
 
@@ -98,40 +97,40 @@ Component({
         // 存在纹理才进行释放
         const scene = this.scene
         // 释放加载过的资源
-        scene.assets.releaseAsset('video-texture', `video-${id}`);
-        scene.assets.releaseAsset('material', `video-mat-${id}`);
+        scene.assets.releaseAsset('video-texture', `video-${id}`)
+        scene.assets.releaseAsset('material', `video-mat-${id}`)
       }
     },
-    handleTrackerSwitch({ detail }) {
+    handleTrackerSwitch({detail}) {
       console.log('tracked match')
       if (this.data.loaded) {
-        const element = detail.el;
-        const active = detail.value;
-        const data = this.data;
-        const markerList = data.markerList;
+        const element = detail.el
+        const active = detail.value
+        const data = this.data
+        const markerList = data.markerList
         for (let i = 0; i < markerList.length; i++) {
-          const markerInfo = markerList[i];
+          const markerInfo = markerList[i]
           const markerTracker = this.scene.getElementById(`marker-${markerInfo.id}`)
           if (element === markerTracker) {
             // 处理视频纹理
-            this.releaseVideo(this.videoId);
-            this.videoId = -1;
+            this.releaseVideo(this.videoId)
+            this.videoId = -1
             // 匹配 tracker
             switch (markerInfo.renderType) {
               case 'scan': // scan
-                this.scanHandler(markerTracker, markerInfo, active);
-                break;
+                this.scanHandler(markerTracker, markerInfo, active)
+                break
               case 'video': // video
                 if (active) {
-                  this.videoHanler(markerInfo);
+                  this.videoHanler(markerInfo)
                 }
-                break;
+                break
               case 'gltf': // gltf
-                break;
+                break
             }
             this.triggerEvent('trackerchange', {
               name: markerInfo.name,
-              active: active,
+              active,
               type: markerInfo.renderType,
             })
           }
@@ -141,9 +140,9 @@ Component({
     scanHandler(markerTracker, markerInfo, active) {
       const renderType = markerInfo.renderType
       const xrFrameSystem = wx.getXrFrameSystem()
-      const camera = this.scene.getElementById('camera').getComponent(xrFrameSystem.Camera);
+      const camera = this.scene.getElementById('camera').getComponent(xrFrameSystem.Camera)
       const trackerTRS = markerTracker.getComponent(xrFrameSystem.Transform)
-      const rightTRS = this.scene.getElementById(`normal-right-${markerInfo.id}`).getComponent(xrFrameSystem.Transform);
+      const rightTRS = this.scene.getElementById(`normal-right-${markerInfo.id}`).getComponent(xrFrameSystem.Transform)
       const trackerPos = camera.convertWorldPositionToClip(trackerTRS.worldPosition)
       const rightPos = camera.convertWorldPositionToClip(rightTRS.worldPosition)
       const posX = ((trackerPos.x + 1) / 2)
@@ -168,7 +167,7 @@ Component({
       // 通知上层
       this.triggerEvent('trackerchange', {
         name: markerInfo.name,
-        active: active,
+        active,
         type: renderType,
         trackerInfo: {
           x: posX,
@@ -179,10 +178,10 @@ Component({
       })
       if (active) {
         // 激活态开启tracker位置同步
-        let preX = posX;
-        let preY = posY;
+        let preX = posX
+        let preY = posY
         let preR = rightPosX
-        this.innerInterval = setInterval(()=>{
+        this.innerInterval = setInterval(() => {
           const tPos = camera.convertWorldPositionToClip(trackerTRS.worldPosition)
           const rPos = camera.convertWorldPositionToClip(rightTRS.worldPosition)
           const pX = ((tPos.x + 1) / 2)
@@ -194,8 +193,8 @@ Component({
           const dR = Math.abs(rX - preR)
 
           if (dX > 0.005 || dY > 0.005 || dR > 0.005) {
-            preX = pX;
-            preY = pY;
+            preX = pX
+            preY = pY
             preR = rX
             this.triggerEvent('trackermove', {
               active: true,
@@ -222,7 +221,6 @@ Component({
           }
         })
       }
-
     },
     videoHanler(markerInfo) {
       this.setData({
@@ -238,14 +236,13 @@ Component({
             width,
             height
           } = res
-          const widthDivideHeight = width / height;
+          const widthDivideHeight = width / height
 
           this.setData({
             markerWidth: 1,
             markerHeight: (1 / widthDivideHeight).toFixed(2),
             videoRatioLoaded: true,
-          });
-
+          })
         },
         fail: res => {
           console.error(res)
@@ -258,7 +255,7 @@ Component({
         console.log('[video load] error: ', err)
       }
 
-      this.videoId = markerInfo.id;
+      this.videoId = markerInfo.id
     }
   }
 })

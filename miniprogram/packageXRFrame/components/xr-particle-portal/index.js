@@ -9,7 +9,7 @@ Component({
       type: Number,
       value: 5
     },
-    lifeTime:{
+    lifeTime: {
       type: Number,
       value: 3
     }
@@ -20,26 +20,25 @@ Component({
   lifetimes: {},
   methods: {
     handleReady({detail}) {
-      const xrScene = this.scene = detail.value;
-      console.log('xr-scene', xrScene);
+      const xrScene = this.scene = detail.value
+      console.log('xr-scene', xrScene)
       const xrFrameSystem = wx.getXrFrameSystem()
 
-      const portal = xrScene.getElementById("portal");
+      const portal = xrScene.getElementById('portal')
       const tempSystem = portal.getComponent(xrFrameSystem.Particle)
-      tempSystem.addSizeGradient(0,1,1);
-      tempSystem.addSizeGradient(0.5,0.8,0.8);
-      tempSystem.addSizeGradient(0.75,0.5,0.5);
-      tempSystem.addSizeGradient(0.9,0.2,0.2);
-      tempSystem.addSizeGradient(1,0,0);
+      tempSystem.addSizeGradient(0, 1, 1)
+      tempSystem.addSizeGradient(0.5, 0.8, 0.8)
+      tempSystem.addSizeGradient(0.75, 0.5, 0.5)
+      tempSystem.addSizeGradient(0.9, 0.2, 0.2)
+      tempSystem.addSizeGradient(1, 0, 0)
     },
 
-    handleAssetsProgress: function({detail}) {
-      console.log('assets progress', detail.value);
-      
+    handleAssetsProgress({detail}) {
+      console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded: function({detail}) {
-      console.log('assets loaded', detail.value);
-      this.setData({loaded: true});
+    handleAssetsLoaded({detail}) {
+      console.log('assets loaded', detail.value)
+      this.setData({loaded: true})
     }
   }
 })

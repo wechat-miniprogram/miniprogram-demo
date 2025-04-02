@@ -11,54 +11,52 @@ Component({
   },
   methods: {
     handleReady({detail}) {
-      const xrScene = this.scene = detail.value;
-      xrScene.event.add('tick', this.handleTick.bind(this));
-      console.log('xr-scene', xrScene);
+      const xrScene = this.scene = detail.value
+      xrScene.event.add('tick', this.handleTick.bind(this))
+      console.log('xr-scene', xrScene)
 
       // 同步点信息
-      const syncNumber = 24;
-      
-      let syncStr = '';
-      const syncList = [];
+      const syncNumber = 24
+
+      let syncStr = ''
+      const syncList = []
 
       for (let i = 0; i <= syncNumber; i++) {
-        const colorFloat = i / 16;
-        const colorR = 1.0 - colorFloat;
-        syncStr += ` ${i}`;
+        const colorFloat = i / 16
+        const colorR = 1.0 - colorFloat
+        syncStr += ` ${i}`
         syncList.push(`1.0 ${colorR} ${colorR} 1.0`)
       }
 
-
       this.setData({
         trackerReady: true,
-        syncNumber: syncNumber,
-        syncStr: syncStr,
-        syncList: syncList
+        syncNumber,
+        syncStr,
+        syncList
       })
     },
-    handleAssetsProgress: function ({detail}) {
-      console.log('assets progress', detail.value);
+    handleAssetsProgress({detail}) {
+      console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded: function ({detail}) {
-      console.log('assets loaded', detail.value);
-      this.setData({loaded: true});
+    handleAssetsLoaded({detail}) {
+      console.log('assets loaded', detail.value)
+      this.setData({loaded: true})
     },
-    handleARReady: function ({detail}) {
-      console.log('arReady');
-      this.setData({arReady: true});
+    handleARReady({detail}) {
+      console.log('arReady')
+      this.setData({arReady: true})
     },
-    handleTick: function () {
-      const xrSystem = wx.getXrFrameSystem();
-      const trackerEl = this.scene.getElementById('tracker');
+    handleTick() {
+      const xrSystem = wx.getXrFrameSystem()
+      const trackerEl = this.scene.getElementById('tracker')
       if (!trackerEl) {
-        return;
-      }
-
-      const tracker = trackerEl.getComponent(xrSystem.ARTracker);
-      if (!tracker.arActive) {
         return
       }
 
+      const tracker = trackerEl.getComponent(xrSystem.ARTracker)
+      if (!tracker.arActive) {
+
+      }
     }
   }
 })

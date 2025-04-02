@@ -9,7 +9,7 @@ Component({
       type: Number,
       value: 5
     },
-    lifeTime:{
+    lifeTime: {
       type: Number,
       value: 3
     }
@@ -22,11 +22,10 @@ Component({
     handleReady({detail}) {
     },
 
-    handleAssetsProgress: function({detail}) {
-      console.log('assets progress', detail.value);
-      
+    handleAssetsProgress({detail}) {
+      console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded: function({detail}) {
+    handleAssetsLoaded({detail}) {
 
     }
   }

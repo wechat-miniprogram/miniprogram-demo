@@ -5,9 +5,9 @@ Component({
   },
   methods: {
     handleReady({detail}) {
-      const xrFrameSystem  = wx.getXrFrameSystem()
+      const xrFrameSystem = wx.getXrFrameSystem()
       const createFrameEffect = (scene) => {
-        const xrFrameSystem  = wx.getXrFrameSystem()
+        const xrFrameSystem = wx.getXrFrameSystem()
         return scene.createEffect({
           name: 'frame-effect',
           properties: [
@@ -17,14 +17,14 @@ Component({
               default: 1
             },
             {
-                key: 'rowCount',
-                type: xrFrameSystem.EUniformType.FLOAT,
-                default: 1
+              key: 'rowCount',
+              type: xrFrameSystem.EUniformType.FLOAT,
+              default: 1
             },
             {
-                key: 'during',
-                type: xrFrameSystem.EUniformType.FLOAT,
-                default: 1
+              key: 'during',
+              type: xrFrameSystem.EUniformType.FLOAT,
+              default: 1
             }
           ],
           images: [
@@ -90,53 +90,51 @@ Component({
               vec4 color = texture2D(u_baseColorMap, texCoord);
               gl_FragColor = color;
             }`
-            ],
-        });
+          ],
+        })
       }
       console.log('序列帧特效加载')
       xrFrameSystem.registerEffect('frame-effect', createFrameEffect)
-      const xrScene = this.scene = detail.value;
+      const xrScene = this.scene = detail.value
       this.loadAsset()
     },
-    async loadAsset(){
-        const xrFrameSystem = wx.getXrFrameSystem();
-        const xrScene = this.scene;
-        // const shadowRoot = xrScene.getElementById("shadow-root");
+    async loadAsset() {
+      const xrFrameSystem = wx.getXrFrameSystem()
+      const xrScene = this.scene
+      // const shadowRoot = xrScene.getElementById("shadow-root");
 
-        await xrScene.assets.loadAsset({type: 'texture', assetId: 'frame', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/sprite-frames.png'})
+      await xrScene.assets.loadAsset({type: 'texture', assetId: 'frame', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/sprite-frames.png'})
 
-        // 第一个参数是效果实例的引用，第二个参数是默认`uniforms`
-        const frameMaterial = xrScene.createMaterial(
-            // 使用定制的效果
-            xrScene.assets.getAsset('effect', 'frame-effect'),
-            {u_baseColorMap: xrScene.assets.getAsset('texture', 'frame')}
-        );
-        
-        // 可以将其添加到资源系统中备用
-        xrScene.assets.addAsset('material', 'frame-effect', frameMaterial);
+      // 第一个参数是效果实例的引用，第二个参数是默认`uniforms`
+      const frameMaterial = xrScene.createMaterial(
+        // 使用定制的效果
+        xrScene.assets.getAsset('effect', 'frame-effect'),
+        {u_baseColorMap: xrScene.assets.getAsset('texture', 'frame')}
+      )
 
-        const meshElement = xrScene.getElementById("animation-mesh").getComponent(xrFrameSystem.Mesh);
-        frameMaterial.setFloat('columCount', 4);
-        frameMaterial.setFloat('rowCount', 32);
-        frameMaterial.setFloat('during', 2);
-        frameMaterial.alphaMode = "BLEND";
-        meshElement.material = frameMaterial;
+      // 可以将其添加到资源系统中备用
+      xrScene.assets.addAsset('material', 'frame-effect', frameMaterial)
 
-        // 不同的序列帧需要使用不同的材质
-        const frameMaterial2 = xrScene.createMaterial(
-          // 使用定制的效果
-          xrScene.assets.getAsset('effect', 'frame-effect'),
-          {u_baseColorMap: xrScene.assets.getAsset('texture', 'frame')}
-      );
+      const meshElement = xrScene.getElementById('animation-mesh').getComponent(xrFrameSystem.Mesh)
+      frameMaterial.setFloat('columCount', 4)
+      frameMaterial.setFloat('rowCount', 32)
+      frameMaterial.setFloat('during', 2)
+      frameMaterial.alphaMode = 'BLEND'
+      meshElement.material = frameMaterial
 
-        const meshElement2 = xrScene.getElementById("animation-mesh2").getComponent(xrFrameSystem.Mesh);
-        frameMaterial2.setFloat('columCount', 4);
-        frameMaterial2.setFloat('rowCount', 32);
-        frameMaterial2.setFloat('during', 2);
-        frameMaterial2.alphaMode = "BLEND";
-        meshElement2.material = frameMaterial2;
+      // 不同的序列帧需要使用不同的材质
+      const frameMaterial2 = xrScene.createMaterial(
+        // 使用定制的效果
+        xrScene.assets.getAsset('effect', 'frame-effect'),
+        {u_baseColorMap: xrScene.assets.getAsset('texture', 'frame')}
+      )
 
-
+      const meshElement2 = xrScene.getElementById('animation-mesh2').getComponent(xrFrameSystem.Mesh)
+      frameMaterial2.setFloat('columCount', 4)
+      frameMaterial2.setFloat('rowCount', 32)
+      frameMaterial2.setFloat('during', 2)
+      frameMaterial2.alphaMode = 'BLEND'
+      meshElement2.material = frameMaterial2
     },
   }
 })

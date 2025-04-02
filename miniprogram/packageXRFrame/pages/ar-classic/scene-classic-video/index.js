@@ -1,6 +1,7 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
-var xmlCode = `&lt;xr-scene ar-system=&quot;modes:Marker&quot; bind:ready=&quot;handleReady&quot;&gt;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
+
+const xmlCode = `&lt;xr-scene ar-system=&quot;modes:Marker&quot; bind:ready=&quot;handleReady&quot;&gt;
   &lt;xr-assets bind:progress=&quot;handleAssetsProgress&quot; bind:loaded=&quot;handleAssetsLoaded&quot;&gt;
   &lt;xr-asset-load
       type=&quot;video-texture&quot; asset-id=&quot;hikari&quot;
@@ -16,11 +17,10 @@ var xmlCode = `&lt;xr-scene ar-system=&quot;modes:Marker&quot; bind:ready=&quot;
       background=&quot;ar&quot; is-ar-camera
     /&gt;
   &lt;/xr-node&gt;
-&lt;/xr-scene&gt;`;
+&lt;/xr-scene&gt;`
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>'
   }
-});
-
+})

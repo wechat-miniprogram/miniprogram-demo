@@ -6,17 +6,17 @@ Component({
   lifetimes: {},
   methods: {
     handleReady({detail}) {
-      const xrScene = this.scene = detail.value;
-      console.log('xr-scene', xrScene);
+      const xrScene = this.scene = detail.value
+      console.log('xr-scene', xrScene)
     },
-    handleAssetsProgress: function({detail}) {
-      this.triggerEvent('assetsProgress', detail.value);
+    handleAssetsProgress({detail}) {
+      this.triggerEvent('assetsProgress', detail.value)
     },
-    handleAssetsLoaded: function({detail}) {
-      this.triggerEvent('assetsLoaded', detail.value);
+    handleAssetsLoaded({detail}) {
+      this.triggerEvent('assetsLoaded', detail.value)
     },
-    handleRaf: function({detail}) {
-      console.log('raf', detail.value);
+    handleRaf({detail}) {
+      console.log('raf', detail.value)
     }
   }
 })

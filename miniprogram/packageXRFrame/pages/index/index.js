@@ -1,23 +1,23 @@
 // 自定义组件
-import '../../xr-custom/components/AutoRotate';
-import '../../xr-custom/components/Particle/SystemProperty/BasicParticle';
-import '../../xr-custom/components/Particle/index';
-import '../../xr-custom/elements/xr-auto-rotate-touchable-gltf';
-import '../../xr-custom/elements/xr-custom-particle';
+import '../../xr-custom/components/AutoRotate'
+import '../../xr-custom/components/Particle/SystemProperty/BasicParticle'
+import '../../xr-custom/components/Particle/index'
+import '../../xr-custom/elements/xr-auto-rotate-touchable-gltf'
+import '../../xr-custom/elements/xr-custom-particle'
 // 自定义Geometry
-import '../../xr-custom/assets/geometry-star';
-import '../../xr-custom/assets/geometry-specialCylinder';
+import '../../xr-custom/assets/geometry-star'
+import '../../xr-custom/assets/geometry-specialCylinder'
 // 自定义材质
-import '../../xr-custom/elements/xr-shining-star';
+import '../../xr-custom/elements/xr-shining-star'
 // 自定义effect
-import '../../xr-custom/assets/effect-shining';
-import '../../xr-custom/assets/effect-last-record-final';
+import '../../xr-custom/assets/effect-shining'
+import '../../xr-custom/assets/effect-last-record-final'
 
-import list from './data/index';
+import list from './data/index'
 
-let lastOpened = false;
-let lastCount = 0;
-let first = true;
+let lastOpened = false
+let lastCount = 0
+let first = true
 
 Page({
   data: {
@@ -26,11 +26,11 @@ Page({
   },
   onLoad() {
     if (first) {
-      console.log('Entry xr-frame index page');
-      wx.reportEvent("xr_frame", {
-        "xr_page_path": '/pages/index/index'
-      });
-      first = false;
+      console.log('Entry xr-frame index page')
+      wx.reportEvent('xr_frame', {
+        xr_page_path: '/pages/index/index'
+      })
+      first = false
     }
   },
   onShareAppMessage() {
@@ -44,16 +44,16 @@ Page({
     }
   },
   clickHandle(e) {
-    let root = this.data.root;
-    let { name, path } = e.detail.item;
+    const root = this.data.root
+    const {name, path} = e.detail.item
 
     if (!path) {
-      return;
+      return
     }
 
     if (path === '/pages/scene-last-record/index') {
-      this.handleLastRecord();
-      return;
+      this.handleLastRecord()
+      return
     }
 
     if (path) {
@@ -63,52 +63,52 @@ Page({
         },
         fail: () => {
         },
-      });
+      })
     }
   },
-  handleLastRecord: async function () {
+  async handleLastRecord() {
     if (lastOpened) {
-      return;
+      return
     }
 
-    lastCount += 1;
+    lastCount += 1
     // if (Math.random() >= (0.34 + lastCount * 0.1)) {
     //   return;
     // }
 
-    let root = this.data.root;
-    lastOpened = true;
+    const root = this.data.root
+    lastOpened = true
 
     wx.request({
       url: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-gate.txt',
-      success: function (res) {
+      success(res) {
         wx.showModal({
           title: '一把钥匙',
           content: res.data,
           confirmText: '探寻真实',
           cancelText: '放下钥匙',
-          success: function(res) {
+          success(res) {
             if (res.cancel) {
               wx.onAppShow((result) => {
-                lastOpened = false;
-              });
-              return;
+                lastOpened = false
+              })
+              return
             }
 
             wx.navigateTo({
               url: root + '/pages/scene-last-record/index',
               success: () => {
                 wx.onAppShow((result) => {
-                  lastOpened = false;
-                });
+                  lastOpened = false
+                })
               }
-            });
+            })
           }
-        });
+        })
       },
-      fail: function (err) {
-        lastOpened = false;
+      fail(err) {
+        lastOpened = false
       }
-    });
+    })
   }
-});
+})

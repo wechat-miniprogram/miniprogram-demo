@@ -1,7 +1,7 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
 
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     showBackBtn: true,
     resourceData: {
@@ -15,40 +15,40 @@ Page({
     // 准备加载数据
   },
   tapResBtn(event) {
-    const dataSet = event.target.dataset;
-    const src = dataSet.src;
-    const index = dataSet.index;
-    let onFlags = this.data.onFlags;
-    onFlags = !onFlags;
-    let videoListNew;
-    if(onFlags){
-      videoListNew = this.data.videoList;
+    const dataSet = event.target.dataset
+    const src = dataSet.src
+    const index = dataSet.index
+    let onFlags = this.data.onFlags
+    onFlags = !onFlags
+    let videoListNew
+    if (onFlags) {
+      videoListNew = this.data.videoList
       videoListNew.push({
         id: index,
-        src: src
-      });
+        src
+      })
     } else {
-      let matchIndex = -1;
+      let matchIndex = -1
       for (let i = 0; i < this.data.videoList.length; i++) {
-        if (this.data.videoList[i] &&  src === this.data.videoList[i].src) {
-          matchIndex = i;
-          break;
+        if (this.data.videoList[i] && src === this.data.videoList[i].src) {
+          matchIndex = i
+          break
         }
       }
-      this.data.videoList.splice(matchIndex, 1);
-      videoListNew = this.data.videoList;
+      this.data.videoList.splice(matchIndex, 1)
+      videoListNew = this.data.videoList
     }
 
     this.setData({
       videoList: videoListNew,
-      onFlags: onFlags
-    });
+      onFlags
+    })
   },
   handleInfoListener(cur) {
-    const detail = cur.detail;
+    const detail = cur.detail
 
     this.setData({
-    });
+    })
   }
-  
-});
+
+})

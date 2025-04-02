@@ -33,7 +33,7 @@ Component({
   },
   lifetimes: {
     attached() {
-      wx.xrTitle = this.data.title;
+      wx.xrTitle = this.data.title
     }
   },
   methods: {

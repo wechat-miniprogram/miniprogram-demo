@@ -1,8 +1,8 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
-var escapeMarkup = require('../../behavior-scene/util').escapeMarkup;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
+const escapeMarkup = require('../../behavior-scene/util').escapeMarkup
 
-var xmlCode = escapeMarkup(`<xr-scene id="xr-scene" bind:tick="handleTick" bind:ready="handleReady">
+const xmlCode = escapeMarkup(`<xr-scene id="xr-scene" bind:tick="handleTick" bind:ready="handleReady">
 <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
   <xr-asset-load type="texture" asset-id="earth-texture" src="..." />
   <xr-asset-load type="texture" asset-id="moon-texture" src="..." />
@@ -21,14 +21,14 @@ var xmlCode = escapeMarkup(`<xr-scene id="xr-scene" bind:tick="handleTick" bind:
   <xr-light type="ambient" color="1 1 1" intensity="0.1" />
   <xr-light id="directional-light" type="directional" rotation="0 60 0" color="1 1 1" intensity="5" />
 </xr-node>
-</xr-scene>`);
+</xr-scene>`)
 
-var jsCode = "not implemented";
+const jsCode = 'not implemented'
 
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
-    jsCode: jsCode
+    jsCode
   }
-});
+})

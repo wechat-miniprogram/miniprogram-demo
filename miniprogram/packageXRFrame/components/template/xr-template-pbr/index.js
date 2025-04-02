@@ -1,5 +1,3 @@
-
-
 Component({
   behaviors: [require('../../common/share-behavior').default],
   properties: {
@@ -11,35 +9,33 @@ Component({
   lifetimes: {},
   methods: {
     handleReady({detail}) {
-      const xrScene = this.scene = detail.value;
-      console.log('xr-saaacene', xrScene);
-
+      const xrScene = this.scene = detail.value
+      console.log('xr-saaacene', xrScene)
     },
-    handleAssetsProgress: function({detail}) {
-      console.log('assets progress', detail.value);
+    handleAssetsProgress({detail}) {
+      console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded: function({detail}) {
-      console.log('assets loaded', detail.value);
+    handleAssetsLoaded({detail}) {
+      console.log('assets loaded', detail.value)
 
       // 延时保证 glTF 解析完毕
       setTimeout(() => {
-        this.setToon();        
-      }, 200);
-    
+        this.setToon()
+      }, 200)
     },
     setToon() {
-      const scene = this.scene;      
-      const xrFrameSystem  = wx.getXrFrameSystem()
+      const scene = this.scene
+      const xrFrameSystem = wx.getXrFrameSystem()
 
-      const gltfElement = scene.getElementById("gltf");
-      const gltf = gltfElement.getComponent(xrFrameSystem.GLTF);
+      const gltfElement = scene.getElementById('gltf')
+      const gltf = gltfElement.getComponent(xrFrameSystem.GLTF)
 
-      console.log('custom-pbr gltf', gltf);
+      console.log('custom-pbr gltf', gltf)
 
-      for(const mesh of gltf.meshes) {
+      for (const mesh of gltf.meshes) {
         console.log('custom-pbr mesh material', mesh.material)
 
-        console.log('custom-pbr effect', scene.assets.getAsset('effect', 'custom-pbr'));
+        console.log('custom-pbr effect', scene.assets.getAsset('effect', 'custom-pbr'))
 
         const pbrMaterial = scene.createMaterial(
           // 使用定制的效果
@@ -49,8 +45,8 @@ Component({
             u_baseColorMap: mesh.material.getTexture('u_baseColorMap'),
             u_metallicRoughnessMap: mesh.material.getTexture('u_metallicRoughnessMap'),
             u_normalMap: mesh.material.getTexture('u_normalMap'),
-            u_emissiveMap:  mesh.material.getTexture('u_emissiveMap'),
-            u_emissiveFactor:  mesh.material.getTexture('u_emissiveFactor'),
+            u_emissiveMap: mesh.material.getTexture('u_emissiveMap'),
+            u_emissiveFactor: mesh.material.getTexture('u_emissiveFactor'),
             u_occlusionMap: mesh.material.getTexture('u_occlusionMap'),
             u_clearcoatMap: mesh.material.getTexture('u_clearcoatMap'),
             u_specularGlossinessMap: mesh.material.getTexture('u_specularGlossinessMap'),
@@ -63,12 +59,11 @@ Component({
             u_sheenRoughnessMap: mesh.material.getTexture('u_sheenRoughnessMap'),
             u_specularEnvMapMat: mesh.material.getTexture('u_specularEnvMapMat'),
           }
-        );
+        )
 
-        console.log('custom-pbr material', pbrMaterial);
-        mesh.material = pbrMaterial;
+        console.log('custom-pbr material', pbrMaterial)
+        mesh.material = pbrMaterial
       }
-
     }
   }
 })

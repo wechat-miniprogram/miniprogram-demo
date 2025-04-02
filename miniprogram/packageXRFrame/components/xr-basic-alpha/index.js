@@ -17,8 +17,8 @@ Component({
   lifetimes: {},
   methods: {
     handleReady({detail}) {
-      const xrScene = this.scene = detail.value;
-      console.log('xr-scene', xrScene);
+      const xrScene = this.scene = detail.value
+      console.log('xr-scene', xrScene)
     }
   }
 })

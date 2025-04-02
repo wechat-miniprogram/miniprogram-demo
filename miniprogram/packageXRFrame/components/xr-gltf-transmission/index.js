@@ -12,19 +12,19 @@ Component({
     }
   },
   methods: {
-    handleReady: function({detail}) {
-      this.scene = detail.value;
-      console.log('scene', detail.value);
+    handleReady({detail}) {
+      this.scene = detail.value
+      console.log('scene', detail.value)
     },
-    handleAssetsProgress: function({detail}) {
-      console.log('assets progress', detail.value);
+    handleAssetsProgress({detail}) {
+      console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded: function({detail}) {
-      console.log('assets loaded', detail.value);
-      this.setData({loaded: true});
+    handleAssetsLoaded({detail}) {
+      console.log('assets loaded', detail.value)
+      this.setData({loaded: true})
     },
-    handleRaf: function({detail}) {
-      console.log('raf', detail.value);
+    handleRaf({detail}) {
+      console.log('raf', detail.value)
     }
   }
 })

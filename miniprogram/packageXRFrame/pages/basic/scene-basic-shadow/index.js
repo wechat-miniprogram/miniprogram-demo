@@ -1,11 +1,11 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
-var escapeMarkup = require('../../behavior-scene/util').escapeMarkup;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
+const escapeMarkup = require('../../behavior-scene/util').escapeMarkup
 
-var xmlCode = escapeMarkup(`<xr-scene id="xr-scene" bind:ready="handleReady" bind:tick="handleTick">
+const xmlCode = escapeMarkup(`<xr-scene id="xr-scene" bind:ready="handleReady" bind:tick="handleTick">
 <xr-shadow id="shadow-root"></xr-shadow>
-</xr-scene>`);
-var jsCode = `
+</xr-scene>`)
+const jsCode = `
 ...<br>
 addOne() {
   <div class="ml20">
@@ -34,27 +34,26 @@ handleTick: function({detail}) {
   </div>
 },<br>
 ...
-`;
+`
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
-    jsCode:  jsCode,
+    jsCode,
     meshCount: 0
   },
-  handleIncMeshCount: function() {
+  handleIncMeshCount() {
     if (this.data.meshCount > 16) {
-      return;
+      return
     }
 
-    this.setData({meshCount: this.data.meshCount + 1});
+    this.setData({meshCount: this.data.meshCount + 1})
   },
-  handleDecMeshCount: function() {
+  handleDecMeshCount() {
     if (this.data.meshCount <= 0) {
-      return;
+      return
     }
 
-    this.setData({meshCount: this.data.meshCount - 1});
+    this.setData({meshCount: this.data.meshCount - 1})
   }
-});
-
+})

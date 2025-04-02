@@ -1,6 +1,7 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
-var xmlCode = `&lt;xr-scene ar-system=&quot;modes:Marker&quot; id=&quot;xr-scene&quot; bind:ready=&quot;handleReady&quot; bind:arReady=&quot;handleARReady&quot; bind:log=&quot;handleLog&quot;&gt;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
+
+const xmlCode = `&lt;xr-scene ar-system=&quot;modes:Marker&quot; id=&quot;xr-scene&quot; bind:ready=&quot;handleReady&quot; bind:arReady=&quot;handleARReady&quot; bind:log=&quot;handleLog&quot;&gt;
 &lt;xr-assets bind:progress=&quot;handleAssetsProgress&quot; bind:loaded=&quot;handleAssetsLoaded&quot;&gt;
   &lt;xr-asset-material asset-id=&quot;ar-anchor&quot; effect=&quot;standrand&quot; uniforms=&quot;u_baseColorFactor:0 1 0 1&quot;&gt;&lt;/xr-asset-material&gt;
 &lt;/xr-assets&gt;
@@ -20,26 +21,26 @@ var xmlCode = `&lt;xr-scene ar-system=&quot;modes:Marker&quot; id=&quot;xr-scene
   &lt;xr-light type=&quot;directional&quot; rotation=&quot;180 0 0&quot; color=&quot;1 1 1&quot; intensity=&quot;3&quot; /&gt;
 &lt;/xr-node&gt;
 &lt;/xr-scene&gt;
-`;
+`
 Page({
   behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
     markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/2dmarker-test.jpg'
   },
-  handleChangeMarkerImg: function() {
+  handleChangeMarkerImg() {
     wx.chooseMedia({
       count: 1,
       sizeType: ['compressed'],
       mediaType: ['image'],
       sourceType: ['album'],
       success: res => {
-        const fp = res.tempFiles[0].tempFilePath;
-        this.setData({markerImg: fp});
+        const fp = res.tempFiles[0].tempFilePath
+        this.setData({markerImg: fp})
       },
       fail: err => {
-        console.error('[xr-demo]chooseImage failed', err);
+        console.error('[xr-demo]chooseImage failed', err)
       }
-    });
+    })
   }
-});
+})
