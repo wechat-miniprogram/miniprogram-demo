@@ -2,7 +2,7 @@ Page({
   data: {
     theme: 'light',
     sharedata: {
-    theme: 'light',
+      theme: 'light',
       title: '自定义转发标题',
       desc: '自定义转发描述',
       path: 'packageAPI/pages/api/share/share'

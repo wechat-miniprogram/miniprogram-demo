@@ -1,9 +1,8 @@
-"use strict";
-module.exports = Service;
-var util = require("../util");
+module.exports = Service
+const util = require('../util');
 
 // Extends EventEmitter
-(Service.prototype = Object.create(util.EventEmitter.prototype)).constructor = Service;
+(Service.prototype = Object.create(util.EventEmitter.prototype)).constructor = Service
 
 /**
  * A service method callback as used by {@link rpc.ServiceMethod|ServiceMethod}.
@@ -39,29 +38,27 @@ var util = require("../util");
  * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
  */
 function Service(rpcImpl, requestDelimited, responseDelimited) {
+  if (typeof rpcImpl !== 'function') throw TypeError('rpcImpl must be a function')
 
-    if (typeof rpcImpl !== "function")
-        throw TypeError("rpcImpl must be a function");
+  util.EventEmitter.call(this)
 
-    util.EventEmitter.call(this);
-
-    /**
+  /**
      * RPC implementation. Becomes `null` once the service is ended.
      * @type {RPCImpl|null}
      */
-    this.rpcImpl = rpcImpl;
+  this.rpcImpl = rpcImpl
 
-    /**
+  /**
      * Whether requests are length-delimited.
      * @type {boolean}
      */
-    this.requestDelimited = Boolean(requestDelimited);
+  this.requestDelimited = Boolean(requestDelimited)
 
-    /**
+  /**
      * Whether responses are length-delimited.
      * @type {boolean}
      */
-    this.responseDelimited = Boolean(responseDelimited);
+  this.responseDelimited = Boolean(responseDelimited)
 }
 
 /**
@@ -76,54 +73,50 @@ function Service(rpcImpl, requestDelimited, responseDelimited) {
  * @template TRes extends Message<TRes>
  */
 Service.prototype.rpcCall = function rpcCall(method, requestCtor, responseCtor, request, callback) {
+  if (!request) throw TypeError('request must be specified')
 
-    if (!request)
-        throw TypeError("request must be specified");
+  const self = this
+  if (!callback) return util.asPromise(rpcCall, self, method, requestCtor, responseCtor, request)
 
-    var self = this;
-    if (!callback)
-        return util.asPromise(rpcCall, self, method, requestCtor, responseCtor, request);
+  if (!self.rpcImpl) {
+    setTimeout(function () { callback(Error('already ended')) }, 0)
+    return undefined
+  }
 
-    if (!self.rpcImpl) {
-        setTimeout(function() { callback(Error("already ended")); }, 0);
-        return undefined;
-    }
+  try {
+    return self.rpcImpl(
+      method,
+      requestCtor[self.requestDelimited ? 'encodeDelimited' : 'encode'](request).finish(),
+      function rpcCallback(err, response) {
+        if (err) {
+          self.emit('error', err, method)
+          return callback(err)
+        }
 
-    try {
-        return self.rpcImpl(
-            method,
-            requestCtor[self.requestDelimited ? "encodeDelimited" : "encode"](request).finish(),
-            function rpcCallback(err, response) {
+        if (response === null) {
+          self.end(/* endedByRPC */ true)
+          return undefined
+        }
 
-                if (err) {
-                    self.emit("error", err, method);
-                    return callback(err);
-                }
+        if (!(response instanceof responseCtor)) {
+          try {
+            response = responseCtor[self.responseDelimited ? 'decodeDelimited' : 'decode'](response)
+          } catch (err) {
+            self.emit('error', err, method)
+            return callback(err)
+          }
+        }
 
-                if (response === null) {
-                    self.end(/* endedByRPC */ true);
-                    return undefined;
-                }
-
-                if (!(response instanceof responseCtor)) {
-                    try {
-                        response = responseCtor[self.responseDelimited ? "decodeDelimited" : "decode"](response);
-                    } catch (err) {
-                        self.emit("error", err, method);
-                        return callback(err);
-                    }
-                }
-
-                self.emit("data", response, method);
-                return callback(null, response);
-            }
-        );
-    } catch (err) {
-        self.emit("error", err, method);
-        setTimeout(function() { callback(err); }, 0);
-        return undefined;
-    }
-};
+        self.emit('data', response, method)
+        return callback(null, response)
+      }
+    )
+  } catch (err) {
+    self.emit('error', err, method)
+    setTimeout(function () { callback(err) }, 0)
+    return undefined
+  }
+}
 
 /**
  * Ends this service and emits the `end` event.
@@ -131,11 +124,11 @@ Service.prototype.rpcCall = function rpcCall(method, requestCtor, responseCtor, 
  * @returns {rpc.Service} `this`
  */
 Service.prototype.end = function end(endedByRPC) {
-    if (this.rpcImpl) {
-        if (!endedByRPC) // signal end to rpcImpl
-            this.rpcImpl(null, null, null);
-        this.rpcImpl = null;
-        this.emit("end").off();
-    }
-    return this;
-};
+  if (this.rpcImpl) {
+    if (!endedByRPC) // signal end to rpcImpl
+    { this.rpcImpl(null, null, null) }
+    this.rpcImpl = null
+    this.emit('end').off()
+  }
+  return this
+}
