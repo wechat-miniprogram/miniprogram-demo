@@ -1,5 +1,6 @@
 const config = require('../../../../config')
 const util = require('../../../../util/util')
+
 const systemInfo = wx.getSystemInfoSync()
 Page({
   data: {
@@ -33,14 +34,14 @@ Page({
       env: config.envId,
       traceUser: true,
     })
-    
+
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({ theme }) => {
-        this.setData({ theme })
+      wx.onThemeChange(({theme}) => {
+        this.setData({theme})
       })
     }
   },
@@ -63,7 +64,7 @@ Page({
       console.info('fetchActivityList: ', resp)
       if (resp.result) {
         const activityList = resp.result.dataList
-        this.setData({ activityList })
+        this.setData({activityList})
       }
     }).catch(err => {
       console.error('fetchActivityList fail: ', err)
@@ -77,7 +78,7 @@ Page({
   },
 
   goDetail(e) {
-    const { id, roomid, singlechat } = e.currentTarget.dataset
+    const {id, roomid, singlechat} = e.currentTarget.dataset
     wx.openChatTool({
       roomid,
       isSingleChat: Boolean(singlechat),
