@@ -1,4 +1,3 @@
-
 const AB2String = (arrayBuffer) => {
   const unit8Arr = new Uint8Array(arrayBuffer)
   const encodedString = String.fromCharCode.apply(null, unit8Arr)
@@ -100,6 +99,5 @@ Page({
       message: `port[${this.port}] 向 remote-port[${this.remote_port}] 发送信息: Hello Wechat!`,
     })
   },
-
 
 })
