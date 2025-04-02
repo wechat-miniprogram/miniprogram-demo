@@ -157,9 +157,7 @@ Component({
 
       const detail = e.detail
       const activeId = e.target.dataset.id
-      this.triggerEvent(
-        type, Object.assign(Object.assign(Object.assign({}, detail), {activeId}), ext)
-      )
+      this.triggerEvent(type, {...detail, activeId, ...ext})
     }
   },
 })
