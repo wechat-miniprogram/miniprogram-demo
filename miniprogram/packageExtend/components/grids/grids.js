@@ -1,4 +1,3 @@
-
 /** *** */ (function (modules) { // webpackBootstrap
 /** *** */ // The module cache
 /** *** */ const installedModules = {}
@@ -132,7 +131,7 @@
         attached() {
           if (this.data.grids) {
             this.setData({
-              innerGrids: this.data.grids.map(grid => Object.assign({}, this.data._defaultGridProps, grid))
+              innerGrids: this.data.grids.map(grid => ({...this.data._defaultGridProps, ...grid}))
             })
           }
         }

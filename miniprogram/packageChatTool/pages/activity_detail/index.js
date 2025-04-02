@@ -1,5 +1,5 @@
 // pages/activity_create/index.js
-import { getChatToolInfo } from '../../util'
+import {getChatToolInfo} from '../../util'
 
 const roleType = ['unkown', 'owner', 'participant', 'nonParticipant']
 
@@ -54,7 +54,7 @@ Page({
   },
 
   onBack() {
-    wx.navigateBack({ delta: 1 })
+    wx.navigateBack({delta: 1})
   },
 
   onRefresh() {
@@ -77,12 +77,11 @@ Page({
     console.log('onAbort', e)
   },
 
-
   onGoHome() {
     wx.reLaunch({
       url: '/packageAPI/pages/chattool/activity_assist/activity_assist',
       complete(res) {
-        console.info("relaunch", res)
+        console.info('relaunch', res)
       }
     })
   },
@@ -96,7 +95,7 @@ Page({
 
     const notSignIn = participant.filter(i => !signIn.includes(i))
 
-    const { groupOpenID, roomid, openid } = groupInfo
+    const {groupOpenID, roomid, openid} = groupInfo
 
     const percent = participant.length ? Math.ceil(signIn.length / participant.length * 100) : 0
     const isOwner = creator === openid
@@ -155,7 +154,6 @@ Page({
         console.info('fetchActivity fail: ', err)
       })
     })
-
   },
 
   onTabsChange(e) {
@@ -166,7 +164,7 @@ Page({
   },
 
   notifyNotSignIn() {
-    const { activityId, notSignIn, activityInfo } = this.data
+    const {activityId, notSignIn, activityInfo} = this.data
     if (!activityInfo._id) return
 
     wx.notifyGroupMembers({
@@ -182,8 +180,8 @@ Page({
 
   signIn() {
     const that = this
-    const { signIn, activityInfo, groupInfo } = this.data
-    const { roomid, groupOpenID } = groupInfo
+    const {signIn, activityInfo, groupInfo} = this.data
+    const {roomid, groupOpenID} = groupInfo
 
     if (signIn.includes(groupOpenID)) {
       wx.showToast({
@@ -203,7 +201,7 @@ Page({
       }
     }).then(resp => {
       if (resp.result.success) {
-        const { signIn } = activityInfo
+        const {signIn} = activityInfo
         signIn.push(groupOpenID)
         that.refreshData(activityInfo, groupInfo, false)
         that.updateChatToolMsg({
@@ -245,7 +243,7 @@ Page({
   },
 
   updateChatToolMsg(params = {}) {
-    const { targetState, parameterList } = params
+    const {targetState, parameterList} = params
     // const templateId = '2A84254B945674A2F88CE4970782C402795EB607' // 参与
     const templateId = '4A68CBB88A92B0A9311848DBA1E94A199B166463' // 完成
 
@@ -255,7 +253,7 @@ Page({
         action: 'updateChatToolMsg',
         activityId: this.data.activityId,
         targetState: targetState || 1,
-        templateId: templateId,
+        templateId,
         parameterList: parameterList || [],
         versionType: getVersionType()
       }
@@ -270,7 +268,7 @@ Page({
     const that = this
     setTimeout(() => {
       this.createSelectorQuery()
-        .select("#target")
+        .select('#target')
         .node()
         .exec(res => {
           const node = res[0].node
@@ -295,7 +293,7 @@ Page({
   },
 
   sendProgress() {
-    const { progressImage, activityId} = this.data
+    const {progressImage, activityId} = this.data
     const entrancePath = `packageChatTool/pages/activity_detail/index?activityId=${activityId}`
     wx.shareImageToGroup({
       imagePath: progressImage,
@@ -308,7 +306,7 @@ Page({
   },
 
   share() {
-    const { activityInfo, activityId } = this.data
+    const {activityInfo, activityId} = this.data
     if (!activityInfo._id) return
 
     wx.cloud.downloadFile({

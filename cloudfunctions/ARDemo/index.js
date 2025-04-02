@@ -11,13 +11,13 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const bizuin = wxContext.APPUIN
   switch (event.type) {
-    case "GenerateARModel":
+    case 'GenerateARModel':
       return await cloud.callWXSvrkit({
         pbInstance: svrkitUtils.generate({
-          serviceName: "Mmbizwxaintpar",
-          funcName: "GenerateARModel",
+          serviceName: 'Mmbizwxaintpar',
+          funcName: 'GenerateARModel',
           data: {
-            bizuin: bizuin,
+            bizuin,
             name: event.name,
             url: event.url,
             algoType: event.algoType,
@@ -26,14 +26,14 @@ exports.main = async (event, context) => {
           },
         }),
         timeout: 30000,
-      });
-    case "GetARModel":
+      })
+    case 'GetARModel':
       return await cloud.callWXSvrkit({
         pbInstance: svrkitUtils.generate({
-          serviceName: "Mmbizwxaintpar",
-          funcName: "GetARModel",
+          serviceName: 'Mmbizwxaintpar',
+          funcName: 'GetARModel',
           data: {
-            bizuin: bizuin,
+            bizuin,
             cosid: event.cosid,
             modelType: event.modelType,
             needData: event.needData,
@@ -42,7 +42,7 @@ exports.main = async (event, context) => {
           },
         }),
         timeout: 30000,
-      });
+      })
     // GetARModelList 废弃，完全依赖本地缓存
     // case "GetARModelList":
     //   return await cloud.callWXSvrkit({
@@ -58,5 +58,4 @@ exports.main = async (event, context) => {
     //     timeout: 30000,
     //   });
   }
-
 }

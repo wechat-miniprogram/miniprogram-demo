@@ -1,5 +1,5 @@
 import Base from '../base'
-import { getAlbum } from '../../utils/tool'
+import {getAlbum} from '../../utils/tool'
 
 Component({
   behaviors: [Base],
@@ -28,7 +28,7 @@ Component({
       const imageId = decodeURIComponent(query.imageid || '')
       const sourcePageId = decodeURIComponent(query.sourcepageid || '')
       const list = getAlbum()
-      this.setData({ imageId, sourcePageId, list })
+      this.setData({imageId, sourcePageId, list})
     },
 
     /**

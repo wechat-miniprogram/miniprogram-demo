@@ -11,7 +11,7 @@ Component({
   data: {
     apiCategory: '',
   },
-  
+
   methods: {
 
   },

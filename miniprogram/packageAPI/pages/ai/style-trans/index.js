@@ -1,4 +1,3 @@
-
 // pages/stype-trans/index.js.ts
 Page({
   session: null,
@@ -8,10 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    src : '',
-    imageWidth : 224,
-    imageHeight : 224,
-    imageChannel : 3,
+    src: '',
+    imageWidth: 224,
+    imageHeight: 224,
+    imageChannel: 3,
   },
 
   /**
@@ -70,7 +69,7 @@ Page({
 
   },
 
-   takePhoto() {
+  takePhoto() {
     const camera = wx.createCameraContext()
     camera.takePhoto({
       quality: 'normal',
@@ -105,58 +104,53 @@ Page({
         })
       }
     })
-
   },
 
-  InitSession()
-  {
+  InitSession() {
     return new Promise((resolve, reject) => {
-      const modelPath = `${wx.env.USER_DATA_PATH}/mosaic-8.onnx`;
+      const modelPath = `${wx.env.USER_DATA_PATH}/mosaic-8.onnx`
 
       // 判断之前是否已经下载过onnx模型
       wx.getFileSystemManager().access({
-      path: modelPath,
-      success: (res) =>
-      {
-        console.log("file already exist at: " + modelPath)
-        this.createInferenceSession(modelPath).then(() =>
-        {
-          resolve();
-        })
-      },
-      fail: (res) => {
-        console.error(res)
+        path: modelPath,
+        success: (res) => {
+          console.log('file already exist at: ' + modelPath)
+          this.createInferenceSession(modelPath).then(() => {
+            resolve()
+          })
+        },
+        fail: (res) => {
+          console.error(res)
 
-        wx.cloud.init();
-        console.log("begin download model");
+          wx.cloud.init()
+          console.log('begin download model')
 
-        const cloudPath = 'cloud://containertest-0gmw3ulnd8d9bc7b.636f-containertest-0gmw3ulnd8d9bc7b-1258211818/mosaic-8.onnx'
+          const cloudPath = 'cloud://containertest-0gmw3ulnd8d9bc7b.636f-containertest-0gmw3ulnd8d9bc7b-1258211818/mosaic-8.onnx'
 
-        this.downloadFile(cloudPath, function(r) {
-          console.log(`下载进度：${r.progress}%，已下载${r.totalBytesWritten}B，共${r.totalBytesExpectedToWrite}B`)
-        }).then(result => {
+          this.downloadFile(cloudPath, function (r) {
+            console.log(`下载进度：${r.progress}%，已下载${r.totalBytesWritten}B，共${r.totalBytesExpectedToWrite}B`)
+          }).then(result => {
             wx.getFileSystemManager().saveFile({
-              tempFilePath:result.tempFilePath,
+              tempFilePath: result.tempFilePath,
               filePath: modelPath,
               success: (res) => { // 注册回调函数
                 console.log(res)
-  
-                const modelPath = res.savedFilePath;
-                console.log("save onnx model at path: " + modelPath)
+
+                const modelPath = res.savedFilePath
+                console.log('save onnx model at path: ' + modelPath)
 
                 this.createInferenceSession(modelPath).then(() => {
-                  resolve();
+                  resolve()
                 })
               },
               fail(res) {
                 console.error(res)
-                return
               }
             })
-          });
+          })
         }
       })
-   })
+    })
   },
 
   createInferenceSession(modelPath) {
@@ -171,23 +165,23 @@ Page({
 
            Higher precision always require longer time to run session
         */
-        precisionLevel : 4,
-        allowNPU : false,     // wheather use NPU for inference, only useful for IOS
+        precisionLevel: 4,
+        allowNPU: false, // wheather use NPU for inference, only useful for IOS
         allowQuantize: false, // wheather generate quantize model
-      });
+      })
 
       // 监听error事件
       this.session.onError((error) => {
-        console.error(error);
-        reject(error);
-      });
+        console.error(error)
+        reject(error)
+      })
       this.session.onLoad(() => {
-        resolve();
-      });
+        resolve()
+      })
     })
   },
 
-downloadFile(fileID, onCall = () => {}) {
+  downloadFile(fileID, onCall = () => {}) {
     return new Promise((resolve, reject) => {
       const task = wx.cloud.downloadFile({
         fileID,
@@ -209,79 +203,72 @@ downloadFile(fileID, onCall = () => {}) {
     })
   },
 
-  detect(imgData)
-  {
-    return new Promise((resolve, reject) => 
-    {
+  detect(imgData) {
+    return new Promise((resolve, reject) => {
       const uint8Data = new Uint8Array(imgData.data)
 
-      var floatData = new Float32Array(this.data.imageChannel * this.data.imageHeight * this.data.imageWidth);
+      const floatData = new Float32Array(this.data.imageChannel * this.data.imageHeight * this.data.imageWidth)
 
       // nhwc uint8 data to nchw float32 data, and ignore the alpha channel
       const modelChannel = this.data.imageChannel
- 
-      const imageWH = this.data.imageHeight * this.data.imageWidth;
 
-      var idx = 0;
-      for (var c = 0; c < modelChannel; ++c)
-      {
-        for (var wh = 0; wh < imageWH; ++wh)
-        {
-          var inputIdx = wh * 4 + c;
-          floatData[idx] = uint8Data[inputIdx];
-          idx++;
+      const imageWH = this.data.imageHeight * this.data.imageWidth
+
+      let idx = 0
+      for (let c = 0; c < modelChannel; ++c) {
+        for (let wh = 0; wh < imageWH; ++wh) {
+          const inputIdx = wh * 4 + c
+          floatData[idx] = uint8Data[inputIdx]
+          idx++
         }
-      } 
+      }
 
       const xinput = {
-        shape: [1, 3, 224, 224],  // Input data shape in NCHW
+        shape: [1, 3, 224, 224], // Input data shape in NCHW
         data: floatData.buffer,
-        type: 'float32',  // Input data type
-      };
+        type: 'float32', // Input data type
+      }
 
       this.session.run({
-          // Here string "input1" Should be the same with the input name in onnx file
-        "input1" : xinput,
+        // Here string "input1" Should be the same with the input name in onnx file
+        input1: xinput,
       }).then((res) => {
-        // Here use res.outputname.data, outputname 
+        // Here use res.outputname.data, outputname
         // Should be the same with the output name in onnx file
-        let output = new Float32Array(res.output1.data)
+        const output = new Float32Array(res.output1.data)
 
-        const hwSize = imgData.height * imgData.width;
+        const hwSize = imgData.height * imgData.width
 
-        var finalout = new Uint8ClampedArray(4 * hwSize);
+        const finalout = new Uint8ClampedArray(4 * hwSize)
 
         // fill the alpha channel
-        finalout.fill(255);
+        finalout.fill(255)
 
         // convert from nchw to nhwc
-        idx = 0;
-        for (var c = 0; c < modelChannel; ++c)
-        {
-          for (var hw = 0; hw < hwSize; ++hw)
-          {
-            var dstIdx = hw * 4 + c;
-            finalout[dstIdx] = Math.max(0, Math.min(Math.round(output[idx]), 255));
-            idx++;
+        idx = 0
+        for (let c = 0; c < modelChannel; ++c) {
+          for (let hw = 0; hw < hwSize; ++hw) {
+            const dstIdx = hw * 4 + c
+            finalout[dstIdx] = Math.max(0, Math.min(Math.round(output[idx]), 255))
+            idx++
           }
         }
 
         this.canvasCtx = wx.createCanvasContext('trans')
 
-        wx.canvasPutImageData
-        ({
+        wx.canvasPutImageData({
           canvasId: 'trans',
           data: finalout,
           height: 224,
           width: 224,
           x: 0,
           y: 0,
-        }).then((res) =>{
+        }).then((res) => {
           console.log(res)
         })
       })
 
-      resolve();
+      resolve()
     })
   },
 

@@ -1,4 +1,3 @@
-
 Page({
   onShareAppMessage() {
     return {

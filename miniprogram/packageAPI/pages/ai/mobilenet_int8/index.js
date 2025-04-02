@@ -1,26 +1,26 @@
 // pages/mobilenet/index.ts
 
-import { Classifier } from './classify'
+import {Classifier} from './classify'
 
-import { FpsHelper } from '../../../../util/fps_helper'
+import {FpsHelper} from '../../../../util/fps_helper'
 
-const { appWidth, appHeight, benchmarkLevel } = getApp().globalData;
+const {appWidth, appHeight, benchmarkLevel} = getApp().globalData
 
 Page({
   classifier: null,
   ctx: null,
-  fpsHelper:null,
+  fpsHelper: null,
 
   predicting: false,
 
   // For Speed Test
-  constBuffer : null,
+  constBuffer: null,
 
   /**
    * 页面的初始数据
    */
   data: {
-    predClass: "None",
+    predClass: 'None',
     classifier: null,
     enableSpeedTest: false,
     avgTime: 110.0,
@@ -31,8 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    if (this.data.enableSpeedTest)
-    {
+    if (this.data.enableSpeedTest) {
       this.constBuffer = new Float32Array(3 * 224 * 224)
     }
   },
@@ -40,46 +39,45 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
- onReady() {
-    this.ctx = wx.createCanvasContext('ssd');
-    const context = wx.createCameraContext(this);
-    this.initClassifier();
-    this.fpsHelper = new FpsHelper();
+  onReady() {
+    this.ctx = wx.createCanvasContext('ssd')
+    const context = wx.createCameraContext(this)
+    this.initClassifier()
+    this.fpsHelper = new FpsHelper()
 
     const listener = context.onCameraFrame(frame => {
+      const fps = this.fpsHelper.getAverageFps()
+      console.log(`fps=${fps}`)
 
-        const fps = this.fpsHelper.getAverageFps();
-        console.log(`fps=${fps}`);
-
-        if (this.classifier && this.classifier.isReady() && !this.predicting) {
-           this.executeClassify(frame);
-        }
-    });
-    listener.start();
-    this.fpsHelper.reset();
+      if (this.classifier && this.classifier.isReady() && !this.predicting) {
+        this.executeClassify(frame)
+      }
+    })
+    listener.start()
+    this.fpsHelper.reset()
   },
 
   /**
    * 初始化 SSD models
    */
   initClassifier() {
-    wx.showLoading({ title: '模型正在加载...' });
-    this.classifier = new Classifier({ width: appWidth, height: appHeight });
+    wx.showLoading({title: '模型正在加载...'})
+    this.classifier = new Classifier({width: appWidth, height: appHeight})
     this.classifier.load().then(() => {
-      wx.hideLoading();
+      wx.hideLoading()
     }).catch(err => {
-      console.log('模型加载报错：', err);
+      console.log('模型加载报错：', err)
     })
   },
 
-    /**
+  /**
    * 构建模型
    */
-async executeClassify (frame) {
-    this.predicting = true;
+  async executeClassify(frame) {
+    this.predicting = true
 
     if (this.classifier && this.classifier.isReady()) {
-      this.fpsHelper.updateFPS();
+      this.fpsHelper.updateFPS()
 
       this.setData({
         predClass: this.classifier.predClass(),
@@ -92,81 +90,75 @@ async executeClassify (frame) {
         })
       }).catch((err) => {
         console.log(err)
-      }) 
+      })
 
-      if (this.data.enableSpeedTest)
-      {
-        await this.inferSpeedTest();
+      if (this.data.enableSpeedTest) {
+        await this.inferSpeedTest()
       }
     }
 
-    this.predicting = false;
+    this.predicting = false
   },
 
-  async inferSpeedTest()
-  {
-      console.log("runInferenceSession speed test start run===============================")
+  async inferSpeedTest() {
+    console.log('runInferenceSession speed test start run===============================')
 
-      const xinput = {
-        shape: [1, 3, 224, 224],
-        data: this.constBuffer.buffer,
-        type: 'float32',
-      };
-  
-      this.data.classifier = this.classifier;
+    const xinput = {
+      shape: [1, 3, 224, 224],
+      data: this.constBuffer.buffer,
+      type: 'float32',
+    }
 
-      // warm up
-      for (let index = 0; index < 20; index++) {
-        await this.inferOnce(xinput, this.data);
+    this.data.classifier = this.classifier
+
+    // warm up
+    for (let index = 0; index < 20; index++) {
+      await this.inferOnce(xinput, this.data)
+    }
+
+    for (let l = 0; l < 5; ++l) {
+      const beMs = new Date().getTime()
+
+      for (let index = 0; index < 100; index++) {
+        await this.inferOnce(xinput, this.data)
       }
 
-     for (var l = 0; l < 5; ++l)
-     {
-        var beMs = new Date().getTime()
+      const afMs = new Date().getTime()
 
-        for (let index = 0; index < 100; index++) {
+      const avgTime = (afMs - beMs) / 100.0
 
-          await this.inferOnce(xinput, this.data);
+      let overall = 0.0
+      let minTime = 1000000.0
+
+      for (let index = 0; index < 100; index++) {
+        const beMsTmp = new Date().getTime()
+        await this.inferOnce(xinput, this.data)
+        const afMsTmp = new Date().getTime()
+        const tmpTime = (afMsTmp - beMsTmp)
+        if (minTime > tmpTime) {
+          minTime = tmpTime
         }
-
-        var afMs = new Date().getTime()
-            
-        var avgTime = (afMs - beMs) / 100.0;
-
-        var overall = 0.0;
-        var minTime = 1000000.0;
-
-        for (let index = 0; index < 100; index++) {
-          var beMsTmp = new Date().getTime()
-          await this.inferOnce(xinput, this.data);
-          var afMsTmp = new Date().getTime()
-          var tmpTime = (afMsTmp - beMsTmp)
-          if (minTime > tmpTime)
-          {
-            minTime = tmpTime;
-          }
-          overall += (afMsTmp - beMsTmp)
-        }  
-
-        console.log("Inference min time: ", minTime)
-        console.log("Inference avg time: ", avgTime)
-
-        this.setData({
-          predClass: this.classifier.predClass(),
-          minTime : minTime,
-          avgTime : avgTime,
-        })
+        overall += (afMsTmp - beMsTmp)
       }
+
+      console.log('Inference min time: ', minTime)
+      console.log('Inference avg time: ', avgTime)
+
+      this.setData({
+        predClass: this.classifier.predClass(),
+        minTime,
+        avgTime,
+      })
+    }
   },
 
   inferOnce(xinput, data) {
     return new Promise(function (resolve, reject) {
       data.classifier.session.run({
-        "onnx::QuantizeLinear_0": xinput,
+        'onnx::QuantizeLinear_0': xinput,
       }).then(async function (res) {
         resolve()
       })
-
     })
   },
 
@@ -189,7 +181,7 @@ async executeClassify (frame) {
    */
   onUnload() {
     if (this.classifier && this.classifier.isReady()) {
-      this.classifier.dispose();
+      this.classifier.dispose()
     }
   },
 
