@@ -1,32 +1,32 @@
 module.exports = {
-  'extends': [
+  extends: [
     'airbnb-base',
     'plugin:promise/recommended'
   ],
-  'parserOptions': {
-    'ecmaVersion': 9,
-    'ecmaFeatures': {
-      'jsx': false
+  parserOptions: {
+    ecmaVersion: 9,
+    ecmaFeatures: {
+      jsx: false
     },
-    'sourceType': 'module'
+    sourceType: 'module'
   },
-  'env': {
-    'es6': true,
-    'node': true,
-    'jest': true
+  env: {
+    es6: true,
+    node: true,
+    jest: true
   },
-  'plugins': [
+  plugins: [
     'import',
     'node',
     'promise'
   ],
-  'rules': {
+  rules: {
     'arrow-parens': 'off',
     'comma-dangle': [
       'error',
       'only-multiline'
     ],
-    'complexity': ['error', 10],
+    complexity: ['error', 10],
     'func-names': 'off',
     'global-require': 'off',
     'handle-callback-err': [
@@ -36,9 +36,9 @@ module.exports = {
     'import/no-unresolved': [
       'error',
       {
-        'caseSensitive': true,
-        'commonjs': true,
-        'ignore': ['^[^.]']
+        caseSensitive: true,
+        commonjs: true,
+        ignore: ['^[^.]']
       }
     ],
     'import/prefer-default-export': 'off',
@@ -64,7 +64,7 @@ module.exports = {
       'error',
       'after',
       {
-        'overrides': {
+        overrides: {
           ':': 'before',
           '?': 'before'
         }
@@ -77,23 +77,23 @@ module.exports = {
       1,
       'as-needed',
       {
-        'unnecessary': true
+        unnecessary: true
       }
     ],
-    'semi': [
+    semi: [
       'error',
       'never'
     ]
   },
-  'globals': {
-    'window': true,
-    'document': true,
-    'App': true,
-    'Page': true,
-    'Component': true,
-    'Behavior': true,
-    'wx': true,
-    'worker': true,
-    'getApp': true
+  globals: {
+    window: true,
+    document: true,
+    App: true,
+    Page: true,
+    Component: true,
+    Behavior: true,
+    wx: true,
+    worker: true,
+    getApp: true
   }
 }
