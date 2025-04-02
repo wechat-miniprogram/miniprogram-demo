@@ -1,9 +1,10 @@
 const fastOutSlowIn = wx.worklet.Easing.bezier(0.4, 0.0, 0.2, 1.0).factory()
 
 export function initRoute() {
-  wx.router.addRouteBuilder('fadeToggle', ({ primaryAnimation }) => {
+  wx.router.addRouteBuilder('fadeToggle', ({primaryAnimation}) => {
     const handlePrimaryAnimation = () => {
       'worklet'
+
       return {
         opacity: fastOutSlowIn(primaryAnimation.value),
       }

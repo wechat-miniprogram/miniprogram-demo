@@ -1,4 +1,3 @@
-
 const app = getApp()
 
 Page({
@@ -40,7 +39,7 @@ Page({
         wx.cloud.callFunction({
           name: 'pay',
           data: {
-    theme: 'light',
+            theme: 'light',
             action: 'unifiedorder',
             userInfo: {
               openId: openid
