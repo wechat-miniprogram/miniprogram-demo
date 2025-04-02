@@ -27,7 +27,6 @@ Page({
         this.setData({theme})
       })
     }
-
   },
 
   /**
