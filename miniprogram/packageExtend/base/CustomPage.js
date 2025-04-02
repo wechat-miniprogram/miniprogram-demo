@@ -2,7 +2,8 @@ import themeMixin from './behaviors/theme'
 
 const CustomPage = function (options) {
   return Page(
-    Object.assign({}, options, {
+    {
+      ...options,
       behaviors: [themeMixin].concat(options.behaviors || []),
       onLoad(query) {
         const app = getApp()
@@ -18,17 +19,17 @@ const CustomPage = function (options) {
           app.unWatchThemeChange && app.unWatchThemeChange(this.themeChanged)
           options.onUnload && options.onUnload.call(this)
         }
-			},
-			onShareAppMessage() {
-				const route = this.route
-				const segments = route.split('/')
-				const title = segments[segments.length - 1]
-				return {
-					title: title,
-					path: route,
-				}
-			},
-    })
+      },
+      onShareAppMessage() {
+        const route = this.route
+        const segments = route.split('/')
+        const title = segments[segments.length - 1]
+        return {
+          title,
+          path: route,
+        }
+      },
+    }
   )
 }
 

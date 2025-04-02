@@ -38,33 +38,33 @@ Component({
   },
 
   attached() {
-    const isSupport = !!wx.getMenuButtonBoundingClientRect;
-    const rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null;
+    const isSupport = !!wx.getMenuButtonBoundingClientRect
+    const rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null
     wx.getSystemInfo({
       success: (res) => {
-        const ios = !!(res.system.toLowerCase().search('ios') + 1);
-        const sideWidth = isSupport ? res.windowWidth - rect.left : 0;
+        const ios = !!(res.system.toLowerCase().search('ios') + 1)
+        const sideWidth = isSupport ? res.windowWidth - rect.left : 0
 
         this.setData({
           ios,
           sideWidth: this.data.sideWidth || sideWidth,
           statusBarHeight: res.statusBarHeight,
-        });
+        })
       },
-    });
+    })
   },
   /**
    * 组件的方法列表
    */
   methods: {
     back() {
-      const { data } = this;
+      const {data} = this
       if (data.delta) {
         wx.navigateBack({
           delta: data.delta,
-        });
+        })
       }
-      this.triggerEvent('back', { delta: data.delta }, {});
+      this.triggerEvent('back', {delta: data.delta}, {})
     },
   },
-});
+})

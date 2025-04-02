@@ -2,7 +2,8 @@ import themeMixin from './behaviors/theme'
 
 const CustomPage = function (options) {
   return Page(
-    Object.assign({}, options, {
+    {
+      ...options,
       behaviors: [themeMixin].concat(options.behaviors || []),
       onLoad(query) {
         const app = getApp()
@@ -19,7 +20,7 @@ const CustomPage = function (options) {
           if (options.onUnload) options.onUnload.call(this)
         }
       }
-    })
+    }
   )
 }
 

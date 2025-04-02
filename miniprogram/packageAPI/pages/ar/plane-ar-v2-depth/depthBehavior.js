@@ -2,9 +2,8 @@ const depthBehavior = Behavior({
   methods: {
     initDepthShader() {
       const gl = this.gl = this.renderer.getContext()
-      const ext = gl.getExtension("OES_texture_float");
-      if (!ext)
-        console.warn('OES_texture_float not support');
+      const ext = gl.getExtension('OES_texture_float')
+      if (!ext) console.warn('OES_texture_float not support')
       const currentProgram = gl.getParameter(gl.CURRENT_PROGRAM)
       const vs = `
         precision highp float;
@@ -27,7 +26,7 @@ const depthBehavior = Behavior({
           gl_FragColor = vec4(depth_color.rgb, 1.0);
         }
       `
-      
+
       const vertShader = gl.createShader(gl.VERTEX_SHADER)
       gl.shaderSource(vertShader, vs)
       gl.compileShader(vertShader)
@@ -89,32 +88,32 @@ const depthBehavior = Behavior({
       const displayTransform = frame.getDisplayTransform()
 
       // DepthBuffer
-      const depthBufferRes = frame.getDepthBuffer();
-      const depthBuffer = new Float32Array(depthBufferRes.DepthAddress);
+      const depthBufferRes = frame.getDepthBuffer()
+      const depthBuffer = new Float32Array(depthBufferRes.DepthAddress)
 
-      const texture = gl.createTexture();
-      gl.bindTexture(gl.TEXTURE_2D, texture);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      const texture = gl.createTexture()
+      gl.bindTexture(gl.TEXTURE_2D, texture)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
 
-      const width = depthBufferRes.width;
-      const height = depthBufferRes.height;
+      const width = depthBufferRes.width
+      const height = depthBufferRes.height
 
       // const ext = gl.getExtension("OES_texture_float");
       // if (ext) {
       //   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.FLOAT, depthBuffer);
       // } else {
       // }
-      
+
       // 先直接采用 uint8 写入深度纹理，使用浮点写入的方法会存在锯齿
-      const data = new Uint8Array(width * height * 4);
+      const data = new Uint8Array(width * height * 4)
       for (let i = 0; i < depthBuffer.length; i++) {
-        let num = parseInt(depthBuffer[i] * 255);
-        data[i] = num;
+        const num = parseInt(depthBuffer[i] * 255)
+        data[i] = num
       }
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, data)
 
       const currentProgram = gl.getParameter(gl.CURRENT_PROGRAM)
       const currentActiveTexture = gl.getParameter(gl.ACTIVE_TEXTURE)
@@ -137,7 +136,6 @@ const depthBehavior = Behavior({
       gl.useProgram(currentProgram)
       gl.activeTexture(currentActiveTexture)
       this.ext.bindVertexArrayOES(currentVAO)
-
     },
   },
 })

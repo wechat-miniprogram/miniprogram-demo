@@ -5,7 +5,6 @@ const util = require('./util')
 const performance = wx.getPerformance ? wx.getPerformance() : {}
 const performanceObserver = performance.createObserver ? performance.createObserver() : null
 
-
 Page({
   onShareAppMessage() {
     return {

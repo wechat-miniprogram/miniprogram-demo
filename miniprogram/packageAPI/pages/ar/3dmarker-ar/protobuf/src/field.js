@@ -2,19 +2,20 @@
  * Created by zhangmiao on 2018/3/12.
  */
 
-module.exports = Field;
+module.exports = Field
 
 // extends ReflectionObject
-var ReflectionObject = require("./object");
-((Field.prototype = Object.create(ReflectionObject.prototype)).constructor = Field).className = "Field";
+const ReflectionObject = require('./object');
 
-var Enum,
-    types,
-    util;
+((Field.prototype = Object.create(ReflectionObject.prototype)).constructor = Field).className = 'Field'
 
-var Type; // cyclic
+let Enum
+let types
+let util
 
-var ruleRe = /^required|optional|repeated$/;
+let Type // cyclic
+
+const ruleRe = /^required|optional|repeated$/
 
 /**
  * Constructs a new message field instance. Note that {@link MapField|map fields} have their own class.
@@ -38,8 +39,8 @@ var ruleRe = /^required|optional|repeated$/;
  * @throws {TypeError} If arguments are invalid
  */
 Field.fromJSON = function fromJSON(name, json) {
-    return new Field(name, json.id, json.type, json.rule, json.extend, json.options, json.comment);
-};
+  return new Field(name, json.id, json.type, json.rule, json.extend, json.options, json.comment)
+}
 
 /**
  * Not an actual constructor. Use {@link Field} instead.
@@ -56,145 +57,140 @@ Field.fromJSON = function fromJSON(name, json) {
  * @param {string} [comment] Comment associated with this field
  */
 function Field(name, id, type, rule, extend, options, comment) {
+  if (util.isObject(rule)) {
+    comment = extend
+    options = rule
+    rule = extend = undefined
+  } else if (util.isObject(extend)) {
+    comment = options
+    options = extend
+    extend = undefined
+  }
 
-    if (util.isObject(rule)) {
-        comment = extend;
-        options = rule;
-        rule = extend = undefined;
-    } else if (util.isObject(extend)) {
-        comment = options;
-        options = extend;
-        extend = undefined;
-    }
+  ReflectionObject.call(this, name, options)
 
-    ReflectionObject.call(this, name, options);
+  if (!util.isInteger(id) || id < 0) throw TypeError('id must be a non-negative integer')
 
-    if (!util.isInteger(id) || id < 0)
-        throw TypeError("id must be a non-negative integer");
+  if (!util.isString(type)) throw TypeError('type must be a string')
 
-    if (!util.isString(type))
-        throw TypeError("type must be a string");
+  if (rule !== undefined && !ruleRe.test(rule = rule.toString().toLowerCase())) throw TypeError('rule must be a string rule')
 
-    if (rule !== undefined && !ruleRe.test(rule = rule.toString().toLowerCase()))
-        throw TypeError("rule must be a string rule");
+  if (extend !== undefined && !util.isString(extend)) throw TypeError('extend must be a string')
 
-    if (extend !== undefined && !util.isString(extend))
-        throw TypeError("extend must be a string");
-
-    /**
+  /**
      * Field rule, if any.
      * @type {string|undefined}
      */
-    this.rule = rule && rule !== "optional" ? rule : undefined; // toJSON
+  this.rule = rule && rule !== 'optional' ? rule : undefined // toJSON
 
-    /**
+  /**
      * Field type.
      * @type {string}
      */
-    this.type = type; // toJSON
+  this.type = type // toJSON
 
-    /**
+  /**
      * Unique field id.
      * @type {number}
      */
-    this.id = id; // toJSON, marker
+  this.id = id // toJSON, marker
 
-    /**
+  /**
      * Extended type if different from parent.
      * @type {string|undefined}
      */
-    this.extend = extend || undefined; // toJSON
+  this.extend = extend || undefined // toJSON
 
-    /**
+  /**
      * Whether this field is required.
      * @type {boolean}
      */
-    this.required = rule === "required";
+  this.required = rule === 'required'
 
-    /**
+  /**
      * Whether this field is optional.
      * @type {boolean}
      */
-    this.optional = !this.required;
+  this.optional = !this.required
 
-    /**
+  /**
      * Whether this field is repeated.
      * @type {boolean}
      */
-    this.repeated = rule === "repeated";
+  this.repeated = rule === 'repeated'
 
-    /**
+  /**
      * Whether this field is a map or not.
      * @type {boolean}
      */
-    this.map = false;
+  this.map = false
 
-    /**
+  /**
      * Message this field belongs to.
      * @type {Type|null}
      */
-    this.message = null;
+  this.message = null
 
-    /**
+  /**
      * OneOf this field belongs to, if any,
      * @type {OneOf|null}
      */
-    this.partOf = null;
+  this.partOf = null
 
-    /**
+  /**
      * The field type's default value.
      * @type {*}
      */
-    this.typeDefault = null;
+  this.typeDefault = null
 
-    /**
+  /**
      * The field's default value on prototypes.
      * @type {*}
      */
-    this.defaultValue = null;
+  this.defaultValue = null
 
-    /**
+  /**
      * Whether this field's value should be treated as a long.
      * @type {boolean}
      */
-    this.long = util.Long ? types.long[type] !== undefined : /* istanbul ignore next */ false;
+  this.long = util.Long ? types.long[type] !== undefined : /* istanbul ignore next */ false
 
-    /**
+  /**
      * Whether this field's value is a buffer.
      * @type {boolean}
      */
-    this.bytes = type === "bytes";
+  this.bytes = type === 'bytes'
 
-    /**
+  /**
      * Resolved type if not a basic type.
      * @type {Type|Enum|null}
      */
-    this.resolvedType = null;
+  this.resolvedType = null
 
-    /**
+  /**
      * Sister-field within the extended type if a declaring extension field.
      * @type {Field|null}
      */
-    this.extensionField = null;
+  this.extensionField = null
 
-    /**
+  /**
      * Sister-field within the declaring namespace if an extended field.
      * @type {Field|null}
      */
-    this.declaringField = null;
+  this.declaringField = null
 
-    /**
+  /**
      * Internally remembers whether this field is packed.
      * @type {boolean|null}
      * @private
      */
-    this._packed = null;
+  this._packed = null
 
-    /**
+  /**
      * Comment for this field.
      * @type {string|null}
      */
-    this.comment = comment;
+  this.comment = comment
 }
 
 /**
@@ -203,23 +199,22 @@ function Field(name, id, type, rule, extend, options, comment) {
  * @type {boolean}
  * @readonly
  */
-Object.defineProperty(Field.prototype, "packed", {
-    get: function() {
-        // defaults to packed=true if not explicity set to false
-        if (this._packed === null)
-            this._packed = this.getOption("packed") !== false;
-        return this._packed;
-    }
-});
+Object.defineProperty(Field.prototype, 'packed', {
+  get() {
+    // defaults to packed=true if not explicity set to false
+    if (this._packed === null) this._packed = this.getOption('packed') !== false
+    return this._packed
+  }
+})
 
 /**
  * @override
  */
 Field.prototype.setOption = function setOption(name, value, ifNotSet) {
-    if (name === "packed") // clear cached before setting
-        this._packed = null;
-    return ReflectionObject.prototype.setOption.call(this, name, value, ifNotSet);
-};
+  if (name === 'packed') // clear cached before setting
+  { this._packed = null }
+  return ReflectionObject.prototype.setOption.call(this, name, value, ifNotSet)
+}
 
 /**
  * Field descriptor.
@@ -243,16 +238,16 @@ Field.prototype.setOption = function setOption(name, value, ifNotSet) {
  * @returns {IField} Field descriptor
  */
 Field.prototype.toJSON = function toJSON(toJSONOptions) {
-    var keepComments = toJSONOptions ? Boolean(toJSONOptions.keepComments) : false;
-    return util.toObject([
-        "rule"    , this.rule !== "optional" && this.rule || undefined,
-        "type"    , this.type,
-        "id"      , this.id,
-        "extend"  , this.extend,
-        "options" , this.options,
-        "comment" , keepComments ? this.comment : undefined
-    ]);
-};
+  const keepComments = toJSONOptions ? Boolean(toJSONOptions.keepComments) : false
+  return util.toObject([
+    'rule', this.rule !== 'optional' && this.rule || undefined,
+    'type', this.type,
+    'id', this.id,
+    'extend', this.extend,
+    'options', this.options,
+    'comment', keepComments ? this.comment : undefined
+  ])
+}
 
 /**
  * Resolves this field's type references.
@@ -260,64 +255,53 @@ Field.prototype.toJSON = function toJSON(toJSONOptions) {
  * @throws {Error} If any reference cannot be resolved
  */
 Field.prototype.resolve = function resolve() {
+  if (this.resolved) return this
 
-    if (this.resolved)
-        return this;
+  if ((this.typeDefault = types.defaults[this.type]) === undefined) { // if not a basic type, resolve it
+    this.resolvedType = (this.declaringField ? this.declaringField.parent : this.parent).lookupTypeOrEnum(this.type)
+    if (this.resolvedType instanceof Type) this.typeDefault = null
+    else // instanceof Enum
+    { this.typeDefault = this.resolvedType.values[Object.keys(this.resolvedType.values)[0]] } // first defined
+  }
 
-    if ((this.typeDefault = types.defaults[this.type]) === undefined) { // if not a basic type, resolve it
-        this.resolvedType = (this.declaringField ? this.declaringField.parent : this.parent).lookupTypeOrEnum(this.type);
-        if (this.resolvedType instanceof Type)
-            this.typeDefault = null;
-        else // instanceof Enum
-            this.typeDefault = this.resolvedType.values[Object.keys(this.resolvedType.values)[0]]; // first defined
-    }
+  // use explicitly set default value if present
+  if (this.options && this.options.default != null) {
+    this.typeDefault = this.options.default
+    if (this.resolvedType instanceof Enum && typeof this.typeDefault === 'string') this.typeDefault = this.resolvedType.values[this.typeDefault]
+  }
 
-    // use explicitly set default value if present
-    if (this.options && this.options["default"] != null) {
-        this.typeDefault = this.options["default"];
-        if (this.resolvedType instanceof Enum && typeof this.typeDefault === "string")
-            this.typeDefault = this.resolvedType.values[this.typeDefault];
-    }
+  // remove unnecessary options
+  if (this.options) {
+    if (this.options.packed === true || this.options.packed !== undefined && this.resolvedType && !(this.resolvedType instanceof Enum)) delete this.options.packed
+    if (!Object.keys(this.options).length) this.options = undefined
+  }
 
-    // remove unnecessary options
-    if (this.options) {
-        if (this.options.packed === true || this.options.packed !== undefined && this.resolvedType && !(this.resolvedType instanceof Enum))
-            delete this.options.packed;
-        if (!Object.keys(this.options).length)
-            this.options = undefined;
-    }
+  // convert to internal data type if necesssary
+  if (this.long) {
+    this.typeDefault = util.Long.fromNumber(this.typeDefault, this.type.charAt(0) === 'u')
 
-    // convert to internal data type if necesssary
-    if (this.long) {
-        this.typeDefault = util.Long.fromNumber(this.typeDefault, this.type.charAt(0) === "u");
+    /* istanbul ignore else */
+    if (Object.freeze) Object.freeze(this.typeDefault) // long instances are meant to be immutable anyway (i.e. use small int cache that even requires it)
+  } else if (this.bytes && typeof this.typeDefault === 'string') {
+    let buf
+    // if (util.base64.test(this.typeDefault))
+    //    util.base64.decode(this.typeDefault, buf = util.newBuffer(util.base64.length(this.typeDefault)), 0);
+    // else
+    util.utf8.write(this.typeDefault, buf = util.newBuffer(util.utf8.length(this.typeDefault)), 0)
+    this.typeDefault = buf
+  }
 
-        /* istanbul ignore else */
-        if (Object.freeze)
-            Object.freeze(this.typeDefault); // long instances are meant to be immutable anyway (i.e. use small int cache that even requires it)
+  // take special care of maps and repeated fields
+  if (this.map) this.defaultValue = util.emptyObject
+  else if (this.repeated) this.defaultValue = util.emptyArray
+  else this.defaultValue = this.typeDefault
 
-    } else if (this.bytes && typeof this.typeDefault === "string") {
-        var buf;
-        //if (util.base64.test(this.typeDefault))
-        //    util.base64.decode(this.typeDefault, buf = util.newBuffer(util.base64.length(this.typeDefault)), 0);
-        //else
-            util.utf8.write(this.typeDefault, buf = util.newBuffer(util.utf8.length(this.typeDefault)), 0);
-        this.typeDefault = buf;
-    }
-
-    // take special care of maps and repeated fields
-    if (this.map)
-        this.defaultValue = util.emptyObject;
-    else if (this.repeated)
-        this.defaultValue = util.emptyArray;
-    else
-        this.defaultValue = this.typeDefault;
-
-    // ensure proper value on prototype
-    if (this.parent instanceof Type) {
-        this.parent.ctor.prototype[this.name] = this.defaultValue;
-    }
-    return ReflectionObject.prototype.resolve.call(this);
-};
+  // ensure proper value on prototype
+  if (this.parent instanceof Type) {
+    this.parent.ctor.prototype[this.name] = this.defaultValue
+  }
+  return ReflectionObject.prototype.resolve.call(this)
+}
 
 /**
  * Decorator function as returned by {@link Field.d} and {@link MapField.d} (TypeScript).
@@ -340,20 +324,17 @@ Field.prototype.resolve = function resolve() {
  * @template T extends number | number[] | Long | Long[] | string | string[] | boolean | boolean[] | Uint8Array | Uint8Array[] | Buffer | Buffer[]
  */
 Field.d = function decorateField(fieldId, fieldType, fieldRule, defaultValue) {
+  // submessage: decorate the submessage and use its name as the type
+  if (typeof fieldType === 'function') fieldType = util.decorateType(fieldType).name
 
-    // submessage: decorate the submessage and use its name as the type
-    if (typeof fieldType === "function")
-        fieldType = util.decorateType(fieldType).name;
+  // enum reference: create a reflected copy of the enum and keep reuseing it
+  else if (fieldType && typeof fieldType === 'object') fieldType = util.decorateEnum(fieldType).name
 
-    // enum reference: create a reflected copy of the enum and keep reuseing it
-    else if (fieldType && typeof fieldType === "object")
-        fieldType = util.decorateEnum(fieldType).name;
-
-    return function fieldDecorator(prototype, fieldName) {
-        util.decorateType(prototype.constructor)
-            .add(new Field(fieldName, fieldId, fieldType, fieldRule, { "default": defaultValue }));
-    };
-};
+  return function fieldDecorator(prototype, fieldName) {
+    util.decorateType(prototype.constructor)
+      .add(new Field(fieldName, fieldId, fieldType, fieldRule, {default: defaultValue}))
+  }
+}
 
 /**
  * Field decorator (TypeScript).
@@ -369,9 +350,9 @@ Field.d = function decorateField(fieldId, fieldType, fieldRule, defaultValue) {
 // like Field.d but without a default value
 
 Field._configure = function configure() {
-    Type = require('./type');
+  Type = require('./type')
 
-    Enum  = require("./enum");
-    types = require("./types");
-    util  = require("./util");
-};
+  Enum = require('./enum')
+  types = require('./types')
+  util = require('./util')
+}

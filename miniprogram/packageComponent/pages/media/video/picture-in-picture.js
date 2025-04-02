@@ -17,7 +17,6 @@ Page({
         this.setData({theme})
       })
     }
-
   },
   onReady() {
 

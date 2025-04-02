@@ -1,4 +1,3 @@
-
 import {CurveAnimation, Curves} from './common'
 
 /**

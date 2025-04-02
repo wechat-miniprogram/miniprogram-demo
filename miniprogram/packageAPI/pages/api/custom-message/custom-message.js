@@ -5,7 +5,7 @@ Page({
       path: 'packageAPI/pages/api/custom-message/custom-message'
     }
   },
-  handleContact (e) {
+  handleContact(e) {
     console.log(e.detail.path)
     console.log(e.detail.query)
   },
