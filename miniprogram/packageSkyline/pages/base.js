@@ -5,6 +5,7 @@ export default Behavior({
     created() {
       runOnUI(() => {
         'worklet'
+
         if (!globalThis.temp) globalThis.temp = {}
         if (!globalThis.eventBus) {
           const eventBus = {
