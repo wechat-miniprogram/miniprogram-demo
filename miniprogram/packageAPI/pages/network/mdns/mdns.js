@@ -71,7 +71,6 @@ Page({
     })
   },
 
-
   // 监听列表
   onLocalService() {
     const that = this

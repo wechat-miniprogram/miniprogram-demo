@@ -38,7 +38,6 @@ Page({
         this.setData({theme})
       })
     }
-
   },
 
   /**

@@ -1,11 +1,11 @@
-"use strict";
-module.exports = Method;
+module.exports = Method
 
 // extends ReflectionObject
-var ReflectionObject = require("./object");
-((Method.prototype = Object.create(ReflectionObject.prototype)).constructor = Method).className = "Method";
+const ReflectionObject = require('./object');
 
-var util;
+((Method.prototype = Object.create(ReflectionObject.prototype)).constructor = Method).className = 'Method'
+
+let util
 
 /**
  * Constructs a new service method instance.
@@ -22,77 +22,73 @@ var util;
  * @param {string} [comment] The comment for this method
  */
 function Method(name, type, requestType, responseType, requestStream, responseStream, options, comment) {
+  /* istanbul ignore next */
+  if (util.isObject(requestStream)) {
+    options = requestStream
+    requestStream = responseStream = undefined
+  } else if (util.isObject(responseStream)) {
+    options = responseStream
+    responseStream = undefined
+  }
 
-    /* istanbul ignore next */
-    if (util.isObject(requestStream)) {
-        options = requestStream;
-        requestStream = responseStream = undefined;
-    } else if (util.isObject(responseStream)) {
-        options = responseStream;
-        responseStream = undefined;
-    }
+  /* istanbul ignore if */
+  if (!(type === undefined || util.isString(type))) throw TypeError('type must be a string')
 
-    /* istanbul ignore if */
-    if (!(type === undefined || util.isString(type)))
-        throw TypeError("type must be a string");
+  /* istanbul ignore if */
+  if (!util.isString(requestType)) throw TypeError('requestType must be a string')
 
-    /* istanbul ignore if */
-    if (!util.isString(requestType))
-        throw TypeError("requestType must be a string");
+  /* istanbul ignore if */
+  if (!util.isString(responseType)) throw TypeError('responseType must be a string')
 
-    /* istanbul ignore if */
-    if (!util.isString(responseType))
-        throw TypeError("responseType must be a string");
+  ReflectionObject.call(this, name, options)
 
-    ReflectionObject.call(this, name, options);
-
-    /**
+  /**
      * Method type.
      * @type {string}
      */
-    this.type = type || "rpc"; // toJSON
+  this.type = type || 'rpc' // toJSON
 
-    /**
+  /**
      * Request type.
      * @type {string}
      */
-    this.requestType = requestType; // toJSON, marker
+  this.requestType = requestType // toJSON, marker
 
-    /**
+  /**
      * Whether requests are streamed or not.
      * @type {boolean|undefined}
      */
-    this.requestStream = requestStream ? true : undefined; // toJSON
+  this.requestStream = requestStream ? true : undefined // toJSON
 
-    /**
+  /**
      * Response type.
      * @type {string}
      */
-    this.responseType = responseType; // toJSON
+  this.responseType = responseType // toJSON
 
-    /**
+  /**
      * Whether responses are streamed or not.
      * @type {boolean|undefined}
      */
-    this.responseStream = responseStream ? true : undefined; // toJSON
+  this.responseStream = responseStream ? true : undefined // toJSON
 
-    /**
+  /**
      * Resolved request type.
      * @type {Type|null}
      */
-    this.resolvedRequestType = null;
+  this.resolvedRequestType = null
 
-    /**
+  /**
      * Resolved response type.
      * @type {Type|null}
      */
-    this.resolvedResponseType = null;
+  this.resolvedResponseType = null
 
-    /**
+  /**
      * Comment for this method
      * @type {string|null}
      */
-    this.comment = comment;
+  this.comment = comment
 }
 
 /**
@@ -114,8 +110,8 @@ function Method(name, type, requestType, responseType, requestStream, responseSt
  * @throws {TypeError} If arguments are invalid
  */
 Method.fromJSON = function fromJSON(name, json) {
-    return new Method(name, json.type, json.requestType, json.responseType, json.requestStream, json.responseStream, json.options, json.comment);
-};
+  return new Method(name, json.type, json.requestType, json.responseType, json.requestStream, json.responseStream, json.options, json.comment)
+}
 
 /**
  * Converts this method to a method descriptor.
@@ -123,33 +119,31 @@ Method.fromJSON = function fromJSON(name, json) {
  * @returns {IMethod} Method descriptor
  */
 Method.prototype.toJSON = function toJSON(toJSONOptions) {
-    var keepComments = toJSONOptions ? Boolean(toJSONOptions.keepComments) : false;
-    return util.toObject([
-        "type"           , this.type !== "rpc" && /* istanbul ignore next */ this.type || undefined,
-        "requestType"    , this.requestType,
-        "requestStream"  , this.requestStream,
-        "responseType"   , this.responseType,
-        "responseStream" , this.responseStream,
-        "options"        , this.options,
-        "comment"        , keepComments ? this.comment : undefined
-    ]);
-};
+  const keepComments = toJSONOptions ? Boolean(toJSONOptions.keepComments) : false
+  return util.toObject([
+    'type', this.type !== 'rpc' && /* istanbul ignore next */ this.type || undefined,
+    'requestType', this.requestType,
+    'requestStream', this.requestStream,
+    'responseType', this.responseType,
+    'responseStream', this.responseStream,
+    'options', this.options,
+    'comment', keepComments ? this.comment : undefined
+  ])
+}
 
 /**
  * @override
  */
 Method.prototype.resolve = function resolve() {
+  /* istanbul ignore if */
+  if (this.resolved) return this
 
-    /* istanbul ignore if */
-    if (this.resolved)
-        return this;
+  this.resolvedRequestType = this.parent.lookupType(this.requestType)
+  this.resolvedResponseType = this.parent.lookupType(this.responseType)
 
-    this.resolvedRequestType = this.parent.lookupType(this.requestType);
-    this.resolvedResponseType = this.parent.lookupType(this.responseType);
+  return ReflectionObject.prototype.resolve.call(this)
+}
 
-    return ReflectionObject.prototype.resolve.call(this);
-};
-
-Method._configure = function (){
-    util = require("./util");
+Method._configure = function () {
+  util = require('./util')
 }

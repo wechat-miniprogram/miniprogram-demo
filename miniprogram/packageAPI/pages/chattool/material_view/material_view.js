@@ -108,8 +108,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({ theme }) => {
-        this.setData({ theme })
+      wx.onThemeChange(({theme}) => {
+        this.setData({theme})
       })
     }
   },
@@ -131,7 +131,7 @@ Page({
     this.triggerMergedImage()
 
     const materials = []
-    for (let item of forwardMaterials) {
+    for (const item of forwardMaterials) {
       let recordType = ''
       if (item.type === 'text/message') {
         recordType = chatRecordTypes[0]
@@ -155,15 +155,14 @@ Page({
   async triggerMergedImage() {
     try {
       const tempFilePaths = this._forwardMaterials
-      .filter(item => item.type.startsWith('image'))
-      .map(item => item.path)
+        .filter(item => item.type.startsWith('image'))
+        .map(item => item.path)
       console.info('tempFilePaths: ', tempFilePaths)
       const shareImagePath = await this.mergeImages(tempFilePaths)
       this.setData({
         shareImagePath,
       })
       console.info('shareImagePath: ', shareImagePath)
-     
     } catch (error) {
       console.error('mergeImages fail: ', error)
     }
@@ -190,22 +189,22 @@ Page({
   async mergeImages(tempFilePaths) {
     try {
       // 获取 canvas 节点
-      const { node: canvas, width: cw, height: ch } = await this.getCanvasNode();
-      
+      const {node: canvas, width: cw, height: ch} = await this.getCanvasNode()
+
       // 获取 2D 上下文
-      const ctx = canvas.getContext('2d');
-      
+      const ctx = canvas.getContext('2d')
+
       // 预加载所有图片
-      const images = await this.loadAllImages(canvas, tempFilePaths);
-      
+      const images = await this.loadAllImages(canvas, tempFilePaths)
+
       // 绘制图片
-      this.drawImages(ctx, images, 400);
-      
+      this.drawImages(ctx, images, 400)
+
       // 生成临时文件
-      return await this.canvasToTempFile(canvas);
+      return await this.canvasToTempFile(canvas)
     } catch (err) {
-      console.error('合并失败:', err);
-      return null;
+      console.error('合并失败:', err)
+      return null
     }
   },
 
@@ -214,74 +213,78 @@ Page({
     return new Promise((resolve, reject) => {
       wx.createSelectorQuery()
         .select('#myCanvas')
-        .fields({ node: true, size: true })
+        .fields({node: true, size: true})
         .exec(res => {
-          if (res[0]) resolve(res[0]);
-          else reject(new Error('Canvas 节点获取失败'));
-        });
-    });
+          if (res[0]) resolve(res[0])
+          else reject(new Error('Canvas 节点获取失败'))
+        })
+    })
   },
 
   // 计算画布尺寸
   calculateLayout(paths) {
-    const imgSize = 100;
-    const spacing = 10;
-    const perLine = 3;
-    
-    const rows = Math.ceil(paths.length / perLine);
+    const imgSize = 100
+    const spacing = 10
+    const perLine = 3
+
+    const rows = Math.ceil(paths.length / perLine)
     return {
       canvasWidth: perLine * imgSize + (perLine - 1) * spacing,
       canvasHeight: rows * imgSize + (rows - 1) * spacing
-    };
+    }
   },
 
   // 加载所有图片（Web Image 对象）
   loadAllImages(canvas, paths) {
-    return Promise.all(paths.map(url => {
-      return new Promise((resolve, reject) => {
-        const image = canvas.createImage();
-        image.onload = () => resolve(image);
-        image.onerror = reject;
-        image.src = url; // 支持本地路径和网络图片
-      });
-    }));
+    return Promise.all(paths.map(url => new Promise((resolve, reject) => {
+      const image = canvas.createImage()
+      image.onload = () => resolve(image)
+      image.onerror = reject
+      image.src = url // 支持本地路径和网络图片
+    })))
   },
 
   // 执行图片绘制
   drawImages(ctx, images, canvasWidth) {
-    const imgSize = 100;
-    const spacing = 10;
-    const perLine = 3;
-    
+    const imgSize = 100
+    const spacing = 10
+    const perLine = 3
+
     images.forEach((image, index) => {
-      const row = Math.floor(index / perLine);
-      const col = index % perLine;
-      
-      const x = col * (imgSize + spacing);
-      const y = row * (imgSize + spacing);
-      
+      const row = Math.floor(index / perLine)
+      const col = index % perLine
+
+      const x = col * (imgSize + spacing)
+      const y = row * (imgSize + spacing)
+
       // 绘制图像（支持缩放裁剪）
       ctx.drawImage(
         image,
-        0, 0, image.width, image.height, // 源图裁剪区域
-        x, y, imgSize, imgSize           // 画布绘制区域
-      );
-    });
+        0,
+        0,
+        image.width,
+        image.height, // 源图裁剪区域
+        x,
+        y,
+        imgSize,
+        imgSize // 画布绘制区域
+      )
+    })
   },
 
   // Canvas 转临时文件
   canvasToTempFile(canvas) {
     return new Promise((resolve, reject) => {
       wx.canvasToTempFilePath({
-        canvas: canvas,
+        canvas,
         fileType: 'png',
         width: 400,
         height: 500,
         quality: 1,
         success: res => resolve(res.tempFilePath),
         fail: reject
-      });
-    });
+      })
+    })
   }
 
 })

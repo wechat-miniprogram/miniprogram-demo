@@ -26,8 +26,7 @@ Page({
       hasLogin: app.globalData.hasLogin
     })
   },
-  data: {
-    theme: 'light',},
+  data: {theme: 'light'},
   login() {
     const that = this
     wx.login({

@@ -1,9 +1,10 @@
-import { getGroupEnterInfo } from '../util'
+import {getGroupEnterInfo} from '../util'
+
 const config = require('../../../../config')
 
 let needShowEntrance = true
-let entrancePath = 'packageAPI/pages/chattool/material_open/material_open'
-let templateId = '4A68CBB88A92B0A9311848DBA1E94A199B166463' // 完成
+const entrancePath = 'packageAPI/pages/chattool/material_open/material_open'
+const templateId = '4A68CBB88A92B0A9311848DBA1E94A199B166463' // 完成
 // let templateId = '2A84254B945674A2F88CE4970782C402795EB607' // 参与
 
 const fileUrl = 'https://res.wx.qq.com/open/js/jweixin-1.6.0.js'
@@ -48,14 +49,14 @@ Page({
       env: config.envId,
       traceUser: true,
     })
-    
+
     this.setData({
       theme: wx.getSystemInfoSync().theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({ theme }) => {
-        this.setData({ theme })
+      wx.onThemeChange(({theme}) => {
+        this.setData({theme})
       })
     }
   },
@@ -71,24 +72,24 @@ Page({
     }
 
     await getGroupEnterInfo()
-    .then(groupInfo => {
-      const {groupOpenID} = groupInfo
-      this.updateChatToolMsg(activityId, {
-        targetState: 1,
-        parameterList: [{
-          groupOpenID,
-          state: 1,
-        }]
+      .then(groupInfo => {
+        const {groupOpenID} = groupInfo
+        this.updateChatToolMsg(activityId, {
+          targetState: 1,
+          parameterList: [{
+            groupOpenID,
+            state: 1,
+          }]
+        })
+        wx.showToast({
+          title: '签到成功',
+          icon: 'none'
+        })
+      }).catch(err => {
+        console.error('getGroupEnterInfo fail: ', err)
       })
-      wx.showToast({
-        title: '签到成功',
-        icon: 'none'
-      })
-    }).catch(err => {
-      console.error('getGroupEnterInfo fail: ', err)
-    })
   },
-  
+
   remindExpiration() {
     const activityId = this._activityId
     if (!activityId) {
@@ -126,7 +127,7 @@ Page({
   },
 
   updateChatToolMsg(activityId, params = {}) {
-    const {targetState, parameterList } = params
+    const {targetState, parameterList} = params
     wx.cloud.callFunction({
       name: 'openapi',
       data: {
@@ -203,7 +204,7 @@ Page({
           complete(res) {
             console.info('shareImageToGroup: ', res)
           }
-        }) 
+        })
       }
     })
   },
@@ -219,7 +220,7 @@ Page({
           complete(res) {
             console.info('shareEmojiToGroup: ', res)
           }
-        }) 
+        })
       }
     })
   },
@@ -227,7 +228,7 @@ Page({
   shareVideo() {
     wx.downloadFile({
       url: videoUrl,
-      success (res) {
+      success(res) {
         wx.shareVideoToGroup({
           videoPath: res.tempFilePath,
           thumbPath: '',
@@ -236,7 +237,7 @@ Page({
           complete(res) {
             console.info('shareVideoToGroup: ', res)
           }
-        }) 
+        })
       },
       fail: console.error,
     })
@@ -245,7 +246,7 @@ Page({
   shareFile() {
     wx.downloadFile({
       url: fileUrl,
-      success (res) {
+      success(res) {
         wx.shareFileToGroup({
           filePath: res.tempFilePath,
           fileName: '',
@@ -254,7 +255,7 @@ Page({
           complete(res) {
             console.info('shareFileToGroup: ', res)
           }
-        }) 
+        })
       },
       fail: console.error,
     })
