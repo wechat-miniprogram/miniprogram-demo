@@ -1,4 +1,3 @@
-
 const config = require('./svrkit.config.js')
 const proto = require('./svrkit-utils.static.js')
 const protoJSON = require('./svrkit-utils.static.json')
@@ -8,9 +7,9 @@ function generate(options) {
     throw new Error('options must be provided')
   }
 
-  const { serviceName, funcName, data } = options
+  const {serviceName, funcName, data} = options
 
-  const serviceConfig = config.find(c => c.serviceName === serviceName) 
+  const serviceConfig = config.find(c => c.serviceName === serviceName)
   if (!serviceConfig) {
     throw new Error('service not found')
   }
@@ -42,7 +41,7 @@ function generate(options) {
         if (!reqProtoJSON.fields[key]) {
           throw new Error(`'${key}' doesn't exist in '${reqProtoName}' proto, valid keys are ${Object.keys(reqProtoJSON.fields)}`)
         }
-      } 
+      }
     } else {
       throw new Error('data must be object')
     }
@@ -68,7 +67,7 @@ function generateV2(options) {
     throw new Error('options must be provided')
   }
 
-  const { apiName, data } = options
+  const {apiName, data} = options
 
   const apiConfig = config.find(c => c.apiName === apiName)
 
@@ -95,7 +94,7 @@ function generateV2(options) {
         if (!reqProtoJSON.fields[key]) {
           throw new Error(`'${key}' doesn't exist in '${reqProtoName}' proto, valid keys are ${Object.keys(reqProtoJSON.fields)}`)
         }
-      } 
+      }
     } else {
       throw new Error('data must be object')
     }
@@ -116,4 +115,3 @@ module.exports = {
   generate,
   generateV2,
 }
-

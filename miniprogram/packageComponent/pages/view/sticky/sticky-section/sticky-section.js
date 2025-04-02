@@ -1,5 +1,5 @@
 // demo-2/index.js
-import { generateList } from '../../../../../util/util'
+import {generateList} from '../../../../../util/util'
 
 Page({
 
@@ -9,7 +9,7 @@ Page({
   data: {
     list: generateList(20),
   },
-  
+
   back() {
     wx.navigateBack({})
   },

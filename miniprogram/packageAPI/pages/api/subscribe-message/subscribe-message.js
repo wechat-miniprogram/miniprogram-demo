@@ -30,7 +30,7 @@ Page({
     wx.cloud.callFunction({
       name: 'openapi',
       data: {
-    theme: 'light',
+        theme: 'light',
         action: 'sendSubscribeMessage'
       },
       success: res => {
@@ -69,7 +69,6 @@ Page({
         this.setData({theme})
       })
     }
-
   },
 
   /**
