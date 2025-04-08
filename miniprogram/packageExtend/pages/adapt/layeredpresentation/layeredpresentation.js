@@ -2,8 +2,7 @@ Page({
   data: {
     theme: 'light',
     hide1: false,
-    hide2: false,
-    theme: 'light'
+    hide2: false
   },
   onUnload() {
     if (wx.offThemeChange) {
@@ -12,7 +11,7 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {

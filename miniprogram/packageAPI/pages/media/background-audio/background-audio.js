@@ -83,17 +83,15 @@ Page({
   },
 
   onUnload() {
-    clearInterval(updateInterval)
-  },
-
-  onUnload() {
     if (wx.offThemeChange) {
       wx.offThemeChange()
     }
+    clearInterval(updateInterval)
   },
+
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {

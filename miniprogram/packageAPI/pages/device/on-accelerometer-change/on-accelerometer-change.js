@@ -118,16 +118,14 @@ Page({
     })
   },
   onUnload() {
-    clearInterval(this.interval)
-  },
-  onUnload() {
     if (wx.offThemeChange) {
       wx.offThemeChange()
     }
+    clearInterval(this.interval)
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {

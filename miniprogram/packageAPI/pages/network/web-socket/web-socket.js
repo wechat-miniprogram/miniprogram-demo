@@ -31,10 +31,11 @@ Page({
     if (wx.offThemeChange) {
       wx.offThemeChange()
     }
+    this.closeSocket()
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
@@ -60,10 +61,6 @@ Page({
     //     console.log('登录失败', error)
     //   }
     // })
-  },
-
-  onUnload() {
-    this.closeSocket()
   },
 
   toggleSocket(e) {

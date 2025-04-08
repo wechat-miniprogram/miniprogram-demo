@@ -20,7 +20,7 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     const res = wx.getExptInfoSync(['expt_args_2'])

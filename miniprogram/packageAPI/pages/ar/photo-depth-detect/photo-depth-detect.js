@@ -28,7 +28,7 @@ Component({
     ready() {
       console.log('页面准备完全')
       this.setData({
-        theme: wx.getSystemInfoSync().theme || 'light'
+        theme: getApp().globalData.theme || 'light'
       })
 
       if (wx.onThemeChange) {

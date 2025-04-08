@@ -1,7 +1,7 @@
 const config = require('../../../../config')
 const util = require('../../../../util/util')
 
-const systemInfo = wx.getSystemInfoSync()
+const systemInfo = getApp().globalData
 Page({
   data: {
     activityList: [],
@@ -36,7 +36,7 @@ Page({
     })
 
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {

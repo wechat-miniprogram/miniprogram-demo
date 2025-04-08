@@ -45,10 +45,19 @@ App({
         traceUser: true,
       })
     }
-    // skyline
-    const systemInfo = wx.getSystemInfoSync()
-    console.log('@@@ systemInfo ', systemInfo)
-    Object.assign(this.globalData, systemInfo)
+    const getSystemInfo = [
+      'getSystemSetting',
+      'getAppAuthorizeSetting',
+      'getDeviceInfo',
+      'getAppBaseInfo',
+      'getWindowInfo'
+    ]
+
+    getSystemInfo.forEach(apiName => {
+      if (wx[apiName]) {
+        Object.assign(this.globalData, wx[apiName]())
+      }
+    })
     // eslint-disable-next-line promise/always-return
     require.async('./packageSkyline/common/custom-route/index.js').then(utils => {
       console.log('--------begin installRouteBuilder')
@@ -84,7 +93,7 @@ App({
     }
   },
   globalData: {
-    theme: wx.getSystemInfoSync().theme,
+    theme: wx.getAppBaseInfo().theme,
     hasLogin: false,
     openid: null,
     iconTabbar: '/page/extend/images/icon_tabbar.png',

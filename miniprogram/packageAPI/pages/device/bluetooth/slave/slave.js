@@ -41,10 +41,14 @@ Page({
     if (wx.offThemeChange) {
       wx.offThemeChange()
     }
+    this.data.servers.forEach(() => {
+      // server.close()
+    })
   },
+
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
@@ -299,11 +303,5 @@ Page({
       title: '结束流程',
     })
     wx.closeBluetoothAdapter()
-  },
-
-  onUnload() {
-    this.data.servers.forEach(() => {
-      // server.close()
-    })
   },
 })

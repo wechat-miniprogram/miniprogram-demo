@@ -59,21 +59,20 @@ Page({
       }
     })
   },
+
   onUnload() {
     if (this.data.fileID) {
       wx.cloud.deleteFile({
         fileList: [this.data.fileID]
       })
     }
-  },
-  onUnload() {
     if (wx.offThemeChange) {
       wx.offThemeChange()
     }
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {

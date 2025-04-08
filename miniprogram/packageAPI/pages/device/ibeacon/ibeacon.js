@@ -12,10 +12,6 @@ Page({
     beacons: []
   },
 
-  onUnload() {
-    this.stopSearch()
-  },
-
   enterUuid(e) {
     this.setData({
       uuid: e.detail.value
@@ -49,10 +45,11 @@ Page({
     if (wx.offThemeChange) {
       wx.offThemeChange()
     }
+    this.stopSearch()
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {

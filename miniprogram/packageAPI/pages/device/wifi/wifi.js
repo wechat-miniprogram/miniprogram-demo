@@ -11,10 +11,6 @@ Page({
     wifiList: []
   },
 
-  onUnload() {
-    this.stopSearch()
-  },
-
   startSearch() {
     const getWifiList = () => {
       wx.getWifiList({
@@ -76,13 +72,14 @@ Page({
     })
   },
   onUnload() {
+    this.stopSearch()
     if (wx.offThemeChange) {
       wx.offThemeChange()
     }
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {

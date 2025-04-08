@@ -18,10 +18,13 @@ Page({
     if (wx.offThemeChange) {
       wx.offThemeChange()
     }
+    clearInterval(this.interval)
+    if (this._worker) this._worker.terminate()
   },
+
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
@@ -30,11 +33,6 @@ Page({
       })
     }
     this._worker = wx.createWorker('workers/fib/index.js')
-  },
-
-  onUnload() {
-    clearInterval(this.interval)
-    if (this._worker) this._worker.terminate()
   },
 
   bindInput(e) {

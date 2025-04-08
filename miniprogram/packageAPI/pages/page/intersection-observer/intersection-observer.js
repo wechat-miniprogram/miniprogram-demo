@@ -14,10 +14,11 @@ Page({
     if (wx.offThemeChange) {
       wx.offThemeChange()
     }
+    if (this._observer) this._observer.disconnect()
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
@@ -34,8 +35,5 @@ Page({
           appear: res.intersectionRatio > 0
         })
       })
-  },
-  onUnload() {
-    if (this._observer) this._observer.disconnect()
   }
 })
