@@ -217,6 +217,8 @@ Page({
         selector.select('#webgl')
           .node(this.init)
           .exec()
+      } else if (this.listener) {
+        this.listener.stop()
       }
     })
   },
