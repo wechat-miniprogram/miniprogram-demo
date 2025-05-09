@@ -1,3 +1,4 @@
+const app = getApp().globalData
 Component({
   options: {
     styleIsolation: 'apply-shared', // 表示页面 wxss 样式将影响到自定义组件，但自定义组件 wxss 中指定的样式不会影响页面
@@ -60,37 +61,20 @@ Component({
       ? wx.getMenuButtonBoundingClientRect()
       : null
     const isSkyline = this.renderer === 'skyline'
-    console.log('rect', rect)
-
-    if (wx.getDeviceInfo) {
-      const deviceInfo = wx.getDeviceInfo()
-      const ios = !!(deviceInfo.system.toLowerCase().search('ios') + 1)
-      this.setData({
-        ios
-      })
-    }
-    if (wx.getAppBaseInfo) {
-      const appBaseInfo = wx.getAppBaseInfo()
-      this.setData({
-        theme: appBaseInfo.theme || 'light',
-      })
-    }
-    if (wx.getWindowInfo) {
-      const windowInfo = wx.getWindowInfo()
-      console.log('windowInfo', windowInfo)
-      this.setData({
-        statusBarHeight: windowInfo.statusBarHeight,
-        navBarHeight: rect.bottom - rect.top + 10 + (isSkyline ? 0 : windowInfo.statusBarHeight),
-        innerWidth: isSupport ? `width:${rect.left}px` : '',
-        innerPaddingRight: isSupport
-          ? `padding-right:${windowInfo.windowWidth - rect.left}px`
-          : '',
-        leftWidth: isSupport ? `width:${windowInfo.windowWidth - rect.left}px` : '',
-      })
-    }
+    this.setData({
+      ios: !!(app.system.toLowerCase().search('ios') + 1),
+      theme: app.theme || 'light',
+      statusBarHeight: app.statusBarHeight,
+      navBarHeight: rect.bottom - rect.top + 10 + (isSkyline ? 0 : app.statusBarHeight),
+      innerWidth: isSupport ? `width:${rect.left}px` : '',
+      innerPaddingRight: isSupport
+        ? `padding-right:${app.windowWidth - rect.left}px`
+        : '',
+      leftWidth: isSupport ? `width:${app.windowWidth - rect.left}px` : '',
+    })
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   },
@@ -118,7 +102,6 @@ Component({
     },
     back() {
       const data = this.data
-      console.log('---------222', getCurrentPages().length)
       if (data.delta) {
         wx.navigateBack({
           delta: data.delta
@@ -126,7 +109,6 @@ Component({
       }
       // 如果是直接打开的，就默认回首页
       if (getCurrentPages().length == 1) {
-        console.log('---------333')
         wx.switchTab({
           url: '/page/component/index',
           complete: (res) => {
@@ -134,7 +116,7 @@ Component({
           }
         })
       }
-      this.triggerEvent('back', {delta: data.delta}, {})
+      this.triggerEvent('back', { delta: data.delta }, {})
     }
   }
 })
