@@ -36,7 +36,7 @@ Page({
         console.log('request success', result)
       },
 
-      fail({errMsg}) {
+      fail({ errMsg }) {
         console.log('request fail', errMsg)
         self.setData({
           loading: false
@@ -55,8 +55,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

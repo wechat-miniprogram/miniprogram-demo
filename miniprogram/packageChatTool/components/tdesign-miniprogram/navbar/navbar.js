@@ -1,5 +1,5 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
-import {getRect, systemInfo} from '../common/utils'
+import { SuperComponent, wxComponent } from '../common/src/index'
+import { getRect, systemInfo } from '../common/utils'
 import config from '../common/config'
 import props from './props'
 
@@ -11,7 +11,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-navbar`
 let Navbar = class Navbar extends SuperComponent {
   constructor() {
@@ -35,7 +35,7 @@ let Navbar = class Navbar extends SuperComponent {
     this.properties = props
     this.observers = {
       visible(visible) {
-        const {animation} = this.properties
+        const { animation } = this.properties
         const visibleClass = `${name}${visible ? '--visible' : '--hide'}`
         this.setData({
           visibleClass: `${visibleClass}${animation ? '-animation' : ''}`,
@@ -52,7 +52,7 @@ let Navbar = class Navbar extends SuperComponent {
         }
       },
       'title,titleMaxLength': function () {
-        const {title} = this.properties
+        const { title } = this.properties
         const titleMaxLength = this.properties.titleMaxLength || Number.MAX_SAFE_INTEGER
         let temp = title.slice(0, titleMaxLength)
         if (titleMaxLength < title.length) temp += '...'
@@ -75,7 +75,7 @@ let Navbar = class Navbar extends SuperComponent {
     this.methods = {
       initStyle() {
         this.getMenuRect()
-        const {_menuRect, _leftRect} = this.data
+        const { _menuRect, _leftRect } = this.data
         if (!_menuRect || !_leftRect || !systemInfo) return
         const _boxStyle = {
           '--td-navbar-padding-top': `${systemInfo.statusBarHeight}px`,
@@ -89,7 +89,7 @@ let Navbar = class Navbar extends SuperComponent {
       },
       calcCenterStyle(leftRect, menuRect, defaultStyle) {
         const maxSpacing = Math.max(leftRect.right, systemInfo.windowWidth - menuRect.left)
-        const _boxStyle = {...defaultStyle, '--td-navbar-center-left': `${maxSpacing}px`, '--td-navbar-center-width': `${Math.max(menuRect.left - maxSpacing, 0)}px`}
+        const _boxStyle = { ...defaultStyle, '--td-navbar-center-left': `${maxSpacing}px`, '--td-navbar-center-width': `${Math.max(menuRect.left - maxSpacing, 0)}px` }
         const boxStyle = Object.entries(_boxStyle)
           .map(([k, v]) => `${k}: ${v}`)
           .join('; ')
@@ -150,7 +150,7 @@ let Navbar = class Navbar extends SuperComponent {
         })
       },
       goBack() {
-        const {delta} = this.data
+        const { delta } = this.data
         const that = this
         this.triggerEvent('go-back')
         if (delta > 0) {

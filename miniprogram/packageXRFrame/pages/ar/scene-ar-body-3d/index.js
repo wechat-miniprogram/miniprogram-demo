@@ -8,7 +8,7 @@ Page({
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
     score: undefined
   },
-  handleInfo({detail}) {
-    this.setData({score: detail.score.toFixed(2)})
+  handleInfo({ detail }) {
+    this.setData({ score: detail.score.toFixed(2) })
   },
 })

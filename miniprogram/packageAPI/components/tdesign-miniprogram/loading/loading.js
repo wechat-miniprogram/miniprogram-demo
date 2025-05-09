@@ -1,4 +1,4 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
 
@@ -10,7 +10,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-loading`
 let Loading = class Loading extends SuperComponent {
   constructor() {
@@ -24,25 +24,25 @@ let Loading = class Loading extends SuperComponent {
     this.options = {
       multipleSlots: true,
     }
-    this.properties = {...props}
+    this.properties = { ...props }
     this.timer = null
     this.observers = {
       loading(cur) {
-        const {delay} = this.properties
+        const { delay } = this.properties
         if (this.timer) {
           clearTimeout(this.timer)
         }
         if (cur) {
           if (delay) {
             this.timer = setTimeout(() => {
-              this.setData({show: cur})
+              this.setData({ show: cur })
               this.timer = null
             }, delay)
           } else {
-            this.setData({show: cur})
+            this.setData({ show: cur })
           }
         } else {
-          this.setData({show: cur})
+          this.setData({ show: cur })
         }
       },
     }

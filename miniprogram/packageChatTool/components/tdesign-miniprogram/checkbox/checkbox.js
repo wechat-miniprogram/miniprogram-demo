@@ -1,4 +1,4 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import Props from './props'
 
@@ -10,7 +10,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-checkbox`
 let CheckBox = class CheckBox extends SuperComponent {
   constructor() {
@@ -27,7 +27,7 @@ let CheckBox = class CheckBox extends SuperComponent {
       '../checkbox-group/checkbox-group': {
         type: 'ancestor',
         linked(parent) {
-          const {value, disabled, borderless} = parent.data
+          const { value, disabled, borderless } = parent.data
           const valueSet = new Set(value)
           const checkedFromParent = valueSet.has(this.data.value)
           const data = {
@@ -67,7 +67,7 @@ let CheckBox = class CheckBox extends SuperComponent {
     }
     this.observers = {
       disabled(v) {
-        this.setData({_disabled: v})
+        this.setData({ _disabled: v })
       },
     }
     this.controlledProps = [
@@ -78,16 +78,16 @@ let CheckBox = class CheckBox extends SuperComponent {
     ]
     this.methods = {
       handleTap(e) {
-        const {_disabled, readonly, contentDisabled} = this.data
-        const {target} = e.currentTarget.dataset
+        const { _disabled, readonly, contentDisabled } = this.data
+        const { target } = e.currentTarget.dataset
         if (_disabled || readonly || (target === 'text' && contentDisabled)) return
-        const {value, label} = this.data
+        const { value, label } = this.data
         const checked = !this.data.checked
         const parent = this.$parent
         if (parent) {
-          parent.updateValue({...this.data, checked, item: {label, value, checked}})
+          parent.updateValue({ ...this.data, checked, item: { label, value, checked } })
         } else {
-          this._trigger('change', {context: {value, label}, checked})
+          this._trigger('change', { context: { value, label }, checked })
         }
       },
       setDisabled(disabled) {

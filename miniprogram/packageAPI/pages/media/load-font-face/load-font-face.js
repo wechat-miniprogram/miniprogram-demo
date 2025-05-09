@@ -23,8 +23,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     this.setData({
@@ -39,7 +39,7 @@ Page({
       source: 'url("https://sungd.github.io/Pacifico.ttf")',
       success(res) {
         console.log(res.status)
-        self.setData({loaded: true})
+        self.setData({ loaded: true })
       },
       fail(res) {
         console.log(res.status)
@@ -51,6 +51,6 @@ Page({
   },
 
   clear() {
-    this.setData({loaded: false})
+    this.setData({ loaded: false })
   }
 })

@@ -32,8 +32,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     const canIUse = wx.canIUse('createUDPSocket')
@@ -57,7 +57,7 @@ Page({
       startUDP: true,
     })
     this.remoteUDPSocket.onMessage((res) => {
-      const {remoteInfo} = res
+      const { remoteInfo } = res
       console.log(res)
       wx.showModal({
         title: `IP:${remoteInfo.address}发来的信息`,

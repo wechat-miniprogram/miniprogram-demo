@@ -10,18 +10,18 @@ Page({
     run: false,
     positions: [[0, 0, '瞬光'], [0, 0, 'roam'], [0, 0, 'xinyi']],
   },
-  handleLoaded({detail}) {
+  handleLoaded({ detail }) {
     console.log('assets loaded', detail)
 
-    this.setData({loaded: true})
+    this.setData({ loaded: true })
   },
-  handleSyncPositions({detail}) {
+  handleSyncPositions({ detail }) {
     const info = detail
-    this.setData({positions: info})
+    this.setData({ positions: info })
   },
   handleRun() {
     if (this.data.loaded && !this.data.run) {
-      this.setData({run: true})
+      this.setData({ run: true })
     }
   }
 })

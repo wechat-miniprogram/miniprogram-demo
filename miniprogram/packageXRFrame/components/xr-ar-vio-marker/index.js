@@ -13,25 +13,25 @@ Component({
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       this.mat = new (wx.getXrFrameSystem().Matrix4)()
       console.log('xr-scene', xrScene)
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
       // this.setData({loaded: true});
       this.scene.event.addOnce('touchstart', this.placeNode.bind(this))
     },
-    handleARReady({detail}) {
+    handleARReady({ detail }) {
       console.log('arReady', this.scene.ar.arVersion)
     },
     placeNode(event) {
-      const {clientX, clientY} = event.touches[0]
-      const {frameWidth: width, frameHeight: height} = this.scene
+      const { clientX, clientY } = event.touches[0]
+      const { frameWidth: width, frameHeight: height } = this.scene
 
       if (clientY / height > 0.8 && clientX / width < 0.2) {
         this.scene.getNodeById('setitem').visible = false

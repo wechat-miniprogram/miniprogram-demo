@@ -1,4 +1,4 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
 
@@ -10,7 +10,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-checkbox-group`
 let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
   constructor() {
@@ -67,7 +67,7 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
       },
       updateChildren() {
         const items = this.getChildren()
-        const {value} = this.data
+        const { value } = this.data
         if (items.length > 0) {
           items.forEach((item) => {
             !item.data.checkAll &&
@@ -83,8 +83,8 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
       updateValue({
         value, checked, checkAll, item, indeterminate
       }) {
-        let {value: newValue} = this.data
-        const {max} = this.data
+        let { value: newValue } = this.data
+        const { max } = this.data
         const keySet = new Set(this.getChildren().map((item) => item.data.value))
         newValue = newValue.filter((value) => keySet.has(value))
         if (max && checked && newValue.length === max) return
@@ -93,26 +93,26 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
           newValue =
                         !checked && indeterminate
                           ? items
-                            .filter(({data}) => !(data.disabled && !newValue.includes(data.value)))
+                            .filter(({ data }) => !(data.disabled && !newValue.includes(data.value)))
                             .map((item) => item.data.value)
                           : items
-                            .filter(({data}) => {
+                            .filter(({ data }) => {
                               if (data.disabled) {
                                 return newValue.includes(data.value)
                               }
                               return checked && !data.checkAll
                             })
-                            .map(({data}) => data.value)
+                            .map(({ data }) => data.value)
         } else if (checked) {
           newValue = newValue.concat(value)
         } else {
           const index = newValue.findIndex((v) => v === value)
           newValue.splice(index, 1)
         }
-        this._trigger('change', {value: newValue, context: item})
+        this._trigger('change', { value: newValue, context: item })
       },
       initWithOptions() {
-        const {options, value, keys} = this.data
+        const { options, value, keys } = this.data
         if (!(options === null || options === void 0 ? void 0 : options.length) || !Array.isArray(options)) return
         const checkboxOptions = options.map((item) => {
           let _a; let _b; let
@@ -134,8 +134,8 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
       },
       handleInnerChildChange(e) {
         let _a
-        const {item} = e.target.dataset
-        const {checked} = e.detail
+        const { item } = e.target.dataset
+        const { checked } = e.detail
         const rect = {}
         if (item.checkAll) {
           rect.indeterminate = (_a = this.$checkAll) === null || _a === void 0 ? void 0 : _a.data.indeterminate
@@ -150,7 +150,7 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
           this.$checkAll = items.find((item) => item.data.checkAll)
         }
         if (!this.$checkAll) return
-        const {value} = this.data
+        const { value } = this.data
         const valueSet = new Set(value === null || value === void 0 ? void 0 : value.filter((val) => val !== this.$checkAll.data.value))
         const isCheckall = items.every((item) => (item.data.checkAll ? true : valueSet.has(item.data.value)))
         this.$checkAll.setData({

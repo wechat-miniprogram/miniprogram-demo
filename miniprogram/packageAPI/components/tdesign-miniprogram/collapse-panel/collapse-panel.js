@@ -1,7 +1,7 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
-import {getRect} from '../common/utils'
+import { getRect } from '../common/utils'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
   const c = arguments.length; let r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc; let
@@ -11,7 +11,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-collapse-panel`
 let CollapsePanel = class CollapsePanel extends SuperComponent {
   constructor() {
@@ -24,7 +24,7 @@ let CollapsePanel = class CollapsePanel extends SuperComponent {
       '../collapse/collapse': {
         type: 'ancestor',
         linked(target) {
-          const {value, expandIcon, disabled} = target.properties
+          const { value, expandIcon, disabled } = target.properties
           this.setData({
             ultimateExpandIcon: this.properties.expandIcon == null ? expandIcon : this.properties.expandIcon,
             ultimateDisabled: this.properties.disabled == null ? disabled : this.properties.disabled,
@@ -44,7 +44,7 @@ let CollapsePanel = class CollapsePanel extends SuperComponent {
     }
     this.observers = {
       disabled(v) {
-        this.setData({ultimateDisabled: !!v})
+        this.setData({ ultimateDisabled: !!v })
       },
     }
     this.methods = {
@@ -52,11 +52,11 @@ let CollapsePanel = class CollapsePanel extends SuperComponent {
         if (!this.$parent) {
           return
         }
-        const {value} = this.properties
-        const {defaultExpandAll} = this.$parent.data
+        const { value } = this.properties
+        const { defaultExpandAll } = this.$parent.data
         const expanded = defaultExpandAll ? !this.data.expanded : activeValues.includes(value)
         if (expanded === this.properties.expanded) return
-        this.setData({expanded})
+        this.setData({ expanded })
         this.updateStyle(expanded)
       },
       updateStyle(expanded) {
@@ -68,18 +68,18 @@ let CollapsePanel = class CollapsePanel extends SuperComponent {
               timingFunction: 'ease-in-out',
             })
             if (expanded) {
-              animation.height(height).top(0).step({duration: 300}).height('auto')
+              animation.height(height).top(0).step({ duration: 300 }).height('auto')
                 .step()
             } else {
-              animation.height(height).top(1).step({duration: 1}).height(0)
-                .step({duration: 300})
+              animation.height(height).top(1).step({ duration: 1 }).height(0)
+                .step({ duration: 300 })
             }
-            this.setData({animation: animation.export()})
+            this.setData({ animation: animation.export() })
           })
       },
       onClick() {
-        const {ultimateDisabled} = this.data
-        const {value} = this.properties
+        const { ultimateDisabled } = this.data
+        const { value } = this.properties
         if (ultimateDisabled) return
         if (this.$parent.data.defaultExpandAll) {
           this.updateExpanded()

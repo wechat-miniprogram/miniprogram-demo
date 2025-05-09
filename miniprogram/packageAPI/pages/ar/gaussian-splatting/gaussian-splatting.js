@@ -1,12 +1,12 @@
-import {loadPly} from './loaders/ply/ply-loader'
-import {loadSplat} from './loaders/splat/splat-loader'
+import { loadPly } from './loaders/ply/ply-loader'
+import { loadSplat } from './loaders/splat/splat-loader'
 import CameraWebGL from './webgl2/camera-webGL'
 import CubeInstanceWebGL from './webgl2/cubeInstance-webGL'
-import SplatWebGL, {SplatRenderTexture} from './webgl2/splat-webGL'
+import SplatWebGL, { SplatRenderTexture } from './webgl2/splat-webGL'
 
 import * as glMatrix from './util/gl-matrix-min'
 
-const {mat4} = glMatrix
+const { mat4 } = glMatrix
 
 const renderScale = 1
 
@@ -258,8 +258,8 @@ Component({
           /**
            * 因为微信读文件，最大只能读100MB的，所以需要分块读取。
            */
-          const fd = fs.openSync({filePath})
-          const stats = fs.fstatSync({fd})
+          const fd = fs.openSync({ filePath })
+          const stats = fs.fstatSync({ fd })
           console.log('fd stats', stats)
           let size = stats.size
           if (size > 0) {
@@ -288,7 +288,7 @@ Component({
               offset += chunkSize
               size -= chunkSize
             }
-            fs.close({fd})
+            fs.close({ fd })
 
             // console.log('buffer', buffer)
 

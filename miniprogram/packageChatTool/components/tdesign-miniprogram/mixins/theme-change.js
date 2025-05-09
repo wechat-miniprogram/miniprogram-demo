@@ -1,4 +1,4 @@
-import {appBaseInfo} from '../common/utils'
+import { appBaseInfo } from '../common/utils'
 
 const themeChangeBehavior = Behavior({
   data: {

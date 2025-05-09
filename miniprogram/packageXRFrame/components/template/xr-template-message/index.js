@@ -19,7 +19,7 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       console.log('xr-scene', xrScene)
       const xrSystem = wx.getXrFrameSystem()
@@ -33,12 +33,12 @@ Component({
       // 绑定tick事件
       xrScene.event.add('tick', this.handleTick.bind(this))
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     },
     handleTick() {
       if (this.moveSphereTRS) {

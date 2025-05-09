@@ -11,7 +11,7 @@ export default class TCalendar {
   }
 
   getTrimValue() {
-    const {value, type} = this
+    const { value, type } = this
     const format = (val) => {
       if (val instanceof Date) return val
       if (typeof val === 'number') return new Date(val)
@@ -44,15 +44,15 @@ export default class TCalendar {
     const {
       minDate, maxDate, type, format
     } = this
-    let {year: minYear, month: minMonth, time: minTime} = getDateRect(minDate)
-    const {year: maxYear, month: maxMonth, time: maxTime} = getDateRect(maxDate)
+    let { year: minYear, month: minMonth, time: minTime } = getDateRect(minDate)
+    const { year: maxYear, month: maxMonth, time: maxTime } = getDateRect(maxDate)
     const calcType = (year, month, date) => {
       const curDate = new Date(year, month, date, 23, 59, 59)
       if (type === 'single' && selectedDate) {
-        if (isSameDate({year, month, date}, selectedDate)) return 'selected'
+        if (isSameDate({ year, month, date }, selectedDate)) return 'selected'
       }
       if (type === 'multiple' && selectedDate) {
-        const hit = selectedDate.some((item) => isSameDate({year, month, date}, item))
+        const hit = selectedDate.some((item) => isSameDate({ year, month, date }, item))
         if (hit) {
           return 'selected'
         }
@@ -60,8 +60,8 @@ export default class TCalendar {
       if (type === 'range' && selectedDate) {
         if (Array.isArray(selectedDate)) {
           const [startDate, endDate] = selectedDate
-          if (startDate && isSameDate({year, month, date}, startDate)) return 'start'
-          if (endDate && isSameDate({year, month, date}, endDate)) return 'end'
+          if (startDate && isSameDate({ year, month, date }, startDate)) return 'start'
+          if (endDate && isSameDate({ year, month, date }, endDate)) return 'end'
           if (startDate && endDate && curDate.getTime() > startDate.getTime() && curDate.getTime() < endDate.getTime()) return 'centre'
         }
       }
@@ -99,7 +99,7 @@ export default class TCalendar {
   select({
     cellType, year, month, date
   }) {
-    const {type} = this
+    const { type } = this
     const selectedDate = this.getTrimValue()
     if (cellType === 'disabled') return
     const selected = new Date(year, month, date)

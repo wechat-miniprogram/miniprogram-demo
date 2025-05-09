@@ -1,5 +1,5 @@
 import config from '../common/config'
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import props from './props'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-radio-group`
 let RadioGroup = class RadioGroup extends SuperComponent {
   constructor() {
@@ -25,7 +25,7 @@ let RadioGroup = class RadioGroup extends SuperComponent {
       '../radio/radio': {
         type: 'descendant',
         linked(target) {
-          const {value, disabled} = this.data
+          const { value, disabled } = this.data
           target.setData({
             checked: value === target.data.value,
           })
@@ -71,12 +71,12 @@ let RadioGroup = class RadioGroup extends SuperComponent {
         return items
       },
       updateValue(value) {
-        this._trigger('change', {value})
+        this._trigger('change', { value })
       },
       handleRadioChange(e) {
-        const {checked} = e.detail
-        const {value, index, allowUncheck} = e.target.dataset
-        this._trigger('change', checked === false && allowUncheck ? {value: null, index} : {value, index})
+        const { checked } = e.detail
+        const { value, index, allowUncheck } = e.target.dataset
+        this._trigger('change', checked === false && allowUncheck ? { value: null, index } : { value, index })
       },
       initWithOptions() {
         const {

@@ -34,11 +34,11 @@ Page({
       renderHeight: height * dpi
     })
   },
-  handleRequireLight({detail}) {
-    const {state, wait} = detail
+  handleRequireLight({ detail }) {
+    const { state, wait } = detail
     console.log('light', state, wait)
     if (state === 'hide') {
-      this.setData({showLightButton: false})
+      this.setData({ showLightButton: false })
       return
     }
 
@@ -49,8 +49,8 @@ Page({
       lightProgress: state === 'cd' ? 1 - wait : 1
     })
   },
-  handleRequireDialog({detail}) {
-    const {texts, name, from} = detail
+  handleRequireDialog({ detail }) {
+    const { texts, name, from } = detail
     this.texts = texts
     this.textIndex = 0
     this.from = from
@@ -68,10 +68,10 @@ Page({
     }
 
     if (this.textIndex === this.texts.length) {
-      this.setData({text: '', name: '', bg: '#000'})
+      this.setData({ text: '', name: '', bg: '#000' })
       setTimeout(() => {
         this.textIndex = 0
-        this.setData({showDialog: false, nextAction: this.from})
+        this.setData({ showDialog: false, nextAction: this.from })
       }, 1000)
       return
     }
@@ -81,10 +81,10 @@ Page({
     if (tmp) {
       const hint = tmp[1]
       const [start, end] = text.split('{{' + hint + '}}')
-      console.log({start, hint, end})
-      this.setData({start, hint, end})
+      console.log({ start, hint, end })
+      this.setData({ start, hint, end })
     } else {
-      this.setData({text: this.texts[this.textIndex], hint: ''})
+      this.setData({ text: this.texts[this.textIndex], hint: '' })
     }
   },
   handleTriggerLight() {
@@ -92,6 +92,6 @@ Page({
       return
     }
 
-    this.setData({nextAction: 'light'})
+    this.setData({ nextAction: 'light' })
   }
 })

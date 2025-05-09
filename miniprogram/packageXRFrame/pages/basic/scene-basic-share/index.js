@@ -15,7 +15,7 @@ Page({
     sceneWidth: 0,
     sceneHeight: 0
   },
-  handleReady({detail}) {
+  handleReady({ detail }) {
     this.setData({
       sceneWidth: detail.width,
       sceneHeight: detail.height,
@@ -38,17 +38,17 @@ Page({
       return
     }
 
-    this.setData({captureState: 1})
+    this.setData({ captureState: 1 })
     // hack，其实应该等待异步方法完成
     setTimeout(() => {
-      this.setData({captureState: 0})
+      this.setData({ captureState: 0 })
     }, 1000)
   },
   changeRecordState(e) {
-    this.setData({recordState: this.data.recordState ? 0 : 1})
+    this.setData({ recordState: this.data.recordState ? 0 : 1 })
   },
   changeCaptureType(e) {
-    this.setData({captureType: e.detail.value})
+    this.setData({ captureType: e.detail.value })
   },
   changeCaptureQuality(e) {
     this.setData({

@@ -128,7 +128,7 @@ void main()
     initXRYUVCamera() {
       const xrFrameSystem = wx.getXrFrameSystem()
       const scene = this.xrScene
-      const {assets, rootShadow} = scene
+      const { assets, rootShadow } = scene
 
       const el = scene.createElement(xrFrameSystem.XRNode, {
         layer: 1
@@ -180,7 +180,7 @@ void main()
           })
         }
       }
-      const {y, uv, depth} = this.cameraTexures
+      const { y, uv, depth } = this.cameraTexures
 
       const cameraYUVMat = this.yuvMat
       // 未绑定贴图的情况下，绑定贴图
@@ -203,8 +203,8 @@ void main()
       cameraYUVMat.setMatrix('u_displayMatrix', this.DT)
 
       // YUV纹理更新
-      y.update({buffer: yuv.yAddress})
-      uv.update({buffer: yuv.uvAddress})
+      y.update({ buffer: yuv.yAddress })
+      uv.update({ buffer: yuv.uvAddress })
 
       // console.log('update yuv end')
     },
@@ -219,7 +219,7 @@ void main()
 
         // 更新 projectMatrix
         const halfFov = Math.atan(1 / projMat[5]) * 180 / Math.PI
-        this.xrCamera.setData({near, far, fov: 2 * halfFov})
+        this.xrCamera.setData({ near, far, fov: 2 * halfFov })
         this.xrCamera.changeProjectMatrix(true, projMat)
       }
     },

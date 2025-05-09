@@ -15,7 +15,7 @@ CustomPage({
     return new Promise((resolve, reject) => {
       if (this.data.i % 2 === 0) {
         setTimeout(() => {
-          resolve([{text: '搜索结果', value: 1}, {text: '搜索结果2', value: 2}])
+          resolve([{ text: '搜索结果', value: 1 }, { text: '搜索结果2', value: 2 }])
         }, 200)
       } else {
         setTimeout(() => {

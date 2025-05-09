@@ -1,4 +1,4 @@
-import {getGroupEnterInfo} from '../util'
+import { getGroupEnterInfo } from '../util'
 
 const config = require('../../../../config')
 
@@ -10,7 +10,7 @@ const templateId = '4A68CBB88A92B0A9311848DBA1E94A199B166463' // 完成
 const fileUrl = 'https://res.wx.qq.com/open/js/jweixin-1.6.0.js'
 const videoUrl = 'https://res.wx.qq.com/op_res/o3RWIC_o--wNf_qA3B4ghHbL_qKRRwsUM39dGTzltCR2__61DnEANInj5AJJmVXsHvx9FyHlDftU3KhcGCukDA'
 
-const {envVersion} = wx.getAccountInfoSync().miniProgram
+const { envVersion } = wx.getAccountInfoSync().miniProgram
 
 const getVersionType = () => {
   if (envVersion === 'release') {
@@ -55,8 +55,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   },
@@ -73,7 +73,7 @@ Page({
 
     await getGroupEnterInfo()
       .then(groupInfo => {
-        const {groupOpenID} = groupInfo
+        const { groupOpenID } = groupInfo
         this.updateChatToolMsg(activityId, {
           targetState: 1,
           parameterList: [{
@@ -127,7 +127,7 @@ Page({
   },
 
   updateChatToolMsg(activityId, params = {}) {
-    const {targetState, parameterList} = params
+    const { targetState, parameterList } = params
     wx.cloud.callFunction({
       name: 'openapi',
       data: {

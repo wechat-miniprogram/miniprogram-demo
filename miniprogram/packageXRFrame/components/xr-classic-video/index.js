@@ -11,20 +11,20 @@ Component({
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       console.log('xr-scene', xrScene)
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
       this.setData({
         loaded: true
       })
     },
-    handleTrackerSwitch({detail}) {
+    handleTrackerSwitch({ detail }) {
       const active = detail.value
       console.log('handleTrackerSwitch', detail)
       const video = this.scene.assets.getAsset('video-texture', 'hikari')

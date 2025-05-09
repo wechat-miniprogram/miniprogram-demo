@@ -1,4 +1,4 @@
-import {wxDecodeAdapter, computeCov3D} from '../util-loader.js'
+import { wxDecodeAdapter, computeCov3D } from '../util-loader.js'
 
 const RowSizeBytes = 32
 const CenterSizeBytes = 12

@@ -332,7 +332,7 @@ Field.d = function decorateField(fieldId, fieldType, fieldRule, defaultValue) {
 
   return function fieldDecorator(prototype, fieldName) {
     util.decorateType(prototype.constructor)
-      .add(new Field(fieldName, fieldId, fieldType, fieldRule, {default: defaultValue}))
+      .add(new Field(fieldName, fieldId, fieldType, fieldRule, { default: defaultValue }))
   }
 }
 

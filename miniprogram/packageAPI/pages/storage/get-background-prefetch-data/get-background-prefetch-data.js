@@ -44,7 +44,7 @@ Page({
     if (wx.getBackgroundFetchData) {
       console.log('读取预拉取数据')
       const res = app.globalData.backgroundFetchData
-      const {fetchedData} = res
+      const { fetchedData } = res
       const result = JSON.parse(fetchedData)
       const systemInfo = wx.getSystemInfoSync()
       const timeStamp = systemInfo.brand === 'iPhone' ? res.timeStamp * 1000 : res.timeStamp
@@ -74,8 +74,8 @@ Page({
       theme: getApp().globalData.theme || 'light'
     })
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

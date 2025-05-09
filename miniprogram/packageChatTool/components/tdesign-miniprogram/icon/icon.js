@@ -1,7 +1,7 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
-import {styles, addUnit, getRect} from '../common/utils'
+import { styles, addUnit, getRect } from '../common/utils'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
   const c = arguments.length; let r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc; let
@@ -20,7 +20,7 @@ const __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, 
   })
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-icon`
 let Icon = class Icon extends SuperComponent {
   constructor() {
@@ -48,10 +48,10 @@ let Icon = class Icon extends SuperComponent {
         } = this.data
         const isImage = name.indexOf('/') !== -1
         const sizeValue = addUnit(size)
-        const colorStyle = color ? {color} : {}
-        const fontStyle = size ? {'font-size': sizeValue} : {}
-        const iconStyle = {...colorStyle, ...fontStyle}
-        this.setData({isImage}, () => __awaiter(this, void 0, void 0, function* () {
+        const colorStyle = color ? { color } : {}
+        const fontStyle = size ? { 'font-size': sizeValue } : {}
+        const iconStyle = { ...colorStyle, ...fontStyle }
+        this.setData({ isImage }, () => __awaiter(this, void 0, void 0, function* () {
           if (isImage) {
             let iconSize = sizeValue
             if (!iconSize) {
@@ -64,7 +64,7 @@ let Icon = class Icon extends SuperComponent {
             iconStyle.width = iconSize
             iconStyle.height = iconSize
           }
-          this.setData({iconStyle: `${styles(iconStyle)}`})
+          this.setData({ iconStyle: `${styles(iconStyle)}` })
         }))
       },
     }

@@ -21,7 +21,7 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       console.log('xr-scene', xrScene)
       const xrFrameSystem = wx.getXrFrameSystem()
@@ -57,12 +57,12 @@ Component({
       }
     },
 
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     }
   }
 })

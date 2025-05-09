@@ -1,4 +1,4 @@
-import {getAppBaseInfo} from './wechat'
+import { getAppBaseInfo } from './wechat'
 
 let systemInfo
 function getSystemInfo() {

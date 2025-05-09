@@ -1,5 +1,5 @@
-import {showTips} from '../../../common/tips'
-import {worklet, supportWorklet} from '../../../common/worklet-api'
+import { showTips } from '../../../common/tips'
+import { worklet, supportWorklet } from '../../../common/worklet-api'
 
 Page({
   data: {},

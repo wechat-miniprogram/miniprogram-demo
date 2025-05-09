@@ -8,7 +8,7 @@ export const trimSingleValue = (value, min, max) => {
   return value
 }
 export const trimValue = (value, props) => {
-  const {min, max, range} = props
+  const { min, max, range } = props
   if (range && Array.isArray(value)) {
     value[0] = trimSingleValue(value[0], min, max)
     value[1] = trimSingleValue(value[1], min, max)

@@ -17,11 +17,11 @@ Page({
     vignetteRoundness: 1,
     fxaaEnabled: false
   },
-  handleProgress({detail}) {
-    this.setData({progressInfo: `${~~(detail.progress * 100)} %\n\n${detail.asset.assetId}(${detail.asset.type}): ${detail.asset.src}`})
+  handleProgress({ detail }) {
+    this.setData({ progressInfo: `${~~(detail.progress * 100)} %\n\n${detail.asset.assetId}(${detail.asset.type}): ${detail.asset.src}` })
   },
-  handleLoaded({detail}) {
-    this.setData({loaded: true})
+  handleLoaded({ detail }) {
+    this.setData({ loaded: true })
   },
   changeType(e) {
     const type = e.detail.value

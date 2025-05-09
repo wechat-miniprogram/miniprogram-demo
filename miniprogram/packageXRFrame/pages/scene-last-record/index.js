@@ -24,10 +24,10 @@ Page({
       renderHeight: height * dpi
     })
   },
-  handleChangeTexts({detail}) {
-    this.setData({texts: detail})
+  handleChangeTexts({ detail }) {
+    this.setData({ texts: detail })
   },
-  handleShowNote({detail}) {
+  handleShowNote({ detail }) {
     wx.showModal({
       title: '最后的记录',
       content: detail,

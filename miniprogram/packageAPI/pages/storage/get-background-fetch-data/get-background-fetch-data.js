@@ -25,7 +25,7 @@ Page({
         fetchType: 'periodic',
         success(res) {
           console.log(res)
-          const {fetchedData} = res
+          const { fetchedData } = res
           const result = JSON.parse(fetchedData)
           that.setData({
             appid: result.appid,
@@ -64,8 +64,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

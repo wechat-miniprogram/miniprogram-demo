@@ -78,7 +78,7 @@ Page({
           src: res.tempImagePath
         })
 
-        const canvas = wx.createOffscreenCanvas({type: '2d', width: this.data.imageWidth, height: this.data.imageHeight})
+        const canvas = wx.createOffscreenCanvas({ type: '2d', width: this.data.imageWidth, height: this.data.imageHeight })
 
         const ctx = canvas.getContext('2d')
 

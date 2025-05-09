@@ -1,8 +1,8 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import ImageProps from './props'
 import config from '../common/config'
-import {addUnit, getRect, appBaseInfo} from '../common/utils'
-import {compareVersion} from '../common/version'
+import { addUnit, getRect, appBaseInfo } from '../common/utils'
+import { compareVersion } from '../common/version'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
   const c = arguments.length; let r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc; let
@@ -12,7 +12,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-image`
 let Image = class Image extends SuperComponent {
   constructor() {
@@ -42,14 +42,14 @@ let Image = class Image extends SuperComponent {
     this.methods = {
       onLoaded(e) {
         const sdkVersion = appBaseInfo.SDKVersion
-        const {mode, tId} = this.properties
+        const { mode, tId } = this.properties
         const isInCompatible = compareVersion(sdkVersion, '2.10.3') < 0
         if (mode === 'heightFix' && isInCompatible) {
-          const {height: picHeight, width: picWidth} = e.detail
+          const { height: picHeight, width: picWidth } = e.detail
           getRect(this, `#${tId || 'image'}`).then((rect) => {
-            const {height} = rect
+            const { height } = rect
             const resultWidth = ((height / picHeight) * picWidth).toFixed(2)
-            this.setData({innerStyle: `height: ${addUnit(height)}; width: ${resultWidth}px;`})
+            this.setData({ innerStyle: `height: ${addUnit(height)}; width: ${resultWidth}px;` })
           })
         }
         this.setData({
@@ -78,10 +78,10 @@ let Image = class Image extends SuperComponent {
         })
       },
       update() {
-        const {src} = this.properties
+        const { src } = this.properties
         this.preSrc = src
         if (!src) {
-          this.onLoadError({errMsg: '图片链接为空'})
+          this.onLoadError({ errMsg: '图片链接为空' })
         } else {
           this.setData({
             isLoading: true,

@@ -15,16 +15,16 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       console.log('xr-scene', xrScene)
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     },
     handleTouchEarth() {
       this.setData({
@@ -36,12 +36,12 @@ Component({
         touchingEarth: false
       })
     },
-    handleEarthRotation({detail}) {
-      const {target, deltaX} = detail.value
+    handleEarthRotation({ detail }) {
+      const { target, deltaX } = detail.value
       target._components.transform.rotation.y += deltaX / 100
     },
-    handleDragMoon({detail}) {
-      const {dir, target, camera} = detail.value
+    handleDragMoon({ detail }) {
+      const { dir, target, camera } = detail.value
       const cameraPos = camera.el._components.transform.worldPosition
       const k = -cameraPos.y / dir[1]
       const x = cameraPos.x + k * dir[0]
@@ -55,7 +55,7 @@ Component({
       }
     },
     handleTouchMoon() {
-      this.setData({touchingMoon: true})
+      this.setData({ touchingMoon: true })
     },
     handleUntouchMoon() {
       const moon = this.scene.getNodeById('mesh-moon')
@@ -68,9 +68,9 @@ Component({
         θ: x < 0 ? Math.atan(z / x) + Math.PI : Math.atan(z / x),
         ω: Math.sqrt(2.5e-4 / (len * len * len))
       })
-      this.setData({touchingMoon: false})
+      this.setData({ touchingMoon: false })
     },
-    handleTick({detail}) {
+    handleTick({ detail }) {
       if (this.data.touchingMoon || !this.scene) return
       const deltaTime = detail.value
       const moon = this.scene.getNodeById('mesh-moon')

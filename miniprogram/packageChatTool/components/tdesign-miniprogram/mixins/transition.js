@@ -1,6 +1,6 @@
 import config from '../common/config'
 
-const {prefix} = config
+const { prefix } = config
 export default function transition() {
   return Behavior({
     properties: {
@@ -46,14 +46,14 @@ export default function transition() {
         }
       },
       getDurations() {
-        const {durations} = this.data
+        const { durations } = this.data
         if (Array.isArray(durations)) {
           return durations.map((item) => Number(item))
         }
         return [Number(durations), Number(durations)]
       },
       enter() {
-        const {name} = this.data
+        const { name } = this.data
         const [duration] = this.durations
         this.status = 'entering'
         this.setData({
@@ -78,7 +78,7 @@ export default function transition() {
         })
       },
       leave() {
-        const {name} = this.data
+        const { name } = this.data
         const [, duration] = this.durations
         this.status = 'leaving'
         this.setData({

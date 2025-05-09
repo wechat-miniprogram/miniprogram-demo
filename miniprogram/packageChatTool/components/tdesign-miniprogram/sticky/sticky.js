@@ -1,8 +1,8 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import props from './props'
 import config from '../common/config'
 import pageScrollMixin from '../mixins/page-scroll'
-import {getRect} from '../common/utils'
+import { getRect } from '../common/utils'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
   const c = arguments.length; let r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc; let
@@ -12,7 +12,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-sticky`
 const ContainerClass = `.${name}`
 let Sticky = class Sticky extends SuperComponent {
@@ -34,8 +34,8 @@ let Sticky = class Sticky extends SuperComponent {
     }
     this.methods = {
       onScroll(event) {
-        const {scrollTop} = event || {}
-        const {container, offsetTop, disabled} = this.properties
+        const { scrollTop } = event || {}
+        const { container, offsetTop, disabled } = this.properties
         if (disabled) {
           this.setDataAfterDiff({
             isFixed: false,
@@ -59,7 +59,7 @@ let Sticky = class Sticky extends SuperComponent {
                 transform: 0,
               })
             } else {
-              this.setDataAfterDiff({isFixed: false, transform: 0})
+              this.setDataAfterDiff({ isFixed: false, transform: 0 })
             }
           })
           return
@@ -67,17 +67,17 @@ let Sticky = class Sticky extends SuperComponent {
         getRect(this, ContainerClass).then((root) => {
           if (!root) return
           if (offsetTop >= root.top) {
-            this.setDataAfterDiff({isFixed: true, height: root.height})
+            this.setDataAfterDiff({ isFixed: true, height: root.height })
             this.transform = 0
           } else {
-            this.setDataAfterDiff({isFixed: false})
+            this.setDataAfterDiff({ isFixed: false })
           }
         })
       },
       setDataAfterDiff(data) {
-        const {offsetTop} = this.properties
-        const {containerStyle: prevContainerStyle, contentStyle: prevContentStyle} = this.data
-        const {isFixed, height, transform} = data
+        const { offsetTop } = this.properties
+        const { containerStyle: prevContainerStyle, contentStyle: prevContentStyle } = this.data
+        const { isFixed, height, transform } = data
         wx.nextTick(() => {
           let containerStyle = ''
           let contentStyle = ''
@@ -90,7 +90,7 @@ let Sticky = class Sticky extends SuperComponent {
             contentStyle += `-webkit-transform:${translate};transform:${translate};`
           }
           if (prevContainerStyle !== containerStyle || prevContentStyle !== contentStyle) {
-            this.setData({containerStyle, contentStyle})
+            this.setData({ containerStyle, contentStyle })
           }
           this.triggerEvent('scroll', {
             scrollTop: this.scrollTop,

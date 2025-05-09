@@ -44,7 +44,7 @@ Page({
               fileID: res.fileID,
             })
           },
-          fail({errMsg}) {
+          fail({ errMsg }) {
             console.log('uploadImage fail, errMsg is', errMsg)
           }
         })
@@ -76,8 +76,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

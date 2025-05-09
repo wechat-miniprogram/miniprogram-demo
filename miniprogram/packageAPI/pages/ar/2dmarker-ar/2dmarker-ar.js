@@ -34,8 +34,8 @@ Component({
       })
 
       if (wx.onThemeChange) {
-        wx.onThemeChange(({theme}) => {
-          this.setData({theme})
+        wx.onThemeChange(({ theme }) => {
+          this.setData({ theme })
         })
       }
     },

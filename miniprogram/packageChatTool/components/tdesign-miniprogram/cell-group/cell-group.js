@@ -1,4 +1,4 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
 
@@ -10,7 +10,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-cell-group`
 let CellGroup = class CellGroup extends SuperComponent {
   constructor() {
@@ -35,7 +35,7 @@ let CellGroup = class CellGroup extends SuperComponent {
     this.methods = {
       updateLastChid() {
         const items = this.$children
-        items.forEach((child, index) => child.setData({isLastChild: index === items.length - 1}))
+        items.forEach((child, index) => child.setData({ isLastChild: index === items.length - 1 }))
       },
     }
   }

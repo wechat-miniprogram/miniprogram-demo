@@ -53,7 +53,7 @@ LongBits.prototype.toLong = function toLong(unsigned) {
   //    ? new util.Long(this.lo | 0, this.hi | 0, Boolean(unsigned))
   //    /* istanbul ignore next */
   //    : { low: this.lo | 0, high: this.hi | 0, unsigned: Boolean(unsigned) };
-  return {low: this.lo | 0, high: this.hi | 0, unsigned: Boolean(unsigned)}
+  return { low: this.lo | 0, high: this.hi | 0, unsigned: Boolean(unsigned) }
 }
 
 const charCodeAt = String.prototype.charCodeAt

@@ -1,6 +1,6 @@
 import CustomPage from '../../../base/CustomPage'
 
-const {GRID_DEMO_URL} = getApp().globalData
+const { GRID_DEMO_URL } = getApp().globalData
 const app = getApp()
 
 CustomPage({

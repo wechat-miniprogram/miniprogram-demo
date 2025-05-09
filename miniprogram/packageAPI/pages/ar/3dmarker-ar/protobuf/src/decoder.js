@@ -89,7 +89,7 @@ function decoder(mtype) {
         const rfield = mtype._fieldsArray[i]
         if (rfield.required) {
           if (!m.hasOwnProperty(rfield.name)) {
-            throw util.ProtocolError(missing(rfield), {instance: m})
+            throw util.ProtocolError(missing(rfield), { instance: m })
           }
         }
       }

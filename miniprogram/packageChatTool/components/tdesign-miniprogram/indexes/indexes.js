@@ -1,7 +1,7 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
-import {getRect, throttle, systemInfo} from '../common/utils'
+import { getRect, throttle, systemInfo } from '../common/utils'
 import pageScrollMixin from '../mixins/page-scroll'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -12,7 +12,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-indexes`
 let Indexes = class Indexes extends SuperComponent {
   constructor() {
@@ -63,7 +63,7 @@ let Indexes = class Indexes extends SuperComponent {
     this.methods = {
       setHeight(height) {
         if (!height) {
-          const {windowHeight} = systemInfo
+          const { windowHeight } = systemInfo
           height = windowHeight
         }
         this.setData({
@@ -79,9 +79,9 @@ let Indexes = class Indexes extends SuperComponent {
           for (let i = start, end = start + 26; i < end; i += 1) {
             alphabet.push(String.fromCharCode(i))
           }
-          this.setData({_indexList: alphabet})
+          this.setData({ _indexList: alphabet })
         } else {
-          this.setData({_indexList: list})
+          this.setData({ _indexList: list })
         }
       },
       getAllRect() {
@@ -105,8 +105,8 @@ let Indexes = class Indexes extends SuperComponent {
       },
       getSidebarRect() {
         getRect(this, `#id-${name}__bar`).then((rect) => {
-          const {top, height} = rect
-          const {length} = this.data._indexList
+          const { top, height } = rect
+          const { length } = this.data._indexList
           this.sidebar = {
             top,
             height,
@@ -129,7 +129,7 @@ let Indexes = class Indexes extends SuperComponent {
         }
       },
       setAnchorByIndex(index) {
-        const {_indexList, stickyOffset} = this.data
+        const { _indexList, stickyOffset } = this.data
         const activeAnchor = _indexList[index]
         if (this.data.activeAnchor !== null && this.data.activeAnchor === activeAnchor) return
         const target = this.groupTop.find((item) => item.anchor === activeAnchor)
@@ -141,12 +141,12 @@ let Indexes = class Indexes extends SuperComponent {
             duration: 0,
           })
           this.toggleTips(true)
-          this.triggerEvent('select', {index: activeAnchor})
-          this.setData({activeAnchor})
+          this.triggerEvent('select', { index: activeAnchor })
+          this.setData({ activeAnchor })
         }
       },
       onClick(e) {
-        const {index} = e.currentTarget.dataset
+        const { index } = e.currentTarget.dataset
         this.setAnchorByIndex(index)
       },
       onTouchMove(e) {
@@ -177,17 +177,17 @@ let Indexes = class Indexes extends SuperComponent {
         if (!this.groupTop) {
           return
         }
-        const {sticky, stickyOffset, activeAnchor} = this.data
+        const { sticky, stickyOffset, activeAnchor } = this.data
         scrollTop += stickyOffset
         const curIndex = this.groupTop.findIndex((group) => scrollTop >= group.top - group.height && scrollTop <= group.top + group.totalHeight - group.height)
         if (curIndex === -1) return
         const curGroup = this.groupTop[curIndex]
         if (this.currentTouchAnchor !== null) {
-          this.triggerEvent('change', {index: curGroup.anchor})
+          this.triggerEvent('change', { index: curGroup.anchor })
           this.currentTouchAnchor = null
         } else if (activeAnchor !== curGroup.anchor) {
-          this.triggerEvent('change', {index: curGroup.anchor})
-          this.setData({activeAnchor: curGroup.anchor})
+          this.triggerEvent('change', { index: curGroup.anchor })
+          this.setData({ activeAnchor: curGroup.anchor })
         }
         if (sticky) {
           const offset = curGroup.top - scrollTop
@@ -215,12 +215,12 @@ let Indexes = class Indexes extends SuperComponent {
                 })
               }
             } else {
-              child.setData({active: false, sticky: false, anchorStyle: ''})
+              child.setData({ active: false, sticky: false, anchorStyle: '' })
             }
           })
         }
       },
-      onScroll({scrollTop}) {
+      onScroll({ scrollTop }) {
         this.setAnchorOnScroll(scrollTop)
       },
     }

@@ -49,17 +49,17 @@ xrFrameSystem.registerEffect('toon-user', scene => scene.createEffect(
       },
     ],
     properties: [
-      {key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1]},
-      {key: 'u_outlineColor', type: xrFrameSystem.EUniformType.FLOAT4, default: [0.0, 0.0, 0.0, 0.0]},
+      { key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1] },
+      { key: 'u_outlineColor', type: xrFrameSystem.EUniformType.FLOAT4, default: [0.0, 0.0, 0.0, 0.0] },
       // { key: 'u_outlineWidth', type: xrFrameSystem.EUniformType.FLOAT, default: [0.3]},
-      {key: 'u_outlineWidth', type: xrFrameSystem.EUniformType.FLOAT, default: [1.0]},
-      {key: 'u_farthestDistance', type: xrFrameSystem.EUniformType.FLOAT, default: [100]},
-      {key: 'u_nearestDistance', type: xrFrameSystem.EUniformType.FLOAT, default: [0.5]},
-      {key: 'u_offsetZ', type: xrFrameSystem.EUniformType.FLOAT, default: [2.0]}
+      { key: 'u_outlineWidth', type: xrFrameSystem.EUniformType.FLOAT, default: [1.0] },
+      { key: 'u_farthestDistance', type: xrFrameSystem.EUniformType.FLOAT, default: [100] },
+      { key: 'u_nearestDistance', type: xrFrameSystem.EUniformType.FLOAT, default: [0.5] },
+      { key: 'u_offsetZ', type: xrFrameSystem.EUniformType.FLOAT, default: [2.0] }
     ],
     images: [
-      {key: 'u_baseColorMap', default: 'white', macro: 'WX_USE_BASECOLORMAP'},
-      {key: 'u_gradientMap', default: 'white'}
+      { key: 'u_baseColorMap', default: 'white', macro: 'WX_USE_BASECOLORMAP' },
+      { key: 'u_gradientMap', default: 'white' }
     ],
     shaders: [
       // === Outline ===

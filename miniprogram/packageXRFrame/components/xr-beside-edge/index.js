@@ -56,18 +56,18 @@ Component({
           this.remainItems -= 1
           if (this.remainItems === 0) {
             this.disable3DTouch = false
-            this.setData({subStep: true})
+            this.setData({ subStep: true })
             return
           }
 
           this.switchSide(false)
-          this.triggerEvent('requireLight', {state: 'idle'})
+          this.triggerEvent('requireLight', { state: 'idle' })
           return
         }
 
         if (fromWhat === 'char') {
-          const {texts} = this.config.steps[this.data.step]
-          this.requireDialog({texts, from: 'step'})
+          const { texts } = this.config.steps[this.data.step]
+          this.requireDialog({ texts, from: 'step' })
           return
         }
 
@@ -92,9 +92,9 @@ Component({
           }
 
           this.remainItems = this.config.steps[step].itemCount
-          this.setData({step, subStep: false, ambient: ROOT_AMBIENTS[step]})
+          this.setData({ step, subStep: false, ambient: ROOT_AMBIENTS[step] })
           this.switchSide(false)
-          this.triggerEvent('requireLight', {state: 'idle'})
+          this.triggerEvent('requireLight', { state: 'idle' })
           return
         }
 
@@ -120,11 +120,11 @@ Component({
     detached() {
       this.bgm.stop()
       this.bgm2.stop()
-      wx.setKeepScreenOn({keepScreenOn: false})
+      wx.setKeepScreenOn({ keepScreenOn: false })
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       this.scene = detail.value
       this.scene.event.add('tick', this.handleTick.bind(this))
       this.inited = false
@@ -140,13 +140,13 @@ Component({
       this.bgm2.loop = true
     },
     handleARReady() {
-      wx.setKeepScreenOn({keepScreenOn: true})
-      this.setData({arReady: true})
+      wx.setKeepScreenOn({ keepScreenOn: true })
+      this.setData({ arReady: true })
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
       this.config = CONFIG
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     },
     handleTick(dt) {
       const mainCamera = this.scene.getNodeById('main-camera')
@@ -164,13 +164,13 @@ Component({
         if (this.lightDuration > 0 && nextDuration === 0) {
           this.disable3DTouch = true
           this.switchSide(false)
-          this.triggerEvent('requireLight', {state: 'cd', wait: 1})
+          this.triggerEvent('requireLight', { state: 'cd', wait: 1 })
         } else if (this.lightDuration === 0) {
           const nextDelay = Math.max(this.lightDelay - dt, 0)
           if (this.lightDelay > 0 && nextDelay === 0) {
-            this.triggerEvent('requireLight', {state: 'idle'})
+            this.triggerEvent('requireLight', { state: 'idle' })
           } else if (this.lightDelay > 0) {
-            this.triggerEvent('requireLight', {state: 'cd', wait: nextDelay / ROOT_DELAYS[this.data.step]})
+            this.triggerEvent('requireLight', { state: 'cd', wait: nextDelay / ROOT_DELAYS[this.data.step] })
           }
           this.lightDelay = nextDelay
         }
@@ -190,8 +190,8 @@ Component({
 
       setTimeout(() => {
         this.switchSide(true, ROOT_BLURS[0])
-        const {texts} = this.config.intro
-        this.requireDialog({texts, from: 'intro'})
+        const { texts } = this.config.intro
+        this.requireDialog({ texts, from: 'intro' })
         this.bgm.play()
       }, 1000)
     },
@@ -201,7 +201,7 @@ Component({
       const blurAsset = this.scene.assets.getAsset('post-process', 'blur')
       if (virtual) {
         blurAsset.data.radius = blur === undefined ? ROOT_BLURS[this.data.step] : blur
-        this.triggerEvent('requireLight', {state: 'hide'})
+        this.triggerEvent('requireLight', { state: 'hide' })
       } else {
         blurAsset.data.radius = blur === undefined ? REAL_BLURS[this.data.step] : blur
       }
@@ -211,29 +211,29 @@ Component({
         this.data.step === 3 ? this.bgm2.play() : this.bgm2.play()
       }
     },
-    handleTouchObj({detail}) {
+    handleTouchObj({ detail }) {
       if (!this.inDistance(detail)) {
         return
       }
 
       const id = detail.value.target.id
-      const {texts} = this.config.items[id]
+      const { texts } = this.config.items[id]
 
-      this.requireDialog({texts, from: 'item'})
+      this.requireDialog({ texts, from: 'item' })
     },
-    handleTouchChar({detail}) {
+    handleTouchChar({ detail }) {
       if (!this.inDistance(detail)) {
         return
       }
 
       const id = this.data.step === 3 ? 'final' : detail.value.target.id
-      const {name, texts} = this.config.chars[id]
-      this.requireDialog({name, texts, from: 'char'})
+      const { name, texts } = this.config.chars[id]
+      this.requireDialog({ name, texts, from: 'char' })
     },
     requireDialog(info) {
       this.disable3DTouch = true
       this.lightDuration = Infinity
-      this.triggerEvent('requireLight', {state: 'hide'})
+      this.triggerEvent('requireLight', { state: 'hide' })
       info.name = info.name || '某个声音'
       this.triggerEvent('requireDialog', info)
     },
@@ -247,7 +247,7 @@ Component({
       }
 
       const xrSystem = wx.getXrFrameSystem()
-      const {camera, target} = detail.value
+      const { camera, target } = detail.value
       const camTrs = camera.el.getComponent(xrSystem.Transform)
       const targetTrs = target.getComponent(xrSystem.Transform)
       const diff = camTrs.worldPosition.sub(targetTrs.worldPosition)

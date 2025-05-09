@@ -1,10 +1,10 @@
 // pages/mobilenet/index.ts
 
-import {Classifier} from './classify'
+import { Classifier } from './classify'
 
-import {FpsHelper} from '../../../../util/fps_helper'
+import { FpsHelper } from '../../../../util/fps_helper'
 
-const {appWidth, appHeight, benchmarkLevel} = getApp().globalData
+const { appWidth, appHeight, benchmarkLevel } = getApp().globalData
 
 Page({
   classifier: null,
@@ -61,8 +61,8 @@ Page({
    * 初始化 SSD models
    */
   initClassifier() {
-    wx.showLoading({title: '模型正在加载...'})
-    this.classifier = new Classifier({width: appWidth, height: appHeight})
+    wx.showLoading({ title: '模型正在加载...' })
+    this.classifier = new Classifier({ width: appWidth, height: appHeight })
     this.classifier.load().then(() => {
       wx.hideLoading()
     }).catch(err => {

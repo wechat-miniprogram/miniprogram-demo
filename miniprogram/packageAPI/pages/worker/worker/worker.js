@@ -1,4 +1,4 @@
-const {fib} = require('../../../../util/util.js')
+const { fib } = require('../../../../util/util.js')
 
 Page({
   onShareAppMessage() {
@@ -28,8 +28,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     this._worker = wx.createWorker('workers/fib/index.js')
@@ -37,8 +37,8 @@ Page({
 
   bindInput(e) {
     const val = Number(e.detail.value)
-    if (val > 40) return {value: 40}
-    if (Number.isNaN(val)) return {value: 33}
+    if (val > 40) return { value: 40 }
+    if (Number.isNaN(val)) return { value: 33 }
     this.setData({
       input: val
     })
@@ -46,7 +46,7 @@ Page({
   },
 
   reset() {
-    this.setData({res: ''})
+    this.setData({ res: '' })
   },
 
   compute() {

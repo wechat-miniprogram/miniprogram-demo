@@ -1,8 +1,8 @@
-import {GestureState} from '../../../common/types'
-import {worklet, supportWorklet} from '../../../common/worklet-api'
-import {showTips} from '../../../common/tips'
+import { GestureState } from '../../../common/types'
+import { worklet, supportWorklet } from '../../../common/worklet-api'
+import { showTips } from '../../../common/tips'
 
-const {shared, timing} = worklet
+const { shared, timing } = worklet
 
 Page({
   data: {
@@ -18,7 +18,7 @@ Page({
     this.applyAnimatedStyle('.list-wrp', () => {
       'worklet'
 
-      return {transform: `translateY(${transY.value}px)`}
+      return { transform: `translateY(${transY.value}px)` }
     })
     this.transY = transY
     this.scrollTop = shared(0)
@@ -34,7 +34,7 @@ Page({
 
     if (this.transY.value > 0) return false
     const scrollTop = this.scrollTop.value
-    const {deltaY} = pointerEvent
+    const { deltaY } = pointerEvent
     const result = !(scrollTop <= 0 && deltaY > 0)
     this.startPan.value = !result
     return result

@@ -1,7 +1,7 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
-import {calcIcon} from '../common/utils'
+import { calcIcon } from '../common/utils'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
   const c = arguments.length; let r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc; let
@@ -11,7 +11,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-cell`
 let Cell = class Cell extends SuperComponent {
   constructor() {
@@ -71,7 +71,7 @@ let Cell = class Cell extends SuperComponent {
     const url = this.data[urlKey]
     const jumpType = this.data[link]
     if (url) {
-      wx[jumpType]({url})
+      wx[jumpType]({ url })
     }
   }
 }

@@ -1,4 +1,4 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
 import {
@@ -13,7 +13,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-count-down`
 let CountDown = class CountDown extends SuperComponent {
   constructor() {
@@ -66,11 +66,11 @@ let CountDown = class CountDown extends SuperComponent {
         return Math.max(this.endTime - Date.now(), 0)
       },
       updateTime(remain) {
-        const {format} = this.properties
+        const { format } = this.properties
         this.remain = remain
         const timeData = parseTimeData(remain)
         this.triggerEvent('change', timeData)
-        const {timeText} = parseFormat(remain, format)
+        const { timeText } = parseFormat(remain, format)
         const timeRange = format.split(':')
         this.setData({
           timeRange,

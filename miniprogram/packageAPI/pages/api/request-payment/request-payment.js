@@ -19,8 +19,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   },
@@ -56,7 +56,7 @@ Page({
               signType: 'MD5',
               paySign: data.sign,
               success: () => {
-                wx.showToast({title: '支付成功'})
+                wx.showToast({ title: '支付成功' })
               },
               fail(err) {
                 self.setData({

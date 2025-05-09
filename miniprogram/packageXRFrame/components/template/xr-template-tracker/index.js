@@ -31,7 +31,7 @@ Component({
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       console.log('xr-scene', xrScene)
 
@@ -60,7 +60,7 @@ Component({
     },
     handleARReady() {
       console.log('arReady')
-      this.setData({arReady: true})
+      this.setData({ arReady: true })
     },
     async loadGLTF(gltfList) {
       const scene = this.scene
@@ -70,7 +70,7 @@ Component({
         src: gltfItem.src,
       })))
       console.log('glTF asset loaded')
-      this.setData({gltfLoaded: true})
+      this.setData({ gltfLoaded: true })
     },
     async loadVideoSingle(videoItem) {
       const scene = this.scene
@@ -78,12 +78,12 @@ Component({
         type: 'video-texture',
         assetId: 'video-' + videoItem.id,
         src: videoItem.src,
-        options: {loop: true, autoPlay: true},
+        options: { loop: true, autoPlay: true },
       })
       // console.log('videoTexture', videoTexture);
       const videoMat = scene.createMaterial(
         scene.assets.getAsset('effect', 'simple'),
-        {u_baseColorMap: videoTexture.value.texture}
+        { u_baseColorMap: videoTexture.value.texture }
       )
       scene.assets.addAsset('material', `video-mat-${videoItem.id}`, videoMat)
 
@@ -101,7 +101,7 @@ Component({
         scene.assets.releaseAsset('material', `video-mat-${id}`)
       }
     },
-    handleTrackerSwitch({detail}) {
+    handleTrackerSwitch({ detail }) {
       console.log('tracked match')
       if (this.data.loaded) {
         const element = detail.el

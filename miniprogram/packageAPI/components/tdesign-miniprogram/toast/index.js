@@ -1,4 +1,4 @@
-import {getInstance} from '../common/utils'
+import { getInstance } from '../common/utils'
 
 const __rest = (this && this.__rest) || function (s, e) {
   const t = {}
@@ -13,21 +13,21 @@ const __rest = (this && this.__rest) || function (s, e) {
 
 function Toast(options) {
   let _a
-  const {context, selector = '#t-toast'} = options; const
+  const { context, selector = '#t-toast' } = options; const
     Options = __rest(options, ['context', 'selector'])
   const instance = getInstance(context, selector)
   if (instance) {
-    instance.show({...Options, duration: (_a = Options.duration) !== null && _a !== void 0 ? _a : 2000})
+    instance.show({ ...Options, duration: (_a = Options.duration) !== null && _a !== void 0 ? _a : 2000 })
   }
 }
 function showToast(options = {}) {
   Toast(options)
 }
 function hideToast(options = {}) {
-  const {context, selector = '#t-toast'} = options
+  const { context, selector = '#t-toast' } = options
   const instance = getInstance(context, selector)
   if (instance) {
     instance.hide()
   }
 }
-export {Toast as default, showToast, hideToast}
+export { Toast as default, showToast, hideToast }

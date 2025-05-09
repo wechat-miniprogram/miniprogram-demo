@@ -40,8 +40,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   },
@@ -64,7 +64,7 @@ Page({
       console.info('fetchActivityList: ', resp)
       if (resp.result) {
         const activityList = resp.result.dataList
-        this.setData({activityList})
+        this.setData({ activityList })
       }
     }).catch(err => {
       console.error('fetchActivityList fail: ', err)
@@ -78,7 +78,7 @@ Page({
   },
 
   goDetail(e) {
-    const {id, roomid, singlechat} = e.currentTarget.dataset
+    const { id, roomid, singlechat } = e.currentTarget.dataset
     wx.openChatTool({
       roomid,
       isSingleChat: Boolean(singlechat),

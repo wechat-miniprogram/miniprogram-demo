@@ -68,7 +68,7 @@ function Long(low, high, unsigned) {
  */
 Long.prototype.__isLong__
 
-Object.defineProperty(Long.prototype, '__isLong__', {value: true})
+Object.defineProperty(Long.prototype, '__isLong__', { value: true })
 
 /**
  * @function

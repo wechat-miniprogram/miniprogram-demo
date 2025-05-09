@@ -51,8 +51,8 @@ Component({
       })
 
       if (wx.onThemeChange) {
-        wx.onThemeChange(({theme}) => {
-          this.setData({theme})
+        wx.onThemeChange(({ theme }) => {
+          this.setData({ theme })
         })
       }
     },
@@ -150,7 +150,7 @@ Component({
     async initXRFrame() {
       const xrFrameSystem = wx.getXrFrameSystem()
       const scene = this.xrScene
-      const {rootShadow} = scene
+      const { rootShadow } = scene
 
       // 初始化YUV相机配置
       this.initXRYUVCamera()

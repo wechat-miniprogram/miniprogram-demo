@@ -1,8 +1,8 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
 import transition from '../mixins/transition'
-import {calcIcon} from '../common/utils'
+import { calcIcon } from '../common/utils'
 import useCustomNavbar from '../mixins/using-custom-navbar'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-toast`
 let Toast = class Toast extends SuperComponent {
   constructor() {
@@ -62,7 +62,7 @@ let Toast = class Toast extends SuperComponent {
         const data = {
           ...defaultOptions, ...options, visible: true, isLoading: (options === null || options === void 0 ? void 0 : options.theme) === 'loading', _icon: calcIcon(typeMapIcon !== null && typeMapIcon !== void 0 ? typeMapIcon : options.icon)
         }
-        const {duration} = data
+        const { duration } = data
         this.setData(data)
         if (duration > 0) {
           this.hideTimer = setTimeout(() => {
@@ -74,7 +74,7 @@ let Toast = class Toast extends SuperComponent {
         let _a; let
           _b
         if (!this.data.visible) return
-        this.setData({visible: false});
+        this.setData({ visible: false });
         (_b = (_a = this.data) === null || _a === void 0 ? void 0 : _a.close) === null || _b === void 0 ? void 0 : _b.call(_a)
         this.triggerEvent('close')
       },

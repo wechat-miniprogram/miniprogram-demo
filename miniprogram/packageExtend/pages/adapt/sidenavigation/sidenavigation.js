@@ -14,16 +14,16 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   },
   show() {
-    this.setData({show: true})
+    this.setData({ show: true })
   },
   hide() {
-    this.setData({show: false})
+    this.setData({ show: false })
   },
   onShareAppMessage() {
     return {

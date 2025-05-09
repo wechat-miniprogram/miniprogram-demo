@@ -35,8 +35,8 @@ Component({
       })
 
       if (wx.onThemeChange) {
-        wx.onThemeChange(({theme}) => {
-          this.setData({theme})
+        wx.onThemeChange(({ theme }) => {
+          this.setData({ theme })
         })
       }
     },
@@ -279,7 +279,7 @@ Component({
           // marker Anchor
 
           const uniforms = {
-            time: {value: Math.random() * 100}
+            time: { value: Math.random() * 100 }
           }
 
           material = new THREE.ShaderMaterial({

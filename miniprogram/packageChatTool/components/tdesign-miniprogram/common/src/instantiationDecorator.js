@@ -1,5 +1,5 @@
-import {isPlainObject, toObject} from './flatTool'
-import {canUseVirtualHost} from '../version'
+import { isPlainObject, toObject } from './flatTool'
+import { canUseVirtualHost } from '../version'
 
 const RawLifeCycles = ['Created', 'Attached', 'Ready', 'Moved', 'Detached', 'Error']
 const NativeLifeCycles = RawLifeCycles.map((k) => k.toLowerCase())
@@ -18,30 +18,30 @@ const ComponentNativeProps = [
   'definitionFilter',
 ]
 export const toComponent = function toComponent(options) {
-  const {relations, behaviors = [], externalClasses = []} = options
+  const { relations, behaviors = [], externalClasses = [] } = options
   if (options.properties) {
     Object.keys(options.properties).forEach((k) => {
       let opt = options.properties[k]
       if (!isPlainObject(opt)) {
-        opt = {type: opt}
+        opt = { type: opt }
       }
       options.properties[k] = opt
     })
     const ariaProps = [
-      {key: 'ariaHidden', type: Boolean},
-      {key: 'ariaRole', type: String},
-      {key: 'ariaLabel', type: String},
-      {key: 'ariaLabelledby', type: String},
-      {key: 'ariaDescribedby', type: String},
-      {key: 'ariaBusy', type: Boolean},
+      { key: 'ariaHidden', type: Boolean },
+      { key: 'ariaRole', type: String },
+      { key: 'ariaLabel', type: String },
+      { key: 'ariaLabelledby', type: String },
+      { key: 'ariaDescribedby', type: String },
+      { key: 'ariaBusy', type: Boolean },
     ]
-    ariaProps.forEach(({key, type}) => {
+    ariaProps.forEach(({ key, type }) => {
       options.properties[key] = {
         type,
       }
     })
-    options.properties.style = {type: String, value: ''}
-    options.properties.customStyle = {type: String, value: ''}
+    options.properties.style = { type: String, value: '' }
+    options.properties.customStyle = { type: String, value: '' }
   }
   if (!options.methods) options.methods = {}
   if (!options.lifetimes) options.lifetimes = {}
@@ -83,14 +83,14 @@ export const toComponent = function toComponent(options) {
   if (Object.keys(inits).length) {
     const oldCreated = options.lifetimes.created
     const oldAttached = options.lifetimes.attached
-    const {controlledProps = []} = options
+    const { controlledProps = [] } = options
     options.lifetimes.created = function (...args) {
       Object.defineProperties(this, inits)
       if (oldCreated) oldCreated.apply(this, args)
     }
     options.lifetimes.attached = function (...args) {
       if (oldAttached) oldAttached.apply(this, args)
-      controlledProps.forEach(({key}) => {
+      controlledProps.forEach(({ key }) => {
         const defaultKey = `default${key.replace(/^(\w)/, (m, m1) => m1.toUpperCase())}`
         const props = this.properties
         if (props[key] == null) {
@@ -106,7 +106,7 @@ export const toComponent = function toComponent(options) {
     options.methods._trigger = function (evtName, detail, opts) {
       const target = controlledProps.find((item) => item.event == evtName)
       if (target) {
-        const {key} = target
+        const { key } = target
         if (this._selfControlled) {
           this.setData({
             [key]: detail[key],

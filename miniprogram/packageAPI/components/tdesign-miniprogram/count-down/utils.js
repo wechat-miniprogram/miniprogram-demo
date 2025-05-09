@@ -52,10 +52,10 @@ export const parseFormat = function (time, format) {
             last.unit = last.unit.substr(0, index)
           }
         }
-        timeList.push({digit, unit, match})
+        timeList.push({ digit, unit, match })
         return digit
       })
     }
   })
-  return {timeText, timeList}
+  return { timeText, timeList }
 }

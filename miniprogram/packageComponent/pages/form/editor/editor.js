@@ -31,8 +31,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     const {
@@ -46,7 +46,7 @@ Page({
     }
     this._safeHeight = safeHeight
     const isIOS = platform === 'ios'
-    this.setData({isIOS, safeHeight, toolBarHeight: isIOS ? safeHeight + 50 : 50})
+    this.setData({ isIOS, safeHeight, toolBarHeight: isIOS ? safeHeight + 50 : 50 })
     const that = this
     this.updatePosition(0)
     let keyboardHeight = 0
@@ -69,7 +69,7 @@ Page({
   },
   updatePosition(keyboardHeight) {
     const toolbarHeight = 50
-    const {windowHeight} = wx.getSystemInfoSync()
+    const { windowHeight } = wx.getSystemInfoSync()
     let editorHeight = windowHeight
     if (keyboardHeight > 0) {
       editorHeight = windowHeight - keyboardHeight - toolbarHeight
@@ -92,7 +92,7 @@ Page({
   },
   calNavigationBarAndStatusBar() {
     const systemInfo = wx.getSystemInfoSync()
-    const {statusBarHeight, platform} = systemInfo
+    const { statusBarHeight, platform } = systemInfo
     const isIOS = platform === 'ios'
     const navigationBarHeight = isIOS ? 44 : 48
     return statusBarHeight + navigationBarHeight
@@ -107,14 +107,14 @@ Page({
     this.editorCtx.blur()
   },
   format(e) {
-    const {name, value} = e.target.dataset
+    const { name, value } = e.target.dataset
     if (!name) return
     // console.log('format', name, value)
     this.editorCtx.format(name, value)
   },
   onStatusChange(e) {
     const formats = e.detail
-    this.setData({formats})
+    this.setData({ formats })
   },
   insertDivider() {
     this.editorCtx.insertDivider({

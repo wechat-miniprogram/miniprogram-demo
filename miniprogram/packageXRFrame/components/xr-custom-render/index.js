@@ -6,7 +6,7 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       this.scene = detail.value
       const stars = new Array(44).fill(0).map(() => ({
         pos: [
@@ -24,14 +24,14 @@ Component({
       }))
       console.log(stars)
 
-      this.setData({stars})
+      this.setData({ stars })
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     }
   }
 })

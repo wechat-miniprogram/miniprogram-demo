@@ -17,12 +17,12 @@ Page({
       item.bg = `background-color: rgb(${r}, ${r}, ${r})`
       items.push(item)
     }
-    this.setData({items})
+    this.setData({ items })
   },
   tap() {
-    this.setData({show: true})
+    this.setData({ show: true })
   },
   handleStatus(e) {
-    this.setData({show: false})
+    this.setData({ show: false })
   }
 })

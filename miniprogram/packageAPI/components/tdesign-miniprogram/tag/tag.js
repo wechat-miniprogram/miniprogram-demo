@@ -1,7 +1,7 @@
-import {wxComponent, SuperComponent} from '../common/src/index'
+import { wxComponent, SuperComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
-import {classNames, isNumber, calcIcon} from '../common/utils'
+import { classNames, isNumber, calcIcon } from '../common/utils'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
   const c = arguments.length; let r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc; let
@@ -11,7 +11,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-tag`
 let Tag = class Tag extends SuperComponent {
   constructor() {
@@ -53,7 +53,7 @@ let Tag = class Tag extends SuperComponent {
     }
     this.methods = {
       setClass() {
-        const {prefix, classPrefix} = this.data
+        const { prefix, classPrefix } = this.data
         const {
           size, shape, theme, variant, closable, disabled
         } = this.properties
@@ -72,12 +72,12 @@ let Tag = class Tag extends SuperComponent {
         })
       },
       setTagStyle() {
-        const {maxWidth} = this.properties
+        const { maxWidth } = this.properties
         if (!maxWidth) {
           return ''
         }
         const width = isNumber(maxWidth) ? `${maxWidth}px` : maxWidth
-        this.setData({tagStyle: `max-width:${width};`})
+        this.setData({ tagStyle: `max-width:${width};` })
       },
       handleClick(e) {
         if (this.data.disabled) return

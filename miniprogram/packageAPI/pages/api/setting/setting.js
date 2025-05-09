@@ -15,7 +15,7 @@ Page({
     wx.getSetting({
       success: (res) => {
         console.log(res)
-        this.setData({setting: res.authSetting})
+        this.setData({ setting: res.authSetting })
       }
     })
   },
@@ -30,8 +30,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

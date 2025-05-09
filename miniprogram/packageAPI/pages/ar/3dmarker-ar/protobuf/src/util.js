@@ -110,8 +110,8 @@ util.decorateType = function decorateType(ctor, typeName) {
   const type = new Type(typeName || ctor.name)
   util.decorateRoot.add(type)
   type.ctor = ctor // sets up .encode, .decode etc.
-  Object.defineProperty(ctor, '$type', {value: type, enumerable: false})
-  Object.defineProperty(ctor.prototype, '$type', {value: type, enumerable: false})
+  Object.defineProperty(ctor, '$type', { value: type, enumerable: false })
+  Object.defineProperty(ctor.prototype, '$type', { value: type, enumerable: false })
   return type
 }
 
@@ -156,18 +156,18 @@ util.ProtocolError = function newError(name) {
     // Error.call(this, message);
     // ^ just returns a new error instance because the ctor can be called as a function
 
-    Object.defineProperty(this, 'message', {get() { return message }})
+    Object.defineProperty(this, 'message', { get() { return message } })
 
     /* istanbul ignore next */
     if (Error.captureStackTrace) // node
-    { Error.captureStackTrace(this, CustomError) } else Object.defineProperty(this, 'stack', {value: (new Error()).stack || ''})
+    { Error.captureStackTrace(this, CustomError) } else Object.defineProperty(this, 'stack', { value: (new Error()).stack || '' })
 
     if (properties) merge(this, properties)
   }
 
   (CustomError.prototype = Object.create(Error.prototype)).constructor = CustomError
 
-  Object.defineProperty(CustomError.prototype, 'name', {get() { return name }})
+  Object.defineProperty(CustomError.prototype, 'name', { get() { return name } })
 
   CustomError.prototype.toString = function toString() {
     return this.name + ': ' + this.message

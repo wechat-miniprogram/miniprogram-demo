@@ -47,13 +47,13 @@ Page({
       return
     }
 
-    this.setData({meshCount: this.data.meshCount + 1})
+    this.setData({ meshCount: this.data.meshCount + 1 })
   },
   handleDecMeshCount() {
     if (this.data.meshCount <= 0) {
       return
     }
 
-    this.setData({meshCount: this.data.meshCount - 1})
+    this.setData({ meshCount: this.data.meshCount - 1 })
   }
 })

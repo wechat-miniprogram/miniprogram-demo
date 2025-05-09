@@ -26,7 +26,7 @@ function compareVersion(v1, v2) {
 
 export function isOfficialSkyline() {
   if (!wx.getSkylineInfoSync) return false
-  const {isSupported, version} = wx.getSkylineInfoSync()
+  const { isSupported, version } = wx.getSkylineInfoSync()
   if (!isSupported) return false
   return compareVersion(version, '1.0.1') >= 0
 }

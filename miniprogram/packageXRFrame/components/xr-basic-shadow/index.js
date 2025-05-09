@@ -20,25 +20,25 @@ Component({
     arReady: false
   },
   methods: {
-    async handleReady({detail}) {
+    async handleReady({ detail }) {
       const scene = this.scene = detail.value
       console.log('xr-scene', scene)
       this.meshList = []
       const xrFrameSystem = wx.getXrFrameSystem()
       this.shadowRoot = scene.getElementById('shadow-root')
 
-      const {value: envData} = await scene.assets.loadAsset({type: 'env-data', assetId: 'env1', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin'})
+      const { value: envData } = await scene.assets.loadAsset({ type: 'env-data', assetId: 'env1', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin' })
       const envElement = scene.createElement(xrFrameSystem.XREnv)
       this.shadowRoot.addChild(envElement)
       const envComp = envElement.getComponent(xrFrameSystem.Env)
-      envComp.setData({envData})
+      envComp.setData({ envData })
 
-      const {value: model} = await scene.assets.loadAsset({type: 'gltf', assetId: 'damage-helmet', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.glb'})
+      const { value: model } = await scene.assets.loadAsset({ type: 'gltf', assetId: 'damage-helmet', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.glb' })
       this.gltfModle = model
       const gltfElement = scene.createElement(xrFrameSystem.XRGLTF)
       this.shadowRoot.addChild(gltfElement)
       const gltfComp = gltfElement.getComponent(xrFrameSystem.GLTF)
-      gltfComp.setData({model})
+      gltfComp.setData({ model })
 
       const cameraElement = scene.createElement(xrFrameSystem.XRCamera)
       this.shadowRoot.addChild(cameraElement)
@@ -56,7 +56,7 @@ Component({
       const gltfElement = this.scene.createElement(xrFrameSystem.XRGLTF)
       this.shadowRoot.addChild(gltfElement)
       gltfElement.getComponent(xrFrameSystem.Transform).position.setArray(pos)
-      gltfElement.getComponent(xrFrameSystem.GLTF).setData({model: this.gltfModle})
+      gltfElement.getComponent(xrFrameSystem.GLTF).setData({ model: this.gltfModle })
 
       this.meshList.push(gltfElement)
     },
@@ -66,8 +66,8 @@ Component({
         this.shadowRoot.removeChild(element)
       }
     },
-    handleTick({detail}) {
-      const {el, value} = detail
+    handleTick({ detail }) {
+      const { el, value } = detail
     },
     handleDesotry() {
 

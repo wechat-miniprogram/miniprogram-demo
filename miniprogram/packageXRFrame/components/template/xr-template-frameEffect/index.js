@@ -4,7 +4,7 @@ Component({
   data: {
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrFrameSystem = wx.getXrFrameSystem()
       const createFrameEffect = (scene) => {
         const xrFrameSystem = wx.getXrFrameSystem()
@@ -103,13 +103,13 @@ Component({
       const xrScene = this.scene
       // const shadowRoot = xrScene.getElementById("shadow-root");
 
-      await xrScene.assets.loadAsset({type: 'texture', assetId: 'frame', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/sprite-frames.png'})
+      await xrScene.assets.loadAsset({ type: 'texture', assetId: 'frame', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/sprite-frames.png' })
 
       // 第一个参数是效果实例的引用，第二个参数是默认`uniforms`
       const frameMaterial = xrScene.createMaterial(
         // 使用定制的效果
         xrScene.assets.getAsset('effect', 'frame-effect'),
-        {u_baseColorMap: xrScene.assets.getAsset('texture', 'frame')}
+        { u_baseColorMap: xrScene.assets.getAsset('texture', 'frame') }
       )
 
       // 可以将其添加到资源系统中备用
@@ -126,7 +126,7 @@ Component({
       const frameMaterial2 = xrScene.createMaterial(
         // 使用定制的效果
         xrScene.assets.getAsset('effect', 'frame-effect'),
-        {u_baseColorMap: xrScene.assets.getAsset('texture', 'frame')}
+        { u_baseColorMap: xrScene.assets.getAsset('texture', 'frame') }
       )
 
       const meshElement2 = xrScene.getElementById('animation-mesh2').getComponent(xrFrameSystem.Mesh)

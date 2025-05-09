@@ -1,5 +1,5 @@
-import {createScopedThreejs} from 'threejs-miniprogram'
-import {registerGLTFLoader} from '../loaders/gltf-loader'
+import { createScopedThreejs } from 'threejs-miniprogram'
+import { registerGLTFLoader } from '../loaders/gltf-loader'
 
 const threeBehavior = Behavior({
   methods: {

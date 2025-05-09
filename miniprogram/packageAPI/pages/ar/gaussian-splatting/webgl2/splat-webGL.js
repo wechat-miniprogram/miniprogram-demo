@@ -1,7 +1,7 @@
-import {splatVertexShader} from './shaders/splat_vertex.glsl'
-import {splatFragmentShader} from './shaders/splat_fragment.glsl'
-import {splatRTVertexShader} from './shaders/splat_rt_vertex.glsl'
-import {splatRTFragmentShader} from './shaders/splat_rt_fragment.glsl'
+import { splatVertexShader } from './shaders/splat_vertex.glsl'
+import { splatFragmentShader } from './shaders/splat_fragment.glsl'
+import { splatRTVertexShader } from './shaders/splat_rt_vertex.glsl'
+import { splatRTFragmentShader } from './shaders/splat_rt_fragment.glsl'
 
 class SplatWebGL {
   constructor(gl) {

@@ -1,5 +1,5 @@
 // pages/activity_create/index.js
-import {getChatToolInfo} from '../../util'
+import { getChatToolInfo } from '../../util'
 
 // const defaultShareImage = 'https://p9.itc.cn/q_70/images03/20211124/d7dce66b866c4ccd805190a4925ff707.png'
 
@@ -79,21 +79,21 @@ Page({
   },
 
   showPicker(e) {
-    const {mode} = e.currentTarget.dataset
+    const { mode } = e.currentTarget.dataset
     this.setData({
       mode,
       [`${mode}Visible`]: true,
     })
   },
   hidePicker() {
-    const {mode} = this.data
+    const { mode } = this.data
     this.setData({
       [`${mode}Visible`]: false,
     })
   },
   onConfirm(e) {
-    const {value} = e.detail
-    const {mode, dateOption} = this.data
+    const { value } = e.detail
+    const { mode, dateOption } = this.data
 
     console.log('confirm', value)
 
@@ -167,7 +167,7 @@ Page({
 
   chooseParticipant() {
     const that = this
-    const {limitNumber, number} = this.data
+    const { limitNumber, number } = this.data
     wx.selectGroupMembers({
       maxSelectCount: limitNumber ? number : -1,
       success(res) {

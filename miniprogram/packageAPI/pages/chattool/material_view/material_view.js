@@ -108,8 +108,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   },
@@ -189,7 +189,7 @@ Page({
   async mergeImages(tempFilePaths) {
     try {
       // 获取 canvas 节点
-      const {node: canvas, width: cw, height: ch} = await this.getCanvasNode()
+      const { node: canvas, width: cw, height: ch } = await this.getCanvasNode()
 
       // 获取 2D 上下文
       const ctx = canvas.getContext('2d')
@@ -213,7 +213,7 @@ Page({
     return new Promise((resolve, reject) => {
       wx.createSelectorQuery()
         .select('#myCanvas')
-        .fields({node: true, size: true})
+        .fields({ node: true, size: true })
         .exec(res => {
           if (res[0]) resolve(res[0])
           else reject(new Error('Canvas 节点获取失败'))

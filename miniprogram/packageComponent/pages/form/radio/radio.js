@@ -9,12 +9,12 @@ Page({
   data: {
     theme: 'light',
     items: [
-      {value: 'USA', name: '美国'},
-      {value: 'CHN', name: '中国', checked: 'true'},
-      {value: 'BRA', name: '巴西'},
-      {value: 'JPN', name: '日本'},
-      {value: 'ENG', name: '英国'},
-      {value: 'FRA', name: '法国'},
+      { value: 'USA', name: '美国' },
+      { value: 'CHN', name: '中国', checked: 'true' },
+      { value: 'BRA', name: '巴西' },
+      { value: 'JPN', name: '日本' },
+      { value: 'ENG', name: '英国' },
+      { value: 'FRA', name: '法国' },
     ]
   },
 
@@ -41,8 +41,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

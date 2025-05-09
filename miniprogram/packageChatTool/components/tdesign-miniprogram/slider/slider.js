@@ -1,8 +1,8 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
-import {trimSingleValue, trimValue} from './tool'
+import { trimSingleValue, trimValue } from './tool'
 import props from './props'
-import {getRect} from '../common/utils'
+import { getRect } from '../common/utils'
 import Bus from '../common/bus'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -22,7 +22,7 @@ const __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, 
   })
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-slider`
 let Slider = class Slider extends SuperComponent {
   constructor() {
@@ -82,7 +82,7 @@ let Slider = class Slider extends SuperComponent {
         this.bus = new Bus()
       },
       attached() {
-        const {value} = this.properties
+        const { value } = this.properties
         if (!value) this.handlePropsChange(0)
         this.init()
         this.injectPageScroll()
@@ -91,7 +91,7 @@ let Slider = class Slider extends SuperComponent {
   }
 
   injectPageScroll() {
-    const {range, vertical} = this.properties
+    const { range, vertical } = this.properties
     if (!range || !vertical) return
     const pages = getCurrentPages() || []
     let curPage = null
@@ -107,7 +107,7 @@ let Slider = class Slider extends SuperComponent {
   }
 
   observerScrollTop(rest) {
-    const {scrollTop} = rest || {}
+    const { scrollTop } = rest || {}
     this.pageScrollTop = scrollTop
   }
 
@@ -123,8 +123,8 @@ let Slider = class Slider extends SuperComponent {
   }
 
   renderLine(val) {
-    const {min, max, range} = this.properties
-    const {maxRange} = this.data
+    const { min, max, range } = this.properties
+    const { maxRange } = this.data
     if (range) {
       const left = (maxRange * (val[0] - Number(min))) / (Number(max) - Number(min))
       const right = (maxRange * (Number(max) - val[1])) / (Number(max) - Number(min))
@@ -158,8 +158,8 @@ let Slider = class Slider extends SuperComponent {
 
   handleMark(marks) {
     const calcPos = (arr) => {
-      const {max, theme} = this.properties
-      const {blockSize, maxRange} = this.data
+      const { max, theme } = this.properties
+      const { blockSize, maxRange } = this.data
       const margin = theme === 'capsule' ? blockSize / 2 : 0
       return arr.map((item) => ({
         val: item,
@@ -185,8 +185,8 @@ let Slider = class Slider extends SuperComponent {
   }
 
   setSingleBarWidth(value) {
-    const {max, min, theme} = this.properties
-    const {maxRange, blockSize} = this.data
+    const { max, min, theme } = this.properties
+    const { maxRange, blockSize } = this.data
     const halfBlock = theme === 'capsule' ? Number(blockSize) / 2 : 0
     const percentage = (Number(value) - Number(min)) / (Number(max) - Number(min))
     const width = percentage * maxRange + halfBlock
@@ -199,8 +199,8 @@ let Slider = class Slider extends SuperComponent {
     return __awaiter(this, void 0, void 0, function* () {
       if (this.data.__inited) return
       const line = yield getRect(this, '#sliderLine')
-      const {blockSize} = this.data
-      const {theme, vertical} = this.properties
+      const { blockSize } = this.data
+      const { theme, vertical } = this.properties
       const halfBlock = Number(blockSize) / 2
       const {
         top, bottom, right, left
@@ -225,14 +225,14 @@ let Slider = class Slider extends SuperComponent {
   }
 
   stepValue(value) {
-    const {step, min, max} = this.properties
+    const { step, min, max } = this.properties
     const decimal = String(step).indexOf('.') > -1 ? String(step).length - String(step).indexOf('.') - 1 : 0
     const closestStep = trimSingleValue(Number((Math.round(value / Number(step)) * Number(step)).toFixed(decimal)), Number(min), Number(max))
     return closestStep
   }
 
   onSingleLineTap(e) {
-    const {disabled} = this.properties
+    const { disabled } = this.properties
     if (disabled) return
     const isSingleLineTap = this.data.identifier[0] === -1
     if (isSingleLineTap) {
@@ -250,7 +250,7 @@ let Slider = class Slider extends SuperComponent {
     const {
       min, max, theme, vertical
     } = this.properties
-    const {initialLeft, maxRange, blockSize} = this.data
+    const { initialLeft, maxRange, blockSize } = this.data
     const touch = e.changedTouches.find((item) => item.identifier === this.data.identifier[0])
     const pagePosition = this.getPagePosition(touch)
     let offset = 0
@@ -276,15 +276,15 @@ let Slider = class Slider extends SuperComponent {
   }
 
   convertPosToValue(posValue, dir) {
-    const {maxRange} = this.data
-    const {max, min} = this.properties
+    const { maxRange } = this.data
+    const { max, min } = this.properties
     return dir === 0
       ? (posValue / maxRange) * (Number(max) - Number(min)) + Number(min)
       : Number(max) - (posValue / maxRange) * (Number(max) - Number(min))
   }
 
   onLineTap(e) {
-    const {disabled, theme, vertical} = this.properties
+    const { disabled, theme, vertical } = this.properties
     const {
       initialLeft, initialRight, maxRange, blockSize
     } = this.data
@@ -328,7 +328,7 @@ let Slider = class Slider extends SuperComponent {
   }
 
   onTouchStart(e) {
-    this.triggerEvent('dragstart', {e})
+    this.triggerEvent('dragstart', { e })
     const [touch] = e.changedTouches
     if (e.currentTarget.id === 'rightDot') {
       this.data.identifier[1] = touch.identifier
@@ -338,8 +338,8 @@ let Slider = class Slider extends SuperComponent {
   }
 
   onTouchMoveLeft(e) {
-    const {disabled, theme, vertical} = this.properties
-    const {initialLeft, _value, blockSize} = this.data
+    const { disabled, theme, vertical } = this.properties
+    const { initialLeft, _value, blockSize } = this.data
     if (disabled) return
     const touch = e.changedTouches.find((item) => item.identifier === this.data.identifier[0])
     const pagePosition = this.getPagePosition(touch)
@@ -358,8 +358,8 @@ let Slider = class Slider extends SuperComponent {
   }
 
   onTouchMoveRight(e) {
-    const {disabled, vertical} = this.properties
-    const {initialRight, _value, blockSize} = this.data
+    const { disabled, vertical } = this.properties
+    const { initialRight, _value, blockSize } = this.data
     if (disabled) return
     const touch = e.changedTouches.find((item) => item.identifier === this.data.identifier[1])
     const pagePosition = this.getPagePosition(touch)
@@ -375,8 +375,8 @@ let Slider = class Slider extends SuperComponent {
   }
 
   setLineStyle(left, right) {
-    const {theme} = this.properties
-    const {blockSize, maxRange} = this.data
+    const { theme } = this.properties
+    const { blockSize, maxRange } = this.data
     const halfBlock = theme === 'capsule' ? Number(blockSize) / 2 : 0
     const [a, b] = this.data._value
     const cut = (v) => parseInt(v, 10)
@@ -397,7 +397,7 @@ let Slider = class Slider extends SuperComponent {
   }
 
   onTouchEnd(e) {
-    this.triggerEvent('dragend', {e, value: this.data._value})
+    this.triggerEvent('dragend', { e, value: this.data._value })
     if (e.currentTarget.id === 'rightDot') {
       this.data.identifier[1] = -1
     } else {
@@ -406,8 +406,8 @@ let Slider = class Slider extends SuperComponent {
   }
 
   getPagePosition(touch) {
-    const {pageX, pageY} = touch
-    const {vertical} = this.properties
+    const { pageX, pageY } = touch
+    const { vertical } = this.properties
     return vertical ? pageY : pageX
   }
 }

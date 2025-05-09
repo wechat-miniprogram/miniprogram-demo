@@ -13,13 +13,13 @@ Component({
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       this.mat = new (wx.getXrFrameSystem().Matrix4)()
       console.log('xr-scene', xrScene)
     },
 
-    async handleARReady({detail}) {
+    async handleARReady({ detail }) {
       console.log('arReady', this.scene.ar.arVersion)
       const xr = wx.getXrFrameSystem()
 
@@ -40,7 +40,7 @@ Component({
         position: '10000 0 0',
       })
 
-      const {value: model} = await this.scene.assets.loadAsset({type: 'gltf', assetId: 'butterfly', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/butterfly/index.glb'})
+      const { value: model } = await this.scene.assets.loadAsset({ type: 'gltf', assetId: 'butterfly', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/butterfly/index.glb' })
 
       // 添加蝴蝶
       const gltf1 = this.scene.createElement(xr.XRGLTF, {
@@ -80,7 +80,7 @@ Component({
 
       lockTrackerEl.event.add('ar-tracker-state', tracker => {
         // 获取当前状态和错误信息
-        const {state, errorMessage} = tracker
+        const { state, errorMessage } = tracker
 
         if (state === 2 && !waiting) {
           console.log('match')

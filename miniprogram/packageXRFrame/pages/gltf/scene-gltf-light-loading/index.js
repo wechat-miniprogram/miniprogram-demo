@@ -38,14 +38,14 @@ Page({
     progressInfo: '',
     loaded: false
   },
-  handleProgress({detail}) {
+  handleProgress({ detail }) {
     console.log('assets progress', detail)
 
-    this.setData({progressInfo: `${~~(detail.progress * 100)} %\n\n${detail.asset.assetId}(${detail.asset.type}): ${detail.asset.src}`})
+    this.setData({ progressInfo: `${~~(detail.progress * 100)} %\n\n${detail.asset.assetId}(${detail.asset.type}): ${detail.asset.src}` })
   },
-  handleLoaded({detail}) {
+  handleLoaded({ detail }) {
     console.log('assets loaded', detail)
 
-    this.setData({loaded: true})
+    this.setData({ loaded: true })
   }
 })

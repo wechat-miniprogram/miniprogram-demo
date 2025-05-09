@@ -62,7 +62,7 @@ App({
     require.async('./packageSkyline/common/custom-route/index.js').then(utils => {
       console.log('--------begin installRouteBuilder')
       utils.installRouteBuilder() // 'common'
-    }).catch(({mod, errMsg}) => {
+    }).catch(({ mod, errMsg }) => {
       console.error(`installRouteBuilder path: ${mod}, ${errMsg}`)
     })
   },
@@ -75,7 +75,7 @@ App({
   onHide() {
     console.log('App Hide')
   },
-  onThemeChange({theme}) {
+  onThemeChange({ theme }) {
     this.globalData.theme = theme
     themeListeners.forEach((listener) => {
       listener(theme)

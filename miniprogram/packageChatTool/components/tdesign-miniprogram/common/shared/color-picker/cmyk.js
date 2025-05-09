@@ -50,7 +50,7 @@ export const cmykInputToColor = (input) => {
     const m = toNumber(match[2])
     const y = toNumber(match[3])
     const k = toNumber(match[4])
-    const {r, g, b} = cmyk2rgb(c, m, y, k)
+    const { r, g, b } = cmyk2rgb(c, m, y, k)
     return `rgb(${r}, ${g}, ${b})`
   }
   return input

@@ -12,25 +12,25 @@ Component({
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       console.log('xr-scene', xrScene)
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     },
-    handleARReady({detail}) {
+    handleARReady({ detail }) {
       console.log('ar-ready', this.scene.ar.arModes, this.scene.ar.arVersion)
     },
-    handleARError({detail}) {
+    handleARError({ detail }) {
       console.log('ar-error', detail)
     },
-    handleLog({detail}) {
-      const {el, value} = detail
+    handleLog({ detail }) {
+      const { el, value } = detail
       console.log('log', detail.value)
     },
   }

@@ -45,7 +45,7 @@ Page({
   },
   clickHandle(e) {
     const root = this.data.root
-    const {name, path} = e.detail.item
+    const { name, path } = e.detail.item
 
     if (!path) {
       return

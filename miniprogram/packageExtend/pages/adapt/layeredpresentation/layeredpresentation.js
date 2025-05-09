@@ -15,13 +15,13 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   },
   onClick(e) {
-    this.setData({[e.target.dataset.set]: true})
+    this.setData({ [e.target.dataset.set]: true })
   },
   onShareAppMessage() {
     return {

@@ -28,8 +28,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     console.log('canIUse:getPerformance:', wx.canIUse('getPerformance'))
@@ -59,7 +59,7 @@ Page({
 
   startObserver() {
     // 监听需要的性能指标
-    performanceObserver.observe({entryTypes: ['render', 'script', 'navigation']})
+    performanceObserver.observe({ entryTypes: ['render', 'script', 'navigation'] })
   },
 
   stopObserver() {

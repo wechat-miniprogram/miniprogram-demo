@@ -25,7 +25,7 @@ Component({
   },
   methods: {
     close() {
-      const {data} = this
+      const { data } = this
       console.log('@@@ close', data.maskClosable)
       if (!data.maskClosable) return
       this.setData({

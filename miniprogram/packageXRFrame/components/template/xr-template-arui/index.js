@@ -19,20 +19,20 @@ Component({
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       console.log('xr-scene', xrScene)
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
       // this.setData({loaded: true});
       this.placedFlag = false
       this.scene.event.addOnce('touchstart', this.placeNode.bind(this))
     },
-    handleARReady({detail}) {
+    handleARReady({ detail }) {
       console.log('arReady', this.scene.ar.arVersion)
     },
     placeNode(event) {
@@ -43,11 +43,11 @@ Component({
       this.placedFlag = true
       this.scene.ar.placeHere('setitem', true)
       const anchorTRS = this.scene.getElementById('anchor').getComponent(xrFrameSystem.Transform)
-      anchorTRS.setData({visible: false})
+      anchorTRS.setData({ visible: false })
       anchorTRS.scale.x = 0
       anchorTRS.scale.y = 0
       anchorTRS.scale.z = 0
-      wx.setKeepScreenOn({keepScreenOn: true})
+      wx.setKeepScreenOn({ keepScreenOn: true })
     }
   }
 })

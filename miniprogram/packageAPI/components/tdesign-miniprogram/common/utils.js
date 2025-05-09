@@ -1,5 +1,5 @@
-import {prefix} from './config'
-import {getWindowInfo, getAppBaseInfo, getDeviceInfo} from './wechat'
+import { prefix } from './config'
+import { getWindowInfo, getAppBaseInfo, getDeviceInfo } from './wechat'
 
 export const systemInfo = getWindowInfo()
 export const appBaseInfo = getAppBaseInfo()
@@ -147,7 +147,7 @@ export const getCharacterLength = (type, char, max) => {
     characters: str,
   }
 }
-export const chunk = (arr, size) => Array.from({length: Math.ceil(arr.length / size)}, (v, i) => arr.slice(i * size, i * size + size))
+export const chunk = (arr, size) => Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size))
 export const getInstance = function (context, selector) {
   if (!context) {
     const pages = getCurrentPages()
@@ -209,7 +209,7 @@ export const uniqueFactory = (compName) => {
 }
 export const calcIcon = (icon, defaultIcon) => {
   if (icon && ((isBool(icon) && defaultIcon) || isString(icon))) {
-    return {name: isBool(icon) ? defaultIcon : icon}
+    return { name: isBool(icon) ? defaultIcon : icon }
   }
   if (isObject(icon)) {
     return icon

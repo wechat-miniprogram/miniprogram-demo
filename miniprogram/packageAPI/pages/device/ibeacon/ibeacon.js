@@ -25,7 +25,7 @@ Page({
       uuids: [this.data.uuid],
       success: (res) => {
         console.log(res)
-        wx.onBeaconUpdate(({beacons}) => {
+        wx.onBeaconUpdate(({ beacons }) => {
           this.setData({
             beacons
           })
@@ -53,8 +53,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

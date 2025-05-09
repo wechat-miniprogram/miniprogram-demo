@@ -1,4 +1,4 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
 
@@ -10,7 +10,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-collapse`
 let Collapse = class Collapse extends SuperComponent {
   constructor() {
@@ -44,7 +44,7 @@ let Collapse = class Collapse extends SuperComponent {
         })
       },
       switch(panelValue) {
-        const {expandMutex, value: activeValues} = this.properties
+        const { expandMutex, value: activeValues } = this.properties
         let value = []
         const hit = activeValues.indexOf(panelValue)
         if (hit > -1) {
@@ -52,7 +52,7 @@ let Collapse = class Collapse extends SuperComponent {
         } else {
           value = expandMutex ? [panelValue] : activeValues.concat(panelValue)
         }
-        this._trigger('change', {value})
+        this._trigger('change', { value })
       },
     }
   }

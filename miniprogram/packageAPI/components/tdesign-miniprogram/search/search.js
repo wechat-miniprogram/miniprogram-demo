@@ -1,7 +1,7 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
-import {getCharacterLength} from '../common/utils'
+import { getCharacterLength } from '../common/utils'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
   const c = arguments.length; let r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc; let
@@ -11,7 +11,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-search`
 let Search = class Search extends SuperComponent {
   constructor() {
@@ -30,7 +30,7 @@ let Search = class Search extends SuperComponent {
     this.properties = props
     this.observers = {
       resultList(val) {
-        const {isSelected} = this.data
+        const { isSelected } = this.data
         if (val.length) {
           if (isSelected) {
             this.setData({
@@ -58,37 +58,37 @@ let Search = class Search extends SuperComponent {
   }
 
   onInput(e) {
-    let {value} = e.detail
-    const {maxcharacter} = this.properties
+    let { value } = e.detail
+    const { maxcharacter } = this.properties
     if (maxcharacter && typeof maxcharacter === 'number' && maxcharacter > 0) {
-      const {characters} = getCharacterLength('maxcharacter', value, maxcharacter)
+      const { characters } = getCharacterLength('maxcharacter', value, maxcharacter)
       value = characters
     }
     this.setData({
       value,
     })
-    this.triggerEvent('change', {value})
+    this.triggerEvent('change', { value })
   }
 
   onFocus(e) {
-    const {value} = e.detail
-    this.triggerEvent('focus', {value})
+    const { value } = e.detail
+    this.triggerEvent('focus', { value })
   }
 
   onBlur(e) {
-    const {value} = e.detail
-    this.triggerEvent('blur', {value})
+    const { value } = e.detail
+    this.triggerEvent('blur', { value })
   }
 
   handleClear() {
-    this.setData({value: ''})
-    this.triggerEvent('clear', {value: ''})
-    this.triggerEvent('change', {value: ''})
+    this.setData({ value: '' })
+    this.triggerEvent('clear', { value: '' })
+    this.triggerEvent('change', { value: '' })
   }
 
   onConfirm(e) {
-    const {value} = e.detail
-    this.triggerEvent('submit', {value})
+    const { value } = e.detail
+    this.triggerEvent('submit', { value })
   }
 
   onActionClick() {
@@ -96,14 +96,14 @@ let Search = class Search extends SuperComponent {
   }
 
   onSelectResultItem(e) {
-    const {index} = e.currentTarget.dataset
+    const { index } = e.currentTarget.dataset
     const item = this.properties.resultList[index]
     this.setData({
       value: item,
       isSelected: true,
     })
-    this.triggerEvent('change', {value: item})
-    this.triggerEvent('selectresult', {index, item})
+    this.triggerEvent('change', { value: item })
+    this.triggerEvent('selectresult', { index, item })
   }
 }
 Search = __decorate([

@@ -121,7 +121,7 @@ function compareVersion(v1, v2) {
 let safeAreaInsetBottom = null
 function getSafeAreaInsetBottom() {
   if (safeAreaInsetBottom === null) {
-    const {safeArea, screenHeight} = wx.getSystemInfoSync()
+    const { safeArea, screenHeight } = wx.getSystemInfoSync()
     safeAreaInsetBottom = screenHeight - safeArea.bottom
   }
   return safeAreaInsetBottom

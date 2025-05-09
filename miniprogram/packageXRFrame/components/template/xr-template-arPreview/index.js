@@ -19,11 +19,11 @@ Component({
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       this.mat = new (wx.getXrFrameSystem().Matrix4)()
       console.log('xr-scene', xrScene)
-      const {width, height} = this.scene
+      const { width, height } = this.scene
       // 旋转缩放相关配置
       this.radius = (width + height) / 4
       this.rotateSpeed = 5
@@ -94,7 +94,7 @@ Component({
         const x = event.touches[0].pageX
         const y = event.touches[0].pageY
 
-        const {startX, startY} = this.mouseInfo
+        const { startX, startY } = this.mouseInfo
 
         const theta = (x - startX) / this.radius * -this.rotateSpeed
         const phi = (y - startY) / this.radius * -this.rotateSpeed
@@ -132,16 +132,16 @@ Component({
         this.gltfItemTRS.scale.z *= s
       }
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
       // this.setData({loaded: true});
       this.placedFlag = false
       this.scene.event.addOnce('touchstart', this.placeNode.bind(this))
     },
-    handleARReady({detail}) {
+    handleARReady({ detail }) {
       console.log('arReady', this.scene.ar.arVersion)
     },
     placeNode(event) {
@@ -152,11 +152,11 @@ Component({
       this.placedFlag = true
       this.scene.ar.placeHere('setitem', true)
       const anchorTRS = this.scene.getElementById('anchor').getComponent(xrFrameSystem.Transform)
-      anchorTRS.setData({visible: false})
+      anchorTRS.setData({ visible: false })
       anchorTRS.scale.x = 0
       anchorTRS.scale.y = 0
       anchorTRS.scale.z = 0
-      wx.setKeepScreenOn({keepScreenOn: true})
+      wx.setKeepScreenOn({ keepScreenOn: true })
 
       // 获取改动元素
       this.gltfItemTRS = this.scene.getElementById('preview-model').getComponent(xrFrameSystem.Transform)

@@ -1,13 +1,13 @@
 import tinyColor from 'tinycolor2'
-import {cmykInputToColor, rgb2cmyk} from './cmyk'
-import {parseGradientString, isGradientColor} from './gradient'
+import { cmykInputToColor, rgb2cmyk } from './cmyk'
+import { parseGradientString, isGradientColor } from './gradient'
 
 const mathRound = Math.round
 const hsv2rgba = (states) => tinyColor(states).toRgb()
 const hsv2hsva = (states) => tinyColor(states).toHsv()
 const hsv2hsla = (states) => tinyColor(states).toHsl()
 export const gradientColors2string = (object) => {
-  const {points, degree} = object
+  const { points, degree } = object
   const colorsStop = points
     .sort((pA, pB) => pA.left - pB.left)
     .map((p) => `${p.color} ${Math.round(p.left * 100) / 100}%`)
@@ -102,7 +102,7 @@ export class Color {
   }
 
   get rgb() {
-    const {r, g, b} = hsv2rgba(this.states)
+    const { r, g, b } = hsv2rgba(this.states)
     return `rgb(${mathRound(r)}, ${mathRound(g)}, ${mathRound(b)})`
   }
 
@@ -114,7 +114,7 @@ export class Color {
   }
 
   get hsv() {
-    const {h, s, v} = this.getHsva()
+    const { h, s, v } = this.getHsva()
     return `hsv(${h}, ${s}%, ${v}%)`
   }
 
@@ -126,7 +126,7 @@ export class Color {
   }
 
   get hsl() {
-    const {h, s, l} = this.getHsla()
+    const { h, s, l } = this.getHsla()
     return `hsl(${h}, ${s}%, ${l}%)`
   }
 
@@ -160,7 +160,7 @@ export class Color {
   }
 
   get linearGradient() {
-    const {gradientColors, gradientDegree} = this
+    const { gradientColors, gradientDegree } = this
     return gradientColors2string({
       points: gradientColors,
       degree: gradientDegree,
@@ -199,7 +199,7 @@ export class Color {
   }
 
   get gradientSelectedPoint() {
-    const {gradientColors, gradientSelectedId} = this
+    const { gradientColors, gradientSelectedId } = this
     return gradientColors.find((color) => color.id === gradientSelectedId)
   }
 
@@ -219,14 +219,14 @@ export class Color {
   }
 
   updateCurrentGradientColor() {
-    const {isGradient, gradientColors, gradientSelectedId} = this
-    const {length} = gradientColors
+    const { isGradient, gradientColors, gradientSelectedId } = this
+    const { length } = gradientColors
     const current = this.gradientSelectedPoint
     if (!isGradient || length === 0 || !current) {
       return false
     }
     const index = gradientColors.findIndex((color) => color.id === gradientSelectedId)
-    const newColor = {...current, color: this.rgba}
+    const newColor = { ...current, color: this.rgba }
     gradientColors.splice(index, 1, newColor)
     this.gradientColors = gradientColors.slice()
     return this
@@ -251,7 +251,7 @@ export class Color {
   }
 
   getCmyk() {
-    const {r, g, b} = this.getRgba()
+    const { r, g, b } = this.getRgba()
     const [c, m, y, k] = rgb2cmyk(r, g, b)
     return {
       c: mathRound(c * 100),

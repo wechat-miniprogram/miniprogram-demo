@@ -26,7 +26,7 @@ Page({
   },
 
   getStorage() {
-    const {key, data} = this.data
+    const { key, data } = this.data
     let storageData
 
     if (key.length === 0) {
@@ -64,7 +64,7 @@ Page({
   },
 
   setStorage() {
-    const {key, data} = this.data
+    const { key, data } = this.data
     if (key.length === 0) {
       this.setData({
         key,
@@ -108,8 +108,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

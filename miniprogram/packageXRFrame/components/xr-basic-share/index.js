@@ -55,7 +55,7 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const scene = this.scene = detail.value
       const appHide = () => this.scene.share.recordPause()
       const appShow = () => this.scene.share.recordResume()
@@ -64,7 +64,7 @@ Component({
       wx.offAppHide(appHide)
       wx.offAppShow(appShow)
 
-      this.triggerEvent('sceneReady', {width: scene.width, height: scene.height})
+      this.triggerEvent('sceneReady', { width: scene.width, height: scene.height })
     },
     capture() {
       this.scene.share.captureToFriends({

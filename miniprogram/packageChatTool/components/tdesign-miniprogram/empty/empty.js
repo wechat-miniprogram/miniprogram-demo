@@ -1,7 +1,7 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import props from './props'
 import config from '../common/config'
-import {setIcon} from '../common/utils'
+import { setIcon } from '../common/utils'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
   const c = arguments.length; let r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc; let
@@ -11,7 +11,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-empty`
 let default_1 = class extends SuperComponent {
   constructor() {
@@ -28,7 +28,7 @@ let default_1 = class extends SuperComponent {
     this.observers = {
       icon(icon) {
         const obj = setIcon('icon', icon, '')
-        this.setData({...obj})
+        this.setData({ ...obj })
       },
     }
   }

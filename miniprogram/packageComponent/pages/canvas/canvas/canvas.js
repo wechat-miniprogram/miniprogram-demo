@@ -1,4 +1,4 @@
-import {compareVersion} from '../../../../util/util'
+import { compareVersion } from '../../../../util/util'
 
 Page({
 
@@ -11,7 +11,7 @@ Page({
   },
   onReady() {
     // 解决基础库小于 2.7.0 的兼容问题
-    const {SDKVersion} = wx.getSystemInfoSync()
+    const { SDKVersion } = wx.getSystemInfoSync()
     if (compareVersion(SDKVersion, '2.7.0') < 0) {
       console.log('123')
       this.setData({

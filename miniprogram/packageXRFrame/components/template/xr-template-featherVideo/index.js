@@ -33,18 +33,18 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       console.log('xr-scene', xrScene)
       // 绑定tick事件
       xrScene.event.add('tick', this.handleTick.bind(this))
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     },
     handleTick() {
     },
@@ -106,14 +106,14 @@ Component({
             type: 'video-texture',
             assetId: `video-${videoItem.id}`,
             src: videoItem.src,
-            options: {autoPlay: true, loop: true},
+            options: { autoPlay: true, loop: true },
           })
         }))
 
         videos.map((videoTexture, index) => {
           const videoMat = scene.createMaterial(
             scene.assets.getAsset('effect', 'standard'),
-            {u_baseColorMap: videoTexture.value.texture}
+            { u_baseColorMap: videoTexture.value.texture }
           )
           scene.assets.addAsset('material', `video-mat-${videoList[index].id}`, videoMat)
         })

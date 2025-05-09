@@ -1,6 +1,6 @@
 import * as glMatrix from '../util/gl-matrix-min'
 
-const {mat3} = glMatrix
+const { mat3 } = glMatrix
 const tmp = mat3.create()
 const S = mat3.create()
 const R = mat3.create()

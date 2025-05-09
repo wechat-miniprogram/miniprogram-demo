@@ -1,8 +1,8 @@
-import {GestureState} from '../../../common/types'
-import {worklet, supportWorklet} from '../../../common/worklet-api'
-import {showTips} from '../../../common/tips'
+import { GestureState } from '../../../common/types'
+import { worklet, supportWorklet } from '../../../common/worklet-api'
+import { showTips } from '../../../common/tips'
 
-const {shared, derived, spring} = worklet
+const { shared, derived, spring } = worklet
 
 Page({
   data: {},

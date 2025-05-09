@@ -10,7 +10,7 @@ Component({
     syncBoxSize: 0.006
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       xrScene.event.add('tick', this.handleTick.bind(this))
       console.log('xr-scene', xrScene)
@@ -35,16 +35,16 @@ Component({
         syncList
       })
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     },
-    handleARReady({detail}) {
+    handleARReady({ detail }) {
       console.log('arReady')
-      this.setData({arReady: true})
+      this.setData({ arReady: true })
     },
     handleTick() {
       const xrSystem = wx.getXrFrameSystem()

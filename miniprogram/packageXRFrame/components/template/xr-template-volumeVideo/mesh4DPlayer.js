@@ -67,7 +67,7 @@ class mesh4DPlayer {
     const effect = this.scene.createEffect({
       name: 'frame-effect' + this.name,
       properties: [
-        {key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1]},
+        { key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1] },
         // { key: 'u_farthestDistance', type: xrFrameSystem.EUniformType.FLOAT, default: [100]},
         // { key: 'u_nearestDistance', type: xrFrameSystem.EUniformType.FLOAT, default: [0.5]},
         // { key: 'u_offsetZ', type: xrFrameSystem.EUniformType.FLOAT, default: [2.0]}

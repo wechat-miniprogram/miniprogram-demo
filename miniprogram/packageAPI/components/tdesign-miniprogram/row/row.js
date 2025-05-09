@@ -1,4 +1,4 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
 
@@ -10,7 +10,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 let Row = class Row extends SuperComponent {
   constructor() {
     super(...arguments)
@@ -23,9 +23,9 @@ let Row = class Row extends SuperComponent {
       '../col/col': {
         type: 'child',
         linked(target) {
-          const {gutter} = this.data
+          const { gutter } = this.data
           if (gutter) {
-            target.setData({gutter})
+            target.setData({ gutter })
           }
         },
       },
@@ -37,10 +37,10 @@ let Row = class Row extends SuperComponent {
     }
     this.methods = {
       setGutter() {
-        const {gutter} = this.data
+        const { gutter } = this.data
         const cols = this.$children
         cols.forEach((col) => {
-          col.setData({gutter})
+          col.setData({ gutter })
         })
       },
     }

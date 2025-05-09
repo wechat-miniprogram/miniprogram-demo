@@ -1,4 +1,4 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import props from './props'
 import config from '../common/config'
 
@@ -10,7 +10,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-tab-panel`
 let TabPanel = class TabPanel extends SuperComponent {
   constructor() {
@@ -40,7 +40,7 @@ let TabPanel = class TabPanel extends SuperComponent {
   }
 
   setId(id) {
-    this.setData({id})
+    this.setData({ id })
   }
 
   getComputedName() {

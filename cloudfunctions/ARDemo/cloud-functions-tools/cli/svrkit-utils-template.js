@@ -3,7 +3,7 @@ function generate(options) {
     throw new Error('options must be provided')
   }
 
-  const {serviceName, funcName, data} = options
+  const { serviceName, funcName, data } = options
 
   const serviceConfig = config.find(c => c.serviceName === serviceName)
   if (!serviceConfig) {
@@ -63,7 +63,7 @@ function generateV2(options) {
     throw new Error('options must be provided')
   }
 
-  const {apiName, data} = options
+  const { apiName, data } = options
 
   const apiConfig = config.find(c => c.apiName === apiName)
 

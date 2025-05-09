@@ -58,13 +58,13 @@ Component({
    */
   methods: {
     back() {
-      const {data} = this
+      const { data } = this
       if (data.delta) {
         wx.navigateBack({
           delta: data.delta,
         })
       }
-      this.triggerEvent('back', {delta: data.delta}, {})
+      this.triggerEvent('back', { delta: data.delta }, {})
     },
   },
 })

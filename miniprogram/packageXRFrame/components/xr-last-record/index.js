@@ -23,11 +23,11 @@ Component({
     },
     detached() {
       this.bgm.stop()
-      wx.setKeepScreenOn({keepScreenOn: false})
+      wx.setKeepScreenOn({ keepScreenOn: false })
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       this.scene = detail.value
       this.scene.event.add('tick', this.handleTick.bind(this))
       this.inRealWorld = true
@@ -37,17 +37,17 @@ Component({
       this.bgm.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/bgm.mp3'
       this.bgm.loop = true
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
     handleARReady() {
-      this.setData({arReady: true})
+      this.setData({ arReady: true })
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
       this.records = JSON.parse(this.scene.assets.getAsset('raw', 'records'))
       this.note = this.scene.assets.getAsset('raw', 'note')
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     },
     handleTick(dt) {
       this.syncTexts()
@@ -123,10 +123,10 @@ Component({
         renderTarget: null,
         postProcess: ['tone']
       })
-      this.setData({gateClosed: true})
+      this.setData({ gateClosed: true })
       this.inRealWorld = false
     },
-    handleShowDoor({detail}) {
+    handleShowDoor({ detail }) {
       if (detail.value.camera.el.id !== 'main-camera') {
         return
       }
@@ -139,30 +139,30 @@ Component({
       setTimeout(() => {
         this.blurTotal = this.blurDuration = 1700
       }, 300)
-      wx.setKeepScreenOn({keepScreenOn: true})
+      wx.setKeepScreenOn({ keepScreenOn: true })
       this.bgm.play()
-      this.setData({placed: true})
+      this.setData({ placed: true })
     },
     handleResume() {
       if (this.data.placed) {
         this.bgm.play()
       }
     },
-    handleTouchNote({detail}) {
+    handleTouchNote({ detail }) {
       if (detail.value.camera.el.id !== 'main-camera') {
         return
       }
 
       this.triggerEvent('showNote', this.note)
     },
-    handleTouchObj({detail}) {
+    handleTouchObj({ detail }) {
       if (detail.value.camera.el.id !== 'main-camera') {
         return
       }
 
       const xrSystem = wx.getXrFrameSystem()
-      const {el, value} = detail
-      const {camera, target} = value
+      const { el, value } = detail
+      const { camera, target } = value
       const id = target.id
       const text = this.texts[id]
       const camTrs = camera.el.getComponent(xrSystem.Transform)
@@ -174,7 +174,7 @@ Component({
         return
       }
 
-      const {y, d, texts: records} = this.records[id]
+      const { y, d, texts: records } = this.records[id]
 
       if (distance > (d || 1.5)) {
         return
@@ -212,7 +212,7 @@ Component({
         const tmp = trs.worldPosition.clone()
         tmp.y += y
         const clipPos = camera.convertWorldPositionToClip(tmp)
-        const {frameWidth, frameHeight} = this.scene
+        const { frameWidth, frameHeight } = this.scene
 
         return {
           content,

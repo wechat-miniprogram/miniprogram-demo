@@ -42,7 +42,7 @@ module.exports = Behavior({
     onShareAppMessage() {
       try {
         if (wx.xrScene) {
-          const buffer = wx.xrScene.share.captureToArrayBuffer({quality: 0.5})
+          const buffer = wx.xrScene.share.captureToArrayBuffer({ quality: 0.5 })
           const fp = `${wx.env.USER_DATA_PATH}/xr-frame-share.jpg`
           wx.getFileSystemManager().writeFileSync(fp, buffer, 'binary')
           return {
@@ -59,7 +59,7 @@ module.exports = Behavior({
     onShareTimeline() {
       try {
         if (wx.xrScene) {
-          const buffer = wx.xrScene.share.captureToArrayBuffer({quality: 0.5})
+          const buffer = wx.xrScene.share.captureToArrayBuffer({ quality: 0.5 })
           const fp = `${wx.env.USER_DATA_PATH}/xr-frame-share.jpg`
           wx.getFileSystemManager().writeFileSync(fp, buffer, 'binary')
           return {
@@ -76,8 +76,8 @@ module.exports = Behavior({
     getTitle() {
       return wx.xrTitle ? `XR - ${wx.xrTitle}` : 'XR-FRAME官方示例'
     },
-    handleARTrackerState({detail}) {
-      const {state, error} = detail
+    handleARTrackerState({ detail }) {
+      const { state, error } = detail
       this.setData({
         arTrackerShow: true,
         arTrackerState: wx.getXrFrameSystem().EARTrackerState[state],

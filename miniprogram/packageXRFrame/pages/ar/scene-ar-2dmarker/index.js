@@ -36,7 +36,7 @@ Page({
       sourceType: ['album'],
       success: res => {
         const fp = res.tempFiles[0].tempFilePath
-        this.setData({markerImg: fp})
+        this.setData({ markerImg: fp })
       },
       fail: err => {
         console.error('[xr-demo]chooseImage failed', err)

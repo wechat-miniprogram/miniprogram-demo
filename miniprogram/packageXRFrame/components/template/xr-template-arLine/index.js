@@ -25,11 +25,11 @@ Component({
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       console.log('xr-scene', xrScene)
     },
-    handleARReady({detail}) {
+    handleARReady({ detail }) {
       console.log('arReady', this.scene.ar.arVersion)
 
       const xr = wx.getXrFrameSystem()

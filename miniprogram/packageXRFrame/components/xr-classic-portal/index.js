@@ -8,23 +8,23 @@ Component({
   },
   lifetimes: {
     detached() {
-      wx.setKeepScreenOn({keepScreenOn: false})
+      wx.setKeepScreenOn({ keepScreenOn: false })
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       this.inRealWorld = true
       console.log('xr-scene', xrScene)
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
       this.scene.event.addOnce('touchstart', this.placeNode.bind(this))
-      wx.showToast({title: '点击屏幕放置'})
+      wx.showToast({ title: '点击屏幕放置' })
     },
     handleTick() {
       if (!this.placed) {
@@ -71,9 +71,9 @@ Component({
         // mainCam: ar -> stencil -> scene
         // magicCam: nothing
         this.inRealWorld = true
-        mainCam.setData({background: 'ar'})
-        magicCam.setData({background: 'default'})
-        magicCam.setData({isClearDepth: false})
+        mainCam.setData({ background: 'ar' })
+        magicCam.setData({ background: 'default' })
+        magicCam.setData({ isClearDepth: false })
         magicCam.clearBackgroundRenderStates()
         doorMesh.material.renderQueue = 1
         doorMesh.material.setRenderState('cullFace', 2)
@@ -83,9 +83,9 @@ Component({
         // mainCam: scene -> stencil
         // magicCam: ar
         this.inRealWorld = false
-        mainCam.setData({background: 'default'})
-        magicCam.setData({background: 'ar'})
-        magicCam.setData({isClearDepth: true})
+        mainCam.setData({ background: 'default' })
+        magicCam.setData({ background: 'ar' })
+        magicCam.setData({ isClearDepth: true })
         magicCam.setBackgroundRenderStates({
           stencilComp: 3,
           stencilRef: 1,
@@ -97,8 +97,8 @@ Component({
       }
     },
     placeNode(event) {
-      const {clientX, clientY} = event.touches[0]
-      const {frameWidth: width, frameHeight: height} = this.scene
+      const { clientX, clientY } = event.touches[0]
+      const { frameWidth: width, frameHeight: height } = this.scene
 
       if (clientY / height > 0.8 && clientX / width > 0.8) {
         this.scene.getNodeById('setitem').visible = false
@@ -106,9 +106,9 @@ Component({
         this.scene.event.addOnce('touchstart', this.placeNode.bind(this))
       } else {
         this.scene.ar.placeHere('setitem', true)
-        this.scene.getElementById('anchor').getComponent(wx.getXrFrameSystem().Transform).setData({visible: false})
+        this.scene.getElementById('anchor').getComponent(wx.getXrFrameSystem().Transform).setData({ visible: false })
         this.placed = true
-        wx.setKeepScreenOn({keepScreenOn: true})
+        wx.setKeepScreenOn({ keepScreenOn: true })
       }
     },
   }

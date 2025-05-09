@@ -1,4 +1,4 @@
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import config from '../common/config'
 import props from './props'
 
@@ -10,7 +10,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-divider`
 let Divider = class Divider extends SuperComponent {
   constructor() {
@@ -31,7 +31,7 @@ let Divider = class Divider extends SuperComponent {
     }
     this.methods = {
       setStyle() {
-        const {lineColor} = this.properties
+        const { lineColor } = this.properties
         const dividerStyle = `${lineColor ? `border-color: ${lineColor};` : ''}`
         this.setData({
           dividerStyle,

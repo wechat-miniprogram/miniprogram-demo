@@ -17,12 +17,12 @@ Page({
     envWord: 'TiT创意园白天',
   },
   handleEnv0() {
-    this.setData({envIndex: 0, envWord: envWords[0]})
+    this.setData({ envIndex: 0, envWord: envWords[0] })
   },
   handleEnv1() {
-    this.setData({envIndex: 1, envWord: envWords[1]})
+    this.setData({ envIndex: 1, envWord: envWords[1] })
   },
   handleEnv2() {
-    this.setData({envIndex: 2, envWord: envWords[2]})
+    this.setData({ envIndex: 2, envWord: envWords[2] })
   }
 })

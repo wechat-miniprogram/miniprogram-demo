@@ -17,25 +17,25 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
 
       this.vQueueLength = 5
       this.vQueue = []
       this.vQueueHead = 0
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     },
-    handleARTrackerState({detail}) {
+    handleARTrackerState({ detail }) {
       // 事件的值即为`ARTracker`实例
       const tracker = detail.value
       // 获取当前状态和错误信息
-      const {state, errorMessage} = tracker
+      const { state, errorMessage } = tracker
       if (state == 2) {
         this.handleARDetected()
       }
@@ -76,7 +76,7 @@ Component({
       const cam_trans = camera.getComponent('transform')
       transform.position.set(cam_trans.position.add(cam_trans.worldForward.scale(-1)))
     },
-    handleTick({detail}) {
+    handleTick({ detail }) {
       if (this.currentBall) {
         this.placeBall(this.currentBall.getComponent('transform'))
         this.recordPosition(detail)

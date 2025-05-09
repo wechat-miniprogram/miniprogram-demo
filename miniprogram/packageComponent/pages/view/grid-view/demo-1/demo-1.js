@@ -1,4 +1,4 @@
-import {generateGridList} from '../../../../../util/util.js'
+import { generateGridList } from '../../../../../util/util.js'
 
 Page({
 

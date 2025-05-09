@@ -37,21 +37,21 @@ Page({
     return Number(result.toFixed(1))
   },
   handleAdd() {
-    this.setData({capacity: this.calc(this.data.capacity, true)})
+    this.setData({ capacity: this.calc(this.data.capacity, true) })
   },
   handleSub() {
-    this.setData({capacity: this.calc(this.data.capacity, false)})
+    this.setData({ capacity: this.calc(this.data.capacity, false) })
   },
   handleRateAdd() {
-    this.setData({emitRate: this.calc(this.data.emitRate, true)})
+    this.setData({ emitRate: this.calc(this.data.emitRate, true) })
   },
   handleRateSub() {
-    this.setData({emitRate: this.calc(this.data.emitRate, false)})
+    this.setData({ emitRate: this.calc(this.data.emitRate, false) })
   },
   handleTimeAdd() {
-    this.setData({lifeTime: this.calc(this.data.lifeTime, true, 0.1)})
+    this.setData({ lifeTime: this.calc(this.data.lifeTime, true, 0.1) })
   },
   handleTimeSub() {
-    this.setData({lifeTime: this.calc(this.data.lifeTime, false, 0.1)})
+    this.setData({ lifeTime: this.calc(this.data.lifeTime, false, 0.1) })
   }
 })

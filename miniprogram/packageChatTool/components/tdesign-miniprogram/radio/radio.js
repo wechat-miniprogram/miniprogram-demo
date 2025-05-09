@@ -1,5 +1,5 @@
 import config from '../common/config'
-import {SuperComponent, wxComponent} from '../common/src/index'
+import { SuperComponent, wxComponent } from '../common/src/index'
 import Props from './props'
 
 const __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ const __decorate = (this && this.__decorate) || function (decorators, target, ke
   return c > 3 && r && Object.defineProperty(target, key, r), r
 }
 
-const {prefix} = config
+const { prefix } = config
 const name = `${prefix}-radio`
 let Radio = class Radio extends SuperComponent {
   constructor() {
@@ -28,7 +28,7 @@ let Radio = class Radio extends SuperComponent {
         type: 'ancestor',
         linked(parent) {
           if (parent.data.borderless) {
-            this.setData({borderless: true})
+            this.setData({ borderless: true })
           }
         },
       },
@@ -69,30 +69,30 @@ let Radio = class Radio extends SuperComponent {
     }
     this.observers = {
       disabled(v) {
-        this.setData({_disabled: v})
+        this.setData({ _disabled: v })
       },
     }
     this.methods = {
       handleTap(e) {
-        const {_disabled, readonly, contentDisabled} = this.data
-        const {target} = e.currentTarget.dataset
+        const { _disabled, readonly, contentDisabled } = this.data
+        const { target } = e.currentTarget.dataset
         if (_disabled || readonly || (target === 'text' && contentDisabled)) return
         this.doChange()
       },
       doChange() {
         let _a
-        const {value, checked, allowUncheck} = this.data
+        const { value, checked, allowUncheck } = this.data
         const isAllowUncheck = Boolean(allowUncheck || ((_a = this.$parent) === null || _a === void 0 ? void 0 : _a.data.allowUncheck))
         if (this.$parent) {
           this.$parent.updateValue(checked && isAllowUncheck ? null : value)
         } else {
-          this._trigger('change', {checked: isAllowUncheck ? !checked : true})
+          this._trigger('change', { checked: isAllowUncheck ? !checked : true })
         }
       },
       init() {
         let _a; let _b; let _c; let _d; let _e; let
           _f
-        const {icon} = this.data
+        const { icon } = this.data
         const isIdArr = Array.isArray(((_a = this.$parent) === null || _a === void 0 ? void 0 : _a.icon) || icon)
         this.setData({
           customIcon: isIdArr,

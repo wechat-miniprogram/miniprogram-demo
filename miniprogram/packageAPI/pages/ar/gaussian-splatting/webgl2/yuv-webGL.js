@@ -1,5 +1,5 @@
-import {YUVVertexShader} from './shaders/yuv_vertex.glsl'
-import {YUVFragmentShader} from './shaders/yuv_fragment.glsl'
+import { YUVVertexShader } from './shaders/yuv_vertex.glsl'
+import { YUVFragmentShader } from './shaders/yuv_fragment.glsl'
 
 export class YUVRenderWebGL {
   constructor(gl) {

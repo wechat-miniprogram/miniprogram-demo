@@ -21,13 +21,13 @@ Component({
     },
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       console.log('xr-scene', xrScene)
       this.bgm = wx.createInnerAudioContext({})
       this.bgm.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/kaqituolitai.mp3'
       this.bgm.volume = 0.5
-      this.voice = wx.createInnerAudioContext({useWebAudioImplement: true})
+      this.voice = wx.createInnerAudioContext({ useWebAudioImplement: true })
       this.voice.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/homo.m4a'
       this.voiceFrag = {
         xinyi: [4, 2],
@@ -37,10 +37,10 @@ Component({
       }
       this.tmpV3 = new (wx.getXrFrameSystem().Vector3)()
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       this.triggerEvent('assetsLoaded', detail.value)
     },
-    handleRaf({detail}) {
+    handleRaf({ detail }) {
       if (!this.init()) {
         return
       }
@@ -61,7 +61,7 @@ Component({
       this.tmpV3.x += -0.1
       this.tmpV3.y += 1.2
       const clipPos = this.camera.convertWorldPositionToClip(this.tmpV3)
-      const {frameWidth, frameHeight} = this.scene
+      const { frameWidth, frameHeight } = this.scene
       return [((clipPos.x + 1) / 2) * frameWidth, (1 - (clipPos.y + 1) / 2) * frameHeight, name]
     },
     init() {
@@ -89,8 +89,8 @@ Component({
 
       return inited
     },
-    handleModelLoaded({detail}) {
-      const {target} = detail.value
+    handleModelLoaded({ detail }) {
+      const { target } = detail.value
       this[target.id] = target.getComponent(wx.getXrFrameSystem().Transform)
     },
     async run() {
@@ -149,7 +149,7 @@ Component({
         this.voice.seek(this.voiceFrag.jump[0])
         this.voice.play()
         animator.stop()
-        animator.play('Jump', {loop: 0})
+        animator.play('Jump', { loop: 0 })
         animator.el.event.addOnce('anim-stop', () => {
           animator.play('Run')
           this.voice.stop()

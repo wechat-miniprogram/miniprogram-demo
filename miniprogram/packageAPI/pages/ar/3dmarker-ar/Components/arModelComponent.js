@@ -1,7 +1,7 @@
 Component({
   behaviors: ['wx://component-export'],
   export() {
-    return {getARModelList: this.getARModelList.bind(this)}
+    return { getARModelList: this.getARModelList.bind(this) }
   },
   data: {
     chooseMapFile: null,

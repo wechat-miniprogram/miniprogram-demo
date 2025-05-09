@@ -9,7 +9,7 @@ Page({
     gesture: undefined,
     score: undefined
   },
-  handleInfo({detail}) {
-    this.setData({gesture: detail.gesture, score: detail.score.toFixed(2)})
+  handleInfo({ detail }) {
+    this.setData({ gesture: detail.gesture, score: detail.score.toFixed(2) })
   },
 })

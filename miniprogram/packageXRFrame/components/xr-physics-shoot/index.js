@@ -9,26 +9,26 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       this.cubeGeometry = this.scene.assets.getAsset('geometry', 'cube')
       this.bricksRoot = this.scene.getElementById('bricksRoot')
       console.log('xr-scene', xrScene)
       this.matMap = new Map()
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     },
-    handleARTrackerState({detail}) {
+    handleARTrackerState({ detail }) {
       console.log('ar state', detail.value.state)
       // 事件的值即为`ARTracker`实例
       const tracker = detail.value
       // 获取当前状态和错误信息
-      const {state, errorMessage} = tracker
+      const { state, errorMessage } = tracker
       if (state === 2 && !this.inited) {
         this.initBricks()
         this.inited = true
@@ -85,9 +85,9 @@ Component({
       transform.position.z = 0
       transform.scale.setValue(0.1, 0.1, 0.1)
 
-      const rigidbody = brickEl.addComponent(xr.Rigidbody, {useGravity: false})
-      brickEl.addComponent(xr.CubeShape, {autoFit: true})
-      brickEl.addComponent(xr.ShapeInteract, {collide: true, bounciness: 0})
+      const rigidbody = brickEl.addComponent(xr.Rigidbody, { useGravity: false })
+      brickEl.addComponent(xr.CubeShape, { autoFit: true })
+      brickEl.addComponent(xr.ShapeInteract, { collide: true, bounciness: 0 })
       rigidbody.sleep()
 
       return brickMesh
@@ -108,9 +108,9 @@ Component({
       transform.position.set(origin.position)
       transform.scale.setValue(0.1, 0.1, 0.1)
 
-      const rigidbody = bulletEl.addComponent(xr.Rigidbody, {useGravity: false})
-      bulletEl.addComponent(xr.SphereShape, {autoFit: true})
-      bulletEl.addComponent(xr.ShapeInteract, {collide: true, bounciness: 0})
+      const rigidbody = bulletEl.addComponent(xr.Rigidbody, { useGravity: false })
+      bulletEl.addComponent(xr.SphereShape, { autoFit: true })
+      bulletEl.addComponent(xr.ShapeInteract, { collide: true, bounciness: 0 })
       let ray = xr.Vector3.createFromNumber(0, 0, 0)
       camera.convertClipPositionToWorld(xr.Vector3.createFromNumber(x, y, 0), ray)
       ray = ray.sub(origin.position)

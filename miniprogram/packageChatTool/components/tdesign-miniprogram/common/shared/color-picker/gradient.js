@@ -102,7 +102,7 @@ export const parseGradientString = (input) => {
   if (result.original.trim() !== match[1].trim()) {
     return false
   }
-  const points = result.colorStopList.map(({color, position}) => {
+  const points = result.colorStopList.map(({ color, position }) => {
     const point = Object.create(null)
     point.color = tinyColor(color).toRgbString()
     point.left = parseFloat(position)

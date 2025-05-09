@@ -18,7 +18,7 @@ export function getBackgroundColor(color) {
     }
     return `linear-gradient( ${color.join(',')} )`
   }
-  const {from, to, direction = 'to right'} = color; const
+  const { from, to, direction = 'to right' } = color; const
     rest = __rest(color, ['from', 'to', 'direction'])
   let keys = Object.keys(rest)
   if (keys.length) {

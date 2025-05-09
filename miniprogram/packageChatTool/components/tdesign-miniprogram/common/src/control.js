@@ -7,7 +7,7 @@ const defaultOption = {
 function useControl(option = {}) {
   const {
     valueKey, defaultValueKey, changeEventName, strict
-  } = {...defaultOption, ...option}
+  } = { ...defaultOption, ...option }
   const props = this.properties || {}
   const value = props[valueKey]
   const defaultValue = props[strict ? defaultValueKey : valueKey]
@@ -16,7 +16,7 @@ function useControl(option = {}) {
     controlled = true
   }
   const set = (newVal, extObj, fn) => {
-    this.setData({[`_${valueKey}`]: newVal, ...extObj}, fn)
+    this.setData({ [`_${valueKey}`]: newVal, ...extObj }, fn)
   }
   return {
     controlled,
@@ -36,4 +36,4 @@ function useControl(option = {}) {
     },
   }
 }
-export {useControl}
+export { useControl }

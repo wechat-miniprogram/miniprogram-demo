@@ -134,7 +134,7 @@ converter.fromObject = function fromObject(mtype) {
             m[propName] = {}
           }
           const ks = Object.keys(d[propName])
-          for (_i = 0; _i < ks.length; ++_i) valuePartial_fromObject(field, i, propName, util.merge(util.copy(options), {m, d, ksi: ks[_i]}))
+          for (_i = 0; _i < ks.length; ++_i) valuePartial_fromObject(field, i, propName, util.merge(util.copy(options), { m, d, ksi: ks[_i] }))
         } else if (field.repeated) {
           if (d[propName]) {
             if (!Array.isArray(d[propName])) throw TypeError(field.fullName + ': array expected')
@@ -148,7 +148,7 @@ converter.fromObject = function fromObject(mtype) {
             }
           }
         } else if ((field.resolvedType instanceof Enum) || d[propName] != null) {
-          valuePartial_fromObject(field, i, propName, util.merge(util.copy(options), {m, d}))
+          valuePartial_fromObject(field, i, propName, util.merge(util.copy(options), { m, d }))
         }
       }
       return m
@@ -310,7 +310,7 @@ converter.toObject = function toObject(mtype) {
           }
         } else {
           if (m[propName] != null && (m.hasOwnProperty(propName)/* || field.partOf */)) {
-            valuePartial_toObject(field, index, propName, util.merge(util.copy(options), {m, d, o}))
+            valuePartial_toObject(field, index, propName, util.merge(util.copy(options), { m, d, o }))
           }
           if (field.partOf) {
             if (o.oneofs) d[field.partOf.name] = propName

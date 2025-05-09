@@ -42,7 +42,7 @@ function sort(params) {
 
   loopTime++
 
-  const {viewProjectionMatrix} = params
+  const { viewProjectionMatrix } = params
 
   const start = new Date().getTime()
 

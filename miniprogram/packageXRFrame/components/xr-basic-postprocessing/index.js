@@ -141,7 +141,7 @@ Component({
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       this.scene = detail.value
       console.log('scene', detail.value)
       this.activeBlur()
@@ -155,12 +155,12 @@ Component({
       //   transform.rotation.y = -Math.PI * 0.25;
       // }
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       this.triggerEvent('assetsProgress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       this.triggerEvent('assetsLoaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     },
     activeBlur() {
       this.setData(blurData)

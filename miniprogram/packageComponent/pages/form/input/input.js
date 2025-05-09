@@ -10,7 +10,7 @@ Page({
     theme: 'light',
     focus: false,
     inputValue: '',
-    style: {color: '#F76260', fontSize: 16},
+    style: { color: '#F76260', fontSize: 16 },
   },
 
   bindKeyInput(e) {
@@ -57,8 +57,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

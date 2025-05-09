@@ -19,13 +19,13 @@ Component({
     }
   },
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       const xrSystem = wx.getXrFrameSystem()
 
       this.mat = new (xrSystem.Matrix4)()
       console.log('xr-scene', xrScene)
-      const {width, height} = this.scene
+      const { width, height } = this.scene
 
       this.cameraTrs = this.scene.getElementById('camera').getComponent(xrSystem.Transform)
 

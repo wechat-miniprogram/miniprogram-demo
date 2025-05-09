@@ -18,7 +18,7 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       const xrScene = this.scene = detail.value
       console.log('xr-scene', xrScene)
       const xrFrameSystem = wx.getXrFrameSystem()
@@ -44,7 +44,7 @@ Component({
       tempSystem.addSizeGradient(1, 0, 0)
     },
 
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
   }

@@ -52,8 +52,8 @@ Page({
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     wx.onBLEPeripheralConnectionStateChanged(res => {
@@ -65,7 +65,7 @@ Page({
       } else {
         connects.push(res)
       }
-      this.setData({connects})
+      this.setData({ connects })
     })
   },
 
@@ -108,7 +108,7 @@ Page({
         title: '创建 server ',
       })
       this.server.onCharacteristicReadRequest(res => {
-        const {serviceId, characteristicId, callbackId} = res
+        const { serviceId, characteristicId, callbackId } = res
         const buffer = new ArrayBuffer(1)
         const dataView = new DataView(buffer)
         const newValue = Math.ceil(Math.random() * 10)

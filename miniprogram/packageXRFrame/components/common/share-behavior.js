@@ -35,9 +35,9 @@ export default Behavior({
         const comp = el.getComponent(xrFrameSystem.ARTracker)
         if (comp) {
           if (typeof comp.state === 'number') {
-            this.triggerEvent('arTrackerState', {state: comp.state, error: comp.errorMessage})
+            this.triggerEvent('arTrackerState', { state: comp.state, error: comp.errorMessage })
             el.event.add('ar-tracker-state', tracker => {
-              this.triggerEvent('arTrackerState', {state: tracker.state, error: tracker.errorMessage})
+              this.triggerEvent('arTrackerState', { state: tracker.state, error: tracker.errorMessage })
             })
           }
           return true

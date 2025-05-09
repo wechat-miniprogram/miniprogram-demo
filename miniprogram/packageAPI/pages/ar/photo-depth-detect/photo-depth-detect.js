@@ -32,8 +32,8 @@ Component({
       })
 
       if (wx.onThemeChange) {
-        wx.onThemeChange(({theme}) => {
-          this.setData({theme})
+        wx.onThemeChange(({ theme }) => {
+          this.setData({ theme })
         })
       }
     },
@@ -111,7 +111,7 @@ Component({
         console.log('this.session.detectDepth', this.session.detectDepth)
         console.log('width', this.data.depthImgOriginWidth)
         console.log('height', this.data.depthImgOriginHeight)
-        wx.showLoading({title: '深度图生成中...'})
+        wx.showLoading({ title: '深度图生成中...' })
         this.session.detectDepth({
           frameBuffer: this.imgData.data.buffer,
           width: this.data.depthImgOriginWidth,

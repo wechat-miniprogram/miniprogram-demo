@@ -108,10 +108,10 @@ Component({
       const effect = this.scene.createEffect({
         name: 'dissolveEffect',
         properties: [
-          {key: 'u_firstColor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 0, 0, 1]},
-          {key: 'u_secondColor', type: xrFrameSystem.EUniformType.FLOAT4, default: [0, 1, 0, 1]},
-          {key: 'u_threshold', type: xrFrameSystem.EUniformType.FLOAT, default: [0.5]},
-          {key: 'u_edgeWidth', type: xrFrameSystem.EUniformType.FLOAT, default: [0.1]},
+          { key: 'u_firstColor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 0, 0, 1] },
+          { key: 'u_secondColor', type: xrFrameSystem.EUniformType.FLOAT4, default: [0, 1, 0, 1] },
+          { key: 'u_threshold', type: xrFrameSystem.EUniformType.FLOAT, default: [0.5] },
+          { key: 'u_edgeWidth', type: xrFrameSystem.EUniformType.FLOAT, default: [0.1] },
         ],
         images: [
           {

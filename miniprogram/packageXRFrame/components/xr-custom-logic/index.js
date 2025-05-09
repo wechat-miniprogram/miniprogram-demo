@@ -6,15 +6,15 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
+    handleReady({ detail }) {
       this.scene = detail.value
       this.rotSpeed = 1
       this.rotAxis = 0
     },
-    handleTouchStart({detail}) {
+    handleTouchStart({ detail }) {
       console.log('touch start', detail.value)
     },
-    handleTouchEnd({detail}) {
+    handleTouchEnd({ detail }) {
       console.log('touch end', detail.value)
       this.rotAxis += 1
       if (this.rotAxis >= 3) {
@@ -23,7 +23,7 @@ Component({
 
       this.changeSpeed()
     },
-    handleDrag({detail}) {
+    handleDrag({ detail }) {
       const info = detail.value
       console.log('drag', info)
       this.rotSpeed += info.deltaX / this.scene.width
@@ -35,17 +35,17 @@ Component({
       const comp = el.getComponent('auto-rotate')
 
       if (comp) {
-        comp.setData({speed: [0, 0, 0].map((_, i) => (i === this.rotAxis ? this.rotSpeed : 0))})
+        comp.setData({ speed: [0, 0, 0].map((_, i) => (i === this.rotAxis ? this.rotSpeed : 0)) })
       }
     },
-    handleAssetsProgress({detail}) {
+    handleAssetsProgress({ detail }) {
       console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded({detail}) {
+    handleAssetsLoaded({ detail }) {
       console.log('assets loaded', detail.value)
-      this.setData({loaded: true})
+      this.setData({ loaded: true })
     },
-    handleLog({detail}) {
+    handleLog({ detail }) {
       console.log('log', detail.value)
     }
   }

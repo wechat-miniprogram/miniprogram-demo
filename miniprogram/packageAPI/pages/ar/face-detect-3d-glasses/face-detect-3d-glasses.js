@@ -35,8 +35,8 @@ Component({
       })
 
       if (wx.onThemeChange) {
-        wx.onThemeChange(({theme}) => {
-          this.setData({theme})
+        wx.onThemeChange(({ theme }) => {
+          this.setData({ theme })
         })
       }
     },
@@ -74,7 +74,7 @@ Component({
           })
 
           // 开启三维识别
-          session.update3DMode({open3d: true})
+          session.update3DMode({ open3d: true })
 
           // VKSession EVENT addAnchors
           session.on('addAnchors', anchors => {
@@ -126,7 +126,7 @@ Component({
     async initXRFrame() {
       const xrFrameSystem = wx.getXrFrameSystem()
       const scene = this.xrScene
-      const {rootShadow} = scene
+      const { rootShadow } = scene
 
       // 缓存主相机
       this.xrCameraMain = this.xrCamera

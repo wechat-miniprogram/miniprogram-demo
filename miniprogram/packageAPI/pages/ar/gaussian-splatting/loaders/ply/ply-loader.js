@@ -1,4 +1,4 @@
-import {wxDecodeAdapter, computeCov3D} from '../util-loader.js'
+import { wxDecodeAdapter, computeCov3D } from '../util-loader.js'
 
 // implementation from https://github.com/kishimisu/Gaussian-Splatting-WebGL
 export function loadPly(content, maxGaussians) {

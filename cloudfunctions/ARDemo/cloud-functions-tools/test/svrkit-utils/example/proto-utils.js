@@ -6,9 +6,9 @@ function generate(options) {
     throw new Error('options must be provided')
   }
 
-  const {serviceName, funcName, data} = options
+  const { serviceName, funcName, data } = options
 
-  const serviceConfig = config.find(c => c.serviceName === serviceName)
+  const serviceConfig = config.find(c => c.serviceName === serviceName) 
   if (!serviceConfig) {
     throw new Error('service not found')
   }

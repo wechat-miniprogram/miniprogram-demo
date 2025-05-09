@@ -33,7 +33,7 @@ CustomPage({
         for (const city of cities) {
           const alpha = city.pinyin[0].charAt(0).toUpperCase()
           if (!map.has(alpha)) map.set(alpha, [])
-          map.get(alpha).push({name: city.fullname})
+          map.get(alpha).push({ name: city.fullname })
         }
 
         const keys = []
@@ -50,7 +50,7 @@ CustomPage({
           })
         }
 
-        _this.setData({list})
+        _this.setData({ list })
       }
     })
   }

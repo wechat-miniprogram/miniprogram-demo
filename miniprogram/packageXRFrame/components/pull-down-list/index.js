@@ -33,7 +33,7 @@ Component({
   },
   methods: {
     switchHandle() {
-      const {childArr, childBoxHeight} = this.data
+      const { childArr, childBoxHeight } = this.data
       this.setData({
         childBoxHeight: childBoxHeight > 0 ? 0 : childArr.length * itemHeight,
       })

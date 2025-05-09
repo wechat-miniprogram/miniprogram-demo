@@ -1,7 +1,7 @@
 module.exports = parse
 
 parse.filename = null
-parse.defaults = {keepCase: false}
+parse.defaults = { keepCase: false }
 
 let tokenize
 let Root

@@ -77,7 +77,7 @@ Component({
 
           if (!this.data.showLegMask) {
           // 初始化设定
-            this.session.updateMaskMode({useMask: false})
+            this.session.updateMaskMode({ useMask: false })
           }
 
           //  VKSession EVENT resize
@@ -180,7 +180,7 @@ Component({
     async initXRFrame() {
       const xrFrameSystem = wx.getXrFrameSystem()
       const scene = this.xrScene
-      const {rootShadow} = scene
+      const { rootShadow } = scene
 
       // 缓存主相机
       this.xrCameraMain = this.xrCamera
@@ -466,7 +466,7 @@ Component({
     },
     addShoeMaskPlane() {
       const scene = this.xrScene
-      const {rootShadow} = scene
+      const { rootShadow } = scene
 
       const xrFrameSystem = wx.getXrFrameSystem()
 
@@ -480,7 +480,7 @@ Component({
       if (!shoeMaskEffect) {
         xrFrameSystem.registerEffect('ar-shoe-mask', scene => scene.createEffect({
           properties: [
-            {key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1]},
+            { key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1] },
           ],
           images: [
             {
@@ -608,7 +608,7 @@ Component({
           this.shoeMaskMatInit = true
         }
 
-        this.shoeMaskTexure.update({buffer: legSegmentBuffer.MaskAddress})
+        this.shoeMaskTexure.update({ buffer: legSegmentBuffer.MaskAddress })
       } else {
         console.error('getLegSegmentBuffer is empty', legSegmentBuffer, legSegmentBuffer.width, legSegmentBuffer.height)
       }
@@ -619,7 +619,7 @@ Component({
 
       if (this.session && this.session.updateMaskMode) {
         // 开启关闭 shoeMask
-        this.session.updateMaskMode({useMask: maskFlag})
+        this.session.updateMaskMode({ useMask: maskFlag })
 
         if (!maskFlag) {
           this.shoeMaskMat.setMacro('WX_USE_SHOEMASK', false)

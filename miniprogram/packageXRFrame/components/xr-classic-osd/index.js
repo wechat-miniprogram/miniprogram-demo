@@ -37,28 +37,28 @@ Component({
         loaded: true
       })
     },
-    handleToySwitch({detail}) {
+    handleToySwitch({ detail }) {
       const active = detail.value
       if (active) {
-        this.setData({toyReady: true})
+        this.setData({ toyReady: true })
       } else {
-        this.setData({toyReady: false})
+        this.setData({ toyReady: false })
       }
     },
-    handleDaySwitch({detail}) {
+    handleDaySwitch({ detail }) {
       const active = detail.value
       if (active) {
-        this.setData({gzDayReady: true})
+        this.setData({ gzDayReady: true })
       } else {
-        this.setData({gzDayReady: false})
+        this.setData({ gzDayReady: false })
       }
     },
-    handleNightSwitch({detail}) {
+    handleNightSwitch({ detail }) {
       const active = detail.value
       if (active) {
-        this.setData({gzNightReady: true})
+        this.setData({ gzNightReady: true })
       } else {
-        this.setData({gzNightReady: false})
+        this.setData({ gzNightReady: false })
       }
     }
   }
