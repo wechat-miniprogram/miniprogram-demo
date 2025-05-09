@@ -1,6 +1,7 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
-var xmlCode = `&lt;xr-scene ar-system=&quot;modes:Plane&quot; id=&quot;xr-scene&quot; bind:ready=&quot;handleReady&quot; bind:arReady=&quot;handleARReady&quot; bind:log=&quot;handleLog&quot;&gt;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
+
+const xmlCode = `&lt;xr-scene ar-system=&quot;modes:Plane&quot; id=&quot;xr-scene&quot; bind:ready=&quot;handleReady&quot; bind:arReady=&quot;handleARReady&quot; bind:log=&quot;handleLog&quot;&gt;
 &lt;xr-assets bind:progress=&quot;handleAssetsProgress&quot; bind:loaded=&quot;handleAssetsLoaded&quot;&gt;
   &lt;xr-asset-load type=&quot;gltf&quot; asset-id=&quot;gltf-item&quot; src=&quot;https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/just_a_girl/scene.gltf&quot; /&gt;
   &lt;xr-asset-material asset-id=&quot;standard-mat&quot; effect=&quot;standard&quot; /&gt;
@@ -26,11 +27,10 @@ var xmlCode = `&lt;xr-scene ar-system=&quot;modes:Plane&quot; id=&quot;xr-scene&
   &lt;xr-light type=&quot;directional&quot; rotation=&quot;180 0 0&quot; color=&quot;1 1 1&quot; intensity=&quot;3&quot; /&gt;
 &lt;/xr-node&gt;
 &lt;/xr-scene&gt;
-`;
+`
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
   }
-});
-
+})

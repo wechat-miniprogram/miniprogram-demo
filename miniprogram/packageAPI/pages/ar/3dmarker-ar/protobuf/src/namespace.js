@@ -1,16 +1,16 @@
-
-module.exports = Namespace;
+module.exports = Namespace
 
 // extends ReflectionObject
-var ReflectionObject = require("./object");
-((Namespace.prototype = Object.create(ReflectionObject.prototype)).constructor = Namespace).className = "Namespace";
+const ReflectionObject = require('./object');
 
-var Enum,
-    Field,
-    util;
+((Namespace.prototype = Object.create(ReflectionObject.prototype)).constructor = Namespace).className = 'Namespace'
 
-var Type;    // cyclic
-var Service;
+let Enum
+let Field
+let util
+
+let Type // cyclic
+let Service
 
 /**
  * Constructs a new namespace instance.
@@ -32,8 +32,8 @@ var Service;
  * @throws {TypeError} If arguments are invalid
  */
 Namespace.fromJSON = function fromJSON(name, json) {
-    return new Namespace(name, json.options).addJSON(json.nested);
-};
+  return new Namespace(name, json.options).addJSON(json.nested)
+}
 
 /**
  * Converts an array of reflection objects to JSON.
@@ -43,15 +43,13 @@ Namespace.fromJSON = function fromJSON(name, json) {
  * @returns {Object.<string,*>|undefined} JSON object or `undefined` when array is empty
  */
 function arrayToJSON(array, toJSONOptions) {
-    if (!(array && array.length))
-        return undefined;
-    var obj = {};
-    for (var i = 0; i < array.length; ++i)
-        obj[array[i].name] = array[i].toJSON(toJSONOptions);
-    return obj;
+  if (!(array && array.length)) return undefined
+  const obj = {}
+  for (let i = 0; i < array.length; ++i) obj[array[i].name] = array[i].toJSON(toJSONOptions)
+  return obj
 }
 
-Namespace.arrayToJSON = arrayToJSON;
+Namespace.arrayToJSON = arrayToJSON
 
 /**
  * Tests if the specified id is reserved.
@@ -60,12 +58,9 @@ Namespace.arrayToJSON = arrayToJSON;
  * @returns {boolean} `true` if reserved, otherwise `false`
  */
 Namespace.isReservedId = function isReservedId(reserved, id) {
-    if (reserved)
-        for (var i = 0; i < reserved.length; ++i)
-            if (typeof reserved[i] !== "string" && reserved[i][0] <= id && reserved[i][1] >= id)
-                return true;
-    return false;
-};
+  if (reserved) for (let i = 0; i < reserved.length; ++i) if (typeof reserved[i] !== 'string' && reserved[i][0] <= id && reserved[i][1] >= id) return true
+  return false
+}
 
 /**
  * Tests if the specified name is reserved.
@@ -74,12 +69,9 @@ Namespace.isReservedId = function isReservedId(reserved, id) {
  * @returns {boolean} `true` if reserved, otherwise `false`
  */
 Namespace.isReservedName = function isReservedName(reserved, name) {
-    if (reserved)
-        for (var i = 0; i < reserved.length; ++i)
-            if (reserved[i] === name)
-                return true;
-    return false;
-};
+  if (reserved) for (let i = 0; i < reserved.length; ++i) if (reserved[i] === name) return true
+  return false
+}
 
 /**
  * Not an actual constructor. Use {@link Namespace} instead.
@@ -93,25 +85,25 @@ Namespace.isReservedName = function isReservedName(reserved, name) {
  * @see {@link Namespace}
  */
 function Namespace(name, options) {
-    ReflectionObject.call(this, name, options);
+  ReflectionObject.call(this, name, options)
 
-    /**
+  /**
      * Nested objects by name.
      * @type {Object.<string,ReflectionObject>|undefined}
      */
-    this.nested = undefined; // toJSON
+  this.nested = undefined // toJSON
 
-    /**
+  /**
      * Cached nested objects as an array.
      * @type {ReflectionObject[]|null}
      * @private
      */
-    this._nestedArray = null;
+  this._nestedArray = null
 }
 
 function clearCache(namespace) {
-    namespace._nestedArray = null;
-    return namespace;
+  namespace._nestedArray = null
+  return namespace
 }
 
 /**
@@ -120,11 +112,11 @@ function clearCache(namespace) {
  * @type {ReflectionObject[]}
  * @readonly
  */
-Object.defineProperty(Namespace.prototype, "nestedArray", {
-    get: function() {
-        return this._nestedArray || (this._nestedArray = util.toArray(this.nested));
-    }
-});
+Object.defineProperty(Namespace.prototype, 'nestedArray', {
+  get() {
+    return this._nestedArray || (this._nestedArray = util.toArray(this.nested))
+  }
+})
 
 /**
  * Namespace descriptor.
@@ -152,11 +144,11 @@ Object.defineProperty(Namespace.prototype, "nestedArray", {
  * @returns {INamespace} Namespace descriptor
  */
 Namespace.prototype.toJSON = function toJSON(toJSONOptions) {
-    return util.toObject([
-        "options" , this.options,
-        "nested"  , arrayToJSON(this.nestedArray, toJSONOptions)
-    ]);
-};
+  return util.toObject([
+    'options', this.options,
+    'nested', arrayToJSON(this.nestedArray, toJSONOptions)
+  ])
+}
 
 /**
  * Adds nested objects to this namespace from nested object descriptors.
@@ -164,26 +156,26 @@ Namespace.prototype.toJSON = function toJSON(toJSONOptions) {
  * @returns {Namespace} `this`
  */
 Namespace.prototype.addJSON = function addJSON(nestedJson) {
-    var ns = this;
-    /* istanbul ignore else */
-    if (nestedJson) {
-        for (var names = Object.keys(nestedJson), i = 0, nested; i < names.length; ++i) {
-            nested = nestedJson[names[i]];
-            ns.add( // most to least likely
-                ( nested.fields !== undefined
-                    ? Type.fromJSON
-                    : nested.values !== undefined
-                    ? Enum.fromJSON
-                    : nested.methods !== undefined
-                    ? Service.fromJSON
-                    : nested.id !== undefined
-                    ? Field.fromJSON
-                    : Namespace.fromJSON )(names[i], nested)
-            );
-        }
+  const ns = this
+  /* istanbul ignore else */
+  if (nestedJson) {
+    for (var names = Object.keys(nestedJson), i = 0, nested; i < names.length; ++i) {
+      nested = nestedJson[names[i]]
+      ns.add( // most to least likely
+        (nested.fields !== undefined
+          ? Type.fromJSON
+          : nested.values !== undefined
+            ? Enum.fromJSON
+            : nested.methods !== undefined
+              ? Service.fromJSON
+              : nested.id !== undefined
+                ? Field.fromJSON
+                : Namespace.fromJSON)(names[i], nested)
+      )
     }
-    return this;
-};
+  }
+  return this
+}
 
 /**
  * Gets the nested object of the specified name.
@@ -191,9 +183,9 @@ Namespace.prototype.addJSON = function addJSON(nestedJson) {
  * @returns {ReflectionObject|null} The reflection object or `null` if it doesn't exist
  */
 Namespace.prototype.get = function get(name) {
-    return this.nested && this.nested[name]
-        || null;
-};
+  return this.nested && this.nested[name] ||
+        null
+}
 
 /**
  * Gets the values of the nested {@link Enum|enum} of the specified name.
@@ -203,10 +195,9 @@ Namespace.prototype.get = function get(name) {
  * @throws {Error} If there is no such enum
  */
 Namespace.prototype.getEnum = function getEnum(name) {
-    if (this.nested && this.nested[name] instanceof Enum)
-        return this.nested[name].values;
-    throw Error("no such enum: " + name);
-};
+  if (this.nested && this.nested[name] instanceof Enum) return this.nested[name].values
+  throw Error('no such enum: ' + name)
+}
 
 /**
  * Adds a nested object to this namespace.
@@ -216,33 +207,26 @@ Namespace.prototype.getEnum = function getEnum(name) {
  * @throws {Error} If there is already a nested object with this name
  */
 Namespace.prototype.add = function add(object) {
+  if (!(object instanceof Field && object.extend !== undefined || object instanceof Type || object instanceof Enum || object instanceof Service || object instanceof Namespace)) throw TypeError('object must be a valid nested object')
 
-    if (!(object instanceof Field && object.extend !== undefined || object instanceof Type || object instanceof Enum || object instanceof Service || object instanceof Namespace))
-        throw TypeError("object must be a valid nested object");
-
-    if (!this.nested)
-        this.nested = {};
-    else {
-        var prev = this.get(object.name);
-        if (prev) {
-            if (prev instanceof Namespace && object instanceof Namespace && !(prev instanceof Type || prev instanceof Service)) {
-                // replace plain namespace but keep existing nested elements and options
-                var nested = prev.nestedArray;
-                for (var i = 0; i < nested.length; ++i)
-                    object.add(nested[i]);
-                this.remove(prev);
-                if (!this.nested)
-                    this.nested = {};
-                object.setOptions(prev.options, true);
-
-            } else
-                throw Error("duplicate name '" + object.name + "' in " + this);
-        }
+  if (!this.nested) this.nested = {}
+  else {
+    const prev = this.get(object.name)
+    if (prev) {
+      if (prev instanceof Namespace && object instanceof Namespace && !(prev instanceof Type || prev instanceof Service)) {
+        // replace plain namespace but keep existing nested elements and options
+        const nested = prev.nestedArray
+        for (let i = 0; i < nested.length; ++i) object.add(nested[i])
+        this.remove(prev)
+        if (!this.nested) this.nested = {}
+        object.setOptions(prev.options, true)
+      } else throw Error("duplicate name '" + object.name + "' in " + this)
     }
-    this.nested[object.name] = object;
-    object.onAdd(this);
-    return clearCache(this);
-};
+  }
+  this.nested[object.name] = object
+  object.onAdd(this)
+  return clearCache(this)
+}
 
 /**
  * Removes a nested object from this namespace.
@@ -252,19 +236,15 @@ Namespace.prototype.add = function add(object) {
  * @throws {Error} If `object` is not a member of this namespace
  */
 Namespace.prototype.remove = function remove(object) {
+  if (!(object instanceof ReflectionObject)) throw TypeError('object must be a ReflectionObject')
+  if (object.parent !== this) throw Error(object + ' is not a member of ' + this)
 
-    if (!(object instanceof ReflectionObject))
-        throw TypeError("object must be a ReflectionObject");
-    if (object.parent !== this)
-        throw Error(object + " is not a member of " + this);
+  delete this.nested[object.name]
+  if (!Object.keys(this.nested).length) this.nested = undefined
 
-    delete this.nested[object.name];
-    if (!Object.keys(this.nested).length)
-        this.nested = undefined;
-
-    object.onRemove(this);
-    return clearCache(this);
-};
+  object.onRemove(this)
+  return clearCache(this)
+}
 
 /**
  * Defines additial namespaces within this one if not yet existing.
@@ -273,42 +253,35 @@ Namespace.prototype.remove = function remove(object) {
  * @returns {Namespace} Pointer to the last namespace created or `this` if path is empty
  */
 Namespace.prototype.define = function define(path, json) {
+  if (util.isString(path)) path = path.split('.')
+  else if (!Array.isArray(path)) throw TypeError('illegal path')
+  if (path && path.length && path[0] === '') throw Error('path must be relative')
 
-    if (util.isString(path))
-        path = path.split(".");
-    else if (!Array.isArray(path))
-        throw TypeError("illegal path");
-    if (path && path.length && path[0] === "")
-        throw Error("path must be relative");
-
-    var ptr = this;
-    while (path.length > 0) {
-        var part = path.shift();
-        if (ptr.nested && ptr.nested[part]) {
-            ptr = ptr.nested[part];
-            if (!(ptr instanceof Namespace))
-                throw Error("path conflicts with non-namespace objects");
-        } else
-            ptr.add(ptr = new Namespace(part));
-    }
-    if (json)
-        ptr.addJSON(json);
-    return ptr;
-};
+  let ptr = this
+  while (path.length > 0) {
+    const part = path.shift()
+    if (ptr.nested && ptr.nested[part]) {
+      ptr = ptr.nested[part]
+      if (!(ptr instanceof Namespace)) throw Error('path conflicts with non-namespace objects')
+    } else ptr.add(ptr = new Namespace(part))
+  }
+  if (json) ptr.addJSON(json)
+  return ptr
+}
 
 /**
  * Resolves this namespace's and all its nested objects' type references. Useful to validate a reflection tree, but comes at a cost.
  * @returns {Namespace} `this`
  */
 Namespace.prototype.resolveAll = function resolveAll() {
-    var nested = this.nestedArray, i = 0;
-    while (i < nested.length)
-        if (nested[i] instanceof Namespace)
-            nested[i++].resolveAll();
-        else
-            nested[i++].resolve();
-    return this.resolve();
-};
+  const nested = this.nestedArray; let
+    i = 0
+  while (i < nested.length) {
+    if (nested[i] instanceof Namespace) nested[i++].resolveAll()
+    else nested[i++].resolve()
+  }
+  return this.resolve()
+}
 
 /**
  * Recursively looks up the reflection object matching the specified path in the scope of this namespace.
@@ -318,45 +291,34 @@ Namespace.prototype.resolveAll = function resolveAll() {
  * @returns {ReflectionObject|null} Looked up object or `null` if none could be found
  */
 Namespace.prototype.lookup = function lookup(path, filterTypes, parentAlreadyChecked) {
+  /* istanbul ignore next */
+  if (typeof filterTypes === 'boolean') {
+    parentAlreadyChecked = filterTypes
+    filterTypes = undefined
+  } else if (filterTypes && !Array.isArray(filterTypes)) filterTypes = [filterTypes]
 
-    /* istanbul ignore next */
-    if (typeof filterTypes === "boolean") {
-        parentAlreadyChecked = filterTypes;
-        filterTypes = undefined;
-    } else if (filterTypes && !Array.isArray(filterTypes))
-        filterTypes = [ filterTypes ];
+  if (util.isString(path) && path.length) {
+    if (path === '.') return this.root
+    path = path.split('.')
+  } else if (!path.length) return this
 
-    if (util.isString(path) && path.length) {
-        if (path === ".")
-            return this.root;
-        path = path.split(".");
-    } else if (!path.length)
-        return this;
+  // Start at root if path is absolute
+  if (path[0] === '') return this.root.lookup(path.slice(1), filterTypes)
 
-    // Start at root if path is absolute
-    if (path[0] === "")
-        return this.root.lookup(path.slice(1), filterTypes);
+  // Test if the first part matches any nested object, and if so, traverse if path contains more
+  let found = this.get(path[0])
+  if (found) {
+    if (path.length === 1) {
+      if (!filterTypes || filterTypes.indexOf(found.constructor) > -1) return found
+    } else if (found instanceof Namespace && (found = found.lookup(path.slice(1), filterTypes, true))) return found
 
-    // Test if the first part matches any nested object, and if so, traverse if path contains more
-    var found = this.get(path[0]);
-    if (found) {
-        if (path.length === 1) {
-            if (!filterTypes || filterTypes.indexOf(found.constructor) > -1)
-                return found;
-        } else if (found instanceof Namespace && (found = found.lookup(path.slice(1), filterTypes, true)))
-            return found;
+    // Otherwise try each nested namespace
+  } else for (let i = 0; i < this.nestedArray.length; ++i) if (this._nestedArray[i] instanceof Namespace && (found = this._nestedArray[i].lookup(path, filterTypes, true))) return found
 
-        // Otherwise try each nested namespace
-    } else
-        for (var i = 0; i < this.nestedArray.length; ++i)
-            if (this._nestedArray[i] instanceof Namespace && (found = this._nestedArray[i].lookup(path, filterTypes, true)))
-                return found;
-
-    // If there hasn't been a match, try again at the parent
-    if (this.parent === null || parentAlreadyChecked)
-        return null;
-    return this.parent.lookup(path, filterTypes);
-};
+  // If there hasn't been a match, try again at the parent
+  if (this.parent === null || parentAlreadyChecked) return null
+  return this.parent.lookup(path, filterTypes)
+}
 
 /**
  * Looks up the reflection object at the specified path, relative to this namespace.
@@ -377,11 +339,10 @@ Namespace.prototype.lookup = function lookup(path, filterTypes, parentAlreadyChe
  * @throws {Error} If `path` does not point to a type
  */
 Namespace.prototype.lookupType = function lookupType(path) {
-    var found = this.lookup(path, [ Type ]);
-    if (!found)
-        throw Error("no such type: " + path);
-    return found;
-};
+  const found = this.lookup(path, [Type])
+  if (!found) throw Error('no such type: ' + path)
+  return found
+}
 
 /**
  * Looks up the values of the {@link Enum|enum} at the specified path, relative to this namespace.
@@ -391,11 +352,10 @@ Namespace.prototype.lookupType = function lookupType(path) {
  * @throws {Error} If `path` does not point to an enum
  */
 Namespace.prototype.lookupEnum = function lookupEnum(path) {
-    var found = this.lookup(path, [ Enum ]);
-    if (!found)
-        throw Error("no such Enum '" + path + "' in " + this);
-    return found;
-};
+  const found = this.lookup(path, [Enum])
+  if (!found) throw Error("no such Enum '" + path + "' in " + this)
+  return found
+}
 
 /**
  * Looks up the {@link Type|type} or {@link Enum|enum} at the specified path, relative to this namespace.
@@ -405,11 +365,10 @@ Namespace.prototype.lookupEnum = function lookupEnum(path) {
  * @throws {Error} If `path` does not point to a type or enum
  */
 Namespace.prototype.lookupTypeOrEnum = function lookupTypeOrEnum(path) {
-    var found = this.lookup(path, [ Type, Enum ]);
-    if (!found)
-        throw Error("no such Type or Enum '" + path + "' in " + this);
-    return found;
-};
+  const found = this.lookup(path, [Type, Enum])
+  if (!found) throw Error("no such Type or Enum '" + path + "' in " + this)
+  return found
+}
 
 /**
  * Looks up the {@link Service|service} at the specified path, relative to this namespace.
@@ -419,17 +378,16 @@ Namespace.prototype.lookupTypeOrEnum = function lookupTypeOrEnum(path) {
  * @throws {Error} If `path` does not point to a service
  */
 Namespace.prototype.lookupService = function lookupService(path) {
-    var found = this.lookup(path, [ Service ]);
-    if (!found)
-        throw Error("no such Service '" + path + "' in " + this);
-    return found;
-};
+  const found = this.lookup(path, [Service])
+  if (!found) throw Error("no such Service '" + path + "' in " + this)
+  return found
+}
 
-Namespace._configure = function() {
-    Enum     = require("./enum");
-    Field    = require("./field");
-    util     = require("./util");
+Namespace._configure = function () {
+  Enum = require('./enum')
+  Field = require('./field')
+  util = require('./util')
 
-    Type     = require("./type");    // cyclic
-    Service  = require("./service");
-};
+  Type = require('./type') // cyclic
+  Service = require('./service')
+}

@@ -25,12 +25,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     const tabs = [
@@ -65,6 +65,6 @@ Page({
         desc: '微信小程序应用开发赛',
       },
     ]
-    this.setData({tabs})
+    this.setData({ tabs })
   }
 })

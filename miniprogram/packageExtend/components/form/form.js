@@ -15,7 +15,7 @@ module.exports =
         /** *** */ i: moduleId,
         /** *** */ l: false,
         /** *** */ exports: {}
-        /** *** */}
+        /** *** */ }
       /** *** */
       /** *** */ // Execute the module function
       /** *** */ modules[moduleId].call(module.exports, module, module.exports, __webpack_require__)
@@ -37,16 +37,16 @@ module.exports =
     /** *** */ // define getter function for harmony exports
     /** *** */ __webpack_require__.d = function (exports, name, getter) {
       /** *** */ if (!__webpack_require__.o(exports, name)) {
-        /** *** */ Object.defineProperty(exports, name, {enumerable: true, get: getter})
+        /** *** */ Object.defineProperty(exports, name, { enumerable: true, get: getter })
         /** *** */ }
       /** *** */ }
     /** *** */
     /** *** */ // define __esModule on exports
     /** *** */ __webpack_require__.r = function (exports) {
       /** *** */ if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-        /** *** */ Object.defineProperty(exports, Symbol.toStringTag, {value: 'Module'})
+        /** *** */ Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' })
         /** *** */ }
-      /** *** */ Object.defineProperty(exports, '__esModule', {value: true})
+      /** *** */ Object.defineProperty(exports, '__esModule', { value: true })
       /** *** */ }
     /** *** */
     /** *** */ // create a fake namespace object
@@ -60,7 +60,7 @@ module.exports =
       /** *** */ if ((mode & 4) && typeof value === 'object' && value && value.__esModule) return value
       /** *** */ const ns = Object.create(null)
       /** *** */ __webpack_require__.r(ns)
-      /** *** */ Object.defineProperty(ns, 'default', {enumerable: true, value})
+      /** *** */ Object.defineProperty(ns, 'default', { enumerable: true, value })
       /** *** */ if (mode & 2 && typeof value !== 'string') for (const key in value) __webpack_require__.d(ns, key, function (key) { return value[key] }.bind(null, key))
       /** *** */ return ns
       /** *** */ }
@@ -86,7 +86,7 @@ module.exports =
     /** *** */ }([
     /* 0 */
     /***/ (function (module, exports, __webpack_require__) {
-      Object.defineProperty(exports, '__esModule', {value: true})
+      Object.defineProperty(exports, '__esModule', { value: true })
       exports.diff = function (old, newVal) {
         if (!old && newVal || old && !newVal) return true
         for (const k in newVal) {
@@ -122,7 +122,7 @@ module.exports =
     /* 3 */,
     /* 4 */
     /***/ (function (module, exports, __webpack_require__) {
-      Object.defineProperty(exports, '__esModule', {value: true})
+      Object.defineProperty(exports, '__esModule', { value: true })
       const form_validator_1 = __webpack_require__(5)
       const object_1 = __webpack_require__(0)
       function linked(target) {
@@ -189,7 +189,7 @@ module.exports =
                 newRules[rule.name] = rule.rules || []
               }
             })
-            this.setData({newRules})
+            this.setData({ newRules })
             return newRules
           },
           _modelChange: function _modelChange(newVal, oldVal, path) {
@@ -222,7 +222,7 @@ module.exports =
                   _loop(k)
                 }
                 _this._showErrors(diffObj, errorMap)
-                _this.triggerEvent(isValid ? 'success' : 'fail', isValid ? {trigger: 'change'} : {errors, trigger: 'change'})
+                _this.triggerEvent(isValid ? 'success' : 'fail', isValid ? { trigger: 'change' } : { errors, trigger: 'change' })
               }())
             }
             return newVal
@@ -256,7 +256,7 @@ module.exports =
             return this.formValidator.validate(function (isValid, errors) {
               _this2._showAllErrors(errors)
               const handleError = _this2.handleErrors(errors)
-              _this2.triggerEvent(isValid ? 'success' : 'fail', isValid ? {trigger: 'validate'} : {errors: handleError, trigger: 'validate'})
+              _this2.triggerEvent(isValid ? 'success' : 'fail', isValid ? { trigger: 'validate' } : { errors: handleError, trigger: 'validate' })
               cb && cb(isValid, handleError)
             })
           },
@@ -270,7 +270,7 @@ module.exports =
             return this.formValidator.validateField(name, value, function (isValid, errors) {
               _this3._showError(name, errors)
               const handleError = _this3.handleErrors(errors)
-              _this3.triggerEvent(isValid ? 'success' : 'fail', isValid ? {trigger: 'validate'} : {errors: handleError, trigger: 'validate'})
+              _this3.triggerEvent(isValid ? 'success' : 'fail', isValid ? { trigger: 'validate' } : { errors: handleError, trigger: 'validate' })
               cb && cb(isValid, handleError)
             })
           },
@@ -298,7 +298,7 @@ module.exports =
     /***/ (function (module, exports, __webpack_require__) {
       function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function') } }
 
-      Object.defineProperty(exports, '__esModule', {value: true})
+      Object.defineProperty(exports, '__esModule', { value: true })
       const validator_1 = __webpack_require__(6)
       const object_1 = __webpack_require__(0)
       const toString = Object.prototype.toString
@@ -361,7 +361,7 @@ module.exports =
             keys.forEach(function (key) {
               if (!errors[key]) delete errors[key]
             })
-            resolve({isValid: !failCount, errors: failCount ? errors : undefined})
+            resolve({ isValid: !failCount, errors: failCount ? errors : undefined })
             cb && cb(!failCount, failCount ? errors : undefined)
           })
         }
@@ -377,7 +377,7 @@ module.exports =
             _this2._innerValidateField(name, value, function (valid, error) {
               const errObj = {}
               errObj[name] = error
-              resolve({valid, error: valid ? undefined : error})
+              resolve({ valid, error: valid ? undefined : error })
               cb(valid, valid ? undefined : errObj)
               const oldError = _this2.errors[name]
               const errorChanged = object_1.diff(oldError, error)
@@ -412,7 +412,7 @@ module.exports =
               const resMessage = validateSingleRule(rule, value || models[name], rule.param, models)
               if (resMessage && !isFail) {
                 isFail = true
-                const error = resMessage ? {message: resMessage, rule} : undefined
+                const error = resMessage ? { message: resMessage, rule } : undefined
                 cb(false, error)
               }
             })
@@ -423,7 +423,7 @@ module.exports =
             const rule = rules
             rule.name = name
             const resMessage = validateSingleRule(rule, value || models[name], rule.param, models)
-            const error = resMessage ? {message: resMessage, rule} : undefined
+            const error = resMessage ? { message: resMessage, rule } : undefined
             if (resMessage) {
               isFail = true
             }
@@ -450,7 +450,7 @@ module.exports =
       /***/ }),
     /* 6 */
     /***/ (function (module, exports, __webpack_require__) {
-      Object.defineProperty(exports, '__esModule', {value: true})
+      Object.defineProperty(exports, '__esModule', { value: true })
       const string_1 = __webpack_require__(7)
       const defaultMessage = {
         required: '%s必填',
@@ -528,7 +528,7 @@ module.exports =
       /***/ }),
     /* 7 */
     /***/ (function (module, exports, __webpack_require__) {
-      Object.defineProperty(exports, '__esModule', {value: true})
+      Object.defineProperty(exports, '__esModule', { value: true })
       exports.sprintf = function () {
         for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
           args[_key] = arguments[_key]

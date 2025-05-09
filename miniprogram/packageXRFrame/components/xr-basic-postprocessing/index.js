@@ -2,53 +2,53 @@ const blurData = {
   cullMask: 0b101,
   aIntensity: 1,
   dIntensity: 2,
-  env: "",
-  background: "default",
+  env: '',
+  background: 'default',
   cameraPosition: 1.3,
-  clearColor: "0 0 0 1",
-  cameraTarget: "camera-target",
+  clearColor: '0 0 0 1',
+  cameraTarget: 'camera-target',
 
-  pp: "blur",
+  pp: 'blur',
   // blurRadius: 0
-};
+}
 
 const bloomData = {
   cullMask: 0b11,
   aIntensity: 0,
   dIntensity: 0,
-  env: "",
-  background: "default",
+  env: '',
+  background: 'default',
   cameraPosition: 10,
-  clearColor: "0 0 0 1",
-  cameraTarget: "camera-target",
+  clearColor: '0 0 0 1',
+  cameraTarget: 'camera-target',
 
-  pp: "bloom2",
+  pp: 'bloom2',
   // bloomRadius_0: 0,
   // bloomRadius_1: 0
-};
+}
 
 const fxaaData = {
   cullMask: 0b1001,
   aIntensity: 1,
   dIntensity: 3,
-  env: "",
-  background: "default",
+  env: '',
+  background: 'default',
   cameraPosition: 1,
-  clearColor: "0.925 0.925 0.925 1",
-  cameraTarget: "mesh-sphere"
-};
+  clearColor: '0.925 0.925 0.925 1',
+  cameraTarget: 'mesh-sphere'
+}
 
 const vignetteData = {
   cullMask: 0b101,
   aIntensity: 1,
   dIntensity: 2,
-  env: "",
-  background: "default",
+  env: '',
+  background: 'default',
   cameraPosition: 1.3,
-  clearColor: "0 0 0 1",
-  cameraTarget: "camera-target",
-  pp: "vignette",
-};
+  clearColor: '0 0 0 1',
+  cameraTarget: 'camera-target',
+  pp: 'vignette',
+}
 
 Component({
   behaviors: [require('../common/share-behavior').default],
@@ -56,16 +56,16 @@ Component({
     type: {
       type: Number,
       value: 0,
-      observer: function (newVal, oldVal) {
+      observer(newVal, oldVal) {
         if (newVal !== oldVal) {
           if (newVal === 0) {
-            this.activeBlur();
+            this.activeBlur()
           } else if (newVal === 1) {
-            this.activeBloom();
+            this.activeBloom()
           } else if (newVal === 2) {
-            this.activeVignette();
+            this.activeVignette()
           } else if (newVal === 3) {
-            this.activeFXAA();
+            this.activeFXAA()
           }
         }
       }
@@ -81,7 +81,7 @@ Component({
         this.setData({
           bloomRadius_0: newVal * 0.2,
           bloomRadius_1: newVal * 0.8
-        });
+        })
       }
     },
     bloomIntensity: {
@@ -110,29 +110,29 @@ Component({
       observer(newVal, oldVal) {
         this.setData({
           fxaaEnabled: newVal
-        });
+        })
         if (this.data.type === 3) {
-          this.activeFXAA();
+          this.activeFXAA()
         }
       }
     }
   },
   data: {
     loaded: false,
-    env: "",
+    env: '',
     cullMask: 0,
-    background: "default",
+    background: 'default',
     aIntensity: 0,
     dIntensity: 0,
-    pp: "",
+    pp: '',
     cameraPosition: 1,
-    cameraTarget: "camera-target",
+    cameraTarget: 'camera-target',
 
-    //---bloom---
+    // ---bloom---
     bloomRadius_0: 0,
     bloomRadius_1: 1,
 
-    //---fxaa---
+    // ---fxaa---
     fxaaEnabled: false
   },
   lifetimes: {
@@ -141,12 +141,12 @@ Component({
     }
   },
   methods: {
-    handleReady: function({detail}) {
-      this.scene = detail.value;
-      console.log('scene', detail.value);
-      this.activeBlur();
+    handleReady({ detail }) {
+      this.scene = detail.value
+      console.log('scene', detail.value)
+      this.activeBlur()
     },
-    handleTick: function() {
+    handleTick() {
       // const camera = this.scene.getNodeById("camera");
       // const transform = camera.el._components.transform;
       // if (transform.rotation.y > Math.PI * 0.25) {
@@ -155,27 +155,27 @@ Component({
       //   transform.rotation.y = -Math.PI * 0.25;
       // }
     },
-    handleAssetsProgress: function({detail}) {
-      this.triggerEvent('assetsProgress', detail.value);
+    handleAssetsProgress({ detail }) {
+      this.triggerEvent('assetsProgress', detail.value)
     },
-    handleAssetsLoaded: function({detail}) {
-      this.triggerEvent('assetsLoaded', detail.value);
-      this.setData({loaded: true});
+    handleAssetsLoaded({ detail }) {
+      this.triggerEvent('assetsLoaded', detail.value)
+      this.setData({ loaded: true })
     },
     activeBlur() {
-      this.setData(blurData);
+      this.setData(blurData)
     },
     activeBloom() {
-      this.setData(bloomData);
+      this.setData(bloomData)
     },
     activeVignette() {
-      this.setData(vignetteData);
+      this.setData(vignetteData)
     },
     activeFXAA() {
-      this.setData(fxaaData);
+      this.setData(fxaaData)
       this.setData({
-        pp: this.data.fxaaEnabled ? "fxaa" : ""
-      });
+        pp: this.data.fxaaEnabled ? 'fxaa' : ''
+      })
     }
   }
 })

@@ -85,13 +85,13 @@ Component({
       const _wx$getSystemInfoSync = wx.getSystemInfoSync(); const
         windowHeight = _wx$getSystemInfoSync.windowHeight
 
-      this.setData({windowHeight})
+      this.setData({ windowHeight })
     },
   },
   methods: {
     choose(e) {
       const item = e.target.dataset.item
-      this.triggerEvent('choose', {item})
+      this.triggerEvent('choose', { item })
     },
     scrollTo(e) {
       this.__scrollTo(e)
@@ -101,7 +101,7 @@ Component({
       const clientY = e.changedTouches[0].clientY
       const index = Math.floor((clientY - data._anchorTop) / data._anchorItemH)
       const current = data.alphabet[index]
-      this.setData({current, intoView: current, touching: true})
+      this.setData({ current, intoView: current, touching: true })
       if (data.vibrated) wx.vibrateShort()
     },
     computedSize() {
@@ -126,7 +126,7 @@ Component({
       const _this2 = this
 
       setTimeout(function () {
-        _this2.setData({touching: false})
+        _this2.setData({ touching: false })
       }, 150)
     },
     onScroll: function onScroll(e) {
@@ -149,7 +149,7 @@ Component({
         }
       }
       if (!current) current = alphabet[alphabet.length - 1]
-      this.setData({current})
+      this.setData({ current })
     }
   }
 })

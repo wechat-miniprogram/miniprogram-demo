@@ -21,4 +21,4 @@ export const IPointerEvent = {
   tilt: 'number',
   force: 'number',
   timeStamp: 'number',
-};
+}

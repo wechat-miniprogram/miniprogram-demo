@@ -1,7 +1,6 @@
 // demo-1/index.js
 import { generateList } from '../../../../../util/util'
 
-
 Page({
 
   /**

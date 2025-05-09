@@ -36,7 +36,7 @@ export function getGroupEnterInfo() {
         reject(res)
       },
       complete(res) {
-        console.info('getGroupEnterInfo complete: ',res)
+        console.info('getGroupEnterInfo complete: ', res)
       }
     })
   })

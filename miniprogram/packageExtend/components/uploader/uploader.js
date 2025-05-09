@@ -15,7 +15,7 @@ module.exports =
         /** *** */ i: moduleId,
         /** *** */ l: false,
         /** *** */ exports: {}
-        /** *** */}
+        /** *** */ }
       /** *** */
       /** *** */ // Execute the module function
       /** *** */ modules[moduleId].call(module.exports, module, module.exports, __webpack_require__)
@@ -37,16 +37,16 @@ module.exports =
     /** *** */ // define getter function for harmony exports
     /** *** */ __webpack_require__.d = function (exports, name, getter) {
       /** *** */ if (!__webpack_require__.o(exports, name)) {
-        /** *** */ Object.defineProperty(exports, name, {enumerable: true, get: getter})
+        /** *** */ Object.defineProperty(exports, name, { enumerable: true, get: getter })
         /** *** */ }
       /** *** */ }
     /** *** */
     /** *** */ // define __esModule on exports
     /** *** */ __webpack_require__.r = function (exports) {
       /** *** */ if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-        /** *** */ Object.defineProperty(exports, Symbol.toStringTag, {value: 'Module'})
+        /** *** */ Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' })
         /** *** */ }
-      /** *** */ Object.defineProperty(exports, '__esModule', {value: true})
+      /** *** */ Object.defineProperty(exports, '__esModule', { value: true })
       /** *** */ }
     /** *** */
     /** *** */ // create a fake namespace object
@@ -60,7 +60,7 @@ module.exports =
       /** *** */ if ((mode & 4) && typeof value === 'object' && value && value.__esModule) return value
       /** *** */ const ns = Object.create(null)
       /** *** */ __webpack_require__.r(ns)
-      /** *** */ Object.defineProperty(ns, 'default', {enumerable: true, value})
+      /** *** */ Object.defineProperty(ns, 'default', { enumerable: true, value })
       /** *** */ if (mode & 2 && typeof value !== 'string') for (const key in value) __webpack_require__.d(ns, key, function (key) { return value[key] }.bind(null, key))
       /** *** */ return ns
       /** *** */ }
@@ -193,16 +193,16 @@ module.exports =
                   const fileContent = mgr.readFileSync(item)
                   return fileContent
                 })
-                const obj = {tempFilePaths: res.tempFilePaths, tempFiles: res.tempFiles, contents}
+                const obj = { tempFilePaths: res.tempFilePaths, tempFiles: res.tempFiles, contents }
                 _this.triggerEvent('select', obj, {})
                 const files = res.tempFilePaths.map(function (item, i) {
-                  return {loading: true, url: 'data:image/jpg;base64,' + wx.arrayBufferToBase64(contents[i])}
+                  return { loading: true, url: 'data:image/jpg;base64,' + wx.arrayBufferToBase64(contents[i]) }
                 })
                 if (!files || !files.length) return
                 if (typeof _this.data.upload === 'function') {
                   const len = _this.data.files.length
                   const newFiles = _this.data.files.concat(files)
-                  _this.setData({files: newFiles, currentFiles: newFiles})
+                  _this.setData({ files: newFiles, currentFiles: newFiles })
                   _this.loading = true
                   _this.data.upload(obj).then(function (json) {
                     _this.loading = false
@@ -212,10 +212,10 @@ module.exports =
                         oldFiles[len + index].url = url
                         oldFiles[len + index].loading = false
                       })
-                      _this.setData({files: oldFiles, currentFiles: newFiles})
+                      _this.setData({ files: oldFiles, currentFiles: newFiles })
                       _this.triggerEvent('success', json, {})
                     } else {
-                      _this.triggerEvent('fail', {type: 3, errMsg: 'upload file fail, urls not found'}, {})
+                      _this.triggerEvent('fail', { type: 3, errMsg: 'upload file fail, urls not found' }, {})
                     }
                   }).catch(function (err) {
                     _this.loading = false
@@ -224,8 +224,8 @@ module.exports =
                       oldFiles[len + index].error = true
                       oldFiles[len + index].loading = false
                     })
-                    _this.setData({files: oldFiles, currentFiles: newFiles})
-                    _this.triggerEvent('fail', {type: 3, errMsg: 'upload file fail', error: err}, {})
+                    _this.setData({ files: oldFiles, currentFiles: newFiles })
+                    _this.triggerEvent('fail', { type: 3, errMsg: 'upload file fail', error: err }, {})
                   })
                 }
               },
@@ -247,10 +247,10 @@ module.exports =
               files,
               currentFiles: files
             })
-            this.triggerEvent('delete', {index, item: file[0]})
+            this.triggerEvent('delete', { index, item: file[0] })
           }
         }
       })
       /***/ })
 
-    /** *** */}))
+    /** *** */ }))

@@ -59,14 +59,14 @@ Component({
     releaseAll() {
       // 释放资源
       for (let i = 0, len = markerList.length; i < len; i++) {
-        const markerInfo = markerList[i];
-        let meshPlayer = this.meshPlayObj[markerInfo.name].meshPlayer
+        const markerInfo = markerList[i]
+        const meshPlayer = this.meshPlayObj[markerInfo.name].meshPlayer
         meshPlayer && meshPlayer.release('all')
       }
     },
 
     handleArError(e) {
-      console.log(e.detail);
+      console.log(e.detail)
       let errormsg = '当前设备不支持AR'
       if (String(e.detail.value).indexOf('2003002') > -1) {
         errormsg = '未开启小程序相机权限，打开右上角“设置”选项，开启小程序相机权限'
@@ -81,15 +81,15 @@ Component({
     handleReady({
       detail
     }) {
-      this.scene = detail.value;
+      this.scene = detail.value
       this.camera = this.scene.getElementById('camera')
 
       // 绑定tick事件
-      this.scene.event.add('tick', this.handleTick.bind(this));
+      this.scene.event.add('tick', this.handleTick.bind(this))
 
       this.meshPlayObj = {}
       for (let i = 0, len = this.data.markerList.length; i < len; i++) {
-        const markerInfo = this.data.markerList[i];
+        const markerInfo = this.data.markerList[i]
         this.meshPlayObj[markerInfo.name] = {
           meshPlayer: new mesh4DPlayer({
             scene: this.scene,
@@ -98,17 +98,17 @@ Component({
             preStart: true,
             loop: true,
             mountedComplete: () => {
-              this.camera.addChild(this.meshPlayer.manElem);
+              this.camera.addChild(this.meshPlayer.manElem)
             }
           })
         }
       }
-      
+
       this.meshPlayer = this.meshPlayObj[this.data.markerList[0].name].meshPlayer
 
       setTimeout(() => {
-      this.play()
-      }, 2000);
+        this.play()
+      }, 2000)
     },
 
     play() {
@@ -130,31 +130,31 @@ Component({
     },
 
     handleTick(delta) {
-      //更新体积视频
+      // 更新体积视频
       if (this.meshPlayer) {
-        this.meshPlayer.update();
+        this.meshPlayer.update()
       }
     },
 
-    handleAssetsProgress: function ({
+    handleAssetsProgress({
       detail
     }) {
-      console.log('assets progress', detail.value);
+      console.log('assets progress', detail.value)
     },
 
-    handleAssetsLoaded: function ({
+    handleAssetsLoaded({
       detail
     }) {
-      console.log('assets loaded', detail.value);
+      console.log('assets loaded', detail.value)
       this.setData({
         loaded: true
-      });
+      })
     },
 
-    handleARReady: function ({
+    handleARReady({
       detail
     }) {
-      console.log('arReady');
+      console.log('arReady')
       this.setData({
         arReady: true
       })

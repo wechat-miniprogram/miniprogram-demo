@@ -1,7 +1,7 @@
-const xrFrameSystem = wx.getXrFrameSystem();
+const xrFrameSystem = wx.getXrFrameSystem()
 
 xrFrameSystem.registerEffect('plane-shadow', scene => scene.createEffect({
-  name: "plane-shadow",
+  name: 'plane-shadow',
   properties: [
     // 需保证，至少存在一个properties用于创建effect共享内存
     {
@@ -13,17 +13,17 @@ xrFrameSystem.registerEffect('plane-shadow', scene => scene.createEffect({
   images: [],
   defaultRenderQueue: 3000,
   passes: [{
-    "renderStates": {
+    renderStates: {
       cullOn: false,
       blendOn: true,
     },
-    lightMode: "ForwardBase",
+    lightMode: 'ForwardBase',
     useMaterialRenderStates: true,
     shaders: [0, 1]
   }],
   shaders: [
-// Vertex
-`#version 100
+    // Vertex
+    `#version 100
 uniform highp mat4 u_view;
 uniform highp mat4 u_viewInverse;
 uniform highp mat4 u_vp;
@@ -44,8 +44,8 @@ void main()
   #endif
   gl_Position = u_projection * u_view * worldPosition;
 }`,
-// Fragemenet
-`#version 100
+    // Fragemenet
+    `#version 100
 precision mediump float;
 precision highp int;
 varying highp vec2 v_UV;
@@ -104,4 +104,4 @@ void main()
   gl_FragData[0] = result; 
 }
 `],
-}));
+}))

@@ -15,27 +15,27 @@ Component({
     frameHeight: 0,
   },
   lifetimes: {
-      /**
+    /**
       * 生命周期函数--监听页面加载
       */
-      detached() {
-      console.log("页面detached")
+    detached() {
+      console.log('页面detached')
       if (wx.offThemeChange) {
         wx.offThemeChange()
       }
-      },
-      ready() {
-      console.log("页面准备完全")
-        this.setData({
-          theme: wx.getSystemInfoSync().theme || 'light'
-        })
+    },
+    ready() {
+      console.log('页面准备完全')
+      this.setData({
+        theme: getApp().globalData.theme || 'light'
+      })
 
-        if (wx.onThemeChange) {
-          wx.onThemeChange(({theme}) => {
-            this.setData({theme})
-          })
-        }
-      },
+      if (wx.onThemeChange) {
+        wx.onThemeChange(({ theme }) => {
+          this.setData({ theme })
+        })
+      }
+    },
   },
   methods: {
     init() {
@@ -95,14 +95,13 @@ Component({
               } = res
               console.log('getImageInfo res', res)
               this.setData({
-                imgUrl: imgUrl,
+                imgUrl,
               })
             },
             fail: res => {
               console.error(res)
             }
           })
-
         },
         fail: res => {
           console.error(res)
@@ -160,17 +159,15 @@ Component({
         console.log('[addMarker] --> ', filePath)
         this.markerId = this.session.addOSDMarker(filePath)
         this.setData({
-          "filePathNow": filePath
+          filePathNow: filePath
         })
       }
 
-      const getFilePathNow = () => {
-        return this.data.filePathNow;
-      }
+      const getFilePathNow = () => this.data.filePathNow
       fs.stat({
         path: filePath,
         success(res) {
-          let path = getFilePathNow()
+          const path = getFilePathNow()
           if (path != filePath) {
             if (res.stats.isFile() && path) {
               fs.unlinkSync(path)

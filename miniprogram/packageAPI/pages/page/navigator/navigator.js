@@ -7,7 +7,7 @@ Page({
   },
 
   navigateTo() {
-    wx.navigateTo({url: './navigator'})
+    wx.navigateTo({ url: './navigator' })
   },
 
   navigateBack() {
@@ -15,15 +15,15 @@ Page({
   },
 
   redirectTo() {
-    wx.redirectTo({url: './navigator'})
+    wx.redirectTo({ url: './navigator' })
   },
 
   switchTab() {
-    wx.switchTab({url: '/page/component/index'})
+    wx.switchTab({ url: '/page/component/index' })
   },
 
   reLaunch() {
-    wx.reLaunch({url: '/page/component/index'})
+    wx.reLaunch({ url: '/page/component/index' })
   },
   onUnload() {
     if (wx.offThemeChange) {
@@ -32,12 +32,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

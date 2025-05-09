@@ -20,7 +20,7 @@ Page({
     wx.request({
       url: requestUrl,
       data: {
-    theme: 'light',
+        theme: 'light',
         noncestr: Date.now()
       },
       success(result) {
@@ -36,7 +36,7 @@ Page({
         console.log('request success', result)
       },
 
-      fail({errMsg}) {
+      fail({ errMsg }) {
         console.log('request fail', errMsg)
         self.setData({
           loading: false
@@ -51,12 +51,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

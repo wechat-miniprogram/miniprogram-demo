@@ -2,9 +2,8 @@ const cameraBufferBehavior = Behavior({
   methods: {
     initCameraBufferShader() {
       const gl = this.gl = this.renderer.getContext()
-      const ext = gl.getExtension("OES_texture_float");
-      if (!ext)
-        console.warn('OES_texture_float not support');
+      const ext = gl.getExtension('OES_texture_float')
+      if (!ext) console.warn('OES_texture_float not support')
       const currentProgram = gl.getParameter(gl.CURRENT_PROGRAM)
       const vs = `
         precision highp float;
@@ -60,9 +59,8 @@ const cameraBufferBehavior = Behavior({
 
       ext.bindVertexArrayOES(vao)
 
-
-      const width = Math.floor(this.canvas.width / 16) * 16;
-      const height = this.canvas.height;
+      const width = Math.floor(this.canvas.width / 16) * 16
+      const height = this.canvas.height
 
       const posAttr = gl.getAttribLocation(this._cameraBufferProgram, 'a_position')
       const pos = gl.createBuffer()
@@ -94,34 +92,29 @@ const cameraBufferBehavior = Behavior({
       gl.disable(gl.DEPTH_TEST)
       const displayTransform = frame.getDisplayTransform()
 
-      const width = Math.floor(this.canvas.width / 16) * 16;
-      const height = this.canvas.height;
+      const width = Math.floor(this.canvas.width / 16) * 16
+      const height = this.canvas.height
 
-      const cameraBufferRes = frame.getCameraBuffer(width, height);
+      const cameraBufferRes = frame.getCameraBuffer(width, height)
 
-      const texture = gl.createTexture();
+      const texture = gl.createTexture()
       if (cameraBufferRes) {
+        const cameraBuffer = new Uint8Array(cameraBufferRes)
 
-          let cameraBuffer = new Uint8Array(cameraBufferRes);
+        const data = new Uint8Array(width * height * 4)
+        for (let i = 0; i < cameraBuffer.length; i++) {
+          const num = parseInt(cameraBuffer[i] * 255)
+          data[i] = num
+        }
 
-          const data = new Uint8Array(width * height * 4);
-          for (let i = 0; i < cameraBuffer.length; i++) {
-            let num = parseInt(cameraBuffer[i] * 255);
-            data[i] = num;
-          }
+        gl.bindTexture(gl.TEXTURE_2D, texture)
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
 
-          gl.bindTexture(gl.TEXTURE_2D, texture);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-
-
-          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, data)
       }
-
-
-
 
       const currentProgram = gl.getParameter(gl.CURRENT_PROGRAM)
       const currentActiveTexture = gl.getParameter(gl.ACTIVE_TEXTURE)
@@ -144,7 +137,6 @@ const cameraBufferBehavior = Behavior({
       gl.useProgram(currentProgram)
       gl.activeTexture(currentActiveTexture)
       this.ext.bindVertexArrayOES(currentVAO)
-
     },
   },
 })

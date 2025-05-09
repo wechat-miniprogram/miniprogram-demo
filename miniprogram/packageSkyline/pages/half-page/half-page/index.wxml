@@ -1,6 +1,6 @@
 <!-- index.wxml -->
 <vertical-drag-gesture-handler id="pan" worklet:should-response-on-move="shouldPanResponse" simultaneousHandlers="{{ ['scroll'] }}" worklet:ongesture="handleVerticalDrag" style="flex: 1; overflow: auto;width: 100%;">
-	<view style="width: 100%; height: 100%;padding-top: 40px;">
+	<view class="comment-container">
 		<view class="bottom-sheet">
 			<view class="btn-wrp" bind:tap="back">
 				<view class="btn">

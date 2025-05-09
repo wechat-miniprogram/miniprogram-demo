@@ -1,7 +1,7 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
 
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   moveTimes: 0,
   data: {
     // 内置
@@ -25,8 +25,8 @@ Page({
     // Debug
     debugMsg: 'Defalut Words',
   },
-  onLoad( ) {
-    this.refreshData();
+  onLoad() {
+    this.refreshData()
   },
   resetData() {
     this.setData({
@@ -39,9 +39,9 @@ Page({
     })
   },
   refreshData() {
-    this.resetData();
+    this.resetData()
     // 模拟用的数据集合，可以跟进需要切换为后端接口
-    const mockDataList = [];
+    const mockDataList = []
 
     // 识别框
     if (this.data.useScan) {
@@ -50,7 +50,7 @@ Page({
         markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/wxball.jpg',
         type: 'scan',
         src: '',
-      });
+      })
     }
 
     // glTF模型
@@ -60,7 +60,7 @@ Page({
         markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/portalImage.jpg',
         type: 'gltf',
         src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/fiesta_tea/scene.gltf',
-      });
+      })
     }
 
     // 视频
@@ -70,7 +70,7 @@ Page({
         markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/2dmarker-test.jpg',
         type: 'video',
         src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.mp4',
-      });
+      })
     }
 
     if (this.data.useVideo2) {
@@ -79,7 +79,7 @@ Page({
         markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/osdmarker-test.jpg',
         type: 'video',
         src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/paris.mp4',
-      });
+      })
     }
 
     // 需要使用的marker
@@ -89,9 +89,8 @@ Page({
     let videoIndex = 0
     let gltfIndex = 0
 
-
     for (let i = 0; i < mockDataList.length; i++) {
-      const mockItem = mockDataList[i];
+      const mockItem = mockDataList[i]
       switch (mockItem.type) {
         case 'scan': // scan
           const scanId = 'scan' + scanIndex
@@ -101,9 +100,9 @@ Page({
             renderType: mockItem.type,
             markerImage: mockItem.markerImg,
             src: mockItem.src,
-          });
-          scanIndex++;
-          break;
+          })
+          scanIndex++
+          break
         case 'video': // video
           const videoId = 'video' + videoIndex
           markerList.push({
@@ -112,9 +111,9 @@ Page({
             renderType: mockItem.type,
             markerImage: mockItem.markerImg,
             src: mockItem.src,
-          });
-          videoIndex++;
-          break;
+          })
+          videoIndex++
+          break
         case 'gltf': // gltf
           const gltfId = 'gltf' + gltfIndex
           markerList.push({
@@ -123,18 +122,18 @@ Page({
             renderType: mockItem.type,
             markerImage: mockItem.markerImg,
             src: mockItem.src,
-          });
-          gltfIndex++;
-          break;
+          })
+          gltfIndex++
+          break
       }
     }
 
-    console.log('markerList', markerList);
+    console.log('markerList', markerList)
 
     this.setData({
       dataReady: true,
-      markerList: markerList
-    });
+      markerList
+    })
 
     this.setData({
       debugMsg: 'markerList:' + markerList.length
@@ -143,33 +142,33 @@ Page({
   tapScan() {
     this.setData({
       useScan: !this.data.useScan
-    });
+    })
 
-    this.refreshData();
+    this.refreshData()
   },
   tapGLTF() {
     this.setData({
       useGLTF: !this.data.useGLTF
-    });
+    })
 
-    this.refreshData();
+    this.refreshData()
   },
   tapVideo1() {
     this.setData({
       useVideo1: !this.data.useVideo1
-    });
+    })
 
-    this.refreshData();
+    this.refreshData()
   },
   tapVideo2() {
     this.setData({
       useVideo2: !this.data.useVideo2
-    });
+    })
 
-    this.refreshData();
+    this.refreshData()
   },
   handleTrackerChange(cur) {
-    const item = cur.detail;
+    const item = cur.detail
     this.setData({
       debugMsg: 'handleTrackerChange:' + item.name
     })
@@ -177,7 +176,7 @@ Page({
   handleTrackerMove(cur) {
     const detail = cur.detail
     const trackerInfo = detail.trackerInfo
-    
+
     this.moveTimes++
 
     if (detail.type === 'scan') {
@@ -197,4 +196,4 @@ Page({
       }
     }
   },
-});
+})

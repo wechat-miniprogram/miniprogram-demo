@@ -128,23 +128,22 @@ export default function getBehavior() {
             this.afterVKSessionCreated()
           }
 
-          
-          //限制调用帧率
-          let fps = 30
-          let fpsInterval = 1000 / fps
+          // 限制调用帧率
+          const fps = 30
+          const fpsInterval = 1000 / fps
           let last = Date.now()
 
           // 逐帧渲染
           const onFrame = timestamp => {
-            let now = Date.now()
+            const now = Date.now()
             const mill = now - last
             // 经过了足够的时间
             if (mill > fpsInterval) {
-                last = now - (mill % fpsInterval); //校正当前时间
-                const frame = session.getVKFrame(canvas.width, canvas.height)
-                if (frame) {
-                  this.render(frame)
-                }
+              last = now - (mill % fpsInterval) // 校正当前时间
+              const frame = session.getVKFrame(canvas.width, canvas.height)
+              if (frame) {
+                this.render(frame)
+              }
             }
             session.requestAnimationFrame(onFrame)
           }

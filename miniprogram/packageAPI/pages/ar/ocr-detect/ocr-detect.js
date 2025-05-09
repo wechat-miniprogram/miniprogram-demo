@@ -4,48 +4,48 @@ import yuvBehavior from './yuvBehavior'
 const NEAR = 0.001
 const FAR = 1000
 
-//初始化着色器函数
+// 初始化着色器函数
 let initShadersDone = false
 
 function initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE) {
-  //创建顶点着色器对象
-  var vertexShader = loadShader(gl, gl.VERTEX_SHADER, VSHADER_SOURCE)
-  //创建片元着色器对象
-  var fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, FSHADER_SOURCE)
+  // 创建顶点着色器对象
+  const vertexShader = loadShader(gl, gl.VERTEX_SHADER, VSHADER_SOURCE)
+  // 创建片元着色器对象
+  const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, FSHADER_SOURCE)
 
   if (!vertexShader || !fragmentShader) {
     return null
   }
 
-  //创建程序对象program
-  var program = gl.createProgram()
+  // 创建程序对象program
+  const program = gl.createProgram()
   if (!gl.createProgram()) {
     return null
   }
-  //分配顶点着色器和片元着色器到program
+  // 分配顶点着色器和片元着色器到program
   gl.attachShader(program, vertexShader)
   gl.attachShader(program, fragmentShader)
-  //链接program
+  // 链接program
   gl.linkProgram(program)
 
-  //检查程序对象是否连接成功
-  var linked = gl.getProgramParameter(program, gl.LINK_STATUS)
+  // 检查程序对象是否连接成功
+  const linked = gl.getProgramParameter(program, gl.LINK_STATUS)
   if (!linked) {
-    var error = gl.getProgramInfoLog(program)
+    const error = gl.getProgramInfoLog(program)
     console.log('程序对象连接失败: ' + error)
     gl.deleteProgram(program)
     gl.deleteShader(fragmentShader)
     gl.deleteShader(vertexShader)
     return null
   }
-  //返回程序program对象
+  // 返回程序program对象
   initShadersDone = true
   return program
 }
 
 function loadShader(gl, type, source) {
   // 创建顶点着色器对象
-  var shader = gl.createShader(type)
+  const shader = gl.createShader(type)
   if (shader == null) {
     console.log('创建着色器失败')
     return null
@@ -58,9 +58,9 @@ function loadShader(gl, type, source) {
   gl.compileShader(shader)
 
   // 检查顶是否编译成功
-  var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS)
+  const compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS)
   if (!compiled) {
-    var error = gl.getShaderInfoLog(shader)
+    const error = gl.getShaderInfoLog(shader)
     console.log('编译着色器失败: ' + error)
     gl.deleteShader(shader)
     return null
@@ -69,7 +69,7 @@ function loadShader(gl, type, source) {
   return shader
 }
 
-var EDGE_VSHADER_SOURCE =
+const EDGE_VSHADER_SOURCE =
   `
   attribute vec4 aPosition; 
   void main(void) {
@@ -77,7 +77,7 @@ var EDGE_VSHADER_SOURCE =
   }
 `
 
-var EDGE_FSHADER_SOURCE =
+const EDGE_FSHADER_SOURCE =
   `
   precision highp float;
   void main() {
@@ -86,33 +86,33 @@ var EDGE_FSHADER_SOURCE =
 `
 
 function initEdgeBuffer(gl, lt, lr, rb, lb) {
-  let shaderProgram = gl.program;
-  var vertices = [
+  const shaderProgram = gl.program
+  const vertices = [
     lt.x, lt.y, 0.0,
     lr.x, lr.y, 0.0,
     rb.x, rb.y, 0.0,
     lb.x, lb.y, 0.0,
-  ];
+  ]
 
-  var vertexBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-  var aPosition = gl.getAttribLocation(shaderProgram, 'aPosition');
-  gl.enableVertexAttribArray(aPosition);
-  gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0);
-  var length = vertices.length / 3;
-  return length;
+  const vertexBuffer = gl.createBuffer()
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW)
+  const aPosition = gl.getAttribLocation(shaderProgram, 'aPosition')
+  gl.enableVertexAttribArray(aPosition)
+  gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0)
+  const length = vertices.length / 3
+  return length
 }
 
 function onDrawEdge(gl, lt, lr, rb, lb) {
-  var n = initEdgeBuffer(gl, lt, lr, rb, lb);
-  gl.drawArrays(gl.LINE_LOOP, 0, n);
+  const n = initEdgeBuffer(gl, lt, lr, rb, lb)
+  gl.drawArrays(gl.LINE_LOOP, 0, n)
 }
 
-function convert(obj){
-  obj.x = obj.x * 2 -1;
-  obj.y = (1-obj.y)*2-1;
-  return obj;
+function convert(obj) {
+  obj.x = obj.x * 2 - 1
+  obj.y = (1 - obj.y) * 2 - 1
+  return obj
 }
 
 Component({
@@ -126,15 +126,15 @@ Component({
      */
     detached() {
       initShadersDone = false
-      console.log("页面detached")
+      console.log('页面detached')
       if (wx.offThemeChange) {
         wx.offThemeChange()
       }
     },
     ready() {
-      console.log("页面准备完全")
+      console.log('页面准备完全')
       this.setData({
-        theme: wx.getSystemInfoSync().theme || 'light'
+        theme: getApp().globalData.theme || 'light'
       })
 
       if (wx.onThemeChange) {
@@ -160,12 +160,10 @@ Component({
       //   this.canvas.requestAnimationFrame(onFrame1)
       // }
       // this.canvas.requestAnimationFrame(onFrame1)
-
     },
 
-
     render(frame) {
-      var gl = this.gl
+      const gl = this.gl
 
       this.renderGL(frame)
 
@@ -190,7 +188,7 @@ Component({
 
       if (!textContentList || textContentList.length <= 0) {
         return
-      }else{
+      } else {
         if (!initShadersDone) {
           this.edgeProgram = initShaders(gl, EDGE_VSHADER_SOURCE, EDGE_FSHADER_SOURCE)
           if (!this.edgeProgram) {
@@ -200,37 +198,35 @@ Component({
           console.log('初始化着色器成功')
         }
 
-        if(textContentList[0].box == undefined){
-          return;
+        if (textContentList[0].box == undefined) {
+          return
         }
-  
+
         gl.useProgram(this.edgeProgram)
         gl.program = this.edgeProgram
 
-        var lt,lr,rb,lb;
-        for (var i = 0; i < textContentList.length; i++) {
+        let lt; let lr; let rb; let lb
+        for (let i = 0; i < textContentList.length; i++) {
           lt = textContentList[i].box[0]
           lr = textContentList[i].box[1]
           rb = textContentList[i].box[2]
           lb = textContentList[i].box[3]
-          let avgX =  (lt.x +  lr.x +  rb.x +  lb.x) / 4;
-          let avgY =  (lt.y +  lr.y +  rb.y +  lb.y) / 4;
-          textContentList[i].centerX = avgX * this.data.width;
-          textContentList[i].centerY = avgY * this.data.height;
-        
+          const avgX = (lt.x + lr.x + rb.x + lb.x) / 4
+          const avgY = (lt.y + lr.y + rb.y + lb.y) / 4
+          textContentList[i].centerX = avgX * this.data.width
+          textContentList[i].centerY = avgY * this.data.height
+
           lt = convert(lt)
           lr = convert(lr)
           rb = convert(rb)
           lb = convert(lb)
-          onDrawEdge(gl,lt, lr, rb, lb);
+          onDrawEdge(gl, lt, lr, rb, lb)
         }
       }
 
       this.setData({
-        textContentList: textContentList
+        textContentList
       })
-
-
     },
   },
 })

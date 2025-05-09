@@ -1,11 +1,11 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-
 // 加载toonEffect
-import '../../../xr-custom/assets/standard-shader/customPBR';
+import '../../../xr-custom/assets/standard-shader/customPBR'
+
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
 
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     dpiScale: 1
   }
-});
+})

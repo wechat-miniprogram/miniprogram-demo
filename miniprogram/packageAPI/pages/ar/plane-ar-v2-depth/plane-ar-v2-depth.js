@@ -5,11 +5,11 @@ import depthBehavior from './depthBehavior'
 const NEAR = 0.1
 const FAR = 100
 let cubeVao = null
-let countNumber = 20
+const countNumber = 20
 let count = 0
 let time = 0
 
-var CUBE_VSHADER_SOURCE =
+const CUBE_VSHADER_SOURCE =
   `
   #version 300 es 
   in vec3 aPosition; 
@@ -23,7 +23,7 @@ var CUBE_VSHADER_SOURCE =
   }
 `
 
-var CUBE_FSHADER_SOURCE =
+const CUBE_FSHADER_SOURCE =
   `
   #version 300 es 
   precision highp float;
@@ -34,12 +34,12 @@ var CUBE_FSHADER_SOURCE =
   }
 `
 
-function createCubeVAO(gl, program){
-  const ext = gl.getExtension("OES_vertex_array_object");
+function createCubeVAO(gl, program) {
+  const ext = gl.getExtension('OES_vertex_array_object')
   const vao = ext.createVertexArrayOES()
   ext.bindVertexArrayOES(vao)
 
-  var vertices = [
+  const vertices = [
     -1.0, 1.0, -1.0, -1.0, -1.0, -1.0, 1.0, -1.0, -1.0,
     1.0, -1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0,
     1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, 1.0, -1.0,
@@ -52,51 +52,47 @@ function createCubeVAO(gl, program){
     1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0,
     -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0,
     1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, -1.0
-  ];
-  var vertexBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-  var aPosition = gl.getAttribLocation(program, 'aPosition');
-  gl.enableVertexAttribArray(aPosition);
-  gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0);
+  ]
+  const vertexBuffer = gl.createBuffer()
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer)
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW)
+  const aPosition = gl.getAttribLocation(program, 'aPosition')
+  gl.enableVertexAttribArray(aPosition)
+  gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0)
   vao.posBuffer = vertexBuffer
   return vao
 }
 
 function onDrawCube(gl, program, hitPosition, vm, pm) {
-  const ext = gl.getExtension("OES_vertex_array_object");
+  const ext = gl.getExtension('OES_vertex_array_object')
   const currentProgram = gl.getParameter(gl.CURRENT_PROGRAM)
   const currentActiveTexture = gl.getParameter(gl.ACTIVE_TEXTURE)
   const currentVAO = gl.getParameter(gl.VERTEX_ARRAY_BINDING)
   const bindingTexture = gl.getParameter(gl.TEXTURE_BINDING_2D)
 
-  if(!cubeVao){
+  if (!cubeVao) {
     cubeVao = createCubeVAO(gl, program)
-  }else{
+  } else {
     ext.bindVertexArrayOES(cubeVao)
   }
   gl.useProgram(program)
 
-  var basePos = gl.getUniformLocation(program, 'basePosition');
-  gl.uniform3fv(basePos, [hitPosition.x, hitPosition.y, hitPosition.z]);
+  const basePos = gl.getUniformLocation(program, 'basePosition')
+  gl.uniform3fv(basePos, [hitPosition.x, hitPosition.y, hitPosition.z])
 
-  var viewLoc = gl.getUniformLocation(program, 'viewMatrix')
+  const viewLoc = gl.getUniformLocation(program, 'viewMatrix')
   gl.uniformMatrix4fv(viewLoc, false, vm)
 
-  var projLoc = gl.getUniformLocation(program, 'projMatrix')
+  const projLoc = gl.getUniformLocation(program, 'projMatrix')
   gl.uniformMatrix4fv(projLoc, false, pm)
 
- gl.drawArrays(gl.TRIANGLE_STRIP, 0, 36);
-
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 36)
 
   gl.useProgram(currentProgram)
   ext.bindVertexArrayOES(currentVAO)
   gl.activeTexture(currentActiveTexture)
   gl.bindTexture(gl.TEXTURE_2D, bindingTexture)
 }
-
-
-
 
 Component({
   behaviors: [getBehavior(), yuvBehavior, depthBehavior],
@@ -108,15 +104,15 @@ Component({
      * 生命周期函数--监听页面加载
      */
     detached() {
-      console.log("页面detached")
+      console.log('页面detached')
       if (wx.offThemeChange) {
         wx.offThemeChange()
       }
     },
     ready() {
-      console.log("页面准备完全")
+      console.log('页面准备完全')
       this.setData({
-        theme: wx.getSystemInfoSync().theme || 'light'
+        theme: getApp().globalData.theme || 'light'
       })
 
       if (wx.onThemeChange) {
@@ -136,7 +132,6 @@ Component({
       this.initDepthGL()
     },
     render(frame) {
-
       this.session.setDepthOccRange(NEAR, FAR)
 
       const start = Date.now()
@@ -181,7 +176,6 @@ Component({
 
       gl.depthFunc(gl.LESS)
       this.renderer.render(this.scene, this.camera)
-
 
       // if (!this.cubeProgram) {
       //   this.cubeProgram = this.compileShader(gl, CUBE_VSHADER_SOURCE, CUBE_FSHADER_SOURCE)

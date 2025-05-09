@@ -1,5 +1,4 @@
-
-import {CurveAnimation, Curves} from './common'
+import { CurveAnimation, Curves } from './common'
 
 /**
  * 仿 iOS 返回自定义路由
@@ -11,7 +10,7 @@ export const CupertinoRouteBuilder = ({
   secondaryAnimationStatus,
   userGestureInProgress,
 }) => {
-  const {windowWidth} = wx.getSystemInfoSync()
+  const { windowWidth } = wx.getSystemInfoSync()
 
   const _curvePrimaryAnimation = CurveAnimation({
     animation: primaryAnimation,
@@ -35,7 +34,7 @@ export const CupertinoRouteBuilder = ({
 
     // 页面从右至左推入
     return {
-      transform: [{translateX: windowWidth * (1 - t)}],
+      transform: [{ translateX: windowWidth * (1 - t) }],
     }
   }
 
@@ -56,7 +55,7 @@ export const CupertinoRouteBuilder = ({
 
     // 下一个页面推入时，当前页面继续向左推入 1/3
     return {
-      transform: [{translateX: (-1 / 3) * windowWidth * t}],
+      transform: [{ translateX: (-1 / 3) * windowWidth * t }],
     }
   }
 

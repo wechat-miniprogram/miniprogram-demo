@@ -1,56 +1,56 @@
-var handleDecodedXML = function(decodedXml) {
-  let rerurnXml = '';
+const handleDecodedXML = function (decodedXml) {
+  let rerurnXml = ''
 
-  const blockArr = decodedXml.split('&lt;');
+  const blockArr = decodedXml.split('&lt;')
 
   for (let i = 0; i < blockArr.length; i++) {
-    let blockStr = blockArr[i];
-    let handleBlockStr = '';
-    let returnBlockStr = '';
+    const blockStr = blockArr[i]
+    let handleBlockStr = ''
+    let returnBlockStr = ''
 
-    const sliceBlockStr = blockStr.split(' ');
+    const sliceBlockStr = blockStr.split(' ')
 
-    for(let j = 0; j < sliceBlockStr.length; j++) {
-      const subBlockStr = sliceBlockStr[j];
-      
-      const eIndex = subBlockStr.indexOf('=');
+    for (let j = 0; j < sliceBlockStr.length; j++) {
+      const subBlockStr = sliceBlockStr[j]
+
+      const eIndex = subBlockStr.indexOf('=')
       if (eIndex !== -1) {
-        handleBlockStr += ' <span class="attr-name">' + subBlockStr.slice(0, eIndex) +'</span>' + subBlockStr.slice(eIndex);
+        handleBlockStr += ' <span class="attr-name">' + subBlockStr.slice(0, eIndex) + '</span>' + subBlockStr.slice(eIndex)
       } else {
-        handleBlockStr += subBlockStr;
+        handleBlockStr += subBlockStr
       }
     }
     // console.log(sliceBlockStr);
 
-    const blockEndIndexB = handleBlockStr.indexOf(' ');
-    const blockEndIndexR = handleBlockStr.indexOf('&gt;');
+    const blockEndIndexB = handleBlockStr.indexOf(' ')
+    const blockEndIndexR = handleBlockStr.indexOf('&gt;')
     // Handle XMLTag
     if (blockEndIndexB === -1 && blockEndIndexR === -1) {
-      continue;
+      continue
     }
-    const endBlockFlag = handleBlockStr[0] === '/';
+    const endBlockFlag = handleBlockStr[0] === '/'
 
     if (blockEndIndexR !== -1) {
       handleBlockStr += '<br>'
     }
     if (blockEndIndexR < blockEndIndexB) {
-      returnBlockStr = '&lt;' + (endBlockFlag ? '/' : '') + '<span class="block-name">' + handleBlockStr.slice(endBlockFlag ? 1 : 0, blockEndIndexR) + '</span>' + handleBlockStr.slice(blockEndIndexR);
+      returnBlockStr = '&lt;' + (endBlockFlag ? '/' : '') + '<span class="block-name">' + handleBlockStr.slice(endBlockFlag ? 1 : 0, blockEndIndexR) + '</span>' + handleBlockStr.slice(blockEndIndexR)
     } else if (blockEndIndexB !== -1) {
-      returnBlockStr = '&lt;' + (endBlockFlag ? '/' : '') +'<span class="block-name">' + handleBlockStr.slice(endBlockFlag ? 1 : 0, blockEndIndexB) + '</span>' + handleBlockStr.slice(blockEndIndexB);
+      returnBlockStr = '&lt;' + (endBlockFlag ? '/' : '') + '<span class="block-name">' + handleBlockStr.slice(endBlockFlag ? 1 : 0, blockEndIndexB) + '</span>' + handleBlockStr.slice(blockEndIndexB)
     } else if (blockEndIndexR !== -1) {
-      returnBlockStr = '&lt;' + (endBlockFlag ? '/' : '') + '<span class="block-name">' + handleBlockStr.slice(endBlockFlag ? 1 : 0, blockEndIndexR) + '</span>' + handleBlockStr.slice(blockEndIndexR);
+      returnBlockStr = '&lt;' + (endBlockFlag ? '/' : '') + '<span class="block-name">' + handleBlockStr.slice(endBlockFlag ? 1 : 0, blockEndIndexR) + '</span>' + handleBlockStr.slice(blockEndIndexR)
     }
-    rerurnXml += returnBlockStr;
+    rerurnXml += returnBlockStr
   }
-  return rerurnXml;
+  return rerurnXml
 }
 
-var escapeMarkup = function(dangerousInput) {
-  const dangerousString = String(dangerousInput);
-  const matchHtmlRegExp = /["'&<>]/;
-  const match = matchHtmlRegExp.exec(dangerousString);
+const escapeMarkup = function (dangerousInput) {
+  const dangerousString = String(dangerousInput)
+  const matchHtmlRegExp = /["'&<>]/
+  const match = matchHtmlRegExp.exec(dangerousString)
   if (!match) {
-    return dangerousInput;
+    return dangerousInput
   }
 
   const encodedSymbolMap = {
@@ -59,15 +59,14 @@ var escapeMarkup = function(dangerousInput) {
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;'
-  };
-  const dangerousCharacters = dangerousString.split('');
+  }
+  const dangerousCharacters = dangerousString.split('')
   const safeCharacters = dangerousCharacters.map(function (character) {
-    return encodedSymbolMap[character] || character;
-  });
-  const safeString = safeCharacters.join('');
-  return safeString;
+    return encodedSymbolMap[character] || character
+  })
+  const safeString = safeCharacters.join('')
+  return safeString
 }
-
 
 module.exports = {
   handleDecodedXML,

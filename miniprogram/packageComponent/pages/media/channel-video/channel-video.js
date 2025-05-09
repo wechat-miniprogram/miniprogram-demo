@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-	feedId: 'export/UzFfAgtgekIEAQAAAAAAQ3s56WvdaQAAAAstQy6ubaLX4KHWvLEZgBPEjYMcaThvAvSDzNPgMJpU00S4DKmOC1N5VwE8t9F-'
+    feedId: 'export/UzFfAgtgekIEAQAAAAAAQ3s56WvdaQAAAAstQy6ubaLX4KHWvLEZgBPEjYMcaThvAvSDzNPgMJpU00S4DKmOC1N5VwE8t9F-'
   },
 
   /**

@@ -1,10 +1,10 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
 
-var xmlCode = ``;
+const xmlCode = ''
 
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
     arDetected: false,
@@ -13,16 +13,16 @@ Page({
   handleARDetected() {
     this.setData({
       arDetected: true
-    });
+    })
   },
   handleThrowStart() {
     this.setData({
       throwing: true
-    });
+    })
   },
   handleThrowEnd() {
     this.setData({
       throwing: false
-    });
+    })
   }
-});
+})

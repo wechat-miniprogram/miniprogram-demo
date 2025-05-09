@@ -1,4 +1,4 @@
-import skinningDefines from './skinningDefine';
+import skinningDefines from './skinningDefine'
 
 export default
 /* glsl */
@@ -69,4 +69,4 @@ void main()
 
   gl_Position.z = gl_Position.z + offsetZ * cameraPosCS.z;
 }
-`;
+`

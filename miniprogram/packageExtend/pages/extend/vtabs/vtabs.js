@@ -45,7 +45,7 @@ CustomPage({
         desc: '微信小程序应用开发赛',
       },
     ]
-    this.setData({vtabs: tabs})
+    this.setData({ vtabs: tabs })
   },
 
   onTabClick(e) {

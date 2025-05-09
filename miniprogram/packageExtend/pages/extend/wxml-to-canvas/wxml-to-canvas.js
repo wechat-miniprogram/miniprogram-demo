@@ -1,4 +1,4 @@
-const {wxml, style} = require('./demo.js')
+const { wxml, style } = require('./demo.js')
 
 Page({
   onShareAppMessage() {
@@ -26,7 +26,7 @@ Page({
   },
   renderToCanvas() {
     console.log(wxml(this.url))
-    const p1 = this.widget.renderToCanvas({wxml: wxml(this.url), style})
+    const p1 = this.widget.renderToCanvas({ wxml: wxml(this.url), style })
     p1.then((re) => {
       console.log('container', re.layoutBox)
       this.data.showCanvas = true

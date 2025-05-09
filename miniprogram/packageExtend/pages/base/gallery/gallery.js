@@ -8,10 +8,10 @@ CustomPage({
       'https://res.wx.qq.com/op_res/0TZreUFL8sWsS1cFx5_f7MF5aY767_cWsd9JiKdHxL9Ktu6O6JLAJwvF-jLVxpB3'
     ],
     show: true
-	},
-	openGallery() {
-		this.setData({ show: true })
-	},
+  },
+  openGallery() {
+    this.setData({ show: true })
+  },
   change(e) {
     console.log('current index has changed', e.detail)
   },

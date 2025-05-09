@@ -9,37 +9,37 @@ Component({
   behaviors: [arBehavior, threeBehavior],
   data: {
     theme: 'light',
-    widthScale: 1,      // canvas宽度缩放值
-    heightScale: 0.6,   // canvas高度缩放值
-    markerImgList: [],  // 使用的 marker 列表
+    widthScale: 1, // canvas宽度缩放值
+    heightScale: 0.6, // canvas高度缩放值
+    markerImgList: [], // 使用的 marker 列表
     chooseImgList: [], // 使用的 图片 列表
   },
-  markerIndex: 0,  // 使用的 marker 索引
+  markerIndex: 0, // 使用的 marker 索引
   showBoxList: [], // 提示盒子列表,
   hintCenter: null, // 红色提示点
   useDepthBuffer: false, // 开启深度buffer
   lifetimes: {
-      /**
+    /**
       * 生命周期函数--监听页面加载
       */
-      detached() {
-      console.log("页面detached")
+    detached() {
+      console.log('页面detached')
       if (wx.offThemeChange) {
         wx.offThemeChange()
       }
-      },
-      ready() {
-      console.log("页面准备完全")
-        this.setData({
-          theme: wx.getSystemInfoSync().theme || 'light'
-        })
+    },
+    ready() {
+      console.log('页面准备完全')
+      this.setData({
+        theme: getApp().globalData.theme || 'light'
+      })
 
-        if (wx.onThemeChange) {
-          wx.onThemeChange(({theme}) => {
-            this.setData({theme})
-          })
-        }
-      },
+      if (wx.onThemeChange) {
+        wx.onThemeChange(({ theme }) => {
+          this.setData({ theme })
+        })
+      }
+    },
   },
 
   methods: {
@@ -47,7 +47,7 @@ Component({
     init() {
       // 初始化 Three.js，用于模型相关的渲染
       this.initTHREE()
-      this.initDepthGL();
+      this.initDepthGL()
 
       this.loader.load('https://dldir1.qq.com/weixin/miniprogram/reticle_4b6cc19698ca4a08b31fd3c95ce412ec.glb', gltf => {
         const reticle = this.hintCenter = gltf.scene
@@ -61,13 +61,11 @@ Component({
 
       // 初始化VK
       // start完毕后，进行更新渲染循环
-      this.initVK();
+      this.initVK()
 
-      this.markerIndex = 0;
-      this.showBoxList = [];
-      this.useDepthBuffer = false;
-
-
+      this.markerIndex = 0
+      this.showBoxList = []
+      this.useDepthBuffer = false
     },
     initVK() {
       // VKSession 配置
@@ -80,7 +78,7 @@ Component({
         },
         version: 'v2',
         gl: this.gl
-      });
+      })
 
       session.start(err => {
         if (err) return console.error('VK error: ', err)
@@ -89,7 +87,7 @@ Component({
 
         //  VKSession EVENT resize
         session.on('resize', () => {
-          this.calcCanvasSize();
+          this.calcCanvasSize()
         })
 
         // VKSession EVENT addAnchors
@@ -101,34 +99,33 @@ Component({
               id: anchor.id,
               size: anchor.size,
               transform: anchor.transform
-            };
-            
-            switch(anchor.type) {
+            }
+
+            switch (anchor.type) {
               case 0:
                 // plane Anchor
-                const boxPlane = this.createBox(0xffffff, anchor.type);
-                boxPlane.box.scale.set(showBox.size.width, 0.02, showBox.height);
-                console.log('boxPlane.size', showBox.size);
+                const boxPlane = this.createBox(0xffffff, anchor.type)
+                boxPlane.box.scale.set(showBox.size.width, 0.02, showBox.height)
+                console.log('boxPlane.size', showBox.size)
 
-                showBox.type = 'Plane';
-                showBox.wrap = boxPlane.wrap;
-                showBox.box = boxPlane.box;
-                break;
+                showBox.type = 'Plane'
+                showBox.wrap = boxPlane.wrap
+                showBox.box = boxPlane.box
+                break
               case 1:
                 // marker Anchor
-                const boxMarker = this.createBox(0x55cc55, anchor.type);
-                boxMarker.box.scale.set(1, 0.1, 1);
-                console.log('boxMarker.size', showBox.size);
+                const boxMarker = this.createBox(0x55cc55, anchor.type)
+                boxMarker.box.scale.set(1, 0.1, 1)
+                console.log('boxMarker.size', showBox.size)
 
-
-                showBox.type = 'Marker';
-                showBox.wrap = boxMarker.wrap;
-                showBox.box = boxMarker.box;
-                break;
+                showBox.type = 'Marker'
+                showBox.wrap = boxMarker.wrap
+                showBox.box = boxMarker.box
+                break
             }
-            
-            this.showBoxList.push(showBox);
-          });
+
+            this.showBoxList.push(showBox)
+          })
 
           console.log('this.showBoxList', this.showBoxList)
         })
@@ -140,26 +137,26 @@ Component({
 
           // 仅更新已经添加的Anchor
           this.showBoxList.forEach(showBox => {
-            for(let i = 0; i < anchors.length; i++) {
+            for (let i = 0; i < anchors.length; i++) {
               if (showBox.id === anchors[i].id) {
                 // 匹配
                 if (showBox.size !== anchors[i].size) {
-                  switch(showBox.type) {
+                  switch (showBox.type) {
                     case 'Plane':
-                      showBox.box.scale.set(anchors[i].size.width, 0.02, anchors[i].size.height);
-                      break;
+                      showBox.box.scale.set(anchors[i].size.width, 0.02, anchors[i].size.height)
+                      break
                     case 'Marker':
-                      break;
+                      break
                   }
                 }
-                showBox.size =  anchors[i].size;
-                showBox.transform = anchors[i].transform;
-                break;
+                showBox.size = anchors[i].size
+                showBox.transform = anchors[i].transform
+                break
               }
             }
-          });
+          })
         })
-        
+
         // VKSession removeAnchors
         // 识别目标丢失时，会触发一次
         session.on('removeAnchors', anchors => {
@@ -168,33 +165,30 @@ Component({
           // 存在要删除的 Anchor
           if (anchors.length > 0) {
             this.showBoxList = this.showBoxList.filter((showBox) => {
-              let flag = true;
-              for(let i = 0; i < anchors.length; i++) {
+              let flag = true
+              for (let i = 0; i < anchors.length; i++) {
                 if (showBox.id === anchors[i].id) {
                   console.log('remove', showBox.id)
-                  let scene = this.scene;
-                  if (showBox.type === "Marker") {
-                    scene = this.sceneCull;
+                  let scene = this.scene
+                  if (showBox.type === 'Marker') {
+                    scene = this.sceneCull
                   }
                   // 从three里面去掉
-                  scene.remove(showBox.wrap);
+                  scene.remove(showBox.wrap)
                   // 标记删除
-                  flag = false;
-                  break;
+                  flag = false
+                  break
                 }
               }
-              return flag;
-
+              return flag
             })
           }
-        });
-
+        })
 
         console.log('ready to initloop')
         // start 初始化完毕后，进行更新渲染循环
-        this.initLoop();
-      });
-
+        this.initLoop()
+      })
     },
     loop() {
       // console.log('loop')
@@ -203,7 +197,7 @@ Component({
       const frame = this.session.getVKFrame(this.canvas.width, this.canvas.height)
 
       // 成功获取 VKFrame 才进行
-      if(!frame) { return; }
+      if (!frame) { return }
 
       // 更新相机 YUV 数据
       this.renderYUV(frame)
@@ -217,8 +211,8 @@ Component({
         this.camera.matrixAutoUpdate = false
 
         // 视图矩阵
-        this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix);
-        this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse);
+        this.camera.matrixWorldInverse.fromArray(VKCamera.viewMatrix)
+        this.camera.matrixWorld.getInverse(this.camera.matrixWorldInverse)
 
         // 投影矩阵
         const projectionMatrix = VKCamera.getProjectionMatrix(NEAR, FAR)
@@ -229,11 +223,11 @@ Component({
       // 更新提示盒子 位置
       if (this.showBoxList) {
         this.showBoxList.forEach(showBox => {
-          showBox.wrap.matrix.fromArray(showBox.transform);
-        });
+          showBox.wrap.matrix.fromArray(showBox.transform)
+        })
       }
 
-      const reticle = this.hintCenter;
+      const reticle = this.hintCenter
       if (reticle) {
         const hitTestRes = this.session.hitTest(0.5, 0.5)
         if (hitTestRes.length) {
@@ -257,39 +251,39 @@ Component({
       if (this.useDepthBuffer) {
         // 1. 在左下角绘制深度提示
         // 2. 写入深度遮挡纹理到深度值
-        this.renderDepthGL(frame);
+        this.renderDepthGL(frame)
       }
       // 绘制进行深度遮挡的物体
       this.renderer.render(this.sceneCull, this.camera)
       this.renderer.state.setCullFace(this.THREE.CullFaceNone)
     },
     createBox(color, type) {
-      const THREE = this.THREE;
-      let scene = this.scene;
+      const THREE = this.THREE
+      let scene = this.scene
 
-      let material;
+      let material
 
       // 根据类型添加不一样的行为
-      switch(type) {
+      switch (type) {
         case 0:
           // plane Anchor
           material = new THREE.MeshBasicMaterial({
             metalness: 0.0,
             roughness: 0.1,
-            color: color,
+            color,
             transparent: true,
             opacity: 0.8
-          } );
-          break;
+          })
+          break
         case 1:
           // marker Anchor
 
           const uniforms = {
             time: { value: Math.random() * 100 }
-          };
-  
+          }
+
           material = new THREE.ShaderMaterial({
-            uniforms: uniforms,
+            uniforms,
             vertexShader: `
               varying vec2 vUv;
               void main()	{
@@ -327,33 +321,33 @@ Component({
                 f = ( sin( a * g ) + 1.0 ) / 2.0;
                 gl_FragColor = vec4( vec3( f * i / 1.6, i / 2.0 + d / 13.0, i ) * d * p.x + vec3( i / 1.3 + d / 8.0, i / 2.0 + d / 18.0, i ) * d * ( 1.0 - p.x ), 1.0 );
               }`,
-          });
+          })
 
-          scene = this.sceneCull;
-          
-          break;
+          scene = this.sceneCull
+
+          break
       }
 
-      const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+      const geometry = new THREE.BoxGeometry(1, 1, 1)
 
-      const wrap = new THREE.Object3D();
+      const wrap = new THREE.Object3D()
       // 禁止矩阵自动更新，只能手动写入信息
-      wrap.matrixAutoUpdate = false;
+      wrap.matrixAutoUpdate = false
 
       // 绘制区域的box
-      const box = new THREE.Mesh( geometry, material );
-      wrap.add(box);
+      const box = new THREE.Mesh(geometry, material)
+      wrap.add(box)
 
-      scene.add( wrap );
+      scene.add(wrap)
 
-      box.visible = true;
+      box.visible = true
 
       return {
-        wrap: wrap,
-        box: box,
-      };
+        wrap,
+        box,
+      }
     },
-    chooseMedia() { 
+    chooseMedia() {
       // marker图片上传逻辑
       wx.chooseMedia({
         count: 9,
@@ -362,10 +356,10 @@ Component({
         success: res => {
           console.log('chooseMedia res', res)
 
-          const chooseImgListRes = [];
+          const chooseImgListRes = []
           for (let i = 0; i < res.tempFiles.length; i++) {
-            const imgUrl = res.tempFiles[i].tempFilePath;
-            chooseImgListRes.push(imgUrl);
+            const imgUrl = res.tempFiles[i].tempFilePath
+            chooseImgListRes.push(imgUrl)
           }
 
           console.log('set chooseImgList', chooseImgListRes)
@@ -381,88 +375,87 @@ Component({
     async addMarker() {
       console.log('addMarker')
       const fs = wx.getFileSystemManager()
-      
-      const markerImgListRes = this.data.markerImgList.concat([]);
-      const preMarkerIndex = this.markerIndex;
 
-      console.log('pre markerImgList', preMarkerIndex, markerImgListRes);
-      
+      const markerImgListRes = this.data.markerImgList.concat([])
+      const preMarkerIndex = this.markerIndex
+
+      console.log('pre markerImgList', preMarkerIndex, markerImgListRes)
+
       // 检查与添加 marker 函数
-      const chooseImgCount = this.data.chooseImgList.length;
-      let handledCount = 0;
+      const chooseImgCount = this.data.chooseImgList.length
+      let handledCount = 0
       const checkMarkerAdded = () => {
         if (handledCount === chooseImgCount) {
-          this.markerIndex = markerImgListRes.length;
+          this.markerIndex = markerImgListRes.length
 
-          console.log('markerImgList set', markerImgListRes, this.markerIndex);
+          console.log('markerImgList set', markerImgListRes, this.markerIndex)
           this.setData({
             chooseImgList: [],
             markerImgList: markerImgListRes
-          });
+          })
         }
       }
-      
+
       // 准备进行choose的图片保存到fs
       for (let i = 0; i < chooseImgCount; i++) {
-        const chooseImgUrl = this.data.chooseImgList[i];
-        const fileEnd = chooseImgUrl.split('.').slice(-1)[0];
-        const fileIndex = preMarkerIndex + i;
+        const chooseImgUrl = this.data.chooseImgList[i]
+        const fileEnd = chooseImgUrl.split('.').slice(-1)[0]
+        const fileIndex = preMarkerIndex + i
         // 算法侧目前只认 map png jpg jpeg 后缀文件
-        const filePath = `${wx.env.USER_DATA_PATH}/marker-ar-${fileIndex}.${fileEnd}`;
+        const filePath = `${wx.env.USER_DATA_PATH}/marker-ar-${fileIndex}.${fileEnd}`
 
         const saveAndAddMarker = () => {
-          console.log('saveFileSync start', filePath, chooseImgUrl);
+          console.log('saveFileSync start', filePath, chooseImgUrl)
           // 存入文件系统，并添加到marker
           fs.saveFile({
             filePath,
             tempFilePath: chooseImgUrl,
-            success: ()=> {
+            success: () => {
               console.log('[addMarker] --> ', filePath)
               const markerId = this.session.addMarker(filePath)
               markerImgListRes.push({
-                markerId: markerId,
-                filePath: filePath
+                markerId,
+                filePath
               })
-              handledCount++;
-              checkMarkerAdded();
+              handledCount++
+              checkMarkerAdded()
             },
             fail: res => {
               console.error(res)
-              console.log('文件保存失败', filePath);
-              handledCount++;
-              checkMarkerAdded();
+              console.log('文件保存失败', filePath)
+              handledCount++
+              checkMarkerAdded()
             }
           })
         }
 
-        console.log('uploadFile Path', filePath);
+        console.log('uploadFile Path', filePath)
         // 确定文件，存在即删除
         fs.stat({
           path: filePath,
           success: (res) => {
             if (res.stats.isFile()) {
-              fs.unlinkSync(filePath);
-              console.log('fs unlinkSync', filePath);
+              fs.unlinkSync(filePath)
+              console.log('fs unlinkSync', filePath)
             }
-            saveAndAddMarker();
+            saveAndAddMarker()
           },
           fail: (res) => {
             console.error(res)
-            console.log('fs中不存在，直接写入', filePath);
+            console.log('fs中不存在，直接写入', filePath)
 
-            saveAndAddMarker();
+            saveAndAddMarker()
           }
         })
       }
-
     },
     removeMarker() {
       if (this.data.markerImgList) {
         for (let i = 0; i < this.data.markerImgList.length; i++) {
-          const markerImg = this.data.markerImgList[i];
-          this.session.removeMarker(markerImg.markerId);
+          const markerImg = this.data.markerImgList[i]
+          this.session.removeMarker(markerImg.markerId)
         }
-        this.markerIndex = 0;
+        this.markerIndex = 0
         this.setData({
           markerImgList: [],
         })
@@ -470,42 +463,40 @@ Component({
     },
     placeItem() {
       if (this.hintCenter && this.hintCenter.visible) {
-        const THREE = this.THREE;
-        const scene = this.sceneCull;
+        const THREE = this.THREE
+        const scene = this.sceneCull
 
         // 加载模型
         this.loader.load('https://dldir1.qq.com/weixin/miniprogram/RobotExpressive_aa2603d917384b68bb4a086f32dabe83.glb', gltf => {
-          const wrap = new THREE.Object3D();
+          const wrap = new THREE.Object3D()
 
-          wrap.add(gltf.scene);
-          
-          scene.add( wrap );
+          wrap.add(gltf.scene)
 
-          const position = new THREE.Vector3();
-          const rotation = new THREE.Quaternion();
-          const scale = new THREE.Vector3();
-          this.hintCenter.matrix.decompose(position, rotation, scale);
-          wrap.position.set(position.x, position.y, position.z);
-          wrap.rotation.set(rotation.x, rotation.y, rotation.z, rotation.w);
-          wrap.scale.set(0.1, 0.1, 0.1);
+          scene.add(wrap)
 
-          console.log("model加载完成")
+          const position = new THREE.Vector3()
+          const rotation = new THREE.Quaternion()
+          const scale = new THREE.Vector3()
+          this.hintCenter.matrix.decompose(position, rotation, scale)
+          wrap.position.set(position.x, position.y, position.z)
+          wrap.rotation.set(rotation.x, rotation.y, rotation.z, rotation.w)
+          wrap.scale.set(0.1, 0.1, 0.1)
 
-          console.log('position', position.x, position.y, position.z);
+          console.log('model加载完成')
+
+          console.log('position', position.x, position.y, position.z)
           // console.log('rotation', rotation.x, rotation.y, rotation.z, rotation.w);
           // boxPlace.box.matrix.FromMatrix4(this.hintCenter.matrix);
         })
-      
-
       }
     },
     changeDepthFlag() {
-      const depthNear = 0.1;
-      const depthFar = 20;
+      const depthNear = 0.1
+      const depthFar = 20
       this.session.setDepthOccRange(depthNear, depthFar)
 
-      this.useDepthBuffer = !this.useDepthBuffer;
-      this.session.setDepthSwitch(this.useDepthBuffer);
+      this.useDepthBuffer = !this.useDepthBuffer
+      this.session.setDepthSwitch(this.useDepthBuffer)
     },
   },
 })

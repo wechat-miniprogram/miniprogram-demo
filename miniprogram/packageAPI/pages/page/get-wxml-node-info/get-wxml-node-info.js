@@ -28,11 +28,11 @@ Page({
         for (const key in rect) {
           if (key !== 'id' && key !== 'dataset') {
             const val = rect[key]
-            metrics.push({key, val})
+            metrics.push({ key, val })
           }
         }
 
-        this.setData({metrics})
+        this.setData({ metrics })
       }
     })
   },
@@ -43,12 +43,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

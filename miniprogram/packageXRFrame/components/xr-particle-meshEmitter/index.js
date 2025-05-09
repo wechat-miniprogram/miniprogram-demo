@@ -1,4 +1,3 @@
-
 Component({
   behaviors: [require('../common/share-behavior').default],
   properties: {
@@ -10,7 +9,7 @@ Component({
       type: Number,
       value: 5
     },
-    lifeTime:{
+    lifeTime: {
       type: Number,
       value: 3
     }
@@ -20,28 +19,27 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
-        const xrScene = this.scene = detail.value;
-        console.log('xr-scene', xrScene);
-        const xrFrameSystem = wx.getXrFrameSystem()
-        const magicField = xrScene.getElementById("magicField");
-        const tempSystem = magicField.getComponent(xrFrameSystem.Particle)
-        tempSystem.addSizeGradient(0,0.7);
-        tempSystem.addSizeGradient(0.5,1.0);
-        tempSystem.addColorGradient(0, xrFrameSystem.Vector4.createFromNumber(1,0.89,0.27,1));
-        tempSystem.addColorGradient(1, xrFrameSystem.Vector4.createFromNumber(1,0.64,0,1));
-        tempSystem.addAlphaGradient(0,0,0);
-        tempSystem.addAlphaGradient(0.5,1,1);
-        tempSystem.addAlphaGradient(1,0,0);
+    handleReady({ detail }) {
+      const xrScene = this.scene = detail.value
+      console.log('xr-scene', xrScene)
+      const xrFrameSystem = wx.getXrFrameSystem()
+      const magicField = xrScene.getElementById('magicField')
+      const tempSystem = magicField.getComponent(xrFrameSystem.Particle)
+      tempSystem.addSizeGradient(0, 0.7)
+      tempSystem.addSizeGradient(0.5, 1.0)
+      tempSystem.addColorGradient(0, xrFrameSystem.Vector4.createFromNumber(1, 0.89, 0.27, 1))
+      tempSystem.addColorGradient(1, xrFrameSystem.Vector4.createFromNumber(1, 0.64, 0, 1))
+      tempSystem.addAlphaGradient(0, 0, 0)
+      tempSystem.addAlphaGradient(0.5, 1, 1)
+      tempSystem.addAlphaGradient(1, 0, 0)
     },
 
-    handleAssetsProgress: function({detail}) {
-      console.log('assets progress', detail.value);
-      
+    handleAssetsProgress({ detail }) {
+      console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded: function({detail}) {
-      console.log('assets loaded', detail.value);
-      this.setData({loaded: true});
+    handleAssetsLoaded({ detail }) {
+      console.log('assets loaded', detail.value)
+      this.setData({ loaded: true })
     }
   }
 })

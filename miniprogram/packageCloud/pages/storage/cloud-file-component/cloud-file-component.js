@@ -1,4 +1,4 @@
-const {demoImageFileId, demoVideoFileId} = require('../../../../config')
+const { demoImageFileId, demoVideoFileId } = require('../../../../config')
 
 Page({
   onShareAppMessage() {
@@ -20,12 +20,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

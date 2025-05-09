@@ -481,4 +481,4 @@ vec3 getIBLRadiance(vec3 viewDir, vec3 normal, float roughness, mat3 envRotation
 		// return unpackDepth(texture2D(u_shadowMap, shadowCoord.xy));
 	}
 #endif
-`;
+`

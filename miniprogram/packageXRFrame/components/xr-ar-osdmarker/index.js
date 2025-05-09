@@ -18,34 +18,34 @@ Component({
     handleReady({
       detail
     }) {
-      const xrScene = this.scene = detail.value;
-      console.log('xr-scene', xrScene);
+      const xrScene = this.scene = detail.value
+      console.log('xr-scene', xrScene)
     },
-    handleAssetsProgress: function ({
+    handleAssetsProgress({
       detail
     }) {
-      console.log('assets progress', detail.value);
+      console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded: function ({
+    handleAssetsLoaded({
       detail
     }) {
-      console.log('assets loaded', detail.value);
+      console.log('assets loaded', detail.value)
       this.setData({
         loaded: true
-      });
+      })
     },
-    handleARReady: function ({
+    handleARReady({
       detail
     }) {
-      console.log('arReady');
+      console.log('arReady')
       this.setData({
         arReady: true
       })
     },
-    handleLog: function ({
+    handleLog({
       detail
     }) {
-      console.log('log', detail.value);
+      console.log('log', detail.value)
     }
   }
 })

@@ -5,7 +5,7 @@ const roleType = ['unkown', 'owner', 'participant', 'nonParticipant']
 
 const activityStatus = ['未开始', '进行中', '已结束']
 
-const {envVersion} = wx.getAccountInfoSync().miniProgram
+const { envVersion } = wx.getAccountInfoSync().miniProgram
 
 const getVersionType = () => {
   if (envVersion === 'release') {
@@ -77,12 +77,11 @@ Page({
     console.log('onAbort', e)
   },
 
-
   onGoHome() {
     wx.reLaunch({
       url: '/packageAPI/pages/chattool/activity_assist/activity_assist',
       complete(res) {
-        console.info("relaunch", res)
+        console.info('relaunch', res)
       }
     })
   },
@@ -155,7 +154,6 @@ Page({
         console.info('fetchActivity fail: ', err)
       })
     })
-
   },
 
   onTabsChange(e) {
@@ -255,7 +253,7 @@ Page({
         action: 'updateChatToolMsg',
         activityId: this.data.activityId,
         targetState: targetState || 1,
-        templateId: templateId,
+        templateId,
         parameterList: parameterList || [],
         versionType: getVersionType()
       }
@@ -270,7 +268,7 @@ Page({
     const that = this
     setTimeout(() => {
       this.createSelectorQuery()
-        .select("#target")
+        .select('#target')
         .node()
         .exec(res => {
           const node = res[0].node
@@ -295,7 +293,7 @@ Page({
   },
 
   sendProgress() {
-    const { progressImage, activityId} = this.data
+    const { progressImage, activityId } = this.data
     const entrancePath = `packageChatTool/pages/activity_detail/index?activityId=${activityId}`
     wx.shareImageToGroup({
       imagePath: progressImage,

@@ -1,4 +1,4 @@
-export const YUVFragmentShader = 
+export const YUVFragmentShader =
 /* glsl */
 `#version 300 es
 precision mediump float;
@@ -26,4 +26,4 @@ void main(void) {
     
     fragColor = vec4(R, G, B, 1.0);
 }
-`;
+`

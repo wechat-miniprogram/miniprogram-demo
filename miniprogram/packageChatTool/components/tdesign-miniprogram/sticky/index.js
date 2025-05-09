@@ -1,3 +1,3 @@
-export * from './props';
-export * from './type';
-export * from './sticky';
+export * from './props'
+export * from './type'
+export * from './sticky'

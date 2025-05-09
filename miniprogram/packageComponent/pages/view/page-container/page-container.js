@@ -22,12 +22,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   },
@@ -51,10 +51,10 @@ Page({
     })
   },
   changeRound() {
-    this.setData({round: !this.data.round})
+    this.setData({ round: !this.data.round })
   },
   changeOverlay() {
-    this.setData({overlay: !this.data.overlay, show: true})
+    this.setData({ overlay: !this.data.overlay, show: true })
   },
   changeOverlayStyle(e) {
     let overlayStyle = ''
@@ -69,10 +69,10 @@ Page({
       case 'blur':
         overlayStyle = 'background-color: rgba(0, 0, 0, 0.7); filter: blur(4px);'
     }
-    this.setData({overlayStyle, show: true})
+    this.setData({ overlayStyle, show: true })
   },
   exit() {
-    this.setData({show: false})
+    this.setData({ show: false })
   },
   onBeforeEnter(res) {
     console.log(res)

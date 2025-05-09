@@ -15,7 +15,7 @@ module.exports =
         /** *** */ i: moduleId,
         /** *** */ l: false,
         /** *** */ exports: {}
-        /** *** */}
+        /** *** */ }
       /** *** */
       /** *** */ // Execute the module function
       /** *** */ modules[moduleId].call(module.exports, module, module.exports, __webpack_require__)
@@ -37,16 +37,16 @@ module.exports =
     /** *** */ // define getter function for harmony exports
     /** *** */ __webpack_require__.d = function (exports, name, getter) {
       /** *** */ if (!__webpack_require__.o(exports, name)) {
-        /** *** */ Object.defineProperty(exports, name, {enumerable: true, get: getter})
+        /** *** */ Object.defineProperty(exports, name, { enumerable: true, get: getter })
         /** *** */ }
       /** *** */ }
     /** *** */
     /** *** */ // define __esModule on exports
     /** *** */ __webpack_require__.r = function (exports) {
       /** *** */ if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-        /** *** */ Object.defineProperty(exports, Symbol.toStringTag, {value: 'Module'})
+        /** *** */ Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' })
         /** *** */ }
-      /** *** */ Object.defineProperty(exports, '__esModule', {value: true})
+      /** *** */ Object.defineProperty(exports, '__esModule', { value: true })
       /** *** */ }
     /** *** */
     /** *** */ // create a fake namespace object
@@ -60,7 +60,7 @@ module.exports =
       /** *** */ if ((mode & 4) && typeof value === 'object' && value && value.__esModule) return value
       /** *** */ const ns = Object.create(null)
       /** *** */ __webpack_require__.r(ns)
-      /** *** */ Object.defineProperty(ns, 'default', {enumerable: true, value})
+      /** *** */ Object.defineProperty(ns, 'default', { enumerable: true, value })
       /** *** */ if (mode & 2 && typeof value !== 'string') for (const key in value) __webpack_require__.d(ns, key, function (key) { return value[key] }.bind(null, key))
       /** *** */ return ns
       /** *** */ }
@@ -86,7 +86,7 @@ module.exports =
     /** *** */ }([
     /* 0 */
     /***/ (function (module, exports, __webpack_require__) {
-      Object.defineProperty(exports, '__esModule', {value: true})
+      Object.defineProperty(exports, '__esModule', { value: true })
       exports.default = [{
         id: 0, cn: '[微笑]', hk: '[微笑]', us: '[Smile]', code: '/::)', web_code: '/微笑', style: 'smiley_0'
       }, {
@@ -370,7 +370,7 @@ module.exports =
     /* 1 */,
     /* 2 */
     /***/ (function (module, exports, __webpack_require__) {
-      Object.defineProperty(exports, '__esModule', {value: true})
+      Object.defineProperty(exports, '__esModule', { value: true })
       const emoji_data_1 = __webpack_require__(0)
       const emoji_panel_data_1 = __webpack_require__(3)
       const parser_1 = __webpack_require__(4)
@@ -455,8 +455,8 @@ module.exports =
             const idx = evt.currentTarget.dataset.idx
             const emotionName = data.emotions[idx].cn
             this.LRUCache(data.history, data.perLine, idx)
-            this.setData({history: data.history})
-            this.triggerEvent('insertemoji', {emotionName})
+            this.setData({ history: data.history })
+            this.triggerEvent('insertemoji', { emotionName })
           },
           deleteEmoji() {
             this.triggerEvent('delemoji')
@@ -480,12 +480,12 @@ module.exports =
       /***/ }),
     /* 3 */
     /***/ (function (module, exports, __webpack_require__) {
-      Object.defineProperty(exports, '__esModule', {value: true})
+      Object.defineProperty(exports, '__esModule', { value: true })
       exports.default = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 51, 52, 54, 55, 56, 57, 60, 62, 63, 64, 65, 66, 67, 68, 70, 74, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 89, 92, 93, 94, 95, 300, 301, 302, 303, 304, 305, 306, 307, 204, 205, 202, 206, 212, 211, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 308, 309, 310, 311, 312, 209]
       /***/ }),
     /* 4 */
     /***/ (function (module, exports, __webpack_require__) {
-      Object.defineProperty(exports, '__esModule', {value: true})
+      Object.defineProperty(exports, '__esModule', { value: true })
       const emoji_data_1 = __webpack_require__(0)
       const emotionMap = {}
       emoji_data_1.default.forEach(function (item, index) {
@@ -500,7 +500,7 @@ module.exports =
         for (const k in emotionMap) {
           let idx = content.indexOf(k)
           while (idx >= 0) {
-            emojiIndexList.push({idx, code: k, type: 2})
+            emojiIndexList.push({ idx, code: k, type: 2 })
             idx = content.indexOf(k, idx + k.length)
           }
         }

@@ -1,4 +1,4 @@
-import common from './common';
+import common from './common'
 
 const toonInfo = `
 uniform highp vec4 u_baseColorFactor;
@@ -124,4 +124,4 @@ void main()
 
     gl_FragData[0] = vec4(color, 1.0);
 }
-`;
+`

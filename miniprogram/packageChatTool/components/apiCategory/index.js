@@ -11,7 +11,7 @@ Component({
   data: {
     apiCategory: '',
   },
-  
+
   methods: {
 
   },
@@ -19,7 +19,7 @@ Component({
   pageLifetimes: {
     show() {
       const apiCategory = wx.getApiCategory()
-      this.setData({apiCategory})
+      this.setData({ apiCategory })
     }
   }
 })

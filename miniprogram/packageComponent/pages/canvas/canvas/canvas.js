@@ -1,4 +1,4 @@
-import {compareVersion} from '../../../../util/util'
+import { compareVersion } from '../../../../util/util'
 
 Page({
 
@@ -11,7 +11,7 @@ Page({
   },
   onReady() {
     // 解决基础库小于 2.7.0 的兼容问题
-    const {SDKVersion} = wx.getSystemInfoSync()
+    const { SDKVersion } = wx.getSystemInfoSync()
     if (compareVersion(SDKVersion, '2.7.0') < 0) {
       console.log('123')
       this.setData({
@@ -34,49 +34,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage() {
 
   }
 })

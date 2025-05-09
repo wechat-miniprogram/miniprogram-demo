@@ -79,34 +79,34 @@ Page({
   },
 
   showPicker(e) {
-    const { mode } = e.currentTarget.dataset;
+    const { mode } = e.currentTarget.dataset
     this.setData({
       mode,
       [`${mode}Visible`]: true,
-    });
+    })
   },
   hidePicker() {
-    const { mode } = this.data;
+    const { mode } = this.data
     this.setData({
       [`${mode}Visible`]: false,
-    });
+    })
   },
   onConfirm(e) {
-    const { value } = e.detail;
-    const { mode, dateOption } = this.data;
+    const { value } = e.detail
+    const { mode, dateOption } = this.data
 
-    console.log('confirm', value);
+    console.log('confirm', value)
 
     this.setData({
       [mode]: value,
       [`${mode}Text${dateOption}`]: value,
-    });
+    })
 
-    this.hidePicker();
+    this.hidePicker()
   },
 
   onColumnChange(e) {
-    console.log('pick', e.detail.value);
+    console.log('pick', e.detail.value)
   },
 
   chooseShareImage() {
@@ -125,7 +125,7 @@ Page({
 
         wx.cloud.uploadFile({
           cloudPath: `image-${Date.now()}.png`, // 上传至云端的路径
-          filePath: shareImage, 
+          filePath: shareImage,
           success: res => {
             // 返回文件 ID
             console.log('uploadFile: ', res.fileID)
@@ -220,7 +220,6 @@ Page({
     if (!activityId) {
       this.createActivityID(() => {
         this.publish()
-        return
       })
     }
 
@@ -270,7 +269,7 @@ Page({
               })
             },
             fail(res) {
-              console.info("updateShareMenu fail: ", res)
+              console.info('updateShareMenu fail: ', res)
               wx.showToast({
                 title: '分享失败',
                 icon: 'none'

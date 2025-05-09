@@ -1,4 +1,4 @@
-import {CurveAnimation, Curves} from './common'
+import { CurveAnimation, Curves } from './common'
 
 const ScaleTransitionRouteBuilder = ({
   primaryAnimation,
@@ -7,8 +7,8 @@ const ScaleTransitionRouteBuilder = ({
   secondaryAnimationStatus,
   userGestureInProgress,
 }) => {
-  const {windowWidth} = getApp().globalData
-  const {screenHeight} = getApp().globalData
+  const { windowWidth } = getApp().globalData
+  const { screenHeight } = getApp().globalData
   console.info('ScaleTransitionRouteBuilder ', windowWidth)
 
   const _curvePrimaryAnimation = CurveAnimation({

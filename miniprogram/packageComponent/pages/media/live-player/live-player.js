@@ -15,7 +15,7 @@ Page({
   handleScanQRCode() {
     wx.scanCode({
       complete: (res) => {
-        const {result} = res
+        const { result } = res
         this.setData({
           videoSrc: result
         })
@@ -90,12 +90,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

@@ -1,6 +1,6 @@
 import CustomPage from '../../../base/CustomPage'
 
-const {mockData} = require('./utils')
+const { mockData } = require('./utils')
 
 CustomPage({
   onShareAppMessage() {
@@ -43,7 +43,7 @@ CustomPage({
     })
     setTimeout(() => {
       if (this.barrage) this.barrage.close()
-      this.setData({toggle: true})
+      this.setData({ toggle: true })
       this.addBarrage()
     }, 1000)
   },

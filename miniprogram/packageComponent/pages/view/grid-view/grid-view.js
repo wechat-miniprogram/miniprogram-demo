@@ -10,16 +10,14 @@ Page({
 
   go1() {
     wx.navigateTo({
-        url: './demo-1/demo-1',
-      })
-  },
-
-
-  goGrid1() {
-    wx.navigateTo({
-        url: './demo-2/demo-2',
+      url: './demo-1/demo-1',
     })
   },
 
+  goGrid1() {
+    wx.navigateTo({
+      url: './demo-2/demo-2',
+    })
+  },
 
 })

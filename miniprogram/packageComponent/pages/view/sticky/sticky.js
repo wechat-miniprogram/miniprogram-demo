@@ -10,16 +10,14 @@ Page({
 
   go1() {
     wx.navigateTo({
-        url: './sticky-header/sticky-header',
-      })
-  },
-
-
-  goGrid1() {
-    wx.navigateTo({
-        url: './sticky-section/sticky-section',
+      url: './sticky-header/sticky-header',
     })
   },
 
+  goGrid1() {
+    wx.navigateTo({
+      url: './sticky-section/sticky-section',
+    })
+  },
 
 })

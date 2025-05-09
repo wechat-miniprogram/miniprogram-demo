@@ -1,9 +1,7 @@
-
 const uuid3 = '0C76801A-62EB-45E5-96A8-37C8882ABB2B'
 const serviceId = 'D0611E78-BBB4-4591-A5F8-487910AE4366'
 const characteristicId = '8667556C-9A37-4C91-84ED-54EE27D90049'
 // 上面需要配置主机的 serviceId 和 characteristicId
-
 
 // ArrayBuffer转16进制字符串示例
 // function ab2hex(buffer) {
@@ -43,15 +41,19 @@ Page({
     if (wx.offThemeChange) {
       wx.offThemeChange()
     }
+    this.data.servers.forEach(() => {
+      // server.close()
+    })
   },
+
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     wx.onBLEPeripheralConnectionStateChanged(res => {
@@ -63,7 +65,7 @@ Page({
       } else {
         connects.push(res)
       }
-      this.setData({connects})
+      this.setData({ connects })
     })
   },
 
@@ -106,7 +108,7 @@ Page({
         title: '创建 server ',
       })
       this.server.onCharacteristicReadRequest(res => {
-        const {serviceId, characteristicId, callbackId} = res
+        const { serviceId, characteristicId, callbackId } = res
         const buffer = new ArrayBuffer(1)
         const dataView = new DataView(buffer)
         const newValue = Math.ceil(Math.random() * 10)
@@ -141,7 +143,7 @@ Page({
     }).catch(() => {})
   },
   closeServer() {
-    if (this.server) { 
+    if (this.server) {
       this.server.close()
       wx.showToast({
         title: '关闭 server',
@@ -301,11 +303,5 @@ Page({
       title: '结束流程',
     })
     wx.closeBluetoothAdapter()
-  },
-
-  onUnload() {
-    this.data.servers.forEach(() => {
-      // server.close()
-    })
   },
 })

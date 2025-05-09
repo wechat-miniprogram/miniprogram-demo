@@ -21,11 +21,10 @@ const yuvBehavior = Behavior({
       gl.linkProgram(program)
 
       if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        const info = gl.getProgramInfoLog(program);
+        const info = gl.getProgramInfoLog(program)
         console.log(info)
-        throw new Error(`Could not compile WebGL program. \n\n${info}`);
+        throw new Error(`Could not compile WebGL program. \n\n${info}`)
       }
-
 
       gl.useProgram(program)
 
@@ -105,7 +104,7 @@ const yuvBehavior = Behavior({
      //   FragColor = vec4(depth_color.rgb, 1.0);
       }
   `
-  
+
       const depthOutputProgram = this._depthOutputProgram = this.compileShader(gl, dvs, dfs)
       const uniformDepthTexture = gl.getUniformLocation(depthOutputProgram, 'depth_texture')
       gl.uniform1i(uniformDepthTexture, 5)
@@ -114,52 +113,57 @@ const yuvBehavior = Behavior({
       gl.useProgram(currentProgram)
     },
     buildPlane(
-      vertices, indices,
-      width, height,
-      widthSegments, heightSegments
+      vertices,
+      indices,
+      width,
+      height,
+      widthSegments,
+      heightSegments
     ) {
-      const width_half = width / 2;
-      const height_half = height / 2;
-    
-      const gridX = Math.floor( widthSegments );
-      const gridY = Math.floor( heightSegments );
-    
-      const gridX1 = gridX + 1;
-      const gridY1 = gridY + 1;
-    
-      const segment_width = width / gridX;
-      const segment_height = height / gridY;
-    
-      for ( let iy = 0; iy < gridY1; iy ++ ) {
-        const y = iy * segment_height - height_half;
-    
-        for ( let ix = 0; ix < gridX1; ix ++ ) {
-          const x = ix * segment_width - width_half;
-    
-            vertices.push(
-              // a_position
-              x, -y, 0,
-              // a_texCoord
-              ix / gridX, 1 - ( iy / gridY )
-            );
+      const width_half = width / 2
+      const height_half = height / 2
+
+      const gridX = Math.floor(widthSegments)
+      const gridY = Math.floor(heightSegments)
+
+      const gridX1 = gridX + 1
+      const gridY1 = gridY + 1
+
+      const segment_width = width / gridX
+      const segment_height = height / gridY
+
+      for (let iy = 0; iy < gridY1; iy++) {
+        const y = iy * segment_height - height_half
+
+        for (let ix = 0; ix < gridX1; ix++) {
+          const x = ix * segment_width - width_half
+
+          vertices.push(
+            // a_position
+            x,
+            -y,
+            0,
+            // a_texCoord
+            ix / gridX,
+            1 - (iy / gridY)
+          )
         }
       }
-      for ( let iy = 0; iy < gridY; iy ++ ) {
-        for ( let ix = 0; ix < gridX; ix ++ ) {
-          const a = ix + gridX1 * iy;
-          const b = ix + gridX1 * ( iy + 1 );
-          const c = ( ix + 1 ) + gridX1 * ( iy + 1 );
-          const d = ( ix + 1 ) + gridX1 * iy;
-          indices.push( a, b, d );
-          indices.push( b, c, d );
+      for (let iy = 0; iy < gridY; iy++) {
+        for (let ix = 0; ix < gridX; ix++) {
+          const a = ix + gridX1 * iy
+          const b = ix + gridX1 * (iy + 1)
+          const c = (ix + 1) + gridX1 * (iy + 1)
+          const d = (ix + 1) + gridX1 * iy
+          indices.push(a, b, d)
+          indices.push(b, c, d)
         }
       }
     },
     initVAO(program) {
       const gl = this.renderer.getContext()
       const ext = gl.getExtension('OES_vertex_array_object')
-      if (!this.ext)
-        this.ext = ext
+      if (!this.ext) this.ext = ext
 
       const currentVAO = gl.getParameter(gl.VERTEX_ARRAY_BINDING)
       const vao = ext.createVertexArrayOES()
@@ -189,7 +193,7 @@ const yuvBehavior = Behavior({
       const gl = this.renderer.getContext()
       const ext = gl.getExtension('OES_vertex_array_object')
 
-      if (!this.ext){
+      if (!this.ext) {
         this.ext = ext
       }
 
@@ -201,8 +205,7 @@ const yuvBehavior = Behavior({
       const vertices = []
       const indices = []
 
-      this.buildPlane(vertices, indices, 1, 1, width, height);
-
+      this.buildPlane(vertices, indices, 1, 1, width, height)
 
       const posAttr = gl.getAttribLocation(program, 'a_position')
       const pos = gl.createBuffer()
@@ -232,18 +235,18 @@ const yuvBehavior = Behavior({
       const displayTransform = frame.getDisplayTransform()
 
       // DepthBuffer
-      const depthBufferRes = frame.getDepthBuffer();
-      const depthBuffer = new Float32Array(depthBufferRes.DepthAddress);
+      const depthBufferRes = frame.getDepthBuffer()
+      const depthBuffer = new Float32Array(depthBufferRes.DepthAddress)
 
-      const texture = gl.createTexture();
-      gl.bindTexture(gl.TEXTURE_2D, texture);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      const texture = gl.createTexture()
+      gl.bindTexture(gl.TEXTURE_2D, texture)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
 
-      const width = depthBufferRes.width;
-      const height = depthBufferRes.height;
+      const width = depthBufferRes.width
+      const height = depthBufferRes.height
 
       // const ext = gl.getExtension("OES_texture_float");
       // if (ext) {
@@ -252,24 +255,23 @@ const yuvBehavior = Behavior({
       // }
 
       // 先直接采用 uint8 写入深度纹理，使用浮点写入的方法会存在锯齿
-      const data = new Uint8Array(width * height * 4);
+      const data = new Uint8Array(width * height * 4)
       for (let i = 0; i < depthBuffer.length; i++) {
-        let num = parseInt(depthBuffer[i] * 255);
-        data[i] = num;
+        const num = parseInt(depthBuffer[i] * 255)
+        data[i] = num
       }
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, data)
 
       const currentProgram = gl.getParameter(gl.CURRENT_PROGRAM)
       const currentActiveTexture = gl.getParameter(gl.ACTIVE_TEXTURE)
       const currentVAO = gl.getParameter(gl.VERTEX_ARRAY_BINDING)
       const bindingTexture = gl.getParameter(gl.TEXTURE_BINDING_2D)
 
-
-      if(!this._vao2){
-       // this._vao2 = this.initDepthOutputVAO(this._depthOutputProgram, width, height) 
-       this._vao2 = this.initVAO(this._depthOutputProgram) 
+      if (!this._vao2) {
+        // this._vao2 = this.initDepthOutputVAO(this._depthOutputProgram, width, height)
+        this._vao2 = this.initVAO(this._depthOutputProgram)
       }
-      
+
       this.ext.bindVertexArrayOES(this._vao2)
       gl.useProgram(this._depthOutputProgram)
 
@@ -289,7 +291,6 @@ const yuvBehavior = Behavior({
       gl.bindTexture(gl.TEXTURE_2D, bindingTexture)
 
       this.ext.bindVertexArrayOES(currentVAO)
-
     },
     renderGL(frame) {
       const gl = this.renderer.getContext()
@@ -305,7 +306,6 @@ const yuvBehavior = Behavior({
         const currentVAO = gl.getParameter(gl.VERTEX_ARRAY_BINDING)
         const bindingTexture = gl.getParameter(gl.TEXTURE_BINDING_2D)
 
-        
         gl.enable(gl.DEPTH_TEST)
         gl.depthMask(true)
         gl.depthFunc(gl.ALWAYS)
@@ -332,7 +332,6 @@ const yuvBehavior = Behavior({
         gl.bindTexture(gl.TEXTURE_2D, bindingTexture6)
         gl.activeTexture(gl.TEXTURE0 + 5)
         gl.bindTexture(gl.TEXTURE_2D, bindingTexture5)
-
 
         gl.useProgram(currentProgram)
         gl.activeTexture(currentActiveTexture)

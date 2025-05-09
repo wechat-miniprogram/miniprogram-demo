@@ -12,77 +12,73 @@ Component({
   },
   lifetimes: {
     async attached() {
-      console.log('data', this.data);
+      console.log('data', this.data)
     }
   },
   methods: {
     handleReady({
       detail
     }) {
-      const xrScene = this.scene = detail.value;
-      console.log('xr-scene', xrScene);
+      const xrScene = this.scene = detail.value
+      console.log('xr-scene', xrScene)
 
-      const xrFrameSystem = wx.getXrFrameSystem();
+      const xrFrameSystem = wx.getXrFrameSystem()
 
-      this.wxball = xrScene.getElementById('wxball');
+      this.wxball = xrScene.getElementById('wxball')
 
-      this.wxballTransform = this.wxball.getComponent(xrFrameSystem.Transform);
-      this.wxballTransform.visible = false;
-
-
+      this.wxballTransform = this.wxball.getComponent(xrFrameSystem.Transform)
+      this.wxballTransform.visible = false
     },
-    handleAssetsProgress: function ({
+    handleAssetsProgress({
       detail
     }) {
-      console.log('assets progress', detail.value);
+      console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded: function ({
+    handleAssetsLoaded({
       detail
     }) {
-      console.log('assets loaded', detail.value);
+      console.log('assets loaded', detail.value)
       this.setData({
         loaded: true
-      });
+      })
     },
-    handleGltfLoaded: function() {
-      const xrScene = this.scene;
+    handleGltfLoaded() {
+      const xrScene = this.scene
 
-      const xrFrameSystem = wx.getXrFrameSystem();
-      
-      this.wxball = xrScene.getElementById('wxball');
+      const xrFrameSystem = wx.getXrFrameSystem()
 
-      this.wxballAnimator = this.wxball.getComponent(xrFrameSystem.Animator);
+      this.wxball = xrScene.getElementById('wxball')
+
+      this.wxballAnimator = this.wxball.getComponent(xrFrameSystem.Animator)
 
       this.wxballAnimator.play('gltfAnimation', {
         loop: 0,
-      });
+      })
 
       this.wxballAnimator.play('gltfAnimation#0', {
         loop: 0,
-      });
+      })
 
-      this.wxballAnimator.pauseToFrame('gltfAnimation', 1);
-      this.wxballAnimator.pauseToFrame('gltfAnimation#0', 1);
+      this.wxballAnimator.pauseToFrame('gltfAnimation', 1)
+      this.wxballAnimator.pauseToFrame('gltfAnimation#0', 1)
 
-      this.wxballTransform.visible = true;
-
+      this.wxballTransform.visible = true
     },
-    handleTouchWXball: function() {
-     
+    handleTouchWXball() {
       if (!this.animationRuning) {
-        console.log('WXBALL TOUCH');
+        console.log('WXBALL TOUCH')
 
-        this.animationRuning = true;
+        this.animationRuning = true
 
-        this.wxballAnimator.pauseToFrame('gltfAnimation', 1);
-        this.wxballAnimator.pauseToFrame('gltfAnimation#0', 1);
-        
-        this.wxballAnimator.resume('gltfAnimation');
-        this.wxballAnimator.resume('gltfAnimation#0');
+        this.wxballAnimator.pauseToFrame('gltfAnimation', 1)
+        this.wxballAnimator.pauseToFrame('gltfAnimation#0', 1)
+
+        this.wxballAnimator.resume('gltfAnimation')
+        this.wxballAnimator.resume('gltfAnimation#0')
       }
     },
-    handleAnimationStop: function() {
-      console.log('animation Stop');
+    handleAnimationStop() {
+      console.log('animation Stop')
     }
   }
 })

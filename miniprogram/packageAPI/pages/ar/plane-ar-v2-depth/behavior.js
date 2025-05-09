@@ -19,7 +19,6 @@ export default function getBehavior() {
     },
     methods: {
       onReady() {
-
         wx.createSelectorQuery()
           .select('#webgl')
           .node()
@@ -111,12 +110,11 @@ export default function getBehavior() {
           version: 'v2',
           gl: this.gl,
         })
-      const session = this.session
+        const session = this.session
         session.start(err => {
-          
           if (err) {
             this.setData({
-              errMsg:'VK error: ' + err
+              errMsg: 'VK error: ' + err
             })
             return console.error('VK error: ', err)
           }
@@ -157,7 +155,6 @@ export default function getBehavior() {
             this.planeBox.add(reticle)
           })
 
-
           // anchor 检测
           const createPlane = size => {
             const geometry = new THREE.PlaneGeometry(size.width, size.height)
@@ -185,21 +182,21 @@ export default function getBehavior() {
               const size = anchor.size
               let object
               if (size) {
-               //  object = createPlane(size)
-                 this.planeBox.add(object)
+                //  object = createPlane(size)
+                this.planeBox.add(object)
               } else {
                 if (!this.model) {
                   console.warn('this.model 还没加载完成 ！！！！！')
                   return
                 }
-                  object = new THREE.Object3D()
-                  const model = this.getRobot()
-                  model.rotateX(-Math.PI / 2)
-                  object.add(model)
-                  this.robotBox.add(object)
+                object = new THREE.Object3D()
+                const model = this.getRobot()
+                model.rotateX(-Math.PI / 2)
+                object.add(model)
+                this.robotBox.add(object)
               }
 
-              if(object){
+              if (object) {
                 object._id = anchor.id
                 object._size = size
                 updateMatrix(object, anchor.transform)
@@ -217,7 +214,7 @@ export default function getBehavior() {
                 const size = anchor.size
                 if (size && object._size && (size.width !== object._size.width || size.height !== object._size.height)) {
                   this.planeBox.remove(object)
-                //  object = createPlane(size)
+                  //  object = createPlane(size)
                   this.plane = object
                   this.planeBox.add(object)
                 }
@@ -240,29 +237,28 @@ export default function getBehavior() {
             })
           })
 
-          //限制调用帧率
-          let fps = 30
-          let fpsInterval = 1000 / fps
+          // 限制调用帧率
+          const fps = 30
+          const fpsInterval = 1000 / fps
           let last = Date.now()
 
           // 逐帧渲染
           const onFrame = timestamp => {
-              let now = Date.now()
-              const mill = now - last
-              // 经过了足够的时间
-              if (mill > fpsInterval) {
-                  last = now - (mill % fpsInterval); //校正当前时间
-                  const frame = session.getVKFrame(canvas.width, canvas.height)
-                  if (frame) {
-                    try{
-                      this.render(frame)
-                    }catch(e){
-                      console.log(e)
-                    }
-                  
-                  }
+            const now = Date.now()
+            const mill = now - last
+            // 经过了足够的时间
+            if (mill > fpsInterval) {
+              last = now - (mill % fpsInterval) // 校正当前时间
+              const frame = session.getVKFrame(canvas.width, canvas.height)
+              if (frame) {
+                try {
+                  this.render(frame)
+                } catch (e) {
+                  console.log(e)
+                }
               }
-              session.requestAnimationFrame(onFrame)
+            }
+            session.requestAnimationFrame(onFrame)
           }
           session.requestAnimationFrame(onFrame)
         })
@@ -351,11 +347,11 @@ export default function getBehavior() {
         return model
       },
       onTouchEnd(evt) {
-        if(this.reticle.visible){
-          //0.05 -0.47 -0.14
+        if (this.reticle.visible) {
+          // 0.05 -0.47 -0.14
           this.hitPosition = this.reticle.position.clone()
           console.log(this.hitPosition)
-          
+
           const model = this.getRobot()
           model.position.copy(this.hitPosition)
           model.rotation.copy(this.reticle.rotation)

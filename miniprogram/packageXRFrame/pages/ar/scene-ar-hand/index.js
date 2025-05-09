@@ -1,6 +1,7 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
-var xmlCode = ``;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
+
+const xmlCode = ''
 Page({
   behaviors: [sceneReadyBehavior],
   data: {
@@ -8,7 +9,7 @@ Page({
     gesture: undefined,
     score: undefined
   },
-  handleInfo: function({detail}) {
-    this.setData({gesture: detail.gesture, score: detail.score.toFixed(2)});
+  handleInfo({ detail }) {
+    this.setData({ gesture: detail.gesture, score: detail.score.toFixed(2) })
   },
-});
+})

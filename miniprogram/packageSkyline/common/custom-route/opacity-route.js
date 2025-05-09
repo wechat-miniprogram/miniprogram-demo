@@ -1,6 +1,6 @@
-import {Curves} from './common'
+import { Curves } from './common'
 
-const OpacityTransitionRouteBuilder = ({primaryAnimation}) => {
+const OpacityTransitionRouteBuilder = ({ primaryAnimation }) => {
   const handlePrimaryAnimation = () => {
     'worklet'
 

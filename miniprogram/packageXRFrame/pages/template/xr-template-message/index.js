@@ -1,7 +1,7 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
 
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     messageData: {
       moveX: 0,
@@ -17,9 +17,9 @@ Page({
     this.setData({
       messageData: {
         moveX: this.data.messageData.moveX + 1,
-        moveZ: this.data.messageData.moveZ 
+        moveZ: this.data.messageData.moveZ
       }
-    });
+    })
   },
   tapSubX() {
     this.setData({
@@ -27,7 +27,7 @@ Page({
         moveX: this.data.messageData.moveX - 1,
         moveZ: this.data.messageData.moveZ
       }
-    });
+    })
   },
   tapPlusZ() {
     this.setData({
@@ -35,7 +35,7 @@ Page({
         moveX: this.data.messageData.moveX,
         moveZ: this.data.messageData.moveZ + 1,
       }
-    });
+    })
   },
   tapSubZ() {
     this.setData({
@@ -43,7 +43,7 @@ Page({
         moveX: this.data.messageData.moveX,
         moveZ: this.data.messageData.moveZ - 1,
       }
-    });
+    })
   },
   tapClose() {
     this.setData({
@@ -51,14 +51,14 @@ Page({
     })
   },
   handleInfoListener(cur) {
-    const detail = cur.detail;
+    const detail = cur.detail
 
     this.setData({
       speedX: detail.speedX,
       speedZ: detail.speedZ,
       posX: detail.posX,
       posZ: detail.posZ
-    });
+    })
   }
-  
-});
+
+})

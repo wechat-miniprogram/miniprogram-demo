@@ -102,12 +102,11 @@ export default function getBehavior() {
           version: 'v2',
           gl: this.gl,
         })
-      const session = this.session
+        const session = this.session
         session.start(err => {
-          
           if (err) {
             this.setData({
-              errMsg:'VK error: ' + err
+              errMsg: 'VK error: ' + err
             })
             return console.error('VK error: ', err)
           }
@@ -151,7 +150,7 @@ export default function getBehavior() {
           this.setData({
             showTip: true
           })
-          setTimeout(()=>{
+          setTimeout(() => {
             this.setData({
               showTip: false
             })
@@ -181,19 +180,19 @@ export default function getBehavior() {
               const size = anchor.size
               let object
               if (anchor.type == 0) {
-                 object = createPlane(size)
-                 this.setData({
-                    showTip: false
-                  })
+                object = createPlane(size)
+                this.setData({
+                  showTip: false
+                })
               } else {
                 if (!this.model) {
                   console.warn('this.model 还没加载完成 ！！！！！')
                   return
                 }
-                  object = new THREE.Object3D()
-                  const model = this.getRobot()
-                  model.rotateX(-Math.PI / 2)
-                  object.add(model)
+                object = new THREE.Object3D()
+                const model = this.getRobot()
+                model.rotateX(-Math.PI / 2)
+                object.add(model)
               }
 
               object._id = anchor.id
@@ -207,8 +206,8 @@ export default function getBehavior() {
               temp[item.id] = item
               return temp
             }, {})
-            const deletePlaneBoxs = [];
-            const newPlaneBoxs = [];
+            const deletePlaneBoxs = []
+            const newPlaneBoxs = []
             this.planeBox.children.forEach(object => {
               if (object._id && map[object._id]) {
                 const anchor = map[object._id]
@@ -218,13 +217,13 @@ export default function getBehavior() {
                   // object = createPlane(size)
                   // this.planeBox.add(object)
                   // 塞入删除队列
-                  deletePlaneBoxs.push(object);
-                  const newPlane = createPlane(size);
+                  deletePlaneBoxs.push(object)
+                  const newPlane = createPlane(size)
                   newPlane._id = anchor.id
                   newPlane._size = size
                   updateMatrix(newPlane, anchor.transform)
                   // 塞入添加队列
-                  newPlaneBoxs.push(newPlane);
+                  newPlaneBoxs.push(newPlane)
                 } else {
                   object._id = anchor.id
                   object._size = size
@@ -233,12 +232,12 @@ export default function getBehavior() {
               }
             })
             // 延后删除
-            for(let i = 0; i < deletePlaneBoxs.length; i++) {
+            for (let i = 0; i < deletePlaneBoxs.length; i++) {
               this.planeBox.remove(deletePlaneBoxs[i])
             }
             // 延后添加
-            for(let i = 0; i < newPlaneBoxs.length; i++) {
-              this.planeBox.add(newPlaneBoxs[i]);
+            for (let i = 0; i < newPlaneBoxs.length; i++) {
+              this.planeBox.add(newPlaneBoxs[i])
             }
           })
           session.on('removeAnchors', anchors => {
@@ -246,16 +245,16 @@ export default function getBehavior() {
               temp[item.id] = item
               return temp
             }, {})
-            const deletePlaneBoxs = [];
+            const deletePlaneBoxs = []
             this.planeBox.children.forEach(object => {
               if (object._id && map[object._id]) {
                 // this.planeBox.remove(object)
                 // 塞入删除队列
-                deletePlaneBoxs.push(object);
+                deletePlaneBoxs.push(object)
               }
             })
             // 延后删除
-            for(let i = 0; i < deletePlaneBoxs.length; i++) {
+            for (let i = 0; i < deletePlaneBoxs.length; i++) {
               this.planeBox.remove(deletePlaneBoxs[i])
             }
           })
@@ -264,24 +263,24 @@ export default function getBehavior() {
           const planeBox = this.planeBox = new THREE.Object3D()
           this.scene.add(planeBox)
 
-          //限制调用帧率
-          let fps = 30
-          let fpsInterval = 1000 / fps
+          // 限制调用帧率
+          const fps = 30
+          const fpsInterval = 1000 / fps
           let last = Date.now()
 
           // 逐帧渲染
           const onFrame = timestamp => {
-              let now = Date.now()
-              const mill = now - last
-              // 经过了足够的时间
-              if (mill > fpsInterval) {
-                  last = now - (mill % fpsInterval); //校正当前时间
-                  const frame = session.getVKFrame(canvas.width, canvas.height)
-                  if (frame) {
-                  this.render(frame)
-                  }
+            const now = Date.now()
+            const mill = now - last
+            // 经过了足够的时间
+            if (mill > fpsInterval) {
+              last = now - (mill % fpsInterval) // 校正当前时间
+              const frame = session.getVKFrame(canvas.width, canvas.height)
+              if (frame) {
+                this.render(frame)
               }
-              session.requestAnimationFrame(onFrame)
+            }
+            session.requestAnimationFrame(onFrame)
           }
           session.requestAnimationFrame(onFrame)
         })
@@ -312,38 +311,38 @@ export default function getBehavior() {
         renderer.gammaOutput = true
         renderer.gammaFactor = 2.2
 
-        const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        const geometry = new THREE.BoxGeometry(1, 1, 1)
 
-        const scale = 0.1;
-        const m1 = new THREE.MeshPhysicalMaterial( {
+        const scale = 0.1
+        const m1 = new THREE.MeshPhysicalMaterial({
           metalness: 0.0,
           roughness: 0.1,
           color: 0xff0000,
-        } );
-        const x = new THREE.Mesh( geometry, m1 );
-        x.position.set(1.5 * scale, 0, 0 );
-        x.scale.set(3 * scale, 0.1 * scale, 0.1 * scale);
-        scene.add( x );
+        })
+        const x = new THREE.Mesh(geometry, m1)
+        x.position.set(1.5 * scale, 0, 0)
+        x.scale.set(3 * scale, 0.1 * scale, 0.1 * scale)
+        scene.add(x)
 
-        const m2 = new THREE.MeshPhysicalMaterial( {
+        const m2 = new THREE.MeshPhysicalMaterial({
           metalness: 0.0,
           roughness: 0.1,
           color: 0x00ff00,
-        } );
-        const y = new THREE.Mesh( geometry, m2 );
-        y.position.set(0, 1.5 * scale, 0 );
-        y.scale.set(0.1 * scale, 3 * scale, 0.1 * scale);
-        scene.add( y );
+        })
+        const y = new THREE.Mesh(geometry, m2)
+        y.position.set(0, 1.5 * scale, 0)
+        y.scale.set(0.1 * scale, 3 * scale, 0.1 * scale)
+        scene.add(y)
 
-        const m3 = new THREE.MeshPhysicalMaterial( {
+        const m3 = new THREE.MeshPhysicalMaterial({
           metalness: 0.0,
           roughness: 0.1,
           color: 0x0000ff,
-        } );
-        const z = new THREE.Mesh( geometry, m3 );
-        z.position.set(0, 0, 1.5 * scale );
-        z.scale.set(0.1 * scale, 0.1 * scale, 3 * scale);
-        scene.add( z );
+        })
+        const z = new THREE.Mesh(geometry, m3)
+        z.position.set(0, 0, 1.5 * scale)
+        z.scale.set(0.1 * scale, 0.1 * scale, 3 * scale)
+        scene.add(z)
       },
       updateAnimation() {
         const dt = this.clock.getDelta()

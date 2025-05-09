@@ -52,4 +52,4 @@ vec4 getSkinningWorldPosition(vec4 origin) {
 #endif // WX_SKINNED
 }
 
-`;
+`

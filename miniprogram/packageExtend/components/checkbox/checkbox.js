@@ -15,7 +15,7 @@ module.exports =
         /** *** */ 			i: moduleId,
         /** *** */ 			l: false,
         /** *** */ 			exports: {}
-        /** *** */}
+        /** *** */ }
       /** *** */
       /** *** */ 		// Execute the module function
       /** *** */ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__)
@@ -37,16 +37,16 @@ module.exports =
     /** *** */ 	// define getter function for harmony exports
     /** *** */ 	__webpack_require__.d = function (exports, name, getter) {
       /** *** */ 		if (!__webpack_require__.o(exports, name)) {
-        /** *** */ 			Object.defineProperty(exports, name, {enumerable: true, get: getter})
+        /** *** */ 			Object.defineProperty(exports, name, { enumerable: true, get: getter })
         /** *** */ 		}
       /** *** */ 	}
     /** *** */
     /** *** */ 	// define __esModule on exports
     /** *** */ 	__webpack_require__.r = function (exports) {
       /** *** */ 		if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-        /** *** */ 			Object.defineProperty(exports, Symbol.toStringTag, {value: 'Module'})
+        /** *** */ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' })
         /** *** */ 		}
-      /** *** */ 		Object.defineProperty(exports, '__esModule', {value: true})
+      /** *** */ 		Object.defineProperty(exports, '__esModule', { value: true })
       /** *** */ 	}
     /** *** */
     /** *** */ 	// create a fake namespace object
@@ -60,7 +60,7 @@ module.exports =
       /** *** */ 		if ((mode & 4) && typeof value === 'object' && value && value.__esModule) return value
       /** *** */ 		const ns = Object.create(null)
       /** *** */ 		__webpack_require__.r(ns)
-      /** *** */ 		Object.defineProperty(ns, 'default', {enumerable: true, value})
+      /** *** */ 		Object.defineProperty(ns, 'default', { enumerable: true, value })
       /** *** */ 		if (mode & 2 && typeof value !== 'string') for (const key in value) __webpack_require__.d(ns, key, function (key) { return value[key] }.bind(null, key))
       /** *** */ 		return ns
       /** *** */ 	}
@@ -155,10 +155,10 @@ module.exports =
                 this.data.group.checkedChange(_checked, this)
               }
             }
-            this.triggerEvent('change', {value: this.data.value, checked: this.data.checked})
+            this.triggerEvent('change', { value: this.data.value, checked: this.data.checked })
           }
         }
       })
       /***/ })
 
-    /** *** */}))
+    /** *** */ }))

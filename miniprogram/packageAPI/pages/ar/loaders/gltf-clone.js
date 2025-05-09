@@ -1,4 +1,4 @@
-export default function(gltf, THREE) {
+export default function (gltf, THREE) {
   const clone = {
     animations: gltf.animations,
     scene: gltf.scene.clone(true)
@@ -25,7 +25,7 @@ export default function(gltf, THREE) {
     }
   })
 
-  for (let name in skinnedMeshes) {
+  for (const name in skinnedMeshes) {
     const skinnedMesh = skinnedMeshes[name]
     const skeleton = skinnedMesh.skeleton
     const cloneSkinnedMesh = cloneSkinnedMeshes[name]

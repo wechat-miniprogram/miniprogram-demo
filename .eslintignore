@@ -1,2 +1,6 @@
 /vendor
 /node_modules
+/cloudfunctions/ARDemo/cloud-functions-tools/test/svrkit-utils/example
+/cloudfunctions/ARDemo/wx-server-sdk-wxg-service/index.js
+/miniprogram/packageSkylineExamples
+/miniprogram/_commons/0.js

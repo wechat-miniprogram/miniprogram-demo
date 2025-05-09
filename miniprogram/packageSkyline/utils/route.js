@@ -4,6 +4,7 @@ export function initRoute() {
   wx.router.addRouteBuilder('fadeToggle', ({ primaryAnimation }) => {
     const handlePrimaryAnimation = () => {
       'worklet'
+
       return {
         opacity: fastOutSlowIn(primaryAnimation.value),
       }

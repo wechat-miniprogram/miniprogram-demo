@@ -5,20 +5,20 @@ CustomPage({
     showTopTips: false,
 
     radioItems: [
-      {name: 'cell standard', value: '0', checked: true},
-      {name: 'cell standard', value: '1'}
+      { name: 'cell standard', value: '0', checked: true },
+      { name: 'cell standard', value: '1' }
     ],
     checkboxItems: [
-      {name: 'standard is dealt for u.', value: '0', checked: true},
-      {name: 'standard is dealicient for u.', value: '1'}
+      { name: 'standard is dealt for u.', value: '0', checked: true },
+      { name: 'standard is dealicient for u.', value: '1' }
     ],
     items: [
-      {name: 'USA', value: '美国'},
-      {name: 'CHN', value: '中国', checked: 'true'},
-      {name: 'BRA', value: '巴西'},
-      {name: 'JPN', value: '日本'},
-      {name: 'ENG', value: '英国'},
-      {name: 'TUR', value: '法国'},
+      { name: 'USA', value: '美国' },
+      { name: 'CHN', value: '中国', checked: 'true' },
+      { name: 'BRA', value: '巴西' },
+      { name: 'JPN', value: '日本' },
+      { name: 'ENG', value: '英国' },
+      { name: 'TUR', value: '法国' },
     ],
 
     date: '2016-09-01',
@@ -39,22 +39,22 @@ CustomPage({
     },
     rules: [{
       name: 'radio',
-      rules: {required: false, message: '单选列表是必选项'},
+      rules: { required: false, message: '单选列表是必选项' },
     }, {
       name: 'checkbox',
-      rules: {required: true, message: '多选列表是必选项'},
+      rules: { required: true, message: '多选列表是必选项' },
     }, {
       name: 'name',
-      rules: {required: true, message: '请输入姓名'},
+      rules: { required: true, message: '请输入姓名' },
     }, {
       name: 'qq',
-      rules: {required: true, message: 'qq必填'},
+      rules: { required: true, message: 'qq必填' },
     }, {
       name: 'mobile',
-      rules: [{required: true, message: 'mobile必填'}, {mobile: true, message: 'mobile格式不对'}],
+      rules: [{ required: true, message: 'mobile必填' }, { mobile: true, message: 'mobile格式不对' }],
     }, {
       name: 'vcode',
-      rules: {required: true, message: '验证码必填'},
+      rules: { required: true, message: '验证码必填' },
     }, {
       name: 'idcard',
       rules: {
@@ -108,7 +108,7 @@ CustomPage({
     })
   },
   formInputChange(e) {
-    const {field} = e.currentTarget.dataset
+    const { field } = e.currentTarget.dataset
     this.setData({
       [`formData.${field}`]: e.detail.value
     })

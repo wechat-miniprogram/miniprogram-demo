@@ -14,7 +14,6 @@ function showSuccess(title) {
   })
 }
 
-
 Page({
   onShareAppMessage() {
     return {
@@ -32,15 +31,16 @@ Page({
     if (wx.offThemeChange) {
       wx.offThemeChange()
     }
+    this.closeSocket()
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     const self = this
@@ -61,10 +61,6 @@ Page({
     //     console.log('登录失败', error)
     //   }
     // })
-  },
-
-  onUnload() {
-    this.closeSocket()
   },
 
   toggleSocket(e) {
@@ -91,7 +87,7 @@ Page({
 
     wx.onSocketClose(() => {
       console.log('WebSocket 已断开')
-      this.setData({socketStatus: 'closed'})
+      this.setData({ socketStatus: 'closed' })
     })
 
     wx.onSocketError(error => {
@@ -122,7 +118,7 @@ Page({
       wx.closeSocket({
         success: () => {
           showSuccess('Socket已断开')
-          this.setData({socketStatus: 'closed'})
+          this.setData({ socketStatus: 'closed' })
         }
       })
     }

@@ -1,21 +1,19 @@
-
-
 Component({
   options: {
     pureDataPattern: /^_/,
     multipleSlots: true
   },
   properties: {
-    vtabs: {type: Array, value: []},
-    tabBarClass: {type: String, value: ''},
-    activeClass: {type: String, value: ''},
-    tabBarLineColor: {type: String, value: '#07c160'},
-    tabBarInactiveTextColor: {type: String, value: '#000000'},
-    tabBarActiveTextColor: {type: String, value: '#07c160'},
-    tabBarInactiveBgColor: {type: String, value: '#eeeeee'},
-    tabBarActiveBgColor: {type: String, value: '#ffffff'},
-    activeTab: {type: Number, value: 0},
-    animation: {type: Boolean, value: true}
+    vtabs: { type: Array, value: [] },
+    tabBarClass: { type: String, value: '' },
+    activeClass: { type: String, value: '' },
+    tabBarLineColor: { type: String, value: '#07c160' },
+    tabBarInactiveTextColor: { type: String, value: '#000000' },
+    tabBarActiveTextColor: { type: String, value: '#07c160' },
+    tabBarInactiveBgColor: { type: String, value: '#eeeeee' },
+    tabBarActiveBgColor: { type: String, value: '#ffffff' },
+    activeTab: { type: Number, value: 0 },
+    animation: { type: Boolean, value: true }
   },
   data: {
     currentView: 0,
@@ -69,13 +67,13 @@ Component({
       if (len === 0) return
       let currentView = index < 6 ? 0 : index - 5
       if (currentView >= len) currentView = len - 1
-      this.setData({currentView})
+      this.setData({ currentView })
     },
     handleTabClick: function handleTabClick(e) {
       const _heightRecords = this.data._heightRecords
       const index = e.currentTarget.dataset.index
       const contentScrollTop = _heightRecords[index - 1] || 0
-      this.triggerEvent('tabclick', {index})
+      this.triggerEvent('tabclick', { index })
       this.setData({
         activeTab: index,
         contentScrollTop
@@ -96,8 +94,8 @@ Component({
         }
       }
       if (index !== this.data.activeTab) {
-        this.triggerEvent('change', {index})
-        this.setData({activeTab: index})
+        this.triggerEvent('change', { index })
+        this.setData({ activeTab: index })
       }
     }
   }

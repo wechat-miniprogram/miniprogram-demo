@@ -71,7 +71,7 @@ Component({
       if (diff === 0) return
       this.data._last = current
       this.playCurrent(current)
-      this.triggerEvent('change', {activeId: curQueue[current].id})
+      this.triggerEvent('change', { activeId: curQueue[current].id })
       const direction = diff === 1 || diff === -2 ? 'up' : 'down'
       if (direction === 'up') {
         console.log(this.data)
@@ -157,9 +157,7 @@ Component({
 
       const detail = e.detail
       const activeId = e.target.dataset.id
-      this.triggerEvent(
-        type, Object.assign(Object.assign(Object.assign({}, detail), {activeId}), ext)
-      )
+      this.triggerEvent(type, { ...detail, activeId, ...ext })
     }
   },
 })

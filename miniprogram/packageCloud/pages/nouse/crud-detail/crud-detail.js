@@ -19,7 +19,7 @@ Page({
   },
 
   onLoad(options) {
-    const {todoId} = options
+    const { todoId } = options
     this.setData({
       todoId
     })
@@ -77,12 +77,12 @@ Page({
     if (this.data.updating || !this.data.todoId) {
       return
     }
-    const {todoId, description} = this.data
+    const { todoId, description } = this.data
     if (!description) {
       return
     }
 
-    this.setData({updating: true})
+    this.setData({ updating: true })
     const db = wx.cloud.database()
     db.collection('todos').doc(todoId).update({
       data: {
@@ -103,7 +103,7 @@ Page({
         console.error('[数据库] [更新记录] 失败：', err)
       },
       complete: () => {
-        this.setData({updating: false})
+        this.setData({ updating: false })
       }
     })
   },
@@ -112,9 +112,9 @@ Page({
     if (this.data.deleting || !this.data.todoId) {
       return
     }
-    const {todoId} = this.data
+    const { todoId } = this.data
 
-    this.setData({deleting: true})
+    this.setData({ deleting: true })
     const db = wx.cloud.database()
     db.collection('todos').doc(todoId).remove({
       success: () => {
@@ -131,7 +131,7 @@ Page({
         console.error('[数据库] [删除记录] 失败：', err)
       },
       complete: () => {
-        this.setData({deleting: false})
+        this.setData({ deleting: false })
       }
     })
   },

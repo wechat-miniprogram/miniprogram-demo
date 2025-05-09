@@ -29,7 +29,7 @@ export const AnimationStatus = {
 export const Curves = {}
 
 if (wx.worklet) {
-  const {Easing} = wx.worklet
+  const { Easing } = wx.worklet
   Object.assign(Curves, {
     fastLinearToSlowEaseIn: Easing.bezier(0.18, 1.0, 0.04, 1.0).factory(),
     linearToEaseOut: Easing.bezier(0.35, 0.91, 0.33, 0.97).factory(),
@@ -55,7 +55,7 @@ export const clamp = function (cur, lowerBound, upperBound) {
 export function CurveAnimation({
   animation, animationStatus, curve, reverseCurve
 }) {
-  const {derived} = wx.worklet
+  const { derived } = wx.worklet
 
   return derived(() => {
     'worklet'

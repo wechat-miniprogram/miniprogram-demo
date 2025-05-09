@@ -1,36 +1,36 @@
 export const lightBlue = {
-    // 0: '#E1F5FE',
-    // 100: '#B3E5FC',
-    // 200: '#81D4FA',
-    // 300: '#4FC3F7',
-    // 400: '#29B6F6',
-    // 500: '#03A9F4',
-    // 600: '#039BE5',
-    // 700: '#0288D1',
-    // 800: '#0277BD',
-    // 900: '#01579B',
-     0:'#efefef',
-    100: '#d7d7d7',
-    200:'#bdbdbd',
-    300: '#a3a3a3',
-    400: '#8f8f8f',
-    500:'#7b7b7b',
-    600:'#989898;',
-    700: '#747474',
-    800:'#696969',
-    900:'#5f5f5f',
+  // 0: '#E1F5FE',
+  // 100: '#B3E5FC',
+  // 200: '#81D4FA',
+  // 300: '#4FC3F7',
+  // 400: '#29B6F6',
+  // 500: '#03A9F4',
+  // 600: '#039BE5',
+  // 700: '#0288D1',
+  // 800: '#0277BD',
+  // 900: '#01579B',
+  0: '#efefef',
+  100: '#d7d7d7',
+  200: '#bdbdbd',
+  300: '#a3a3a3',
+  400: '#8f8f8f',
+  500: '#7b7b7b',
+  600: '#989898;',
+  700: '#747474',
+  800: '#696969',
+  900: '#5f5f5f',
+}
+
+export const generateList = (childCount) => {
+  const ans = []
+  for (let i = 0; i < childCount; i++) {
+    ans.push({
+      id: i,
+      color: lightBlue[`${100 * (i % 9)}`],
+    })
   }
-  
-  export const generateList = (childCount) => {
-    const ans = []
-    for (let i = 0; i < childCount; i++) {
-      ans.push({
-        id: i,
-        color: lightBlue[`${100 * (i % 9)}`],
-      })
-    }
-    return ans
-  }
+  return ans
+}
 
 function formatTime(time) {
   if (typeof time !== 'number' || time < 0) {
@@ -137,7 +137,7 @@ function getStatusBarHeight() {
 }
 
 function getFrameSliceOptions(frameWidth, frameHeight, displayWidth, displayHeight) {
-  let result = {
+  const result = {
     start: [0, 0, 0],
     size: [-1, -1, 3]
   }
@@ -155,20 +155,20 @@ function getFrameSliceOptions(frameWidth, frameHeight, displayWidth, displayHeig
   return result
 }
 
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max)
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max)
+}
+
+export const generateGridList = (childCount, columns) => {
+  const ans = []
+  for (let i = 0; i < childCount; i++) {
+    ans.push({
+      id: i,
+      sub: getRandomInt(columns) + 1,
+    })
   }
-  
-  export const generateGridList = (childCount, columns) => {
-    const ans = []
-    for (let i = 0; i < childCount; i++) {
-      ans.push({
-        id: i,
-        sub: getRandomInt(columns) + 1,
-      })
-    }
-    return ans
-  }
+  return ans
+}
 
 module.exports = {
   formatTime,
