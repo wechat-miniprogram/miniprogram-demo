@@ -1,4 +1,4 @@
 export default {
-  prefix: 't',
-}
-export const prefix = 't'
+    prefix: "t",
+};
+export const prefix = "t";

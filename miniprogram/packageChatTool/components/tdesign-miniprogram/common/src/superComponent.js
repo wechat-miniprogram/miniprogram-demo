@@ -1,5 +1,5 @@
 export class SuperComponent {
-  constructor() {
-    this.app = getApp()
-  }
+    constructor() {
+        this.app = getApp();
+    }
 }
