@@ -1,4 +1,5 @@
-module.exports = asPromise
+"use strict";
+module.exports = asPromise;
 
 /**
  * Callback as used by {@link util.asPromise}.
@@ -17,32 +18,35 @@ module.exports = asPromise
  * @param {...*} params Function arguments
  * @returns {Promise<*>} Promisified function
  */
-function asPromise(fn, ctx/* , varargs */) {
-  const params = new Array(arguments.length - 1)
-  let offset = 0
-  let index = 2
-  let pending = true
-  while (index < arguments.length) params[offset++] = arguments[index++]
-  return new Promise(function executor(resolve, reject) {
-    params[offset] = function callback(err/* , varargs */) {
-      if (pending) {
-        pending = false
-        if (err) reject(err)
-        else {
-          const params = new Array(arguments.length - 1)
-          let offset = 0
-          while (offset < params.length) params[offset++] = arguments[offset]
-          resolve.apply(null, params)
+function asPromise(fn, ctx/*, varargs */) {
+    var params  = new Array(arguments.length - 1),
+        offset  = 0,
+        index   = 2,
+        pending = true;
+    while (index < arguments.length)
+        params[offset++] = arguments[index++];
+    return new Promise(function executor(resolve, reject) {
+        params[offset] = function callback(err/*, varargs */) {
+            if (pending) {
+                pending = false;
+                if (err)
+                    reject(err);
+                else {
+                    var params = new Array(arguments.length - 1),
+                        offset = 0;
+                    while (offset < params.length)
+                        params[offset++] = arguments[offset];
+                    resolve.apply(null, params);
+                }
+            }
+        };
+        try {
+            fn.apply(ctx || null, params);
+        } catch (err) {
+            if (pending) {
+                pending = false;
+                reject(err);
+            }
         }
-      }
-    }
-    try {
-      fn.apply(ctx || null, params)
-    } catch (err) {
-      if (pending) {
-        pending = false
-        reject(err)
-      }
-    }
-  })
+    });
 }

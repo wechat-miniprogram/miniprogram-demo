@@ -1,13 +1,13 @@
-module.exports = Service
+"use strict";
+module.exports = Service;
 
 // extends Namespace
-const Namespace = require('./namespace');
+var Namespace = require("./namespace");
+((Service.prototype = Object.create(Namespace.prototype)).constructor = Service).className = "Service";
 
-((Service.prototype = Object.create(Namespace.prototype)).constructor = Service).className = 'Service'
-
-let Method
-let util
-let rpc
+var Method,
+    util,
+    rpc;
 
 /**
  * Constructs a new service instance.
@@ -19,20 +19,20 @@ let rpc
  * @throws {TypeError} If arguments are invalid
  */
 function Service(name, options) {
-  Namespace.call(this, name, options)
+    Namespace.call(this, name, options);
 
-  /**
+    /**
      * Service methods.
      * @type {Object.<string,Method>}
      */
-  this.methods = {} // toJSON, marker
+    this.methods = {}; // toJSON, marker
 
-  /**
+    /**
      * Cached methods as an array.
      * @type {Method[]|null}
      * @private
      */
-  this._methodsArray = null
+    this._methodsArray = null;
 }
 
 /**
@@ -50,13 +50,16 @@ function Service(name, options) {
  * @throws {TypeError} If arguments are invalid
  */
 Service.fromJSON = function fromJSON(name, json) {
-  const service = new Service(name, json.options)
-  /* istanbul ignore else */
-  if (json.methods) for (let names = Object.keys(json.methods), i = 0; i < names.length; ++i) service.add(Method.fromJSON(names[i], json.methods[names[i]]))
-  if (json.nested) service.addJSON(json.nested)
-  service.comment = json.comment
-  return service
-}
+    var service = new Service(name, json.options);
+    /* istanbul ignore else */
+    if (json.methods)
+        for (var names = Object.keys(json.methods), i = 0; i < names.length; ++i)
+            service.add(Method.fromJSON(names[i], json.methods[names[i]]));
+    if (json.nested)
+        service.addJSON(json.nested);
+    service.comment = json.comment;
+    return service;
+};
 
 /**
  * Converts this service to a service descriptor.
@@ -64,15 +67,15 @@ Service.fromJSON = function fromJSON(name, json) {
  * @returns {IService} Service descriptor
  */
 Service.prototype.toJSON = function toJSON(toJSONOptions) {
-  const inherited = Namespace.prototype.toJSON.call(this, toJSONOptions)
-  const keepComments = toJSONOptions ? Boolean(toJSONOptions.keepComments) : false
-  return util.toObject([
-    'options', inherited && inherited.options || undefined,
-    'methods', Namespace.arrayToJSON(this.methodsArray, toJSONOptions) || /* istanbul ignore next */ {},
-    'nested', inherited && inherited.nested || undefined,
-    'comment', keepComments ? this.comment : undefined
-  ])
-}
+    var inherited = Namespace.prototype.toJSON.call(this, toJSONOptions);
+    var keepComments = toJSONOptions ? Boolean(toJSONOptions.keepComments) : false;
+    return util.toObject([
+        "options" , inherited && inherited.options || undefined,
+        "methods" , Namespace.arrayToJSON(this.methodsArray, toJSONOptions) || /* istanbul ignore next */ {},
+        "nested"  , inherited && inherited.nested || undefined,
+        "comment" , keepComments ? this.comment : undefined
+    ]);
+};
 
 /**
  * Methods of this service as an array for iteration.
@@ -80,63 +83,68 @@ Service.prototype.toJSON = function toJSON(toJSONOptions) {
  * @type {Method[]}
  * @readonly
  */
-Object.defineProperty(Service.prototype, 'methodsArray', {
-  get() {
-    return this._methodsArray || (this._methodsArray = util.toArray(this.methods))
-  }
-})
+Object.defineProperty(Service.prototype, "methodsArray", {
+    get: function() {
+        return this._methodsArray || (this._methodsArray = util.toArray(this.methods));
+    }
+});
 
 function clearCache(service) {
-  service._methodsArray = null
-  return service
+    service._methodsArray = null;
+    return service;
 }
 
 /**
  * @override
  */
 Service.prototype.get = function get(name) {
-  return this.methods[name] ||
-        Namespace.prototype.get.call(this, name)
-}
+    return this.methods[name]
+        || Namespace.prototype.get.call(this, name);
+};
 
 /**
  * @override
  */
 Service.prototype.resolveAll = function resolveAll() {
-  const methods = this.methodsArray
-  for (let i = 0; i < methods.length; ++i) methods[i].resolve()
-  return Namespace.prototype.resolve.call(this)
-}
+    var methods = this.methodsArray;
+    for (var i = 0; i < methods.length; ++i)
+        methods[i].resolve();
+    return Namespace.prototype.resolve.call(this);
+};
 
 /**
  * @override
  */
 Service.prototype.add = function add(object) {
-  /* istanbul ignore if */
-  if (this.get(object.name)) throw Error("duplicate name '" + object.name + "' in " + this)
 
-  if (object instanceof Method) {
-    this.methods[object.name] = object
-    object.parent = this
-    return clearCache(this)
-  }
-  return Namespace.prototype.add.call(this, object)
-}
+    /* istanbul ignore if */
+    if (this.get(object.name))
+        throw Error("duplicate name '" + object.name + "' in " + this);
+
+    if (object instanceof Method) {
+        this.methods[object.name] = object;
+        object.parent = this;
+        return clearCache(this);
+    }
+    return Namespace.prototype.add.call(this, object);
+};
 
 /**
  * @override
  */
 Service.prototype.remove = function remove(object) {
-  if (object instanceof Method) {
-    /* istanbul ignore if */
-    if (this.methods[object.name] !== object) throw Error(object + ' is not a member of ' + this)
+    if (object instanceof Method) {
 
-    delete this.methods[object.name]
-    object.parent = null
-    return clearCache(this)
-  }
-  return Namespace.prototype.remove.call(this, object)
-}
+        /* istanbul ignore if */
+        if (this.methods[object.name] !== object)
+            throw Error(object + " is not a member of " + this);
+
+        delete this.methods[object.name];
+        object.parent = null;
+        return clearCache(this);
+    }
+    return Namespace.prototype.remove.call(this, object);
+};
 
 /**
  * Creates a runtime service using the specified rpc implementation.
@@ -146,20 +154,20 @@ Service.prototype.remove = function remove(object) {
  * @returns {rpc.Service} RPC service. Useful where requests and/or responses are streamed.
  */
 Service.prototype.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-  const rpcService = new rpc.Service(rpcImpl, requestDelimited, responseDelimited)
-  for (var i = 0, method; i < /* initializes */ this.methodsArray.length; ++i) {
-    const methodName = util.lcFirst((method = this._methodsArray[i]).resolve().name).replace(/[^$\w_]/g, '')
-    rpcService[methodName] = util.codegen(['r', 'c'], util.isReserved(methodName) ? methodName + '_' : methodName)('return this.rpcCall(m,q,s,r,c)')({
-      m: method,
-      q: method.resolvedRequestType.ctor,
-      s: method.resolvedResponseType.ctor
-    })
-  }
-  return rpcService
-}
+    var rpcService = new rpc.Service(rpcImpl, requestDelimited, responseDelimited);
+    for (var i = 0, method; i < /* initializes */ this.methodsArray.length; ++i) {
+        var methodName = util.lcFirst((method = this._methodsArray[i]).resolve().name).replace(/[^$\w_]/g, "");
+        rpcService[methodName] = util.codegen(["r","c"], util.isReserved(methodName) ? methodName + "_" : methodName)("return this.rpcCall(m,q,s,r,c)")({
+            m: method,
+            q: method.resolvedRequestType.ctor,
+            s: method.resolvedResponseType.ctor
+        });
+    }
+    return rpcService;
+};
 
-Service._configure = function () {
-  Method = require('./method')
-  util = require('./util')
-  rpc = require('./rpc/service')
-}
+Service._configure = function (){
+    Method = require("./method");
+    util   = require("./util");
+    rpc    = require("./rpc/service");
+};

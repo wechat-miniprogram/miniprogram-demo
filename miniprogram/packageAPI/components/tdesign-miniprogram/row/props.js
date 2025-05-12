@@ -1,6 +1,6 @@
 const props = {
-  gutter: {
-    type: null,
-  },
-}
-export default props
+    gutter: {
+        type: null,
+    },
+};
+export default props;

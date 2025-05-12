@@ -1,4 +1,4 @@
-module.exports = pool
+module.exports = pool;
 
 /**
  * An allocator as used by {@link util.pool}.
@@ -28,19 +28,20 @@ module.exports = pool
  * @returns {PoolAllocator} Pooled allocator
  */
 function pool(alloc, slice, size) {
-  const SIZE = size || 8192
-  const MAX = SIZE >>> 1
-  let slab = null
-  let offset = SIZE
-  return function pool_alloc(size) {
-    if (size < 1 || size > MAX) return alloc(size)
-    if (offset + size > SIZE) {
-      slab = alloc(SIZE)
-      offset = 0
-    }
-    const buf = slice.call(slab, offset, offset += size)
-    if (offset & 7) // align to 32 bit
-    { offset = (offset | 7) + 1 }
-    return buf
-  }
+    var SIZE   = size || 8192;
+    var MAX    = SIZE >>> 1;
+    var slab   = null;
+    var offset = SIZE;
+    return function pool_alloc(size) {
+        if (size < 1 || size > MAX)
+            return alloc(size);
+        if (offset + size > SIZE) {
+            slab = alloc(SIZE);
+            offset = 0;
+        }
+        var buf = slice.call(slab, offset, offset += size);
+        if (offset & 7) // align to 32 bit
+            offset = (offset | 7) + 1;
+        return buf;
+    };
 }

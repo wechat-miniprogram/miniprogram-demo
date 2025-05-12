@@ -1,18 +1,17 @@
-module.exports = Root
+module.exports = Root;
 
 // extends Namespace
-const Namespace = require('./namespace');
+var Namespace = require("./namespace");
+((Root.prototype = Object.create(Namespace.prototype)).constructor = Root).className = "Root";
 
-((Root.prototype = Object.create(Namespace.prototype)).constructor = Root).className = 'Root'
+var Field   = require("./field"),
+    Enum    = require("./enum"),
+    OneOf   = require("./oneof"),
+    util    = require("./util");
 
-let Field = require('./field')
-let Enum = require('./enum')
-let OneOf = require('./oneof')
-let util = require('./util')
-
-let Type // cyclic
-let parse // might be excluded
-let common // "
+var Type,   // cyclic
+    parse,  // might be excluded
+    common; // "
 
 /**
  * Constructs a new root namespace instance.
@@ -22,25 +21,25 @@ let common // "
  * @param {Object.<string,*>} [options] Top level options
  */
 function Root(options) {
-  Namespace.call(this, '', options)
+    Namespace.call(this, "", options);
 
-  /**
+    /**
      * Deferred extension fields.
      * @type {Field[]}
      */
-  this.deferred = []
+    this.deferred = [];
 
-  /**
+    /**
      * Resolved file names of loaded files.
      * @type {string[]}
      */
-  this.files = []
+    this.files = [];
 
-  /**
+    /**
      * Resolved name of parsered pbString.
      * @type {string[]}
      */
-  this.names = []
+    this.names = [];
 }
 
 /**
@@ -50,11 +49,13 @@ function Root(options) {
  * @returns {Root} Root namespace
  */
 Root.fromJSON = function fromJSON(json, root) {
-  json = typeof json === 'string' ? JSON.parse(json) : json
-  if (!root) root = new Root()
-  if (json.options) root.setOptions(json.options)
-  return root.addJSON(json.nested)
-}
+    json = typeof json === 'string' ? JSON.parse(json) : json;
+    if (!root)
+        root = new Root();
+    if (json.options)
+        root.setOptions(json.options);
+    return root.addJSON(json.nested);
+};
 
 /**
  * Resolves the path of an imported file, relative to the importing origin.
@@ -64,83 +65,89 @@ Root.fromJSON = function fromJSON(json, root) {
  * @param {string} target The file name being imported
  * @returns {string|null} Resolved path to `target` or `null` to skip the file
  */
-Root.prototype.resolvePath = util.path.resolve
+Root.prototype.resolvePath = util.path.resolve;
 
 // A symbol-like function to safely signal synchronous loading
 /* istanbul ignore next */
 function SYNC() {} // eslint-disable-line no-empty-function
 
-function parseFromPbString(pbString, options, callback) {
-  if (typeof options === 'function') {
-    callback = options
-    options = undefined
-  }
-  const self = this
-  if (!callback) {
-    return util.asPromise(parseFromPbString, self, pbString, options)
-  }
+function parseFromPbString(pbString, options, callback){
 
-  let pbObj = null
-  if (typeof pbString === 'string') {
-    pbObj = JSON.parse(pbString)
-  } else if (typeof pbString === 'object') {
-    pbObj = pbString
-  } else {
-    // throw Error("pb格式转化失败");
-    console.log('pb格式转化失败')
-    return undefined
-  }
-
-  const name = pbObj.name
-  const pbJsonStr = pbObj.pbJsonStr
-
-  function finish(err, root) {
-    if (!callback) return
-    const cb = callback
-    callback = null
-    cb(err, root)
-  }
-
-  function process(name, source) {
-    try {
-      if (util.isString(source) && source.charAt(0) === '{') source = JSON.parse(source)
-      if (!util.isString(source)) self.setOptions(source.options).addJSON(source.nested)
-      else {
-        parse.filename = name
-        const parsed = parse(source, self, options)
-        let resolved
-        let i = 0
-        if (parsed.imports) {
-          for (; i < parsed.imports.length; ++i) {
-            resolved = parsed.imports[i]
-            fetch(resolved)
-          }
-        }
-        if (parsed.weakImports) {
-          for (i = 0; i < parsed.weakImports.length; ++i) resolved = parsed.weakImports[i]
-          fetch(resolved, true)
-        }
-      }
-    } catch (err) {
-      finish(err)
+    if (typeof options === "function") {
+        callback = options;
+        options = undefined;
+    }
+    var self = this;
+    if (!callback){
+        return util.asPromise(parseFromPbString, self, pbString, options);
     }
 
-    finish(null, self) // only once anyway
-  }
-
-  function fetch(name) {
-    if (self.names.indexOf(name) > -1) return
-    self.names.push(name)
-    if (name in common) {
-      process(name, common[name])
+    var pbObj = null;
+    if(typeof pbString === 'string'){
+        pbObj = JSON.parse(pbString);
+    }else if(typeof pbString === 'object'){
+        pbObj = pbString;
+    }else {
+        //throw Error("pb格式转化失败");
+        console.log("pb格式转化失败");
+        return undefined;
     }
-  }
 
-  process(name, pbJsonStr)
-  return undefined
+    var name      = pbObj['name'];
+    var pbJsonStr = pbObj['pbJsonStr'];
+
+    function finish(err, root){
+        if(!callback)
+            return;
+        var cb = callback;
+        callback = null;
+        cb(err, root);
+    }
+
+    function process(name, source){
+        try {
+            if (util.isString(source) && source.charAt(0) === "{")
+                source = JSON.parse(source);
+            if (!util.isString(source))
+                self.setOptions(source.options).addJSON(source.nested);
+            else {
+                parse.filename = name;
+                var parsed = parse(source, self, options),
+                    resolved;
+                var i = 0;
+                if(parsed.imports){
+                    for (; i < parsed.imports.length; ++i){
+                        resolved = parsed.imports[i];
+                        fetch(resolved);
+                    }
+                }
+                if (parsed.weakImports){
+                    for (i = 0; i < parsed.weakImports.length; ++i)
+                         resolved = parsed.weakImports[i];
+                            fetch(resolved, true);
+                }
+            }
+        } catch (err) {
+            finish(err);
+        }
+
+        finish(null, self); // only once anyway
+    }
+
+    function  fetch(name){
+        if(self.names.indexOf(name)>-1)
+            return;
+        self.names.push(name);
+        if (name in common){
+            process(name, common[name]);
+        }
+    }
+
+    process(name, pbJsonStr);
+    return undefined;
 }
 
-Root.prototype.parseFromPbString = parseFromPbString
+Root.prototype.parseFromPbString = parseFromPbString;
 
 /**
  * Loads one or multiple .proto or preprocessed .json files into this root namespace and calls the callback.
@@ -150,108 +157,132 @@ Root.prototype.parseFromPbString = parseFromPbString
  * @returns {undefined}
  */
 Root.prototype.load = function load(filename, options, callback) {
-  if (typeof options === 'function') {
-    callback = options
-    options = undefined
-  }
-  const self = this
-  if (!callback) return util.asPromise(load, self, filename, options)
-
-  const sync = callback === SYNC // undocumented
-
-  // Finishes loading by calling the callback (exactly once)
-  function finish(err, root) {
-    /* istanbul ignore if */
-    if (!callback) return
-    const cb = callback
-    callback = null
-    if (sync) throw err
-    cb(err, root)
-  }
-
-  // Processes a single file
-  function process(filename, source) {
-    try {
-      if (util.isString(source) && source.charAt(0) === '{') source = JSON.parse(source)
-      if (!util.isString(source)) self.setOptions(source.options).addJSON(source.nested)
-      else {
-        parse.filename = filename
-        const parsed = parse(source, self, options)
-        let resolved
-        let i = 0
-        if (parsed.imports) for (; i < parsed.imports.length; ++i) if (resolved = self.resolvePath(filename, parsed.imports[i])) fetch(resolved)
-        if (parsed.weakImports) for (i = 0; i < parsed.weakImports.length; ++i) if (resolved = self.resolvePath(filename, parsed.weakImports[i])) fetch(resolved, true)
-      }
-    } catch (err) {
-      finish(err)
+    if (typeof options === "function") {
+        callback = options;
+        options = undefined;
     }
-    if (!sync && !queued) finish(null, self) // only once anyway
-  }
+    var self = this;
+    if (!callback)
+        return util.asPromise(load, self, filename, options);
 
-  // Fetches a single file
-  function fetch(filename, weak) {
-    // Strip path if this file references a bundled definition
-    const idx = filename.lastIndexOf('google/protobuf/')
-    if (idx > -1) {
-      const altname = filename.substring(idx)
-      if (altname in common) filename = altname
-    }
+    var sync = callback === SYNC; // undocumented
 
-    // Skip if already loaded / attempted
-    if (self.files.indexOf(filename) > -1) return
-    self.files.push(filename)
-
-    // Shortcut bundled definitions
-    if (filename in common) {
-      if (sync) process(filename, common[filename])
-      else {
-        ++queued
-        setTimeout(function () {
-          --queued
-          process(filename, common[filename])
-        })
-      }
-      return
-    }
-
-    // Otherwise fetch from disk or network
-    if (sync) {
-      let source
-      try {
-        source = util.fs.readFileSync(filename).toString('utf8')
-      } catch (err) {
-        if (!weak) finish(err)
-        return
-      }
-      process(filename, source)
-    } else {
-      ++queued
-      util.fetch(filename, function (err, source) {
-        --queued
+    // Finishes loading by calling the callback (exactly once)
+    function finish(err, root) {
         /* istanbul ignore if */
-        if (!callback) return // terminated meanwhile
-        if (err) {
-          /* istanbul ignore else */
-          if (!weak) finish(err)
-          else if (!queued) // can't be covered reliably
-          { finish(null, self) }
-          return
-        }
-        process(filename, source)
-      })
+        if (!callback)
+            return;
+        var cb = callback;
+        callback = null;
+        if (sync)
+            throw err;
+        cb(err, root);
     }
-  }
-  var queued = 0
 
-  // Assembling the root namespace doesn't require working type
-  // references anymore, so we can load everything in parallel
-  if (util.isString(filename)) filename = [filename]
-  for (var i = 0, resolved; i < filename.length; ++i) if (resolved = self.resolvePath('', filename[i])) fetch(resolved)
+    // Processes a single file
+    function process(filename, source) {
+        try {
+            if (util.isString(source) && source.charAt(0) === "{")
+                source = JSON.parse(source);
+            if (!util.isString(source))
+                self.setOptions(source.options).addJSON(source.nested);
+            else {
+                parse.filename = filename;
+                var parsed = parse(source, self, options),
+                    resolved,
+                    i = 0;
+                if (parsed.imports)
+                    for (; i < parsed.imports.length; ++i)
+                        if (resolved = self.resolvePath(filename, parsed.imports[i]))
+                            fetch(resolved);
+                if (parsed.weakImports)
+                    for (i = 0; i < parsed.weakImports.length; ++i)
+                        if (resolved = self.resolvePath(filename, parsed.weakImports[i]))
+                            fetch(resolved, true);
+            }
+        } catch (err) {
+            finish(err);
+        }
+        if (!sync && !queued)
+            finish(null, self); // only once anyway
+    }
 
-  if (sync) return self
-  if (!queued) finish(null, self)
-  return undefined
-}
+    // Fetches a single file
+    function fetch(filename, weak) {
+
+        // Strip path if this file references a bundled definition
+        var idx = filename.lastIndexOf("google/protobuf/");
+        if (idx > -1) {
+            var altname = filename.substring(idx);
+            if (altname in common)
+                filename = altname;
+        }
+
+        // Skip if already loaded / attempted
+        if (self.files.indexOf(filename) > -1)
+            return;
+        self.files.push(filename);
+
+        // Shortcut bundled definitions
+        if (filename in common) {
+            if (sync)
+                process(filename, common[filename]);
+            else {
+                ++queued;
+                setTimeout(function() {
+                    --queued;
+                    process(filename, common[filename]);
+                });
+            }
+            return;
+        }
+
+        // Otherwise fetch from disk or network
+        if (sync) {
+            var source;
+            try {
+                source = util.fs.readFileSync(filename).toString("utf8");
+            } catch (err) {
+                if (!weak)
+                    finish(err);
+                return;
+            }
+            process(filename, source);
+        } else {
+            ++queued;
+            util.fetch(filename, function(err, source) {
+                --queued;
+                /* istanbul ignore if */
+                if (!callback)
+                    return; // terminated meanwhile
+                if (err) {
+                    /* istanbul ignore else */
+                    if (!weak)
+                        finish(err);
+                    else if (!queued) // can't be covered reliably
+                        finish(null, self);
+                    return;
+                }
+                process(filename, source);
+            });
+        }
+    }
+    var queued = 0;
+
+    // Assembling the root namespace doesn't require working type
+    // references anymore, so we can load everything in parallel
+    if (util.isString(filename))
+        filename = [ filename ];
+    for (var i = 0, resolved; i < filename.length; ++i)
+        if (resolved = self.resolvePath("", filename[i]))
+            fetch(resolved);
+
+    if (sync)
+        return self;
+    if (!queued)
+        finish(null, self);
+    return undefined;
+};
 // function load(filename:string, options:IParseOptions, callback:LoadCallback):undefined
 
 /**
@@ -283,24 +314,24 @@ Root.prototype.load = function load(filename, options, callback) {
  * @throws {Error} If synchronous fetching is not supported (i.e. in browsers) or if a file's syntax is invalid
  */
 Root.prototype.loadSync = function loadSync(filename, options) {
-  if (!util.isNode) throw Error('not supported')
-  return this.load(filename, options, SYNC)
-}
+    if (!util.isNode)
+        throw Error("not supported");
+    return this.load(filename, options, SYNC);
+};
 
 /**
  * @override
  */
 Root.prototype.resolveAll = function resolveAll() {
-  if (this.deferred.length) {
-    throw Error('unresolvable extensions: ' + this.deferred.map(function (field) {
-      return "'extend " + field.extend + "' in " + field.parent.fullName
-    }).join(', '))
-  }
-  return Namespace.prototype.resolveAll.call(this)
-}
+    if (this.deferred.length)
+        throw Error("unresolvable extensions: " + this.deferred.map(function(field) {
+                return "'extend " + field.extend + "' in " + field.parent.fullName;
+            }).join(", "));
+    return Namespace.prototype.resolveAll.call(this);
+};
 
 // only uppercased (and thus conflict-free) children are exposed, see below
-const exposeRe = /^[A-Z]/
+var exposeRe = /^[A-Z]/;
 
 /**
  * Handles a deferred declaring extension field by creating a sister field to represent it within its extended type.
@@ -311,15 +342,15 @@ const exposeRe = /^[A-Z]/
  * @ignore
  */
 function tryHandleExtension(root, field) {
-  const extendedType = field.parent.lookup(field.extend)
-  if (extendedType) {
-    const sisterField = new Field(field.fullName, field.id, field.type, field.rule, undefined, field.options)
-    sisterField.declaringField = field
-    field.extensionField = sisterField
-    extendedType.add(sisterField)
-    return true
-  }
-  return false
+    var extendedType = field.parent.lookup(field.extend);
+    if (extendedType) {
+        var sisterField = new Field(field.fullName, field.id, field.type, field.rule, undefined, field.options);
+        sisterField.declaringField = field;
+        field.extensionField = sisterField;
+        extendedType.add(sisterField);
+        return true;
+    }
+    return false;
 }
 
 /**
@@ -329,27 +360,35 @@ function tryHandleExtension(root, field) {
  * @private
  */
 Root.prototype._handleAdd = function _handleAdd(object) {
-  if (object instanceof Field) {
-    if (/* an extension field (implies not part of a oneof) */ object.extend !== undefined && /* not already handled */ !object.extensionField) if (!tryHandleExtension(this, object)) this.deferred.push(object)
-  } else if (object instanceof Enum) {
-    if (exposeRe.test(object.name)) object.parent[object.name] = object.values // expose enum values as property of its parent
-  } else if (!(object instanceof OneOf)) /* everything else is a namespace */ {
-    if (object instanceof Type) // Try to handle any deferred extensions
-    {
-      for (let i = 0; i < this.deferred.length;) {
-        if (tryHandleExtension(this, this.deferred[i])) this.deferred.splice(i, 1)
-        else ++i
-      }
-    }
-    for (let j = 0; j < /* initializes */ object.nestedArray.length; ++j) // recurse into the namespace
-    { this._handleAdd(object._nestedArray[j]) }
-    if (exposeRe.test(object.name)) object.parent[object.name] = object // expose namespace as property of its parent
-  }
+    if (object instanceof Field) {
 
-  // The above also adds uppercased (and thus conflict-free) nested types, services and enums as
-  // properties of namespaces just like static code does. This allows using a .d.ts generated for
-  // a static module with reflection-based solutions where the condition is met.
-}
+        if (/* an extension field (implies not part of a oneof) */ object.extend !== undefined && /* not already handled */ !object.extensionField)
+            if (!tryHandleExtension(this, object))
+                this.deferred.push(object);
+
+    } else if (object instanceof Enum) {
+
+        if (exposeRe.test(object.name))
+            object.parent[object.name] = object.values; // expose enum values as property of its parent
+
+    } else if (!(object instanceof OneOf)) /* everything else is a namespace */ {
+
+        if (object instanceof Type) // Try to handle any deferred extensions
+            for (var i = 0; i < this.deferred.length;)
+                if (tryHandleExtension(this, this.deferred[i]))
+                    this.deferred.splice(i, 1);
+                else
+                    ++i;
+        for (var j = 0; j < /* initializes */ object.nestedArray.length; ++j) // recurse into the namespace
+            this._handleAdd(object._nestedArray[j]);
+        if (exposeRe.test(object.name))
+            object.parent[object.name] = object; // expose namespace as property of its parent
+    }
+
+    // The above also adds uppercased (and thus conflict-free) nested types, services and enums as
+    // properties of namespaces just like static code does. This allows using a .d.ts generated for
+    // a static module with reflection-based solutions where the condition is met.
+};
 
 /**
  * Called when any object is removed from this root or its sub-namespaces.
@@ -358,34 +397,43 @@ Root.prototype._handleAdd = function _handleAdd(object) {
  * @private
  */
 Root.prototype._handleRemove = function _handleRemove(object) {
-  if (object instanceof Field) {
-    if (/* an extension field */ object.extend !== undefined) {
-      if (/* already handled */ object.extensionField) { // remove its sister field
-        object.extensionField.parent.remove(object.extensionField)
-        object.extensionField = null
-      } else { // cancel the extension
-        const index = this.deferred.indexOf(object)
-        /* istanbul ignore else */
-        if (index > -1) this.deferred.splice(index, 1)
-      }
+    if (object instanceof Field) {
+
+        if (/* an extension field */ object.extend !== undefined) {
+            if (/* already handled */ object.extensionField) { // remove its sister field
+                object.extensionField.parent.remove(object.extensionField);
+                object.extensionField = null;
+            } else { // cancel the extension
+                var index = this.deferred.indexOf(object);
+                /* istanbul ignore else */
+                if (index > -1)
+                    this.deferred.splice(index, 1);
+            }
+        }
+
+    } else if (object instanceof Enum) {
+
+        if (exposeRe.test(object.name))
+            delete object.parent[object.name]; // unexpose enum values
+
+    } else if (object instanceof Namespace) {
+
+        for (var i = 0; i < /* initializes */ object.nestedArray.length; ++i) // recurse into the namespace
+            this._handleRemove(object._nestedArray[i]);
+
+        if (exposeRe.test(object.name))
+            delete object.parent[object.name]; // unexpose namespaces
+
     }
-  } else if (object instanceof Enum) {
-    if (exposeRe.test(object.name)) delete object.parent[object.name] // unexpose enum values
-  } else if (object instanceof Namespace) {
-    for (let i = 0; i < /* initializes */ object.nestedArray.length; ++i) // recurse into the namespace
-    { this._handleRemove(object._nestedArray[i]) }
+};
 
-    if (exposeRe.test(object.name)) delete object.parent[object.name] // unexpose namespaces
-  }
-}
+Root._configure = function() {
+    Type = require('./type');
+    parse = require('./parse');
+    common = require('./common');
 
-Root._configure = function () {
-  Type = require('./type')
-  parse = require('./parse')
-  common = require('./common')
-
-  Field = require('./field')
-  Enum = require('./enum')
-  OneOf = require('./oneof')
-  util = require('./util')
-}
+    Field   = require("./field");
+    Enum    = require("./enum");
+    OneOf   = require("./oneof");
+    util    = require("./util");
+};

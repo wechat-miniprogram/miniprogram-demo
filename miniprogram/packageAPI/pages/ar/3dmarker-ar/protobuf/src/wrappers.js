@@ -1,6 +1,7 @@
-const wrappers = exports
+var wrappers = exports;
 
-let Message
+
+var Message;
 
 /**
  * From object converter part of an {@link IWrapper}.
@@ -29,49 +30,52 @@ let Message
  */
 
 // Custom wrapper for Any
-wrappers['.google.protobuf.Any'] = {
+wrappers[".google.protobuf.Any"] = {
 
-  fromObject(object) {
-    // unwrap value type if mapped
-    if (object && object['@type']) {
-      const type = this.lookup(object['@type'])
-      /* istanbul ignore else */
-      if (type) {
-        // type_url does not accept leading "."
-        const type_url = object['@type'].charAt(0) === '.'
-          ? object['@type'].substr(1) : object['@type']
-        // type_url prefix is optional, but path seperator is required
-        return this.create({
-          type_url: '/' + type_url,
-          value: type.encode(type.fromObject(object)).finish()
-        })
-      }
+    fromObject: function(object) {
+
+        // unwrap value type if mapped
+        if (object && object["@type"]) {
+            var type = this.lookup(object["@type"]);
+            /* istanbul ignore else */
+            if (type) {
+                // type_url does not accept leading "."
+                var type_url = object["@type"].charAt(0) === "." ?
+                    object["@type"].substr(1) : object["@type"];
+                // type_url prefix is optional, but path seperator is required
+                return this.create({
+                    type_url: "/" + type_url,
+                    value: type.encode(type.fromObject(object)).finish()
+                });
+            }
+        }
+
+        return this.fromObject(object);
+    },
+
+    toObject: function(message, options) {
+
+        // decode value if requested and unmapped
+        if (options && options.json && message.type_url && message.value) {
+            // Only use fully qualified type name after the last '/'
+            var name = message.type_url.substring(message.type_url.lastIndexOf("/") + 1);
+            var type = this.lookup(name);
+            /* istanbul ignore else */
+            if (type)
+                message = type.decode(message.value);
+        }
+
+        // wrap value if unmapped
+        if (!(message instanceof this.ctor) && message instanceof Message) {
+            var object = message.$type.toObject(message, options);
+            object["@type"] = message.$type.fullName;
+            return object;
+        }
+
+        return this.toObject(message, options);
     }
-
-    return this.fromObject(object)
-  },
-
-  toObject(message, options) {
-    // decode value if requested and unmapped
-    if (options && options.json && message.type_url && message.value) {
-      // Only use fully qualified type name after the last '/'
-      const name = message.type_url.substring(message.type_url.lastIndexOf('/') + 1)
-      const type = this.lookup(name)
-      /* istanbul ignore else */
-      if (type) message = type.decode(message.value)
-    }
-
-    // wrap value if unmapped
-    if (!(message instanceof this.ctor) && message instanceof Message) {
-      const object = message.$type.toObject(message, options)
-      object['@type'] = message.$type.fullName
-      return object
-    }
-
-    return this.toObject(message, options)
-  }
-}
+};
 
 wrappers._configure = function () {
-  Message = require('./message')
+    Message = require("./message");
 }

@@ -1,34 +1,35 @@
+"use strict";
+
 /**
  * Common type constants.
  * @namespace
  */
-const types = module.exports
-let util = require('./util')
+var types = module.exports;
+var util = require("./util");
 
-const s = [
-  'double', // 0
-  'float', // 1
-  'int32', // 2
-  'uint32', // 3
-  'sint32', // 4
-  'fixed32', // 5
-  'sfixed32', // 6
-  'int64', // 7
-  'uint64', // 8
-  'sint64', // 9
-  'fixed64', // 10
-  'sfixed64', // 11
-  'bool', // 12
-  'string', // 13
-  'bytes' // 14
-]
+var s = [
+    "double",   // 0
+    "float",    // 1
+    "int32",    // 2
+    "uint32",   // 3
+    "sint32",   // 4
+    "fixed32",  // 5
+    "sfixed32", // 6
+    "int64",    // 7
+    "uint64",   // 8
+    "sint64",   // 9
+    "fixed64",  // 10
+    "sfixed64", // 11
+    "bool",     // 12
+    "string",   // 13
+    "bytes"     // 14
+];
 
 function bake(values, offset) {
-  let i = 0; const
-    o = {}
-  offset |= 0
-  while (i < values.length) o[s[i + offset]] = values[i++]
-  return o
+    var i = 0, o = {};
+    offset |= 0;
+    while (i < values.length) o[s[i + offset]] = values[i++];
+    return o;
 }
 
 /**
@@ -52,22 +53,22 @@ function bake(values, offset) {
  * @property {number} bytes=2 Ldelim wire type
  */
 types.basic = bake([
-  /* double   */ 1,
-  /* float    */ 5,
-  /* int32    */ 0,
-  /* uint32   */ 0,
-  /* sint32   */ 0,
-  /* fixed32  */ 5,
-  /* sfixed32 */ 5,
-  /* int64    */ 0,
-  /* uint64   */ 0,
-  /* sint64   */ 0,
-  /* fixed64  */ 1,
-  /* sfixed64 */ 1,
-  /* bool     */ 0,
-  /* string   */ 2,
-  /* bytes    */ 2
-])
+    /* double   */ 1,
+    /* float    */ 5,
+    /* int32    */ 0,
+    /* uint32   */ 0,
+    /* sint32   */ 0,
+    /* fixed32  */ 5,
+    /* sfixed32 */ 5,
+    /* int64    */ 0,
+    /* uint64   */ 0,
+    /* sint64   */ 0,
+    /* fixed64  */ 1,
+    /* sfixed64 */ 1,
+    /* bool     */ 0,
+    /* string   */ 2,
+    /* bytes    */ 2
+]);
 
 /**
  * Basic type defaults.
@@ -91,23 +92,23 @@ types.basic = bake([
  * @property {null} message=null Message default
  */
 types.defaults = bake([
-  /* double   */ 0,
-  /* float    */ 0,
-  /* int32    */ 0,
-  /* uint32   */ 0,
-  /* sint32   */ 0,
-  /* fixed32  */ 0,
-  /* sfixed32 */ 0,
-  /* int64    */ 0,
-  /* uint64   */ 0,
-  /* sint64   */ 0,
-  /* fixed64  */ 0,
-  /* sfixed64 */ 0,
-  /* bool     */ false,
-  /* string   */ '',
-  /* bytes    */ util.emptyArray,
-  /* message  */ null
-])
+    /* double   */ 0,
+    /* float    */ 0,
+    /* int32    */ 0,
+    /* uint32   */ 0,
+    /* sint32   */ 0,
+    /* fixed32  */ 0,
+    /* sfixed32 */ 0,
+    /* int64    */ 0,
+    /* uint64   */ 0,
+    /* sint64   */ 0,
+    /* fixed64  */ 0,
+    /* sfixed64 */ 0,
+    /* bool     */ false,
+    /* string   */ "",
+    /* bytes    */ util.emptyArray,
+    /* message  */ null
+]);
 
 /**
  * Basic long type wire types.
@@ -120,12 +121,12 @@ types.defaults = bake([
  * @property {number} sfixed64=1 Fixed64 wire type
  */
 types.long = bake([
-  /* int64    */ 0,
-  /* uint64   */ 0,
-  /* sint64   */ 0,
-  /* fixed64  */ 1,
-  /* sfixed64 */ 1
-], 7)
+    /* int64    */ 0,
+    /* uint64   */ 0,
+    /* sint64   */ 0,
+    /* fixed64  */ 1,
+    /* sfixed64 */ 1
+], 7);
 
 /**
  * Allowed types for map keys with their associated wire type.
@@ -145,19 +146,19 @@ types.long = bake([
  * @property {number} string=2 Ldelim wire type
  */
 types.mapKey = bake([
-  /* int32    */ 0,
-  /* uint32   */ 0,
-  /* sint32   */ 0,
-  /* fixed32  */ 5,
-  /* sfixed32 */ 5,
-  /* int64    */ 0,
-  /* uint64   */ 0,
-  /* sint64   */ 0,
-  /* fixed64  */ 1,
-  /* sfixed64 */ 1,
-  /* bool     */ 0,
-  /* string   */ 2
-], 2)
+    /* int32    */ 0,
+    /* uint32   */ 0,
+    /* sint32   */ 0,
+    /* fixed32  */ 5,
+    /* sfixed32 */ 5,
+    /* int64    */ 0,
+    /* uint64   */ 0,
+    /* sint64   */ 0,
+    /* fixed64  */ 1,
+    /* sfixed64 */ 1,
+    /* bool     */ 0,
+    /* string   */ 2
+], 2);
 
 /**
  * Allowed types for packed repeated fields with their associated wire type.
@@ -178,21 +179,21 @@ types.mapKey = bake([
  * @property {number} bool=0 Varint wire type
  */
 types.packed = bake([
-  /* double   */ 1,
-  /* float    */ 5,
-  /* int32    */ 0,
-  /* uint32   */ 0,
-  /* sint32   */ 0,
-  /* fixed32  */ 5,
-  /* sfixed32 */ 5,
-  /* int64    */ 0,
-  /* uint64   */ 0,
-  /* sint64   */ 0,
-  /* fixed64  */ 1,
-  /* sfixed64 */ 1,
-  /* bool     */ 0
-])
+    /* double   */ 1,
+    /* float    */ 5,
+    /* int32    */ 0,
+    /* uint32   */ 0,
+    /* sint32   */ 0,
+    /* fixed32  */ 5,
+    /* sfixed32 */ 5,
+    /* int64    */ 0,
+    /* uint64   */ 0,
+    /* sint64   */ 0,
+    /* fixed64  */ 1,
+    /* sfixed64 */ 1,
+    /* bool     */ 0
+]);
 
-types._configure = function () {
-  util = require('./util')
+types._configure = function (){
+    util = require('./util');
 }
