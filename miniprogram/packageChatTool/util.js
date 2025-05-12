@@ -34,7 +34,7 @@ export function getChatToolInfo() {
         reject(res)
       },
       complete(res) {
-        console.info('getChatToolInfo complete: ',res)
+        console.info('getChatToolInfo complete: ', res)
       }
     })
   })

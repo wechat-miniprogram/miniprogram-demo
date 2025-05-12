@@ -73,7 +73,9 @@ export function getAlbum() {
 let rectInfo = null
 export function getRectInfo() {
   if (!rectInfo) {
-    const { safeArea, screenWidth, screenHeight, windowWidth, windowHeight } = wx.getSystemInfoSync()
+    const {
+      safeArea, screenWidth, screenHeight, windowWidth, windowHeight
+    } = wx.getSystemInfoSync()
     const menuButtomRect = wx.getMenuButtonBoundingClientRect()
 
     rectInfo = {
@@ -90,8 +92,6 @@ export function getRectInfo() {
 
   return rectInfo
 }
-
-
 
 export function timeFormat(date, reg) {
   date = date instanceof Date ? date : new Date(date)

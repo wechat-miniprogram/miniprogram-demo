@@ -2,7 +2,7 @@ Page({
   data: {
     theme: 'light',
     sharedata: {
-    theme: 'light',
+      theme: 'light',
       title: '自定义转发标题',
       desc: '自定义转发描述',
       path: 'packageAPI/pages/api/share/share'
@@ -15,12 +15,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   },

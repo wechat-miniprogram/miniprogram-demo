@@ -1,0 +1,19 @@
+name: WeChat MiniProgram Demo CI/CD
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload MiniProgram
+        env:
+          WX_PRIVATE_KEY: ${{ secrets.WX_PRIVATE_KEY }}
+        run: |
+          echo "$WX_PRIVATE_KEY" > ./build/key
+          node ./build/ci.js

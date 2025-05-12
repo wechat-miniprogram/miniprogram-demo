@@ -1,6 +1,7 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
-var xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
+
+const xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
 &lt;xr-assets bind:progress=&quot;handleAssetsProgress&quot; bind:loaded=&quot;handleAssetsLoaded&quot;&gt;
   &lt;xr-asset-material asset-id=&quot;standard-mat&quot; effect=&quot;standard&quot; /&gt;
 &lt;/xr-assets&gt;
@@ -25,11 +26,10 @@ var xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
   &lt;xr-light type=&quot;spot&quot; position=&quot;0 0 0&quot; color=&quot;0 0 1&quot; range=&quot;12&quot; intensity=&quot;12&quot; rotation=&quot;0 120 0&quot; inner-cone-angle=&quot;30&quot; outer-cone-angle=&quot;35&quot; /&gt;
 &lt;/xr-node&gt;
 &lt;/xr-scene&gt;
-`;
+`
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
   }
-});
-
+})

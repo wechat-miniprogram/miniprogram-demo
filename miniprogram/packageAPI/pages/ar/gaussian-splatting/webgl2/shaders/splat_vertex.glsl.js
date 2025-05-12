@@ -1,5 +1,4 @@
-
-export const splatVertexShader = 
+export const splatVertexShader =
 /* glsl */
 `#version 300 es
 in vec3 a_center;
@@ -140,4 +139,4 @@ void main() {
 
 
 }
-`;
+`

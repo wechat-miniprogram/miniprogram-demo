@@ -19,28 +19,28 @@ Component({
     }
   },
   methods: {
-    handleReady({detail}) {
-      const xrScene = this.scene = detail.value;
-      console.log('xr-scene', xrScene);
+    handleReady({ detail }) {
+      const xrScene = this.scene = detail.value
+      console.log('xr-scene', xrScene)
     },
-    handleAssetsProgress: function({detail}) {
-      console.log('assets progress', detail.value);
+    handleAssetsProgress({ detail }) {
+      console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded: function({detail}) {
-      console.log('assets loaded', detail.value);
+    handleAssetsLoaded({ detail }) {
+      console.log('assets loaded', detail.value)
       // this.setData({loaded: true});
-      this.placedFlag = false;
-      this.scene.event.addOnce('touchstart', this.placeNode.bind(this));
+      this.placedFlag = false
+      this.scene.event.addOnce('touchstart', this.placeNode.bind(this))
     },
-    handleARReady: function({detail}) {
-      console.log('arReady', this.scene.ar.arVersion);
+    handleARReady({ detail }) {
+      console.log('arReady', this.scene.ar.arVersion)
     },
     placeNode(event) {
       if (this.placedFlag) {
-        return;
+        return
       }
       const xrFrameSystem = wx.getXrFrameSystem()
-      this.placedFlag = true;
+      this.placedFlag = true
       this.scene.ar.placeHere('setitem', true)
       const anchorTRS = this.scene.getElementById('anchor').getComponent(xrFrameSystem.Transform)
       anchorTRS.setData({ visible: false })

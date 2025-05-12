@@ -1,10 +1,10 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
 
-var xmlCode = ``;
+const xmlCode = ''
 
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     heightScale: 0.5,
     cubeAlpha: 100,
@@ -18,31 +18,31 @@ Page({
   changeClearR(e) {
     this.setData({
       clearR: e.detail.value
-    });
+    })
   },
   changeClearG(e) {
     this.setData({
       clearG: e.detail.value
-    });
+    })
   },
   changeClearB(e) {
     this.setData({
       clearB: e.detail.value
-    });
+    })
   },
   changeClearA(e) {
     this.setData({
       clearA: e.detail.value
-    });
+    })
   },
   changeCubeAlpha(e) {
     this.setData({
       cubeAlpha: e.detail.value
-    });
+    })
   },
   changeSphereAlpha(e) {
     this.setData({
       sphereAlpha: e.detail.value
-    });
+    })
   }
-});
+})

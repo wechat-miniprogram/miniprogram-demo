@@ -3,7 +3,7 @@ const path = require('path')
 const yargs = require('yargs')
 const chalk = require('chalk')
 const debug = require('debug')('cli')
-const pbjs = require("protobufjs/cli/pbjs")
+const pbjs = require('protobufjs/cli/pbjs')
 
 const log = (...msg) => {
   console.log(chalk.blue('svrkit-utils'), ...msg)
@@ -50,7 +50,7 @@ function main() {
         throw err
       }
 
-      let staticModuleContent = fs.readFileSync(staticModuleFilePath, 'utf8')
+      const staticModuleContent = fs.readFileSync(staticModuleFilePath, 'utf8')
       fs.writeFileSync(staticModuleFilePath, `// #lizard forgives
 ${staticModuleContent}`, 'utf8')
 
@@ -95,4 +95,3 @@ ${protoUtils}
 module.exports = {
   main,
 }
-

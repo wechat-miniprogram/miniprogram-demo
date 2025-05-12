@@ -1,27 +1,27 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
-var xmlCode = ``;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
+
+const xmlCode = ''
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '',
     loaded: false,
     run: false,
     positions: [[0, 0, '瞬光'], [0, 0, 'roam'], [0, 0, 'xinyi']],
   },
-  handleLoaded: function({detail}) {
-    console.log('assets loaded', detail);
+  handleLoaded({ detail }) {
+    console.log('assets loaded', detail)
 
-    this.setData({loaded: true});
+    this.setData({ loaded: true })
   },
-  handleSyncPositions: function({detail}) {
-    const info = detail;
-    this.setData({positions: info});
+  handleSyncPositions({ detail }) {
+    const info = detail
+    this.setData({ positions: info })
   },
-  handleRun: function() {
+  handleRun() {
     if (this.data.loaded && !this.data.run) {
-      this.setData({run: true});
+      this.setData({ run: true })
     }
   }
-});
-
+})

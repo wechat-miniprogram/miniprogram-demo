@@ -28,12 +28,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     if (app.globalData.openid) {
@@ -74,12 +74,12 @@ Page({
     if (this.data.loading) {
       return
     }
-    const {newContent} = this.data
+    const { newContent } = this.data
     if (!newContent) {
       return
     }
 
-    this.setData({loading: true})
+    this.setData({ loading: true })
     const db = wx.cloud.database()
     db.collection('todos').add({
       data: {
@@ -113,7 +113,7 @@ Page({
         console.error('[数据库] [新增记录] 失败：', err)
       },
       complete: () => {
-        this.setData({loading: false})
+        this.setData({ loading: false })
       }
     })
   },
@@ -148,7 +148,7 @@ Page({
   },
 
   searchTodo() {
-    const {searchContent} = this.data
+    const { searchContent } = this.data
     if (!searchContent) {
       this.queryTodoList()
       return
@@ -194,13 +194,13 @@ Page({
     if (this.data.loading) {
       return
     }
-    const {id: todoId, index} = e.currentTarget.dataset
+    const { id: todoId, index } = e.currentTarget.dataset
     const todo = this.data.todoList[index]
 
-    this.setData({loading: true})
+    this.setData({ loading: true })
     const db = wx.cloud.database()
     db.collection('todos').doc(todoId).update({
-      data: {done: !todo.done},
+      data: { done: !todo.done },
       success: () => {
         this.setData({
           [`todoList[${index}].done`]: !todo.done
@@ -214,13 +214,13 @@ Page({
         console.error('[数据库] [更新记录] 失败：', err)
       },
       complete: () => {
-        this.setData({loading: false})
+        this.setData({ loading: false })
       }
     })
   },
 
   toDetail(e) {
-    const {id: todoId} = e.currentTarget.dataset
+    const { id: todoId } = e.currentTarget.dataset
     wx.navigateTo({
       url: `/page/cloud/pages/crud-detail/crud-detail?todoId=${todoId}`,
     })

@@ -96,7 +96,7 @@ export default function getBehavior() {
             depth: {
               mode: 2
             }
-          },                                                                                                                                                                                                                                                    
+          },
           cameraPosition: 0,
           version: 'v1',
           gl: this.gl
@@ -126,29 +126,26 @@ export default function getBehavior() {
           session.on('addAnchors', anchors => {
           })
           session.on('updateAnchors', anchors => {
-            let depthArray = []
+            const depthArray = []
             // 手动传入图像的时候用dom画点和框就行
-            let anchor2DList =  anchors.map(anchor => {
-                return {
-                value: anchor.depthArray,
-                size: anchor.size
-              }})
-              wx.hideLoading()
-              if (anchor2DList.length > 0) {       
-                let width = 80
-                let height = 80                               
-                anchor2DList.forEach(anchor => {
-                    width = anchor.size[0]
-                    height = anchor.size[1]
-                    anchor.value.forEach(item =>{
-                    depthArray.push(item.value)
-                  })
-                  this.renderDepthGL(depthArray, width, height)
-                  
+            const anchor2DList = anchors.map(anchor => ({
+              value: anchor.depthArray,
+              size: anchor.size
+            }))
+            wx.hideLoading()
+            if (anchor2DList.length > 0) {
+              let width = 80
+              let height = 80
+              anchor2DList.forEach(anchor => {
+                width = anchor.size[0]
+                height = anchor.size[1]
+                anchor.value.forEach(item => {
+                  depthArray.push(item.value)
+                })
+                this.renderDepthGL(depthArray, width, height)
               })
-              }
             }
-          )
+          })
           session.on('removeAnchors', anchors => {
           })
         })

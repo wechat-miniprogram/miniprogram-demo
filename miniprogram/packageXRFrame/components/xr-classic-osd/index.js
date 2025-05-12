@@ -14,52 +14,51 @@ Component({
   },
   lifetimes: {
     async attached() {
-      console.log('data', this.data);
+      console.log('data', this.data)
     }
   },
   methods: {
     handleReady({
       detail
     }) {
-      const xrScene = this.scene = detail.value;
-      console.log('xr-scene', xrScene);
-
+      const xrScene = this.scene = detail.value
+      console.log('xr-scene', xrScene)
     },
-    handleAssetsProgress: function ({
+    handleAssetsProgress({
       detail
     }) {
-      console.log('assets progress', detail.value);
+      console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded: function ({
+    handleAssetsLoaded({
       detail
     }) {
-      console.log('assets loaded', detail.value);
+      console.log('assets loaded', detail.value)
       this.setData({
         loaded: true
-      });
+      })
     },
-    handleToySwitch: function ({detail}) {
-      const active = detail.value;
+    handleToySwitch({ detail }) {
+      const active = detail.value
       if (active) {
-        this.setData({toyReady: true});
+        this.setData({ toyReady: true })
       } else {
-        this.setData({toyReady: false});
+        this.setData({ toyReady: false })
       }
     },
-    handleDaySwitch: function ({detail}) {
-      const active = detail.value;
+    handleDaySwitch({ detail }) {
+      const active = detail.value
       if (active) {
-        this.setData({gzDayReady: true});
+        this.setData({ gzDayReady: true })
       } else {
-        this.setData({gzDayReady: false});
+        this.setData({ gzDayReady: false })
       }
     },
-    handleNightSwitch: function ({detail}) {
-      const active = detail.value;
+    handleNightSwitch({ detail }) {
+      const active = detail.value
       if (active) {
-        this.setData({gzNightReady: true});
+        this.setData({ gzNightReady: true })
       } else {
-        this.setData({gzNightReady: false});
+        this.setData({ gzNightReady: false })
       }
     }
   }

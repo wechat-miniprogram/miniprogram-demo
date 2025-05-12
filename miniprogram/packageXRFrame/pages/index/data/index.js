@@ -63,143 +63,143 @@ const base = {
       path: '/pages/basic/scene-basic-envData/index',
     },
   ],
-};
+}
 const gltf = {
   name: 'glTF能力',
   tag: 'func',
   childArr: [{
-      name: 'Standard',
-      label: '标准金属头盔',
-      path: '/pages/gltf/scene-gltf-damageHelmet/index',
-    },
-    {
-      name: 'Unlit',
-      label: '无光照材质卡通模型',
-      path: '/pages/gltf/scene-gltf-unlit/index',
-    },
-    {
-      name: 'Loading',
-      label: '加载界面与多光源场景',
-      path: '/pages/gltf/scene-gltf-light-loading/index',
-    },
-    {
-      name: 'Animation',
-      label: 'gltf动画',
-      path: '/pages/gltf/scene-gltf-animation/index',
-    },
-    {
-      name: 'Morph',
-      label: 'gltf morph',
-      path: '/pages/gltf/scene-gltf-morph/index',
-    },
-    {
-      name: '扩展',
-      label: '压缩纹理',
-      path: '/pages/gltf/scene-gltf-compressTextures/index',
-    },
-    {
-      name: '扩展',
-      label: 'KHR_texture_transform',
-      path: '/pages/gltf/scene-gltf-textureTransform/index',
-    },
-    {
-      name: '扩展',
-      label: 'KHR_materials_pbrSpecularGlossiness',
-      path: '/pages/gltf/scene-gltf-specularGlossiness/index',
-    },
-    {
-      name: '扩展',
-      label: 'KHR_materials_sheen',
-      path: '/pages/gltf/scene-gltf-sheen/index',
-    },
-    {
-      name: '扩展',
-      label: 'KHR_materials_transmission',
-      path: '/pages/gltf/scene-gltf-transmission/index',
-    },
-    {
-      name: '扩展',
-      label: 'KHR_lights_punctual',
-      path: '/pages/gltf/scene-gltf-lightsPunctual/index',
-    },
+    name: 'Standard',
+    label: '标准金属头盔',
+    path: '/pages/gltf/scene-gltf-damageHelmet/index',
+  },
+  {
+    name: 'Unlit',
+    label: '无光照材质卡通模型',
+    path: '/pages/gltf/scene-gltf-unlit/index',
+  },
+  {
+    name: 'Loading',
+    label: '加载界面与多光源场景',
+    path: '/pages/gltf/scene-gltf-light-loading/index',
+  },
+  {
+    name: 'Animation',
+    label: 'gltf动画',
+    path: '/pages/gltf/scene-gltf-animation/index',
+  },
+  {
+    name: 'Morph',
+    label: 'gltf morph',
+    path: '/pages/gltf/scene-gltf-morph/index',
+  },
+  {
+    name: '扩展',
+    label: '压缩纹理',
+    path: '/pages/gltf/scene-gltf-compressTextures/index',
+  },
+  {
+    name: '扩展',
+    label: 'KHR_texture_transform',
+    path: '/pages/gltf/scene-gltf-textureTransform/index',
+  },
+  {
+    name: '扩展',
+    label: 'KHR_materials_pbrSpecularGlossiness',
+    path: '/pages/gltf/scene-gltf-specularGlossiness/index',
+  },
+  {
+    name: '扩展',
+    label: 'KHR_materials_sheen',
+    path: '/pages/gltf/scene-gltf-sheen/index',
+  },
+  {
+    name: '扩展',
+    label: 'KHR_materials_transmission',
+    path: '/pages/gltf/scene-gltf-transmission/index',
+  },
+  {
+    name: '扩展',
+    label: 'KHR_lights_punctual',
+    path: '/pages/gltf/scene-gltf-lightsPunctual/index',
+  },
   ],
-};
+}
 
 const ar = {
   name: 'AR能力',
   tag: 'func',
   childArr: [{
-      name: 'Camera',
-      label: 'AR 相机渲染',
-      path: '/pages/ar/scene-ar-camera/index',
-    },
-    {
-      name: 'Basic',
-      label: 'AR 平面识别',
-      path: '/pages/ar/scene-ar-basic/index',
-    },
-    {
-      name: 'ThreeDof',
-      label: 'AR 相机旋转',
-      path: '/pages/ar/scene-ar-threeDof/index',
-    },
-    {
-      name: '2DMarker',
-      label: 'AR 2DMarker',
-      path: '/pages/ar/scene-ar-2dmarker/index',
-    },
-    {
-      name: 'OSDMarker',
-      label: 'AR OSDMarker',
-      path: '/pages/ar/scene-ar-osdmarker/index',
-    },
-    {
-      name: 'Face',
-      label: 'AR 人脸',
-      path: '/pages/ar/scene-ar-face/index',
-    },
-    {
-      name: 'Face',
-      label: 'AR 三维人脸',
-      path: '/pages/ar/scene-ar-face-3d/index',
-    },
-    {
-      name: 'Hand',
-      label: 'AR 人手',
-      path: '/pages/ar/scene-ar-hand/index',
-    },
-    {
-      name: 'Hand',
-      label: 'AR 三维人手',
-      path: '/pages/ar/scene-ar-hand-3d/index',
-    },
-    {
-      name: 'Body',
-      label: 'AR 人体',
-      path: '/pages/ar/scene-ar-body/index',
-    },
-    {
-      name: 'Body',
-      label: 'AR 三维人体',
-      path: '/pages/ar/scene-ar-body-3d/index',
-    },
-    {
-      name: 'Shoe',
-      label: 'AR 试鞋',
-      path: '/pages/ar/scene-ar-shoe/index',
-    },
-    {
-      name: 'Plane+Marker',
-      label: 'AR 平面 Marker融合',
-      path: '/pages/ar/scene-ar-vio-marker/index',
-    },
-    // {
-    //   name: 'Plane+Depth',
-    //   label: 'AR 平面深度剔除',
-    //   path: '/pages/ar/scene-ar-vio-depth/index',
-    // },
+    name: 'Camera',
+    label: 'AR 相机渲染',
+    path: '/pages/ar/scene-ar-camera/index',
+  },
+  {
+    name: 'Basic',
+    label: 'AR 平面识别',
+    path: '/pages/ar/scene-ar-basic/index',
+  },
+  {
+    name: 'ThreeDof',
+    label: 'AR 相机旋转',
+    path: '/pages/ar/scene-ar-threeDof/index',
+  },
+  {
+    name: '2DMarker',
+    label: 'AR 2DMarker',
+    path: '/pages/ar/scene-ar-2dmarker/index',
+  },
+  {
+    name: 'OSDMarker',
+    label: 'AR OSDMarker',
+    path: '/pages/ar/scene-ar-osdmarker/index',
+  },
+  {
+    name: 'Face',
+    label: 'AR 人脸',
+    path: '/pages/ar/scene-ar-face/index',
+  },
+  {
+    name: 'Face',
+    label: 'AR 三维人脸',
+    path: '/pages/ar/scene-ar-face-3d/index',
+  },
+  {
+    name: 'Hand',
+    label: 'AR 人手',
+    path: '/pages/ar/scene-ar-hand/index',
+  },
+  {
+    name: 'Hand',
+    label: 'AR 三维人手',
+    path: '/pages/ar/scene-ar-hand-3d/index',
+  },
+  {
+    name: 'Body',
+    label: 'AR 人体',
+    path: '/pages/ar/scene-ar-body/index',
+  },
+  {
+    name: 'Body',
+    label: 'AR 三维人体',
+    path: '/pages/ar/scene-ar-body-3d/index',
+  },
+  {
+    name: 'Shoe',
+    label: 'AR 试鞋',
+    path: '/pages/ar/scene-ar-shoe/index',
+  },
+  {
+    name: 'Plane+Marker',
+    label: 'AR 平面 Marker融合',
+    path: '/pages/ar/scene-ar-vio-marker/index',
+  },
+  {
+    name: 'Plane+Depth',
+    label: 'AR 平面深度剔除',
+    path: '/pages/ar/scene-ar-vio-depth/index',
+  },
   ],
-};
+}
 
 const physics = {
   name: '物理能力',
@@ -216,76 +216,76 @@ const physics = {
       path: '/pages/physics/scene-physics-throw/index'
     }
   ]
-};
+}
 
 const particle = {
-    name: '粒子能力',
-    tag: 'func',
-    childArr: [
-      {
-        name: 'Firework',
-        label: '喷射烟火',
-        path: '/pages/particle/scene-particle-firework/index'
-      },
-      {
-        name: 'Portal',
-        label: '传送门',
-        path: '/pages/particle/scene-particle-portal/index'
-      },
-      {
-        name: 'Orb',
-        label: '闪电光球',
-        path: '/pages/particle/scene-particle-orb/index'
-      },
-      {
-        name: 'ShapeEmitter',
-        label: '球形发射器',
-        path: '/pages/particle/scene-particle-shapeEmitter/index'
-      },
-      {
-        name: 'MeshEmitter',
-        label: '网格发射器',
-        path: '/pages/particle/scene-particle-meshEmitter/index'
-      },
-      {
-        name: 'HumanFace',
-        label: '自定义粒子系统',
-        path: '/pages/particle/scene-particle-custom/index'
-      },
-    ]
-  };
+  name: '粒子能力',
+  tag: 'func',
+  childArr: [
+    {
+      name: 'Firework',
+      label: '喷射烟火',
+      path: '/pages/particle/scene-particle-firework/index'
+    },
+    {
+      name: 'Portal',
+      label: '传送门',
+      path: '/pages/particle/scene-particle-portal/index'
+    },
+    {
+      name: 'Orb',
+      label: '闪电光球',
+      path: '/pages/particle/scene-particle-orb/index'
+    },
+    {
+      name: 'ShapeEmitter',
+      label: '球形发射器',
+      path: '/pages/particle/scene-particle-shapeEmitter/index'
+    },
+    {
+      name: 'MeshEmitter',
+      label: '网格发射器',
+      path: '/pages/particle/scene-particle-meshEmitter/index'
+    },
+    {
+      name: 'HumanFace',
+      label: '自定义粒子系统',
+      path: '/pages/particle/scene-particle-custom/index'
+    },
+  ]
+}
 
 const customParticle = {
-    name: '粒子定制能力',
-    tag: 'func',
-    childArr: [
-        {
-            name: 'Firework',
-            label: '喷射烟火',
-            path: '/pages/customParticle/scene-customParticle-firework/index'
-        },
-        {
-            name: 'Portal',
-            label: '传送门',
-            path: '/pages/customParticle/scene-customParticle-portal/index'
-          },
-          {
-            name: 'Orb',
-            label: '闪电光球',
-            path: '/pages/customParticle/scene-customParticle-orb/index'
-          },
-          {
-            name: 'ShapeEmitter',
-            label: '球形发射器',
-            path: '/pages/customParticle/scene-customParticle-shapeEmitter/index'
-          },
-          {
-            name: 'MeshEmitter',
-            label: '网格发射器',
-            path: '/pages/customParticle/scene-customParticle-meshEmitter/index'
-          }
-    ]
-  };
+  name: '粒子定制能力',
+  tag: 'func',
+  childArr: [
+    {
+      name: 'Firework',
+      label: '喷射烟火',
+      path: '/pages/customParticle/scene-customParticle-firework/index'
+    },
+    {
+      name: 'Portal',
+      label: '传送门',
+      path: '/pages/customParticle/scene-customParticle-portal/index'
+    },
+    {
+      name: 'Orb',
+      label: '闪电光球',
+      path: '/pages/customParticle/scene-customParticle-orb/index'
+    },
+    {
+      name: 'ShapeEmitter',
+      label: '球形发射器',
+      path: '/pages/customParticle/scene-customParticle-shapeEmitter/index'
+    },
+    {
+      name: 'MeshEmitter',
+      label: '网格发射器',
+      path: '/pages/customParticle/scene-customParticle-meshEmitter/index'
+    }
+  ]
+}
 
 const custom = {
   name: '高级定制',
@@ -302,7 +302,7 @@ const custom = {
       path: '/pages/custom/scene-custom-render/index',
     }
   ]
-};
+}
 
 const messageTemplate = {
   name: '混合通信、资源加载、互动',
@@ -329,7 +329,7 @@ const messageTemplate = {
       path: '/pages/template/xr-template-select/index',
     },
   ],
-};
+}
 
 const arTemplate = {
   name: '常用AR定制能力',
@@ -376,7 +376,7 @@ const arTemplate = {
       path: '/pages/template/xr-template-arui/index',
     },
   ],
-};
+}
 
 const customTemplate = {
   name: '常用定制（材质、几何体、流程）',
@@ -393,9 +393,9 @@ const customTemplate = {
       path: '/pages/template/xr-template-toon/index',
     },
     {
-        name: 'Effect',
-        label: '自定义PBR渲染',
-        path: '/pages/template/xr-template-pbr/index',
+      name: 'Effect',
+      label: '自定义PBR渲染',
+      path: '/pages/template/xr-template-pbr/index',
     },
     {
       name: 'Effect',
@@ -413,7 +413,7 @@ const customTemplate = {
       path: '/pages/template/xr-template-removeBlack/index',
     },
   ],
-};
+}
 
 const gltfEditTemplate = {
   name: 'glTF动态修改',
@@ -445,7 +445,7 @@ const gltfEditTemplate = {
       path: '/pages/template/xr-template-blendDouble/index',
     },
   ],
-};
+}
 
 const toolTemplate = {
   name: '通用基础能力',
@@ -467,9 +467,9 @@ const toolTemplate = {
     //     path: '/pages/template/xr-template-volumeVideo/index',
     // },
     {
-        name: 'Dissolve',
-        label: '消融特效',
-        path: '/pages/template/xr-template-dissolve/index',
+      name: 'Dissolve',
+      label: '消融特效',
+      path: '/pages/template/xr-template-dissolve/index',
     }
     // {
     //   name: 'Video',
@@ -482,7 +482,7 @@ const toolTemplate = {
     //   path: '/pages/template/xr-template-featherVideo/index',
     // },
   ]
-};
+}
 
 const classic = {
   name: 'AR典型案例',
@@ -519,8 +519,7 @@ const classic = {
       path: '/pages/ar-classic/scene-classic-wxball/index',
     }
   ],
-};
-
+}
 
 const scan = {
   name: '扫描还原案例',
@@ -537,7 +536,7 @@ const scan = {
       path: '/pages/scan/scene-scan-team/index',
     }
   ],
-};
+}
 
 const production = {
   name: '产品级案例',
@@ -554,6 +553,6 @@ const production = {
       path: '/pages/scene-last-record/index'
     }
   ]
-};
+}
 
-export default [base, ar, gltf, physics, particle, customParticle, custom, messageTemplate, arTemplate, customTemplate, gltfEditTemplate, toolTemplate, classic, scan, production];
+export default [base, ar, gltf, physics, particle, customParticle, custom, messageTemplate, arTemplate, customTemplate, gltfEditTemplate, toolTemplate, classic, scan, production]

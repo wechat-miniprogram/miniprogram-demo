@@ -273,130 +273,130 @@ Page({
         zh: 'mobileNetInt8',
         url: 'mobilenet_int8/index',
       }
-    ]
+      ]
     }, {
       id: 'ar',
       name: 'VisionKit视觉能力',
       pages: [{
-          zh: 'VisionKit基础',
-          url: 'visionkit-basic/visionkit-basic'
-        },
-        {
-          zh: 'VisionKit基础-v2',
-          url: 'visionkit-basic-v2/visionkit-basic-v2'
-        },
-        {
-          zh: '水平面AR',
-          url: 'plane-ar/plane-ar'
-        },
-        {
-          zh: '水平面AR-v2',
-          url: 'plane-ar-v2/plane-ar-v2'
-        },
-        {
-          zh: '水平面AR-v2-marker识别',
-          url: 'plane-ar-v2-marker/plane-ar-v2-marker'
-        },
-        // {
-        //   zh: '水平面AR-v2-虚实遮挡',
-        //   url: 'plane-ar-v2-depth/plane-ar-v2-depth'
-        // },
-        {
-          zh: '水平面AR-v2-附加能力',
-          url: 'plane-ar-v2-options/plane-ar-v2-options'
-        },
-        {
-          zh: '水平面旋转AR',
-          url: 'plane-ar-3dof/plane-ar-3dof'
-        },
-        {
-          zh: '2DMarkerAR',
-          url: '2dmarker-ar/2dmarker-ar'
-        },
-        {
-          zh: '3DMarkerAR-三维识别与重建',
-          url: '3dmarker-ar/3dmarker-ar'
-        },
-        {
-          zh: '单样本检测(OSD)',
-          url: 'osd-ar/osd-ar'
-        },
-        {
-          zh: '相机帧测试',
-          url: 'cameraBuffer-detect/cameraBuffer-detect'
-        },
-        {
-          zh: '相机帧获取jpg图片',
-          url: 'cameraBuffer-jpg/cameraBuffer-jpg'
-        },
-        {
-          zh: '实时深度图检测',
-          url: 'depth-detect/depth-detect'
-        },
-        {
-          zh: '照片深度图检测',
-          url: 'photo-depth-detect/photo-depth-detect'
-        },
-        {
-          zh: '照片OCR检测',
-          url: 'photo-ocr-detect/photo-ocr-detect'
-        },
-        {
-          zh: '照片身份证检测',
-          url: 'photo-idcard-detect/photo-idcard-detect'
-        },
-        {
-          zh: '实时人脸检测',
-          url: 'face-detect/face-detect'
-        },
-        {
-          zh: '实时人脸检测3D',
-          url: 'face-detect-3d/face-detect-3d'
-        },
-        {
-          zh: '实时人脸检测3D-眼镜试戴',
-          url: 'face-detect-3d-glasses/face-detect-3d-glasses'
-        },
-        {
-          zh: '照片人脸检测',
-          url: 'photo-face-detect/photo-face-detect'
-        },
-        {
-          zh: '实时人体检测',
-          url: 'body-detect/body-detect'
-        },
-        {
-          zh: '实时人体检测3D',
-          url: 'body-detect-3d/body-detect-3d'
-        },
-        {
-          zh: '照片人体检测',
-          url: 'photo-body-detect/photo-body-detect'
-        },
-        {
-          zh: '实时手势检测',
-          url: 'hand-detect/hand-detect'
-        },
-        {
-          zh: '实时手势检测3D',
-          url: 'hand-detect-3d/hand-detect-3d'
-        },
-        {
-          zh: '照片手势检测',
-          url: 'photo-hand-detect/photo-hand-detect'
-        },
-        {
-          zh: '实时鞋部检测-AR试鞋',
-          url: 'shoe-detect/shoe-detect'
-        },
-        {
-          zh: 'GassianSplatting 预览',
-          url: 'gaussian-splatting/gaussian-splatting'
-        },
-        {
-          zh: 'GassianSplatting AR预览',
-          url: 'gaussian-splatting/gaussian-splatting-ar'
-        },
+        zh: 'VisionKit基础',
+        url: 'visionkit-basic/visionkit-basic'
+      },
+      {
+        zh: 'VisionKit基础-v2',
+        url: 'visionkit-basic-v2/visionkit-basic-v2'
+      },
+      {
+        zh: '水平面AR',
+        url: 'plane-ar/plane-ar'
+      },
+      {
+        zh: '水平面AR-v2',
+        url: 'plane-ar-v2/plane-ar-v2'
+      },
+      {
+        zh: '水平面AR-v2-marker识别',
+        url: 'plane-ar-v2-marker/plane-ar-v2-marker'
+      },
+      // {
+      //   zh: '水平面AR-v2-虚实遮挡',
+      //   url: 'plane-ar-v2-depth/plane-ar-v2-depth'
+      // },
+      {
+        zh: '水平面AR-v2-附加能力',
+        url: 'plane-ar-v2-options/plane-ar-v2-options'
+      },
+      {
+        zh: '水平面旋转AR',
+        url: 'plane-ar-3dof/plane-ar-3dof'
+      },
+      {
+        zh: '2DMarkerAR',
+        url: '2dmarker-ar/2dmarker-ar'
+      },
+      {
+        zh: '3DMarkerAR-三维识别与重建',
+        url: '3dmarker-ar/3dmarker-ar'
+      },
+      {
+        zh: '单样本检测(OSD)',
+        url: 'osd-ar/osd-ar'
+      },
+      {
+        zh: '相机帧测试',
+        url: 'cameraBuffer-detect/cameraBuffer-detect'
+      },
+      {
+        zh: '相机帧获取jpg图片',
+        url: 'cameraBuffer-jpg/cameraBuffer-jpg'
+      },
+      {
+        zh: '实时深度图检测',
+        url: 'depth-detect/depth-detect'
+      },
+      {
+        zh: '照片深度图检测',
+        url: 'photo-depth-detect/photo-depth-detect'
+      },
+      {
+        zh: '照片OCR检测',
+        url: 'photo-ocr-detect/photo-ocr-detect'
+      },
+      {
+        zh: '照片身份证检测',
+        url: 'photo-idcard-detect/photo-idcard-detect'
+      },
+      {
+        zh: '实时人脸检测',
+        url: 'face-detect/face-detect'
+      },
+      {
+        zh: '实时人脸检测3D',
+        url: 'face-detect-3d/face-detect-3d'
+      },
+      {
+        zh: '实时人脸检测3D-眼镜试戴',
+        url: 'face-detect-3d-glasses/face-detect-3d-glasses'
+      },
+      {
+        zh: '照片人脸检测',
+        url: 'photo-face-detect/photo-face-detect'
+      },
+      {
+        zh: '实时人体检测',
+        url: 'body-detect/body-detect'
+      },
+      {
+        zh: '实时人体检测3D',
+        url: 'body-detect-3d/body-detect-3d'
+      },
+      {
+        zh: '照片人体检测',
+        url: 'photo-body-detect/photo-body-detect'
+      },
+      {
+        zh: '实时手势检测',
+        url: 'hand-detect/hand-detect'
+      },
+      {
+        zh: '实时手势检测3D',
+        url: 'hand-detect-3d/hand-detect-3d'
+      },
+      {
+        zh: '照片手势检测',
+        url: 'photo-hand-detect/photo-hand-detect'
+      },
+      {
+        zh: '实时鞋部检测-AR试鞋',
+        url: 'shoe-detect/shoe-detect'
+      },
+      {
+        zh: 'GassianSplatting 预览',
+        url: 'gaussian-splatting/gaussian-splatting'
+      },
+      {
+        zh: 'GassianSplatting AR预览',
+        url: 'gaussian-splatting/gaussian-splatting-ar'
+      },
       ],
     }],
     isSetTabBarPage: false,
@@ -409,7 +409,7 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
@@ -429,7 +429,7 @@ Page({
     this.leaveSetTabBarPage()
   },
   kindToggle(e) {
-    const id = e.currentTarget.id;
+    const id = e.currentTarget.id
     const
       list = this.data.list
     for (let i = 0, len = list.length; i < len; ++i) {

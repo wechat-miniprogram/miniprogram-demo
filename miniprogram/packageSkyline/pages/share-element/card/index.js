@@ -1,4 +1,4 @@
-import {cardList} from '../data'
+import { cardList } from '../data'
 
 Component({
   properties: {

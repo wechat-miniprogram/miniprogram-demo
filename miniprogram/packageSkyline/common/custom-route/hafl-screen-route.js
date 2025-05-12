@@ -1,11 +1,11 @@
-import {CurveAnimation, Curves} from './common'
+import { CurveAnimation, Curves } from './common'
 
 const HalfScreenDialogRouteBuilder = ({
   primaryAnimation,
   primaryAnimationStatus,
   userGestureInProgress,
 }) => {
-  const {screenHeight} = getApp().globalData
+  const { screenHeight } = getApp().globalData
   console.info('HalfScreenDialogRouteBuilder ', screenHeight)
 
   const _curvePrimaryAnimation = CurveAnimation({

@@ -13,7 +13,7 @@ Page({
       //   const b = Math.floor(255 * Math.random())
       //   item.bg = `background-color: rgb(${r}, ${g}, ${b})`
 
-      const r = Math.floor(Math.random() * (229 - 105) + 105);//生成固定灰色
+      const r = Math.floor(Math.random() * (229 - 105) + 105)// 生成固定灰色
       item.bg = `background-color: rgb(${r}, ${r}, ${r})`
       items.push(item)
     }

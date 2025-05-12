@@ -1,5 +1,5 @@
 import CustomPage from '../../../base/CustomPage'
-import {compareVersion} from '../../../../util/util'
+import { compareVersion } from '../../../../util/util'
 
 CustomPage({
   onShareAppMessage() {
@@ -44,7 +44,7 @@ CustomPage({
   },
   onReady() {
     // 解决基础库小于 2.9.2 的兼容问题
-    const {SDKVersion} = wx.getSystemInfoSync()
+    const { SDKVersion } = wx.getSystemInfoSync()
     if (compareVersion(SDKVersion, '2.9.1') < 0) {
       this.setData({
         canIUse: false,
@@ -52,7 +52,7 @@ CustomPage({
     }
   },
   onkeyboardHeightChange(e) {
-    const {height} = e.detail
+    const { height } = e.detail
     if (height === 0) {
       this.data._keyboardShow = false
 
@@ -108,7 +108,7 @@ CustomPage({
   },
   insertEmoji(evt) {
     const emotionName = evt.detail.emotionName
-    const {cursor, comment} = this.data
+    const { cursor, comment } = this.data
     const newComment =
       comment.slice(0, cursor) + emotionName + comment.slice(cursor)
     this.setData({

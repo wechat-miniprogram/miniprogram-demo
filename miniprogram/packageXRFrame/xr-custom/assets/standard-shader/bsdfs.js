@@ -119,4 +119,4 @@ void computeMultiscattering( const in vec3 normal, const in vec3 viewDir, const 
 	multiScatter += Fms * Ems;
 }
 
-`;
+`

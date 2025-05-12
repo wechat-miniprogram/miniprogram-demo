@@ -1,5 +1,3 @@
-
-
 Component({
   options: {
   },

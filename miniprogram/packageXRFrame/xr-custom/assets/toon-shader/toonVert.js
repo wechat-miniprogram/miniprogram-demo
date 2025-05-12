@@ -1,4 +1,4 @@
-import skinningDefines from './skinningDefine';
+import skinningDefines from './skinningDefine'
 
 export default
 /* glsl */
@@ -76,4 +76,4 @@ void main()
 
     gl_Position = u_projection * mvPosition;
 }
-`;
+`

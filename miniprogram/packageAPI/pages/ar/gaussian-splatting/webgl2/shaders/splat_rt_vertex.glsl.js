@@ -1,5 +1,4 @@
-
-export const splatRTVertexShader = 
+export const splatRTVertexShader =
 /* glsl */
 `#version 300 es
 in vec3 a_pos;
@@ -12,4 +11,4 @@ void main(void) {
 
     v_uv = a_texCoord;
 }
-`;
+`

@@ -15,7 +15,7 @@
     ></xr-camera>
   </xr-node>
   <xr-node node-id="lights">
-    <xr-light type="ambient" color="{{test}}}" intensity="1" />
+    <xr-light type="ambient" color="{{test}}" intensity="1" />
     <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="3" />
   </xr-node>
 </xr-scene>

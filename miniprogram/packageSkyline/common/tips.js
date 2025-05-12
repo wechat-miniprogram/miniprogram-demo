@@ -1,4 +1,4 @@
-export function showTips () {
+export function showTips() {
   wx.showToast({
     title: '该版本暂不支持 Skyline',
     icon: 'none',

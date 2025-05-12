@@ -1,4 +1,3 @@
-
 const AB2String = (arrayBuffer) => {
   const unit8Arr = new Uint8Array(arrayBuffer)
   const encodedString = String.fromCharCode.apply(null, unit8Arr)
@@ -29,12 +28,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     const canIUse = wx.canIUse('createUDPSocket')
@@ -58,7 +57,7 @@ Page({
       startUDP: true,
     })
     this.remoteUDPSocket.onMessage((res) => {
-      const {remoteInfo} = res
+      const { remoteInfo } = res
       console.log(res)
       wx.showModal({
         title: `IP:${remoteInfo.address}发来的信息`,
@@ -100,6 +99,5 @@ Page({
       message: `port[${this.port}] 向 remote-port[${this.remote_port}] 发送信息: Hello Wechat!`,
     })
   },
-
 
 })

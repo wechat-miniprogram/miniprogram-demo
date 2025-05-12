@@ -1,6 +1,7 @@
-var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
-var handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML;
-var xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
+const sceneReadyBehavior = require('../../behavior-scene/scene-ready')
+const handleDecodedXML = require('../../behavior-scene/util').handleDecodedXML
+
+const xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
 &lt;xr-assets bind:progress=&quot;handleAssetsProgress&quot; bind:loaded=&quot;handleAssetsLoaded&quot;&gt;
   &lt;xr-asset-load type=&quot;gltf&quot; asset-id=&quot;gltf-Sponza&quot; src=&quot;https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/Sponza/gltf/Sponza.gltf&quot; /&gt;
 &lt;/xr-assets&gt;
@@ -29,23 +30,22 @@ var xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
   /&gt;
 &lt;/xr-node&gt;
 &lt;/xr-scene&gt;
-`;
+`
 Page({
-  behaviors:[sceneReadyBehavior],
+  behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
     progressInfo: '',
     loaded: false
   },
-  handleProgress: function({detail}) {
-    console.log('assets progress', detail);
+  handleProgress({ detail }) {
+    console.log('assets progress', detail)
 
-    this.setData({progressInfo: `${~~(detail.progress * 100)} %\n\n${detail.asset.assetId}(${detail.asset.type}): ${detail.asset.src}`});
+    this.setData({ progressInfo: `${~~(detail.progress * 100)} %\n\n${detail.asset.assetId}(${detail.asset.type}): ${detail.asset.src}` })
   },
-  handleLoaded: function({detail}) {
-    console.log('assets loaded', detail);
+  handleLoaded({ detail }) {
+    console.log('assets loaded', detail)
 
-    this.setData({loaded: true});
+    this.setData({ loaded: true })
   }
-});
-
+})

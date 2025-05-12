@@ -1,23 +1,23 @@
-
 const config = require('./svrkit.config.js')
 const proto = require('./svrkit-utils.static.js')
 const protoJSON = require('./svrkit-utils.static.json')
+
 function getProto(proto, serviceName, protoName) {
   if (proto[protoName]) {
-    return proto[protoName];
+    return proto[protoName]
   }
 
   if (proto[serviceName] && proto[serviceName][protoName]) {
-    return proto[serviceName][protoName];
+    return proto[serviceName][protoName]
   }
 
-  /** 处理 mmpayolcirclemodel.QueryActivityReq 的形式*/
+  /** 处理 mmpayolcirclemodel.QueryActivityReq 的形式 */
   const [realServiceName, realProtoName] = protoName.split('.')
   if (proto[realServiceName]) {
     return proto[realServiceName][realProtoName]
   }
 
-  return undefined;
+  return undefined
 }
 
 function generate(options) {
@@ -37,14 +37,14 @@ function generate(options) {
   }
 
   const reqProtoName = serviceConfig.functions[funcName].req
-  const reqProto = getProto(proto, serviceName, reqProtoName);
+  const reqProto = getProto(proto, serviceName, reqProtoName)
 
   if (!reqProto) {
     throw new Error('request proto not found')
   }
 
   const resProtoName = serviceConfig.functions[funcName].res
-  const resProto = resProtoName && getProto(proto, serviceName, resProtoName);
+  const resProto = resProtoName && getProto(proto, serviceName, resProtoName)
 
   const reqProtoVerifyErr = reqProto.verify(data)
   if (reqProtoVerifyErr) {
@@ -133,4 +133,3 @@ module.exports = {
   generate,
   generateV2,
 }
-

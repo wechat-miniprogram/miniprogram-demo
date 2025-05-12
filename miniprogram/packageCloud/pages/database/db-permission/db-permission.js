@@ -47,12 +47,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     if (app.globalData.openid) {
@@ -127,7 +127,7 @@ Page({
   },
 
   bindInput(e) {
-    const {name} = e.currentTarget.dataset
+    const { name } = e.currentTarget.dataset
     this.setData({
       [name]: e.detail.value
     })
@@ -235,7 +235,7 @@ Page({
             data,
             success: res => {
               console.log('[数据库] [新增记录] 成功：', res)
-              if (successCallback) successCallback.call(this, {_id: res._id})
+              if (successCallback) successCallback.call(this, { _id: res._id })
             },
             fail: err => {
               if (showError) this.showErrorModal('设置', err)

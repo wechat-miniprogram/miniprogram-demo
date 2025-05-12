@@ -19,12 +19,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     const tabs = [
@@ -35,7 +35,7 @@ Page({
         desc: '本视频系列课程，由腾讯课堂NEXT学院与微信团队联合出品，通过实战案例，深入浅出地进行讲解。',
       },
     ]
-    this.setData({tabs})
+    this.setData({ tabs })
     // setTimeout(() => {
     // this.initInteraction()
     // }, 5000)

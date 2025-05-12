@@ -9,7 +9,7 @@ Page({
   data: {
     list: generateList(20),
   },
-  
+
   back() {
     wx.navigateBack({})
   },

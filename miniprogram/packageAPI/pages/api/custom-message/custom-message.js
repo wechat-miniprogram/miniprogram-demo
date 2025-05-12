@@ -5,7 +5,7 @@ Page({
       path: 'packageAPI/pages/api/custom-message/custom-message'
     }
   },
-  handleContact (e) {
+  handleContact(e) {
     console.log(e.detail.path)
     console.log(e.detail.query)
   },
@@ -16,12 +16,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

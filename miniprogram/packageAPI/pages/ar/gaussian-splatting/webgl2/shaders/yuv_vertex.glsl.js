@@ -1,5 +1,4 @@
-
-export const YUVVertexShader = 
+export const YUVVertexShader =
 /* glsl */
 `#version 300 es
 in vec3 a_pos;
@@ -16,4 +15,4 @@ void main(void) {
 
     v_uv = a_texCoord;
 }
-`;
+`

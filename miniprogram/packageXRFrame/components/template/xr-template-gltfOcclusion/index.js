@@ -8,16 +8,16 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
-      const xrScene = this.scene = detail.value;
-      console.log('xr-scene', xrScene);
+    handleReady({ detail }) {
+      const xrScene = this.scene = detail.value
+      console.log('xr-scene', xrScene)
     },
-    handleAssetsProgress: function({detail}) {
-      console.log('assets progress', detail.value);
+    handleAssetsProgress({ detail }) {
+      console.log('assets progress', detail.value)
     },
-    handleAssetsLoaded: function({detail}) {
-      console.log('assets loaded', detail.value);
-      this.setData({loaded: true});
+    handleAssetsLoaded({ detail }) {
+      console.log('assets loaded', detail.value)
+      this.setData({ loaded: true })
     },
 
   }

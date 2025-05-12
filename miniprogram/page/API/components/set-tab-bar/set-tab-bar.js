@@ -23,12 +23,12 @@ Component({
 
   attached() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
         if (this.data.theme == 'dark') {
           wx.setTabBarStyle(darkDefaultTabBarStyle)
         } else {
@@ -104,7 +104,7 @@ Component({
     },
 
     showTabBar() {
-      this.setData({hasHiddenTabBar: false})
+      this.setData({ hasHiddenTabBar: false })
       wx.showTabBar()
     },
 
@@ -113,7 +113,7 @@ Component({
         this.showTabBar()
         return
       }
-      this.setData({hasHiddenTabBar: true})
+      this.setData({ hasHiddenTabBar: true })
       wx.hideTabBar()
     },
 
@@ -122,7 +122,7 @@ Component({
         this.removeCustomStyle()
         return
       }
-      this.setData({hasCustomedStyle: true})
+      this.setData({ hasCustomedStyle: true })
       wx.setTabBarStyle({
         color: '#FFF',
         selectedColor: '#1AAD19',
@@ -131,7 +131,7 @@ Component({
     },
 
     removeCustomStyle() {
-      this.setData({hasCustomedStyle: false})
+      this.setData({ hasCustomedStyle: false })
       if (this.data.theme == 'dark') {
         wx.setTabBarStyle(darkDefaultTabBarStyle)
       } else {
@@ -144,7 +144,7 @@ Component({
         this.removeCustomItem()
         return
       }
-      this.setData({hasCustomedItem: true})
+      this.setData({ hasCustomedItem: true })
       wx.setTabBarItem({
         index: 1,
         text: 'API'
@@ -152,7 +152,7 @@ Component({
     },
 
     removeCustomItem() {
-      this.setData({hasCustomedItem: false})
+      this.setData({ hasCustomedItem: false })
       wx.setTabBarItem({
         index: 1,
         text: defaultItemName

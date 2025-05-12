@@ -31,12 +31,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
     if (app.globalData.openid) {
@@ -82,7 +82,7 @@ Page({
   insertOrUpdateData(existedData, data) {
     const db = wx.cloud.database()
     if (existedData._id) {
-      db.collection(collection).doc(existedData._id).update({data})
+      db.collection(collection).doc(existedData._id).update({ data })
         .then(res => {
           this.setCompletedData(existedData._id)
           return res
@@ -93,7 +93,7 @@ Page({
           this.completeTask()
         })
     } else {
-      db.collection(collection).add({data})
+      db.collection(collection).add({ data })
         .then(res => {
           this.setCompletedData(res._id)
           return res

@@ -1,4 +1,3 @@
-
 function generate(options) {
   if (!options) {
     throw new Error('options must be provided')
@@ -6,7 +5,7 @@ function generate(options) {
 
   const { serviceName, funcName, data } = options
 
-  const serviceConfig = config.find(c => c.serviceName === serviceName) 
+  const serviceConfig = config.find(c => c.serviceName === serviceName)
   if (!serviceConfig) {
     throw new Error('service not found')
   }
@@ -38,7 +37,7 @@ function generate(options) {
         if (!reqProtoJSON.fields[key]) {
           throw new Error(`'${key}' doesn't exist in '${reqProtoName}' proto, valid keys are ${Object.keys(reqProtoJSON.fields)}`)
         }
-      } 
+      }
     } else {
       throw new Error('data must be object')
     }
@@ -91,7 +90,7 @@ function generateV2(options) {
         if (!reqProtoJSON.fields[key]) {
           throw new Error(`'${key}' doesn't exist in '${reqProtoName}' proto, valid keys are ${Object.keys(reqProtoJSON.fields)}`)
         }
-      } 
+      }
     } else {
       throw new Error('data must be object')
     }

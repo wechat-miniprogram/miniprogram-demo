@@ -9,12 +9,12 @@ Page({
   data: {
     theme: 'light',
     checkboxItems: [
-      {name: 'USA', value: '美国'},
-      {name: 'CHN', value: '中国', checked: 'true'}
+      { name: 'USA', value: '美国' },
+      { name: 'CHN', value: '中国', checked: 'true' }
     ],
     radioItems: [
-      {name: 'USA', value: '美国'},
-      {name: 'CHN', value: '中国', checked: 'true'}
+      { name: 'USA', value: '美国' },
+      { name: 'CHN', value: '中国', checked: 'true' }
     ],
     hidden: false
   },
@@ -55,12 +55,12 @@ Page({
   },
   onLoad() {
     this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light'
+      theme: getApp().globalData.theme || 'light'
     })
 
     if (wx.onThemeChange) {
-      wx.onThemeChange(({theme}) => {
-        this.setData({theme})
+      wx.onThemeChange(({ theme }) => {
+        this.setData({ theme })
       })
     }
   }

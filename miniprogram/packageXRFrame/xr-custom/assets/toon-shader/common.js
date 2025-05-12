@@ -173,4 +173,4 @@ vec3 inverseTransformDirection( in vec3 dir, in mat4 matrix ) {
 }
 
 
-`;
+`

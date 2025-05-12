@@ -1,63 +1,65 @@
-import pbr from "./pbr";
-import bsdfs from "./bsdfs";
-import commonFrag from "./commonFrag";
-import commonVert from "./commonVert";
+import pbr from './pbr'
+import bsdfs from './bsdfs'
+import commonFrag from './commonFrag'
+import commonVert from './commonVert'
 
 const xrFrameSystem = wx.getXrFrameSystem()
 
 xrFrameSystem.registerEffect('custom-pbr', scene => scene.createEffect({
-  name: "custom-pbr",
+  name: 'custom-pbr',
   defaultRenderQueue: 2000,
   passes: [{
-    "renderStates": {
+    renderStates: {
       blendOn: false,
       depthWrite: true,
       cullOn: true,
       cullFace: xrFrameSystem.ECullMode.FRONT,
     },
-    lightMode: "ForwardBase",
+    lightMode: 'ForwardBase',
     useMaterialRenderStates: true,
     shaders: [0, 1]
   }],
-    properties: [
-        { key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1] },
-        { key: 'u_metallicRoughnessValues', type: xrFrameSystem.EUniformType.FLOAT2, default: [0, 1] },
-        { key: 'u_normalScale', type: xrFrameSystem.EUniformType.FLOAT, default: [1] },
-        { key: 'u_emissiveFactor', type: xrFrameSystem.EUniformType.FLOAT3, default: [0, 0, 0] },
-        { key: 'u_occlusionStrength', type: xrFrameSystem.EUniformType.FLOAT, default: [1] },
-        { key: 'u_specularFactor', type: xrFrameSystem.EUniformType.FLOAT3, default: [1, 1, 1] },
-        { key: 'u_glossinessFactor', type: xrFrameSystem.EUniformType.FLOAT, default: [1] },
-        { key: 'u_ior', type: xrFrameSystem.EUniformType.FLOAT, default: [1.5] },
-        { key: 'u_clearcoatFactor', type: xrFrameSystem.EUniformType.FLOAT, default: [0] },
-        { key: 'u_clearcoatRoughnessFactor', type: xrFrameSystem.EUniformType.FLOAT, default: [0] },
-        { key: 'u_clearcoatNormalScale', type: xrFrameSystem.EUniformType.FLOAT, default: [1] },
-        { key: 'u_alphaCutoff', type: xrFrameSystem.EUniformType.FLOAT, default: [0.5] },
-        { key: 'u_diffuseSHMat', type: xrFrameSystem.EUniformType.FLOAT3, num: 9, default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-        { key: 'u_transmissionFactor', type: xrFrameSystem.EUniformType.FLOAT, default: [1] },
-        { key: 'u_sheenColorFactor', type: xrFrameSystem.EUniformType.FLOAT3, default: [0.0, 0.0, 0.0] },
-        { key: 'u_sheenRoughnessFactor', type: xrFrameSystem.EUniformType.FLOAT, default: [0.0] },
-        /** uvTransform */
-        { key: 'u_uvTransform', type: xrFrameSystem.EUniformType.MAT4, default: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
-        { key: 'u_normalMapTransform', type: xrFrameSystem.EUniformType.MAT4, default: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
-      ],
-      images: [
-        { key: 'u_brdfLUT', default: 'brdf-lut' },
-        { key: 'u_baseColorMap', default: 'white', macro: 'WX_USE_BASECOLORMAP' },
-        { key: 'u_metallicRoughnessMap', default: 'green', macro: 'WX_USE_METALROUGHNESSMAP' },
-        { key: 'u_normalMap', default: 'white', macro: 'WX_USE_NORMALMAP' },
-        { key: 'u_emissiveMap', default: 'white', macro: 'WX_USE_EMISSIVEMAP' },
-        { key: 'u_occlusionMap', default: 'white', macro: 'WX_USE_OCCLUSIONMAP' },
-        { key: 'u_clearcoatMap', default: 'white', macro: 'WX_USE_CLEARCOATMAP' },
-        { key: 'u_specularGlossinessMap', default: 'white', macro: 'WX_USE_SPECULARGLOSSINESSMAP' },
-        { key: 'u_transmissionMap', default: 'white', macro: 'WX_USE_TRANSMISSIONMAP' },
-        { key: 'u_sheenColorMap', default: 'white', macro: 'WX_USE_SHEENCOLORMAP' },
-        { key: 'u_metallicMap', default: 'black', macro: 'WX_USE_METALMAP' },
-        { key: 'u_roughnessMap', default: 'white', macro: 'WX_USE_ROUGHNESSMAP' },
-        { key: 'u_clearcoatRoughnessMap', default: 'white', macro: 'WX_USE_CLEARCOATROUGHNESSMAP' },
-        { key: 'u_clearcoatNormalMap', default: 'white', macro: 'WX_USE_CLEARCOATNORMALMAP' },
-        { key: 'u_sheenRoughnessMap', default: 'white', macro: 'WX_USE_SHEENROUGHNESSMAP' },
-        { key: 'u_specularEnvMapMat', default: 'white' },
-      ],
+  properties: [
+    { key: 'u_baseColorFactor', type: xrFrameSystem.EUniformType.FLOAT4, default: [1, 1, 1, 1] },
+    { key: 'u_metallicRoughnessValues', type: xrFrameSystem.EUniformType.FLOAT2, default: [0, 1] },
+    { key: 'u_normalScale', type: xrFrameSystem.EUniformType.FLOAT, default: [1] },
+    { key: 'u_emissiveFactor', type: xrFrameSystem.EUniformType.FLOAT3, default: [0, 0, 0] },
+    { key: 'u_occlusionStrength', type: xrFrameSystem.EUniformType.FLOAT, default: [1] },
+    { key: 'u_specularFactor', type: xrFrameSystem.EUniformType.FLOAT3, default: [1, 1, 1] },
+    { key: 'u_glossinessFactor', type: xrFrameSystem.EUniformType.FLOAT, default: [1] },
+    { key: 'u_ior', type: xrFrameSystem.EUniformType.FLOAT, default: [1.5] },
+    { key: 'u_clearcoatFactor', type: xrFrameSystem.EUniformType.FLOAT, default: [0] },
+    { key: 'u_clearcoatRoughnessFactor', type: xrFrameSystem.EUniformType.FLOAT, default: [0] },
+    { key: 'u_clearcoatNormalScale', type: xrFrameSystem.EUniformType.FLOAT, default: [1] },
+    { key: 'u_alphaCutoff', type: xrFrameSystem.EUniformType.FLOAT, default: [0.5] },
+    {
+      key: 'u_diffuseSHMat', type: xrFrameSystem.EUniformType.FLOAT3, num: 9, default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    { key: 'u_transmissionFactor', type: xrFrameSystem.EUniformType.FLOAT, default: [1] },
+    { key: 'u_sheenColorFactor', type: xrFrameSystem.EUniformType.FLOAT3, default: [0.0, 0.0, 0.0] },
+    { key: 'u_sheenRoughnessFactor', type: xrFrameSystem.EUniformType.FLOAT, default: [0.0] },
+    /** uvTransform */
+    { key: 'u_uvTransform', type: xrFrameSystem.EUniformType.MAT4, default: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+    { key: 'u_normalMapTransform', type: xrFrameSystem.EUniformType.MAT4, default: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
+  ],
+  images: [
+    { key: 'u_brdfLUT', default: 'brdf-lut' },
+    { key: 'u_baseColorMap', default: 'white', macro: 'WX_USE_BASECOLORMAP' },
+    { key: 'u_metallicRoughnessMap', default: 'green', macro: 'WX_USE_METALROUGHNESSMAP' },
+    { key: 'u_normalMap', default: 'white', macro: 'WX_USE_NORMALMAP' },
+    { key: 'u_emissiveMap', default: 'white', macro: 'WX_USE_EMISSIVEMAP' },
+    { key: 'u_occlusionMap', default: 'white', macro: 'WX_USE_OCCLUSIONMAP' },
+    { key: 'u_clearcoatMap', default: 'white', macro: 'WX_USE_CLEARCOATMAP' },
+    { key: 'u_specularGlossinessMap', default: 'white', macro: 'WX_USE_SPECULARGLOSSINESSMAP' },
+    { key: 'u_transmissionMap', default: 'white', macro: 'WX_USE_TRANSMISSIONMAP' },
+    { key: 'u_sheenColorMap', default: 'white', macro: 'WX_USE_SHEENCOLORMAP' },
+    { key: 'u_metallicMap', default: 'black', macro: 'WX_USE_METALMAP' },
+    { key: 'u_roughnessMap', default: 'white', macro: 'WX_USE_ROUGHNESSMAP' },
+    { key: 'u_clearcoatRoughnessMap', default: 'white', macro: 'WX_USE_CLEARCOATROUGHNESSMAP' },
+    { key: 'u_clearcoatNormalMap', default: 'white', macro: 'WX_USE_CLEARCOATNORMALMAP' },
+    { key: 'u_sheenRoughnessMap', default: 'white', macro: 'WX_USE_SHEENROUGHNESSMAP' },
+    { key: 'u_specularEnvMapMat', default: 'white' },
+  ],
   shaders: [
     `#version 100
 
@@ -134,10 +136,8 @@ varying highp vec3 v_ViewPosition;
   varying highp vec3 v_AddLightsDir[WX_ADD_LIGHTS_COUNT];
   varying highp vec3 v_AddLightsPos[WX_ADD_LIGHTS_COUNT];
 #endif
-`
-+
-commonVert
-+
+` +
+commonVert +
 `
 void main()
 {
@@ -223,7 +223,7 @@ void main()
 
 }`,
     // Fragment Shader
-`#version 100
+    `#version 100
 
 // Temp fix Uniform limit, remove lut
 #define WX_USE_BRDFLUT true
@@ -270,15 +270,11 @@ varying highp vec3 v_ViewPosition;
   varying highp vec3 v_AddLightsDir[WX_ADD_LIGHTS_COUNT];
   varying highp vec3 v_AddLightsPos[WX_ADD_LIGHTS_COUNT];
 #endif
-`
-+
-commonFrag
-+
-bsdfs
-+
+` +
+commonFrag +
+bsdfs +
 // PBR Material Info
-pbr
-+
+pbr +
 `
 void main()
 {
@@ -806,4 +802,4 @@ void main()
 }
 `
   ],
-}));
+}))

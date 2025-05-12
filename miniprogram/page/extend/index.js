@@ -68,13 +68,13 @@ CustomPage({
         name: '多端适配（需在PC端体验）',
         open: false,
         pages: [
-          {zh: '左右伸缩', url: 'adapt/telescopic/telescopic'},
-          {zh: '换行排列', url: 'adapt/linebreak/linebreak'},
-          {zh: '侧边导航栏', url: 'adapt/sidenavigation/sidenavigation'},
-          {zh: '分页展现', url: 'adapt/pagination/pagination'},
-          {zh: '自由布局', url: 'adapt/freelayout/freelayout'},
-          {zh: '分层展现', url: 'adapt/layeredpresentation/layeredpresentation'},
-          {zh: '横向拓展', url: 'adapt/horizontalexpansion/horizontalexpansion'}
+          { zh: '左右伸缩', url: 'adapt/telescopic/telescopic' },
+          { zh: '换行排列', url: 'adapt/linebreak/linebreak' },
+          { zh: '侧边导航栏', url: 'adapt/sidenavigation/sidenavigation' },
+          { zh: '分页展现', url: 'adapt/pagination/pagination' },
+          { zh: '自由布局', url: 'adapt/freelayout/freelayout' },
+          { zh: '分层展现', url: 'adapt/layeredpresentation/layeredpresentation' },
+          { zh: '横向拓展', url: 'adapt/horizontalexpansion/horizontalexpansion' }
         ]
       }
     ],
@@ -114,7 +114,7 @@ CustomPage({
         extendedList[i].open = false
       }
     }
-    const list = this.data.list.map((item) => ({...item, open: false}))
+    const list = this.data.list.map((item) => ({ ...item, open: false }))
     this.setData({
       extendedList,
       list,
@@ -130,12 +130,12 @@ CustomPage({
         App.themeChanged('light')
       }
     }
-	},
-	openPage(e) {
-		const { url, father, page } = e.currentTarget.dataset
-		const nextUrl = url ? `../../packageExtend/pages/${url}` : `../../packageExtend/pages/${father}/${page}/${page}`
-		wx.navigateTo({
-				url: nextUrl
-		})
-	}
+  },
+  openPage(e) {
+    const { url, father, page } = e.currentTarget.dataset
+    const nextUrl = url ? `../../packageExtend/pages/${url}` : `../../packageExtend/pages/${father}/${page}/${page}`
+    wx.navigateTo({
+      url: nextUrl
+    })
+  }
 })

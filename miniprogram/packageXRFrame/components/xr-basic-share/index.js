@@ -4,10 +4,10 @@ Component({
     captureState: {
       type: Number,
       value: 0,
-      observer: function (newVal, oldVal) {
+      observer(newVal, oldVal) {
         if (newVal !== oldVal) {
           if (newVal === 1) {
-            this.capture();
+            this.capture()
           }
         }
       },
@@ -15,12 +15,12 @@ Component({
     recordState: {
       type: Number,
       value: 0,
-      observer: function (newVal, oldVal) {
+      observer(newVal, oldVal) {
         if (newVal !== oldVal) {
           if (newVal === 0) {
-            this.recordEnd();
+            this.recordEnd()
           } else {
-            this.recordStart();
+            this.recordStart()
           }
         }
       }
@@ -55,22 +55,22 @@ Component({
   },
   lifetimes: {},
   methods: {
-    handleReady({detail}) {
-      const scene = this.scene = detail.value;
-      const appHide = () => this.scene.share.recordPause();
-      const appShow = () => this.scene.share.recordResume();
-      wx.onAppHide(appHide);
-      wx.onAppShow(appShow);
-      wx.offAppHide(appHide);
-      wx.offAppShow(appShow);
-      
-      this.triggerEvent('sceneReady', {width: scene.width, height: scene.height});
+    handleReady({ detail }) {
+      const scene = this.scene = detail.value
+      const appHide = () => this.scene.share.recordPause()
+      const appShow = () => this.scene.share.recordResume()
+      wx.onAppHide(appHide)
+      wx.onAppShow(appShow)
+      wx.offAppHide(appHide)
+      wx.offAppShow(appShow)
+
+      this.triggerEvent('sceneReady', { width: scene.width, height: scene.height })
     },
     capture() {
       this.scene.share.captureToFriends({
         fileType: this.data.captureType,
         quality: this.data.captureQuality
-      });
+      })
     },
     recordStart() {
       console.log('recordStart')
@@ -79,11 +79,11 @@ Component({
         videoBitsPerSecond: this.data.recordBPS,
         width: this.data.recordWidth,
         height: this.data.recordHeight
-      });
+      })
     },
     recordEnd() {
       console.log('recordEnd')
-      this.scene.share.recordFinishToAlbum();
+      this.scene.share.recordFinishToAlbum()
     }
   }
 })
