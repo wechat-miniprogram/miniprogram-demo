@@ -21,6 +21,9 @@ jobs:
           echo "build目录内容:"
           ls -la ./build/
           
+      - name: Install dependencies
+        run: npm install
+          
       - name: Upload MiniProgram
         env:
           WX_PRIVATE_KEY: ${{ secrets.WX_PRIVATE_KEY }}
