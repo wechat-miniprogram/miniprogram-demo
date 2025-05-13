@@ -67,48 +67,48 @@ Page({
     }
   },
   async handleLastRecord() {
-    if (lastOpened) {
-      return
-    }
-
-    lastCount += 1
-    // if (Math.random() >= (0.34 + lastCount * 0.1)) {
-    //   return;
+    // if (lastOpened) {
+    //   return
     // }
 
-    const root = this.data.root
-    lastOpened = true
+    // lastCount += 1
+    // // if (Math.random() >= (0.34 + lastCount * 0.1)) {
+    // //   return;
+    // // }
 
-    wx.request({
-      url: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-gate.txt',
-      success(res) {
-        wx.showModal({
-          title: '一把钥匙',
-          content: res.data,
-          confirmText: '探寻真实',
-          cancelText: '放下钥匙',
-          success(res) {
-            if (res.cancel) {
-              wx.onAppShow((result) => {
-                lastOpened = false
-              })
-              return
-            }
+    // const root = this.data.root
+    // lastOpened = true
 
-            wx.navigateTo({
-              url: root + '/pages/scene-last-record/index',
-              success: () => {
-                wx.onAppShow((result) => {
-                  lastOpened = false
-                })
-              }
-            })
-          }
-        })
-      },
-      fail(err) {
-        lastOpened = false
-      }
-    })
+    // wx.request({
+    //   url: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-gate.txt',
+    //   success(res) {
+    //     wx.showModal({
+    //       title: '一把钥匙',
+    //       content: res.data,
+    //       confirmText: '探寻真实',
+    //       cancelText: '放下钥匙',
+    //       success(res) {
+    //         if (res.cancel) {
+    //           wx.onAppShow((result) => {
+    //             lastOpened = false
+    //           })
+    //           return
+    //         }
+
+    //         wx.navigateTo({
+    //           url: root + '/pages/scene-last-record/index',
+    //           success: () => {
+    //             wx.onAppShow((result) => {
+    //               lastOpened = false
+    //             })
+    //           }
+    //         })
+    //       }
+    //     })
+    //   },
+    //   fail(err) {
+    //     lastOpened = false
+    //   }
+    // })
   }
 })
