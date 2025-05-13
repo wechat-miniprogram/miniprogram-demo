@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import ci from 'miniprogram-ci'
-import packageJson from '../package.json'
+import packageJson from '../package.json' assert { type: 'json' }
 
 const privateKeyPath = path.resolve(__dirname, './key')
 
