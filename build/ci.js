@@ -1,3 +1,4 @@
+'use strict';
 const path = require('path')
 const ci = require('miniprogram-ci')
 const fs = require('fs')
