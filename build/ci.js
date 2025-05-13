@@ -1,8 +1,10 @@
 import path from 'path'
+import { fileURLToPath } from 'url'
 import fs from 'fs'
 import ci from 'miniprogram-ci'
-import packageJson from '../package.json' assert { type: 'json' }
-
+import packageJson from '../package.json' with { type: 'json' }
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const privateKeyPath = path.resolve(__dirname, './key')
 
 // 检查私钥文件是否已存在
