@@ -36,7 +36,8 @@ const params = {
     minifyWXML: true,
     minifyWXSS: true,
     codeProtect: false,
-    autoPrefixWXSS: true
+    autoPrefixWXSS: true,
+    bigPackageSizeSupport: true
   },
 }
 await ci.packNpm(project, {})
