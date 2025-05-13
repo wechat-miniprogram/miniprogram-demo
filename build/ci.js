@@ -37,7 +37,7 @@ const params = {
     minifyWXSS: true,
     codeProtect: false,
     autoPrefixWXSS: true,
-    bigPackageSizeSupport: true
+    ignoreUploadUnusedFiles: true,
   },
 }
 await ci.packNpm(project, {})
