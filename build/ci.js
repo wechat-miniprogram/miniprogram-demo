@@ -1,8 +1,7 @@
-'use strict';
-const path = require('path')
-const ci = require('miniprogram-ci')
-const fs = require('fs')
-const packageJson = require('../package.json')
+import path from 'path'
+import fs from 'fs'
+import ci from 'miniprogram-ci'
+import packageJson from '../package.json'
 
 const privateKeyPath = path.resolve(__dirname, './key')
 
