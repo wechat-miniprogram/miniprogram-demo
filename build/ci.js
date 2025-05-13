@@ -37,6 +37,7 @@ const params = {
     autoPrefixWXSS: true
   },
 }
+await ci.packNpm(project, {})
 ci.upload({
   project,
   ...params
