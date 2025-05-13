@@ -27,6 +27,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+             npm i --save miniprogram-recycle-view
 
       - name: Run package script
         run: npm run init
