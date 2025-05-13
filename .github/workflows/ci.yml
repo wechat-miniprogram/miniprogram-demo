@@ -27,9 +27,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Run package script
-        run: npm run init
           
       - name: Upload MiniProgram
         env:
