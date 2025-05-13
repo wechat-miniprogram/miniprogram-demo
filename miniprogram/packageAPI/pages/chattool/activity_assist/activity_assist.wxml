@@ -2,7 +2,7 @@
 <import src="../../../../common/foot.wxml" />
 
 <scroll-view type="list" class="page-container" scroll-y>
-	<view class="container page" data-weui-theme="{{theme}}">
+	<!-- <view class="container page" data-weui-theme="{{theme}}">
 		<template is="head" data="{{title: '群签到助手'}}" />
 		<view class="page-body">
 			<view class="card">
@@ -36,6 +36,6 @@
 			</view>
 		</view>
 		<template is="foot" />
-	</view>
+	</view> -->
 </scroll-view>
 

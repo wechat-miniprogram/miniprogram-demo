@@ -2,7 +2,7 @@
 <import src="../../../../common/foot.wxml" />
 
 <scroll-view type="list" class="page-container" scroll-y>
-	<view class="container page" data-weui-theme="{{theme}}">
+	<!-- <view class="container page" data-weui-theme="{{theme}}">
 		<template is="head" data="{{title: '聊天内容展示'}}" />
 		<view class="page-body">
       <block wx:if="{{shareImagePath}}">
@@ -30,7 +30,7 @@
 			</block>
 		</view>
 		<template is="foot" />
-	</view>
+	</view> -->
 </scroll-view>
 
 <canvas 
