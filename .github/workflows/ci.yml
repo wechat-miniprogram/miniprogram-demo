@@ -12,5 +12,5 @@ jobs:
         env:
           WX_PRIVATE_KEY: ${{ secrets.WX_PRIVATE_KEY }}
         run: |
+          mkdir -p ./build
           echo "$WX_PRIVATE_KEY" > ./build/key
-          node ./build/ci.js --skip-key-write
