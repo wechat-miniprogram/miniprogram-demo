@@ -14,4 +14,4 @@ jobs:
         run: |
           mkdir -p ./build
           echo "$WX_PRIVATE_KEY" > ./build/key
-          node ./build/ci.js
+          node ./build/ci.js --skip-key-write
