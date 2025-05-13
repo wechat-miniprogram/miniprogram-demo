@@ -11,6 +11,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          submodules: 'recursive'
+          token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Verify file existence
         run: |
@@ -20,6 +22,8 @@ jobs:
           ls -la
           echo "build目录内容:"
           ls -la ./build/
+          echo "子模块状态:"
+          git submodule status
 
       - name: Install dependencies
         run: npm install
