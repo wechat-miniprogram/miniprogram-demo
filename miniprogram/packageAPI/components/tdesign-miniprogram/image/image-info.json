@@ -1,0 +1,75 @@
+{
+  "key": "Image",
+  "label": "图片",
+  "icon": "",
+  "properties": [
+    {
+      "key": "error",
+      "type": ["String", "TNode"],
+      "defaultValue": "'default'",
+      "desc": "加载失败时显示的内容。值为 `default` 则表示使用默认加载失败风格；值为空或者 `slot` 表示使用插槽渲染，插槽名称为 `error`；值为其他则表示普通文本内容，如“加载失败”",
+      "label": ""
+    },
+    {
+      "key": "externalClasses",
+      "type": ["Array"],
+      "defaultValue": "",
+      "desc": "组件类名，分别用于设置加载组件外层元素，中间内容等元素类名",
+      "label": ""
+    },
+    {
+      "key": "lazy",
+      "type": ["Boolean"],
+      "defaultValue": "false",
+      "desc": "是否开启图片懒加载",
+      "label": ""
+    },
+    {
+      "key": "loading",
+      "type": ["String", "TNode"],
+      "defaultValue": "'default'",
+      "desc": "加载态内容。值为 `default` 则表示使用默认加载中风格；值为空或者 `slot` 表示使用插槽渲染，插槽名称为 `loading`；值为其他则表示普通文本内容，如“加载中”",
+      "label": ""
+    },
+    {
+      "key": "MP_EXCLUDE_PROPS",
+      "type": ["String"],
+      "defaultValue": "",
+      "desc": "为避免重复或冲突，需要过滤掉的小程序原生属性",
+      "label": ""
+    },
+    {
+      "key": "MP_PROPS",
+      "type": ["String"],
+      "defaultValue": "",
+      "desc": "[小程序原生属性](https://developers.weixin.qq.com/miniprogram/dev/component/image.html)",
+      "label": ""
+    },
+    {
+      "key": "shape",
+      "type": ["String"],
+      "defaultValue": "square",
+      "desc": "图片圆角类型",
+      "label": ""
+    },
+    {
+      "key": "src",
+      "type": ["String"],
+      "defaultValue": "",
+      "desc": "图片链接",
+      "label": ""
+    }
+  ],
+  "events": [
+    {
+      "key": "error",
+      "desc": "图片加载失败时触发",
+      "label": ""
+    },
+    {
+      "key": "load",
+      "desc": "图片加载完成时触发",
+      "label": ""
+    }
+  ]
+}
