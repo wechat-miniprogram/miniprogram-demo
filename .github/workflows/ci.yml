@@ -8,10 +8,24 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Verify file existence
+        run: |
+          echo "当前工作目录:"
+          pwd
+          echo "目录内容:"
+          ls -la
+          echo "build目录内容:"
+          ls -la ./build/
+          
       - name: Upload MiniProgram
         env:
           WX_PRIVATE_KEY: ${{ secrets.WX_PRIVATE_KEY }}
         run: |
           mkdir -p ./build
           echo "$WX_PRIVATE_KEY" > ./build/key
+          chmod +x ./build/ci.js
           node ./build/ci.js --skip-key-write
