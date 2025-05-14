@@ -1,8 +1,0 @@
-.page-body-text-screen-brightness {
-  font-size: 40px;
-  font-family: -apple-system-font, Helvetica Neue,Helvetica,sans-serif;
-}
-
-.page-section-gap {
-  padding: 15px;
-}

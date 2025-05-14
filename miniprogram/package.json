@@ -12,7 +12,6 @@
   "dependencies": {
     "miniprogram-barrage": "^1.1.0",
     "miniprogram-recycle-view": "^0.1.5",
-    "wxml-to-canvas": "^1.1.1",
-    "threejs-miniprogram": "0.0.3"
+    "wxml-to-canvas": "^1.1.1"
   }
 }

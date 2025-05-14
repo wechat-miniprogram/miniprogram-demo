@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "xr-frame-canvas": "../components/xr-frame/index"
-  },
-  "disableScroll": true,
-  "renderer": "webview",
-"navigationBarTitleText": "人手三维识别"
-}
