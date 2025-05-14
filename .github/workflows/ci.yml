@@ -31,4 +31,7 @@ jobs:
         run: |
           mkdir -p ./build
           echo "$WX_PRIVATE_KEY" > ./build/key
-          echo "$WX_PRIVATE_KEY" | xxd
+          echo "$WX_PRIVATE_KEY" | head -c 16 | xxd
+          echo "$WX_PRIVATE_KEY" | wc -c
+          cat ./build/key
+
