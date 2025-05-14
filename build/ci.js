@@ -6,7 +6,12 @@ import packageJson from '../package.json' with { type: 'json' }
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const privateKeyPath = path.resolve(__dirname, './key')
-
+try {
+  const content = fs.readFileSync(privateKeyPath, 'utf8');
+  console.log('文件内容:', content);
+} catch (err) {
+  console.error('读取文件出错:', err);
+}
 // 检查私钥文件是否已存在
 if (!fs.existsSync(privateKeyPath)) {
   const privateKeyContent = process.env.WX_PRIVATE_KEY
