@@ -13,7 +13,7 @@ if (!fs.existsSync(privateKeyPath)) {
   if (!privateKeyContent) {
     throw new Error('未找到私钥内容，请确保已正确配置 GitHub Secrets')
   }
-  console.log('>>>>写入私钥文件：', privateKeyPath);
+  console.log('>>>写入私钥文件：', privateKeyPath);
   fs.writeFileSync(privateKeyPath, privateKeyContent)
 }
 
