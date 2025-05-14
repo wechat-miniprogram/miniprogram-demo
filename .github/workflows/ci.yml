@@ -11,9 +11,34 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: 'recursive'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify file existence
+        run: |
+          echo "当前工作目录:"
+          pwd
+          echo "目录内容:"
+          ls -la
+          echo "build目录内容:"
+          ls -la ./build/
+          echo "子模块状态:"
+          git submodule status
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run package script
+        run: npm run init
+
       - name: Upload MiniProgram
         env:
           WX_PRIVATE_KEY: ${{ secrets.WX_PRIVATE_KEY }}
         run: |
+          mkdir -p ./build
           echo "$WX_PRIVATE_KEY" > ./build/key
-          node ./build/ci.js
+          chmod +x ./build/ci.js
+          node ./build/ci.js --skip-key-write
