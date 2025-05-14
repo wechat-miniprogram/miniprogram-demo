@@ -22,7 +22,7 @@ const project = new ci.Project({
   type: 'miniProgram',
   projectPath: path.resolve(__dirname, '../'),
   privateKeyPath: path.resolve(__dirname, './key'),
-  // ignores: [path.resolve(__dirname, '../miniprogram/node_modules/**/*')]
+  ignores: [path.resolve(__dirname, '../miniprogram/node_modules/**/*')]
 })
 const robotNumber = 2
 const params = {
