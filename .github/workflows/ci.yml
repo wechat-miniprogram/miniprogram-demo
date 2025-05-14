@@ -1,13 +1,11 @@
 name: WeChat MiniProgram Demo CI/CD
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
-      - master
+      - feat-ce
 jobs:
   upload:
-    if: github.event.pull_request.merged == true && github.repository == 'wechat-miniprogram/miniprogram-demo'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
