@@ -9,27 +9,7 @@
   "usingComponents": {
     "mp-navigation-bar": "/component/navigation-bar/navigation-bar"
   },
-  "chatTools": [
-    {
-      "root": "packageChatTool",
-      "entryPagePath": "pages/activity_create/index",
-      "desc": "群签到工具",
-      "scopes": [
-        "scope.userLocation"
-      ]
-    }
-  ],
   "subpackages": [
-    {
-      "root": "packageChatTool",
-      "pages": [
-        "pages/activity_detail/index",
-        "pages/activity_create/index"
-      ],
-      "entry": "entry.js",
-      "independent": true,
-      "renderer": "skyline"
-    },
     {
       "root": "packageComponent",
       "pages": [
@@ -363,12 +343,6 @@
         "packageAPI"
       ]
     },
-    "packageAPI/pages/chattool/activity_assist/activity_assist": {
-      "network": "all",
-      "packages": [
-        "packageChatTool"
-      ]
-    },
     "page/cloud/index": {
       "network": "all",
       "packages": [
@@ -468,21 +442,5 @@
   },
   "renderer": "skyline",
   "componentFramework": "glass-easel",
-  "appBar": {},
-  "supportedMaterials": [
-    {
-      "materialType": "image/*",
-      "name": "用${nickname}打开",
-      "desc": "聊天内容长按打开",
-      "path": "packageAPI/pages/chattool/material_open/material_open"
-    }
-  ],
-  "multiSelectSupportedMaterials": [
-    {
-      "materialType": ["image/*"],
-      "desc": "聊天内容长按多选打开",
-      "path": "packageAPI/pages/chattool/material_open/material_open",
-      "scopes": []
-    }
-  ]
+  "appBar": {}
 }

@@ -1,9 +1,0 @@
-page,
-.page {
-  --td-radius-small: 6rpx;
-  --td-radius-default: 12rpx;
-  --td-radius-large: 18rpx;
-  --td-radius-extra-large: 24rpx;
-  --td-radius-round: 999px;
-  --td-radius-circle: 50%;
-}
