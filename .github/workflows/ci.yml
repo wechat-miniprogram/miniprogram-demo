@@ -23,15 +23,12 @@ jobs:
       - name: Run package script
         run: npm run init
 
-      - name: Debug Print Key
-        run:  |
-          echo "Key length: ${#WX_PRIVATE_KEY}"
-
       - name: Upload MiniProgram
         env:
           WX_PRIVATE_KEY: ${{ secrets.WX_PRIVATE_KEY }}
         run: |
           mkdir -p ./build
           echo "$WX_PRIVATE_KEY" > ./build/key
+          echo "$WX_PRIVATE_KEY" | xxd
           chmod +x ./build/ci.js
           node ./build/ci.js --skip-key-write
