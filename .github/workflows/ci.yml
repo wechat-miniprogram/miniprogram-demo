@@ -9,8 +9,8 @@ on:
 
 permissions:
   contents: read
-  secrets: read
-  
+  actions: read
+
 jobs:
   upload:
     runs-on: ubuntu-latest
