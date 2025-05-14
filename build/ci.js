@@ -18,7 +18,7 @@ if (!fs.existsSync(privateKeyPath)) {
 }
 
 const project = new ci.Project({
-  appid: 'wxe5f52902cf4de896',
+  appid: 'wx622bee4f78fa4f5a',
   type: 'miniProgram',
   projectPath: path.resolve(__dirname, '../'),
   privateKeyPath: path.resolve(__dirname, './key'),
