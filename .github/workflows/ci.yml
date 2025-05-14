@@ -1,19 +1,35 @@
 name: WeChat MiniProgram Demo CI/CD
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
+    types: [closed]
     branches:
       - master
 jobs:
   upload:
+    if: github.event.pull_request.merged == true && github.repository == 'wechat-miniprogram/miniprogram-demo'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: 'recursive'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clone submodule
+        run: git submodule status
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run package script
+        run: npm run init
+
       - name: Upload MiniProgram
         env:
           WX_PRIVATE_KEY: ${{ secrets.WX_PRIVATE_KEY }}
         run: |
+          mkdir -p ./build
           echo "$WX_PRIVATE_KEY" > ./build/key
-          node ./build/ci.js
+          chmod +x ./build/ci.js
+          node ./build/ci.js --skip-key-write
