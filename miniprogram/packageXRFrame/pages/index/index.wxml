@@ -1,6 +1,6 @@
 
 <scroll-view class="main" scroll-y="{{true}}">
-  <view class="slogen-wrap" bind:tap="handleLastRecord">
+  <view class="slogen-wrap">
     <view class="slogen">XR<view class="special">Frame</view></view>
     <view class="intro">
       小程序低成本高性能XR解决方案
