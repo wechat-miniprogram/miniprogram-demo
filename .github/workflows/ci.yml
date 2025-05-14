@@ -24,6 +24,10 @@ jobs:
           ls -la ./build/
           echo "子模块状态:"
           git submodule status
+
+      - name: Install dependencies
+        run: npm install
+
           
       - name: Upload MiniProgram
         env:
