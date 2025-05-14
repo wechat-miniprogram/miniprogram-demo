@@ -2,6 +2,7 @@
   "name": "miniprogram-demo",
   "version": "1.0.0",
   "description": "WeChat miniprogram demo",
+  "type": "module",
   "scripts": {
     "init": "npm run sync && cd cloudfunctions/ && npm i --production && cd ../miniprogram/ && npm i --production",
     "lint": "eslint .",
