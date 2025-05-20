@@ -3,7 +3,7 @@ name: WeChat MiniProgram Demo CI/CD
 on:
   push:
     branches:
-      - feat-wzy-ce
+      - feat-wzy-cs
 jobs:
   upload:
     runs-on: ubuntu-latest
