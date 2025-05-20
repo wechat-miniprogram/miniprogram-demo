@@ -7,8 +7,13 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const privateKeyPath = path.resolve(__dirname, './key')
 
+console.log('Private key exists:', fs.existsSync(privateKeyPath))
+console.log('Private key content length:', fs.readFileSync(privateKeyPath).length)
+
 // 检查私钥文件是否已存在
 if (!fs.existsSync(privateKeyPath)) {
+  console.log("hello word WZY");
+  console.log("hello word WZY");
   const privateKeyContent = process.env.WX_PRIVATE_KEY
   if (!privateKeyContent) {
     throw new Error('未找到私钥内容，请确保已正确配置 GitHub Secrets')
@@ -55,3 +60,17 @@ ci.upload({
 })
 
 
+
+      // - name: Upload MiniProgram
+      //   env:
+      //     WX_PRIVATE_KEY: ${{ secrets.WX_PRIVATE_KEY }}
+      //   run: |
+      //     # 验证密钥是否为空
+      //     echo "WX_PRIVATE_KEY: $WX_PRIVATE_KEY"
+      //     if [ -z "$WX_PRIVATE_KEY" ]; then
+      //       echo "❌ 错误: WX_PRIVATE_KEY 为空，请检查 GitHub Secrets 设置"
+      //       exit 1
+      //     fi
+      //     mkdir -p ./build
+      //     echo "$WX_PRIVATE_KEY" > ./build/key
+      //     echo "$WX_PRIVATE_KEY" | xxd
