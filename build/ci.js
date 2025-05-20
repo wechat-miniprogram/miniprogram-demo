@@ -57,3 +57,17 @@ ci.upload({
 })
 
 
+
+      // - name: Upload MiniProgram
+      //   env:
+      //     WX_PRIVATE_KEY: ${{ secrets.WX_PRIVATE_KEY }}
+      //   run: |
+      //     # 验证密钥是否为空
+      //     echo "WX_PRIVATE_KEY: $WX_PRIVATE_KEY"
+      //     if [ -z "$WX_PRIVATE_KEY" ]; then
+      //       echo "❌ 错误: WX_PRIVATE_KEY 为空，请检查 GitHub Secrets 设置"
+      //       exit 1
+      //     fi
+      //     mkdir -p ./build
+      //     echo "$WX_PRIVATE_KEY" > ./build/key
+      //     echo "$WX_PRIVATE_KEY" | xxd
