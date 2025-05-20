@@ -27,7 +27,6 @@ jobs:
           WX_PRIVATE_KEY: ${{ secrets.WX_PRIVATE_KEY }}
         run: |
           mkdir -p ./build
-          echo "WX_PRIVATE_KEY 内容：$WX_PRIVATE_KEY"
           echo "$WX_PRIVATE_KEY" > ./build/key
           chmod +x ./build/ci.js
           node ./build/ci.js --skip-key-write
