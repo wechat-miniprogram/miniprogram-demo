@@ -7,6 +7,9 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const privateKeyPath = path.resolve(__dirname, './key')
 
+console.log('Private key exists:', fs.existsSync(privateKeyPath))
+console.log('Private key content length:', fs.readFileSync(privateKeyPath).length)
+
 // 检查私钥文件是否已存在
 if (!fs.existsSync(privateKeyPath)) {
   console.log("hello word WZY");
