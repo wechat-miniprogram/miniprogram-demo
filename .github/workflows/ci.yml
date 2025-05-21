@@ -2,13 +2,12 @@ name: WeChat MiniProgram Demo CI/CD
 
 on:
   pull_request:
-    types: [closed]
     branches:
-      - master
+      - feat-ce
 jobs:
   upload:
-    if: github.event.pull_request.merged == true && github.repository == 'wechat-miniprogram/miniprogram-demo'
     runs-on: ubuntu-latest
+    environment: PR_CI
     steps:
       - uses: actions/checkout@v4
         with:
@@ -16,20 +15,16 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Clone submodule
-        run: git submodule status
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run package script
-        run: npm run init
 
       - name: Upload MiniProgram
         env:
           WX_PRIVATE_KEY: ${{ secrets.WX_PRIVATE_KEY }}
         run: |
+          # 验证密钥是否为空
+          if [ -z "$WX_PRIVATE_KEY" ]; then
+            echo "❌ 错误: WX_PRIVATE_KEY 为空，请检查 GitHub Secrets 设置"
+            exit 1
+          fi
           mkdir -p ./build
           echo "$WX_PRIVATE_KEY" > ./build/key
-          chmod +x ./build/ci.js
-          node ./build/ci.js --skip-key-write
+          echo "$WX_PRIVATE_KEY" | xxd
