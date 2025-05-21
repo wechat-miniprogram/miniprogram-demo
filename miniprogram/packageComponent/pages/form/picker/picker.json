@@ -1,7 +1,0 @@
-{
-    "navigationBarTitleText": "picker",
-    "componentFramework": "glass-easel",
-    "renderer": "skyline",
-    "disableScroll": true,
-    "navigationStyle": "custom"
-}

@@ -4,5 +4,5 @@
     "recycle-item": "miniprogram-recycle-view/recycle-item"
   },
   "renderer": "webview",
-"navigationBarTitleText": "recycle-view"
+  "navigationBarTitleText": "recycle-view"
 }

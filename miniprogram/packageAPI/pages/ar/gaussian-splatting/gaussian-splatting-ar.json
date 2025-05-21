@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-  },
-  "disableScroll": true,
-  "renderer": "webview",
-  "navigationBarTitleText": "Gaussian Splatting AR预览"
-}

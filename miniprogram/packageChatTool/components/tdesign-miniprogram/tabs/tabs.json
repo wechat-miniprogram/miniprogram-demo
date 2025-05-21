@@ -1,9 +1,0 @@
-{
-  "component": true,
-  "styleIsolation": "apply-shared",
-  "usingComponents": {
-    "t-sticky": "../sticky/sticky",
-    "t-badge": "../badge/badge",
-    "t-icon": "../icon/icon"
-  }
-}

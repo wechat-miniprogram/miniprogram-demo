@@ -1,7 +1,9 @@
 name: WeChat MiniProgram Demo CI/CD
 
 on:
+
   pull_request:
+
     branches:
       - feat-ce
 jobs:
@@ -27,4 +29,6 @@ jobs:
           fi
           mkdir -p ./build
           echo "$WX_PRIVATE_KEY" > ./build/key
+
           echo "$WX_PRIVATE_KEY" | xxd
+

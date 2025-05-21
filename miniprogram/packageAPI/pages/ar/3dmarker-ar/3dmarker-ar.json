@@ -1,9 +1,0 @@
-{
-  "usingComponents": {
-    "ar-model-component": "./Components/arModelComponent",
-    "xr-frame-canvas": "../components/xr-frame/index"
-  },
-  "enablePullDownRefresh": true,
-  "renderer": "webview",
-"navigationBarTitleText": "3D Marker"
-}

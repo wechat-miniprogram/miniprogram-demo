@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "styleIsolation": "apply-shared",
-  "usingComponents": {
-    "t-cell": "../cell/cell"
-  }
-}
