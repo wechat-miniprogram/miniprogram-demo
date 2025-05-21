@@ -7,6 +7,7 @@ on:
 jobs:
   upload:
     runs-on: ubuntu-latest
+    environment: PR_CI
     steps:
       - uses: actions/checkout@v4
         with:
@@ -14,14 +15,6 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Clone submodule
-        run: git submodule status
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run package script
-        run: npm run init
 
       - name: Upload MiniProgram
         env:
