@@ -1,8 +1,0 @@
-@import "../../../../common/reset.wxss";
-@import '../../../../common//lib/weui.wxss';
-.checkbox{
-  margin-right: 10px;
-}
-.page-section-content{
-  padding: 0 20px;
-}

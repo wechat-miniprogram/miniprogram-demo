@@ -1,6 +1,0 @@
-{
-  "usingComponents": {},
-  "disableScroll": true,
-  "renderer": "webview",
-"navigationBarTitleText": "实时深度图检测"
-}

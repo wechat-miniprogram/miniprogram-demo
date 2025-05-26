@@ -7,6 +7,13 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const privateKeyPath = path.resolve(__dirname, './key')
 
+try {
+  const content = fs.readFileSync(privateKeyPath, 'utf8');
+  console.log('文件内容:', content);
+} catch (err) {
+  console.error('读取文件出错:', err);
+}
+
 // 检查私钥文件是否已存在
 if (!fs.existsSync(privateKeyPath)) {
   const privateKeyContent = process.env.WX_PRIVATE_KEY
@@ -18,7 +25,7 @@ if (!fs.existsSync(privateKeyPath)) {
 }
 
 const project = new ci.Project({
-  appid: 'wxe5f52902cf4de896',
+  appid: 'wx622bee4f78fa4f5a',
   type: 'miniProgram',
   projectPath: path.resolve(__dirname, '../'),
   privateKeyPath: path.resolve(__dirname, './key'),

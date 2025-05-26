@@ -1,6 +1,0 @@
-.t-float-left {
-  float: left;
-}
-.t-float-right {
-  float: right;
-}
