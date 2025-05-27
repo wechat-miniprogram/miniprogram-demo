@@ -22,6 +22,8 @@ module.exports = {
   ],
   rules: {
     'arrow-parens': 'off',
+    'eqeqeq': 'off',
+    'no-bitwise': 'off',
     'comma-dangle': [
       'error',
       'only-multiline'
@@ -41,6 +43,8 @@ module.exports = {
         ignore: ['^[^.]']
       }
     ],
+    'max-len': 'off',
+    'no-unused-vars': 'off',
     'import/prefer-default-export': 'off',
     'linebreak-style': 'off',
     'no-catch-shadow': 'error',
