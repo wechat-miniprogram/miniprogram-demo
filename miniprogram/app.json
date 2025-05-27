@@ -9,27 +9,7 @@
   "usingComponents": {
     "mp-navigation-bar": "/component/navigation-bar/navigation-bar"
   },
-  "chatTools": [
-    {
-      "root": "packageChatTool",
-      "entryPagePath": "pages/activity_create/index",
-      "desc": "群签到工具",
-      "scopes": [
-        "scope.userLocation"
-      ]
-    }
-  ],
   "subpackages": [
-    {
-      "root": "packageChatTool",
-      "pages": [
-        "pages/activity_detail/index",
-        "pages/activity_create/index"
-      ],
-      "entry": "entry.js",
-      "independent": true,
-      "renderer": "skyline"
-    },
     {
       "root": "packageComponent",
       "pages": [
@@ -52,18 +32,6 @@
         "pages/content/progress/progress",
         "pages/content/rich-text/rich-text",
         "pages/content/selection/selection",
-        "pages/form/button/button",
-        "pages/form/checkbox/checkbox",
-        "pages/form/form/form",
-        "pages/form/input/input",
-        "pages/form/label/label",
-        "pages/form/picker/picker",
-        "pages/form/picker-view/picker-view",
-        "pages/form/radio/radio",
-        "pages/form/slider/slider",
-        "pages/form/switch/switch",
-        "pages/form/textarea/textarea",
-        "pages/form/editor/editor",
         "pages/nav/navigator/navigator",
         "pages/nav/navigator/navigate",
         "pages/nav/navigator/redirect",
@@ -83,119 +51,6 @@
         "pages/open/web-view/web-view",
         "pages/obstacle-free/aria-component/aria-component",
         "pages/doc-web-view/doc-web-view"
-      ]
-    },
-    {
-      "root": "packageAPI",
-      "pages": [
-        "pages/api/login/login",
-        "pages/api/get-user-info/get-user-info",
-        "pages/api/request-payment/request-payment",
-        "pages/api/jump/jump",
-        "pages/api/share/share",
-        "pages/api/share-button/share-button",
-        "pages/api/custom-message/custom-message",
-        "pages/api/subscribe-message/subscribe-message",
-        "pages/api/choose-address/choose-address",
-        "pages/api/choose-invoice-title/choose-invoice-title",
-        "pages/api/soter-authentication/soter-authentication",
-        "pages/api/setting/setting",
-        "pages/ar/visionkit-basic/visionkit-basic",
-        "pages/ar/visionkit-basic-v2/visionkit-basic-v2",
-        "pages/ar/plane-ar/plane-ar",
-        "pages/ar/plane-ar-v2/plane-ar-v2",
-        "pages/ar/plane-ar-v2-options/plane-ar-v2-options",
-        "pages/ar/plane-ar-v2-marker/plane-ar-v2-marker",
-        "pages/ar/plane-ar-v2-depth/plane-ar-v2-depth",
-        "pages/ar/plane-ar-3dof/plane-ar-3dof",
-        "pages/ar/2dmarker-ar/2dmarker-ar",
-        "pages/ar/3dmarker-ar/3dmarker-ar",
-        "pages/ar/osd-ar/osd-ar",
-        "pages/ar/face-detect/face-detect",
-        "pages/ar/face-detect-3d/face-detect-3d",
-        "pages/ar/face-detect-3d-glasses/face-detect-3d-glasses",
-        "pages/ar/body-detect/body-detect",
-        "pages/ar/body-detect-3d/body-detect-3d",
-        "pages/ar/hand-detect/hand-detect",
-        "pages/ar/hand-detect-3d/hand-detect-3d",
-        "pages/ar/depth-detect/depth-detect",
-        "pages/ar/cameraBuffer-detect/cameraBuffer-detect",
-        "pages/ar/cameraBuffer-jpg/cameraBuffer-jpg",
-        "pages/ar/ocr-detect/ocr-detect",
-        "pages/ar/shoe-detect/shoe-detect",
-        "pages/ar/photo-shoe-detect/photo-shoe-detect",
-        "pages/ar/photo-ocr-detect/photo-ocr-detect",
-        "pages/ar/photo-idcard-detect/photo-idcard-detect",
-        "pages/ar/photo-hand-detect/photo-hand-detect",
-        "pages/ar/photo-body-detect/photo-body-detect",
-        "pages/ar/photo-face-detect/photo-face-detect",
-        "pages/ar/photo-depth-detect/photo-depth-detect",
-        "pages/ar/gaussian-splatting/gaussian-splatting",
-        "pages/ar/gaussian-splatting/gaussian-splatting-ar",
-        "pages/page/set-navigation-bar-title/set-navigation-bar-title",
-        "pages/page/navigation-bar-loading/navigation-bar-loading",
-        "pages/page/navigator/navigator",
-        "pages/page/pull-down-refresh/pull-down-refresh",
-        "pages/page/animation/animation",
-        "pages/page/action-sheet/action-sheet",
-        "pages/page/modal/modal",
-        "pages/page/toast/toast",
-        "pages/page/canvas/canvas",
-        "pages/page/get-wxml-node-info/get-wxml-node-info",
-        "pages/page/page-scroll/page-scroll",
-        "pages/page/intersection-observer/intersection-observer",
-        "pages/device/clipboard-data/clipboard-data",
-        "pages/device/bluetooth/bluetooth",
-        "pages/device/bluetooth/slave/slave",
-        "pages/device/screen-brightness/screen-brightness",
-        "pages/device/vibrate/vibrate",
-        "pages/device/add-contact/add-contact",
-        "pages/device/wifi/wifi",
-        "pages/device/get-network-type/get-network-type",
-        "pages/device/on-network-status-change/on-network-status-change",
-        "pages/device/get-system-info/get-system-info",
-        "pages/device/on-compass-change/on-compass-change",
-        "pages/device/make-phone-call/make-phone-call",
-        "pages/device/scan-code/scan-code",
-        "pages/device/on-accelerometer-change/on-accelerometer-change",
-        "pages/device/capture-screen/capture-screen",
-        "pages/device/ibeacon/ibeacon",
-        "pages/device/get-battery-info/get-battery-info",
-        "pages/media/image/image",
-        "pages/media/voice/voice",
-        "pages/media/file/file",
-        "pages/media/load-font-face/load-font-face",
-        "pages/media/background-audio/background-audio",
-        "pages/media/video/video",
-        "pages/media/audio/audio",
-        "pages/media/media-container/media-container",
-        "pages/location/get-location/get-location",
-        "pages/location/open-location/open-location",
-        "pages/location/choose-location/choose-location",
-        "pages/network/request/request",
-        "pages/network/web-socket/web-socket",
-        "pages/network/upload-file/upload-file",
-        "pages/network/download-file/download-file",
-        "pages/network/mdns/mdns",
-        "pages/network/udp-socket/udp-socket",
-        "pages/storage/storage/storage",
-        "pages/storage/get-background-fetch-data/get-background-fetch-data",
-        "pages/storage/get-background-prefetch-data/get-background-prefetch-data",
-        "pages/performance/get-performance/get-performance",
-        "pages/worker/worker/worker",
-        "pages/framework/two-way-bindings/two-way-bindings",
-        "pages/framework/wxs/wxs",
-        "pages/framework/resizable/resizable",
-        "pages/framework/wxs/movable",
-        "pages/framework/wxs/sidebar",
-        "pages/framework/wxs/stick-top",
-        "pages/framework/wxs/nearby",
-        "pages/ai/mobilenet/index",
-        "pages/ai/style-trans/index",
-        "pages/ai/mobilenet_int8/index",
-        "pages/chattool/activity_assist/activity_assist",
-        "pages/chattool/material_open/material_open",
-        "pages/chattool/material_view/material_view"
       ]
     },
     {
@@ -401,18 +256,6 @@
         "packageComponent"
       ]
     },
-    "page/API/index": {
-      "network": "all",
-      "packages": [
-        "packageAPI"
-      ]
-    },
-    "packageAPI/pages/chattool/activity_assist/activity_assist": {
-      "network": "all",
-      "packages": [
-        "packageChatTool"
-      ]
-    },
     "page/cloud/index": {
       "network": "all",
       "packages": [
@@ -512,21 +355,5 @@
   },
   "renderer": "skyline",
   "componentFramework": "glass-easel",
-  "appBar": {},
-  "supportedMaterials": [
-    {
-      "materialType": "image/*",
-      "name": "用${nickname}打开",
-      "desc": "聊天内容长按打开",
-      "path": "packageAPI/pages/chattool/material_open/material_open"
-    }
-  ],
-  "multiSelectSupportedMaterials": [
-    {
-      "materialType": ["image/*"],
-      "desc": "聊天内容长按多选打开",
-      "path": "packageAPI/pages/chattool/material_open/material_open",
-      "scopes": []
-    }
-  ]
+  "appBar": {}
 }

@@ -1,8 +1,0 @@
-<!--pages/movable/movable.wxml-->
-<view class="container page" data-weui-theme="{{theme}}">
-  <wxs module="test" src="./movable.wxs"></wxs> 
-  <view wx:if="{{show}}" class="area" style='position:relative;width:100%;height:100%;overflow: hidden'>
-    <view data-index="1" data-obj="{{dataObj}}" bindtouchstart="{{test.touchstart}}" bindtouchmove="{{test.touchmove}}" bindtouchend='{{test.touchmove}}' class="movable" style="position:absolute;width:100px;height:100px;border-radius: 50%;background:url('https://res.wx.qq.com/community/dist/community/images/logo_miniprogram_013191.png');background-size: cover;left:{{left}}px;top:{{top}}px"></view>
-  </view>
-<!-- <view bindtap='{{taptest}}'>testbindtap</view> -->
-</view>

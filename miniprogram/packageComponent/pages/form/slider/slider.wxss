@@ -1,5 +1,0 @@
-/* packageComponent/pages/form/slider/slider.wxss */
-
-slider {
-  margin: 0;
-}

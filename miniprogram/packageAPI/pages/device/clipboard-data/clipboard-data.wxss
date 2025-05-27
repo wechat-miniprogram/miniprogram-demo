@@ -1,8 +1,0 @@
-
-
-.page-body-info {
-  padding: 5px;
-  height: 100px;
-  overflow: scroll-y;
-  text-align: left;
-}
