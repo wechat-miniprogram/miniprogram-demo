@@ -2,7 +2,7 @@ name: PR Lint Check
 
 on:
   pull_request:
-    branches: feat-wzy-cs
+    branches: [master]
 
 jobs:
   lint:
