@@ -298,6 +298,12 @@
       ]
     },
     {
+      "root": "packageSkylineRouter",
+      "pages": [
+        "pages/preset-router/index"
+      ]
+    },
+    {
       "root": "packageXRFrame",
       "pages": [
         "pages/index/index",
@@ -523,7 +529,9 @@
   ],
   "multiSelectSupportedMaterials": [
     {
-      "materialType": ["image/*"],
+      "materialType": [
+        "image/*"
+      ],
       "desc": "聊天内容长按多选打开",
       "path": "packageAPI/pages/chattool/material_open/material_open",
       "scopes": []
