@@ -1,0 +1,14 @@
+/* components/float-action-button/index.wxss */
+.float-button {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: plum;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  position: absolute;
+  right: 20px;
+  bottom: 60px;
+}

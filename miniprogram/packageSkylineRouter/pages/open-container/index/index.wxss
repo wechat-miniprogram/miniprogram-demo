@@ -1,0 +1,104 @@
+/* pages/detail/index.wxss */
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollable {
+  flex: 1;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-wrap {
+  height: 250px;
+  width: 100%;
+  padding: 70px;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.38);
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+}
+
+.article {
+  padding: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.title {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.card-row {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+}
+
+.card-item {
+  flex: 1;
+}
+
+.split {
+  width: 8px;
+  height: 100%;
+}
+
+.list-title {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0 15px;
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.list-item-leading {
+  margin-left: 20px;
+  margin-right: 15px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.list-item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item-title {
+  font-size: 16px;
+  color: #000;
+}
+
+.float-button {
+  width: 56px;
+  height: 56px;
+  position: absolute;
+  right: 20px;
+  bottom: 60px;
+}
+
+.ball {
+  height: 100%; 
+  border-radius: 50%;
+  background-color: plum;
+  font-size: 24px;
+}

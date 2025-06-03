@@ -1,0 +1,43 @@
+/* pages/detail/index.wxss */
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollable {
+  flex: 1;
+  overflow: hidden;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-wrap {
+  height: 250px;
+  width: 100%;
+  padding: 70px;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.38);
+}
+
+.img {
+  width: 25vw;
+  height: 25vw;
+}
+
+.article {
+  padding: 20px;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.title {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
