@@ -62,7 +62,7 @@ Page({
         open: false,
         pages: [
           { url: 'preset-router/index', name: '预设路由' },
-          { url: '', name: '容器转场动画' },
+          { url: 'open-container/index/index', name: '容器转场动画' },
           { url: '', name: '页面返回手势' }
         ]
       }, {

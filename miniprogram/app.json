@@ -300,8 +300,12 @@
     {
       "root": "packageSkylineRouter",
       "pages": [
-        "pages/preset-router/index"
-      ]
+        "pages/preset-router/index",
+        "pages/open-container/index/index",
+        "pages/open-container/detail/index",
+        "pages/open-container/other/index"
+      ],
+      "renderer": "skyline"
     },
     {
       "root": "packageXRFrame",
@@ -405,6 +409,12 @@
       "network": "all",
       "packages": [
         "packageComponent"
+      ]
+    },
+    "page/animation/index": {
+      "network": "all",
+      "packages": [
+        "packageSkylineRouter"
       ]
     },
     "page/API/index": {
