@@ -12,6 +12,9 @@ const CustomRotue = {
 
 Page({
   data: {
+    round: true,
+    popGestureDirection: 'vertical',
+    range: ['horizontal', 'vertical', 'multi'],
     list: [
       {
         id: 0,
@@ -70,17 +73,36 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: 'preset-router',
-      path: 'packageSkylineRouter/page/preset-router/index/index'
+      title: 'page-return-gesture',
+      path: 'packageSkylineRouter/page/page-return-gesture/index/index'
     }
   },
-  onLoad() { },
+  onLoad() {},
 
   goNextPage(e) {
     const { routeType, nextRouteType, fullscreen, disableDrag } = e.currentTarget.dataset
     wx.navigateTo({
       url: `/packageSkylineRouter/pages/preset-router/list/index?disableDrag=${disableDrag}&fullscreen=${fullscreen}&nextRouteType=${nextRouteType || ''}`,
-      routeType
+      routeType,
+      routeOptions: {
+        round: this.data.round,
+      },
+      routeConfig: {
+        fullscreenDrag: true,
+        popGestureDirection: this.data.popGestureDirection
+      }
     });
+  },
+  onChange(e) {
+    const popGestureDirection = this.data.range[e.detail.value]
+    this.setData({
+      popGestureDirection
+    })
+  },
+
+  toggleRound() {
+    this.setData({
+      round: !this.data.round
+    })
   }
 });

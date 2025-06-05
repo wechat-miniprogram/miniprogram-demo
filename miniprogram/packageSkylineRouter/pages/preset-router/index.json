@@ -1,9 +1,0 @@
-{
-  "usingComponents": {
-  },
-  "navigationStyle": "custom",
-  "backgroundColorContent": "#00000000",
-  "disableScroll": true,
-  "renderer": "skyline",
-  "componentFramework": "glass-easel"
-}

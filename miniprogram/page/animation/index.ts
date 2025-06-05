@@ -63,7 +63,7 @@ Page({
         pages: [
           { url: 'preset-router/index/index', name: '预设路由' },
           { url: 'open-container/index/index', name: '容器转场动画' },
-          { url: '', name: '页面返回手势' }
+          { url: 'page-return-gesture/index/index', name: '页面返回手势' }
         ]
       }, {
         id: 'XRFrame',
