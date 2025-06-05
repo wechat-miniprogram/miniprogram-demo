@@ -1,0 +1,13 @@
+<mp-navigation-bar title="Skyline Route" back="{{true}}"></mp-navigation-bar>
+<view class="section">Custom Page Route Example</view>
+<block wx:for="{{list}}" wx:key="id">
+  <view
+    class="item"
+    bind:tap="goNextPage"
+    data-route-type="{{item.routeType}}"
+    data-next-route-type="{{item.nextRouteType}}"
+    data-disable-drag="{{item.disableDrag}}"
+    data-fullscreen="{{item.fullscreen}}"
+    >{{item.content}}
+    </view>
+</block>

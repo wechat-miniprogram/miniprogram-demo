@@ -1,0 +1,49 @@
+/* components/example-card/index.wxss */
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0px 1px 2px 1px #E3E8E5;
+}
+
+.img-wrap {
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.38);
+}
+
+.img {
+  width: 60px;
+  height: 60px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro {
+  flex: 1;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+  font-style: italic;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding:0 20px;
+}
+
+.title {
+  color: #000;
+  font-size: 20px;
+}
+
+.content {
+  margin-top: 16px;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.54);
+}
