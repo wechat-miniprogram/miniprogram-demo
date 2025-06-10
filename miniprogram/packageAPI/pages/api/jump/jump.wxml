@@ -1,8 +1,7 @@
 <import src="../../../../common/head.wxml" />
 <import src="../../../../common/foot.wxml" />
-
 <view class="container page" data-weui-theme="{{theme}}">
-  <template is="head" />
+  <template is="head" data="{{title: 'jumpApi'}}" />
   <view class="page-body">
     <!-- 暂时下架 -->
     <!-- <view class="btn-area">
@@ -16,6 +15,12 @@
     </view> -->
     <view class="btn-area">
       <button type="primary" data-mode="fingerPrint" bindtap="exitminiprogram">退出当前小程序</button>
+    </view>
+    <view class="btn-area">
+      <button type="primary" data-mode="fingerPrint" bindtap="openofficialaccountprofile">打开公众号主页</button>
+    </view>
+    <view class="btn-area">
+      <button type="primary" data-mode="fingerPrint" bindtap="openofficialaccountarticle">打开公众号文章</button>
     </view>
   </view>
   <template is="foot" />

@@ -55,6 +55,26 @@ Page({
       }
     })
   },
+  // 打开公众号主页
+  openofficialaccountprofile() {
+    wx.openOfficialAccountProfile({
+      username: 'gh_56fc3b00cc4f',
+      success: (res) => {
+      },
+      fail: (res) => {
+      }
+    })
+  },
+  // 打开公众号文章
+  openofficialaccountarticle() {
+    wx.openOfficialAccountArticle({
+      url: 'https://mp.weixin.qq.com/s/vTt8sZ_tTkTEVYgcydKqew', // 此处填写公众号文章连接
+      success: (res) => {
+      },
+      fail: (res) => {
+      }
+    })
+  },
   onUnload() {
     if (wx.offThemeChange) {
       wx.offThemeChange()
