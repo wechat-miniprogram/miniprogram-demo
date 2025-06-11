@@ -1,8 +1,7 @@
 <import src="../../../../common/head.wxml" />
 <import src="../../../../common/foot.wxml" />
-
 <view class="container page" data-weui-theme="{{theme}}">
-  <template is="head" />
+  <template is="head" data="{{title: 'jumpApi'}}" />
   <view class="page-body">
     <!-- 暂时下架 -->
     <!-- <view class="btn-area">
