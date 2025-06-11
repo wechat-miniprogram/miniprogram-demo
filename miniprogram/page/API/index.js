@@ -32,6 +32,9 @@ Page({
         zh: '跳转',
         url: 'jump/jump'
       }, {
+        zh: '公众号',
+        url: 'official-account/official-account'
+      }, {
         zh: '转发',
         url: 'share/share'
       }, {
