@@ -16,12 +16,6 @@
     <view class="btn-area">
       <button type="primary" data-mode="fingerPrint" bindtap="exitminiprogram">退出当前小程序</button>
     </view>
-    <view class="btn-area">
-      <button type="primary" data-mode="fingerPrint" bindtap="openofficialaccountprofile">打开公众号主页</button>
-    </view>
-    <view class="btn-area">
-      <button type="primary" data-mode="fingerPrint" bindtap="openofficialaccountarticle">打开公众号文章</button>
-    </view>
   </view>
   <template is="foot" />
 </view>

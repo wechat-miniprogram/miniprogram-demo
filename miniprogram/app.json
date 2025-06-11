@@ -92,6 +92,7 @@
         "pages/api/get-user-info/get-user-info",
         "pages/api/request-payment/request-payment",
         "pages/api/jump/jump",
+        "pages/api/official-account/official-account",
         "pages/api/share/share",
         "pages/api/share-button/share-button",
         "pages/api/custom-message/custom-message",
@@ -523,7 +524,9 @@
   ],
   "multiSelectSupportedMaterials": [
     {
-      "materialType": ["image/*"],
+      "materialType": [
+        "image/*"
+      ],
       "desc": "聊天内容长按多选打开",
       "path": "packageAPI/pages/chattool/material_open/material_open",
       "scopes": []
