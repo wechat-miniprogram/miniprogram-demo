@@ -77,10 +77,12 @@ Page({
   onLoad() { },
 
   goNextPage(e) {
-    const { routeType, nextRouteType, fullscreen, disableDrag } = e.currentTarget.dataset
+    const {
+      routeType, nextRouteType, fullscreen, disableDrag
+    } = e.currentTarget.dataset
     wx.navigateTo({
       url: `/packageSkylineRouter/pages/preset-router/list/index?disableDrag=${disableDrag}&fullscreen=${fullscreen}&nextRouteType=${nextRouteType || ''}`,
       routeType
-    });
+    })
   }
-});
+})
