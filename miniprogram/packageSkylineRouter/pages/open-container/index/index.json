@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "example-card": "../../../components/example-card/index",
+    "small-card": "../../../components/small-card/index",
+    "example-single-title": "../../../components/example-single-title/index"
+  },
+  "navigationBarTitleText": "Open Container Demo",
+  "componentFramework": "glass-easel",
+  "renderer": "skyline",
+  "navigationStyle": "custom"
+}

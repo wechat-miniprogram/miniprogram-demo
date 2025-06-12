@@ -1,0 +1,15 @@
+.section {
+  padding: 15px;  
+  font-size: 24px;
+}
+
+.intro {
+  padding: 15px;
+  font-size: 14px;
+  color: grey
+}
+
+.item {
+  padding: 15px;
+  font-size: 18px;
+}

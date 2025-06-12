@@ -1,0 +1,44 @@
+<mp-navigation-bar title="Open Container Demo" back="{{true}}"></mp-navigation-bar>
+<scroll-view type="list" scroll-y class="scrollable" padding="{{[8, 8, 8, 8]}}" show-scrollbar="{{false}}" style="{{renderer === 'webview' ? 'padding: 8px;' : ''}}">
+  <view class="card-row">
+    <open-container closed-elevation="{{closedElevation}}" closed-border-radius="{{closedBorderRadius}}" open-elevation="{{openElevation}}" open-border-radius="{{openBorderRadius}}" transition-type="{{type}}" transition-duration="{{duration}}" bind:tap="goDetail">
+      <example-card />
+    </open-container>
+  </view>
+  <open-container closed-elevation="{{closedElevation}}" closed-border-radius="{{closedBorderRadius}}" open-elevation="{{openElevation}}" open-border-radius="{{openBorderRadius}}" transition-type="{{type}}" transition-duration="{{duration}}" bind:tap="goDetail">
+    <example-single-title />
+  </open-container>
+  <view class="card-row" />
+  <view class="card-row">
+    <block wx:for="{{[0, 1]}}">
+      <open-container class="card-item" closed-elevation="{{closedElevation}}" closed-border-radius="{{closedBorderRadius}}" open-elevation="{{openElevation}}" open-border-radius="{{openBorderRadius}}" transition-type="{{type}}" transition-duration="{{duration}}" bind:tap="goDetail">
+        <small-card class="card-item" />
+      </open-container>
+      <view wx:if="{{index < 1}}" class="split" />
+    </block>
+  </view>
+  <view class="card-row">
+    <block wx:for="{{[0, 1, 2]}}">
+      <open-container class="card-item" closed-elevation="{{closedElevation}}" closed-border-radius="{{closedBorderRadius}}" open-elevation="{{openElevation}}" open-border-radius="{{openBorderRadius}}" transition-type="{{type}}" transition-duration="{{duration}}" bind:tap="goDetail">
+        <small-card />
+      </open-container>
+      <view wx:if="{{index < 2}}" class="split" />
+    </block>
+  </view>
+  <block wx:for="{{list}}">
+    <open-container url="{{detailPage}}" closed-elevation="0" closed-border-radius="0" open-elevation="{{openElevation}}" open-border-radius="{{openBorderRadius}}" transition-type="{{type}}" transition-duration="{{duration}}" bind:tap="goDetail">
+      <view class="list-title">
+        <view class="list-item-leading">
+          <image class="avatar" src="/assets/play.png" />
+        </view>
+        <view class="list-item-content">
+          <view class="item-title">List item {{index + 1}}</view>
+          <view>Secondary text</view>
+        </view>
+      </view>
+    </open-container>
+  </block>
+</scroll-view>
+<open-container class="float-button" closed-color="plum" middle-color="yellow" open-color="white" closed-border-radius="28" open-border-radius="{{openBorderRadius}}" transition-type="{{type}}" transition-duration="{{duration}}" bind:tap="goDetail">
+  <view class="center ball" bind:longpress="toggleType">+</view>
+</open-container>

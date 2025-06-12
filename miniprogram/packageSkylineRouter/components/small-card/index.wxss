@@ -1,0 +1,49 @@
+/* components/example-card/index.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 225px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0px 1px 2px 1px #E3E8E5;
+}
+
+.img-wrap {
+  height: 150px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.38);
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+  padding: 10px;
+  font-style: italic;
+}
+
+.title {
+  color: #000;
+  font-size: 20px;
+}
+
+.sub-title {
+  margin-top: 4px;
+}
+
+.img {
+  width: 80px;
+  height: 80px;
+}
+
+.content {
+  margin-top: 16px;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.54);
+}
