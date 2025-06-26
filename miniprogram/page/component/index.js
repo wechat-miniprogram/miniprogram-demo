@@ -26,7 +26,6 @@ Page({
 
     wx.reportAnalytics('enter_home_programmatically', {})
 
-    // http://tapd.oa.com/miniprogram_experiment/prong/stories/view/1020425689866413543
     if (wx.canIUse('getExptInfoSync')) {
       console.log('getExptInfoSync expt_args_1', wx.getExptInfoSync(['expt_args_1']))
       console.log('getExptInfoSync expt_args_2', wx.getExptInfoSync(['expt_args_2']))
