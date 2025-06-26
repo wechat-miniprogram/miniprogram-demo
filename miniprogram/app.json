@@ -220,10 +220,6 @@
     {
       "root": "packageExtend",
       "pages": [
-        "pages/form/cell/cell",
-        "pages/form/slideview/slideview",
-        "pages/form/form/form",
-        "pages/form/uploader/uploader",
         "pages/base/article/article",
         "pages/base/icons/icons",
         "pages/base/badge/badge",
