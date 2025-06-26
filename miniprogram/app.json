@@ -263,8 +263,7 @@
         "pages/adapt/pagination/pagination",
         "pages/adapt/freelayout/freelayout",
         "pages/adapt/layeredpresentation/layeredpresentation",
-        "pages/adapt/horizontalexpansion/horizontalexpansion",
-        "pages/adapt/customscreenvalidation/customscreenvalidation"
+        "pages/adapt/horizontalexpansion/horizontalexpansion"
       ]
     },
     {
