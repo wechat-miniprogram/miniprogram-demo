@@ -64,7 +64,7 @@ Component({
       const session = this.session = wx.createVKSession({
         track: {
           plane: {
-            mode: 3
+            mode: 1
           },
           marker: true,
         },
@@ -84,7 +84,7 @@ Component({
 
         // VKSession EVENT addAnchors
         session.on('addAnchors', anchors => {
-          // console.log("addAnchor", anchors);
+          console.log("addAnchor", anchors);
 
           this.left.visible = true
           this.right.visible = true
