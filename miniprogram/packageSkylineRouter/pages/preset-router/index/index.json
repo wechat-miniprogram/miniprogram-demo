@@ -1,0 +1,7 @@
+{
+  "usingComponents": {},
+  "componentFramework": "glass-easel",
+  "renderer": "skyline",
+  "navigationStyle": "custom",
+  "styleIsolation": "isolated"
+}

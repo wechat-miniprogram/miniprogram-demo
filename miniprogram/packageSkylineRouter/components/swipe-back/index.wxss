@@ -1,0 +1,8 @@
+/* components/swiper-back/index.wxss */
+.gesture-back-area {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+}

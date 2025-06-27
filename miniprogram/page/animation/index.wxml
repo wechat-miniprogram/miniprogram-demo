@@ -45,6 +45,11 @@
                     <navigator url="/packageExtend/pages/{{page.url}}" class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page.name}}</navigator>
                     <view class="navigator-arrow"></view>
                   </view>
+                  <!-- 路由动画 -->
+                  <view wx:elif="{{item.id == 'SkylineRouter'}}">
+                    <navigator url="/packageSkylineRouter/pages/{{page.url}}" class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page.name}}</navigator>
+                    <view class="navigator-arrow"></view>
+                  </view>
                   <view wx:else>
                     <navigator url="/packageComponent/pages/{{item.id}}/{{page}}/{{page}}" class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}">{{page}}</navigator>
                     <view class="navigator-arrow"></view>
