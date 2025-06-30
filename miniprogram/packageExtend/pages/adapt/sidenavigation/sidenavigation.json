@@ -1,5 +1,5 @@
 {
   "usingComponents": {},
   "renderer": "webview",
-"navigationBarTitleText": "侧边导航栏"
+  "navigationBarTitleText": "侧边导航栏"
 }

@@ -4,5 +4,5 @@
     "mp-row": "../../../components/row/index"
   },
   "renderer": "webview",
-"navigationBarTitleText": "左右伸缩"
+  "navigationBarTitleText": "左右伸缩"
 }
