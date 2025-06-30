@@ -1,0 +1,4 @@
+<!-- components/swiper-back/index.wxml -->
+<horizontal-drag-gesture-handler wx:if="{{!isHomePage}}" onGestureEvent="onSwipeBack">
+  <view class="gesture-back-area"></view>
+</horizontal-drag-gesture-handler>

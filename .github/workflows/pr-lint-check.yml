@@ -1,0 +1,39 @@
+name: PR Lint Check
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  eslint-changed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v46
+        with:
+          since_last_remote_commit: 'true'
+
+      - name: Filter JavaScript files
+        id: filter-js
+        run: |
+          changed_js_files=$(echo '${{ steps.changed-files.outputs.all_changed_files }}' | grep -E '\.(js|ts|jsx|tsx)$' || true)
+          echo "changed_js_files=${changed_js_files}" >> $GITHUB_OUTPUT
+
+      - name: Run ESLint on changed JS files
+        if: ${{ steps.filter-js.outputs.changed_js_files != '' }}
+        run: |
+          echo "Changed JS files: ${{ steps.filter-js.outputs.changed_js_files }}"
+          npx eslint ${{ steps.filter-js.outputs.changed_js_files }}

@@ -294,6 +294,18 @@
       ]
     },
     {
+      "root": "packageSkylineRouter",
+      "pages": [
+        "pages/preset-router/index/index",
+        "pages/preset-router/list/index",
+        "pages/open-container/index/index",
+        "pages/open-container/detail/index",
+        "pages/open-container/other/index",
+        "pages/page-return-gesture/index/index"
+      ],
+      "renderer": "skyline"
+    },
+    {
       "root": "packageXRFrame",
       "pages": [
         "pages/index/index",
@@ -395,6 +407,12 @@
       "network": "all",
       "packages": [
         "packageComponent"
+      ]
+    },
+    "page/animation/index": {
+      "network": "all",
+      "packages": [
+        "packageSkylineRouter"
       ]
     },
     "page/API/index": {

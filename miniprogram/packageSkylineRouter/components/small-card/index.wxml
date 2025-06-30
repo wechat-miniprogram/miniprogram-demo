@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="img-wrap center">
+    <image mode="aspectFit" class="img" src="/assets/play.png"></image>
+  </view>
+
+  <view class="intro">
+    <view class="title">Title</view>
+    <view class="sub-title">Secondary</view>
+  </view>
+</view>
