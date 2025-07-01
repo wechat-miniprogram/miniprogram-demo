@@ -2,38 +2,32 @@
   <mp-row>
     <mp-col xs="{{24}}" span="{{4}}">
       <view>
-        <view class="item">
-        </view>
+        <view class="item"></view>
       </view>
     </mp-col>
     <mp-col xs="{{24}}" span="{{4}}">
       <view>
-        <view class="item">
-        </view>
+        <view class="item"></view>
       </view>
     </mp-col>
     <mp-col xs="{{24}}" span="{{4}}">
       <view>
-        <view class="item">
-        </view>
+        <view class="item"></view>
       </view>
     </mp-col>
     <mp-col xs="{{24}}" span="{{4}}">
       <view>
-        <view class="item">
-        </view>
+        <view class="item"></view>
       </view>
     </mp-col>
     <mp-col xs="{{24}}" span="{{4}}">
       <view>
-        <view class="item">
-        </view>
+        <view class="item"></view>
       </view>
     </mp-col>
     <mp-col xs="{{24}}" span="{{4}}">
       <view>
-        <view class="item">
-        </view>
+        <view class="item"></view>
       </view>
     </mp-col>
   </mp-row>

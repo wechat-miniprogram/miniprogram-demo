@@ -4,5 +4,5 @@
     "mp-row": "../../../components/row/index"
   },
   "renderer": "webview",
-"navigationBarTitleText": "分层展现"
+  "navigationBarTitleText": "分层展现"
 }

@@ -4,5 +4,5 @@
     "mp-row": "../../../components/row/index"
   },
   "renderer": "webview",
-"navigationBarTitleText": "自由布局"
+  "navigationBarTitleText": "自由布局"
 }
