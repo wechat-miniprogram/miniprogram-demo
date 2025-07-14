@@ -1,7 +1,19 @@
-<view>
-	<channel-video
-		feed-id="{{feedId}}"
-		finder-user-name="sphiUesg6A9wDtl"
-		autoplay="{{false}}"
-	></channel-video>
-</view> 
+<import src="../../../../common/head.wxml" />
+<import src="../../../../common/foot.wxml" />
+
+<mp-navigation-bar title="channel-video" back="{{true}}"></mp-navigation-bar>
+<template is="head" data="{{title: 'channel-video'}}"/>
+<scroll-view class="page-scroll-view" scroll-y type="list">
+  <view class="container page" data-weui-theme="{{theme}}">
+    <view class="page-body">
+      <view class="page-section page-section-spacing channel-video">
+        <channel-video
+  	    	feed-id="{{feedId}}"
+  	    	finder-user-name="sphiUesg6A9wDtl"
+  	    	autoplay="{{false}}"
+  	    ></channel-video>
+      </view>
+    </view>
+    <template is="foot"/> 
+  </view>
+</scroll-view>
