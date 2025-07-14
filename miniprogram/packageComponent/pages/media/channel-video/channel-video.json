@@ -1,5 +1,7 @@
 {
   "usingComponents": {},
   "navigationBarTitleText": "channel-video",
-  "renderer": "webview"
+  "componentFramework": "glass-easel",
+  "renderer": "skyline",
+  "navigationStyle": "custom"
 }

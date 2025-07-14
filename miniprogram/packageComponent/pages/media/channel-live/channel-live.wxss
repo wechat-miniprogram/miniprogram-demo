@@ -1,13 +1,12 @@
-.intro {
-  margin: 30px;
-  text-align: center;
+@import "../../../../common/reset.wxss";
+
+.page-section-title{
+  padding: 0;
 }
-button {
-	width: 240px !important;
-	margin-top: 40px;
-	line-height: 40px;
+.page-section-title{
+  margin-top: 30px;
+  position: relative;
 }
-view {
-	text-align: center;
-	margin-top: 50px;
+.page-foot{
+  margin-top: 25px;
 }
