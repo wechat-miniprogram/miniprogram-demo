@@ -1,0 +1,14 @@
+{
+  "usingComponents": {
+    "mp-nagivation-bar": "weui-miniprogram/nagivation-bar/nagivation-bar",
+    "mp-form-page": "weui-miniprogram/form-page/form-page",
+    "mp-toptips": "weui-miniprogram/toptips/toptips",
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell",
+    "mp-checkbox": "weui-miniprogram/checkbox/checkbox",
+    "mp-checkbox-group": "weui-miniprogram/checkbox-group/checkbox-group",
+    "mp-form": "weui-miniprogram/form/form"
+	},
+	"navigationStyle": "custom",
+  "renderer": "skyline"
+}

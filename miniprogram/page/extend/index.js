@@ -133,9 +133,10 @@ CustomPage({
   },
   openPage(e) {
     const { url, father, page } = e.currentTarget.dataset
-    const nextUrl = url ? `../../packageExtend/pages/${url}` : `../../packageExtend/pages/${father}/${page}/${page}`
+    const nextUrl = url ? `/packageExtend/pages/${url}` : `/packageExtend/pages/${father}/${page}/${page}`
     wx.navigateTo({
-      url: nextUrl
+      url: nextUrl,
+      fail: console.error,
     })
   }
 })

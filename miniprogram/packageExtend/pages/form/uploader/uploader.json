@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+		"mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+    "mp-uploader": "weui-miniprogram/uploader/uploader",
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell"
+  },
+	"navigationStyle": "custom",
+  "renderer": "skyline"
+}

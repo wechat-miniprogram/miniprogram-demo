@@ -11,7 +11,7 @@
                         <view
                             id="{{item.id}}"
                             class="weui-flex kind-list__item-hd {{item.open ? 'kind-list__item-hd_show' : ''}}"
-                            bindtap="kindToggle"
+                            bind:tap="kindToggle"
                             aria-role="button"
                             aria-haspopup
                             aria-expanded="{{item.open}}"
@@ -26,7 +26,7 @@
                         >
                             <view class="weui-cells {{item.open ? 'weui-cells_show' : ''}}" tabindex="0">
                                 <block wx:for="{{item.pages}}" wx:for-item="page" wx:key="*this">
-                                    <view aria-role="menuitem" bindtap="openPage" data-url="{{page.url}}" data-father="{{item.father}}" data-page="{{page}}">
+                                    <view aria-role="menuitem" bind:tap="openPage" data-url="{{page.url}}" data-father="{{item.father}}" data-page="{{page}}">
                                         <mp-cell link aria-role="link">{{page.zh || page}}</mp-cell>
                                     </view>
                                 </block>
@@ -37,7 +37,7 @@
             </view>
         </view>
         <view class="page__ft">
-            <view class="ft-img-cnt" bindtap="themeToggle">
+            <view class="ft-img-cnt" bind:tap="themeToggle">
                 <image src="images/icon_footer.png" style="width: 84px; height: 19px;"></image>
             </view>
         </view>

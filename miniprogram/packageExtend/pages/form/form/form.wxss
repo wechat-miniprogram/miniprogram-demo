@@ -1,0 +1,18 @@
+/* example/input/input.wxss */
+@import '../../common.wxss';
+
+.weui-agree {
+  display: flex; /* skyline 不支持 inline */
+  flex-direction: row;
+  justify-content: center;
+}
+
+.weui-agree .weui-agree__text {
+  display: flex; /* skyline 不支持 inline */
+  flex-direction: row;
+}
+
+/* skyline 不支持 currentColor */
+.weui-cell_select .weui-cell__bd::after {
+  background-color: var(--weui-FG-2);
+}

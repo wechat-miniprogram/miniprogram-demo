@@ -1,0 +1,24 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <mp-navigation-bar title="SlideView"></mp-navigation-bar>
+  <scroll-view type="list" scroll-y class="page-height">
+    <view class="page__hd">
+        <view class="page__title">Slideview</view>
+        <view class="page__desc">左滑操作</view>
+    </view>
+    <view class="page__bd">
+      <view class="weui-cells">
+          <mp-slideview show="{{true}}" buttons="{{slideButtons}}" bindshow="show" bindhide="hide" bindbuttontap="slideButtonTap">
+              <mp-cell value="左滑可以删除" footer="说明文字"></mp-cell>
+          </mp-slideview>
+      </view>
+
+      <view class="weui-slidecells">
+        <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindshow="show" bindhide="hide" bindbuttontap="slideButtonTap">
+          <view class="weui-slidecell">
+            左滑可以删除（图标Button）
+          </view>
+        </mp-slideview>
+      </view>
+    </view>
+  </scroll-view>
+</view>
