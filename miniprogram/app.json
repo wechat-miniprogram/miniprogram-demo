@@ -268,6 +268,8 @@
     },
     {
       "root": "packageSkyline",
+      "renderer": "skyline",
+      "componentFramework": "glass-easel",
       "pages": [
         "pages/worklet/animation/index",
         "pages/worklet/gesture/index",
@@ -280,6 +282,8 @@
     },
     {
       "root": "packageSkylineExamples",
+      "renderer": "skyline",
+      "componentFramework": "glass-easel",
       "pages": [
         "examples/address-book/pages/index/index",
         "examples/tab-indicator/pages/index/index",
@@ -299,6 +303,8 @@
     },
     {
       "root": "packageSkylineRouter",
+      "componentFramework": "glass-easel",
+      "renderer": "skyline",
       "pages": [
         "pages/preset-router/index/index",
         "pages/preset-router/list/index",
@@ -306,8 +312,7 @@
         "pages/open-container/detail/index",
         "pages/open-container/other/index",
         "pages/page-return-gesture/index/index"
-      ],
-      "renderer": "skyline"
+      ]
     },
     {
       "root": "packageXRFrame",
