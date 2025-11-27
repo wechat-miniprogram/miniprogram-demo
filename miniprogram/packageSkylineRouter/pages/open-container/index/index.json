@@ -5,7 +5,5 @@
     "example-single-title": "../../../components/example-single-title/index"
   },
   "navigationBarTitleText": "Open Container Demo",
-  "componentFramework": "glass-easel",
-  "renderer": "skyline",
   "navigationStyle": "custom"
 }

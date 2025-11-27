@@ -3,7 +3,5 @@
     "page-scroll": "/components/page-scroll/index"
   },
   "disableScroll": true,
-  "componentFramework": "glass-easel",
-  "renderer": "skyline",
   "navigationStyle": "custom"
 }
