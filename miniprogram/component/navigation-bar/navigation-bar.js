@@ -60,12 +60,11 @@ Component({
     const rect = wx.getMenuButtonBoundingClientRect
       ? wx.getMenuButtonBoundingClientRect()
       : null
-    const isSkyline = this.renderer === 'skyline'
     this.setData({
       ios: !!(app.system.toLowerCase().search('ios') + 1),
       theme: app.theme || 'light',
       statusBarHeight: app.statusBarHeight,
-      navBarHeight: rect.bottom - rect.top + 10 + (isSkyline ? 0 : app.statusBarHeight),
+      navBarHeight: rect.bottom - rect.top + 10 + app.statusBarHeight,
       innerWidth: isSupport ? `width:${rect.left}px` : '',
       innerPaddingRight: isSupport
         ? `padding-right:${app.windowWidth - rect.left}px`
