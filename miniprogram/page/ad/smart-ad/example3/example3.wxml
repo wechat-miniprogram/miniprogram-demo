@@ -1,0 +1,66 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="container">
+    <view class="example-dashboard">
+      <view class="dashboard-header">
+        <view class="dashboard-title">今日数据概览</view>
+        <view class="dashboard-date">2026-01-06</view>
+      </view>
+      <view class="dashboard-grid">
+        <view class="dashboard-cell">
+          <view class="cell-value">12,580</view>
+          <view class="cell-label">展示次数</view>
+          <view class="cell-trend trend-up">↑ 15.2%</view>
+        </view>
+        <view class="dashboard-cell">
+          <view class="cell-value">1,024</view>
+          <view class="cell-label">点击次数</view>
+          <view class="cell-trend trend-up">↑ 8.7%</view>
+        </view>
+        <view class="dashboard-cell">
+          <view class="cell-value">8.14%</view>
+          <view class="cell-label">点击率</view>
+          <view class="cell-trend trend-down">↓ 2.1%</view>
+        </view>
+        <view class="dashboard-cell">
+          <view class="cell-value">¥2,156</view>
+          <view class="cell-label">预估收益</view>
+          <view class="cell-trend trend-up">↑ 12.5%</view>
+        </view>
+      </view>
+      <view class="dashboard-chart">
+        <view class="chart-title">近7日收益趋势</view>
+        <view class="chart-bars">
+          <view class="bar-item">
+            <view class="bar" style="height: 60%;"></view>
+            <view class="bar-label">周一</view>
+          </view>
+          <view class="bar-item">
+            <view class="bar" style="height: 45%;"></view>
+            <view class="bar-label">周二</view>
+          </view>
+          <view class="bar-item">
+            <view class="bar" style="height: 75%;"></view>
+            <view class="bar-label">周三</view>
+          </view>
+          <view class="bar-item">
+            <view class="bar" style="height: 55%;"></view>
+            <view class="bar-label">周四</view>
+          </view>
+          <view class="bar-item">
+            <view class="bar" style="height: 85%;"></view>
+            <view class="bar-label">周五</view>
+          </view>
+          <view class="bar-item">
+            <view class="bar" style="height: 90%;"></view>
+            <view class="bar-label">周六</view>
+          </view>
+          <view class="bar-item">
+            <view class="bar bar-active" style="height: 100%;"></view>
+            <view class="bar-label">周日</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

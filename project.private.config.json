@@ -1,213 +1,23 @@
 {
-  "libVersion": "3.7.6",
-  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "libVersion": "3.13.0",
+  "condition": {},
+  "projectname": "miniprogram-demo",
   "setting": {
-    "urlCheck": false,
-    "compileHotReLoad": false,
-    "lazyloadPlaceholderEnable": false,
-    "skylineRenderEnable": true
+    "urlCheck": true,
     "coverView": true,
-  },
-  "projectname": "miniprogram-demo-master",
-  "condition": {
-    "miniprogram": {
-      "list": [
-        {
-          "name": "packageChatTool/pages/activity_create/index",
-          "pathName": "packageChatTool/pages/activity_create/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "聊天工具-签到助手",
-          "pathName": "packageAPI/pages/chattool/activity_assist/activity_assist",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "packageAPI/pages/chattool/material_view/material_view",
-          "pathName": "packageAPI/pages/chattool/material_view/material_view",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "packageAPI/pages/chattool/material_open/material_open",
-          "pathName": "packageAPI/pages/chattool/material_open/material_open",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "聊天工具-活动详情",
-          "pathName": "packageChatTool/pages/activity_detail/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "聊天工具-创建活动",
-          "pathName": "packageChatTool/pages/activity_create/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "gaussian-splatting-ar",
-          "pathName": "packageAPI/pages/ar/gaussian-splatting/gaussian-splatting-ar",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "gaussian-splatting",
-          "pathName": "packageAPI/pages/ar/gaussian-splatting/gaussian-splatting",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "ar-cameraBuffer-jpg",
-          "pathName": "packageAPI/pages/ar/cameraBuffer-jpg/cameraBuffer-jpg",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "plane-ar-v2-options",
-          "pathName": "packageAPI/pages/ar/plane-ar-v2-options/plane-ar-v2-options",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "packageSkylineExamples/examples/app-bar/pages/index/index",
-          "pathName": "packageSkylineExamples/examples/app-bar/pages/index/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "photo-idcard-detect",
-          "pathName": "packageAPI/pages/ar/photo-idcard-detect/photo-idcard-detect",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "ar-plane-v2",
-          "pathName": "packageAPI/pages/ar/plane-ar-v2/plane-ar-v2",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "ar-v2-depth",
-          "pathName": "packageAPI/pages/ar/plane-ar-v2-depth/plane-ar-v2-depth",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "ar-depth-detect",
-          "pathName": "packageAPI/pages/ar/depth-detect/depth-detect",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "ar-3dmarker",
-          "pathName": "packageAPI/pages/ar/3dmarker-ar/3dmarker-ar",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "ar-photo-shoe-detect",
-          "pathName": "packageAPI/pages/ar/photo-shoe-detect/photo-shoe-detect",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "ar-shoe-detect",
-          "pathName": "packageAPI/pages/ar/shoe-detect/shoe-detect",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "ar-2dmarker",
-          "pathName": "packageAPI/pages/ar/2dmarker-ar/2dmarker-ar",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "page/API/pages/storage/storage",
-          "pathName": "page/API/pages/storage/storage",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "card_transition",
-          "pathName": "packageSkylineExamples/examples/card_transition/pages/list/list",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "card_transition/detail",
-          "pathName": "packageSkylineExamples/examples/card_transition/pages/detail/detail",
-          "query": "index=1&url=https%253A%252F%252Fpicsum.photos%252F300%252F400%253Frandom%253D1&content=%E6%8E%A8%E8%8D%90%20Skyline%EF%BC%8C%E4%BD%BF%E7%94%A8%E5%90%8E%E4%BD%93%E9%AA%8C%E6%B5%81%E7%95%85%E5%BE%88%E5%A4%9A~&ratio=0.75",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "page/animation/index",
-          "pathName": "page/animation/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "packageSkyline/pages/scroll-view/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "product-list",
-          "pathName": "packageSkylineExamples/examples/product-list/pages/index/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "expanded-scroll-view",
-          "pathName": "packageSkylineExamples/examples/expanded-scroll-view/pages/index/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "demo-1",
-          "pathName": "packageComponent/pages/view/grid-view/demo-1/demo-1",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "page/component/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        }
-      ]
-    }
+    "lazyloadPlaceholderEnable": false,
+    "skylineRenderEnable": true,
+    "preloadBackgroundData": true,
+    "autoAudits": false,
+    "useApiHook": true,
+    "showShadowRootInWxmlPanel": true,
+    "useStaticServer": true,
+    "useLanDebug": false,
+    "showES6CompileOption": false,
+    "compileHotReLoad": true,
+    "checkInvalidKey": true,
+    "ignoreDevUnusedFiles": false,
+    "bigPackageSizeSupport": false,
+    "useIsolateContext": false
   }
 }

@@ -1,0 +1,24 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="index">
+    <view class="index-hd">
+      <view class="index-title">智能广告示例</view>
+      <text class="index-desc">以下展示了三种不同类型的智能广告接入示例，点击查看详情。</text>
+    </view>
+    <view class="index-bd">
+      <view class="kind-list">
+        <view class="kind-list-item">
+          <navigator url="/page/ad/smart-ad/example1/example1" class="kind-list-item-hd">
+            <view class="kind-list-text">示例 1</view>
+            <view class="kind-list-arrow"></view>
+          </navigator>
+        </view>
+        <view class="kind-list-item">
+          <navigator url="/page/ad/smart-ad/example2/example2" class="kind-list-item-hd">
+            <view class="kind-list-text">示例 2</view>
+            <view class="kind-list-arrow"></view>
+          </navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

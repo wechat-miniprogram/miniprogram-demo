@@ -1,0 +1,37 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="index">
+    <view class="index-hd">
+      <image class="index-logo" src="/image/wechat.png"></image>
+      <text class="index-desc">微信广告是微信官方提供的广告投放平台，帮助开发者通过小程序实现流量变现。支持多种广告形式，包括 Banner 广告、激励视频广告、插屏广告、原生模板广告等。</text>
+    </view>
+    <view class="index-bd">
+      <view class="kind-list">
+        <view class="kind-list-item">
+          <view class="kind-list-item-hd" bindtap="onItemTap" data-type="smart">
+            <view class="kind-list-text">智能广告</view>
+            <image class="kind-list-img" src="resources/kind/logo.png"></image>
+          </view>
+        </view>
+        <view class="kind-list-item">
+          <view class="kind-list-item-hd" bindtap="onItemTap" data-type="optimize">
+            <view class="kind-list-text">广告调优</view>
+            <image class="kind-list-img" src="resources/kind/logo.png"></image>
+          </view>
+        </view>
+        <view class="kind-list-item">
+          <view class="kind-list-item-hd" bindtap="onItemTap" data-type="hosting">
+            <view class="kind-list-text">广告托管</view>
+            <image class="kind-list-img" src="resources/kind/logo.png"></image>
+          </view>
+        </view>
+        <view class="kind-list-item">
+          <view class="kind-list-item-hd" bindtap="onItemTap" data-type="custom">
+            <view class="kind-list-text">自主开发</view>
+            <image class="kind-list-img" src="resources/kind/logo.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

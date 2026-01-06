@@ -1,0 +1,252 @@
+@import "../../../../common/reset.wxss";
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  min-height: 700px;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card-title-group {
+  text-align: center;
+}
+
+.card-main-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--weui-FG-0);
+  margin-bottom: 6px;
+}
+
+.card-sub-title {
+  font-size: 14px;
+  color: var(--weui-FG-1);
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--weui-FG-1);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.card-tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.tag-primary {
+  background-color: rgba(102, 126, 234, 0.15);
+  color: #667eea;
+}
+
+.tag-success {
+  background-color: rgba(76, 175, 80, 0.15);
+  color: #4caf50;
+}
+
+.tag-warning {
+  background-color: rgba(255, 152, 0, 0.15);
+  color: #ff9800;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 通用区块标题 */
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--weui-FG-0);
+  margin-bottom: 10px;
+  padding-left: 8px;
+  border-left: 3px solid #667eea;
+}
+
+/* 功能特点 */
+.feature-section {
+  margin-top: 16px;
+}
+
+.feature-list {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+[data-weui-theme=dark] .feature-list {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.feature-item:not(:last-child) {
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+[data-weui-theme=dark] .feature-item:not(:last-child) {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.feature-text {
+  font-size: 13px;
+  color: var(--weui-FG-1);
+}
+
+/* 适用场景 */
+.scene-section {
+  margin-top: 16px;
+}
+
+.scene-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scene-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  margin: 0 4px;
+}
+
+.scene-item:first-child {
+  margin-left: 0;
+}
+
+.scene-item:last-child {
+  margin-right: 0;
+}
+
+[data-weui-theme=dark] .scene-item {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.scene-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.scene-name {
+  font-size: 11px;
+  color: var(--weui-FG-1);
+}
+
+/* 接入指南 */
+.guide-section {
+  margin-top: 16px;
+}
+
+.guide-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  padding: 16px 12px;
+}
+
+[data-weui-theme=dark] .guide-steps {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.guide-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.guide-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.guide-text {
+  font-size: 10px;
+  color: var(--weui-FG-1);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.guide-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  margin: 0 4px;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 20px;
+  margin-top: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-weui-theme=dark] .card-footer {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.card-stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--weui-FG-0);
+  margin-bottom: 3px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--weui-FG-2);
+}
+

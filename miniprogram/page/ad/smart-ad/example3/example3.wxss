@@ -1,0 +1,114 @@
+@import "../../../../common/reset.wxss";
+
+.container {
+  padding: 20px 15px;
+}
+
+.example-dashboard {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.dashboard-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.dashboard-date {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.dashboard-cell {
+  width: calc(50% - 4px);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.cell-value {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.cell-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 4px;
+}
+
+.cell-trend {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.trend-up {
+  color: #4caf50;
+}
+
+.trend-down {
+  color: #f44336;
+}
+
+.dashboard-chart {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.chart-title {
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.chart-bars {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 80px;
+}
+
+.bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.bar {
+  width: 16px;
+  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  border-radius: 3px 3px 0 0;
+  margin-bottom: 6px;
+  opacity: 0.7;
+}
+
+.bar-active {
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+.bar-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+

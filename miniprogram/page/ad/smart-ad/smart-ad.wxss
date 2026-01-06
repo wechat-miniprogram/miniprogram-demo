@@ -1,0 +1,23 @@
+@import "../../../common/reset.wxss";
+@import "../../common/index.wxss";
+
+.index-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--weui-FG-0);
+  margin-bottom: 8px;
+}
+
+.kind-list-item-hd {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.kind-list-arrow {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--weui-FG-2);
+  border-top: 2px solid var(--weui-FG-2);
+  transform: rotate(45deg);
+}

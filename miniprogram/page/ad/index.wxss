@@ -1,0 +1,13 @@
+@import "../../common/reset.wxss";
+@import "../common/index.wxss";
+
+.index-logo {
+  display: block;
+  margin: 0 auto;
+}
+
+.kind-list-item-hd {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

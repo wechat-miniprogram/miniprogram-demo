@@ -1,0 +1,42 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="container">
+    <view class="example-list">
+      <view class="list-header">广告投放流程</view>
+      <view class="step-list">
+        <view class="step-item">
+          <view class="step-number">1</view>
+          <view class="step-content">
+            <view class="step-title">创建广告计划</view>
+            <view class="step-desc">设置广告目标、预算和投放时间</view>
+          </view>
+          <view class="step-status status-done">已完成</view>
+        </view>
+        <view class="step-item">
+          <view class="step-number">2</view>
+          <view class="step-content">
+            <view class="step-title">选择投放人群</view>
+            <view class="step-desc">根据用户画像精准定向目标受众</view>
+          </view>
+          <view class="step-status status-done">已完成</view>
+        </view>
+        <view class="step-item">
+          <view class="step-number">3</view>
+          <view class="step-content">
+            <view class="step-title">上传广告素材</view>
+            <view class="step-desc">支持图片、视频等多种素材格式</view>
+          </view>
+          <view class="step-status status-progress">进行中</view>
+        </view>
+        <view class="step-item">
+          <view class="step-number">4</view>
+          <view class="step-content">
+            <view class="step-title">提交审核上线</view>
+            <view class="step-desc">审核通过后自动开始投放</view>
+          </view>
+          <view class="step-status status-pending">待处理</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

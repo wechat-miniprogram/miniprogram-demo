@@ -4,7 +4,12 @@
     "page/API/index",
     "page/cloud/index",
     "page/extend/index",
-    "page/animation/index"
+    "page/animation/index",
+    "page/ad/index",
+    "page/ad/smart-ad/smart-ad",
+    "page/ad/smart-ad/example1/example1",
+    "page/ad/smart-ad/example2/example2",
+    "page/ad/smart-ad/example3/example3"
   ],
   "usingComponents": {
     "mp-navigation-bar": "/component/navigation-bar/navigation-bar"
@@ -484,6 +489,12 @@
         "iconPath": "@iconPathCloud",
         "selectedIconPath": "@selectedIconPathCloud",
         "text": "云开发"
+      },
+      {
+        "pagePath": "page/ad/index",
+        "iconPath": "@iconPathAd",
+        "selectedIconPath": "@selectedIconPathAd",
+        "text": "广告"
       }
     ]
   },
