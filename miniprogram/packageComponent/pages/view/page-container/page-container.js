@@ -31,8 +31,7 @@ Page({
       })
     }
   },
-  popup(e) {
-    const position = e.currentTarget.dataset.position
+  doPopup(position) {
     let customStyle = ''
     const duration = this.data.duration
     switch (position) {
@@ -45,16 +44,23 @@ Page({
     }
     this.setData({
       position,
-      show: true,
       customStyle,
       duration
+    }, () => {
+      this.setData({ show: true })
     })
+  },
+  popup(e) {
+    const position = e.currentTarget.dataset.position
+    this.doPopup(position)
   },
   changeRound() {
     this.setData({ round: !this.data.round })
+    this.doPopup('bottom')
   },
   changeOverlay() {
-    this.setData({ overlay: !this.data.overlay, show: true })
+    this.setData({ overlay: !this.data.overlay })
+    this.doPopup('bottom')
   },
   changeOverlayStyle(e) {
     let overlayStyle = ''
@@ -69,7 +75,8 @@ Page({
       case 'blur':
         overlayStyle = 'background-color: rgba(0, 0, 0, 0.7); filter: blur(4px);'
     }
-    this.setData({ overlayStyle, show: true })
+    this.setData({ overlayStyle })
+    this.doPopup('bottom')
   },
   exit() {
     this.setData({ show: false })
