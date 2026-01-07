@@ -51,6 +51,7 @@
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 [data-weui-theme=dark].weui-navigation-bar {
