@@ -1,0 +1,56 @@
+<!--广告调优测试-首页大卡-->
+<view class="container" data-weui-theme="{{theme}}">
+  <!-- 广告调优测试-首页大卡 -->
+  <view class="ad-section">
+    <text class="ad-label">广告调优测试-首页大卡</text>
+    <ad-custom 
+      unit-id="adunit-c34f3ed02619f043" 
+      class="ad-unit"
+      bindload="onadload"
+      binderror="onaderror" 
+      bindvideoended="onvideoended"
+    ></ad-custom>
+  </view>
+
+  <!-- 填充内容 -->
+  <view class="content-section">
+    <text class="content-title">内容区域</text>
+    <view class="content-item">
+      <text class="content-text">这是一段填充内容，用于页面展示。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">此页面确保只有一个广告组件，符合一个页面只有一个广告的要求。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">小程序广告是微信官方推出的广告组件，支持多种广告形式。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">广告调优可以帮助开发者优化广告展示效果，提升用户体验。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">首页小卡广告适合在首屏位置展示，能够获得更高的曝光率。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">合理的广告布局可以在不影响用户体验的前提下实现流量变现。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">广告组件会根据用户特征自动匹配最合适的广告内容。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">开发者可以通过回调函数监听广告的加载状态和用户交互行为。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">广告收益与曝光量、点击率等多种因素相关。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">建议在合适的场景下展示广告，避免过度打扰用户。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">持续优化广告展示策略，可以获得更好的变现效果。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">感谢您使用微信广告服务，祝您使用愉快！</text>
+    </view>
+  </view>
+</view>
+

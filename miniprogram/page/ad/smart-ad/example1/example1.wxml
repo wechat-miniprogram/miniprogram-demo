@@ -1,0 +1,56 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="container">
+    <view class="example-card">
+      <view class="card-header">
+        <view class="card-title-group">
+          <view class="card-main-title">智能广告</view>
+          <view class="card-sub-title">微信官方推荐的快速变现方案</view>
+        </view>
+      </view>
+      <view class="card-content">
+        <view class="card-tags">
+          <view class="tag tag-primary">智能分析</view>
+          <view class="tag tag-success">实时预览</view>
+          <view class="tag tag-warning">0代码</view>
+        </view>
+
+        <!-- 功能特点 -->
+        <view class="feature-section">
+          <view class="section-title">核心功能</view>
+          <view class="feature-list">
+            <view class="feature-item">
+              <view class="feature-text">智能插入推荐</view>
+            </view>
+            <view class="feature-item">
+              <view class="feature-text">实时预览编辑</view>
+            </view>
+            <view class="feature-item">
+              <view class="feature-text">免开发上线</view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 接入流程 -->
+        <view class="guide-section">
+          <view class="section-title">快速接入</view>
+          <view class="guide-steps">
+            <view class="guide-step">
+              <view class="guide-num">1</view>
+              <view class="guide-text">登录【微信公众平台 -> 流量主 -> 广告管理 -> 广告位管理】</view>
+            </view>
+            <view class="guide-line"></view>
+            <view class="guide-step">
+              <view class="guide-num">2</view>
+              <view class="guide-text">选择【智能接入】模式</view>
+            </view>
+            <view class="guide-line"></view>
+            <view class="guide-step">
+              <view class="guide-num">3</view>
+              <view class="guide-text">【创建智能广告】</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

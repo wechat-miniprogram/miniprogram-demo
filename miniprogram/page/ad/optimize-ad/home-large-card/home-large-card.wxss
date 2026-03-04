@@ -1,0 +1,60 @@
+/* 广告调优测试-首页大卡 */
+.container {
+  display: block !important;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  min-height: auto;
+  justify-content: initial;
+}
+
+.ad-section {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.ad-label {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  padding: 20rpx;
+  margin: 0;
+  text-align: center;
+  background-color: #fff;
+}
+
+.ad-unit {
+  width: 100%;
+  display: block;
+}
+
+.content-section {
+  margin: 0;
+  padding: 20rpx;
+  background-color: #fff;
+}
+
+.content-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.content-item {
+  margin: 20rpx 0;
+  padding: 20rpx;
+  background-color: #fafafa;
+  border-radius: 8rpx;
+  border-left: 4rpx solid #007aff;
+}
+
+.content-text {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #666;
+}

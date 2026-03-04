@@ -1,0 +1,42 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="container">
+    <view class="example-list">
+      <view class="list-header">智能广告接入流程</view>
+      <view class="step-list">
+        <view class="step-item">
+          <view class="step-number">1</view>
+          <view class="step-content">
+            <view class="step-title">入口指引</view>
+            <view class="step-desc">微信公众平台→流量主→广告管理→广告位管理→选择“智能接入”模式→点击“创建智能广告”。</view>
+          </view>
+          <view class="step-status status-done">已完成</view>
+        </view>
+        <view class="step-item">
+          <view class="step-number">2</view>
+          <view class="step-content">
+            <view class="step-title">扫码预览</view>
+            <view class="step-desc">微信扫码预览，确认广告插入的位置、时机与样式。</view>
+          </view>
+          <view class="step-status status-done">已完成</view>
+        </view>
+        <view class="step-item">
+          <view class="step-number">3</view>
+          <view class="step-content">
+            <view class="step-title">调整与标记</view>
+            <view class="step-desc">若需调整，可点击“编辑类型与位置”；标记“使用/不使用”后，仍需返回后台最终确认是否上线。</view>
+          </view>
+          <view class="step-status status-progress">进行中</view>
+        </view>
+        <view class="step-item">
+          <view class="step-number">4</view>
+          <view class="step-content">
+            <view class="step-title">确认上线</view>
+            <view class="step-desc">手机预览完成后，在管理后台点击“下一步”确认广告位并上线。</view>
+          </view>
+          <view class="step-status status-pending">待处理</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

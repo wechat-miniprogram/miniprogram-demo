@@ -1,0 +1,57 @@
+<!--广告调优测试-非首页大卡-->
+<view class="container" data-weui-theme="{{theme}}">
+  <!-- 首屏填充内容，将广告推到非首屏位置 -->
+  <view class="content-section">
+    <text class="content-title">页面内容区域</text>
+    <view class="content-item">
+      <text class="content-text">这是首屏展示的内容，广告在下方非首屏位置。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">用户需要向下滚动才能看到广告内容。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">这里是一些填充文本，用于占据首屏空间。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">继续添加更多内容，确保广告被推到非首屏。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">丰富的内容展示，提供良好的用户体验。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">更多精彩内容等你发现，向下滚动查看更多。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">这是第七段填充内容，继续占据屏幕空间。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">第八段内容，确保广告完全在非首屏位置。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">第九段内容，页面内容丰富多样。</text>
+    </view>
+    <view class="content-item">
+      <text class="content-text">第十段内容，广告即将出现在下方。</text>
+    </view>
+  </view>
+
+  <!-- 广告调优测试-非首页大卡 -->
+  <view class="ad-section">
+    <text class="ad-label">广告调优测试-非首页大卡</text>
+    <ad-custom 
+      unit-id="adunit-4b70a42ff3d811d6" 
+      class="ad-unit"
+      bindload="onadload"
+      binderror="onaderror" 
+      bindvideoended="onvideoended"
+    ></ad-custom>
+  </view>
+
+  <!-- 底部填充内容 -->
+  <view class="content-section">
+    <view class="content-item">
+      <text class="content-text">页面底部内容，感谢您的浏览。</text>
+    </view>
+  </view>
+</view>
+
