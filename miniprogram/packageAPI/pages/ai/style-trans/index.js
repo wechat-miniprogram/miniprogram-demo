@@ -125,7 +125,7 @@ Page({
           wx.cloud.init()
           console.log('begin download model')
 
-          const cloudPath = 'cloud://containertest-0gmw3ulnd8d9bc7b.636f-containertest-0gmw3ulnd8d9bc7b-1258211818/mosaic-8.onnx'
+          const cloudPath = 'cloud://release-b86096.7265-release-b86096-1258211818/amosaic/mosaic-8.onnx'
 
           this.downloadFile(cloudPath, function (r) {
             console.log(`下载进度：${r.progress}%，已下载${r.totalBytesWritten}B，共${r.totalBytesExpectedToWrite}B`)

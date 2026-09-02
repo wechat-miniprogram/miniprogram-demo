@@ -1,3 +1,5 @@
+const config = require('../../../../../config')
+
 Component({
   behaviors: ['wx://component-export'],
   export() {
@@ -5,7 +7,6 @@ Component({
   },
   data: {
     chooseMapFile: null,
-    envId: 'test-f0b102',
     modelName: 'arDemo',
     // 模型数据
     // @ modelStatus 模型状态
@@ -144,7 +145,7 @@ Component({
       wx.cloud.callFunction({
         name: 'ARDemo',
         config: {
-          env: this.data.envId
+          env: config.envId
         },
         data: reqData
       }).then((resp) => {
@@ -276,7 +277,7 @@ Component({
         wx.cloud.callFunction({
           name: 'ARDemo',
           config: {
-            env: this.data.envId
+            env: config.envId
           },
           data: {
             type: 'GetARModel',
@@ -354,7 +355,7 @@ Component({
         cloudPath: `3dmarker/arVideo${id}.mp4`,
         filePath: res.tempFiles[0].tempFilePath, // 文件路径
         config: {
-          env: this.data.envId
+          env: config.envId
         },
         timeout: 60000,
         success(res) {
