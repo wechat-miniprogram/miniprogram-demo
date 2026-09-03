@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "WeStoreCafe 点单场景",
+  "navigationBarBackgroundColor": "#5C3A21",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "backgroundColor": "#FFF8F0",
+  "darkmode": true,
+  "usingComponents": {}
+}

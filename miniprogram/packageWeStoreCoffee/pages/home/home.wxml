@@ -1,0 +1,56 @@
+<view class="md-page">
+  <view class="md-header" style="padding-top: {{headerPaddingTop}}rpx;">
+    <view class="md-title">{{title}}</view>
+    <view class="md-sub">{{subTitle}}</view>
+  </view>
+
+  <view class="md-search">
+    <view class="md-search-box">
+      <text class="md-search-icon">🔍</text>
+      <input
+        class="md-search-input"
+        value="{{searchKeyword}}"
+        placeholder="搜索饮品名称 / 分类"
+        placeholder-class="md-search-ph"
+        confirm-type="search"
+        bind:input="onSearchInput"
+        bind:confirm="onSearchConfirm"
+      />
+      <view wx:if="{{searchKeyword}}" class="md-search-clear" hover-class="clear-hover" bind:tap="onClearSearch">✕</view>
+    </view>
+  </view>
+
+  <scroll-view wx:if="{{!isSearching}}" class="md-tabs" scroll-x enable-flex>
+    <view
+      wx:for="{{categories}}"
+      wx:key="id"
+      class="md-tab {{activeCategoryId === item.id ? 'md-tab-active' : ''}}"
+      hover-class="tab-hover"
+      bind:tap="onTapCategory"
+      data-id="{{item.id}}"
+    >{{item.name}}</view>
+  </scroll-view>
+
+  <scroll-view class="md-list" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="md-grid">
+      <view
+        wx:for="{{items}}"
+        wx:key="id"
+        class="md-item"
+        hover-class="item-hover"
+        bind:tap="onTapDrink"
+        data-item="{{item}}"
+      >
+        <image class="md-img" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        <view class="md-name">{{item.name}}</view>
+        <view wx:if="{{item.description}}" class="md-desc">{{item.description}}</view>
+        <view class="md-foot">
+          <view class="md-price">¥{{item.price}}</view>
+          <view class="md-cat-tag">{{item.categoryName}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{items.length === 0}}" class="md-empty">没有找到相关饮品～</view>
+    <view class="md-bottom safe-area-bottom"></view>
+  </scroll-view>
+</view>

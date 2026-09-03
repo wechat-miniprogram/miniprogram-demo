@@ -1,0 +1,6 @@
+<view class="nf-card">
+  <view class="nf-icon">🍵</view>
+  <view class="nf-title">没找到匹配饮品</view>
+  <view class="nf-sub" wx:if="{{keyword}}">关键词："{{keyword}}"</view>
+  <view class="nf-btn" hover-class="btn-hover" bind:tap="onTapBrowse">浏览全部饮品</view>
+</view>

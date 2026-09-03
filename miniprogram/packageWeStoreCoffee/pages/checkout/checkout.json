@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "订单结算",
+  "darkmode": true,
+  "usingComponents": {},
+  "componentFramework": "glass-easel",
+  "renderer": "skyline"
+}

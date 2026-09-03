@@ -1,0 +1,149 @@
+.dd-card {
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 24rpx;
+  box-shadow: 0 6rpx 24rpx rgba(92, 58, 33, 0.08);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dd-img {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 20rpx;
+  background-color: #F5EFE6;
+  flex-shrink: 0;
+}
+
+.dd-info {
+  flex: 1;
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dd-cat {
+  font-size: 22rpx;
+  color: #8B5E3C;
+  background: #FFF8F0;
+  padding: 4rpx 14rpx;
+  border-radius: 8rpx;
+  align-self: flex-start;
+}
+
+.dd-name {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #2A1810;
+  margin-top: 10rpx;
+}
+
+.dd-desc {
+  font-size: 22rpx;
+  color: #6B5544;
+  margin-top: 6rpx;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dd-price-row {
+  display: flex;
+  align-items: baseline;
+  margin-top: 12rpx;
+}
+
+.dd-price {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #5C3A21;
+}
+
+.dd-unit {
+  font-size: 22rpx;
+  color: #A89180;
+  margin-left: 6rpx;
+}
+
+.dd-dims {
+  font-size: 20rpx;
+  color: #A89180;
+  margin-top: 8rpx;
+}
+
+.dd-actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dd-btn {
+  width: 100%;
+  padding: 18rpx 0;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #8B5E3C 0%, #5C3A21 100%);
+  text-align: center;
+}
+
+.dd-btn-hover {
+  opacity: 0.85;
+}
+
+.dd-btn-text {
+  color: #FFFFFF;
+  font-size: 26rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+}
+
+.dd-modify {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  color: #8B5E3C;
+  text-decoration: underline;
+}
+
+.dd-modify-hover {
+  opacity: 0.6;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dd-card {
+    background: #1E1E1E;
+    box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.3);
+  }
+  .dd-img {
+    background-color: #2A2A2A;
+  }
+  .dd-cat {
+    color: #D4A574;
+    background: #2A2218;
+  }
+  .dd-name {
+    color: #E8E0D8;
+  }
+  .dd-desc {
+    color: #9E8E7E;
+  }
+  .dd-price {
+    color: #D4A574;
+  }
+  .dd-unit {
+    color: #7A6E62;
+  }
+  .dd-dims {
+    color: #7A6E62;
+  }
+  .dd-btn {
+    background: linear-gradient(135deg, #A07050 0%, #7A5030 100%);
+  }
+  .dd-modify {
+    color: #D4A574;
+  }
+}

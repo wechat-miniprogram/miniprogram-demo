@@ -1,0 +1,21 @@
+const searchDrinks = require('./apis/searchDrinks.js')
+const selectDrink = require('./apis/selectDrink.js')
+const createOrder = require('./apis/createOrder.js')
+const addToOrder = require('./apis/addToOrder.js')
+const removeOrderItem = require('./apis/removeOrderItem.js')
+const viewOrder = require('./apis/viewOrder.js')
+const cancelOrder = require('./apis/cancelOrder.js')
+const saveAddress = require('./apis/saveAddress.js')
+
+const skill = wx.modelContext.createSkill('skills/drink-skill')
+
+skill.registerAPI('searchDrinks', searchDrinks)
+skill.registerAPI('selectDrink', selectDrink)
+skill.registerAPI('createOrder', createOrder)
+skill.registerAPI('addToOrder', addToOrder)
+skill.registerAPI('removeOrderItem', removeOrderItem)
+skill.registerAPI('viewOrder', viewOrder)
+skill.registerAPI('cancelOrder', cancelOrder)
+skill.registerAPI('saveAddress', saveAddress)
+
+console.log('[drink-skill] APIs registered via createSkill')

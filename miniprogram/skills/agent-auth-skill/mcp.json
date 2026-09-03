@@ -1,0 +1,176 @@
+{
+  "apis": [
+    {
+      "name": "requirePrivacyAuthWithAgreements",
+      "description": "调用 wx.requestAgentPrivacyAuthorization，并通过 privacyAgreements 传入「用户服务协议」和「隐私政策」。用于验证协议链接展示、跳转及授权结果。协议来源是本次接口入参，不读取 app.json。用户拒绝后禁止重复拉起。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "available": { "type": "boolean", "description": "基础库是否支持 wx.requestAgentPrivacyAuthorization" },
+          "authorized": { "type": "boolean", "description": "用户是否同意授权" },
+          "agreementCount": { "type": "number", "description": "传入的协议数量" },
+          "agreementNames": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "传入的协议名称"
+          },
+          "errMsg": { "type": "string", "description": "接口结果信息" }
+        }
+      }
+    },
+    {
+      "name": "requirePrivacyAuthWithoutAgreements",
+      "description": "调用 wx.requestAgentPrivacyAuthorization，但不传 privacyAgreements。用于验证协议缺省时卡片仅显示统一描述文案、不显示协议链接行。用户拒绝后禁止重复拉起。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "available": { "type": "boolean", "description": "基础库是否支持 wx.requestAgentPrivacyAuthorization" },
+          "authorized": { "type": "boolean", "description": "用户是否同意授权" },
+          "agreementCount": { "type": "number", "description": "传入的协议数量，固定为 0" },
+          "errMsg": { "type": "string", "description": "接口结果信息" }
+        }
+      }
+    },
+    {
+      "name": "requirePrivacyAuthInvalidAgreements",
+      "description": "【验证用接口】向 wx.requestAgentPrivacyAuthorization 传入混合协议列表：一项带首尾空格的合法协议，以及空 name、空 path、非对象等非法项。用于验证基础库 trim 并丢弃非法项，卡片应只显示「用户服务协议」。仅在明确要求验证协议清洗时调用。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "available": { "type": "boolean", "description": "基础库是否支持 wx.requestAgentPrivacyAuthorization" },
+          "authorized": { "type": "boolean", "description": "用户是否同意授权" },
+          "inputAgreementCount": { "type": "number", "description": "输入协议项数量" },
+          "expectedValidCount": { "type": "number", "description": "预期清洗后的有效协议数量" },
+          "expectedAgreementName": { "type": "string", "description": "预期展示的协议名称" },
+          "errMsg": { "type": "string", "description": "接口结果信息" }
+        }
+      }
+    },
+    {
+      "name": "requirePrivacyAuthConcurrent",
+      "description": "【验证用接口】并发三次调用 wx.requestAgentPrivacyAuthorization：首发传「用户服务协议」，后续分别传「隐私政策」和空协议。验证只展示一张卡、结果广播一致，且首发协议决定卡片内容。仅在明确要求验证并发共享时调用。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "available": { "type": "boolean", "description": "基础库是否支持 wx.requestAgentPrivacyAuthorization" },
+          "count": { "type": "number", "description": "并发次数" },
+          "authorizedList": {
+            "type": "array",
+            "items": { "type": "boolean" },
+            "description": "每次调用的授权结果"
+          },
+          "allSame": { "type": "boolean", "description": "全部调用结果是否一致" },
+          "authorized": { "type": "boolean", "description": "首个调用的授权结果" },
+          "firstAgreementNames": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "首发调用传入的协议名称"
+          },
+          "ignoredLaterAgreementNames": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "后续调用中不应覆盖首发内容的协议名称"
+          },
+          "elapsedMs": { "type": "number", "description": "并发耗时（毫秒）" },
+          "errMsg": { "type": "string", "description": "接口结果信息" }
+        }
+      }
+    },
+    {
+      "name": "requestSubscribeMessage",
+      "description": "调起订阅消息面板：调用 wx.requestSubscribeMessage，模板 ID 固定为 f5H2tloldRuDwJyi164NQTb3uYUGhtwUZ_PI8wZ8Uv4。用户说「订阅消息 / 消息通知 / 打开订阅」时调用。\n【无入参】不要改 tmplId。\n【返回后动作】按 status（accept / reject / ban / filter）用一句话告知结果；用户拒绝后禁止重复拉起。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "available": { "type": "boolean", "description": "基础库是否支持 wx.requestSubscribeMessage" },
+          "tmplId": { "type": "string", "description": "订阅消息模板 ID" },
+          "status": { "type": "string", "description": "该 tmplId 的订阅结果：accept / reject / ban / filter" },
+          "accepted": { "type": "boolean", "description": "用户是否同意订阅" },
+          "errMsg": { "type": "string", "description": "接口结果信息" }
+        }
+      }
+    },
+    {
+      "name": "authorizeBluetooth",
+      "description": "发起蓝牙授权：调用 wx.authorize({ scope: 'scope.bluetooth' })。用户说「蓝牙授权 / 打开蓝牙权限」时调用。\n【无入参】。\n【返回后动作】授权成功或失败都用一句话告知用户；用户拒绝后禁止重复发起。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "available": { "type": "boolean", "description": "基础库是否支持 wx.authorize" },
+          "authorized": { "type": "boolean", "description": "用户是否同意蓝牙授权" },
+          "scope": { "type": "string", "description": "授权 scope，固定为 scope.bluetooth" },
+          "errMsg": { "type": "string", "description": "接口结果信息" }
+        }
+      }
+    },
+    {
+      "name": "getWeRunData",
+      "description": "获取微信运动步数：先 wx.login，再 wx.authorize({ scope: 'scope.werun' })，最后 wx.getWeRunData。用户说「微信运动 / 步数 / 走路数据」时调用。\n【无入参】。\n【返回说明】回传 encryptedData / iv / cloudID，明文步数需后端解密，不要在对话中展开加密字段。用户拒绝后禁止重复发起。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "available": { "type": "boolean", "description": "基础库是否支持 wx.getWeRunData" },
+          "authorized": { "type": "boolean", "description": "是否完成微信运动授权并取到数据" },
+          "encryptedData": { "type": "string", "description": "加密的步数数据" },
+          "iv": { "type": "string", "description": "加密初始向量" },
+          "cloudID": { "type": "string", "description": "云 ID（开通云开发时返回）" },
+          "errMsg": { "type": "string", "description": "接口结果信息" }
+        }
+      }
+    },
+    {
+      "name": "chooseAddress",
+      "description": "调起微信收货地址选择器：调用 wx.chooseAddress。用户说「选择收货地址 / 获取收货地址 / 打开地址选择器」时调用。\n【无入参】。\n【返回后动作】按返回的姓名、电话、省市区和详细地址用一句话告知结果；用户取消后禁止重复拉起。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "available": { "type": "boolean", "description": "基础库是否支持 wx.chooseAddress" },
+          "selected": { "type": "boolean", "description": "用户是否完成地址选择" },
+          "userName": { "type": "string", "description": "收货人姓名" },
+          "telNumber": { "type": "string", "description": "收货人手机号码" },
+          "postalCode": { "type": "string", "description": "邮编" },
+          "provinceName": { "type": "string", "description": "国标收货地址第一级地址" },
+          "cityName": { "type": "string", "description": "国标收货地址第二级地址" },
+          "countyName": { "type": "string", "description": "国标收货地址第三级地址" },
+          "streetName": { "type": "string", "description": "国标收货地址第四级地址" },
+          "detailInfo": { "type": "string", "description": "详细收货地址" },
+          "nationalCode": { "type": "string", "description": "收货地址国家码" },
+          "errMsg": { "type": "string", "description": "接口结果信息" }
+        }
+      }
+    }
+  ],
+  "components": []
+}

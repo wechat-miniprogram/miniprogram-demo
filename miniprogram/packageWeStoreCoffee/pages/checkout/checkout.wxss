@@ -1,0 +1,300 @@
+page {
+  background-color: #FFF8F0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.ck-page {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #FFF8F0 0%, #F5EFE6 100%);
+}
+
+.nav-back {
+  position: fixed;
+  left: 24rpx;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 2rpx 10rpx rgba(92, 58, 33, 0.12);
+}
+
+.nav-back-arrow {
+  width: 16rpx;
+  height: 16rpx;
+  border-left: 6rpx solid #2A1810;
+  border-bottom: 6rpx solid #2A1810;
+  transform: translateX(3rpx) rotate(45deg);
+}
+
+.nav-back-hover { opacity: 0.7; }
+
+@media (prefers-color-scheme: dark) {
+  .nav-back {
+    background: rgba(30, 30, 30, 0.92);
+    box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.3);
+  }
+  .nav-back-arrow {
+    border-left-color: #E8E0D8;
+    border-bottom-color: #E8E0D8;
+  }
+}
+
+.ck-header {
+  padding: 32rpx;
+  background: #FFFFFF;
+  border-bottom: 2rpx solid #EDE3D4;
+  flex-shrink: 0;
+}
+
+.ck-title {
+  font-size: 38rpx;
+  font-weight: 800;
+  color: #2A1810;
+}
+
+.ck-sub {
+  font-size: 22rpx;
+  color: #A89180;
+  margin-top: 8rpx;
+}
+
+.ck-body {
+  flex: 1;
+  padding: 24rpx 32rpx 0;
+  box-sizing: border-box;
+}
+
+.ck-card {
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  border: 2rpx solid #EDE3D4;
+}
+
+.ck-card-title {
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #6B5544;
+  margin-bottom: 20rpx;
+}
+
+.ck-addr-line {
+  display: flex;
+  align-items: baseline;
+}
+
+.ck-addr-name {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #2A1810;
+}
+
+.ck-addr-phone {
+  font-size: 26rpx;
+  color: #6B5544;
+  margin-left: 20rpx;
+}
+
+.ck-addr-detail {
+  font-size: 26rpx;
+  color: #6B5544;
+  margin-top: 10rpx;
+  line-height: 1.5;
+}
+
+.ck-addr-empty {
+  padding: 20rpx 0;
+}
+
+.ck-addr-empty-text {
+  font-size: 28rpx;
+  color: #8B5E3C;
+  font-weight: 600;
+}
+
+.row-hover { opacity: 0.7; }
+
+.ck-goods {
+  display: flex;
+  align-items: center;
+}
+
+.ck-goods + .ck-goods {
+  margin-top: 24rpx;
+  padding-top: 24rpx;
+  border-top: 2rpx solid #F2EADF;
+}
+
+.ck-thumb {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 16rpx;
+  background-color: #F5EFE6;
+  flex-shrink: 0;
+}
+
+.ck-goods-info {
+  flex: 1;
+  margin-left: 20rpx;
+  min-width: 0;
+}
+
+.ck-goods-name {
+  display: flex;
+  align-items: baseline;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #2A1810;
+}
+
+.ck-goods-qty {
+  margin-left: 12rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #8B5E3C;
+  flex-shrink: 0;
+}
+
+.ck-goods-spec {
+  font-size: 24rpx;
+  color: #6B5544;
+  margin-top: 8rpx;
+}
+
+.ck-goods-price {
+  font-size: 32rpx;
+  font-weight: 800;
+  color: #5C3A21;
+  margin-left: 16rpx;
+}
+
+.ck-fee {
+  margin-top: 24rpx;
+  border-top: 2rpx dashed #EDE3D4;
+  padding-top: 20rpx;
+}
+
+.ck-fee-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #6B5544;
+  margin-bottom: 12rpx;
+}
+
+.ck-fee-total {
+  margin-top: 4rpx;
+  margin-bottom: 0;
+  font-weight: 700;
+  color: #2A1810;
+}
+
+.ck-fee-total-num {
+  font-size: 32rpx;
+  font-weight: 800;
+  color: #5C3A21;
+}
+
+.ck-paid-tip {
+  text-align: center;
+  font-size: 26rpx;
+  color: #8B5E3C;
+  margin: 8rpx 0 16rpx;
+}
+
+.ck-bottom-spacer {
+  height: 40rpx;
+}
+
+.ck-footer {
+  background: #FFFFFF;
+  border-top: 2rpx solid #EDE3D4;
+  padding: 20rpx 32rpx;
+  flex-shrink: 0;
+}
+
+.safe-area-bottom {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 20rpx);
+}
+
+.ck-pay-line {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.ck-pay-amount {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+}
+
+.ck-pay-label {
+  font-size: 24rpx;
+  color: #6B5544;
+  margin-right: 8rpx;
+}
+
+.ck-pay-num {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: #5C3A21;
+}
+
+.ck-pay-btn {
+  padding: 24rpx 56rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #8B5E3C 0%, #5C3A21 100%);
+  flex-shrink: 0;
+}
+
+.ck-pay-done {
+  text-align: center;
+}
+
+.ck-pay-btn-disabled {
+  opacity: 0.5;
+}
+
+.btn-hover { opacity: 0.85; }
+
+.ck-pay-btn-text {
+  color: #FFFFFF;
+  font-size: 30rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+}
+
+@media (prefers-color-scheme: dark) {
+  page { background-color: #121212; }
+  .ck-page { background: linear-gradient(180deg, #121212 0%, #1A1510 100%); }
+  .ck-header { background: #1E1E1E; border-bottom-color: #3E3228; }
+  .ck-title { color: #E8E0D8; }
+  .ck-sub { color: #7A6E62; }
+  .ck-card { background: #1E1E1E; border-color: #3E3228; }
+  .ck-card-title { color: #9E8E7E; }
+  .ck-addr-name { color: #E8E0D8; }
+  .ck-addr-phone, .ck-addr-detail { color: #9E8E7E; }
+  .ck-addr-empty-text { color: #D4A574; }
+  .ck-thumb { background-color: #2A2A2A; }
+  .ck-goods + .ck-goods { border-top-color: #3E3228; }
+  .ck-goods-name { color: #E8E0D8; }
+  .ck-goods-qty { color: #D4A574; }
+  .ck-goods-spec { color: #9E8E7E; }
+  .ck-goods-price, .ck-fee-total-num, .ck-pay-num { color: #D4A574; }
+  .ck-fee { border-top-color: #3E3228; }
+  .ck-fee-row { color: #9E8E7E; }
+  .ck-fee-total { color: #E8E0D8; }
+  .ck-paid-tip { color: #D4A574; }
+  .ck-footer { background: #1E1E1E; border-top-color: #3E3228; }
+  .ck-pay-label { color: #9E8E7E; }
+  .ck-pay-btn { background: linear-gradient(135deg, #A07050 0%, #7A5030 100%); }
+}

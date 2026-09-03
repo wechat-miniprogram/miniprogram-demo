@@ -65,6 +65,8 @@ App({
     }).catch(({ mod, errMsg }) => {
       console.error(`installRouteBuilder path: ${mod}, ${errMsg}`)
     })
+    this.registerAgentHandoff()
+    this.ensureCafeDemoUser()
   },
 
   onShow(opts) {
@@ -97,7 +99,53 @@ App({
     hasLogin: false,
     openid: null,
     iconTabbar: '/page/extend/images/icon_tabbar.png',
-    systemInfo: {}
+    systemInfo: {},
+    agentHandoffs: {}
+  },
+
+  registerAgentHandoff() {
+    if (!wx.onAgentHandoff) {
+      console.warn('[App] 当前基础库不支持 wx.onAgentHandoff，请使用支持小微 handoff 的版本')
+      return
+    }
+    wx.onAgentHandoff(({ pageId, path, query, payload }) => {
+      console.log('[App] onAgentHandoff', { pageId, path, query, payload })
+      this.globalData.agentHandoffs = this.globalData.agentHandoffs || {}
+      this.globalData.agentHandoffs[pageId] = { path, query, payload }
+    })
+  },
+
+  takeAgentHandoff(pageId) {
+    const map = this.globalData.agentHandoffs || {}
+    const handoff = map[pageId]
+    if (handoff) delete map[pageId]
+    return handoff || null
+  },
+
+  ensureCafeDemoUser() {
+    const userInfo = wx.getStorageSync('userInfo')
+    if (userInfo && userInfo.openid) {
+      this.globalData.userInfo = userInfo
+      return
+    }
+    const mockOpenid = `mock_${Date.now()}`
+    const next = {
+      openid: mockOpenid,
+      unionid: `union_${mockOpenid}`,
+      nickname: `用户${Math.floor(Math.random() * 10000)}`,
+      avatarUrl: '',
+      loginTime: new Date().toISOString()
+    }
+    wx.setStorageSync('userInfo', next)
+    this.globalData.userInfo = next
+    const initialized = wx.getStorageSync(`initialized_${mockOpenid}`)
+    if (!initialized) {
+      wx.setStorageSync(`address_${mockOpenid}`, null)
+      wx.setStorageSync(`orders_${mockOpenid}`, [])
+      wx.setStorageSync(`pending_order_${mockOpenid}`, null)
+      wx.setStorageSync(`active_order_${mockOpenid}`, null)
+      wx.setStorageSync(`initialized_${mockOpenid}`, true)
+    }
   },
   // lazy loading openid
   getUserOpenId(callback) {

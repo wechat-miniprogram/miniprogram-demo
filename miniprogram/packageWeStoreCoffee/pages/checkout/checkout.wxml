@@ -1,0 +1,63 @@
+<view class="ck-page">
+  <view class="nav-back" style="top: {{navBackTop}}rpx; width: {{navBackSize}}rpx; height: {{navBackSize}}rpx;" hover-class="nav-back-hover" bind:tap="onTapBack">
+    <text class="nav-back-arrow"></text>
+  </view>
+  <view class="ck-header" style="padding-top: {{headerPaddingTop}}rpx;">
+    <view class="ck-title">订单结算</view>
+    <view class="ck-sub">从小微对话接力进入 · 在小程序内完成下单</view>
+  </view>
+
+  <scroll-view class="ck-body" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="ck-card">
+      <view class="ck-card-title">收货地址</view>
+      <view wx:if="{{address}}" class="ck-addr" hover-class="row-hover" bind:tap="onTapChooseAddress">
+        <view class="ck-addr-line">
+          <text class="ck-addr-name">{{address.name}}</text>
+          <text class="ck-addr-phone">{{address.phone}}</text>
+        </view>
+        <view class="ck-addr-detail">{{address.detail}}</view>
+      </view>
+      <view wx:else class="ck-addr-empty" hover-class="row-hover" bind:tap="onTapChooseAddress">
+        <text class="ck-addr-empty-text">+ 选择收货地址</text>
+      </view>
+    </view>
+
+    <view class="ck-card" wx:if="{{order}}">
+      <view class="ck-card-title">商品信息 · 共{{order.itemCount}}件</view>
+      <view class="ck-goods" wx:for="{{displayItems}}" wx:key="index" wx:for-item="goods">
+        <image class="ck-thumb" src="{{goods.imageUrl}}" mode="aspectFill"></image>
+        <view class="ck-goods-info">
+          <view class="ck-goods-name">
+            <text>{{goods.drinkName}}</text>
+            <text wx:if="{{goods.qty > 1}}" class="ck-goods-qty">x{{goods.qty}}</text>
+          </view>
+          <view wx:if="{{goods.specText}}" class="ck-goods-spec">{{goods.specText}}</view>
+        </view>
+        <view class="ck-goods-price">¥{{goods.lineTotal}}</view>
+      </view>
+      <view class="ck-fee">
+        <view class="ck-fee-row ck-fee-total">
+          <text>合计</text><text class="ck-fee-total-num">¥{{order.totalPrice}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{paid}}" class="ck-paid-tip">支付成功，预计 20 分钟内出杯</view>
+    <view class="ck-bottom-spacer"></view>
+  </scroll-view>
+
+  <view class="ck-footer safe-area-bottom">
+    <view wx:if="{{!paid}}" class="ck-pay-line">
+      <view class="ck-pay-amount">
+        <text class="ck-pay-label">实付</text>
+        <text class="ck-pay-num">¥{{order.totalPrice}}</text>
+      </view>
+      <view class="ck-pay-btn {{paying ? 'ck-pay-btn-disabled' : ''}}" hover-class="{{paying ? '' : 'btn-hover'}}" bind:tap="onTapPay">
+        <text class="ck-pay-btn-text">{{paying ? '支付中...' : '立即支付'}}</text>
+      </view>
+    </view>
+    <view wx:else class="ck-pay-btn ck-pay-done" hover-class="btn-hover" bind:tap="onTapBackHome">
+      <text class="ck-pay-btn-text">完成 · 返回首页</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,21 @@
+const requirePrivacyAuthWithAgreements = require('./apis/requirePrivacyAuthWithAgreements.js')
+const requirePrivacyAuthWithoutAgreements = require('./apis/requirePrivacyAuthWithoutAgreements.js')
+const requirePrivacyAuthInvalidAgreements = require('./apis/requirePrivacyAuthInvalidAgreements.js')
+const requirePrivacyAuthConcurrent = require('./apis/requirePrivacyAuthConcurrent.js')
+const requestSubscribeMessage = require('./apis/requestSubscribeMessage.js')
+const authorizeBluetooth = require('./apis/authorizeBluetooth.js')
+const getWeRunData = require('./apis/getWeRunData.js')
+const chooseAddress = require('./apis/chooseAddress.js')
+
+const skill = wx.modelContext.createSkill('skills/agent-auth-skill')
+
+skill.registerAPI('requirePrivacyAuthWithAgreements', requirePrivacyAuthWithAgreements)
+skill.registerAPI('requirePrivacyAuthWithoutAgreements', requirePrivacyAuthWithoutAgreements)
+skill.registerAPI('requirePrivacyAuthInvalidAgreements', requirePrivacyAuthInvalidAgreements)
+skill.registerAPI('requirePrivacyAuthConcurrent', requirePrivacyAuthConcurrent)
+skill.registerAPI('requestSubscribeMessage', requestSubscribeMessage)
+skill.registerAPI('authorizeBluetooth', authorizeBluetooth)
+skill.registerAPI('getWeRunData', getWeRunData)
+skill.registerAPI('chooseAddress', chooseAddress)
+
+console.log('[agent-auth-skill] APIs registered via createSkill')

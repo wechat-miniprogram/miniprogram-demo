@@ -29,6 +29,21 @@ npm install
 npm run lint
 ```
 
+## Agent Demo
+
+| 路径 | 说明 |
+|------|------|
+| `miniprogram/skills/drink-skill` | WeStoreCafe 点单：搜索 / 选规格 / 下单 / 地址，小微 handoff 进业务页 |
+| `miniprogram/packageWeStoreCoffee` | WeStoreCafe 点单分包：首页 / 选规格 / 结算 + 目录数据 |
+| `miniprogram/packageWeStoreCoffee/pages/home/home` | 点单首页（searchDrinks 接力页） |
+| `miniprogram/packageWeStoreCoffee/pages/sku-picker/sku-picker` | 选规格接力页 |
+| `miniprogram/packageWeStoreCoffee/pages/checkout/checkout` | 结算接力页 |
+| `miniprogram/skills/agent-auth-skill` | 授权卡片 + 订阅消息 / 蓝牙授权 / 微信运动 / 收货地址 |
+| `miniprogram/pages/protocol/user-service` | 用户服务协议页 |
+| `miniprogram/pages/protocol/privacy` | 隐私政策页 |
+
+协议名称与详情页由原子接口调用 `wx.requestAgentPrivacyAuthorization({ privacyAgreements })` 时传入，不再在 `app.json` 中静态声明。接口不再接收 `type`，统一使用 default 文案模板。
+
 ## 截图
 
 <img width="375" src="https://res.wx.qq.com/op_res/0_vsSii5DaG-1hoXcqmBCT_tPShgSPKi3_FBVuVj1tu1ZdZD8lwYNrSQm3mdswI2">

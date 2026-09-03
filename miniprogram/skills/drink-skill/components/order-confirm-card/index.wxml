@@ -1,0 +1,46 @@
+<view class="oc-card">
+  <view class="oc-header">
+    <view class="oc-title">订单确认</view>
+    <view wx:if="{{orderId}}" class="oc-order-id">#{{orderId}}</view>
+  </view>
+
+  <view class="oc-addr {{hasAddress ? '' : 'oc-addr-empty'}}" hover-class="row-hover" bind:tap="onTapAddress">
+    <block wx:if="{{hasAddress}}">
+      <view class="oc-addr-body">
+        <view class="oc-addr-top">
+          <text class="oc-addr-name">{{address.name}}</text>
+          <text class="oc-addr-phone">{{address.phone}}</text>
+        </view>
+        <view class="oc-addr-detail">{{address.detail}}</view>
+      </view>
+      <view class="oc-edit-text">修改</view>
+    </block>
+    <block wx:else>
+      <view class="oc-addr-body">
+        <view class="oc-addr-empty-title">添加收货地址</view>
+        <view class="oc-addr-empty-sub">请先添加收货地址以便下单</view>
+      </view>
+      <view class="oc-edit-text">去添加</view>
+    </block>
+  </view>
+
+  <view wx:if="{{drinkName}}" class="oc-item">
+    <image wx:if="{{imageUrl}}" class="oc-img" src="{{imageUrl}}" mode="aspectFill"></image>
+    <view class="oc-item-info">
+      <view class="oc-item-name">{{drinkName}}</view>
+      <view wx:if="{{specText}}" class="oc-item-spec">{{specText}}</view>
+      <view class="oc-item-price">¥{{totalPrice}} × 1</view>
+    </view>
+  </view>
+
+  <view class="oc-divider"></view>
+
+  <view class="oc-summary">
+    <view class="oc-summary-label">合计</view>
+    <view class="oc-summary-price">¥{{totalPrice}}</view>
+  </view>
+
+  <view class="oc-pay-btn" hover-class="btn-hover" bind:tap="onTapPay">
+    <view class="oc-pay-text">确认下单 ¥{{totalPrice}}</view>
+  </view>
+</view>

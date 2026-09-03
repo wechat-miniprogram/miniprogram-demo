@@ -14,7 +14,9 @@
     "page/ad/optimize-ad/home-small-card/home-small-card",
     "page/ad/optimize-ad/home-large-card/home-large-card",
     "page/ad/optimize-ad/other-small-card/other-small-card",
-    "page/ad/optimize-ad/other-large-card/other-large-card"
+    "page/ad/optimize-ad/other-large-card/other-large-card",
+    "pages/protocol/user-service",
+    "pages/protocol/privacy"
   ],
   "usingComponents": {
     "mp-navigation-bar": "/component/navigation-bar/navigation-bar"
@@ -419,6 +421,20 @@
         "pages/customParticle/scene-customParticle-shapeEmitter/index",
         "pages/customParticle/scene-customParticle-meshEmitter/index"
       ]
+    },
+    {
+      "root": "skills",
+      "pages": [],
+      "independent": true
+    },
+    {
+      "root": "packageWeStoreCoffee",
+      "name": "westoreCoffee",
+      "pages": [
+        "pages/home/home",
+        "pages/sku-picker/sku-picker",
+        "pages/checkout/checkout"
+      ]
     }
   ],
   "preloadRule": {
@@ -539,6 +555,21 @@
     "wxfdcee92a299bcaf1"
   ],
   "lazyCodeLoading": "requiredComponents",
+  "agent": {
+    "skills": [
+      {
+        "name": "drink",
+        "description": "WeStoreCafe 点单场景：查询推荐饮品、选择规格、填写收货地址、下单支付",
+        "path": "skills/drink-skill"
+      },
+      {
+        "name": "agent-auth",
+        "description": "Agent 授权与开放能力：隐私授权卡片、订阅消息、蓝牙授权、微信运动、收货地址 chooseAddress。",
+        "path": "skills/agent-auth-skill"
+      }
+    ],
+    "pageMetadata": "page-meta.json"
+  },
   "__lazyCodeLoadingChunk": true,
   "rendererOptions": {
     "skyline": {

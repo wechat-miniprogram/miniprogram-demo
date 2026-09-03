@@ -1,0 +1,7 @@
+<view class="protocol-page">
+  <view class="protocol-title">{{title}}</view>
+  <view class="protocol-body">
+    <text>本页用于 Agent 隐私授权卡片（wx.requestAgentPrivacyAuthorization）的协议跳转验证，协议由调用方通过 privacyAgreements 参数传入。</text>
+    <text class="protocol-para">请在使用 WeStoreCafe 点单服务前阅读并同意本协议。本内容为 demo 静态文案，不构成正式法律文件。</text>
+  </view>
+</view>

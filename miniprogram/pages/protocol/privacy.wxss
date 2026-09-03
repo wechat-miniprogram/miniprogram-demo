@@ -1,0 +1,25 @@
+.protocol-page {
+  padding: 32rpx;
+  min-height: 100vh;
+  background: #FFF8F0;
+}
+
+.protocol-title {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #5C3A21;
+  margin-bottom: 24rpx;
+}
+
+.protocol-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #2A1810;
+}
+
+.protocol-para {
+  color: #6B5544;
+}

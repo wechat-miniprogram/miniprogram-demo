@@ -1,0 +1,61 @@
+<view class="sp-page">
+  <view class="nav-back" style="top: {{navBackTop}}rpx; width: {{navBackSize}}rpx; height: {{navBackSize}}rpx;" hover-class="nav-back-hover" bind:tap="onTapBack">
+    <text class="nav-back-arrow"></text>
+  </view>
+  <view class="sp-header" style="padding-top: {{headerPaddingTop}}rpx;">
+    <image class="sp-thumb" src="{{drink.imageUrl}}" mode="aspectFill"></image>
+    <view class="sp-head-info">
+      <view class="sp-name">{{drink.name}}</view>
+      <view wx:if="{{drink.description}}" class="sp-desc">{{drink.description}}</view>
+      <view class="sp-base-price">基础价 ¥{{drink.price}}</view>
+    </view>
+  </view>
+
+  <scroll-view class="sp-body" scroll-y enhanced show-scrollbar="{{false}}">
+    <view wx:for="{{dimensions}}" wx:key="key" wx:for-item="dim" class="sp-section">
+      <view class="sp-section-title">
+        <text class="sp-label">{{dim.label}}</text>
+        <text wx:if="{{dim.multiple}}" class="sp-label-hint">可多选</text>
+      </view>
+      <view class="sp-options">
+        <view
+          wx:for="{{dim.options}}"
+          wx:key="value"
+          wx:for-item="opt"
+          class="sp-option {{opt._selected ? 'sp-option-active' : ''}}"
+          hover-class="opt-hover"
+          bind:tap="onTapOption"
+          data-dim-key="{{dim.key}}"
+          data-value="{{opt.value}}"
+        >
+          <text class="sp-opt-label">{{opt.label}}</text>
+          <text wx:if="{{opt.extraPrice}}" class="sp-opt-extra">+¥{{opt.extraPrice}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="sp-bottom-spacer"></view>
+  </scroll-view>
+
+  <view class="sp-footer safe-area-bottom">
+    <view class="sp-summary">
+      <view class="sp-summary-line">
+        <text class="sp-summary-spec">{{specTextPreview}}</text>
+      </view>
+      <view class="sp-summary-price-row">
+        <text class="sp-summary-price">¥{{totalPrice}}</text>
+        <text wx:if="{{extraPrice}}" class="sp-summary-extra">（含加价 ¥{{extraPrice}}）</text>
+      </view>
+    </view>
+    <block wx:if="{{hasActiveOrder}}">
+      <view class="sp-confirm sp-confirm-secondary" hover-class="btn-hover" bind:tap="onTapConfirm" data-mode="new">
+        <text class="sp-confirm-text sp-confirm-text-secondary">新建订单</text>
+      </view>
+      <view class="sp-confirm" hover-class="btn-hover" bind:tap="onTapConfirm" data-mode="append">
+        <text class="sp-confirm-text">加入当前订单（{{activeItemCount}}件）</text>
+      </view>
+    </block>
+    <view wx:else class="sp-confirm" hover-class="btn-hover" bind:tap="onTapConfirm" data-mode="append">
+      <text class="sp-confirm-text">加入订单</text>
+    </view>
+  </view>
+</view>

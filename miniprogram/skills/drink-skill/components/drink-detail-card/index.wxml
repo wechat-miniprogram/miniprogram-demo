@@ -1,0 +1,18 @@
+<view class="dd-card">
+  <image class="dd-img" src="{{imageUrl}}" mode="aspectFill"></image>
+  <view class="dd-info">
+    <view class="dd-cat">{{categoryName}}</view>
+    <view class="dd-name">{{name}}</view>
+    <view wx:if="{{description}}" class="dd-desc">{{description}}</view>
+    <view class="dd-price-row">
+      <view class="dd-price">¥{{price}}</view>
+      <view class="dd-unit">起</view>
+    </view>
+    <view wx:if="{{dimsLabel}}" class="dd-dims" bind:tap="onTapModifySku">可选规格：{{dimsLabel}}</view>
+    <view class="dd-actions">
+      <view class="dd-btn" hover-class="dd-btn-hover" bind:tap="onTapOrder">
+        <view class="dd-btn-text">直接下单</view>
+      </view>
+    </view>
+  </view>
+</view>

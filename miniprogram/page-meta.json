@@ -1,0 +1,9 @@
+{
+  "pages": [
+    {
+      "path": "packageWeStoreCoffee/pages/home/home",
+      "name": "WeStoreCafe 点单首页",
+      "description": "饮品商城首页，展示点单入口，用户可通过 Agent 对话完成饮品推荐、规格选择与下单支付"
+    }
+  ]
+}

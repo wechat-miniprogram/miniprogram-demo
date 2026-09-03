@@ -1,0 +1,59 @@
+.nf-card {
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 40rpx 28rpx;
+  box-shadow: 0 6rpx 24rpx rgba(92, 58, 33, 0.08);
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nf-icon {
+  font-size: 64rpx;
+  margin-bottom: 10rpx;
+}
+
+.nf-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2A1810;
+}
+
+.nf-sub {
+  font-size: 22rpx;
+  color: #A89180;
+  margin-top: 8rpx;
+}
+
+.nf-btn {
+  margin-top: 20rpx;
+  padding: 18rpx 40rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #8B5E3C 0%, #5C3A21 100%);
+  color: #FFFFFF;
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.btn-hover {
+  opacity: 0.85;
+}
+
+@media (prefers-color-scheme: dark) {
+  .nf-card {
+    background: #1E1E1E;
+    box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.3);
+  }
+  .nf-title {
+    color: #E8E0D8;
+  }
+  .nf-sub {
+    color: #7A6E62;
+  }
+  .nf-btn {
+    background: linear-gradient(135deg, #A07050 0%, #7A5030 100%);
+  }
+}
