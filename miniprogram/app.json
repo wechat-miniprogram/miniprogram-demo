@@ -538,6 +538,7 @@
   "themeLocation": "demo.theme.json",
   "darkmode": true,
   "resizable": true,
+  "extendsUnderVerticalBar": true,
   "useExtendedLib": {
     "weui": "latest"
   },
